@@ -1,6 +1,6 @@
 using System.Text;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Febucci.UI.Core
 {
@@ -13,7 +13,7 @@ namespace Febucci.UI.Core
 
         SerializedProperty referenceFontSize;
         SerializedProperty useDynamicScaling;
-        
+
         SerializedProperty timeScale;
         SerializedProperty animationLoop;
         SerializedProperty isResettingTimeOnNewText;
@@ -25,7 +25,7 @@ namespace Febucci.UI.Core
         SerializedProperty defaultDisappearancesTags;
 
         SerializedProperty useDefaultDatabases;
-        
+
         SerializedProperty databaseBehaviorsField;
         DatabaseSharedDrawer databaseBehaviorsDrawer;
         SerializedProperty databaseAppearancesField;
@@ -35,7 +35,7 @@ namespace Febucci.UI.Core
 
         SerializedProperty useDefaultStylesheet;
         SerializedProperty styleSheetField;
-        
+
         Core.TAnimCore script;
         static string[] excludedProperties = new string[]
         {
@@ -75,12 +75,12 @@ namespace Febucci.UI.Core
             databaseBehaviorsDrawer = new DatabaseSharedDrawer();
             databaseAppearancesDrawer = new DatabaseSharedDrawer();
             databaseActionsDrawer = new DatabaseSharedDrawer();
-            
+
             defaultTagsMode = serializedObject.FindProperty(nameof(Febucci.UI.Core.TAnimCore.defaultTagsMode));
             defaultAppearancesTags = serializedObject.FindProperty("defaultAppearancesTags");
             defaultBehaviorsTags = serializedObject.FindProperty("defaultBehaviorsTags");
             defaultDisappearancesTags = serializedObject.FindProperty("defaultDisappearancesTags");
-            
+
             useDefaultStylesheet = serializedObject.FindProperty(nameof(Febucci.UI.Core.TAnimCore.useDefaultStyleSheet));
             styleSheetField = serializedObject.FindProperty("styleSheet");
 
@@ -92,7 +92,7 @@ namespace Febucci.UI.Core
 
             gui_visibleCharacters = new GUIContent("Visible Characters", null,
                 $"Range of visible characters in the text.\nTo modify this via script, set \"{nameof(TAnimCore.firstVisibleCharacter)}\" and \"{nameof(TAnimCore.maxVisibleCharacters)}\"");
-            
+
             EditorApplication.playModeStateChanged += OnPlayModeChanged;
             RegisterUndoRedraw();
             UnregisterPlayback();
@@ -100,10 +100,10 @@ namespace Febucci.UI.Core
 
         void OnPlayModeChanged(PlayModeStateChange stateChange)
         {
-            if(stateChange == PlayModeStateChange.ExitingEditMode)
+            if (stateChange == PlayModeStateChange.ExitingEditMode)
                 UnregisterPlayback();
         }
-        
+
         private void OnDisable()
         {
             EditorApplication.playModeStateChanged -= OnPlayModeChanged;
@@ -150,9 +150,9 @@ namespace Febucci.UI.Core
 
 
         #endregion
-        
+
         #region Playback
-        
+
         string textBeforePreview;
         string textDuringPreview;
 
@@ -167,31 +167,31 @@ namespace Febucci.UI.Core
             void HookPlaybackEvent()
             {
                 script.time.RestartTime();
-                
+
                 if (runInEditMode) RegisterPlayback();
                 else UnregisterPlayback();
             }
-            
+
             //--- Playback Toolbar ---
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(Application.isPlaying ? "Playback info" : "Preview in Edit Mode", GUILayout.Width(120));
             GUI.enabled = !Application.isPlaying;
-            if(GUILayout.Button(runInEditMode ? TexturesLoader.StopIcon : TexturesLoader.PlayIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
+            if (GUILayout.Button(runInEditMode ? TexturesLoader.StopIcon : TexturesLoader.PlayIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
             {
                 runInEditMode = !runInEditMode;
                 HookPlaybackEvent();
             }
 
             GUI.enabled = runInEditMode && !Application.isPlaying;
-            if(GUILayout.Button(TexturesLoader.SaveIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
+            if (GUILayout.Button(TexturesLoader.SaveIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
             {
                 textBeforePreview = textDuringPreview;
                 runInEditMode = false;
                 HookPlaybackEvent();
             }
             GUI.enabled = true;
-            
+
             EditorGUILayout.EndHorizontal();
 
             //---Visible characters---
@@ -233,22 +233,22 @@ namespace Febucci.UI.Core
                 intMinValue = EditorGUILayout.DelayedIntField(GUIContent.none, intMinValue, GUILayout.Width(30));
                 EditorGUILayout.LabelField("/", GUILayout.Width(10));
                 intMaxValue = EditorGUILayout.DelayedIntField(GUIContent.none, intMaxValue, GUILayout.Width(30));
-                if(EditorGUI.EndChangeCheck())
+                if (EditorGUI.EndChangeCheck())
                 {
                     script.firstVisibleCharacter = Mathf.Clamp(intMinValue, 0, charCount);
                     script.maxVisibleCharacters = Mathf.Clamp(intMaxValue, 0, charCount);
                 }
-                
+
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PrefixLabel("Time passed:");
-                if(GUILayout.Button(TexturesLoader.RestartIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
+                if (GUILayout.Button(TexturesLoader.RestartIcon, EditorStyles.label, GUILayout.Width(20), GUILayout.Height(20)))
                 {
                     script.time.RestartTime();
                 }
                 EditorGUILayout.LabelField(script.time.timeSinceStart.ToString("F2"), EditorStyles.boldLabel);
-                
+
                 EditorGUILayout.EndHorizontal();
 
                 GUI.color = extraPlaybackControls ? Color.gray : Color.white;
@@ -257,16 +257,16 @@ namespace Febucci.UI.Core
                     extraPlaybackControls = !extraPlaybackControls;
                 }
                 GUI.color = Color.white;
-                
+
                 if (extraPlaybackControls)
                 {
                     const float boxSize = 12;
-                    
-                    if(script.WordsCount > 20) 
+
+                    if (script.WordsCount > 20)
                         EditorGUILayout.HelpBox("Displaying only the first 20 words to optimize performance", MessageType.None);
 
                     playbackCharsScrollView = EditorGUILayout.BeginScrollView(playbackCharsScrollView);
-                    
+
                     EditorGUILayout.BeginHorizontal();
                     for (int w = 0; w < script.WordsCount && w < 20; w++) //max X words for performance
                     {
@@ -277,7 +277,7 @@ namespace Febucci.UI.Core
                         }
 
                         EditorGUILayout.BeginHorizontal();
-                        for (int i = script.Words[w].firstCharacterIndex; i <= script.Words[w].lastCharacterIndex; i++) 
+                        for (int i = script.Words[w].firstCharacterIndex; i <= script.Words[w].lastCharacterIndex; i++)
                         {
                             script.Characters[i].isVisible = EditorGUILayout.Toggle(script.Characters[i].isVisible,
                                 GUILayout.Width(boxSize));
@@ -292,7 +292,7 @@ namespace Febucci.UI.Core
 
                 EditorGUILayout.EndVertical();
             }
-            
+
             EditorGUILayout.EndVertical();
         }
 
@@ -329,7 +329,7 @@ namespace Febucci.UI.Core
                 // unfocus text area field to prevent having the same text when it appears again
                 if (textDuringPreview != string.Empty)
                     GUIUtility.keyboardControl = -1;
-                
+
                 script.SetTextToSource(textBeforePreview);
                 textBeforePreview = string.Empty;
                 textDuringPreview = string.Empty;
@@ -346,9 +346,9 @@ namespace Febucci.UI.Core
             EditorApplication.QueuePlayerLoopUpdate();
             Repaint();
         }
-        
+
         #endregion
-        
+
         #region Default Tags
         bool drawDefaultBehaviorTags = false;
         bool drawDefaultAppearancesTags = false;
@@ -359,7 +359,7 @@ namespace Febucci.UI.Core
             serializedObject.ApplyModifiedProperties();
             script.ForceDatabaseRefresh();
         }
-        
+
         void DrawDefaultTags()
         {
             const string helpConstantTags = "How many of these effects will be applied to the entire text";
@@ -407,8 +407,8 @@ namespace Febucci.UI.Core
                         StringBuilder sb = new StringBuilder();
                         foreach (var effect in database.Data)
                         {
-                            if(!effect) continue;
-                            if(string.IsNullOrEmpty(effect.TagID)) continue;
+                            if (!effect) continue;
+                            if (string.IsNullOrEmpty(effect.TagID)) continue;
                             sb.Append(effect.TagID);
                             sb.Append(" ");
                         }
@@ -488,10 +488,10 @@ namespace Febucci.UI.Core
 
             EditorGUILayout.LabelField("Default Tags", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            
+
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(defaultTagsMode, true);
-            if(EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
                 ForceDatabaseRefresh();
 
             if (useDefaultDatabases.boolValue)
@@ -513,7 +513,7 @@ namespace Febucci.UI.Core
 
             EditorGUI.indentLevel--;
         }
-#endregion
+        #endregion
 
         #region  Databases
         bool editBehaviors = false;
@@ -525,8 +525,8 @@ namespace Febucci.UI.Core
         void CacheSettingsObject()
         {
             if (!settings) settings = TextAnimatorSettings.Instance;
-            if(!settings) return;
-            if(settingsObject == null) settingsObject = new SerializedObject(settings);
+            if (!settings) return;
+            if (settingsObject == null) settingsObject = new SerializedObject(settings);
         }
 
         void DrawSettingsFixErrorLabel()
@@ -539,7 +539,7 @@ namespace Febucci.UI.Core
             }
             EditorGUILayout.EndHorizontal();
         }
-        
+
         void DrawDatabases()
         {
             EditorGUILayout.LabelField("Edit Effects & Actions", EditorStyles.boldLabel);
@@ -595,7 +595,7 @@ namespace Febucci.UI.Core
                 DrawDatabaseField(ref editBehaviors, "Behaviors", databaseBehaviorsField, databaseBehaviorsDrawer);
                 DrawDatabaseField(ref editActions, "Actions", databaseActionsField, databaseActionsDrawer);
             }
-            
+
             EditorGUI.indentLevel--;
         }
 
@@ -607,7 +607,7 @@ namespace Febucci.UI.Core
         {
             EditorGUILayout.LabelField("Style Sheet", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PropertyField(useDefaultStylesheet);
             GUI.enabled = false;
@@ -635,23 +635,23 @@ namespace Febucci.UI.Core
             {
                 EditorGUILayout.PropertyField(styleSheetField);
             }
-            
+
             EditorGUI.indentLevel--;
         }
 
         #endregion
-        
+
         #region Main Settings
         void DrawMainSettings()
         {
             EditorGUILayout.LabelField("Main Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(typewriterStartsAutomatically);
-            if(typewriterStartsAutomatically.boolValue) 
+            if (typewriterStartsAutomatically.boolValue)
                 EditorGUILayout.LabelField("(Remember to add a Typewriter component!)", EditorStyles.wordWrappedMiniLabel);
 
             EditorGUILayout.PropertyField(useDynamicScaling);
-            if(useDynamicScaling.boolValue)
+            if (useDynamicScaling.boolValue)
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(referenceFontSize);
@@ -675,11 +675,11 @@ namespace Febucci.UI.Core
         void DrawHelpers()
         {
             //EditorGUILayout.LabelField("Helpers", EditorStyles.boldLabel);
-            
+
             EditorGUI.indentLevel++;
             CacheSettingsObject();
             EditorGUILayout.BeginHorizontal();
-            
+
             GUI.enabled = settings;
             if (GUILayout.Button("Select Global Settings", EditorStyles.helpBox))
             {
@@ -687,22 +687,22 @@ namespace Febucci.UI.Core
                 EditorGUIUtility.PingObject(settings);
             }
             GUI.enabled = true;
-            
+
             if (GUILayout.Button("Open Documentation", EditorStyles.helpBox))
             {
                 Application.OpenURL("https://www.febucci.com/text-animator-unity/docs/");
             }
-            
+
             if (GUILayout.Button("Join Discord", EditorStyles.helpBox))
             {
                 Application.OpenURL(TextAnimatorSetupWindow.url_discord);
             }
 
             EditorGUILayout.EndHorizontal();
-            
+
             EditorGUI.indentLevel--;
         }
-        
+
         public override void OnInspectorGUI()
         {
             GUI.enabled = false;
@@ -718,21 +718,21 @@ namespace Febucci.UI.Core
 
             DrawDefaultTags();
             EditorGUILayout.Space();
-            
+
             DrawDatabases();
             EditorGUILayout.Space();
 
             DrawStyleSheet();
             EditorGUILayout.Space();
-            
+
             DrawHelpers();
             EditorGUILayout.Space();
-            
+
             //--- Draws the rest ---
             //(in case of custom inspector from child classes etc.)
             DrawPropertiesExcluding(serializedObject, excludedProperties);
 
-            if(serializedObject.hasModifiedProperties)
+            if (serializedObject.hasModifiedProperties)
                 serializedObject.ApplyModifiedProperties();
         }
     }

@@ -17,7 +17,7 @@ namespace Febucci.UI.Actions
         public override System.Collections.IEnumerator DoAction(ActionMarker action, TypewriterCore typewriter, TypingInfo typingInfo)
         {
             float speed = defaultSpeed;
-            if(action.parameters.Length > 0)
+            if (action.parameters.Length > 0)
             {
                 FormatUtils.TryGetFloat(action.parameters[0], defaultSpeed, out speed);
             }

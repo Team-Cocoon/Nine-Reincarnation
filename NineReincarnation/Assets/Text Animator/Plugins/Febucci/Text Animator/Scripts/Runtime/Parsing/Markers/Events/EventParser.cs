@@ -6,8 +6,8 @@ namespace Febucci.UI.Core.Parsing
     {
         const char eventSymbol = '?';
 
-        public EventParser(char openingBracket, char closingBracket, char closingTagSymbol) 
-            : base(openingBracket, closingBracket, closingTagSymbol){ }
+        public EventParser(char openingBracket, char closingBracket, char closingTagSymbol)
+            : base(openingBracket, closingBracket, closingTagSymbol) { }
 
         EventMarker[] _results;
 
@@ -24,19 +24,19 @@ namespace Febucci.UI.Core.Parsing
             //If the first character is not the event symbol, skips
             if (textInsideBrackets[0] != eventSymbol)
                 return false;
-            
+
             //Creates a new event
             EventMarker textEvent;
 
             //If the event has parameters
             int indexOfEquals = textInsideBrackets.IndexOf('=');
-            if(indexOfEquals != -1)
+            if (indexOfEquals != -1)
             {
                 string eventName = textInsideBrackets.Substring(1, indexOfEquals - 1);
                 string parameters = textInsideBrackets.Substring(indexOfEquals + 1);
 
                 //TODO fast strip
-                textEvent = new EventMarker(eventName, realTextIndex, internalOrder, parameters.Replace(" ", "").Split(',')); 
+                textEvent = new EventMarker(eventName, realTextIndex, internalOrder, parameters.Replace(" ", "").Split(','));
             }
             else
             {

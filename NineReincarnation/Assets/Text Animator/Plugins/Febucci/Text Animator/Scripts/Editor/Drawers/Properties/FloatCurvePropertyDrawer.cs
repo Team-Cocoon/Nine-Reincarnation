@@ -12,27 +12,27 @@ namespace Febucci.UI.Core
             SerializedProperty enabled = property.FindPropertyRelative(nameof(FloatCurve.enabled));
             Rect lineByLine = position;
             lineByLine.height = EditorGUIUtility.singleLineHeight;
-            
-            Rect enabledRect = new Rect(lineByLine.xMax-EditorGUIUtility.singleLineHeight, lineByLine.y, EditorGUIUtility.singleLineHeight, lineByLine.height);
-            Rect expandedRect = new Rect(lineByLine.x, lineByLine.y, position.width-EditorGUIUtility.singleLineHeight, lineByLine.height);
+
+            Rect enabledRect = new Rect(lineByLine.xMax - EditorGUIUtility.singleLineHeight, lineByLine.y, EditorGUIUtility.singleLineHeight, lineByLine.height);
+            Rect expandedRect = new Rect(lineByLine.x, lineByLine.y, position.width - EditorGUIUtility.singleLineHeight, lineByLine.height);
             enabled.boolValue = GUI.Toggle(enabledRect, enabled.boolValue, GUIContent.none);
             GUI.color = enabled.boolValue ? Color.white : Color.gray;
-            
+
             property.isExpanded = EditorGUI.Foldout(expandedRect, property.isExpanded, label, true);
             GUI.color = Color.white;
-            if(!property.isExpanded) return;
+            if (!property.isExpanded) return;
             GUI.enabled = enabled.boolValue;
 
             // -- inner area smaller ---
             position.y = lineByLine.yMax;
             position.height -= lineByLine.height;
             position.x += 15;
-            position.width-=15;
+            position.width -= 15;
 
             lineByLine.x = position.x;
             lineByLine.width = position.width;
             lineByLine.y += lineByLine.height;
-            
+
             EditorGUI.PropertyField(lineByLine, property.FindPropertyRelative(nameof(FloatCurve.amplitude)));
             lineByLine.y += lineByLine.height;
             EditorGUI.PropertyField(lineByLine, property.FindPropertyRelative(nameof(FloatCurve.waveSize)));
@@ -42,7 +42,7 @@ namespace Febucci.UI.Core
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {           
+        {
             return (property.isExpanded)
                     ? EditorGUIUtility.singleLineHeight * 4
                     : EditorGUIUtility.singleLineHeight;

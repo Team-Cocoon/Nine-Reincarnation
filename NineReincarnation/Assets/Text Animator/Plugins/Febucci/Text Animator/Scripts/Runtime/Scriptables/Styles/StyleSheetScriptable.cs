@@ -22,7 +22,7 @@ namespace Febucci.UI.Styles
                 built = false;
             }
         }
-        
+
         bool built;
         Dictionary<string, Style> dictionary;
 
@@ -30,12 +30,12 @@ namespace Febucci.UI.Styles
         {
             if (built) return;
             built = true;
-            
-            if(dictionary != null) dictionary.Clear();
+
+            if (dictionary != null) dictionary.Clear();
             else dictionary = new Dictionary<string, Style>();
-            
+
             if (styles == null) return;
-            
+
             foreach (var style in styles)
             {
                 var tag = style.styleTag.ToLowerInvariant();

@@ -1,5 +1,4 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -24,8 +23,8 @@ namespace Febucci.UI.Effects
         Vector2 startTop;
         Vector2 startBot;
         float pct;
-        
-        
+
+
         public override void ResetContext(TAnimCore animator)
         {
             base.ResetContext(animator);
@@ -89,7 +88,7 @@ namespace Febucci.UI.Effects
                         default: Debug.LogError($"Text Animator: you set an '{modifier.name}' modifier with value '{modifier.value}' for the HorizontalExpandAppearance effect, but it can only be '-1', '0', or '1'"); break;
                     }
                     break;
-                default: 
+                default:
                     base.SetModifier(modifier);
                     break;
             }

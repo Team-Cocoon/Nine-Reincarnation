@@ -17,7 +17,7 @@ namespace Febucci.UI
         {
             EditorGUILayout.HelpBox("This file is used by Text Animator to locate your installation path, so that you can move the folder anywhere you want, rename it and better organize your effects. Enjoy!", MessageType.None);
             EditorGUILayout.Space();
-            
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Installed version:");
             EditorGUILayout.LabelField(script.latestVersion);
@@ -41,7 +41,7 @@ namespace Febucci.UI
                     Selection.activeObject = TextAnimatorSettings.Instance;
                 }
             }
-            
+
             EditorGUILayout.Space();
             if (GUILayout.Button("Open About Window"))
             {

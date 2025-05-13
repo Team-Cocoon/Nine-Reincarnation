@@ -11,9 +11,9 @@ namespace Febucci.UI.Core.Parsing
         ActionMarker[] _results;
         public ActionMarker[] results => _results; //TODO cache
 
-        public ActionParser(char startSymbol, char closingSymbol, char endSymbol, ActionDatabase actionDatabase) 
-        : base(startSymbol, closingSymbol, endSymbol) 
-        { 
+        public ActionParser(char startSymbol, char closingSymbol, char endSymbol, ActionDatabase actionDatabase)
+        : base(startSymbol, closingSymbol, endSymbol)
+        {
             this.database = actionDatabase;
         }
 
@@ -21,14 +21,14 @@ namespace Febucci.UI.Core.Parsing
         {
             base.OnInitialize();
             _results = new ActionMarker[0];
-            if(database) database.BuildOnce();
+            if (database) database.BuildOnce();
         }
 
         public override bool TryProcessingTag(string textInsideBrackets, int tagLength, ref int realTextIndex, StringBuilder finalTextBuilder, int internalOrder)
         {
             if (!database)
                 return false;
-            
+
             database.BuildOnce();
             //gets the name of the action from the tag
             //if there's an equal sign, it means there are parameters
@@ -42,16 +42,16 @@ namespace Febucci.UI.Core.Parsing
             ActionMarker textAction;
 
             //If the action has parameters
-            if(equalIndex != -1)
+            if (equalIndex != -1)
             {
                 string parameters = textInsideBrackets.Substring(equalIndex + 1);
-                textAction = new ActionMarker(actionName, realTextIndex, internalOrder, parameters.Replace(" ", "").Split(',')); 
+                textAction = new ActionMarker(actionName, realTextIndex, internalOrder, parameters.Replace(" ", "").Split(','));
             }
             else
             {
                 textAction = new ActionMarker(actionName, realTextIndex, internalOrder, new string[0]);
             }
-            
+
             //adds action to results
             System.Array.Resize(ref _results, _results.Length + 1);
             _results[_results.Length - 1] = textAction;

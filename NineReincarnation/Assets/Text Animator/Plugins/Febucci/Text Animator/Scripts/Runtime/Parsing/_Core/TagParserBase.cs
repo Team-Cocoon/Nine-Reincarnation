@@ -24,6 +24,6 @@ namespace Febucci.UI.Core.Parsing
         public abstract bool TryProcessingTag(string textInsideBrackets, int tagLength, ref int realTextIndex, StringBuilder finalTextBuilder, int internalOrder);
 
         public void Initialize() => OnInitialize();
-        protected virtual void OnInitialize(){ }
+        protected virtual void OnInitialize() { }
     }
 }

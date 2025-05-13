@@ -9,7 +9,7 @@ namespace Febucci.UI.Styles
 
         [TextArea] public string openingTag;
         [TextArea] public string closingTag;
-        
+
         public Style(string styleTag, string openingTag, string closingTag)
         {
             this.styleTag = styleTag;

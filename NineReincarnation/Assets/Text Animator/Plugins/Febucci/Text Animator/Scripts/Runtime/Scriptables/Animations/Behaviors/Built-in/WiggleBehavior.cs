@@ -1,4 +1,4 @@
-﻿using Febucci.UI.Core;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -22,7 +22,7 @@ namespace Febucci.UI.Effects
             directions = new Vector3[maxDirections];
 
             //Calculates a random direction for each character (which won't change)
-            for(int i = 0; i < maxDirections; i++)
+            for (int i = 0; i < maxDirections; i++)
             {
                 directions[i] = TextUtilities.fakeRandoms[Random.Range(0, TextUtilities.fakeRandomsCount - 1)] * Mathf.Sign(Mathf.Sin(i));
             }
@@ -33,9 +33,9 @@ namespace Febucci.UI.Effects
             indexCache = character.index % maxDirections;
 
             character.current.positions.MoveChar(
-                directions[indexCache] 
-                * Mathf.Sin(animator.time.timeSinceStart * frequency + character.index * waveSize) 
-                * amplitude 
+                directions[indexCache]
+                * Mathf.Sin(animator.time.timeSinceStart * frequency + character.index * waveSize)
+                * amplitude
                 * character.uniformIntensity);
         }
     }

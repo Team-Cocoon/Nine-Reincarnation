@@ -17,13 +17,13 @@ namespace Febucci.UI.Actions
         public override System.Collections.IEnumerator DoAction(ActionMarker action, TypewriterCore typewriter, TypingInfo typingInfo)
         {
             float targetTime = defaultTime;
-            if(action.parameters.Length > 0)
+            if (action.parameters.Length > 0)
             {
                 FormatUtils.TryGetFloat(action.parameters[0], defaultTime, out targetTime);
             }
 
             float t = 0;
-            while(t<=targetTime)
+            while (t <= targetTime)
             {
                 t += typewriter.TextAnimator.time.deltaTime;
                 yield return null;

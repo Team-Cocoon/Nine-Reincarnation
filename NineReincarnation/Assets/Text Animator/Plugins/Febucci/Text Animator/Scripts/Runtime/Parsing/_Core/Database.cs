@@ -19,12 +19,12 @@ namespace Febucci.UI.Core
             built = false;
         }
 
-        [UnityEngine.SerializeField] System.Collections.Generic.List<T> data = new List<T>(); 
+        [UnityEngine.SerializeField] System.Collections.Generic.List<T> data = new List<T>();
         public System.Collections.Generic.List<T> Data => data;
 
         public void Add(T element)
         {
-            if(data == null) data = new System.Collections.Generic.List<T>();
+            if (data == null) data = new System.Collections.Generic.List<T>();
             data.Add(element);
 
             // at runtime adds directly on database as well, without needing to rebuild
@@ -52,10 +52,10 @@ namespace Febucci.UI.Core
 
         public void BuildOnce()
         {
-            if(built) return;
+            if (built) return;
             built = true;
 
-            if(dictionary == null)
+            if (dictionary == null)
                 dictionary = new Dictionary<string, T>();
             else
                 dictionary.Clear();
@@ -63,9 +63,9 @@ namespace Febucci.UI.Core
             string tagId;
             foreach (var source in data)
             {
-                if(!source)
+                if (!source)
                     continue;
-                
+
                 tagId = source.TagID;
 
                 if (string.IsNullOrEmpty(tagId))
@@ -73,7 +73,7 @@ namespace Febucci.UI.Core
                     UnityEngine.Debug.LogError($"Text Animator: Tag is null or empty. Skipping...");
                     continue;
                 }
-                
+
                 if (dictionary.ContainsKey(tagId))
                 {
                     UnityEngine.Debug.LogError($"Text Animator: Tag {tagId} is already present in the database. Skipping...");
@@ -82,7 +82,7 @@ namespace Febucci.UI.Core
 
                 dictionary.Add(tagId, source);
             }
-            
+
             OnBuildOnce();
         }
 

@@ -74,7 +74,7 @@ namespace Febucci.UI.Effects
 
         public bool TryCalculatingColor(Core.CharacterData character, float timePassed, float weight, out Color32 color)
         {
-            if(!colorCurve.enabled)
+            if (!colorCurve.enabled)
             {
                 color = Color.white;
                 return false;

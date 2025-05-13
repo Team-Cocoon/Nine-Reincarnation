@@ -1,4 +1,3 @@
-using Febucci.UI.Effects;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ namespace Febucci.UI.Core
         }
 
         public bool hasScriptable => propertyScriptable.objectReferenceValue != null;
-        
+
         public void Draw()
         {
             somethingChanged = false;
@@ -61,8 +60,8 @@ namespace Febucci.UI.Core
                 wantsToDelete = 0;
 
             GUI.backgroundColor = Color.white;
-                
-            if(drawWarning)
+
+            if (drawWarning)
                 EditorGUILayout.HelpBox("Invalid", MessageType.Warning);
             EditorGUILayout.EndHorizontal();
 
@@ -75,7 +74,7 @@ namespace Febucci.UI.Core
             }
         }
 
-        
+
         void DrawInfo()
         {
             EditorGUILayout.BeginHorizontal();
@@ -86,10 +85,10 @@ namespace Febucci.UI.Core
                 //refreshes drawer
                 somethingChanged = true;
                 drawer = new GenericSharedDrawer(false);
-                
+
                 if (propertyScriptable.serializedObject.hasModifiedProperties)
                     propertyScriptable.serializedObject.ApplyModifiedProperties();
-                
+
                 expanded = true;
             }
             EditorGUILayout.EndHorizontal();

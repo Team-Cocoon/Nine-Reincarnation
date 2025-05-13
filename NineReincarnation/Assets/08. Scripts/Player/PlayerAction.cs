@@ -17,21 +17,12 @@ public class PlayerAction : MonoBehaviour
     public void ActionMove(InputAction.CallbackContext context)
     {
         int direction = (int)context.ReadValue<float>();
+        _player.Direction = (PlayerDirection)direction;
 
         if (context.started)
         {
-
+            _player.ChangePlayerDirection();
         }
-        else if (context.performed)
-        {
-
-        }
-        else if (context.canceled)
-        {
-
-        }
-
-        _player.Direction = (PlayerDirection)direction;
     }
 
     /// <summary>
@@ -42,14 +33,6 @@ public class PlayerAction : MonoBehaviour
         if (context.started)
         {
             _player.Jump();
-        }
-        else if (context.performed)
-        {
-
-        }
-        else if (context.canceled)
-        {
-
         }
     }
 }

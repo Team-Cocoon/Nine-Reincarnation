@@ -1,5 +1,4 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -10,7 +9,7 @@ namespace Febucci.UI.Effects
     public sealed class FadeAppearance : AppearanceScriptableBase
     {
         Color32 temp;
-        
+
         public override void ApplyEffectTo(ref Core.CharacterData character, TAnimCore animator)
         {
             //from transparent to real color
@@ -22,7 +21,7 @@ namespace Febucci.UI.Effects
                 character.current.colors[i] = Color32.LerpUnclamped(character.current.colors[i], temp,
                     Tween.EaseInOut(1 - (character.passedTime / duration)));
             }
-            
+
         }
     }
 

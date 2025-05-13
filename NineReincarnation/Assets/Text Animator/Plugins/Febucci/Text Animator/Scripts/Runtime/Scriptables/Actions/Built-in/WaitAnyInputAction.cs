@@ -11,7 +11,7 @@ namespace Febucci.UI.Actions
     {
         public override System.Collections.IEnumerator DoAction(ActionMarker action, TypewriterCore typewriter, TypingInfo typingInfo)
         {
-            while(!Input.anyKeyDown)
+            while (!Input.anyKeyDown)
                 yield return null;
         }
     }

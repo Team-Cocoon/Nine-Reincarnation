@@ -7,7 +7,7 @@ namespace Febucci.UI.Core.Parsing
     public sealed class PlainTagParser : TagParserBase
     {
         readonly string tag;
-        
+
         public PlainTagParser(string tag, char startSymbol, char closingSymbol, char endSymbol) : base(startSymbol, closingSymbol,
             endSymbol)
         {
@@ -18,18 +18,18 @@ namespace Febucci.UI.Core.Parsing
         bool hasOpened;
         public Vector2Int[] results;
 
-        
+
         //--- METHODS ---
         public override bool TryProcessingTag(string textInsideBrackets, int tagLength, ref int realTextIndex,
             StringBuilder finalTextBuilder, int internalOrder)
         {
             textInsideBrackets = textInsideBrackets.ToLower();
             if (tagLength <= 1) return false;
-            
+
             if (textInsideBrackets[0] == closingSymbol) // closes
             {
                 if (!textInsideBrackets.Substring(1, tagLength - 1).Equals(tag)) return false;
-                    
+
                 if (results.Length > 0 && hasOpened)
                 {
                     results[results.Length - 1].y = realTextIndex;
@@ -42,8 +42,8 @@ namespace Febucci.UI.Core.Parsing
                 if (!textInsideBrackets.Equals(tag)) return false;
                 hasOpened = true;
                 var newTag = new Vector2Int(realTextIndex, int.MaxValue);
-                Array.Resize(ref results, results.Length+1);
-                results[results.Length-1] = newTag;
+                Array.Resize(ref results, results.Length + 1);
+                results[results.Length - 1] = newTag;
                 return true;
             }
 

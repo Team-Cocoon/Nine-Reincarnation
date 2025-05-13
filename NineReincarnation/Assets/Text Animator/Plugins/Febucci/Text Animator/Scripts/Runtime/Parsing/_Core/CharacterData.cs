@@ -10,7 +10,7 @@ namespace Febucci.UI.Core
         public int wordIndex;
         public bool isVisible;
         public float passedTime;
-        
+
         public float uniformIntensity;
 
         public MeshData source;
@@ -21,8 +21,8 @@ namespace Febucci.UI.Core
 
             index = i;
             wordIndex = -1;
-            
-            if(resetVisibility) isVisible = true; //text is visible by default
+
+            if (resetVisibility) isVisible = true; //text is visible by default
 
             //--Initializes first time only--
             if (!info.initialized)
