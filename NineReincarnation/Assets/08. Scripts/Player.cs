@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     [Header("Status Data")]
-    [SerializeField] private Status statData;
+    [SerializeField] private Status _statData;
+
+    [Header("Animation")]
+    [SerializeField] private AnimState _currentState;
 
     [Header("Movement")]
     [SerializeField] private float _speed;
@@ -12,33 +16,41 @@ public class Player : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] private float _jumpPower;
-    private int jumpCnt;
-    private int maxJumpCnt = 2;
+    private int _jumpCnt;
+    private int _maxJumpCnt = 2;
 
     [Header("GroundCheck")]
+    [SerializeField] private bool _isGrounded;
     public Transform groundCheckPos;
-    private Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
+    private Vector2 _groundCheckSize = new Vector2(0.5f, 0.05f);
     public LayerMask groundLayer;
 
-
     private Rigidbody2D _rb;
+    private PlayerAnimationController _animController;
+    //private Animator _animator;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-
+        _animController = new PlayerAnimationController(GetComponent<Animator>());
+        _currentState = _animController.currentState;
+        //_animator = GetComponent<Animator>();
         /* 초기 Stat 설정 */
-        _speed = statData.Speed;
-        _jumpPower = statData.JumpPower;
+        _speed = _statData.Speed;
+        _jumpPower = _statData.JumpPower;
     }
 
     void Update()
     {
         GroundCheck();
+        FlipSprite();
     }
     private void FixedUpdate()
     {
         _rb.linearVelocity = new Vector2(_horizontalMove * _speed, _rb.linearVelocity.y);
+        _animController.UpdateMovementAnim(_rb.linearVelocity, _isGrounded);
+        //_animator.SetFloat("xVelocity", Math.Abs(_rb.linearVelocity.x));
+        //_animator.SetFloat("yVelocity", _rb.linearVelocity.y);
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -49,30 +61,55 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            if (jumpCnt > 1)
+            if (_jumpCnt > 1)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpPower);
-                Debug.Log($"JumpCnt: {jumpCnt}");
-                --jumpCnt;
+                --_jumpCnt;
+                //_animator.SetBool("isJumping", true);
+                _animController.SetState(AnimState.Jump);
             }
-            else if (jumpCnt > 0)
+            else if (_jumpCnt > 0)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpPower * 0.7f);
-                Debug.Log($"JumpCnt: {jumpCnt}");
-                --jumpCnt;
+                --_jumpCnt;
+                //_animator.SetBool("isJumping", true);
+                _animController.SetState(AnimState.Jump);
             }
         }
     }
     private void GroundCheck()
     {
-        if(Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
+        if (Physics2D.OverlapBox(groundCheckPos.position, _groundCheckSize, 0, groundLayer))
         {
-            jumpCnt = maxJumpCnt;
+            _jumpCnt = _maxJumpCnt;
+            _isGrounded = true;
+            //_animator.SetBool("isJumping", false);
+            //_animController.SetState(AnimState.Idle);
         }
+        else
+        {
+            _isGrounded = false;
+        }
+    }
+    private void FlipSprite()
+    {
+        if (_horizontalMove > 0) 
+        {
+            Vector3 vecScale = transform.localScale;
+            vecScale.x = 1;
+            transform.localScale = vecScale;
+        }
+        else if (_horizontalMove < 0)
+        {
+            Vector3 vecScale = transform.localScale;
+            vecScale.x = -1;
+            transform.localScale = vecScale;
+        }
+
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
+        Gizmos.DrawWireCube(groundCheckPos.position, _groundCheckSize);
     }
 }
