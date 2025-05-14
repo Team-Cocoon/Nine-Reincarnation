@@ -25,7 +25,7 @@ public class PlayerAnimationController
         }
         else if (isGrounded)
         {
-            if(_currentState == AnimState.Jump || _currentState == AnimState.Fall)
+            if(_currentState == AnimState.Fall)
             {
                 _animator.SetBool("isJumping", false);
             }
