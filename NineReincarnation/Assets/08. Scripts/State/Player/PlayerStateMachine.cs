@@ -1,3 +1,5 @@
+using Player.Controller;
+
 namespace State.StateMachine.PlayerStateMachine
 {
     public class PlayerStateMachine : StateMachine
