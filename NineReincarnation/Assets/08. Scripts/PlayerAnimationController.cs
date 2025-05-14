@@ -19,22 +19,21 @@ public class PlayerAnimationController
         _animator.SetFloat("xVelocity", Math.Abs(velocity.x));
         _animator.SetFloat("yVelocity", velocity.y);
 
-        if(isGrounded == true)
-        {
-            _animator.SetBool("isJumping", false);
-        }
-
-        if(!isGrounded && velocity.y < 0f)
+        if (!isGrounded && velocity.y < 0f)
         {
             SetState(AnimState.Fall);
         }
         else if (isGrounded)
         {
-            if(Math.Abs(velocity.x) > 0f)
+            if(_currentState == AnimState.Jump || _currentState == AnimState.Fall)
+            {
+                _animator.SetBool("isJumping", false);
+            }
+            if (Math.Abs(velocity.x) > 0f)
             {
                 SetState(AnimState.Run);
             }
-            else
+            else if(_currentState != AnimState.Jump)
             {
                 SetState(AnimState.Idle);
             }
@@ -49,6 +48,7 @@ public class PlayerAnimationController
         switch (newState)
         {
             case AnimState.Jump:
+            case AnimState.DoubleJump:
                 _animator.SetBool("isJumping", true);
                 break;
         }
@@ -61,6 +61,7 @@ public enum AnimState
     Idle,
     Run,
     Jump,
+    DoubleJump,
     Fall,
     End
 }

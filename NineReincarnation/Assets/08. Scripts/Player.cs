@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Status _statData;
 
     [Header("Animation")]
-    [SerializeField] private AnimState _currentState;
+    [SerializeField] private AnimState _currentState => _animController.currentState;
 
     [Header("Movement")]
     [SerializeField] private float _speed;
@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animController = new PlayerAnimationController(GetComponent<Animator>());
-        _currentState = _animController.currentState;
         //_animator = GetComponent<Animator>();
         /* 초기 Stat 설정 */
         _speed = _statData.Speed;
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpPower * 0.7f);
                 --_jumpCnt;
                 //_animator.SetBool("isJumping", true);
-                _animController.SetState(AnimState.Jump);
+                _animController.SetState(AnimState.DoubleJump);
             }
         }
     }
@@ -81,7 +80,10 @@ public class Player : MonoBehaviour
     {
         if (Physics2D.OverlapBox(groundCheckPos.position, _groundCheckSize, 0, groundLayer))
         {
-            _jumpCnt = _maxJumpCnt;
+            if(_currentState != AnimState.Jump)
+            {
+                _jumpCnt = _maxJumpCnt;
+            }
             _isGrounded = true;
             //_animator.SetBool("isJumping", false);
             //_animController.SetState(AnimState.Idle);
