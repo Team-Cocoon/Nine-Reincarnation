@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: 655824f12bd95e94f82de4396778f5d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: 5523929842067317503
+    second: "\uC6C5\uB2E8 look_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: 4580180705546664499
+    second: "\uC6C5\uB2E8 look_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: -5957462843770803574
+    second: "\uC6C5\uB2E8 look_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
-  - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
-  - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
-  - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
-  - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: -6102088283207081593
+    second: "\uC6C5\uB2E8 look_3"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,177 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: "\uC6C5\uB2E8 look_0"
       rect:
         serializedVersion: 2
-        x: 0
+        x: 9
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: ff22a90ace0f8ac40800000000000000
+      internalID: 5523929842067317503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: "\uC6C5\uB2E8 look_1"
       rect:
         serializedVersion: 2
-        x: 32
+        x: 41
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 33af439b512109f30800000000000000
+      internalID: 4580180705546664499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: "\uC6C5\uB2E8 look_2"
       rect:
         serializedVersion: 2
-        x: 64
+        x: 74
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: a8ae37a8b17d25da0800000000000000
+      internalID: -5957462843770803574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: "\uC6C5\uB2E8 look_3"
       rect:
         serializedVersion: 2
-        x: 96
+        x: 106
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Woongdan_Run_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Woongdan_Run_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Woongdan_Run_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Woongdan_Run_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: 7816e536907015ba0800000000000000
+      internalID: -6102088283207081593
       vertices: []
       indices: 
       edges: []
@@ -313,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -321,18 +221,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      "\uC6C5\uB2E8 look_0": 5523929842067317503
+      "\uC6C5\uB2E8 look_1": 4580180705546664499
+      "\uC6C5\uB2E8 look_2": -5957462843770803574
+      "\uC6C5\uB2E8 look_3": -6102088283207081593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

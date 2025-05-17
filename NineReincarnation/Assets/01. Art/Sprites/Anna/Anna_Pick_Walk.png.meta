@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: 2883c6ba13ea1d64ab6e56968f41e336
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: 4465580102200501298
+    second: "\uC548\uB098 pick walk_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: 7338355550878689709
+    second: "\uC548\uB098 pick walk_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: 4969673116187214295
+    second: "\uC548\uB098 pick walk_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: 1373202990750427922
+    second: "\uC548\uB098 pick walk_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: -4548283270593605443
+    second: "\uC548\uB098 pick walk_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: -3964725827513924088
+    second: "\uC548\uB098 pick walk_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: -1744282493239156641
+    second: "\uC548\uB098 pick walk_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: 5645547689401969473
+    second: "\uC548\uB098 pick walk_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: Anna_Pick_Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: c6d6cc02de63d144daf8aec77237eb18
+      internalID: -2011977321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: Anna_Pick_Walk_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 433b58ae2da565c4b9567c004df89062
+      internalID: -678710923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: Anna_Pick_Walk_2
       rect:
         serializedVersion: 2
         x: 64
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: 3b2a18c755e830142badaec0e7922d13
+      internalID: -744275658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: Anna_Pick_Walk_3
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: 87c35231182935d4d8ee09b224ba67f2
+      internalID: 1110549098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: Anna_Pick_Walk_4
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: d4b8c08af90bdde4cb0b8d74be6244ec
+      internalID: -1264706255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: Anna_Pick_Walk_5
       rect:
         serializedVersion: 2
         x: 160
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: 441cc8fe9c7c4ee4796b565e84bbbf47
+      internalID: -1362617474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: Anna_Pick_Walk_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: 3c3a697747951e04e9af7347791ef117
+      internalID: 1582911938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: Anna_Pick_Walk_7
       rect:
         serializedVersion: 2
         x: 224
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: b26eb0ce4aec21246811c95a117a9a48
+      internalID: 1819370852
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: f29df94f549f3d14abec589de0b9d6cf
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      Anna_Pick_Walk_0: -2011977321
+      Anna_Pick_Walk_1: -678710923
+      Anna_Pick_Walk_2: -744275658
+      Anna_Pick_Walk_3: 1110549098
+      Anna_Pick_Walk_4: -1264706255
+      Anna_Pick_Walk_5: -1362617474
+      Anna_Pick_Walk_6: 1582911938
+      Anna_Pick_Walk_7: 1819370852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

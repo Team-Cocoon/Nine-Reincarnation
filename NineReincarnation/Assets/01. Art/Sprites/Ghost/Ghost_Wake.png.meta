@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: f2411f80fb2ed9442a50dd8fd337e32b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: -306001324668911400
+    second: "\uC720\uB839 wake_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: -3597515421133673038
+    second: "\uC720\uB839 wake_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: 1246050096159597571
+    second: "\uC720\uB839 wake_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: -3400243541238467863
+    second: "\uC720\uB839 wake_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: 4709585089103991430
+    second: "\uC720\uB839 wake_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: 5527075823225450624
+    second: "\uC720\uB839 wake_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: -2310967803612543194
+    second: "\uC720\uB839 wake_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: -7300036870138831425
+    second: "\uC720\uB839 wake_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: Ghost_Wake_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: d0bbccb5ad1d4f4489f138bf97f3dd55
+      internalID: 802413818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: Ghost_Wake_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 35f48ca40a3960b4d8cf493a6a235c6f
+      internalID: -773533880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: Ghost_Wake_2
       rect:
         serializedVersion: 2
         x: 64
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: 8652249a6d89c1d48a603d7156081ff3
+      internalID: -359540045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: Ghost_Wake_3
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: 4c9830bb035f9f14ca95c0791b9cb53c
+      internalID: 1294291145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: Ghost_Wake_4
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: 68acc13585e2e1b46a3bbc4ff654687a
+      internalID: -335733833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: Ghost_Wake_5
       rect:
         serializedVersion: 2
         x: 160
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: b340bf542cc55c4429786e9e65b08988
+      internalID: 2016574937
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: Ghost_Wake_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: e4564b64c2a8dac47bbc84888ef74a36
+      internalID: -755243511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: Ghost_Wake_7
       rect:
         serializedVersion: 2
         x: 224
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: 1236b2ced3ab5a04dbe8de98ed2620ea
+      internalID: -1526782505
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: 41360b4dfee005f43963a1117ef47131
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      Ghost_Wake_0: 802413818
+      Ghost_Wake_1: -773533880
+      Ghost_Wake_2: -359540045
+      Ghost_Wake_3: 1294291145
+      Ghost_Wake_4: -335733833
+      Ghost_Wake_5: 2016574937
+      Ghost_Wake_6: -755243511
+      Ghost_Wake_7: -1526782505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

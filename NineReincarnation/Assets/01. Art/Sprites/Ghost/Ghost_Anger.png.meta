@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: c706e6ce76930a140a9b40c2a795bd43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: -7363439193804498331
+    second: "\uC720\uB839 anger_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: -3484083009184265954
+    second: "\uC720\uB839 anger_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: 6990092674592074542
+    second: "\uC720\uB839 anger_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: -3068976075434157153
+    second: "\uC720\uB839 anger_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: -7937067529195178714
+    second: "\uC720\uB839 anger_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: 600293677470428078
+    second: "\uC720\uB839 anger_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: -3126996984575794575
+    second: "\uC720\uB839 anger_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: -2150394453654189145
+    second: "\uC720\uB839 anger_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: Ghost_Anger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: 0195baa4986e9854bba7528796f187de
+      internalID: -2049006897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: Ghost_Anger_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 121d2a369c180284195e10e25c1faf00
+      internalID: -326592764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: Ghost_Anger_2
       rect:
         serializedVersion: 2
         x: 64
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: 13e67216adc75974e89908af2aad3acd
+      internalID: -1519424173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: Ghost_Anger_3
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: 5d30c146acd72c145ac54aa1327e34a7
+      internalID: 42824849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: Ghost_Anger_4
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: 878a5bc2f7e3b2c47a4d78bd891a610d
+      internalID: -250511372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: Ghost_Anger_5
       rect:
         serializedVersion: 2
         x: 160
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: 0719d9c4a58529241b6edd75a6c34625
+      internalID: -1041893667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: Ghost_Anger_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: 69e08f19a5f8f504587fe42a77be5b99
+      internalID: -588741302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: Ghost_Anger_7
       rect:
         serializedVersion: 2
         x: 224
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: 39c11d712b4632648b97140177445c24
+      internalID: 904651154
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: 09a4860b32c00a340b5bd5c70bb5e050
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      Ghost_Anger_0: -2049006897
+      Ghost_Anger_1: -326592764
+      Ghost_Anger_2: -1519424173
+      Ghost_Anger_3: 42824849
+      Ghost_Anger_4: -250511372
+      Ghost_Anger_5: -1041893667
+      Ghost_Anger_6: -588741302
+      Ghost_Anger_7: 904651154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

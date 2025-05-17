@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: f3d720f03ef24ed4ea092c6a30605f0f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: -381908204834828261
+    second: "\uC6C5\uB2E8 down_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: 5189172696680917398
+    second: "\uC6C5\uB2E8 down_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: -1406055362077840928
+    second: "\uC6C5\uB2E8 down_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: -5426857415623576925
+    second: "\uC6C5\uB2E8 down_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: -6651550642303459188
+    second: "\uC6C5\uB2E8 down_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: -7314064764009864610
+    second: "\uC6C5\uB2E8 down_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: 2387131456798081945
+    second: "\uC6C5\uB2E8 down_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: -3615645878483834024
+    second: "\uC6C5\uB2E8 down_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: Woongdan_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: e63853198449e174f9b119979b497c91
+      internalID: -1842004420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: Woongdan_Down_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 20e4f8fce8f839f488bda1630de3c3ec
+      internalID: 210490444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: Woongdan_Down_2
       rect:
         serializedVersion: 2
         x: 64
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: 4bb4a77ec595ce64f9201cd30cd3c67b
+      internalID: -1640969829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: Woongdan_Down_3
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: ac00dcca72dd71042a4bc2d81c406a7f
+      internalID: 106019942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: Woongdan_Down_4
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: 0ae972b5244ee524a9ef02134fcb1e60
+      internalID: 1527481108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: Woongdan_Down_5
       rect:
         serializedVersion: 2
         x: 160
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: 4b091cfc61cb4cb44b9c06b66e26eebe
+      internalID: 747611072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: Woongdan_Down_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: 11cf6f468dfffdf4d9e254f08bcd9577
+      internalID: 185905812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: Woongdan_Down_7
       rect:
         serializedVersion: 2
         x: 224
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: 45be5fe4eb104fe4b8f72f6e0f4c6a28
+      internalID: -873303915
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: 261bcfebdfaf35d419fe16ce8b681721
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      Woongdan_Down_0: -1842004420
+      Woongdan_Down_1: 210490444
+      Woongdan_Down_2: -1640969829
+      Woongdan_Down_3: 106019942
+      Woongdan_Down_4: 1527481108
+      Woongdan_Down_5: 747611072
+      Woongdan_Down_6: 185905812
+      Woongdan_Down_7: -873303915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
