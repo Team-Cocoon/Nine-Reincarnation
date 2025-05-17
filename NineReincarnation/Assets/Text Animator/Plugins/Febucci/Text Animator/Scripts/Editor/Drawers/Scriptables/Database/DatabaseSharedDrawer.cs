@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Febucci.UI.Core
 {
@@ -10,7 +10,7 @@ namespace Febucci.UI.Core
     {
         SerializedProperty pairsProperty;
         [SerializeField] AnimationElementDrawer[] elements;
-        
+
         protected override void OnEnabled(SerializedObject baseObject)
         {
             base.OnEnabled(baseObject);
@@ -33,7 +33,7 @@ namespace Febucci.UI.Core
         protected override void _OnInspectorGUI()
         {
             MatchEffectsWithArray(); //putting this one here since might change after Undo
-            
+
             for (var i = 0; i < elements.Length; i++)
             {
                 var effect = elements[i];
@@ -52,11 +52,11 @@ namespace Febucci.UI.Core
                     effect.somethingChanged = false;
                 }
             }
-            
+
             //Adds new effect if there isn't any available slot already //TODO check every position
             if (elements.Length == 0 || elements[elements.Length - 1].hasScriptable)
             {
-                if(EditorGUILayout.Foldout(false, "->[Add new effect]", true))
+                if (EditorGUILayout.Foldout(false, "->[Add new effect]", true))
                 {
                     pairsProperty.InsertArrayElementAtIndex(pairsProperty.arraySize);
                     MatchEffectsWithArray();

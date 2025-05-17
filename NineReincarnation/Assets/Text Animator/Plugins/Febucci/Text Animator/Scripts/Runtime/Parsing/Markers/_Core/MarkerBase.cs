@@ -31,7 +31,7 @@ namespace Febucci.UI.Core.Parsing
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(name);
-            sb.Append(" internal order:"); 
+            sb.Append(" internal order:");
             sb.Append(internalOrder);
             sb.Append(" index:");
             sb.Append(index);

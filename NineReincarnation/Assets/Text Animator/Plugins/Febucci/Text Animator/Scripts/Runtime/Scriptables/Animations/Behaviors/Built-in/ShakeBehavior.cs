@@ -1,4 +1,4 @@
-﻿using Febucci.UI.Core;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -30,7 +30,7 @@ namespace Febucci.UI.Effects
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            
+
             randIndex = Random.Range(0, TextUtilities.fakeRandomsCount);
         }
 
@@ -63,7 +63,7 @@ namespace Febucci.UI.Effects
             timePassed += character.index * waveSize;
 
             randIndex = Mathf.RoundToInt(timePassed / delay) % (TextUtilities.fakeRandomsCount);
-            if(randIndex<0) randIndex *= -1; //always positive
+            if (randIndex < 0) randIndex *= -1; //always positive
 
             character.current.positions.MoveChar
             (

@@ -18,29 +18,29 @@ namespace Febucci.UI.Effects
         //--- INITIALIZATION ---
         bool initialized = false;
         public void InitializeOnce()
-        { 
-            if(initialized) return;
+        {
+            if (initialized) return;
 
             initialized = true;
 
             OnInitialize();
         }
 
-        protected virtual void OnInitialize(){ }
+        protected virtual void OnInitialize() { }
 
         void OnEnable()
         {
             //resets for enter playmode settings
             initialized = false;
         }
-        
+
         //--- ABSTRACT / VIRTUAL METHODS ---+
 
         /// <summary>
         /// Resets the effect context (base variables) for every region, before applying modifiers (if any) with <see cref="SetModifier"/>
         /// </summary>
         public abstract void ResetContext(TAnimCore animator);
-        
+
         /// <summary>
         /// Changes an effect' base variable based on the passed parameter.
         /// </summary>

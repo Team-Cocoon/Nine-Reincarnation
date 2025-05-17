@@ -1,7 +1,5 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Febucci.UI.Effects
 {
@@ -47,10 +45,10 @@ namespace Febucci.UI.Effects
             timePassed = timeMode.GetTime(animator.time.timeSinceStart * timeSpeed, character.passedTime * timeSpeed, character.index);
             if (timePassed < 0)
                 return;
-            
+
             float weight = weightMult * emissionCurve.Evaluate(timePassed);
-            
-            if(animationData.TryCalculatingMatrix(character, timePassed, weight, out var matrix, out var offset))
+
+            if (animationData.TryCalculatingMatrix(character, timePassed, weight, out var matrix, out var offset))
             {
                 for (byte i = 0; i < TextUtilities.verticesPerChar; i++)
                 {
@@ -58,7 +56,7 @@ namespace Febucci.UI.Effects
                 }
             }
 
-            if(animationData.TryCalculatingColor(character, timePassed, weight, out var color))
+            if (animationData.TryCalculatingColor(character, timePassed, weight, out var color))
             {
                 character.current.colors.LerpUnclamped(color, Mathf.Clamp01(weight));
             }

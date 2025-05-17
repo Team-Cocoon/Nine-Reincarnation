@@ -1,5 +1,4 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -19,9 +18,9 @@ namespace Febucci.UI.Effects
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            
+
             ValidateArray();
-            
+
             foreach (var anim in animations)
             {
                 anim.InitializeOnce();
@@ -53,18 +52,18 @@ namespace Febucci.UI.Effects
         public override void ApplyEffectTo(ref CharacterData character, TAnimCore animator)
         {
             float timePassed = timeMode.GetTime(animator.time.timeSinceStart, character.passedTime, character.index);
-            if(timePassed<0) return;
-            
+            if (timePassed < 0) return;
+
             for (int i = 0; i < TextUtilities.verticesPerChar; i++)
             {
                 prev.positions[i] = character.current.positions[i];
                 prev.colors[i] = character.current.colors[i];
             }
-            
+
             float weight = emissionCurve.Evaluate(timePassed);
             foreach (var anim in animations)
             {
-                if(anim.CanApplyEffectTo(character, animator)) 
+                if (anim.CanApplyEffectTo(character, animator))
                     anim.ApplyEffectTo(ref character, animator);
             }
 
@@ -81,18 +80,18 @@ namespace Febucci.UI.Effects
         public override float GetMaxDuration() => emissionCurve.GetMaxDuration();
 
         void ValidateArray()
-        { 
+        {
             //prevents recursion
             var validated = new System.Collections.Generic.List<AnimationScriptableBase>();
-             
+
             for (int i = 0; i < animations.Length; i++)
             {
-                if(animations[i]!=this) validated.Add(animations[i]);
+                if (animations[i] != this) validated.Add(animations[i]);
             }
 
             animations = validated.ToArray();
         }
-        
+
         void OnValidate() => ValidateArray();
     }
 }

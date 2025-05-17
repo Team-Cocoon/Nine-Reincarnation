@@ -17,13 +17,13 @@ namespace Febucci.UI.Core
 
         public void OnInspectorGUI(SerializedProperty baseProperty)
         {
-            if(baseProperty == null) return;
-            if(baseProperty.objectReferenceValue == null) return;
-            
+            if (baseProperty == null) return;
+            if (baseProperty.objectReferenceValue == null) return;
+
             if (baseProperty != this.baseProperty)
                 initialized = false;
-            
-            if(!initialized)
+
+            if (!initialized)
             {
                 this.baseProperty = baseProperty;
                 //hacky unity way to reach the actual serialized object
@@ -43,7 +43,7 @@ namespace Febucci.UI.Core
             if (baseObject == null) return;
             if (this.baseObject != baseObject)
                 initialized = false;
-            
+
             if (!initialized)
             {
                 this.baseObject = baseObject;

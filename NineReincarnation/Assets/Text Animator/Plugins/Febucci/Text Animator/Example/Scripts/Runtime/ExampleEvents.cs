@@ -9,13 +9,13 @@ namespace Febucci.UI.Examples
     class ExampleEvents : MonoBehaviour
     {
         // ---- PART OF THE SCRIPT THAT YOU'RE PROBABLY INTERESTED IT ----
-        
+
         void Start()
         {
             //Subscribe to the event
             typewriter.onMessage.AddListener(OnMessage);
-            
-            
+
+
             dialogueIndex = 0;
             CurrentLineShown = false;
             typewriter.ShowText(dialoguesLines[dialogueIndex]);
@@ -23,12 +23,12 @@ namespace Febucci.UI.Examples
 
         void OnDestroy()
         {
-            if(typewriter) typewriter.onMessage.RemoveListener(OnMessage);
+            if (typewriter) typewriter.onMessage.RemoveListener(OnMessage);
         }
 
         bool TryGetInt(string parameter, out int result)
         {
-            
+
             if (FormatUtils.TryGetFloat(parameter, 0, out float resultFloat))
             {
                 result = (int)resultFloat;
@@ -61,7 +61,7 @@ namespace Febucci.UI.Examples
                         }
                     }
                     break;
-                
+
                 case "crate":
                     if (eventData.parameters.Length <= 0)
                     {
@@ -115,7 +115,7 @@ namespace Febucci.UI.Examples
             {
                 cratesInitialScale[i] = crates[i].localScale;
             }
-            
+
             dialogueLength = dialoguesLines.Length;
             typewriter.onTextShowed.AddListener(() => CurrentLineShown = true);
         }
@@ -124,7 +124,7 @@ namespace Febucci.UI.Examples
         {
             CurrentLineShown = false;
             dialogueIndex++;
-            if(dialogueIndex<dialogueLength)
+            if (dialogueIndex < dialogueLength)
             {
                 typewriter.ShowText(dialoguesLines[dialogueIndex]);
             }
@@ -141,7 +141,7 @@ namespace Febucci.UI.Examples
                 ContinueSequence();
             }
         }
-        
+
         IEnumerator AnimateCrate(int crateIndex)
         {
             Transform crate = crates[crateIndex];
@@ -149,14 +149,14 @@ namespace Febucci.UI.Examples
             Vector3 targetScale = new Vector3(initialScale.x * 1.2f, initialScale.y * .6f, initialScale.z);
             float t = 0;
             const float duration = .4f;
-            
-            while (t<=duration)
+
+            while (t <= duration)
             {
                 t += Time.unscaledDeltaTime;
                 float pct = t / duration;
                 if (pct < .5f) pct = pct / .5f;
                 else pct = 1 - (pct - .5f) / .5f;
-                
+
                 crate.localScale = Vector3.LerpUnclamped(initialScale, targetScale, pct);
                 yield return null;
             }

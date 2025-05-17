@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,7 +32,7 @@ namespace Febucci.UI
             EditorGUILayout.PropertyField(appearances);
             EditorGUI.indentLevel--;
         }
-        
+
         void DrawActions()
         {
             EditorGUILayout.LabelField("Actions", EditorStyles.boldLabel);
@@ -49,24 +48,24 @@ namespace Febucci.UI
             EditorGUILayout.PropertyField(styles);
             EditorGUI.indentLevel--;
         }
-        
+
         public override void OnInspectorGUI()
         {
             EditorGUILayout.HelpBox($"For this to work, make sure that it's named {TextAnimatorSettings.expectedName} and it's placed inside the Resources folder.", MessageType.Info);
             EditorGUILayout.Space();
-            
+
             DrawEffects();
             EditorGUILayout.Space();
-            
+
             DrawActions();
             EditorGUILayout.Space();
-            
+
             DrawStyles();
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(controlTags);
             EditorGUILayout.Space();
-            
+
             extraSettings = EditorGUILayout.Foldout(extraSettings, "Extra Settings", EditorStyles.foldoutHeader);
             if (extraSettings)
             {

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Febucci.Attributes
 {
@@ -45,7 +45,7 @@ namespace Febucci.Attributes
 
                     if (EditorGUI.EndChangeCheck())
                     {
-                        property.floatValue = 1f/charPerSecond;
+                        property.floatValue = 1f / charPerSecond;
                     }
 
                     if (property.floatValue < minWaitTime)

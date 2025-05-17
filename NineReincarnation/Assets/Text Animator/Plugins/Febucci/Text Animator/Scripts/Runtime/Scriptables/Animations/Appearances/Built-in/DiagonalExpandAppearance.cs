@@ -1,5 +1,4 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -13,7 +12,7 @@ namespace Febucci.UI.Effects
 
         int targetA;
         int targetB;
-        
+
         //--Temp variables--
         Vector3 middlePos;
         float pct;

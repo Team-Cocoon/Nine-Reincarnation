@@ -1,4 +1,4 @@
-﻿using Febucci.UI.Core;
+using Febucci.UI.Core;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,7 +20,7 @@ namespace Febucci.UI
 
         [System.Obsolete("Typo, please use 'avoidMultiplePunctuationWait' instead.")]
         public bool avoidMultiplePunctuactionWait => avoidMultiplePunctuationWait;
-        
+
         [FormerlySerializedAs("avoidMultiplePunctuactionWait")]
         [SerializeField, Tooltip("-True: only the last punctuation on a sequence waits for its category time.\n-False: each punctuation will wait, regardless if it's in a sequence or not")] public bool avoidMultiplePunctuationWait = false;
 
@@ -35,7 +35,7 @@ namespace Febucci.UI
         protected override float GetWaitAppearanceTimeOf(int charIndex)
         {
             char character = TextAnimator.Characters[charIndex].info.character;
-            
+
             //avoids waiting for the last character
             if (!waitForLastCharacter && TextAnimator.allLettersShown)
                 return 0;
@@ -85,8 +85,8 @@ namespace Febucci.UI
         }
 
         protected override float GetWaitDisappearanceTimeOf(int charIndex)
-        { 
-            return useTypewriterWaitForDisappearances ? GetWaitAppearanceTimeOf(charIndex) * (1/disappearanceSpeedMultiplier) : disappearanceWaitTime;
+        {
+            return useTypewriterWaitForDisappearances ? GetWaitAppearanceTimeOf(charIndex) * (1 / disappearanceSpeedMultiplier) : disappearanceWaitTime;
         }
     }
 }

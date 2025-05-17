@@ -7,7 +7,7 @@ namespace Febucci.UI.Core
     {
         public readonly string variableName;
         public readonly float variableValue;
-        
+
         public DefaultValueAttribute(string variableName, float variableValue)
         {
             this.variableName = variableName;

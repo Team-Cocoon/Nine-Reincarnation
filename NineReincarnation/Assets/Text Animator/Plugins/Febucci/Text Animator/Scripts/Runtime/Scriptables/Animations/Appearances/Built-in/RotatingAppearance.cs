@@ -1,5 +1,4 @@
-﻿using Febucci.UI.Core;
-using Febucci.UI.Effects;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -12,7 +11,7 @@ namespace Febucci.UI.Effects
     {
         public float baseTargetAngle = 50;
         float targetAngle;
-        
+
         public override void ResetContext(TAnimCore animator)
         {
             base.ResetContext(animator);

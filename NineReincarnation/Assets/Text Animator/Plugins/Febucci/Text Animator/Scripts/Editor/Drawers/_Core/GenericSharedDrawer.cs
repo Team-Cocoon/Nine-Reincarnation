@@ -42,13 +42,13 @@ namespace Febucci.UI.Core
                 {
                     EditorGUILayout.BeginHorizontal();
                     //if (iterator.displayName.Length > 0)
-                        //EditorGUILayout.PrefixLabel(iterator.displayName.Replace("Base ", ""));
+                    //EditorGUILayout.PrefixLabel(iterator.displayName.Replace("Base ", ""));
                     EditorGUILayout.PropertyField(iterator, true);
                     //EditorGUILayout.PropertyField(iterator, GUIContent.none, true);
                     EditorGUILayout.EndHorizontal();
                 }
 
-            } while (iterator.NextVisible(false)) ;
+            } while (iterator.NextVisible(false));
         }
     }
 

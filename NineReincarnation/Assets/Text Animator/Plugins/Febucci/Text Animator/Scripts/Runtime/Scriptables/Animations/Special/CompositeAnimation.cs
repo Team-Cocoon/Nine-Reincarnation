@@ -1,4 +1,4 @@
-﻿using Febucci.UI.Core;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -16,9 +16,9 @@ namespace Febucci.UI.Effects
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            
+
             ValidateArray();
-            
+
             foreach (var anim in animations)
             {
                 anim.InitializeOnce();
@@ -46,14 +46,14 @@ namespace Febucci.UI.Effects
         {
             foreach (var anim in animations)
             {
-                if(anim.CanApplyEffectTo(character, animator)) 
+                if (anim.CanApplyEffectTo(character, animator))
                     anim.ApplyEffectTo(ref character, animator);
             }
         }
 
         //Prevents double check
         public override bool CanApplyEffectTo(CharacterData character, TAnimCore animator) => true;
-        
+
         public override float GetMaxDuration()
         {
             //Calculates max duration between animations
@@ -67,18 +67,18 @@ namespace Febucci.UI.Effects
         }
 
         void ValidateArray()
-        { 
+        {
             //prevents recursion
             var validated = new System.Collections.Generic.List<AnimationScriptableBase>();
-             
+
             for (int i = 0; i < animations.Length; i++)
             {
-                if(animations[i]!=this) validated.Add(animations[i]);
+                if (animations[i] != this) validated.Add(animations[i]);
             }
 
             animations = validated.ToArray();
         }
-        
+
         void OnValidate() => ValidateArray();
     }
 }

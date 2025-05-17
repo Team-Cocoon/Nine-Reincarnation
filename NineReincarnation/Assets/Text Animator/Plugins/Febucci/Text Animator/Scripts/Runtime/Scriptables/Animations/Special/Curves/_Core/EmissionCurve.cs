@@ -4,9 +4,9 @@ namespace Febucci.UI.Effects
 {
     public class EmissionCurveProperty : PropertyAttribute
     {
-        
+
     }
-    
+
     [System.Serializable]
     public class EmissionCurve
     {
