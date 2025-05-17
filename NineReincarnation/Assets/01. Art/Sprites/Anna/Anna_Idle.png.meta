@@ -1,13 +1,31 @@
 fileFormatVersion: 2
-guid: daa840793514d3f44bd84d4d0c546cd9
+guid: 1c428f67c36688040ae17133da3fac28
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1089291758887910426
-    second: Anna_Idle_0
+      213: -2764662478579647710
+    second: "\uC548\uB098 stay_0"
   - first:
-      213: 3876988175430185783
-    second: Anna_Idle_1
+      213: -3268534624539885977
+    second: "\uC548\uB098 stay_1"
+  - first:
+      213: -5035968384312512688
+    second: "\uC548\uB098 stay_2"
+  - first:
+      213: 1990284029827646245
+    second: "\uC548\uB098 stay_3"
+  - first:
+      213: -8019212374539379698
+    second: "\uC548\uB098 stay_4"
+  - first:
+      213: -68206440313331834
+    second: "\uC548\uB098 stay_5"
+  - first:
+      213: -2209287894599767987
+    second: "\uC548\uB098 stay_6"
+  - first:
+      213: -4416902428777188050
+    second: "\uC548\uB098 stay_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +147,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a1c36495511fd1f00800000000000000
-      internalID: 1089291758887910426
+      spriteID: bfc5d72aff5c2fc448ad0af5bf41f8dd
+      internalID: -1103740785
       vertices: []
       indices: 
       edges: []
@@ -151,10 +169,142 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 733f7e25434ddc530800000000000000
-      internalID: 3876988175430185783
+      spriteID: a3bb1588afd56994f8f3f9c99203dc47
+      internalID: -657293294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f82e5fc707cf424aaaeba80d18caeb3
+      internalID: 1648478960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 259affa7890a57c4ab338dc1732c4d5e
+      internalID: 1994218951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d89537a01df3e499a64944d0acce67
+      internalID: 758787646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d2aed8b5473224409245a6642d58f0d
+      internalID: 656243537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b4e3a7f114f750449dfe28f97a8b8fd
+      internalID: -1837105768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7c99b2983e2ee408c371e0dc866841
+      internalID: -519969676
       vertices: []
       indices: 
       edges: []
@@ -163,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9ae846ffc5121964694ff1d2ed87f6a0
+    spriteID: 83e375f9f7164094c9e16863d70ecec0
     internalID: 0
     vertices: []
     indices: 
@@ -175,8 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Anna_Idle_0: 1089291758887910426
-      Anna_Idle_1: 3876988175430185783
+      Anna_Idle_0: -1103740785
+      Anna_Idle_1: -657293294
+      Anna_Idle_2: 1648478960
+      Anna_Idle_3: 1994218951
+      Anna_Idle_4: 758787646
+      Anna_Idle_5: 656243537
+      Anna_Idle_6: -1837105768
+      Anna_Idle_7: -519969676
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

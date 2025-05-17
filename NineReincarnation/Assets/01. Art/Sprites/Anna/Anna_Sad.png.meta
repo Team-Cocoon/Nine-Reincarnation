@@ -1,31 +1,55 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: 45dd2ba6233aef749a392ef5304b6f27
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: 7385699008980216534
+    second: "\uC548\uB098 sad_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: -4588132100628437792
+    second: "\uC548\uB098 sad_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: -2116658431246038826
+    second: "\uC548\uB098 sad_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: -5753871910843385833
+    second: "\uC548\uB098 sad_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: -6063245589058194202
+    second: "\uC548\uB098 sad_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: 116071889232269300
+    second: "\uC548\uB098 sad_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: -4159505065566475699
+    second: "\uC548\uB098 sad_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: -3995446196302864688
+    second: "\uC548\uB098 sad_7"
+  - first:
+      213: 4294933352401530142
+    second: "\uC548\uB098 sad_8"
+  - first:
+      213: -6297705571480065804
+    second: "\uC548\uB098 sad_9"
+  - first:
+      213: -5130698088130128138
+    second: "\uC548\uB098 sad_10"
+  - first:
+      213: -234644407008297569
+    second: "\uC548\uB098 sad_11"
+  - first:
+      213: -43816125613884600
+    second: "\uC548\uB098 sad_12"
+  - first:
+      213: -2794486764767529938
+    second: "\uC548\uB098 sad_13"
+  - first:
+      213: 6889737418247629436
+    second: "\uC548\uB098 sad_14"
+  - first:
+      213: -3827411393993589467
+    second: "\uC548\uB098 sad_15"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +158,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: Anna_Sad_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: 7cf1505869312df45ad72d9c5ce357a1
+      internalID: 1914635481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: Anna_Sad_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 2006b37ab71d68145ac9de294b076f0c
+      internalID: -2133282148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: Anna_Sad_2
       rect:
         serializedVersion: 2
         x: 64
@@ -193,14 +217,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: c712923071883ed46aab4c3ab2b3f900
+      internalID: -263087666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: Anna_Sad_3
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +239,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: 7a6d979e68051484c8e70eb6a98bb624
+      internalID: -398115253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: Anna_Sad_4
       rect:
         serializedVersion: 2
         x: 128
@@ -237,14 +261,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: 00852efb160bb6f4cb0b3ee9b8c86162
+      internalID: -389515626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: Anna_Sad_5
       rect:
         serializedVersion: 2
         x: 160
@@ -259,14 +283,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: 051f68702a1beb24a8d813445662cd79
+      internalID: -905435675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: Anna_Sad_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: 107d371f8143ba54cb008c254c9683a6
+      internalID: 854603405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: Anna_Sad_7
       rect:
         serializedVersion: 2
         x: 224
@@ -303,8 +327,184 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: bdd7e7481a966d642a713d5cb60edcb5
+      internalID: -1557320993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3dbf0fd82b1e54683c7b6f98dd36e6
+      internalID: 339061627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 257f05b6a85ecb24ca3b4ab77e3b7baf
+      internalID: 559076091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19f2747a7ba09d147aa069fb9df47aa9
+      internalID: -2000967848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bec1c748af18e548ad51e10c5866824
+      internalID: 1980086754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c7cf9070ff1acb42915fb72e089aca2
+      internalID: -276787583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d75884bcac7538458f17aaf281a54ed
+      internalID: -2052775423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2db2bbf8d886a54a9cf2f0f6dc55c8c
+      internalID: -1680421493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anna_Sad_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e4aee26433ba54f8274cb805925dab
+      internalID: -1704916420
       vertices: []
       indices: 
       edges: []
@@ -313,7 +513,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: e4094091259d3104384bf633ff13a478
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +525,22 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      Anna_Sad_0: 1914635481
+      Anna_Sad_1: -2133282148
+      Anna_Sad_10: -2000967848
+      Anna_Sad_11: 1980086754
+      Anna_Sad_12: -276787583
+      Anna_Sad_13: -2052775423
+      Anna_Sad_14: -1680421493
+      Anna_Sad_15: -1704916420
+      Anna_Sad_2: -263087666
+      Anna_Sad_3: -398115253
+      Anna_Sad_4: -389515626
+      Anna_Sad_5: -905435675
+      Anna_Sad_6: 854603405
+      Anna_Sad_7: -1557320993
+      Anna_Sad_8: 339061627
+      Anna_Sad_9: 559076091
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

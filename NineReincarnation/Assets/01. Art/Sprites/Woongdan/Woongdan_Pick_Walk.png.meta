@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 75974398dea2e0e41988e5da3b9bfaeb
+guid: 47071488148d7f64db15d53ba2280863
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5333769202623918567
-    second: "\uC6C5\uB2E8 run_0"
+      213: -5514765183770480541
+    second: "\uC6C5\uB2E8 pick walk_0"
   - first:
-      213: 7970164957741629151
-    second: "\uC6C5\uB2E8 run_1"
+      213: -528123967310013915
+    second: "\uC6C5\uB2E8 pick walk_1"
   - first:
-      213: 939011349217026711
-    second: "\uC6C5\uB2E8 run_2"
+      213: -5974882798370970725
+    second: "\uC6C5\uB2E8 pick walk_2"
   - first:
-      213: -7231194384481015584
-    second: "\uC6C5\uB2E8 run_3"
+      213: -8913997050740468075
+    second: "\uC6C5\uB2E8 pick walk_3"
   - first:
-      213: -6878713046448615662
-    second: "\uC6C5\uB2E8 run_4"
+      213: 7755627380834702769
+    second: "\uC6C5\uB2E8 pick walk_4"
   - first:
-      213: 7416299170293514712
-    second: "\uC6C5\uB2E8 run_5"
+      213: -5956409414353616445
+    second: "\uC6C5\uB2E8 pick walk_5"
   - first:
-      213: -2444167919622428323
-    second: "\uC6C5\uB2E8 run_6"
+      213: 1146687248737366257
+    second: "\uC6C5\uB2E8 pick walk_6"
   - first:
-      213: 8479341005790843226
-    second: "\uC6C5\uB2E8 run_7"
+      213: 7243736899571421947
+    second: "\uC6C5\uB2E8 pick walk_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Woongdan_Run_0
+      name: "\uC6C5\uB2E8 pick walk_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -147,16 +147,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f818a1e35dc6ffe47b50aa422a4290e6
-      internalID: 1057477559
+      spriteID: 3603ba9a84e9773b0800000000000000
+      internalID: -5514765183770480541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_1
+      name: "\uC6C5\uB2E8 pick walk_1"
       rect:
         serializedVersion: 2
         x: 32
@@ -169,16 +169,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3295a66c1add673428caab75f54a6651
-      internalID: 1772506723
+      spriteID: 52add13cc0abba8f0800000000000000
+      internalID: -528123967310013915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_2
+      name: "\uC6C5\uB2E8 pick walk_2"
       rect:
         serializedVersion: 2
         x: 64
@@ -191,16 +191,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f5c35c6dc54eabf46894415115ad797c
-      internalID: 1838292688
+      spriteID: b93a18c40c3f41da0800000000000000
+      internalID: -5974882798370970725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_3
+      name: "\uC6C5\uB2E8 pick walk_3"
       rect:
         serializedVersion: 2
         x: 96
@@ -213,16 +213,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bd701bcc526e6cf43b181dcdec3a4b84
-      internalID: -1013759101
+      spriteID: 5961cb529ee1b4480800000000000000
+      internalID: -8913997050740468075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_4
+      name: "\uC6C5\uB2E8 pick walk_4"
       rect:
         serializedVersion: 2
         x: 128
@@ -235,16 +235,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7dd974c3ca7acfb4ab5f20b5294af4db
-      internalID: 212980671
+      spriteID: 1b512f4030681ab60800000000000000
+      internalID: 7755627380834702769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_5
+      name: "\uC6C5\uB2E8 pick walk_5"
       rect:
         serializedVersion: 2
         x: 160
@@ -257,16 +257,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 16aa6939351baa3449f7617d46d98c8d
-      internalID: 285092718
+      spriteID: 3c109a03235965da0800000000000000
+      internalID: -5956409414353616445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_6
+      name: "\uC6C5\uB2E8 pick walk_6"
       rect:
         serializedVersion: 2
         x: 192
@@ -279,16 +279,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 13ce94d97be9f584eb3832e0c5957f1b
-      internalID: -1634665200
+      spriteID: 1f0f5713af9d9ef00800000000000000
+      internalID: 1146687248737366257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Woongdan_Run_7
+      name: "\uC6C5\uB2E8 pick walk_7"
       rect:
         serializedVersion: 2
         x: 224
@@ -301,10 +301,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 70f80ff4c2910264eae2fd01a20421ee
-      internalID: 2014595275
+      spriteID: bf21859c45ce68460800000000000000
+      internalID: 7243736899571421947
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2701ca36032df241a8bee4ba43870c6
+    spriteID: c84db1e88fe5ac54b8846fda4ec50582
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Run_0: 1057477559
-      Woongdan_Run_1: 1772506723
-      Woongdan_Run_2: 1838292688
-      Woongdan_Run_3: -1013759101
-      Woongdan_Run_4: 212980671
-      Woongdan_Run_5: 285092718
-      Woongdan_Run_6: -1634665200
-      Woongdan_Run_7: 2014595275
+      "\uC6C5\uB2E8 pick walk_0": -5514765183770480541
+      "\uC6C5\uB2E8 pick walk_1": -528123967310013915
+      "\uC6C5\uB2E8 pick walk_2": -5974882798370970725
+      "\uC6C5\uB2E8 pick walk_3": -8913997050740468075
+      "\uC6C5\uB2E8 pick walk_4": 7755627380834702769
+      "\uC6C5\uB2E8 pick walk_5": -5956409414353616445
+      "\uC6C5\uB2E8 pick walk_6": 1146687248737366257
+      "\uC6C5\uB2E8 pick walk_7": 7243736899571421947
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

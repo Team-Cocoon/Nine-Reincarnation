@@ -1,13 +1,31 @@
 fileFormatVersion: 2
-guid: 27bd434882c444e49ad242304549084e
+guid: 3643b6f4df296194fb20cb5cc882aff6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4646050598537131032
-    second: Woongdan_Idle_0
+      213: -3280594931740816903
+    second: "\uC6C5\uB2E8 stay_0"
   - first:
-      213: 5410768682357254126
-    second: Woongdan_Idle_1
+      213: -5198310041741005835
+    second: "\uC6C5\uB2E8 stay_1"
+  - first:
+      213: -733977122799183170
+    second: "\uC6C5\uB2E8 stay_2"
+  - first:
+      213: 6831360638393533033
+    second: "\uC6C5\uB2E8 stay_3"
+  - first:
+      213: -354681761199879843
+    second: "\uC6C5\uB2E8 stay_4"
+  - first:
+      213: -2561369107065180040
+    second: "\uC6C5\uB2E8 stay_5"
+  - first:
+      213: -303869645990341887
+    second: "\uC6C5\uB2E8 stay_6"
+  - first:
+      213: -2113470141052734433
+    second: "\uC6C5\uB2E8 stay_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +147,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8eb04b1b899e58fb0800000000000000
-      internalID: -4646050598537131032
+      spriteID: 4833978920b8a224c844149fee15ece5
+      internalID: -1667279900
       vertices: []
       indices: 
       edges: []
@@ -151,10 +169,142 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ee766b9f279e61b40800000000000000
-      internalID: 5410768682357254126
+      spriteID: f19f9bfc9e7d0714cac4f393726cf2f4
+      internalID: -1549988447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bdff5e202f4c0a44bddf89ed80f6b4c
+      internalID: -353561551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 985cb8b201bf0d346a6d2246ccb6df7d
+      internalID: -1227999977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df7b032717091347872bd222f53d090
+      internalID: 169893364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca13b62a54de2e547a41b78dc77a2c20
+      internalID: -1331568922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ce784bcb7c64f440a705ef5e6b70586
+      internalID: 1950845555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Woongdan_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22ec26948b0b9324eb03665ed9480d23
+      internalID: -1404888119
       vertices: []
       indices: 
       edges: []
@@ -163,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d528d2f81229f344597a4401075b5f0a
+    spriteID: 336bb41980b519340ba4bd20d21c4573
     internalID: 0
     vertices: []
     indices: 
@@ -175,8 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Idle_0: -4646050598537131032
-      Woongdan_Idle_1: 5410768682357254126
+      Woongdan_Idle_0: -1667279900
+      Woongdan_Idle_1: -1549988447
+      Woongdan_Idle_2: -353561551
+      Woongdan_Idle_3: -1227999977
+      Woongdan_Idle_4: 169893364
+      Woongdan_Idle_5: -1331568922
+      Woongdan_Idle_6: 1950845555
+      Woongdan_Idle_7: -1404888119
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
