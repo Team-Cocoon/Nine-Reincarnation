@@ -97,6 +97,11 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
+            if(_rb2d.linearVelocityY < float.Epsilon)
+            {
+                _rb2d.linearVelocityY = 0;
+            }
+
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
