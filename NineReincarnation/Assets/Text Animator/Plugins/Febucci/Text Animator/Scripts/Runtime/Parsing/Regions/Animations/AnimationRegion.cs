@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Text;
 using System;
+using System.Text;
 using Febucci.UI.Effects;
+using UnityEngine;
 
 namespace Febucci.UI.Core.Parsing
 {
-    
+
     [Flags]
     public enum VisibilityMode
     {
@@ -13,7 +13,7 @@ namespace Febucci.UI.Core.Parsing
         OnHiding = 2,
         Persistent = OnVisible | OnHiding,
     }
-    
+
     /// <summary>
     /// Contains information of a region in the text
     /// </summary>
@@ -89,12 +89,12 @@ namespace Febucci.UI.Core.Parsing
         #endregion
 
         #region Animation
-        
+
         public virtual void SetupContextFor(TAnimCore animator, ModifierInfo[] modifiers)
         {
             animation.ResetContext(animator);
 
-            foreach(var mod in modifiers)
+            foreach (var mod in modifiers)
                 animation.SetModifier(mod);
         }
         #endregion

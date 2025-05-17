@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Febucci.UI.Effects
 {
     public class FloatCurveProperty : PropertyAttribute
     {
-        
+
     }
-    
+
     [System.Serializable] //TODO test
     public struct FloatCurve
     {
@@ -17,7 +16,7 @@ namespace Febucci.UI.Effects
         public AnimationCurve weightOverTime;
         public float amplitude;
         public float waveSize;
-        
+
         public FloatCurve(float amplitude, float waveSize, float defaultAmplitude)
         {
             this.defaultAmplitude = defaultAmplitude;
@@ -31,7 +30,7 @@ namespace Febucci.UI.Effects
 
         public float Evaluate(float passedTime, int charIndex)
         {
-            if(!enabled) return defaultAmplitude;
+            if (!enabled) return defaultAmplitude;
 
             return Mathf.LerpUnclamped(defaultAmplitude, amplitude, weightOverTime.Evaluate(passedTime + waveSize * charIndex));
         }

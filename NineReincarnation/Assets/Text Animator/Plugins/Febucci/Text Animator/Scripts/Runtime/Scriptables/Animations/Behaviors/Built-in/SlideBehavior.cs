@@ -1,4 +1,4 @@
-﻿using Febucci.UI.Core;
+using Febucci.UI.Core;
 using UnityEngine;
 
 namespace Febucci.UI.Effects
@@ -15,7 +15,7 @@ namespace Febucci.UI.Effects
 
         public override void ApplyEffectTo(ref Core.CharacterData character, TAnimCore animator)
         {
-            sin = Mathf.Sin(frequency * animator.time.timeSinceStart 
+            sin = Mathf.Sin(frequency * animator.time.timeSinceStart
                 + character.index * waveSize) * amplitude * character.uniformIntensity;
 
             //bottom, torwards one direction

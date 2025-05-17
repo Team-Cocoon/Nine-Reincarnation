@@ -1,5 +1,5 @@
-﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Febucci.Attributes
 {
@@ -32,8 +32,8 @@ namespace Febucci.Attributes
                     vecValue = EditorGUI.Vector2Field(position, label, vecValue);
 
                     property.vector2Value = new Vector2(
-                        (vecValue.x != 0 || vecValue.y!=0) ? vecValue.x : property.vector2Value.x,
-                        (vecValue.y != 0 || vecValue.x!=0) ? vecValue.y : property.vector2Value.y);
+                        (vecValue.x != 0 || vecValue.y != 0) ? vecValue.x : property.vector2Value.x,
+                        (vecValue.y != 0 || vecValue.x != 0) ? vecValue.y : property.vector2Value.y);
 
                     break;
 

@@ -4,9 +4,9 @@ namespace Febucci.UI.Effects
 {
     public class ColorCurveProperty : PropertyAttribute
     {
-        
+
     }
-    
+
     [System.Serializable]
     public struct ColorCurve
     {
@@ -25,15 +25,15 @@ namespace Febucci.UI.Effects
             colorOverTime.SetKeys(
                 new GradientColorKey[]
                 {
-                    new GradientColorKey(Color.white, 0), 
-                    new GradientColorKey(Color.cyan, 0.5f), 
-                    new GradientColorKey(Color.white, 1) 
+                    new GradientColorKey(Color.white, 0),
+                    new GradientColorKey(Color.cyan, 0.5f),
+                    new GradientColorKey(Color.white, 1)
                 },
 
-                new GradientAlphaKey[] 
-                { 
+                new GradientAlphaKey[]
+                {
                     new GradientAlphaKey(1, 0),
-                    new GradientAlphaKey(1, 1) 
+                    new GradientAlphaKey(1, 1)
                 }
             );
         }

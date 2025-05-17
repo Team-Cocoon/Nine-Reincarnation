@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace Febucci.UI.Core.Editors
@@ -25,7 +25,7 @@ namespace Febucci.UI.Core.Editors
 
         string[] propertiesToExclude = new string[0];
 
-        
+
         protected struct PropertyWithDifferentLabel
         {
             public SerializedProperty property;
@@ -43,7 +43,7 @@ namespace Febucci.UI.Core.Editors
             }
         }
 
-        
+
         protected virtual string[] GetPropertiesToExclude()
         {
             return new string[] {
@@ -142,7 +142,7 @@ namespace Febucci.UI.Core.Editors
 
                 EditorGUILayout.PropertyField(resetTypingSpeedAtStartup);
 
-                EditorGUILayout.BeginHorizontal(); 
+                EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Typewriter Skip & Events", EditorStyles.boldLabel);
 
 
@@ -154,13 +154,13 @@ namespace Febucci.UI.Core.Editors
 
 
                 EditorGUILayout.LabelField("Appearing");
-                
+
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(hideAppearancesOnSkip);
                 EditorGUILayout.PropertyField(triggerEventsOnSkip);
                 EditorGUILayout.PropertyField(waitForFullAppearance);
                 EditorGUI.indentLevel--;
-                
+
                 EditorGUILayout.LabelField("Disappearing");
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(hideDisappearancesOnSkip);
@@ -216,7 +216,7 @@ namespace Febucci.UI.Core.Editors
 
                 EditorGUI.indentLevel++;
                 GUI.enabled = false;
-                if(!useTypewriter.boolValue) EditorGUILayout.LabelField("[!] 'Use Typewriter' option is disabled, so these settings might not apply", EditorStyles.wordWrappedMiniLabel);
+                if (!useTypewriter.boolValue) EditorGUILayout.LabelField("[!] 'Use Typewriter' option is disabled, so these settings might not apply", EditorStyles.wordWrappedMiniLabel);
                 GUI.enabled = true;
                 OnTypewriterSectionGUI();
                 EditorGUI.indentLevel--;
@@ -239,11 +239,11 @@ namespace Febucci.UI.Core.Editors
                 }
 
                 EditorGUILayout.EndHorizontal();
-                
+
 
                 EditorGUI.indentLevel++;
                 GUI.enabled = false;
-                if(!useTypewriter.boolValue) EditorGUILayout.LabelField("[!] 'Use Typewriter' option is disabled, so these settings might not apply", EditorStyles.wordWrappedMiniLabel);
+                if (!useTypewriter.boolValue) EditorGUILayout.LabelField("[!] 'Use Typewriter' option is disabled, so these settings might not apply", EditorStyles.wordWrappedMiniLabel);
                 EditorGUILayout.LabelField("To start disappearances, please call the 'StartDisappearingText()' method. See the docs for more.", EditorStyles.wordWrappedMiniLabel);
                 GUI.enabled = true;
 
