@@ -1,11 +1,11 @@
-name: "🐛 Bug"
-description: "버그 제보"
-labels: ["bug"]
+name: "🔧 chore"
+description: "변경 사항"
+labels: ["chore"]
 body:
   - type: textarea
     attributes:
       label: 📄 설명
-      description: 어떤 버그인지 설명을 작성해 주세요.
+      description: 변경 사항에 대한 설명을 작성해 주세요.
       placeholder: 자세히 적을수록 좋습니다!
     validations:
       required: true
