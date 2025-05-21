@@ -23,8 +23,7 @@ namespace Player.Action
             _playerName = name;
             _player = controller;
 
-            CameraManager.Instance.ChangeTarget(controller.GetTransform());
-            
+            CameraManager.Instance?.ChangeTarget(controller.GetTransform());        
         }
 
         /// <summary>

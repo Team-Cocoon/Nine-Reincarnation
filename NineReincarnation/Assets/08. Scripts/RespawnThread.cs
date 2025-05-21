@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface ICollidable
+{
+    public void Enter(GameObject go);
+    public void Exit(GameObject go);
+}
+
 /* 닿으면 사라지는 실 (N초 후에 다시 생성) */
-public class RespawnThread : Thread
+public class RespawnThread : Thread, ICollidable
 {
     [Header("HitLayer")]
     [SerializeField] private LayerMask _hitLayer;
@@ -27,14 +33,13 @@ public class RespawnThread : Thread
             AdjustCollision();
         }
         RenderThread();
-        Debug.Log(_lineRenderer.startColor.a);
     }
     protected override void Initialize()
     {
         base.Initialize();
         _edgeCollider = GetComponent<EdgeCollider2D>();
     }
-    protected override void RenderThread() 
+    protected override void RenderThread()
     {
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
         Vector3[] segmentPositions = new Vector3[segments.Count];
@@ -95,36 +100,38 @@ public class RespawnThread : Thread
         Color resetColor = _lineRenderer.startColor;
         resetColor.a = 1f;
         _lineRenderer.startColor = resetColor;
-         _lineRenderer.endColor = resetColor;
+        _lineRenderer.endColor = resetColor;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _isHit = true;
-            var player = collision.gameObject;
-            if (!_playersOnRope.Contains(player))
-            {
-                _playersOnRope.Add(player);
-            }
-            if (_disappearCoroutine == null)
-            {
-                _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());
-            }
-        }
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    Debug.Log(collision.gameObject.name);
+        //    _isHit = true;
+        //    var player = collision.gameObject;
+        //    if (!_playersOnRope.Contains(player))
+        //    {
+        //        _playersOnRope.Add(player);
+        //    }
+        //    if (_disappearCoroutine == null)
+        //    {
+        //        _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());
+        //    }
+        //}
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _isHit = false;
-            var player = collision.gameObject;
-            if (_playersOnRope.Contains(player))
-            {
-                _playersOnRope.Remove(player);
-            }
-        }
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    _isHit = false;
+        //    var player = collision.gameObject;
+        //    if (_playersOnRope.Contains(player))
+        //    {
+        //        _playersOnRope.Remove(player);
+        //    }
+        //}
     }
     private IEnumerator DisappearThreadCoroutine()
     {
@@ -148,7 +155,8 @@ public class RespawnThread : Thread
 
         while (elapsedTime < 1f)
         {
-            if (!_isHit) {
+            if (!_isHit)
+            {
                 AppearThread();
                 yield break;  // 중간에 빠졌으면 중단
             }
@@ -172,5 +180,29 @@ public class RespawnThread : Thread
     {
         yield return new WaitForSeconds(_respawnTime);
         AppearThread();
+    }
+
+    public void Enter(GameObject go)
+    {
+        _isHit = true;
+        GameObject player = go;
+        if (!_playersOnRope.Contains(player))
+        {
+            _playersOnRope.Add(player);
+        }
+        if (_disappearCoroutine == null)
+        {
+            _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());
+        }
+    }
+
+    public void Exit(GameObject go)
+    {
+        _isHit = false;
+        GameObject player = go;
+        if (_playersOnRope.Contains(player))
+        {
+            _playersOnRope.Remove(player);
+        }
     }
 }

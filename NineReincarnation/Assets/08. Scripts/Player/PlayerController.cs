@@ -143,11 +143,18 @@ namespace Player.Controller
         private void OnTriggerEnter2D(Collider2D collision)
         {
             _isGround = true;
+
+            ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
+            collidable?.Enter(gameObject);
+
             ResetJumpCount();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
+            collidable?.Exit(gameObject);
+
             _isGround = false;
         }
         #endregion

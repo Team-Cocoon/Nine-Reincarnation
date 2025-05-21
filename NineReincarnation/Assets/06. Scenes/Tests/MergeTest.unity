@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RespawnRope
       objectReference: {fileID: 0}
+    - target: {fileID: 4707294657651084786, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: m_TagString
+      value: Thread
+      objectReference: {fileID: 0}
     - target: {fileID: 8319898939587200427, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -364,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2831241
+      value: 3.17
       objectReference: {fileID: 0}
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -397,6 +401,10 @@ PrefabInstance:
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884321024790366604, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
