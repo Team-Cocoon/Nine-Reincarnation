@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
-using System.Diagnostics;
+using static Enemy.Move.EnemyMove;
 
-namespace Bundos.MovingPlatforms
+namespace Enemy.Move
 {
-    [CustomEditor(typeof(PlatformController))]
+    [CustomEditor(typeof(EnemyMove))]
     public class PlatformControllerEditor : Editor
     {
-        PlatformController platformController;
+        EnemyMove platformController;
 
         SelectionInfo selectionInfo;
 
@@ -19,13 +16,13 @@ namespace Bundos.MovingPlatforms
 
         private void OnEnable()
         {
-            platformController = target as PlatformController;
+            platformController = target as EnemyMove;
             selectionInfo = new SelectionInfo();
             style.normal.textColor = Color.black;
         }
         private void OnSceneGUI()
         {
-            if (platformController.editing)
+            if (platformController.Editing)
             {
                 HandleEvents();
                 HandleUI();
@@ -73,7 +70,7 @@ namespace Bundos.MovingPlatforms
 
         private void Draw()
         {
-            switch (platformController.pathType)
+            switch (platformController.PathType)
             {
                 case WaypointPathType.Circle:
                     DrawCicle();
@@ -94,12 +91,12 @@ namespace Bundos.MovingPlatforms
 
         private void DrawElipse()
         {
-            Vector3 centerPosition = platformController.transform.position - new Vector3(0, platformController.elipseRadiusY, 0);
+            Vector3 centerPosition = platformController.transform.position - new Vector3(0, platformController.ElipseRadiusY, 0);
 
             Matrix4x4 m = Matrix4x4.TRS(
                 centerPosition,          // 위치
                 Quaternion.identity,     // 회전
-                new Vector3(platformController.elipseRadiusX, platformController.elipseRadiusY, 1f) // X·Y만 스케일
+                new Vector3(platformController.ElipseRadiusX, platformController.ElipseRadiusY, 1f) // X·Y만 스케일
             );
 
             using (new Handles.DrawingScope(Color.red, m))
@@ -111,30 +108,30 @@ namespace Bundos.MovingPlatforms
         private void DrawCicle()
         {
             Handles.color = Color.red;
-            Vector3 centerPosition = platformController.transform.position - new Vector3(0, platformController.circleRadius, 0);
+            Vector3 centerPosition = platformController.transform.position - new Vector3(0, platformController.CircleRadius, 0);
             Handles.DrawWireDisc(centerPosition,   // 중심
                       Vector3.back,                // 평면 법선
-                      platformController.circleRadius);
+                      platformController.CircleRadius);
         }
 
         private void DrawLineOpen()
         {
-            for (int i = 0; i < platformController.waypoints.Count; i++)
+            for (int i = 0; i < platformController.Waypoints.Count; i++)
             {
-                Vector3 nextPoint = platformController.waypoints[(i + 1) % platformController.waypoints.Count];
+                Vector3 nextPoint = platformController.Waypoints[(i + 1) % platformController.Waypoints.Count];
 
-                if (i != platformController.waypoints.Count - 1)
+                if (i != platformController.Waypoints.Count - 1)
                 {
                     // Draw Edges
                     if (i == selectionInfo.lineIndex)
                     {
                         Handles.color = Color.red;
-                        Handles.DrawLine(platformController.waypoints[i], nextPoint, 1f);
+                        Handles.DrawLine(platformController.Waypoints[i], nextPoint, 1f);
                     }
                     else
                     {
                         Handles.color = Color.black;
-                        Handles.DrawDottedLine(platformController.waypoints[i], nextPoint, 1f);
+                        Handles.DrawDottedLine(platformController.Waypoints[i], nextPoint, 1f);
                     }
                 }
 
@@ -148,29 +145,29 @@ namespace Bundos.MovingPlatforms
                     Handles.color = Color.white;
                 }
 
-                Handles.DrawSolidDisc(platformController.waypoints[i], Vector3.back, platformController.handleRadius);
+                Handles.DrawSolidDisc(platformController.Waypoints[i], Vector3.back, platformController.HandleRadius);
 
                 Handles.color = Color.black;
-                Handles.Label(platformController.waypoints[i], i.ToString(), style);
+                Handles.Label(platformController.Waypoints[i], i.ToString(), style);
             }
         }
 
         private void DrawLineClosed()
         {
-            for (int i = 0; i < platformController.waypoints.Count; i++)
+            for (int i = 0; i < platformController.Waypoints.Count; i++)
             {
-                Vector3 nextPoint = platformController.waypoints[(i + 1) % platformController.waypoints.Count];
+                Vector3 nextPoint = platformController.Waypoints[(i + 1) % platformController.Waypoints.Count];
 
                 // Draw Edges
                 if (i == selectionInfo.lineIndex)
                 {
                     Handles.color = Color.red;
-                    Handles.DrawLine(platformController.waypoints[i], nextPoint, 1f);
+                    Handles.DrawLine(platformController.Waypoints[i], nextPoint, 1f);
                 }
                 else
                 {
                     Handles.color = Color.black;
-                    Handles.DrawDottedLine(platformController.waypoints[i], nextPoint, 1f);
+                    Handles.DrawDottedLine(platformController.Waypoints[i], nextPoint, 1f);
                 }
 
                 // Draw Points
@@ -183,10 +180,10 @@ namespace Bundos.MovingPlatforms
                     Handles.color = Color.white;
                 }
 
-                Handles.DrawSolidDisc(platformController.waypoints[i], Vector3.back, platformController.handleRadius);
+                Handles.DrawSolidDisc(platformController.Waypoints[i], Vector3.back, platformController.HandleRadius);
 
                 Handles.color = Color.black;
-                Handles.Label(platformController.waypoints[i], i.ToString(), style);
+                Handles.Label(platformController.Waypoints[i], i.ToString(), style);
             }
         }
 
@@ -226,7 +223,7 @@ namespace Bundos.MovingPlatforms
         void HandleLeftMouseDownDelete(Vector3 mousePosition)
         {
             Undo.RecordObject(platformController, "Remove waypoint");
-            platformController.waypoints.RemoveAt(selectionInfo.pointIndex);
+            platformController.Waypoints.RemoveAt(selectionInfo.pointIndex);
             selectionInfo.pointIndex = -1;
             needsRepaint = true;
         }
@@ -235,9 +232,9 @@ namespace Bundos.MovingPlatforms
         {
             if (!selectionInfo.mouseIsOverPoint)
             {
-                int newPointIndex = (selectionInfo.mouseIsOverLine) ? selectionInfo.lineIndex + 1 : platformController.waypoints.Count;
+                int newPointIndex = (selectionInfo.mouseIsOverLine) ? selectionInfo.lineIndex + 1 : platformController.Waypoints.Count;
                 Undo.RecordObject(platformController, "Add waypoint");
-                platformController.waypoints.Insert(newPointIndex, mousePosition);
+                platformController.Waypoints.Insert(newPointIndex, mousePosition);
                 selectionInfo.pointIndex = newPointIndex;
             }
 
@@ -250,9 +247,9 @@ namespace Bundos.MovingPlatforms
         {
             if (selectionInfo.pointIsSelected)
             {
-                platformController.waypoints[selectionInfo.pointIndex] = selectionInfo.positionAtStartOfDrag;
+                platformController.Waypoints[selectionInfo.pointIndex] = selectionInfo.positionAtStartOfDrag;
                 Undo.RecordObject(platformController, "Move point");
-                platformController.waypoints[selectionInfo.pointIndex] = mousePosition;
+                platformController.Waypoints[selectionInfo.pointIndex] = mousePosition;
 
                 selectionInfo.pointIsSelected = false;
                 selectionInfo.pointIndex = -1;
@@ -264,7 +261,7 @@ namespace Bundos.MovingPlatforms
         {
             if (selectionInfo.pointIsSelected)
             {
-                platformController.waypoints[selectionInfo.pointIndex] = mousePosition;
+                platformController.Waypoints[selectionInfo.pointIndex] = mousePosition;
                 needsRepaint = true;
             }
         }
@@ -272,9 +269,9 @@ namespace Bundos.MovingPlatforms
         void UpdateMouseOverInfo(Vector3 currMousePosition)
         {
             int mouseOverPointIndex = -1;
-            for (int i = 0; i < platformController.waypoints.Count; i++)
+            for (int i = 0; i < platformController.Waypoints.Count; i++)
             {
-                if (Vector3.Distance(currMousePosition, platformController.waypoints[i]) < platformController.handleRadius)
+                if (Vector3.Distance(currMousePosition, platformController.Waypoints[i]) < platformController.HandleRadius)
                 {
                     mouseOverPointIndex = i;
                     break;
@@ -297,11 +294,11 @@ namespace Bundos.MovingPlatforms
             else
             {
                 int mouseOverLineIndex = -1;
-                float closestLineDistance = platformController.handleRadius;
-                for (int i = 0; i < platformController.waypoints.Count; i++)
+                float closestLineDistance = platformController.HandleRadius;
+                for (int i = 0; i < platformController.Waypoints.Count; i++)
                 {
-                    Vector3 nextPointInShape = platformController.waypoints[(i + 1) % platformController.waypoints.Count];
-                    float dstFromMouseToLine = HandleUtility.DistancePointToLineSegment(currMousePosition, platformController.waypoints[i], nextPointInShape);
+                    Vector3 nextPointInShape = platformController.Waypoints[(i + 1) % platformController.Waypoints.Count];
+                    float dstFromMouseToLine = HandleUtility.DistancePointToLineSegment(currMousePosition, platformController.Waypoints[i], nextPointInShape);
                     if (dstFromMouseToLine < closestLineDistance)
                     {
                         closestLineDistance = dstFromMouseToLine;
@@ -320,8 +317,8 @@ namespace Bundos.MovingPlatforms
 
         Vector3 SnapToGrid(Vector3 position)
         {
-            float snappedX = Mathf.Round(position.x / platformController.snappingSettings.x) * platformController.snappingSettings.x;
-            float snappedY = Mathf.Round(position.y / platformController.snappingSettings.y) * platformController.snappingSettings.y;
+            float snappedX = Mathf.Round(position.x / platformController.SnappingSettings.x) * platformController.SnappingSettings.x;
+            float snappedY = Mathf.Round(position.y / platformController.SnappingSettings.y) * platformController.SnappingSettings.y;
 
             return new Vector3(snappedX, snappedY, position.z);
         }
