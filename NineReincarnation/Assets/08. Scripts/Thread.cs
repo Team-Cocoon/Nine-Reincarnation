@@ -13,7 +13,7 @@ public abstract class Thread : MonoBehaviour
     [SerializeField] protected Transform _endTransform;
 
     protected LineRenderer _lineRenderer;
-    protected LayerMask _hitLayer;
+    protected EdgeCollider2D _edgeCollider;
     protected List<Segment> segments = new List<Segment>();
 
     private Vector2 _gravity = new Vector2(0, -9.81f);
@@ -74,7 +74,7 @@ public abstract class Thread : MonoBehaviour
     /// <summary>
     /// 실 그리기
     /// </summary>
-    protected void RenderThread()
+    protected virtual void RenderThread()
     {
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
         Vector3[] segmentPositions = new Vector3[segments.Count];
@@ -84,24 +84,6 @@ public abstract class Thread : MonoBehaviour
         }
         _lineRenderer.positionCount = segmentPositions.Length;
         _lineRenderer.SetPositions(segmentPositions);
-    }
-    /// <summary>
-    /// 실의 충돌 시 위치 보정
-    /// </summary>
-    protected void AdjustCollision()
-    {
-        for (int i = 0; i < segments.Count; i++)
-        {
-            Vector2 dir = segments[i].position - segments[i].prevPosition;
-
-            RaycastHit2D hit = Physics2D.CircleCast(segments[i].position, threadWidth * 0.5f, dir.normalized, 0f, _hitLayer);
-
-            if (hit) 
-            {
-                segments[i].position = hit.point + hit.normal * threadWidth * 0.5f;
-                segments[i].prevPosition = segments[i].position;
-            }
-        }
     }
     private void CreateRope()
     {
