@@ -76,11 +76,9 @@ namespace Enemy.Move
                     MoveElipse();
                     break;
                 case WaypointPathType.LineClosed:
-                    transform.position = _waypoints[0];
                     MoveLineClosed();
                     break;
                 case WaypointPathType.LineOpen:
-                    transform.position = _waypoints[0];
                     MoveLineOpen();
                     break;
             }
@@ -128,6 +126,11 @@ namespace Enemy.Move
         //닫힌 구간 움직임
         private void MoveLineOpen()
         {
+            if(_waypoints.Count < 1)
+            {
+                return;
+            }
+            transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
             Sequence seq = DOTween.Sequence();
 
@@ -148,6 +151,11 @@ namespace Enemy.Move
 
         private void MoveLineClosed()
         {
+            if (_waypoints.Count < 1)
+            {
+                return;
+            }
+            transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
             Sequence seq = DOTween.Sequence();
 
