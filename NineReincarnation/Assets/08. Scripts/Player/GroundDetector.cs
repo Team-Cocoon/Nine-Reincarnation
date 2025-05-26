@@ -11,6 +11,8 @@ public class GroundDetector : MonoBehaviour
         if(collision.CompareTag("Ground"))
         {
             player.IsGround = true;
+
+            player.ResetJumpCount();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -19,6 +19,7 @@ namespace Player.Controller
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private string _playerName; //플레이어 식별 변수
+        [SerializeField] private Vector3 _checkPoint; //플레이어 리스폰 위치
 
         private int _jumpCount = 0; //더블 점프 제어
         private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
@@ -59,6 +60,10 @@ namespace Player.Controller
             _playersStateMachine.stateChanged += ChangeAnimation;
         }
 
+        private void Start()
+        {
+            Respawn();
+        }
         private void OnDestroy()
         {
             _playersStateMachine.stateChanged -= ChangeAnimation;
@@ -75,7 +80,7 @@ namespace Player.Controller
         }
 
         #region 내부 변수 제어
-        private void ResetJumpCount()
+        public void ResetJumpCount()
         {
             _jumpCount = 0;
         }
@@ -84,6 +89,12 @@ namespace Player.Controller
         {
             return transform;
         }
+
+        public void SetCheckPoint(Vector3 position)
+        {
+            _checkPoint = position;
+        }
+
         /// <summary>
         /// 플레이어를 정지 상태로 만드는 함수
         /// </summary>
@@ -135,6 +146,12 @@ namespace Player.Controller
         #endregion
 
         #region 플레이어 상태 제어
+
+        public void Respawn()
+        {
+            transform.position = _checkPoint;
+        }
+
         /// <summary>
         /// 플레이어 방향에 따라 이미지 방향 변경
         /// </summary>
@@ -168,13 +185,11 @@ namespace Player.Controller
         }
         #endregion
 
-        #region TODO : 플레이어에 어떤 감지 로직이 더 붙을지 모르므로 나중에 수정필요
+        #region 충돌 제어
         private void OnTriggerEnter2D(Collider2D collision)
         {
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
-
-            ResetJumpCount();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
