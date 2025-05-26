@@ -143,17 +143,24 @@ namespace Player.Controller
         private void OnTriggerEnter2D(Collider2D collision)
         {
             _isGround = true;
-
+            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
+            /* 늪 충돌 */
+            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
+            sinkCollision?.Sink();
 
             ResetJumpCount();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Exit(gameObject);
+            /* 늪 충돌 */
+            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
+            sinkCollision?.Exit();
 
             _isGround = false;
         }
