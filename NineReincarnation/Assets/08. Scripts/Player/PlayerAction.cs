@@ -63,6 +63,17 @@ namespace Player.Action
                 InputManager.Instance.Swap(_playerName);
             }
         }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 DownJump관련 함수
+        /// </summary>
+        public void ActionDownJump(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                _player.DownJump();
+            }
+        }
     }
 
 }
