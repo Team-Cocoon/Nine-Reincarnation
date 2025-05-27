@@ -11,6 +11,8 @@ namespace Player.Action
         private string _playerName;
         private PlayerController _player;
 
+        public PlayerController Player => _player;
+
         /// <summary>
         /// 조종할 플레이어 설정
         /// </summary>
@@ -61,6 +63,17 @@ namespace Player.Action
             if (context.started)
             {
                 InputManager.Instance.Swap(_playerName);
+            }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 DownJump관련 함수
+        /// </summary>
+        public void ActionDownJump(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                _player.DownJump();
             }
         }
     }

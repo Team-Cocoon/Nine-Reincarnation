@@ -4,8 +4,17 @@ using UnityEngine;
 
 public interface ICollidable
 {
-    public void Enter(GameObject go);
-    public void Exit(GameObject go);
+    /// <summary>
+    /// 충돌 시 한 번 일어날 이벤트
+    /// </summary>
+    /// <param name="go"></param>
+    public void Enter(GameObject go = null);
+
+    /// <summary>
+    /// 충돌 해제 시 한 번 일어날 이벤트
+    /// </summary>
+    /// <param name="go"></param>
+    public void Exit(GameObject go = null);
 }
 
 /* 닿으면 사라지는 실 (N초 후에 다시 생성) */
