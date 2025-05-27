@@ -11,6 +11,8 @@ namespace Player.Action
         private string _playerName;
         private PlayerController _player;
 
+        public PlayerController Player => _player;
+
         /// <summary>
         /// 조종할 플레이어 설정
         /// </summary>

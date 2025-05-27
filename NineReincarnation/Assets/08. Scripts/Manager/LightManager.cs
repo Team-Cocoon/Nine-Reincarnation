@@ -13,6 +13,7 @@ public class LightManager : MonoBehaviour
     public static LightManager Instance { get; private set; }
 
     [SerializeField] private float _visionLimitedDuration = 6.0f;
+    [SerializeField] private GameObject _limitedLight;
     private StatusEffect _state = StatusEffect.None;
     
     public Action OnVisionLimited;
@@ -31,6 +32,7 @@ public class LightManager : MonoBehaviour
 
     private void Start()
     {
+        Instantiate(_limitedLight);
         OnVisionLimited += OffLight;
     }
 

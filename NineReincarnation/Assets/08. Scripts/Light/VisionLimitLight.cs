@@ -20,6 +20,12 @@ public class VisionLimitLight : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        transform.parent = InputManager.Instance.Action.Player.transform;
+        transform.localPosition = Vector3.zero;
+    }
+
     private void OnDestroy()
     {
         LightManager.Instance.OnVisionLimited -= OnLight;
