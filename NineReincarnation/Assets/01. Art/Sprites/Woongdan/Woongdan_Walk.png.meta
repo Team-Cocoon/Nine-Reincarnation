@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 440fa4879c00f4943a912cd670fc9b51
+guid: c6cd259d58c79f943a7af8811caf04f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3039432595424453056
-    second: Woongdan_Walk_0
+      213: 9149169948296158634
+    second: "\uC6C5\uB2E8 walk_0"
   - first:
-      213: 7748140247786213929
-    second: Woongdan_Walk_1
+      213: -8561091155503080576
+    second: "\uC6C5\uB2E8 walk_1"
   - first:
-      213: 6394975281276136493
-    second: Woongdan_Walk_2
+      213: -2471151515429453218
+    second: "\uC6C5\uB2E8 walk_2"
   - first:
-      213: 5365878773709106482
-    second: Woongdan_Walk_3
+      213: 543743083745797683
+    second: "\uC6C5\uB2E8 walk_3"
   - first:
-      213: -3766971899720617849
-    second: Woongdan_Walk_4
+      213: 2194464572382430456
+    second: "\uC6C5\uB2E8 walk_4"
   - first:
-      213: 163556583438802255
-    second: Woongdan_Walk_5
+      213: 4645860752615354032
+    second: "\uC6C5\uB2E8 walk_5"
   - first:
-      213: -8191970200352016528
-    second: Woongdan_Walk_6
+      213: 2686531668192214441
+    second: "\uC6C5\uB2E8 walk_6"
   - first:
-      213: -7692565632370849573
-    second: Woongdan_Walk_7
+      213: -3637177689630834318
+    second: "\uC6C5\uB2E8 walk_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,10 +147,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 04e5bf67824c1d5d0800000000000000
-      internalID: -3039432595424453056
+      spriteID: 48b778907df6f8d42b1aedff5586a184
+      internalID: -700971420
       vertices: []
       indices: 
       edges: []
@@ -169,10 +169,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9225433018ce68b60800000000000000
-      internalID: 7748140247786213929
+      spriteID: ca1aab763669b3048ab6ebf2c4867813
+      internalID: -1768280077
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d2c2ed3e2248fb850800000000000000
-      internalID: 6394975281276136493
+      spriteID: 6bdbdd0d242ff1f45830dd9b373a57f4
+      internalID: 342249158
       vertices: []
       indices: 
       edges: []
@@ -213,10 +213,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 23d6db6a05e677a40800000000000000
-      internalID: 5365878773709106482
+      spriteID: 6ad949a96a4f2b34490e886e77b60e02
+      internalID: 1592087803
       vertices: []
       indices: 
       edges: []
@@ -235,10 +235,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7803646f30709bbc0800000000000000
-      internalID: -3766971899720617849
+      spriteID: 02294226d491c3645b0a3f4f58519bc0
+      internalID: 1536518025
       vertices: []
       indices: 
       edges: []
@@ -257,10 +257,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f4ddb8898d1154200800000000000000
-      internalID: 163556583438802255
+      spriteID: f1ddf582e64771a4f94d4c8ad9c0ad58
+      internalID: 1508740627
       vertices: []
       indices: 
       edges: []
@@ -279,10 +279,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 077be657186405e80800000000000000
-      internalID: -8191970200352016528
+      spriteID: 9ddb5d162276ed04093f23324e8f64ce
+      internalID: -1400959989
       vertices: []
       indices: 
       edges: []
@@ -301,10 +301,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bd8482770548e3590800000000000000
-      internalID: -7692565632370849573
+      spriteID: c93ed214626fd4c4faa3bee69e3a3155
+      internalID: 1351312224
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 203e230c65a07f54b9c62d4cfa900684
+    spriteID: e4761f64f2dc602498e391695dcc282a
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Woongdan_Walk_0: -3039432595424453056
-      Woongdan_Walk_1: 7748140247786213929
-      Woongdan_Walk_2: 6394975281276136493
-      Woongdan_Walk_3: 5365878773709106482
-      Woongdan_Walk_4: -3766971899720617849
-      Woongdan_Walk_5: 163556583438802255
-      Woongdan_Walk_6: -8191970200352016528
-      Woongdan_Walk_7: -7692565632370849573
+      Woongdan_Walk_0: -700971420
+      Woongdan_Walk_1: -1768280077
+      Woongdan_Walk_2: 342249158
+      Woongdan_Walk_3: 1592087803
+      Woongdan_Walk_4: 1536518025
+      Woongdan_Walk_5: 1508740627
+      Woongdan_Walk_6: -1400959989
+      Woongdan_Walk_7: 1351312224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

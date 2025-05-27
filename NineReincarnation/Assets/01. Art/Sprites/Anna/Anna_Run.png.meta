@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: b19589c0cdecd5f4c8ed71f53c0acefc
+guid: 2de87c5d26ae8d84e98639de7f4d8a7b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3059292535200967453
-    second: Anna_Run_0
+      213: 2927580960082570071
+    second: "\uC548\uB098 run_0"
   - first:
-      213: -1240449460924396705
-    second: Anna_Run_1
+      213: -1679553063792135882
+    second: "\uC548\uB098 run_1"
   - first:
-      213: 1562121443759512004
-    second: Anna_Run_2
+      213: -230161494345425319
+    second: "\uC548\uB098 run_2"
   - first:
-      213: -8415054751443076753
-    second: Anna_Run_3
+      213: -1232471273682614256
+    second: "\uC548\uB098 run_3"
   - first:
-      213: -474199561902636868
-    second: Anna_Run_4
+      213: -1512987205353483911
+    second: "\uC548\uB098 run_4"
   - first:
-      213: 954543204685604162
-    second: Anna_Run_5
+      213: -4968815695384637325
+    second: "\uC548\uB098 run_5"
   - first:
-      213: -4143495660864958418
-    second: Anna_Run_6
+      213: 4222744973813293789
+    second: "\uC548\uB098 run_6"
   - first:
-      213: 3366895248513573666
-    second: Anna_Run_7
+      213: -3559095814497048832
+    second: "\uC548\uB098 run_7"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,10 +147,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d1b68a81a5ac47a20800000000000000
-      internalID: 3059292535200967453
+      spriteID: d704faffc14b9404da5260ab7f8bf959
+      internalID: 251029451
       vertices: []
       indices: 
       edges: []
@@ -169,10 +169,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f5bc6c799c909cee0800000000000000
-      internalID: -1240449460924396705
+      spriteID: 871bec8a0bfabd84b8d634ea40d33940
+      internalID: 1602624675
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4c95e473d25cda510800000000000000
-      internalID: 1562121443759512004
+      spriteID: 08dd5d22e34e9384fa1348774c124d35
+      internalID: 1594691633
       vertices: []
       indices: 
       edges: []
@@ -213,10 +213,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f69b5c6d948b73b80800000000000000
-      internalID: -8415054751443076753
+      spriteID: 029e687afadaf3f448089a075475f1b1
+      internalID: -150235682
       vertices: []
       indices: 
       edges: []
@@ -235,10 +235,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cb0c528c20e4b69f0800000000000000
-      internalID: -474199561902636868
+      spriteID: 85699e0dae1ec9e44b4b494ffbedbaa3
+      internalID: 1892930553
       vertices: []
       indices: 
       edges: []
@@ -257,10 +257,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2456c0ebcf73f3d00800000000000000
-      internalID: 954543204685604162
+      spriteID: 9c1d97db7ca900e448236cc06420e718
+      internalID: 2110619312
       vertices: []
       indices: 
       edges: []
@@ -279,10 +279,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e2095cd46a85f76c0800000000000000
-      internalID: -4143495660864958418
+      spriteID: ab8e53c4bcfbd1b46b2e67f3c1793a1f
+      internalID: 1267562667
       vertices: []
       indices: 
       edges: []
@@ -301,10 +301,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2232a93d36d99be20800000000000000
-      internalID: 3366895248513573666
+      spriteID: 9b00078ff15d8f3498c3c014f87f1d97
+      internalID: -1236138256
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0738f7314a4422046abc0e9bb54b272b
+    spriteID: 6686e64151c7b3b4db8a4a828caa8941
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +325,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Anna_Run_0: 3059292535200967453
-      Anna_Run_1: -1240449460924396705
-      Anna_Run_2: 1562121443759512004
-      Anna_Run_3: -8415054751443076753
-      Anna_Run_4: -474199561902636868
-      Anna_Run_5: 954543204685604162
-      Anna_Run_6: -4143495660864958418
-      Anna_Run_7: 3366895248513573666
+      Anna_Run_0: 251029451
+      Anna_Run_1: 1602624675
+      Anna_Run_2: 1594691633
+      Anna_Run_3: -150235682
+      Anna_Run_4: 1892930553
+      Anna_Run_5: 2110619312
+      Anna_Run_6: 1267562667
+      Anna_Run_7: -1236138256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
