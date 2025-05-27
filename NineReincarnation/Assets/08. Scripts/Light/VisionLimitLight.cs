@@ -10,10 +10,7 @@ public class VisionLimitLight : MonoBehaviour
     private void Awake()
     {
         _light = GetComponent<Light2D>();
-    }
 
-    private void Start()
-    {
         LightManager.Instance.OnVisionLimited += OnLight;
         LightManager.Instance.OnVisionLimitCleared += OffLight;
 
