@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
 #if UNITY_EDITOR
 using UnityEditor;  //에디터 전용 네임스페이스
 #endif
@@ -33,11 +32,13 @@ namespace Enemy.Move
         [Header("원 세팅")]
         [SerializeField] private float _circleRadius = 5.0f;
         [SerializeField] private float _angleRad = 0f; //초기 위치
+        [SerializeField] private float _circleDirection = 1.0f;
 
         [Space(10)]
         [Header("타원 세팅")]
         [SerializeField] private float _elipseRadiusX = 5.0f;
         [SerializeField] private float _elipseRadiusY = 10.0f;
+        [SerializeField] private float _elipseDirection = 1.0f;
 
         [Space(10)]
         [Header("에디터 세팅")]
@@ -65,6 +66,7 @@ namespace Enemy.Move
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
+
         private void Start()
         {
             switch (_pathType)
@@ -89,10 +91,10 @@ namespace Enemy.Move
         private void MoveCircle()
         {
             Vector3 center = transform.position - new Vector3(0, _circleRadius, 0);
-
+            _angleRad *= Mathf.Deg2Rad;
             DOTween.To(() => _angleRad,
                                  x => _angleRad = x,
-                                 _angleRad - 2f * Mathf.PI,
+                                 _angleRad - 2f * _circleDirection * Mathf.PI,
                                  _duration)
                 .SetEase(Ease.Linear)        // 속도 곡선
                 .OnUpdate(() =>
@@ -108,16 +110,16 @@ namespace Enemy.Move
         //타원 움직임
         private void MoveElipse()
         {
-            float angleRad = 0f; //현재 각도
             Vector3 center = transform.position - new Vector3(0, _elipseRadiusY, 0);
-            DOTween.To(() => angleRad, x => angleRad = x, 
-                        angleRad - 2f * Mathf.PI, 
+            _angleRad *= Mathf.Deg2Rad;
+            DOTween.To(() => _angleRad, x => _angleRad = x, 
+                        _angleRad - 2f * _elipseDirection * Mathf.PI, 
                         _duration)
                    .SetEase(Ease.Linear)
                    .OnUpdate(() => {
                        Vector3 offset = new Vector3(
-                           Mathf.Cos(angleRad) * _elipseRadiusX,
-                           Mathf.Sin(angleRad) * _elipseRadiusY,
+                           Mathf.Cos(_angleRad) * _elipseRadiusX,
+                           Mathf.Sin(_angleRad) * _elipseRadiusY,
                            0f);
                        _rb2d.MovePosition(center + offset);
                    }).SetLoops(_loopCount, _animationLoopType);
@@ -132,6 +134,7 @@ namespace Enemy.Move
             }
             transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
+
             Sequence seq = DOTween.Sequence();
 
             for(int i = 1; i < wayPointsCount; ++i)
@@ -157,6 +160,7 @@ namespace Enemy.Move
             }
             transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
+
             Sequence seq = DOTween.Sequence();
 
             for (int i = 1; i < wayPointsCount; ++i)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8917633105700320164}
   m_Layer: 0
   m_Name: RespawnRope
-  m_TagString: Untagged
+  m_TagString: Thread
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e266f766d6b558d48a1a95611e2c6a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentCount: 11
+  segmentCount: 20
   segmentDist: 0.4
   threadWidth: 0.1
   _startTransform: {fileID: 0}
