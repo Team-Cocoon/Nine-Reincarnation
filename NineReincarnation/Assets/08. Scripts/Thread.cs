@@ -87,11 +87,15 @@ public abstract class Thread : MonoBehaviour
     }
     private void CreateRope()
     {
+        Vector2 gravityEffect = _gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
         Vector2 segmentPos = _endTransform.position;
         for (int i = 0; i < segmentCount; i++)
         {
             segments.Add(new Segment(segmentPos));
             segmentPos.y -= segmentDist;
+            segments[i].prevPosition = segments[i].position;
+            segments[i].position += gravityEffect;
+            segments[i].position += segments[i].velocity;
         }
     }
 }

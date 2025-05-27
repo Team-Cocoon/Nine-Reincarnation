@@ -56,7 +56,7 @@ public class RespawnThread : Thread, ICollidable
         for (int i = 0; i < segments.Count; i++)
         {
             segmentPositions[i] = segments[i].position;
-            colliderPositions[i] = segments[i].position;
+            colliderPositions[i] = transform.InverseTransformPoint(segments[i].position);
         }
         _lineRenderer.positionCount = segmentPositions.Length;
         _lineRenderer.SetPositions(segmentPositions);

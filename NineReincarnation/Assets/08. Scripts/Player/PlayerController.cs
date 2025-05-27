@@ -188,14 +188,24 @@ namespace Player.Controller
         #region 충돌 제어
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
+            
+            /* 늪 충돌 */
+            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
+            sinkCollision?.Sink();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Exit(gameObject);
+
+            /* 늪 충돌 */
+            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
+            sinkCollision?.Exit();
         }
         #endregion
     }
