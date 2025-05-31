@@ -4,6 +4,15 @@ using State.PlayerState;
 using State.StateMachine.PlayerStateMachine;
 using UnityEngine;
 
+public interface IObjectData
+{
+    public float Speed 
+    { 
+        get; 
+        set; 
+    }
+}
+
 namespace Player.Controller
 {
     public enum PlayerDirection
@@ -13,7 +22,7 @@ namespace Player.Controller
         Left = -1
     }
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
         [SerializeField] private float _speed;
@@ -46,6 +55,12 @@ namespace Player.Controller
         { 
             get => _playerName;
             set => _playerName = value;
+        }
+
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
         }
 
         private void Awake()
@@ -188,24 +203,14 @@ namespace Player.Controller
         #region 충돌 제어
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
-            
-            /* 늪 충돌 */
-            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
-            sinkCollision?.Sink();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Exit(gameObject);
-
-            /* 늪 충돌 */
-            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
-            sinkCollision?.Exit();
         }
         #endregion
     }

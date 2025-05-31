@@ -16,7 +16,6 @@ public interface ICollidable
     /// <param name="go"></param>
     public void Exit(GameObject go = null);
 }
-
 /* 닿으면 사라지는 실 (N초 후에 다시 생성) */
 public class RespawnThread : Thread, ICollidable
 {
