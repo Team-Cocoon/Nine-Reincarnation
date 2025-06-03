@@ -31,7 +31,7 @@ namespace Player.Controller
         [SerializeField] private Vector3 _checkPoint; //플레이어 리스폰 위치
 
         private int _jumpCount = 0; //더블 점프 제어
-        private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
+        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         private PlayerDirection _direction; //플레이어 방향
         private Animator _animator;
         private Rigidbody2D _rb2d;
