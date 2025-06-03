@@ -16,23 +16,26 @@ public interface ICollidable
     /// <param name="go"></param>
     public void Exit(GameObject go = null);
 }
-
 /* 닿으면 사라지는 실 (N초 후에 다시 생성) */
 public class RespawnThread : Thread, ICollidable
 {
     [Header("HitLayer")]
     [SerializeField] private LayerMask _hitLayer;
-    [SerializeField] private LayerMask _hitTargetLayer;
 
     [Header("RespawnData")]
     [SerializeField] private bool _isHit;
-    //[SerializeField] private float _castDist = 0f;
     [SerializeField] private float _disappearTime = 0f;
     [SerializeField] private float _respawnTime = 0f;
 
     private List<GameObject> _playersOnRope = new List<GameObject>();
     private Coroutine _disappearCoroutine;
     private Coroutine _appearCoroutine;
+
+    [Header("Player Data")]
+    [SerializeField] private float _damping = 10f;
+    private float _initGravity;
+    private float _initDamping;
+
     protected override void UpdateThread()
     {
         UpdateSegments();
@@ -42,6 +45,9 @@ public class RespawnThread : Thread, ICollidable
             AdjustCollision();
         }
         RenderThread();
+        
+        //foreach (var player in _playersOnRope)
+        //    StickPlayerToThread(player);
     }
     protected override void Initialize()
     {
@@ -74,27 +80,26 @@ public class RespawnThread : Thread, ICollidable
             Vector2 dir = segments[i].position - segments[i].prevPosition;
 
             RaycastHit2D hit = Physics2D.CircleCast(segments[i].position, threadWidth * 0.5f, dir.normalized, 0f, _hitLayer);
-            //RaycastHit2D hitTarget = Physics2D.CircleCast(segments[i].position, threadWidth * 0.5f, dir.normalized, _castDist, _hitTargetLayer);
-            //Collider2D hitTarget = Physics2D.OverlapCircle(segments[i].position, threadWidth, _hitTargetLayer);
 
             if (hit) // 충돌 시 위치 보정
             {
-                //isColliding = true;
                 segments[i].position = hit.point + hit.normal * threadWidth * 0.5f;
                 segments[i].prevPosition = segments[i].position;
             }
-            //if (hitTarget) // 타겟이 실 위에 있는지 확인
-            //{
-            //    isColliding = true;
-            //}
-            //else
-            //{
-            //    if (isColliding) continue;
-            //    isColliding = false;
-            //}
+           
         }
-        //_isHit = isColliding;
-        //Debug.Log(_isHit);
+    }
+    private void StickPlayerToThread(GameObject player)
+    {
+        if (player == null)
+            return;
+
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb == null)
+            return;
+
+        rb.gravityScale = 0f;
+        rb.linearDamping = _damping;
     }
     private void AppearThread()
     {
@@ -198,6 +203,13 @@ public class RespawnThread : Thread, ICollidable
         if (!_playersOnRope.Contains(player))
         {
             _playersOnRope.Add(player);
+
+            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+            _initGravity = rb.gravityScale;
+            _initDamping = rb.linearDamping;
+
+            rb.gravityScale = 0f;
+            rb.linearDamping = _damping;
         }
         if (_disappearCoroutine == null)
         {
@@ -212,6 +224,10 @@ public class RespawnThread : Thread, ICollidable
         if (_playersOnRope.Contains(player))
         {
             _playersOnRope.Remove(player);
+
+            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+            rb.gravityScale = _initGravity;
+            rb.linearDamping = _initDamping;
         }
     }
 }
