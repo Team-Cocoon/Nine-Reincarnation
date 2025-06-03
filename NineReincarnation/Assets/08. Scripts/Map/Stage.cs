@@ -9,19 +9,8 @@ public class Stage : MonoBehaviour
     [Header("--- 로드 기준이 되는 거리 ---")]
     [SerializeField] public float _loadRadius;
 
-    public bool IsLoaded { get; private set; } = false;
-    public bool IsDirty { get; private set; } = false;
-
-
-    // Reset the dirty flag after updating
-    public void Clean()
-    {
-        IsDirty = false;
-    }
-
-
     //스테이지 로드
-    public void LoadContent()
+    private void LoadContent()
     {
         if (!string.IsNullOrEmpty(_scenePath))
         {
@@ -30,11 +19,28 @@ public class Stage : MonoBehaviour
     }
 
     //스테이지 언로드
-    public void UnloadContent()
+    private void UnloadContent()
     {
         if (!string.IsNullOrEmpty(_scenePath))
         {
             SceneLoader.Instance.UnloadSceneByPath(_scenePath);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("응애");
+        if(collision.CompareTag("Player"))
+        {
+            LoadContent();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            UnloadContent();
         }
     }
 }
