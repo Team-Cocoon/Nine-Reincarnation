@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class StoryManager : MonoBehaviour
 {
@@ -42,9 +44,24 @@ public class StoryManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 현재 대화 정보 세팅
+    /// </summary>
     public void SetDialogueData()
     {
         DialogueManager.Instance.SeTextData(_dialogueEvent.dialogue.contexts);
         DialogueManager.Instance.SetExpressionData(_dialogueEvent.dialogue.expression);
+    }
+
+    /// <summary>
+    /// 애니메이션 실행
+    /// </summary>
+    public void StartAnim(Action eventAction = null)
+    {
+        if(eventAction != null)
+        {
+            eventObj[_dialogueEvent.dialogue.objectName]?.SettingAnimEvent(eventAction);
+        }
+        eventObj[_dialogueEvent.dialogue.objectName]?.StartAnim(_dialogueEvent.dialogue.animName);
     }
 }

@@ -50,6 +50,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void SeTextData(string contextsData) // 대사 적용
     {
+        contextsData = contextsData.Replace("*", "\n");
         _typeWriter.TextAnimator.textFull = contextsData;
     }
 
