@@ -19,6 +19,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Image _image;
 
     private Dictionary<string, Sprite> _imageDict = new();
+
+    public Febucci.UI.Core.TypewriterCore TypeWriter => _typeWriter;
+
     public void Awake()
     {
         Instance = this;
@@ -50,6 +53,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void SeTextData(string contextsData) // 대사 적용
     {
+        isTextShowed = false;
         contextsData = contextsData.Replace("*", "\n");
         _typeWriter.TextAnimator.textFull = contextsData;
     }

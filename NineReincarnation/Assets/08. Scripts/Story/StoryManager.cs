@@ -13,10 +13,7 @@ public class StoryManager : MonoBehaviour
     [Header("현재 진행 중인 이벤트")]
     [SerializeField] private DialogueEvent _dialogueEvent;
 
-    public DialogueEvent DialogueEvent 
-    { 
-        get => _dialogueEvent; 
-    }
+    public DialogueEvent DialogueEvent => _dialogueEvent; 
     private void Awake()
     {
         Instance = this;
@@ -30,6 +27,7 @@ public class StoryManager : MonoBehaviour
     public void NextDialogue()
     {
         _dialogueEvent.dialogue = DataManager.Instance.GetDialogue();
+        _dialogueEvent.eventName = _dialogueEvent.dialogue.eventID;
     }
 
     /* 이벤트 호출하는 객체 저장 */

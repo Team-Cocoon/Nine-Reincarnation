@@ -1,7 +1,9 @@
 using System.Collections;
+using Febucci.UI.Core.Parsing;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
-public class Story3 : MonoBehaviour
+public class Story3 : Story
 {
     private void Start()
     {
@@ -9,44 +11,33 @@ public class Story3 : MonoBehaviour
         StartStory();
     }
 
-    /* 스토리 진행 */
-    private void StartStory()
-    {
-        StoryManager.Instance.NextDialogue();
-        if(StoryManager.Instance.DialogueEvent.dialogue == null) // 스토리 스테이지 끝
-        {
-            return;
-        }
-        PlayStory(StoryManager.Instance.DialogueEvent.dialogue.eventName);
-    }
-
-    private void PlayStory(string eventFunc)
+    public override void PlayStory(string eventFunc)
     {
         switch(eventFunc) 
         {
             case "Event1-1":
-                StartCoroutine(Event1_1());
+                StartCoroutine(AnimStory());
                 break;
             case "Event1-2":
-                StartCoroutine(Event1_2());
+                StartCoroutine(DialogueStory());
                 break;
             case "Event1-3":
-                StartCoroutine(Event1_3());
+                StartCoroutine(AnimStory());
                 break;
             case "Event1-4":
-                StartCoroutine(Event1_4());
+                StartCoroutine(DialogueStory());
                 break;
             case "Event1-5":
-                StartCoroutine(Event1_5());
+                StartCoroutine(AnimStory());
                 break;
             case "Event1-6":
-                StartCoroutine(Event1_6());
+                StartCoroutine(TextEventStory());
                 break;
             case "Event1-7":
-                StartCoroutine(Event1_7());
+                StartCoroutine(TextEventStory());
                 break;
             case "Event1-8":
-                StartCoroutine(Event1_8());
+                StartCoroutine(DialogueStory());
                 break;
             case "Event1-9":
                 StartCoroutine(Event1_9());
@@ -56,42 +47,17 @@ public class Story3 : MonoBehaviour
                 break;
         }
     }
-
-    private IEnumerator Event1_1()
+    public override void OnTextEvent(EventMarker eventMarker)
     {
-        StoryManager.Instance.StartAnim(StartStory);
-        yield return null;
-    }
-    private IEnumerator Event1_2()
-    {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
-        StartStory();
-    }
-    private IEnumerator Event1_3()
-    {
-        yield return null;
-        StartStory();
-    }
-    private IEnumerator Event1_4()
-    {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
-        StartStory();
-    }
-    private IEnumerator Event1_5()
-    {
-        yield return null;
-        StartStory();
-    }
-    private IEnumerator Event1_6()
-    {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
-        StartStory();
+        switch(eventMarker.name)
+        {
+            case "event1_6":
+                StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_Laughing");
+                break;
+            case "event1_7":
+                StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_Finger");
+                break;
+        }
     }
     private IEnumerator Event1_7()
     {

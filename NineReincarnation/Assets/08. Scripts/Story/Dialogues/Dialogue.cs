@@ -3,7 +3,11 @@ using Febucci.UI;
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue { 
+public class Dialogue {
+
+    [Header("현재 이벤트 ID")]
+    public string eventID;
+    
     [Header("현재 말하는 캐릭터")]
     public string objectName;
 
@@ -18,9 +22,6 @@ public class Dialogue {
 
     [Header("이벤트 함수")]
     public string eventName;
-
-    [Header("이벤트 종료 여부")]
-    public bool isEnd = false;
 }
 
 [System.Serializable]

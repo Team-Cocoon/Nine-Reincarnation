@@ -15,6 +15,7 @@ public class DialogueParser : MonoBehaviour
             string[] row = data[i].Split(new char[] { ',' });
 
             Dialogue dialogue = new Dialogue();
+            dialogue.eventID = row[0];
             dialogue.objectName = row[1];
             dialogue.eventName = row[2];
             dialogue.expression = row[3];
