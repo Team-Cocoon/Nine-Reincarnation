@@ -17,7 +17,18 @@ public class Story : MonoBehaviour
     /* 각 스테이지 별 스토리 진행 */
     public virtual void PlayStory(string eventFunc)
     {
-        return;
+        switch (eventFunc)
+        {
+            case "AnimStory":
+                StartCoroutine(AnimStory());
+                break;
+            case "DialogueStory":
+                StartCoroutine(DialogueStory());
+                break;
+            case "TextEventStory":
+                StartCoroutine(TextEventStory());
+                break;
+        }
     }
 
     /* 각 스테이지 별 텍스트 이벤트 */
@@ -56,8 +67,10 @@ public class Story : MonoBehaviour
         DialogueManager.Instance?.StartDialogue();
         StoryManager.Instance?.SetDialogueData();
         StoryManager.Instance?.StartAnim();
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
         DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
         StartStory();
     }
 }

@@ -1,49 +1,45 @@
 using System.Collections;
 using Febucci.UI.Core.Parsing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
 public class Story3 : Story
 {
+    [Header("페이드 객체")]
+    [SerializeField] private Fade _fade;
+    
+    [Header("Event1-9 특수 대화창")]
+    [SerializeField] private GameObject _dialogueObject;
+   
+    /* Event1-10 에 필요한 변수 */
+    private int _laughingCount = 0;
+
     private void Start()
     {
-        StoryManager.Instance.eventObj["혼령1"].AnimEvent("Ghost_Down");
-        StartStory();
+        StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
+        StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
+        //StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
+        _fade.FadeInStart(StartStory);
     }
 
     public override void PlayStory(string eventFunc)
     {
+        base.PlayStory(eventFunc);
         switch(eventFunc) 
         {
-            case "Event1-1":
-                StartCoroutine(AnimStory());
-                break;
-            case "Event1-2":
-                StartCoroutine(DialogueStory());
-                break;
-            case "Event1-3":
-                StartCoroutine(AnimStory());
-                break;
-            case "Event1-4":
-                StartCoroutine(DialogueStory());
-                break;
-            case "Event1-5":
-                StartCoroutine(AnimStory());
-                break;
-            case "Event1-6":
-                StartCoroutine(TextEventStory());
-                break;
-            case "Event1-7":
-                StartCoroutine(TextEventStory());
-                break;
-            case "Event1-8":
-                StartCoroutine(DialogueStory());
-                break;
             case "Event1-9":
                 StartCoroutine(Event1_9());
                 break;
             case "Event1-10":
                 StartCoroutine(Event1_10());
+                break;
+            case "Event2-5":
+                // 카메라 흔들림
+                StartStory();
+                break;
+            case "Event2-7":
+                StartCoroutine(Event2_7());
                 break;
         }
     }
@@ -57,32 +53,56 @@ public class Story3 : Story
             case "event1_7":
                 StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_Finger");
                 break;
+            case "event1_10":
+                RepeatLaughing();
+                break;
         }
     }
-    private IEnumerator Event1_7()
-    {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
-        StartStory();
-    }
-    private IEnumerator Event1_8()
-    {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
-        StartStory();
-    }
+
+    #region Event 1-9
     private IEnumerator Event1_9()
     {
+        _dialogueObject.SetActive(true);
         yield return null;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        _dialogueObject.SetActive(false);
         StartStory();
     }
+    #endregion
+
+    #region Event 1-10
     private IEnumerator Event1_10()
     {
-        DialogueManager.Instance.StartDialogue();
-        StoryManager.Instance.SetDialogueData();
+        DialogueManager.Instance?.StartDialogue();
+        StoryManager.Instance?.SetDialogueData();
+        StoryManager.Instance?.StartAnim();
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        //yield return new WaitUntil(() => _laughingCount == 3);
+        yield return new WaitForSeconds(2f);
         StartStory();
     }
+    
+    private void RepeatLaughing()
+    {
+        Debug.Log(_laughingCount);
+        if (_laughingCount < 3)
+        {
+            _laughingCount++;
+            StoryManager.Instance.StartAnim(RepeatLaughing);
+        }
+    }
+    #endregion
+
+    #region Event 2-7
+    private IEnumerator Event2_7()
+    {
+        StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_NoWake");
+        StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_NoWake");
+        yield return new WaitForSeconds(3f);
+        StartStory();
+    }
+    #endregion
 }

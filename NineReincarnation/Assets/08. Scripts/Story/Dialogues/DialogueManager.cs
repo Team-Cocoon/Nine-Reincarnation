@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
         if (isTextShowed && Input.GetMouseButtonDown(0))
         {
             ShowWindow(false);
+            _typeWriter.TextAnimator.textFull = "";
             return true;
         }
         return false;
