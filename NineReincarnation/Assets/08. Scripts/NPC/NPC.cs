@@ -23,7 +23,7 @@ public interface IEvent
     /// 특정 이벤트 호출할 때
     /// </summary>
     /// <param name="eventName"></param>
-    public void TriggerEvent(string eventName);
+    public void TriggerEvent(string eventName, Action triggerAction = null);
 }
 
 public class NPC : MonoBehaviour, IEvent
@@ -32,6 +32,7 @@ public class NPC : MonoBehaviour, IEvent
     
     protected Animator _animator;
     protected Action _animAction;
+    protected Action _triggerAction;
     protected string _currentAnimName;
 
     public string objName => _objName;
@@ -50,13 +51,14 @@ public class NPC : MonoBehaviour, IEvent
     }
     public virtual void AnimEvent(string animName)
     {
-        if(_currentAnimName == animName)
+        if (_currentAnimName == animName)
         {
-            _animAction?.Invoke();
-            _animAction = null;
+            var action = _animAction;  
+            _animAction = null;        
+            action?.Invoke();         
         }
     }
-    public virtual void TriggerEvent(string eventName)
+    public virtual void TriggerEvent(string eventName, Action triggerAction)
     {
         throw new System.NotImplementedException();
     }

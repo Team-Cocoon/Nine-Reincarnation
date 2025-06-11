@@ -1,5 +1,6 @@
 using System.Collections;
 using Febucci.UI.Core.Parsing;
+using Player.Controller;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -8,10 +9,19 @@ public class Story3 : Story
 {
     [Header("페이드 객체")]
     [SerializeField] private Fade _fade;
-    
+
+    [Header("안나")]
+    [SerializeField] private PlayerController _annaController;
+    [SerializeField] private GameObject _npcAnna;
+
+    [Header("가위")]
+    [SerializeField] private GameObject _scissors;
+
     [Header("Event1-9 특수 대화창")]
-    [SerializeField] private GameObject _dialogueObject;
-   
+    [SerializeField] private GameObject _dialogue1_9;
+    [Header("Event3-4 특수 대화창")]
+    [SerializeField] private GameObject _dialogue3_4;
+
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
 
@@ -19,7 +29,7 @@ public class Story3 : Story
     {
         StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
-        //StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
+        StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
         _fade.FadeInStart(StartStory);
     }
 
@@ -35,11 +45,32 @@ public class Story3 : Story
                 StartCoroutine(Event1_10());
                 break;
             case "Event2-5":
-                // 카메라 흔들림
+                // 카메라 흔들림 추가해야 함
                 StartStory();
                 break;
             case "Event2-7":
                 StartCoroutine(Event2_7());
+                break;
+            case "Event3-2":
+                StartCoroutine(Event3_2());
+                break;
+            case "Event3-4":
+                StartCoroutine(Event3_4());
+                break;
+            case "Event3-7":
+                // 나무 클릭하는 기능 추가해야 함
+                StartStory();
+                break;
+            case "Event3-8":
+                StartCoroutine(Event3_8());
+                break;
+            case "Event3-10":
+                _scissors.SetActive(true);
+                StoryManager.Instance.eventObj["가위"].TriggerEvent("Move", StartStory);
+                break;
+            case "Event3-12":
+                // 안나가 오른쪽 밖으로 나가는 기능 추가해야 함
+                AnnaActive(true);
                 break;
         }
     }
@@ -59,13 +90,35 @@ public class Story3 : Story
         }
     }
 
+    /* NPCAnna, Anna 스왑 */
+    private void AnnaActive(bool isActive)
+    {
+        if(isActive == true) // Anna로
+        {
+            _annaController.gameObject.SetActive(isActive);
+            _npcAnna.SetActive(!isActive);
+            _annaController.CheckPoint = _npcAnna.transform.position;
+            _annaController.gameObject.transform.position = _npcAnna.transform.position;
+            _annaController.gameObject.GetComponent<SpriteRenderer>().flipX
+                           = _npcAnna.GetComponent<SpriteRenderer>().flipX;
+        }
+        else // NPCAnna로
+        {
+            _annaController.gameObject.SetActive(isActive);
+            _npcAnna.SetActive(!isActive);
+            _npcAnna.transform.position = _annaController.gameObject.transform.position;
+            _npcAnna.GetComponent<SpriteRenderer>().flipX 
+                = _annaController.gameObject.GetComponent<SpriteRenderer>().flipX;
+        }
+    }
+
     #region Event 1-9
     private IEnumerator Event1_9()
     {
-        _dialogueObject.SetActive(true);
+        _dialogue1_9.SetActive(true);
         yield return null;
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        _dialogueObject.SetActive(false);
+        _dialogue1_9.SetActive(false);
         StartStory();
     }
     #endregion
@@ -80,7 +133,7 @@ public class Story3 : Story
         DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
         DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
-        //yield return new WaitUntil(() => _laughingCount == 3);
+        yield return new WaitUntil(() => _laughingCount == 3);
         yield return new WaitForSeconds(2f);
         StartStory();
     }
@@ -102,6 +155,41 @@ public class Story3 : Story
         StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_NoWake");
         StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_NoWake");
         yield return new WaitForSeconds(3f);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-2
+    private IEnumerator Event3_2()
+    {
+        _npcAnna.GetComponent<SpriteRenderer>().flipX = true;
+        yield return new WaitForSeconds(2f);
+        _npcAnna.GetComponent<SpriteRenderer>().flipX = false;
+        yield return new WaitForSeconds(2f);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-4
+    private IEnumerator Event3_4()
+    {
+        _dialogue3_4.SetActive(true);
+        yield return null;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        _dialogue3_4.SetActive(false);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-8
+    private IEnumerator Event3_8()
+    {
+        DialogueManager.Instance?.StartDialogue();
+        StoryManager.Instance?.SetDialogueData();
+        DialogueManager.Instance?.SetFontColor(Color.darkRed);
+        DialogueManager.Instance?.SetFontSize(25);
+        StoryManager.Instance?.StartAnim();
+        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
         StartStory();
     }
     #endregion

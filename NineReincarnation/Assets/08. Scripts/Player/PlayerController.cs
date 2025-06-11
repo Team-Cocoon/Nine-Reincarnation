@@ -63,6 +63,12 @@ namespace Player.Controller
             set => _speed = value;
         }
 
+        public Vector3 CheckPoint
+        {
+            get => _checkPoint;
+            set => _checkPoint = value;
+        }
+
         private void Awake()
         {
             _collider = GetComponent<Collider2D>();

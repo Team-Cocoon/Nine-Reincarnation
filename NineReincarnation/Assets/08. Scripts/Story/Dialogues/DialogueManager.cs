@@ -18,9 +18,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject _windows;
     [SerializeField] private Image _image;
 
+    /* 기본 폰트 정보 */
+    private Color _initFontColor;
+    private float _initFontSize;
+
     private Dictionary<string, Sprite> _imageDict = new();
 
     public Febucci.UI.Core.TypewriterCore TypeWriter => _typeWriter;
+    public Color InitFontColor => _initFontColor;
+    public float InitFontSize => _initFontSize;
 
     public void Awake()
     {
@@ -32,6 +38,8 @@ public class DialogueManager : MonoBehaviour
                 _imageDict[image.name] = image;
             }
         }
+        _initFontColor = _tmpText.color;
+        _initFontSize = _tmpText.fontSize;
     }
 
     public void StartDialogue()
@@ -44,6 +52,8 @@ public class DialogueManager : MonoBehaviour
         {
             ShowWindow(false);
             _typeWriter.TextAnimator.textFull = "";
+            SetFontColor(InitFontColor);
+            SetFontSize(InitFontSize);
             return true;
         }
         return false;
@@ -70,5 +80,16 @@ public class DialogueManager : MonoBehaviour
     public void TextShowed()
     {
         isTextShowed = true;
+        _tmpText.fontSize = 25;
+    }
+
+    public void SetFontColor(Color color)
+    {
+        _tmpText.color = color;
+    }
+
+    public void SetFontSize(float size)
+    {
+        _tmpText.fontSize = size;
     }
 }
