@@ -13,7 +13,6 @@ namespace Player.Action
     {
         private string _playerName;
         private PlayerController _player;
-        private bool isLook = false;
 
         public PlayerController Player => _player;
 
@@ -43,7 +42,7 @@ namespace Player.Action
 
             if (context.started)
             {
-                if (isLook) return;
+                if (_player.DiablePlayerInput()) return;
                 _player.ChangePlayerDirection();
             }
         }
@@ -55,7 +54,7 @@ namespace Player.Action
         {
             if (context.started)
             {
-                if (isLook) return;
+                if (_player.DiablePlayerInput()) return;
                 _player.Jump();
             }
         }
@@ -68,7 +67,7 @@ namespace Player.Action
         {
             if (context.started)
             {
-                if (isLook) return;
+                if (_player.DiablePlayerInput()) return;
                 InputManager.Instance.Swap(_playerName);
             }
         }
@@ -80,7 +79,7 @@ namespace Player.Action
         {
             if (context.started)
             {
-                if (isLook) return;
+                if (_player.DiablePlayerInput()) return;
                 _player.DownJump();
             }
         }
@@ -91,15 +90,16 @@ namespace Player.Action
         /// <param name="context"></param>
         public void ActionLook(InputAction.CallbackContext context)
         {
+            if (_player.IsDead) return;
+
             if (context.started)
             {
-                isLook = true;
+                _player.IsLook = true;
             }
             else if(context.canceled)
             {
-                isLook = false;
+                _player.IsLook = false;
             }
-            _player.IsLook = isLook;
         }
     }
 

@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour, ICollidable
     public void Enter(GameObject go = null)
     {
         player = go.GetComponent<PlayerController>();
-        player?.Respawn();
+        player?.Dead();
     }
 
     public void Exit(GameObject go = null)
