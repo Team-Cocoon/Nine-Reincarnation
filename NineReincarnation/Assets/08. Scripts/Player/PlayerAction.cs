@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using EventHandler.Camera;
 using Manager.Camera;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 namespace Player.Action
@@ -10,6 +13,7 @@ namespace Player.Action
     {
         private string _playerName;
         private PlayerController _player;
+        private bool isLook = false;
 
         public PlayerController Player => _player;
 
@@ -39,6 +43,7 @@ namespace Player.Action
 
             if (context.started)
             {
+                if (isLook) return;
                 _player.ChangePlayerDirection();
             }
         }
@@ -50,6 +55,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (isLook) return;
                 _player.Jump();
             }
         }
@@ -62,6 +68,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (isLook) return;
                 InputManager.Instance.Swap(_playerName);
             }
         }
@@ -73,8 +80,26 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (isLook) return;
                 _player.DownJump();
             }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 Look관련 함수
+        /// </summary>
+        /// <param name="context"></param>
+        public void ActionLook(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                isLook = true;
+            }
+            else if(context.canceled)
+            {
+                isLook = false;
+            }
+            _player.IsLook = isLook;
         }
     }
 

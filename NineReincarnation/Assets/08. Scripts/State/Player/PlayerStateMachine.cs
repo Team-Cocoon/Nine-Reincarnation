@@ -8,6 +8,7 @@ namespace State.StateMachine.PlayerStateMachine
         public IdleState _idleState;
         public MoveState _moveState;
         public JumpState _jumpState;
+        public LookState _lookState;
 
         /// <summary>
         /// 생성자
@@ -18,6 +19,7 @@ namespace State.StateMachine.PlayerStateMachine
             _idleState = new IdleState(player);
             _moveState = new MoveState(player);
             _jumpState = new JumpState(player);
+            _lookState = new LookState(player);
         }
     }
 }
