@@ -27,6 +27,8 @@ namespace State.StateMachine
         /// <param name="state"></param>
         public void TransitionTo(IState nextState)
         {
+            if (CurrentState == nextState) return;
+
             CurrentState.Exit();
             CurrentState = nextState;
             nextState.Enter();
@@ -38,7 +40,7 @@ namespace State.StateMachine
         /// <summary>
         /// 해당 상태에서 실행해야 할 내용 실행
         /// </summary>
-        public void Excute()
+        virtual public void Excute()
         {
             if (CurrentState != null)
             {

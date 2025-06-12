@@ -1,3 +1,5 @@
+using DG.Tweening;
+using EventHandler.Camera;
 using Map.Platform;
 using State;
 using State.PlayerState;
@@ -29,9 +31,11 @@ namespace Player.Controller
         [SerializeField] private float _jumpForce;
         [SerializeField] private string _playerName; //플레이어 식별 변수
         [SerializeField] private Vector3 _checkPoint; //플레이어 리스폰 위치
+        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
+        [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
+        [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
 
         private int _jumpCount = 0; //더블 점프 제어
-        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         private PlayerDirection _direction; //플레이어 방향
         private Animator _animator;
         private Rigidbody2D _rb2d;
@@ -40,6 +44,13 @@ namespace Player.Controller
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
 
+        public bool IsDead => _isDead;
+
+        public bool IsLook
+        {
+            get => _isLook;
+            set => _isLook = value;
+        }
         public PlayerDirection Direction
         {
             get => _direction;
@@ -92,6 +103,11 @@ namespace Player.Controller
         private void FixedUpdate()
         {
             Move();
+        }
+
+        public bool DiablePlayerInput()
+        {
+            return _isLook || _isDead;
         }
 
         #region 내부 변수 제어
@@ -162,9 +178,23 @@ namespace Player.Controller
 
         #region 플레이어 상태 제어
 
+        public void Dead()
+        {
+            if (_isDead) return;
+
+            SetStop();
+            _isDead = true;
+        }
+
         public void Respawn()
         {
+            _isDead = false;
             transform.position = _checkPoint;
+        }
+
+        public void Look()
+        {
+            CameraEventHandler.OnLook(_isLook);
         }
 
         /// <summary>
@@ -185,6 +215,7 @@ namespace Player.Controller
         
         public void ChangeAnimation(IState state)
         {
+            Debug.Log((state as IPlayerState).AnimationState);
             switch ((state as IPlayerState).AnimationState)
             {
                 case PlayerAnimationState.Idle:
@@ -195,6 +226,12 @@ namespace Player.Controller
                     break;
                 case PlayerAnimationState.Jump:
                     _animator.SetTrigger("isJump");
+                    break;
+                case PlayerAnimationState.Look:
+                    _animator.SetTrigger("isLook");
+                    break;
+                case PlayerAnimationState.Dead:
+                    _animator.SetTrigger("isDead");
                     break;
             }
         }

@@ -32,6 +32,11 @@ public class IdleState : IPlayerState
         {
             _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._moveState);
         }
+        //플레이어가 Look 상태로 진입하면 상태도 Look으로 변환
+        else if (_player.IsLook)
+        {
+            _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._lookState);
+        }
     }
 
     public void Exit()

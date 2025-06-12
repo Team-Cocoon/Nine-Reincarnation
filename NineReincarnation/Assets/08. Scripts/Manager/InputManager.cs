@@ -5,6 +5,7 @@ using Player.Action;
 using Player.Controller;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class InputManager : MonoBehaviour
     private List<string> _playerNames = new List<string>();
     private Dictionary<string, PlayerController> _players = new Dictionary<string, PlayerController>();
     private PlayerAction _action;
-
     public PlayerAction Action => _action;
 
     private void Awake()
@@ -36,7 +36,7 @@ public class InputManager : MonoBehaviour
     {
         PlayerController[] pc = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
 
-        for(int i = 0; i < pc.Length; ++i)
+        for (int i = 0; i < pc.Length; ++i)
         {
             AddPlayer(pc[i].PlayerName, pc[i]);
         }

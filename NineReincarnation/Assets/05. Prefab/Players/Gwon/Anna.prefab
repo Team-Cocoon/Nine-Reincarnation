@@ -202,6 +202,9 @@ MonoBehaviour:
   _speed: 5
   _jumpForce: 5
   _playerName: Anna
+  _checkPoint: {x: 0, y: 0, z: 0}
+  _isGround: 0
+  _isLook: 0
 --- !u!1 &8884321024790366604
 GameObject:
   m_ObjectHideFlags: 0

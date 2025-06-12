@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using EventHandler.Camera;
 using Manager.Camera;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 namespace Player.Action
@@ -39,6 +42,7 @@ namespace Player.Action
 
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.ChangePlayerDirection();
             }
         }
@@ -50,6 +54,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.Jump();
             }
         }
@@ -62,6 +67,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 InputManager.Instance.Swap(_playerName);
             }
         }
@@ -73,7 +79,26 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.DownJump();
+            }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 Look관련 함수
+        /// </summary>
+        /// <param name="context"></param>
+        public void ActionLook(InputAction.CallbackContext context)
+        {
+            if (_player.IsDead) return;
+
+            if (context.started)
+            {
+                _player.IsLook = true;
+            }
+            else if(context.canceled)
+            {
+                _player.IsLook = false;
             }
         }
     }
