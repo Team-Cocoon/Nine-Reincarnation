@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: f2411f80fb2ed9442a50dd8fd337e32b
+guid: b0c2283140260e5439088494fee46cc0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -306001324668911400
-    second: "\uC720\uB839 wake_0"
+      213: -1254976702171529598
+    second: A wake_0
   - first:
-      213: -3597515421133673038
-    second: "\uC720\uB839 wake_1"
+      213: 6532203550449969699
+    second: A wake_1
   - first:
-      213: 1246050096159597571
-    second: "\uC720\uB839 wake_2"
+      213: 4764144168999730975
+    second: A wake_2
   - first:
-      213: -3400243541238467863
-    second: "\uC720\uB839 wake_3"
+      213: -5773201903323789796
+    second: A wake_3
   - first:
-      213: 4709585089103991430
-    second: "\uC720\uB839 wake_4"
+      213: 8338209040699192546
+    second: A wake_4
   - first:
-      213: 5527075823225450624
-    second: "\uC720\uB839 wake_5"
+      213: -6999689907735229862
+    second: A wake_5
   - first:
-      213: -2310967803612543194
-    second: "\uC720\uB839 wake_6"
+      213: -2584104147966189041
+    second: A wake_6
   - first:
-      213: -7300036870138831425
-    second: "\uC720\uB839 wake_7"
+      213: 6384954588587596401
+    second: A wake_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,29 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ghost_Wake_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0bbccb5ad1d4f4489f138bf97f3dd55
-      internalID: 802413818
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ghost_Wake_1
+      name: A wake_0
       rect:
         serializedVersion: 2
         x: 32
@@ -164,21 +142,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 35f48ca40a3960b4d8cf493a6a235c6f
-      internalID: -773533880
+      spriteID: 28ebca9a65d659ee0800000000000000
+      internalID: -1254976702171529598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_2
+      name: A wake_1
       rect:
         serializedVersion: 2
         x: 64
@@ -186,21 +164,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8652249a6d89c1d48a603d7156081ff3
-      internalID: -359540045
+      spriteID: 32aad11258c07aa50800000000000000
+      internalID: 6532203550449969699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_3
+      name: A wake_2
       rect:
         serializedVersion: 2
         x: 96
@@ -208,21 +186,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4c9830bb035f9f14ca95c0791b9cb53c
-      internalID: 1294291145
+      spriteID: f1f3af351e3ad1240800000000000000
+      internalID: 4764144168999730975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_4
+      name: A wake_3
       rect:
         serializedVersion: 2
         x: 128
@@ -230,21 +208,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 68acc13585e2e1b46a3bbc4ff654687a
-      internalID: -335733833
+      spriteID: c16c6c7e47771efa0800000000000000
+      internalID: -5773201903323789796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_5
+      name: A wake_4
       rect:
         serializedVersion: 2
         x: 160
@@ -252,21 +230,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b340bf542cc55c4429786e9e65b08988
-      internalID: 2016574937
+      spriteID: 2e473ddd1f447b370800000000000000
+      internalID: 8338209040699192546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_6
+      name: A wake_5
       rect:
         serializedVersion: 2
         x: 192
@@ -274,21 +252,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e4564b64c2a8dac47bbc84888ef74a36
-      internalID: -755243511
+      spriteID: a5a0e876d1b1cde90800000000000000
+      internalID: -6999689907735229862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Wake_7
+      name: A wake_6
       rect:
         serializedVersion: 2
         x: 224
@@ -296,15 +274,37 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 1236b2ced3ab5a04dbe8de98ed2620ea
-      internalID: -1526782505
+      spriteID: f02acd5f7fa632cd0800000000000000
+      internalID: -2584104147966189041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: A wake_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17a93cf8e5aeb9850800000000000000
+      internalID: 6384954588587596401
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 41360b4dfee005f43963a1117ef47131
+    spriteID: 0df54e0263254ae4786605aa3f3b0ee0
     internalID: 0
     vertices: []
     indices: 
@@ -321,18 +321,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Ghost_Wake_0: 802413818
-      Ghost_Wake_1: -773533880
-      Ghost_Wake_2: -359540045
-      Ghost_Wake_3: 1294291145
-      Ghost_Wake_4: -335733833
-      Ghost_Wake_5: 2016574937
-      Ghost_Wake_6: -755243511
-      Ghost_Wake_7: -1526782505
+      A wake_0: -1254976702171529598
+      A wake_1: 6532203550449969699
+      A wake_2: 4764144168999730975
+      A wake_3: -5773201903323789796
+      A wake_4: 8338209040699192546
+      A wake_5: -6999689907735229862
+      A wake_6: -2584104147966189041
+      A wake_7: 6384954588587596401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

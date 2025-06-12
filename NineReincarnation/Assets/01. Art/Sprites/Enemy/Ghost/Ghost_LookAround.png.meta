@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: d86fc0bea29f6094a88a0ce226ee1f56
+guid: 328e8d8f5dfb12144990ce4cad81e1c5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7106183191125780639
-    second: "\uC720\uB839 surprise_1_0"
+      213: 3475663337514732595
+    second: Ghost_LookAround_0
   - first:
-      213: 502723147801665231
-    second: "\uC720\uB839 surprise_1_1"
+      213: 7837086102335900193
+    second: Ghost_LookAround_1
   - first:
-      213: -528627952842739283
-    second: "\uC720\uB839 surprise_1_2"
+      213: 6043743831863875421
+    second: Ghost_LookAround_2
   - first:
-      213: -7893018348113740619
-    second: "\uC720\uB839 surprise_1_3"
+      213: -2570843563653554075
+    second: Ghost_LookAround_3
   - first:
-      213: -613217195847776125
-    second: "\uC720\uB839 surprise_1_4"
+      213: 4340512751173396218
+    second: Ghost_LookAround_4
   - first:
-      213: 5898483148767233744
-    second: "\uC720\uB839 surprise_1_5"
+      213: 7113958283778372237
+    second: Ghost_LookAround_5
   - first:
-      213: -6256262469993120119
-    second: "\uC720\uB839 surprise_1_6"
+      213: -4395384028483988047
+    second: Ghost_LookAround_6
   - first:
-      213: -5926571177366748003
-    second: "\uC720\uB839 surprise_1_7"
+      213: 7990311908353106088
+    second: Ghost_LookAround_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ghost_Surprise_2_0
+      name: Ghost_LookAround_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,21 +142,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c816910cdd2b39543bb6724fb8e8b53a
-      internalID: -801926291
+      spriteID: 33c0a6ff3690c3030800000000000000
+      internalID: 3475663337514732595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_1
+      name: Ghost_LookAround_1
       rect:
         serializedVersion: 2
         x: 32
@@ -164,21 +164,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 54e7c6629d4e5cf4f840fa2c95f66b2c
-      internalID: 366418130
+      spriteID: 12ac1e3994ce2cc60800000000000000
+      internalID: 7837086102335900193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_2
+      name: Ghost_LookAround_2
       rect:
         serializedVersion: 2
         x: 64
@@ -186,21 +186,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 395deb33bd3053b4eb047c3adb34d389
-      internalID: 1867157287
+      spriteID: d5754b37ef0bfd350800000000000000
+      internalID: 6043743831863875421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_3
+      name: Ghost_LookAround_3
       rect:
         serializedVersion: 2
         x: 96
@@ -208,21 +208,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 50980dd90d4472a4b94cc18cfcaa5484
-      internalID: -1044096063
+      spriteID: 560a4575667825cd0800000000000000
+      internalID: -2570843563653554075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_4
+      name: Ghost_LookAround_4
       rect:
         serializedVersion: 2
         x: 128
@@ -230,21 +230,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e80a8589ad78c4c4fb29643f0960d917
-      internalID: 968100727
+      spriteID: af66eb4a9599c3c30800000000000000
+      internalID: 4340512751173396218
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_5
+      name: Ghost_LookAround_5
       rect:
         serializedVersion: 2
         x: 160
@@ -252,21 +252,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 32c975691d66a6d40963440dd00cc045
-      internalID: -2014464069
+      spriteID: d82be832e5bd9b260800000000000000
+      internalID: 7113958283778372237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_6
+      name: Ghost_LookAround_6
       rect:
         serializedVersion: 2
         x: 192
@@ -274,21 +274,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e1956b64f3aa5974285f6d4d8b74b93e
-      internalID: 893221379
+      spriteID: 1b559ca83857003c0800000000000000
+      internalID: -4395384028483988047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghost_Surprise_2_7
+      name: Ghost_LookAround_7
       rect:
         serializedVersion: 2
         x: 224
@@ -296,15 +296,15 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7185d349a94cc2a43bb65be110f094c3
-      internalID: 1714972407
+      spriteID: 8a0e5fd985a43ee60800000000000000
+      internalID: 7990311908353106088
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 33efe1d4db77f1f4a8f0af66743ebd43
+    spriteID: 72aa5f89fb1db174d864e3fbd69c57f0
     internalID: 0
     vertices: []
     indices: 
@@ -321,18 +321,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Ghost_Surprise_2_0: -801926291
-      Ghost_Surprise_2_1: 366418130
-      Ghost_Surprise_2_2: 1867157287
-      Ghost_Surprise_2_3: -1044096063
-      Ghost_Surprise_2_4: 968100727
-      Ghost_Surprise_2_5: -2014464069
-      Ghost_Surprise_2_6: 893221379
-      Ghost_Surprise_2_7: 1714972407
+      Ghost_LookAround_0: 3475663337514732595
+      Ghost_LookAround_1: 7837086102335900193
+      Ghost_LookAround_2: 6043743831863875421
+      Ghost_LookAround_3: -2570843563653554075
+      Ghost_LookAround_4: 4340512751173396218
+      Ghost_LookAround_5: 7113958283778372237
+      Ghost_LookAround_6: -4395384028483988047
+      Ghost_LookAround_7: 7990311908353106088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
