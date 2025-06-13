@@ -6,11 +6,8 @@ public class Stage : MonoBehaviour
     [Header("--- 씬 경로 ---")]
     [SerializeField] private string _scenePath;
 
-    [Header("--- 로드 기준이 되는 거리 ---")]
-    [SerializeField] public float _loadRadius;
-
     //스테이지 로드
-    private void LoadContent()
+    public void LoadContent()
     {
         if (!string.IsNullOrEmpty(_scenePath))
         {
@@ -19,7 +16,7 @@ public class Stage : MonoBehaviour
     }
 
     //스테이지 언로드
-    private void UnloadContent()
+    public void UnloadContent()
     {
         if (!string.IsNullOrEmpty(_scenePath))
         {
@@ -29,7 +26,6 @@ public class Stage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("응애");
         if(collision.CompareTag("Player"))
         {
             LoadContent();

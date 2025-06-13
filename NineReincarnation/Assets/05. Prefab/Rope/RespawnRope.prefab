@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8917633105700320164}
   m_Layer: 0
   m_Name: RespawnRope
-  m_TagString: Thread
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,9 +204,7 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 64
-  _hitTargetLayer:
-    serializedVersion: 2
-    m_Bits: 0
   _isHit: 0
   _disappearTime: 2
   _respawnTime: 3.5
+  _damping: 10

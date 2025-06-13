@@ -16,6 +16,9 @@ namespace Enemy.Move
             LineClosed, //닫힌 구간
             LineOpen //열린 구간
         }
+        [Header("--- 공통 세팅 ---")]
+        [SerializeField] private float _spawnTime = 0.0f;
+        [SerializeField] private float _delay = 0.0f;
 
         [Header("운동 형태 세팅")]
         [SerializeField] private WaypointPathType _pathType = WaypointPathType.LineClosed; //닫힘 => 맨 마지막 웨이포인트와 처음이 이어짐
@@ -72,16 +75,16 @@ namespace Enemy.Move
             switch (_pathType)
             {
                 case WaypointPathType.Circle:
-                    MoveCircle();
+                    Invoke(nameof(MoveCircle), _spawnTime);
                     break;
                 case WaypointPathType.Ellipse:
-                    MoveElipse();
+                    Invoke(nameof(MoveElipse), _spawnTime);
                     break;
                 case WaypointPathType.LineClosed:
-                    MoveLineClosed();
+                    Invoke(nameof(MoveLineClosed), _spawnTime);
                     break;
                 case WaypointPathType.LineOpen:
-                    MoveLineOpen();
+                    Invoke(nameof(MoveLineOpen), _spawnTime);
                     break;
             }
 
@@ -132,12 +135,13 @@ namespace Enemy.Move
             {
                 return;
             }
+
             transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
 
             Sequence seq = DOTween.Sequence();
 
-            for(int i = 1; i < wayPointsCount; ++i)
+            for (int i = 1; i < wayPointsCount; ++i)
             {
                 if(i == 1 || i == wayPointsCount - 1) //처음 목적지
                 {
@@ -149,6 +153,8 @@ namespace Enemy.Move
                 }
             }
 
+            seq.AppendCallback(() => { transform.position = _waypoints[0]; });
+            seq.AppendInterval(_delay);
             seq.SetLoops(_loopCount, _animationLoopType);
         }
 
@@ -170,6 +176,7 @@ namespace Enemy.Move
 
             seq.Append(_rb2d.DOMove(_waypoints[0], _duration).SetEase(Ease.Linear));
 
+            seq.AppendInterval(_delay);
             seq.SetLoops(_loopCount, _animationLoopType);
         }
 
