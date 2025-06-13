@@ -1,5 +1,5 @@
 using DG.Tweening;
-using EventHandler.Camera;
+using EventHandler;
 using Map.Platform;
 using State;
 using State.PlayerState;
