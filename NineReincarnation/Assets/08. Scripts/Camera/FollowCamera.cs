@@ -1,4 +1,4 @@
-using EventHandler.Camera;
+using EventHandler;
 using Unity.Cinemachine;
 using UnityEngine;
 

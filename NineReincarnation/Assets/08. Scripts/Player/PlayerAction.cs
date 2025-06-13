@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using EventHandler.Camera;
+using EventHandler;
 using Manager.Camera;
 using Player.Controller;
 using UnityEngine;
