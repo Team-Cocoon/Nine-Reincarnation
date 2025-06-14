@@ -1,4 +1,5 @@
 using System.Collections;
+using EventHandler;
 using Febucci.UI.Core.Parsing;
 using Player.Controller;
 using Unity.VisualScripting;
@@ -19,6 +20,9 @@ public class Story3 : Story
 
     [Header("Event1-9")]
     [SerializeField] private GameObject _dialogue1_9;
+    [Header("Event2-5")]
+    [SerializeField] private Camera _camera;
+    [SerializeField] private float _shakeDuration = 3f;
     [Header("Event2-7")]
     [SerializeField] private GameObject _ghost1;
     [SerializeField] private GameObject _ghost2;
@@ -26,6 +30,12 @@ public class Story3 : Story
     private float _time = 0f;
     [Header("Event3-4")]
     [SerializeField] private GameObject _dialogue3_4;
+    [Header("Event3-4")]
+    [SerializeField] private float _cameraSize = 6f;
+    [SerializeField] private float _zoomDuration = 2f;
+    [SerializeField] private Interaction _interaction;
+    [SerializeField] private DrawOutline _outline;
+
 
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
@@ -53,8 +63,7 @@ public class Story3 : Story
                 StartCoroutine(Event1_10());
                 break;
             case "Event2-5":
-                // 카메라 흔들림 추가해야 함
-                StartStory();
+                CameraEventHandler.Shake(_camera, _shakeDuration, 0.1f, 10, 90, true, StartStory);
                 break;
             case "Event2-7":
                 StoryManager.Instance.StartAnim(EventFade);
@@ -68,7 +77,7 @@ public class Story3 : Story
                 break;
             case "Event3-7":
                 // 나무 클릭하는 기능 추가해야 함
-                StartStory();
+                CameraEventHandler.Zoom(_camera, _cameraSize, _zoomDuration, TreeClickEvent);
                 break;
             case "Event3-8":
                 StartCoroutine(Event3_8());
@@ -219,6 +228,20 @@ public class Story3 : Story
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _dialogue3_4.SetActive(false);
         StartStory();
+    }
+    #endregion
+
+    #region Event 3-7
+    void TreeClickEvent()
+    {
+        _interaction.IsInteraction = true;
+        _interaction.SetAction(NoClick);
+    }
+    void NoClick()
+    {
+        StartStory();
+        _interaction.IsInteraction = false;
+        _outline.IsOutline = false;
     }
     #endregion
 
