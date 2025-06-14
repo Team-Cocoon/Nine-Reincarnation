@@ -475,6 +475,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: _segAmount
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentDist
       value: 0.35
       objectReference: {fileID: 0}
@@ -1320,6 +1324,10 @@ PrefabInstance:
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: _damping
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: _segAmount
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentDist
@@ -2282,6 +2290,10 @@ PrefabInstance:
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: _damping
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: _segAmount
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentDist

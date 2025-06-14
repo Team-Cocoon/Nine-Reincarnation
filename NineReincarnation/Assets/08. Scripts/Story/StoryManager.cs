@@ -48,6 +48,7 @@ public class StoryManager : MonoBehaviour
     public void SetDialogueData()
     {
         DialogueManager.Instance.SeTextData(_dialogueEvent.dialogue.contexts);
+        DialogueManager.Instance.SetNameData(_dialogueEvent.dialogue.objectName);
         DialogueManager.Instance.SetExpressionData(_dialogueEvent.dialogue.expression);
     }
 

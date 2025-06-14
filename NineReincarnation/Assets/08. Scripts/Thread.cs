@@ -11,6 +11,8 @@ public abstract class Thread : MonoBehaviour
     [SerializeField] protected float threadWidth = 0.1f;
     [SerializeField] protected Transform _startTransform;
     [SerializeField] protected Transform _endTransform;
+    [SerializeField] private int _segmentCount = 1;
+    [SerializeField] private float _segAmount = 0.3f; // 중심 축 쳐지는 깊이 조절
 
     protected LineRenderer _lineRenderer;
     protected EdgeCollider2D _edgeCollider;
@@ -87,15 +89,38 @@ public abstract class Thread : MonoBehaviour
     }
     private void CreateRope()
     {
-        Vector2 gravityEffect = _gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
-        Vector2 segmentPos = _endTransform.position;
+        //Vector2 gravityEffect = _gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
+        //Vector2 segmentPos = _endTransform.position;
+        //for (int i = 0; i < segmentCount; i++)
+        //{
+        //    segments.Add(new Segment(segmentPos));
+        //    segmentPos.y -= segmentDist;
+        //    segments[i].prevPosition = segments[i].position;
+        //    segments[i].position += gravityEffect;
+        //    segments[i].position += segments[i].velocity;
+        //}
+        Vector2 start = _startTransform.position;
+        Vector2 end = _endTransform.position;
+        int segmentCount = this.segmentCount;
+
+        float totalLength = segmentDist * (segmentCount - 1);
+        Vector2 dir = (end - start).normalized;
+        Vector2 right = new Vector2(1, 0); // x축 기준 방향
+
+        // x축 기준으로 정렬된 줄 만들기
         for (int i = 0; i < segmentCount; i++)
         {
-            segments.Add(new Segment(segmentPos));
-            segmentPos.y -= segmentDist;
-            segments[i].prevPosition = segments[i].position;
-            segments[i].position += gravityEffect;
-            segments[i].position += segments[i].velocity;
+            float t = i / (float)(segmentCount - 1); // 0 ~ 1
+            float x = segmentDist * i;
+
+            // 축 쳐지는 형태: 사인 기반으로 y값 조절
+            float y = -Mathf.Sin(Mathf.PI * t) * _segAmount;
+
+            // 방향 벡터를 따라 x축으로 이동 + y는 아래로 sag
+            Vector2 pos = start + dir * x + Vector2.up * y;
+
+            segments.Add(new Segment(pos));
+            segments[i].prevPosition = pos;
         }
     }
 }
