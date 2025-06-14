@@ -11,7 +11,6 @@ public abstract class Thread : MonoBehaviour
     [SerializeField] protected float threadWidth = 0.1f;
     [SerializeField] protected Transform _startTransform;
     [SerializeField] protected Transform _endTransform;
-    [SerializeField] private int _segmentCount = 1;
     [SerializeField] private float _segAmount = 0.3f; // 중심 축 쳐지는 깊이 조절
 
     protected LineRenderer _lineRenderer;
