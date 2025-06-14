@@ -21,7 +21,7 @@ public abstract class Thread : MonoBehaviour
     private Vector2 _gravity = new Vector2(0, -9.81f);
     protected abstract void UpdateThread();
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         Initialize();
         CreateRope();
