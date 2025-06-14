@@ -62,4 +62,6 @@ public class NPC : MonoBehaviour, IEvent
     {
         throw new System.NotImplementedException();
     }
+
+    
 }

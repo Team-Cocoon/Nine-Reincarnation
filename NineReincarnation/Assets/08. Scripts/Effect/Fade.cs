@@ -16,7 +16,7 @@ public class Fade : MonoBehaviour
     {
         StartCoroutine(FadeIn(fadeEnd));
     }
-    IEnumerator FadeIn(Action fadeEnd)
+    private IEnumerator FadeIn(Action fadeEnd)
     {
         _image.gameObject.SetActive(true);
         Color alpha = _image.color;

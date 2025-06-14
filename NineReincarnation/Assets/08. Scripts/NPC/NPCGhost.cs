@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System;
 
 public class NPCGhost : NPC
 {
@@ -22,8 +24,8 @@ public class NPCGhost : NPC
             case "Ghost_Laughing":
                 _animator.SetTrigger("isLaughing");
                 break;
-            case "Ghost_Finger":
-                _animator.SetTrigger("isFinger");
+            case "Ghost_FingerR":
+                _animator.SetTrigger("isFingerR");
                 break;
             case "Ghost_LookAround":
                 _animator.SetTrigger("isLookAround");

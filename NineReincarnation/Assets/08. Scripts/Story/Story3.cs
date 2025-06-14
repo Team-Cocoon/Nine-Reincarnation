@@ -17,9 +17,14 @@ public class Story3 : Story
     [Header("가위")]
     [SerializeField] private GameObject _scissors;
 
-    [Header("Event1-9 특수 대화창")]
+    [Header("Event1-9")]
     [SerializeField] private GameObject _dialogue1_9;
-    [Header("Event3-4 특수 대화창")]
+    [Header("Event2-7")]
+    [SerializeField] private GameObject _ghost1;
+    [SerializeField] private GameObject _ghost2;
+    [SerializeField] private float _fadeTime = 1f;
+    private float _time = 0f;
+    [Header("Event3-4")]
     [SerializeField] private GameObject _dialogue3_4;
 
     /* Event1-10 에 필요한 변수 */
@@ -38,6 +43,9 @@ public class Story3 : Story
         base.PlayStory(eventFunc);
         switch(eventFunc) 
         {
+            case "Event1-7":
+                EventFinger();
+                break;
             case "Event1-9":
                 StartCoroutine(Event1_9());
                 break;
@@ -49,7 +57,8 @@ public class Story3 : Story
                 StartStory();
                 break;
             case "Event2-7":
-                StartCoroutine(Event2_7());
+                StoryManager.Instance.StartAnim(EventFade);
+                StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_NoWake");
                 break;
             case "Event3-2":
                 StartCoroutine(Event3_2());
@@ -82,7 +91,7 @@ public class Story3 : Story
                 StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_Laughing");
                 break;
             case "event1_7":
-                StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_Finger");
+                StoryManager.Instance?.StartAnim(StartEvent1_7);
                 break;
             case "event1_10":
                 RepeatLaughing();
@@ -111,6 +120,27 @@ public class Story3 : Story
                 = _annaController.gameObject.GetComponent<SpriteRenderer>().flipX;
         }
     }
+
+    #region Event 1-7
+    private void EventFinger()
+    {
+        DialogueManager.Instance?.StartDialogue();
+        StoryManager.Instance?.SetDialogueData();
+        StoryManager.Instance?.StartAnim();
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
+    }
+    private void StartEvent1_7()
+    {
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        StartCoroutine(Event1_7());
+    }
+    private IEnumerator Event1_7()
+    {
+        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        StartStory();
+    }
+    #endregion
 
     #region Event 1-9
     private IEnumerator Event1_9()
@@ -150,11 +180,22 @@ public class Story3 : Story
     #endregion
 
     #region Event 2-7
-    private IEnumerator Event2_7()
+    private void EventFade()
     {
-        StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_NoWake");
-        StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_NoWake");
-        yield return new WaitForSeconds(3f);
+        StartCoroutine(FadeIn());
+    }
+    private IEnumerator FadeIn()
+    {
+        Color alpha = _ghost1.GetComponent<SpriteRenderer>().color;
+        while (alpha.a > 0f)
+        {
+            _time += Time.deltaTime / _fadeTime;
+            alpha.a = Mathf.Lerp(1, 0, _time);
+            _ghost1.GetComponent<SpriteRenderer>().color = alpha;
+            _ghost2.GetComponent<SpriteRenderer>().color = alpha;
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f);
         StartStory();
     }
     #endregion

@@ -699,6 +699,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: _segAmount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentCount
       value: 23
       objectReference: {fileID: 0}
