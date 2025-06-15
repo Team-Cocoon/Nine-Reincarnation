@@ -528,7 +528,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.5450981, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2015,7 +2015,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "{fade a=3.5}\uC548\uB155\uD558\uC138\uC694"
+  m_text: "\uADF8 \uBBF8\uCE5C \uAC00\uC704 \uB140\uC11D... \n\uB3C4\uB300\uCCB4
+    \uB098\uC5D0\uAC8C \uBB34\uC2A8 \uC9D3\uC744 \uD55C \uAC74\uC9C0\uB294 \uBAA8\uB974\uACA0\uC9C0\uB9CC
+    \n\uB2E4\uC74C\uC5D0 \uB9CC\uB098\uBA74 \uAF2D \uAC00\uB9CC\uB450\uC9C0 \uC54A\uC744\uAC70\uB2E4...!!!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
   m_sharedMaterial: {fileID: -691115318593132985, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
@@ -2042,8 +2044,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2080,7 +2082,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -399.75232, y: -42.504593, z: -532.0956, w: -66.91652}
+  m_margin: {x: -370.56195, y: -42.504593, z: -466.11548, w: -66.91652}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
