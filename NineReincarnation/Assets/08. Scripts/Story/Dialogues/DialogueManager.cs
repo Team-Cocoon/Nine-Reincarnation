@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("데이터 파싱을 통해 얻어온 정보")]
     [SerializeField] private TextMeshProUGUI _tmpText;
+    [SerializeField] private TextMeshProUGUI _tmpName;
     [SerializeField] private Febucci.UI.Core.TypewriterCore _typeWriter;
     [SerializeField] private GameObject _windows;
     [SerializeField] private Image _image;
@@ -67,6 +68,11 @@ public class DialogueManager : MonoBehaviour
         isTextShowed = false;
         contextsData = contextsData.Replace("*", "\n");
         _typeWriter.TextAnimator.textFull = contextsData;
+    }
+
+    public void SetNameData(string nameData)
+    {
+        _tmpName.text = nameData;
     }
 
     public void SetExpressionData(string expressionData)

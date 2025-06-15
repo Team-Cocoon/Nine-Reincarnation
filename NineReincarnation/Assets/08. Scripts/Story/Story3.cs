@@ -1,4 +1,5 @@
 using System.Collections;
+using EventHandler;
 using Febucci.UI.Core.Parsing;
 using Player.Controller;
 using Unity.VisualScripting;
@@ -17,10 +18,24 @@ public class Story3 : Story
     [Header("가위")]
     [SerializeField] private GameObject _scissors;
 
-    [Header("Event1-9 특수 대화창")]
+    [Header("Event1-9")]
     [SerializeField] private GameObject _dialogue1_9;
-    [Header("Event3-4 특수 대화창")]
-    [SerializeField] private GameObject _dialogue3_4;
+    [Header("Event2-5")]
+    [SerializeField] private Camera _camera;
+    [SerializeField] private float _shakeDuration = 3f;
+    [Header("Event2-7")]
+    [SerializeField] private GameObject _ghost1;
+    [SerializeField] private GameObject _ghost2;
+    [SerializeField] private float _fadeTime = 1f;
+    private float _time = 0f;
+    [Header("Event3-7")]
+    [SerializeField] private float _cameraSize = 6f;
+    [SerializeField] private float _zoomDuration = 2f;
+    [SerializeField] private Interaction _interaction;
+    [SerializeField] private DrawOutline _outline;
+    [Header("Event3-8")]
+    [SerializeField] private GameObject _dialogue3_8;
+    private bool _isTextShowed = false;
 
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
@@ -38,6 +53,9 @@ public class Story3 : Story
         base.PlayStory(eventFunc);
         switch(eventFunc) 
         {
+            case "Event1-7":
+                EventFinger();
+                break;
             case "Event1-9":
                 StartCoroutine(Event1_9());
                 break;
@@ -45,21 +63,18 @@ public class Story3 : Story
                 StartCoroutine(Event1_10());
                 break;
             case "Event2-5":
-                // 카메라 흔들림 추가해야 함
-                StartStory();
+                CameraEventHandler.Shake(_camera, _shakeDuration, 0.1f, 10, 90, true, StartStory);
                 break;
             case "Event2-7":
-                StartCoroutine(Event2_7());
+                StoryManager.Instance.StartAnim(EventFade);
+                StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_NoWake");
                 break;
             case "Event3-2":
                 StartCoroutine(Event3_2());
                 break;
-            case "Event3-4":
-                StartCoroutine(Event3_4());
-                break;
             case "Event3-7":
                 // 나무 클릭하는 기능 추가해야 함
-                StartStory();
+                CameraEventHandler.Zoom(_camera, _cameraSize, _zoomDuration, TreeClickEvent);
                 break;
             case "Event3-8":
                 StartCoroutine(Event3_8());
@@ -82,7 +97,7 @@ public class Story3 : Story
                 StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_Laughing");
                 break;
             case "event1_7":
-                StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_Finger");
+                StoryManager.Instance?.StartAnim(StartEvent1_7);
                 break;
             case "event1_10":
                 RepeatLaughing();
@@ -112,6 +127,27 @@ public class Story3 : Story
         }
     }
 
+    #region Event 1-7
+    private void EventFinger()
+    {
+        DialogueManager.Instance?.StartDialogue();
+        StoryManager.Instance?.SetDialogueData();
+        StoryManager.Instance?.StartAnim();
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
+    }
+    private void StartEvent1_7()
+    {
+        DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        StartCoroutine(Event1_7());
+    }
+    private IEnumerator Event1_7()
+    {
+        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        StartStory();
+    }
+    #endregion
+
     #region Event 1-9
     private IEnumerator Event1_9()
     {
@@ -140,7 +176,6 @@ public class Story3 : Story
     
     private void RepeatLaughing()
     {
-        Debug.Log(_laughingCount);
         if (_laughingCount < 3)
         {
             _laughingCount++;
@@ -150,11 +185,22 @@ public class Story3 : Story
     #endregion
 
     #region Event 2-7
-    private IEnumerator Event2_7()
+    private void EventFade()
     {
-        StoryManager.Instance.eventObj["혼령1"]?.StartAnim("Ghost_NoWake");
-        StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_NoWake");
-        yield return new WaitForSeconds(3f);
+        StartCoroutine(FadeIn());
+    }
+    private IEnumerator FadeIn()
+    {
+        Color alpha = _ghost1.GetComponent<SpriteRenderer>().color;
+        while (alpha.a > 0f)
+        {
+            _time += Time.deltaTime / _fadeTime;
+            alpha.a = Mathf.Lerp(1, 0, _time);
+            _ghost1.GetComponent<SpriteRenderer>().color = alpha;
+            _ghost2.GetComponent<SpriteRenderer>().color = alpha;
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f);
         StartStory();
     }
     #endregion
@@ -170,27 +216,38 @@ public class Story3 : Story
     }
     #endregion
 
-    #region Event 3-4
-    private IEnumerator Event3_4()
+    #region Event 3-7
+    void TreeClickEvent()
     {
-        _dialogue3_4.SetActive(true);
-        yield return null;
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        _dialogue3_4.SetActive(false);
+        _interaction.IsInteraction = true;
+        _interaction.SetAction(NoClick);
+    }
+    void NoClick()
+    {
         StartStory();
+        _interaction.IsInteraction = false;
+        _outline.IsOutline = false;
     }
     #endregion
 
     #region Event 3-8
     private IEnumerator Event3_8()
     {
-        DialogueManager.Instance?.StartDialogue();
-        StoryManager.Instance?.SetDialogueData();
-        DialogueManager.Instance?.SetFontColor(Color.darkRed);
-        DialogueManager.Instance?.SetFontSize(25);
-        StoryManager.Instance?.StartAnim();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        _dialogue3_8.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(()=> Input.GetMouseButtonDown(0));
+        _dialogue3_8.SetActive(false);
         StartStory();
     }
+    public void TextShowed()
+    {
+        _isTextShowed = true;
+    }
     #endregion
+
+    public override void Enter(GameObject go = null)
+    {
+        // 다음 씬으로 넘어가기
+        Debug.Log("스토리3 끝");
+    }
 }

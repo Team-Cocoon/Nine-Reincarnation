@@ -23,6 +23,9 @@ public class CameraArea : MonoBehaviour
 
     void LateUpdate()
     {
+        _camHeight = _camera.orthographicSize;
+        _camWidth = _camHeight * _camera.aspect;
+
         Vector3 camPos = _camera.transform.position;
         Vector2 clampedPos = ClampCameraPosition(camPos);
         _camera.transform.position = new Vector3(clampedPos.x, clampedPos.y, camPos.z);

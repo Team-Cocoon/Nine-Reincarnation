@@ -233,8 +233,12 @@ PrefabInstance:
       value: ThreadGhost2
       objectReference: {fileID: 0}
     - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: _segAmount
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: segmentCount
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2896783063642592423, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2213,6 +2217,14 @@ PrefabInstance:
       value: ThreadGhost1
       objectReference: {fileID: 0}
     - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: _segAmount
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: segmentDist
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: segmentCount
       value: 8
       objectReference: {fileID: 0}
@@ -2344,6 +2356,10 @@ PrefabInstance:
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: _damping
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
+      propertyPath: _segAmount
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentCount

@@ -4,7 +4,17 @@ using UnityEngine.EventSystems;
 
 public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("상호작용 여부")]
+    [SerializeField] private bool _isInteraction = false;
+    
     private IInteractableToggle[] _interactableToggles;
+    private Action _eventAction;
+    
+    public bool IsInteraction
+    {
+        get => _isInteraction;
+        set => _isInteraction = value;
+    }
 
     private void Awake()
     {
@@ -26,19 +36,36 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             interactableToggle.DisableInteraction();
         }
     }
-
+    /// <summary>
+    /// 이벤트 함수 등록
+    /// </summary>
+    /// <param name="action"></param>
+    public void SetAction(Action action)
+    {
+        _eventAction = action;
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        //여기는 클릭 했을 때 일어날 일 하는거임
+        if (_isInteraction)
+        {
+            _eventAction?.Invoke();
+            _eventAction = null;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnInteraction();
+        if (_isInteraction)
+        {
+            OnInteraction();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OffInteraction();
+        if (_isInteraction)
+        {
+            OffInteraction();
+        }
     }
 }

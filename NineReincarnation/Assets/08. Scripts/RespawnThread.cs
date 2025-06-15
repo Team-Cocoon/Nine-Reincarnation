@@ -116,37 +116,6 @@ public class RespawnThread : Thread, ICollidable
         _lineRenderer.startColor = resetColor;
         _lineRenderer.endColor = resetColor;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    Debug.Log(collision.gameObject.name);
-        //    _isHit = true;
-        //    var player = collision.gameObject;
-        //    if (!_playersOnRope.Contains(player))
-        //    {
-        //        _playersOnRope.Add(player);
-        //    }
-        //    if (_disappearCoroutine == null)
-        //    {
-        //        _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());
-        //    }
-        //}
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    _isHit = false;
-        //    var player = collision.gameObject;
-        //    if (_playersOnRope.Contains(player))
-        //    {
-        //        _playersOnRope.Remove(player);
-        //    }
-        //}
-    }
     private IEnumerator DisappearThreadCoroutine()
     {
         float waitTime = _disappearTime - 1f;

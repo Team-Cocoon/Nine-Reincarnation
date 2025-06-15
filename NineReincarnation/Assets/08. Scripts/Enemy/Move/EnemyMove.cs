@@ -87,7 +87,6 @@ namespace Enemy.Move
                     Invoke(nameof(MoveLineOpen), _spawnTime);
                     break;
             }
-
         }
 
         //원 움직임
