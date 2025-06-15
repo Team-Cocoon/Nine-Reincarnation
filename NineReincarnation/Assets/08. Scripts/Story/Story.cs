@@ -81,6 +81,5 @@ public class Story : MonoBehaviour, ICollidable
 
     public virtual void Exit(GameObject go = null)
     {
-        throw new System.NotImplementedException();
     }
 }

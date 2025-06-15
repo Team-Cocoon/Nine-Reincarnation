@@ -5,6 +5,7 @@ using Player.Controller;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 
 public class Story3 : Story
 {
@@ -247,7 +248,6 @@ public class Story3 : Story
 
     public override void Enter(GameObject go = null)
     {
-        // 다음 씬으로 넘어가기
-        Debug.Log("스토리3 끝");
+        SceneManager.LoadScene("Stage3");
     }
 }

@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8759427}
   m_Layer: 0
-  m_Name: "\uAC00\uC704"
+  m_Name: Scissors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 178757103}
   - component: {fileID: 178757102}
   m_Layer: 5
-  m_Name: "\uC774\uB984"
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1655,7 +1655,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 13.215902, y: -1.5179958}
+  m_Offset: {x: 14.98127, y: -1.5179958}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1665,7 +1665,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.6168737, y: 11.267601}
+  m_Size: {x: 2.6168747, y: 11.267601}
   m_EdgeRadius: 0
 --- !u!114 &656468906 stripped
 MonoBehaviour:
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 778607209}
   - component: {fileID: 778607208}
   m_Layer: 5
-  m_Name: "\uB300\uC0AC"
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2982,7 +2982,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3507247535922604695, guid: 66f2e711794e5b547a7f893232c2adca, type: 3}
       propertyPath: m_Name
-      value: "\uD63C\uB8392"
+      value: Ghost2
       objectReference: {fileID: 0}
     - target: {fileID: 4793107547086184986, guid: 66f2e711794e5b547a7f893232c2adca, type: 3}
       propertyPath: _objName
@@ -3056,7 +3056,7 @@ GameObject:
   - component: {fileID: 1236859670}
   - component: {fileID: 1236859669}
   m_Layer: 5
-  m_Name: "\uC774\uB984\uCC3D"
+  m_Name: NameWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3224,7 +3224,7 @@ GameObject:
   - component: {fileID: 1456557923}
   - component: {fileID: 1456557926}
   m_Layer: 0
-  m_Name: "\uAC00\uC704"
+  m_Name: Scissors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3509,7 +3509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1597688479}
   m_Layer: 0
-  m_Name: "\uC548\uB098"
+  m_Name: Anna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3818,7 +3818,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3507247535922604695, guid: 66f2e711794e5b547a7f893232c2adca, type: 3}
       propertyPath: m_Name
-      value: "\uD63C\uB8391"
+      value: Ghost1
       objectReference: {fileID: 0}
     - target: {fileID: 7114384052595216158, guid: 66f2e711794e5b547a7f893232c2adca, type: 3}
       propertyPath: m_LocalScale.x
