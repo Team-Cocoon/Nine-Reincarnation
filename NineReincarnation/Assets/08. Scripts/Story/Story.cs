@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Story : MonoBehaviour
+public class Story : MonoBehaviour, ICollidable
 {
     /* 스토리 진행 */
     protected void StartStory()
@@ -72,5 +72,15 @@ public class Story : MonoBehaviour
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
         DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
         StartStory();
+    }
+
+    public virtual void Enter(GameObject go = null)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public virtual void Exit(GameObject go = null)
+    {
+        throw new System.NotImplementedException();
     }
 }

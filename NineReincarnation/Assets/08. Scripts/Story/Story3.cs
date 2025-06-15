@@ -28,14 +28,14 @@ public class Story3 : Story
     [SerializeField] private GameObject _ghost2;
     [SerializeField] private float _fadeTime = 1f;
     private float _time = 0f;
-    [Header("Event3-4")]
-    [SerializeField] private GameObject _dialogue3_4;
-    [Header("Event3-4")]
+    [Header("Event3-7")]
     [SerializeField] private float _cameraSize = 6f;
     [SerializeField] private float _zoomDuration = 2f;
     [SerializeField] private Interaction _interaction;
     [SerializeField] private DrawOutline _outline;
-
+    [Header("Event3-8")]
+    [SerializeField] private GameObject _dialogue3_8;
+    private bool _isTextShowed = false;
 
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
@@ -71,9 +71,6 @@ public class Story3 : Story
                 break;
             case "Event3-2":
                 StartCoroutine(Event3_2());
-                break;
-            case "Event3-4":
-                StartCoroutine(Event3_4());
                 break;
             case "Event3-7":
                 // 나무 클릭하는 기능 추가해야 함
@@ -179,7 +176,6 @@ public class Story3 : Story
     
     private void RepeatLaughing()
     {
-        Debug.Log(_laughingCount);
         if (_laughingCount < 3)
         {
             _laughingCount++;
@@ -220,17 +216,6 @@ public class Story3 : Story
     }
     #endregion
 
-    #region Event 3-4
-    private IEnumerator Event3_4()
-    {
-        _dialogue3_4.SetActive(true);
-        yield return null;
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        _dialogue3_4.SetActive(false);
-        StartStory();
-    }
-    #endregion
-
     #region Event 3-7
     void TreeClickEvent()
     {
@@ -248,13 +233,21 @@ public class Story3 : Story
     #region Event 3-8
     private IEnumerator Event3_8()
     {
-        DialogueManager.Instance?.StartDialogue();
-        StoryManager.Instance?.SetDialogueData();
-        DialogueManager.Instance?.SetFontColor(Color.darkRed);
-        DialogueManager.Instance?.SetFontSize(25);
-        StoryManager.Instance?.StartAnim();
-        yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        _dialogue3_8.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(()=> Input.GetMouseButtonDown(0));
+        _dialogue3_8.SetActive(false);
         StartStory();
     }
+    public void TextShowed()
+    {
+        _isTextShowed = true;
+    }
     #endregion
+
+    public override void Enter(GameObject go = null)
+    {
+        // 다음 씬으로 넘어가기
+        Debug.Log("스토리3 끝");
+    }
 }
