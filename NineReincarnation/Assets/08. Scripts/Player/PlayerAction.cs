@@ -13,8 +13,14 @@ namespace Player.Action
     {
         private string _playerName;
         private PlayerController _player;
+        private PlayerInput _playerInput;
 
         public PlayerController Player => _player;
+
+        private void Awake()
+        {
+            _playerInput = GetComponent<PlayerInput>();
+        }
 
         /// <summary>
         /// 조종할 플레이어 설정
@@ -99,6 +105,28 @@ namespace Player.Action
             else if(context.canceled)
             {
                 _player.IsLook = false;
+            }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 MainUI관련 함수
+        /// </summary>
+        /// <param name="context"></param>
+        public void ActionToggleMainUI(InputAction.CallbackContext context)
+        {
+            if (_player.DiablePlayerInput()) return;
+            
+            if (context.started)
+            {
+                bool isOpen = UIEventHandler.ToggleMainUI();
+                if (isOpen)
+                {
+                    _playerInput.SwitchCurrentActionMap("UI");
+                }
+                else
+                {
+                    _playerInput.SwitchCurrentActionMap("Player");
+                }
             }
         }
     }

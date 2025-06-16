@@ -53,6 +53,6 @@ public class ProfileCanvas : MonoBehaviour
 
     private void ListLock()
     {
-
+        UIEventHandler.OnOpenLockedProfileToolTipUI();
     }
 }

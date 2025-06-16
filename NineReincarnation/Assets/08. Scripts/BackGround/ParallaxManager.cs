@@ -52,10 +52,20 @@ public class ParallaxManager : MonoBehaviour
         {
             for (int i = 0; i < _transforms.Length; i++)
             {
-                _transforms[i].position += distance * _offsets[i] * Vector3.right * _speed;
+                Vector3 defalut;
+                //오른쪽 전진
+                if(_prevPosition.x < _camera.position.x)
+                {
+                    defalut = Vector3.right;
+                }
+                else
+                {
+                    defalut = Vector3.left;
+                }
+
+                _transforms[i].position += distance * _offsets[i] * defalut * _speed;
                 float toCamera = _transforms[i].position.x - _camera.position.x;
 
-                Debug.Log(toCamera);
                 // 왼쪽으로 완전히 벗어났다면 우측 끝으로 순간이동
                 if (toCamera + _width <= -1f)
                 {

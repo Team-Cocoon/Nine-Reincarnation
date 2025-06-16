@@ -18,6 +18,7 @@ public class MainUI : MonoBehaviour
         UIEventHandler.OnOpenListUI += OpenListUI;
         UIEventHandler.OnOpenInfoUI += OpenInfoUI;
         UIEventHandler.OnOpenProfileUI += OpenProfileUI;
+        UIEventHandler.OnCloseMainUI += CloseMainUI;
 
         Init();
     }
@@ -28,14 +29,16 @@ public class MainUI : MonoBehaviour
         UIEventHandler.OnOpenListUI -= OpenListUI;
         UIEventHandler.OnOpenInfoUI -= OpenInfoUI;
         UIEventHandler.OnOpenProfileUI -= OpenProfileUI;
+        UIEventHandler.OnCloseMainUI -= CloseMainUI;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Init();
-        }
+        UIEventHandler.OnOpenListSeclectUI -= OpenListSelectUI;
+        UIEventHandler.OnOpenListUI -= OpenListUI;
+        UIEventHandler.OnOpenInfoUI -= OpenInfoUI;
+        UIEventHandler.OnOpenProfileUI -= OpenProfileUI;
+        UIEventHandler.OnCloseMainUI -= CloseMainUI;
     }
 
     private void Init()
@@ -44,6 +47,11 @@ public class MainUI : MonoBehaviour
         _listSelectUI.SetActive(false);
         _listUI.SetActive(false);
         _infoUI.SetActive(false);
+    }
+
+    private void CloseMainUI()
+    {
+        Init();
     }
 
     private void OpenListSelectUI()

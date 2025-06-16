@@ -153,7 +153,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.75
   m_Material: {fileID: 6200000, guid: e7afcac988a26b64fb480c14bad06290, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -199,10 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa99b587520bb1449911fd8b4b05f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpForce: 5
+  _speed: 4
+  _jumpForce: 6
   _playerName: Anna
-  _checkPoint: {x: -13.61, y: -0.97, z: 0}
+  _checkPoint: {x: -13, y: -1, z: 0}
   _isGround: 0
   _isLook: 0
   _isDead: 0
@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 8473199174502717710}
   - component: {fileID: 4261131757496409152}
   - component: {fileID: 196964441453532725}
+  - component: {fileID: 1638397305360284050}
   m_Layer: 0
   m_Name: GroundDetector
   m_TagString: Untagged
@@ -298,3 +299,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1285429716836269916}
+--- !u!50 &1638397305360284050
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8884321024790366604}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

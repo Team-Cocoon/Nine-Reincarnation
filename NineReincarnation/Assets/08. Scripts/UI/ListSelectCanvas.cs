@@ -55,6 +55,6 @@ public class ListSelectCanvas : MonoBehaviour
 
     private void ListLock()
     {
-
+        UIEventHandler.OnOpenLockedListToolTipUI();
     }
 }

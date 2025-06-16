@@ -1,5 +1,5 @@
+using System;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +10,7 @@ namespace Effect.WipeFade
         /// <summary>
         /// 서서히 밝아짐 (매개변수는 페이드 전용 머티리얼)
         /// </summary>
-        public static void FadeIn(Material material, float duration)
+        public static void FadeIn(Material material, float duration, float delay = 0.0f, Action action = null)
         {
             float progress = 0f;
             material.SetFloat("_IsFadeIn", 1f);
@@ -19,7 +19,7 @@ namespace Effect.WipeFade
             {
                 progress = x;
                 material.SetFloat("_Progress", progress);
-            }, 1.0f, duration).SetEase(Ease.Linear).SetUpdate(true);
+            }, 1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).SetDelay(delay).OnComplete( () => { action?.Invoke();  });
         }
 
         /// <summary>

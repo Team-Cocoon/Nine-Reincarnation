@@ -140,8 +140,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1809331973419787375, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: isVisible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809331973419787375, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: _animaionType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809331973419787375, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: isStopAnimator
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1809331973419787375, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: _waypoints.Array.size
@@ -177,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3152695299016057148, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3152695299016057148, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_LocalPosition.z
@@ -285,8 +293,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: isVisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: _animaionType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: isStopAnimator
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: _animationLoopType
@@ -485,6 +501,7 @@ GameObject:
   - component: {fileID: 1109767358}
   - component: {fileID: 1109767362}
   - component: {fileID: 1109767361}
+  - component: {fileID: 1109767363}
   m_Layer: 0
   m_Name: Water
   m_TagString: Ground
@@ -1181,7 +1198,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1237,6 +1254,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1109767363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109767356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8729cfccb3479b74b8290af52b5910eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1255308399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1345,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1418728397
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2058,7 +2087,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -2212,10 +2241,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThreadGhost1
       objectReference: {fileID: 0}
-    - target: {fileID: 2673741424099285593, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: segmentCount
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 2896783063642592423, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 92.4376
@@ -2257,28 +2282,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _duration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _pathType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _animaionType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _animationLoopType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _waypoints.Array.data[0].x
-      value: 90.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
-      propertyPath: _waypoints.Array.data[1].x
-      value: 94.3
+      propertyPath: isStopAnimator
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
