@@ -96,4 +96,9 @@ public class DialogueManager : MonoBehaviour
     {
         _tmpText.fontSize = size;
     }
+
+    public void PlayTextSound()
+    {
+        AudioManger.Instance.PlaySfx(AudioManger.Sfx.Text);
+    }
 }
