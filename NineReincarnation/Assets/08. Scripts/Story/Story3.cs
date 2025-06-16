@@ -35,6 +35,8 @@ public class Story3 : Story
     [Header("Event3-8")]
     [SerializeField] private GameObject _dialogue3_8;
     private bool _isTextShowed = false;
+    [Header("Event3-8")]
+    [SerializeField] private GameObject _mKey;
 
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
@@ -86,6 +88,7 @@ public class Story3 : Story
                 // 안나가 오른쪽 밖으로 나가는 기능 추가해야 함
                 AnnaActive(true);
                 UIEventHandler.OnOpenListUpdateToolTipUI();
+                StartCoroutine(KeyShow());
                 break;
         }
     }
@@ -242,6 +245,20 @@ public class Story3 : Story
     public void TextShowed()
     {
         _isTextShowed = true;
+    }
+    #endregion
+
+    #region Event 3-12
+    private IEnumerator KeyShow()
+    {
+        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+            _mKey.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            _mKey.SetActive(false);
+            yield return new WaitForSeconds(1f);
+        }
     }
     #endregion
 
