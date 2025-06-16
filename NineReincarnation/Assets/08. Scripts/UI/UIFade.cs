@@ -11,6 +11,6 @@ public class UIFade : MonoBehaviour
     private void OnEnable()
     {
         _image.material.SetFloat("_Progress", 0.0f);
-        WipeFadeEffect.FadeIn(_image.material, _duration, 2.0f, () => { gameObject.SetActive(false); });
+        FadeEffect.WipeFadeIn(_image.material, _duration, true, 2.0f, () => { gameObject.SetActive(false); });
     }
 }

@@ -25,7 +25,6 @@ public class GroundDetector : MonoBehaviour
             if (isResetJump) return;
             if (player.Rb2d.linearVelocityY > 0.05f || player.Rb2d.linearVelocityY < -0.05f) return;
 
-            AudioManger.Instance.PlaySfx(AudioManger.Sfx.Landing);
             player.IsGround = true;
             player.ResetJumpCount();
             isResetJump = true;

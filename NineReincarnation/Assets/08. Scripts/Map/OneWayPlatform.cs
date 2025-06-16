@@ -37,7 +37,7 @@ namespace Map.Platform
 
         private void ResetPlatform(Collider2D collider)
         {
-            DOVirtual.DelayedCall(0.4f, () =>
+            DOVirtual.DelayedCall(0.35f, () =>
             {
                 player?.SetContactPlatform(); //접촉한 플랫폼 null로 초기화
                 Physics2D.IgnoreCollision(_platformCollider, collider, false);

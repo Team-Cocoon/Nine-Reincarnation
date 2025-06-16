@@ -26,7 +26,6 @@ public class AudioManger : MonoBehaviour
     public enum Sfx
     {
         DIe,
-        Landing,
         Jump,
         SavePoint,
         Zoom, 

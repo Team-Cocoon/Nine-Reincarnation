@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -5,11 +6,9 @@ using UnityEngine;
 public class ToolTipUICanvas : MonoBehaviour
 {
     [Header("---- 툴팁 UI 관련 변수 ----")]
-    [SerializeField] private GameObject _toolTipUI;
-    [SerializeField] private TextMeshProUGUI _toolTipText;
-    [SerializeField] private string _listUpdateTooltip;
-    [SerializeField] private string _lockedListTooltip;
-    [SerializeField] private string _lockedProfileTooltip;
+    [SerializeField] private GameObject _listUpdateTooltip;
+    [SerializeField] private GameObject _lockedListTooltip;
+    [SerializeField] private GameObject _lockedProfileTooltip;
 
     [Header("---- 툴팁 UI 등장 효과 제어 ----")]
     [SerializeField] private Vector2 _startPosition;
@@ -26,7 +25,9 @@ public class ToolTipUICanvas : MonoBehaviour
         UIEventHandler.OnOpenLockedProfileToolTipUI += OpenLockedProfileToolTip;
         UIEventHandler.OnOpenLockedListToolTipUI += OpenLockedListToolTip;
 
-        _toolTipUI.SetActive(false);
+        _listUpdateTooltip.SetActive(false);
+        _lockedListTooltip.SetActive(false);
+        _lockedProfileTooltip.SetActive(false);
     }
 
     private void OnDestroy()
@@ -41,37 +42,36 @@ public class ToolTipUICanvas : MonoBehaviour
         if (_isRun) return;
 
         _isRun = true;
-        _toolTipText.text = _lockedListTooltip;
 
-        _toolTipUI.SetActive(true);
+        _lockedListTooltip.SetActive(true);
 
-        CanvasGroup canvasGroup = _toolTipUI.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = _lockedListTooltip.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1.0f;
 
         canvasGroup.DOFade(0f, _fadeDuration).SetUpdate(true).SetDelay(_delay)
             .OnComplete(() =>
             {
                 _isRun = false;
-                _toolTipUI.SetActive(false);
+                _lockedListTooltip.SetActive(false);
             });
     }
 
-    private void OpenListUpdateToolTip()
+    private void OpenListUpdateToolTip(Action action = null)
     {
         if (_isRun) return;
 
         _isRun = true;
-        _toolTipText.text = _listUpdateTooltip;
 
-        _toolTipUI.SetActive(true);
+        _listUpdateTooltip.SetActive(true);
 
-        CanvasGroup canvasGroup = _toolTipUI.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = _listUpdateTooltip.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1.0f;
 
         canvasGroup.DOFade(0f, _fadeDuration).SetDelay(_delay).SetUpdate(true).OnComplete(() =>
         {
             _isRun = false;
-            _toolTipUI.SetActive(false);
+            _listUpdateTooltip.SetActive(false);
+            action?.Invoke();
         });
     }
 
@@ -80,14 +80,13 @@ public class ToolTipUICanvas : MonoBehaviour
         if (_isRun) return;
 
         _isRun = true;
-        _toolTipText.text = _lockedProfileTooltip;
 
-        _toolTipUI.SetActive(true);
+        _lockedProfileTooltip.SetActive(true);
 
-        CanvasGroup canvasGroup = _toolTipUI.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = _lockedProfileTooltip.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1.0f;
 
-        RectTransform rect = _toolTipUI.GetComponent<RectTransform>();
+        RectTransform rect = _lockedProfileTooltip.GetComponent<RectTransform>();
 
         Sequence seq = DOTween.Sequence();
 
@@ -98,7 +97,7 @@ public class ToolTipUICanvas : MonoBehaviour
                        .OnComplete(() =>
                        {
                            _isRun = false;
-                           _toolTipUI.SetActive(false);
+                           _lockedProfileTooltip.SetActive(false);
                        });
     }
 }

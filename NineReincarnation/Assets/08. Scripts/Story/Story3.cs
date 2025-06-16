@@ -87,7 +87,8 @@ public class Story3 : Story
             case "Event3-12":
                 // 안나가 오른쪽 밖으로 나가는 기능 추가해야 함
                 AnnaActive(true);
-                UIEventHandler.OnOpenListUpdateToolTipUI();
+                _annaController.IsBusy = true;
+                UIEventHandler.OnOpenListUpdateToolTipUI(() => { _annaController.IsBusy = false; });
                 StartCoroutine(KeyShow());
                 break;
         }
@@ -252,11 +253,12 @@ public class Story3 : Story
     private IEnumerator KeyShow()
     {
         yield return new WaitForSeconds(3f);
+        _mKey.SetActive(true);
         while (true)
         {
-            _mKey.SetActive(true);
+            _mKey.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
             yield return new WaitForSeconds(1f);
-            _mKey.SetActive(false);
+            _mKey.transform.localScale = new Vector3(0.5f, 0.4f, 1f);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -264,6 +266,6 @@ public class Story3 : Story
 
     public override void Enter(GameObject go = null)
     {
-        SceneManager.LoadScene("Stage3");
+        UIEventHandler.OnSceneWipeFadeOut(() => { SceneManager.LoadScene("Stage3"); });
     }
 }

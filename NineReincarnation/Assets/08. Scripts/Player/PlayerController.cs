@@ -42,6 +42,7 @@ namespace Player.Controller
         private SpriteRenderer _spriteRenderer; //플레이어 이미지
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
+        private bool _isBusy;
 
         public Rigidbody2D Rb2d => _rb2d;
 
@@ -68,7 +69,6 @@ namespace Player.Controller
             get => _playerName;
             set => _playerName = value;
         }
-
         public float Speed
         {
             get => _speed;
@@ -79,6 +79,12 @@ namespace Player.Controller
         {
             get => _checkPoint;
             set => _checkPoint = value;
+        }
+
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => _isBusy = value;
         }
 
         private void Awake()
@@ -114,7 +120,7 @@ namespace Player.Controller
 
         public bool DiablePlayerInput()
         {
-            return _isLook || _isDead;
+            return _isLook || _isDead || _isBusy;
         }
 
         #region 내부 변수 제어
@@ -155,6 +161,7 @@ namespace Player.Controller
         //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
         {
+            if (_isDead) return;
             _rb2d.linearVelocityX = (int)_direction * _speed;
         }
 
@@ -181,6 +188,10 @@ namespace Player.Controller
         public void DownJump()
         {
             _oneWayPlatform?.Ignore(_collider);
+            if(_oneWayPlatform != null)
+            {
+                _isGround = false;
+            }
         }
         #endregion
 
