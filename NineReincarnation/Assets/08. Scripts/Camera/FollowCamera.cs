@@ -25,6 +25,10 @@ namespace PlayerCamera
         {
             CameraEventHandler.OnLook -= Look;
         }
+        private void OnDestroy()
+        {
+            CameraEventHandler.OnLook -= Look;
+        }
 
         public void Look(bool isLook)
         {

@@ -44,6 +44,8 @@ namespace Player.Controller
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
 
+        public Rigidbody2D Rb2d => _rb2d;
+
         public bool IsDead => _isDead;
 
         public bool IsLook
@@ -221,7 +223,6 @@ namespace Player.Controller
         
         public void ChangeAnimation(IState state)
         {
-            Debug.Log((state as IPlayerState).AnimationState);
             switch ((state as IPlayerState).AnimationState)
             {
                 case PlayerAnimationState.Idle:

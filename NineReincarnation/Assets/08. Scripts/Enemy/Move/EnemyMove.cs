@@ -19,6 +19,8 @@ namespace Enemy.Move
         [Header("--- 공통 세팅 ---")]
         [SerializeField] private float _spawnTime = 0.0f;
         [SerializeField] private float _delay = 0.0f;
+        [SerializeField] private bool isVisible = false;
+         private bool isStopAnimator = false;
 
         [Header("운동 형태 세팅")]
         [SerializeField] private WaypointPathType _pathType = WaypointPathType.LineClosed; //닫힘 => 맨 마지막 웨이포인트와 처음이 이어짐
@@ -72,6 +74,11 @@ namespace Enemy.Move
 
         private void Start()
         {
+            if(isStopAnimator)
+            {
+                GetComponent<Animator>().speed = 0.0f;
+            }
+
             switch (_pathType)
             {
                 case WaypointPathType.Circle:
@@ -130,7 +137,12 @@ namespace Enemy.Move
         //닫힌 구간 움직임
         private void MoveLineOpen()
         {
-            if(_waypoints.Count < 1)
+            if (isStopAnimator)
+            {
+                GetComponent<Animator>().speed = 1.0f;
+            }
+
+            if (_waypoints.Count < 1)
             {
                 return;
             }
@@ -152,8 +164,34 @@ namespace Enemy.Move
                 }
             }
 
-            seq.AppendCallback(() => { transform.position = _waypoints[0]; });
+            seq.AppendCallback(() => 
+            { 
+                transform.position = _waypoints[0];
+                if(!isVisible)
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                    GetComponent<Collider2D>().enabled = false;
+                }
+
+                if (isStopAnimator)
+                {
+                    GetComponent<Animator>().speed = 0.0f;
+                }
+            });
             seq.AppendInterval(_delay);
+            seq.AppendCallback(() =>
+            {
+                if (!isVisible)
+                {
+                    GetComponent<SpriteRenderer>().enabled = true;
+                    GetComponent<Collider2D>().enabled = true;
+                }
+
+                if (isStopAnimator)
+                {
+                    GetComponent<Animator>().speed = 1.0f;
+                }
+            });
             seq.SetLoops(_loopCount, _animationLoopType);
         }
 
@@ -170,10 +208,10 @@ namespace Enemy.Move
 
             for (int i = 1; i < wayPointsCount; ++i)
             {
-                 seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(Ease.Linear));
+                 seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(_animaionType));
             }
 
-            seq.Append(_rb2d.DOMove(_waypoints[0], _duration).SetEase(Ease.Linear));
+            seq.Append(_rb2d.DOMove(_waypoints[0], _duration).SetEase(_animaionType));
 
             seq.AppendInterval(_delay);
             seq.SetLoops(_loopCount, _animationLoopType);

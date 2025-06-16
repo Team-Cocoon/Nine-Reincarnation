@@ -83,8 +83,8 @@ MonoBehaviour:
   _snappingSettings: {x: 0.1, y: 0.1}
   _editing: 1
   _waypoints:
-  - {x: 91.1, y: -1.4, z: 0}
-  - {x: 94, y: -1.4, z: 0}
+  - {x: 90.8, y: -1.4, z: 0}
+  - {x: 94.3, y: -1.4, z: 0}
   _circleRadius: 5
   _angleRad: 0
   _circleDirection: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   _handleRadius: 0.5
   _gizmoDeselectedColor: {r: 0, g: 0, b: 1, a: 1}
   _duration: 3
-  _animaionType: 4
+  _animaionType: 1
 --- !u!1 &2428626920278413359
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1646299536, guid: 6aaf95e946575ca4aa3685c9417cc0f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -271,7 +271,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1646299536, guid: 6aaf95e946575ca4aa3685c9417cc0f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: segmentCount
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8917633105700320164, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: _endTransform
