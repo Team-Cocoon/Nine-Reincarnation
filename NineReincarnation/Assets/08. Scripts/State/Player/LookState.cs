@@ -1,6 +1,5 @@
 using Player.Controller;
 using State.PlayerState;
-using UnityEngine;
 
 public class LookState : IPlayerState
 {
@@ -19,6 +18,7 @@ public class LookState : IPlayerState
 
     public void Enter()
     {
+        AudioManger.Instance.PlaySfx(AudioManger.Sfx.Zoom);
         _animationState = PlayerAnimationState.Look;
     }
 

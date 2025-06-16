@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UIEventHandler
 {
@@ -27,7 +26,7 @@ public class UIEventHandler
         {
             Time.timeScale = 1.0f;
             OnCloseMainUI();
-            isOpen = false;         
+            isOpen = false;
         }
         else
         {

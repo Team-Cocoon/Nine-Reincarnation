@@ -1,13 +1,9 @@
-using UnityEngine;
-using System.Collections;
-using System;
-
 public class NPCGhost : NPC
 {
     public override void StartAnim(string animName)
     {
         _currentAnimName = animName;
-        switch (animName) 
+        switch (animName)
         {
             case "Ghost_Down":
                 _animator.SetTrigger("isDown");

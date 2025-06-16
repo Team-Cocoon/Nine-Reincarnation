@@ -29,7 +29,7 @@ public interface IEvent
 public class NPC : MonoBehaviour, IEvent
 {
     [SerializeField] private string _objName; // 캐릭터 이름
-    
+
     protected Animator _animator;
     protected Action _animAction;
     protected Action _triggerAction;
@@ -53,9 +53,9 @@ public class NPC : MonoBehaviour, IEvent
     {
         if (_currentAnimName == animName)
         {
-            var action = _animAction;  
-            _animAction = null;        
-            action?.Invoke();         
+            var action = _animAction;
+            _animAction = null;
+            action?.Invoke();
         }
     }
     public virtual void TriggerEvent(string eventName, Action triggerAction)

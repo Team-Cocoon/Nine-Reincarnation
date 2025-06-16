@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Swamp : MonoBehaviour, ICollidable
@@ -31,22 +30,22 @@ public class Swamp : MonoBehaviour, ICollidable
             rb.gravityScale = _gravity;
             rb.linearDamping = _damping;
             objectData.Speed = _speed;
-            
+
             isSave = true;
         }
     }
 
     public void Exit(GameObject go)
     {
-        if (isSave) 
+        if (isSave)
         {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             IObjectData objectData = go.GetComponent<IObjectData>();
-            
+
             rb.gravityScale = _initGravity;
             rb.linearDamping = _initDamping;
             objectData.Speed = _initSpeed;
-            
+
             isSave = false;
         }
     }

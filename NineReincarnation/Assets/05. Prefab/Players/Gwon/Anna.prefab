@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5221455579449346538}
   - component: {fileID: 4626978774484731853}
   - component: {fileID: 1285429716836269916}
+  - component: {fileID: 7532063269940092795}
   m_Layer: 0
   m_Name: Anna
   m_TagString: Player
@@ -78,9 +79,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1418728397
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1103740785, guid: 1c428f67c36688040ae17133da3fac28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -126,7 +127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.037079975, y: -0.04550761}
+  m_Offset: {x: 0.037079975, y: -0.11470093}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -136,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.21120426, y: 0.8483087}
+  m_Size: {x: 0.21120426, y: 0.753953}
   m_EdgeRadius: 0
 --- !u!50 &5221455579449346538
 Rigidbody2D:
@@ -200,12 +201,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _jumpForce: 6
+  _jumpForce: 5.5
   _playerName: Anna
   _checkPoint: {x: -13, y: -1, z: 0}
   _isGround: 0
   _isLook: 0
   _isDead: 0
+--- !u!61 &7532063269940092795
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296145436470254660}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.04, y: -6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.3, y: 0.03}
+  m_EdgeRadius: 0
 --- !u!1 &8884321024790366604
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +264,7 @@ GameObject:
   - component: {fileID: 8473199174502717710}
   - component: {fileID: 4261131757496409152}
   - component: {fileID: 196964441453532725}
-  - component: {fileID: 1638397305360284050}
+  - component: {fileID: 2575618735283795855}
   m_Layer: 0
   m_Name: GroundDetector
   m_TagString: Untagged
@@ -274,7 +321,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.037353233, y: -0.48227984}
+  m_Offset: {x: 0.037353233, y: -0.52}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -284,7 +331,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.3, y: 0.11864364}
+  m_Size: {x: 0.3, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &196964441453532725
 MonoBehaviour:
@@ -299,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1285429716836269916}
---- !u!50 &1638397305360284050
+--- !u!50 &2575618735283795855
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0

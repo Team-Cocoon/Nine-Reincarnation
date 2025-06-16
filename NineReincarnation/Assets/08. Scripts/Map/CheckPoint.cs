@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour, ICollidable
 
     public void Enter(GameObject go = null)
     {
+        AudioManger.Instance.PlaySfx(AudioManger.Sfx.SavePoint);
         player = go.GetComponent<PlayerController>();
         player?.SetCheckPoint(transform.position);
     }

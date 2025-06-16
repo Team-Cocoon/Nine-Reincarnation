@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using EventHandler;
 using Manager.Camera;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 
 namespace Player.Action
@@ -34,7 +31,7 @@ namespace Player.Action
             _playerName = name;
             _player = controller;
 
-            CameraManager.Instance?.ChangeTarget(controller.GetTransform());        
+            CameraManager.Instance?.ChangeTarget(controller.GetTransform());
         }
 
         /// <summary>
@@ -102,7 +99,7 @@ namespace Player.Action
             {
                 _player.IsLook = true;
             }
-            else if(context.canceled)
+            else if (context.canceled)
             {
                 _player.IsLook = false;
             }
@@ -115,7 +112,7 @@ namespace Player.Action
         public void ActionToggleMainUI(InputAction.CallbackContext context)
         {
             if (_player.DiablePlayerInput()) return;
-            
+
             if (context.started)
             {
                 bool isOpen = UIEventHandler.ToggleMainUI();

@@ -6,10 +6,10 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 {
     [Header("상호작용 여부")]
     [SerializeField] private bool _isInteraction = false;
-    
+
     private IInteractableToggle[] _interactableToggles;
     private Action _eventAction;
-    
+
     public bool IsInteraction
     {
         get => _isInteraction;
@@ -23,7 +23,7 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     private void OnInteraction()
     {
-        foreach(IInteractableToggle interactableToggle in _interactableToggles)
+        foreach (IInteractableToggle interactableToggle in _interactableToggles)
         {
             interactableToggle.EnableInteraction();
         }

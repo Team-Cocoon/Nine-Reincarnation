@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < _stages.Length; ++i)
+        for (int i = 0; i < _stages.Length; ++i)
         {
             string scenePath = _stages[i].ScenePath;
             if (!string.IsNullOrEmpty(scenePath))

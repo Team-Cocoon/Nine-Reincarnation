@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-        if(images != null)
+        if (images != null)
         {
             foreach (var image in images)
             {
@@ -77,10 +75,10 @@ public class DialogueManager : MonoBehaviour
 
     public void SetExpressionData(string expressionData)
     {
-        if (expressionData == "") 
+        if (expressionData == "")
         {
             return;
-        } 
+        }
         _image.sprite = _imageDict[expressionData];
     }
     public void TextShowed()

@@ -37,7 +37,7 @@ namespace State.StateMachine.PlayerStateMachine
 
         private void AnyState()
         {
-            if(_player.IsDead)
+            if (_player.IsDead)
             {
                 TransitionTo(_player.PlayerStateMachine._deadState);
             }

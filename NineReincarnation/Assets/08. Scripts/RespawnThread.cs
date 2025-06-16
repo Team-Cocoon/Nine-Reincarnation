@@ -45,7 +45,7 @@ public class RespawnThread : Thread, ICollidable
             AdjustCollision();
         }
         RenderThread();
-        
+
         //foreach (var player in _playersOnRope)
         //    StickPlayerToThread(player);
     }
@@ -86,7 +86,7 @@ public class RespawnThread : Thread, ICollidable
                 segments[i].position = hit.point + hit.normal * threadWidth * 0.5f;
                 segments[i].prevPosition = segments[i].position;
             }
-           
+
         }
     }
     private void StickPlayerToThread(GameObject player)

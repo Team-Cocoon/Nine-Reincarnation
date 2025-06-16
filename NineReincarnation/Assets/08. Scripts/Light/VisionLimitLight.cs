@@ -51,8 +51,9 @@ public class VisionLimitLight : MonoBehaviour
         {
             intensity = i;
             _light.intensity = intensity;
-        }, 0.0f, 1f).OnComplete(() => { 
-            gameObject.SetActive(false); 
+        }, 0.0f, 1f).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
             LightManager.Instance.State = StatusEffect.None;
         });
     }

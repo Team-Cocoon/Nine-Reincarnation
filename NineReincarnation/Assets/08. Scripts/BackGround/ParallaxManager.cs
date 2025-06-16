@@ -1,12 +1,9 @@
-using System.Collections.Generic;
 using System.Linq;
-using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ParallaxManager : MonoBehaviour
 {
-    [Header("--- 원근법 기준이 되는 위치 ---")] 
+    [Header("--- 원근법 기준이 되는 위치 ---")]
     [SerializeField] private Vector3 _defaultPosition; //보통 플레이어 위치
     [SerializeField] private float _width;
     [SerializeField] private float _speed;
@@ -30,7 +27,7 @@ public class ParallaxManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        MoveBackground(); 
+        MoveBackground();
         _prevPosition = _camera.position;
     }
 
@@ -54,7 +51,7 @@ public class ParallaxManager : MonoBehaviour
             {
                 Vector3 defalut;
                 //오른쪽 전진
-                if(_prevPosition.x < _camera.position.x)
+                if (_prevPosition.x < _camera.position.x)
                 {
                     defalut = Vector3.right;
                 }
@@ -84,7 +81,7 @@ public class ParallaxManager : MonoBehaviour
     private void SetOffset()
     {
         float defaultToTarget;
-        for(int i = 0; i < _transforms.Length; i++)
+        for (int i = 0; i < _transforms.Length; i++)
         {
             defaultToTarget = _transforms[i].position.z - _defaultPosition.z;
             if (defaultToTarget <= float.Epsilon && defaultToTarget >= -float.Epsilon) _offsets[i] = 1f;

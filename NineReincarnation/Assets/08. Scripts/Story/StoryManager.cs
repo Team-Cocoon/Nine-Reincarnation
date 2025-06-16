@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class StoryManager : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class StoryManager : MonoBehaviour
     [Header("현재 진행 중인 이벤트")]
     [SerializeField] private DialogueEvent _dialogueEvent;
 
-    public DialogueEvent DialogueEvent => _dialogueEvent; 
+    public DialogueEvent DialogueEvent => _dialogueEvent;
     private void Awake()
     {
         Instance = this;
@@ -57,7 +56,7 @@ public class StoryManager : MonoBehaviour
     /// </summary>
     public void StartAnim(Action eventAction = null)
     {
-        if(eventAction != null)
+        if (eventAction != null)
         {
             eventObj[_dialogueEvent.dialogue.objectName]?.SettingAnimEvent(eventAction);
         }

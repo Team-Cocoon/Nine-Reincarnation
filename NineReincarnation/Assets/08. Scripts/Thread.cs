@@ -29,7 +29,7 @@ public abstract class Thread : MonoBehaviour
     {
         UpdateThread();
     }
-    protected virtual void Initialize() 
+    protected virtual void Initialize()
     {
         _lineRenderer = GetComponent<LineRenderer>();
     }

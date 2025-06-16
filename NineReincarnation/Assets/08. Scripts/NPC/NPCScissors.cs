@@ -11,7 +11,7 @@ public class NPCScissors : NPC
 
     public override void TriggerEvent(string eventName, Action triggerAction)
     {
-        if(triggerAction != null)
+        if (triggerAction != null)
         {
             _triggerAction = triggerAction;
         }
@@ -32,7 +32,7 @@ public class NPCScissors : NPC
             position.x += _speed * Time.deltaTime;
             transform.position = position;
 
-            yield return null; 
+            yield return null;
         }
         _triggerAction?.Invoke();
         _triggerAction = null;

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using EventHandler;
 using Map.Platform;
 using State;
@@ -8,10 +7,10 @@ using UnityEngine;
 
 public interface IObjectData
 {
-    public float Speed 
-    { 
-        get; 
-        set; 
+    public float Speed
+    {
+        get;
+        set;
     }
 }
 
@@ -65,7 +64,7 @@ namespace Player.Controller
         }
         public PlayerStateMachine PlayerStateMachine => _playersStateMachine;
         public string PlayerName
-        { 
+        {
             get => _playerName;
             set => _playerName = value;
         }
@@ -166,11 +165,12 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
-            if(_rb2d.linearVelocityY < float.Epsilon)
+            if (_rb2d.linearVelocityY < float.Epsilon)
             {
                 _rb2d.linearVelocityY = 0;
             }
 
+            AudioManger.Instance.PlaySfx(AudioManger.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
@@ -190,6 +190,7 @@ namespace Player.Controller
         {
             if (_isDead) return;
 
+            AudioManger.Instance.PlaySfx(AudioManger.Sfx.DIe);
             SetStop();
             _isDead = true;
         }
@@ -220,7 +221,7 @@ namespace Player.Controller
                     break;
             }
         }
-        
+
         public void ChangeAnimation(IState state)
         {
             switch ((state as IPlayerState).AnimationState)

@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Manager.Camera;
 using Player.Action;
 using Player.Controller;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {

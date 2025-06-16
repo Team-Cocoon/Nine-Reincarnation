@@ -20,7 +20,7 @@ public class Fade : MonoBehaviour
     {
         _image.gameObject.SetActive(true);
         Color alpha = _image.color;
-        while(alpha.a > 0f)
+        while (alpha.a > 0f)
         {
             _time += Time.deltaTime / _fadeTime;
             alpha.a = Mathf.Lerp(1, 0, _time);

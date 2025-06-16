@@ -19,7 +19,7 @@ namespace Effect.WipeFade
             {
                 progress = x;
                 material.SetFloat("_Progress", progress);
-            }, 1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).SetDelay(delay).OnComplete( () => { action?.Invoke();  });
+            }, 1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).SetDelay(delay).OnComplete(() => { action?.Invoke(); });
         }
 
         /// <summary>

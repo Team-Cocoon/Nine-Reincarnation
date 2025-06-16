@@ -1,4 +1,3 @@
-using DG.Tweening;
 using EventHandler;
 using UnityEngine;
 
@@ -26,7 +25,7 @@ public class CameraTest : MonoBehaviour
 
     void Start()
     {
-        if(isShake)
+        if (isShake)
         {
             CameraEventHandler.Shake(_camera, _duration, _strength, _vibrato, _randomness, _isFadeOut);
         }

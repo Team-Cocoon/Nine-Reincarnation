@@ -18,14 +18,14 @@ public class GroundDetector : MonoBehaviour
         }
     }
 
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground"))
         {
             if (isResetJump) return;
-            if (player.Rb2d.linearVelocityY > 0.1f || player.Rb2d.linearVelocityY < -0.1f) return;
+            if (player.Rb2d.linearVelocityY > 0.05f || player.Rb2d.linearVelocityY < -0.05f) return;
 
+            AudioManger.Instance.PlaySfx(AudioManger.Sfx.Landing);
             player.IsGround = true;
             player.ResetJumpCount();
             isResetJump = true;
@@ -37,7 +37,7 @@ public class GroundDetector : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             _groundCount--;
-            if(_groundCount == 0)
+            if (_groundCount == 0)
             {
                 player.IsGround = false;
                 isResetJump = false;

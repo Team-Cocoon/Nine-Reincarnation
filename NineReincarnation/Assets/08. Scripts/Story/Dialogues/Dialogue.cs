@@ -1,13 +1,12 @@
-using System.Reflection;
-using Febucci.UI;
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue {
+public class Dialogue
+{
 
     [Header("현재 이벤트 ID")]
     public string eventID;
-    
+
     [Header("현재 말하는 캐릭터")]
     public string objectName;
 

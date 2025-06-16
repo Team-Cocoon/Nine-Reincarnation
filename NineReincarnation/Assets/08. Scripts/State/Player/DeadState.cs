@@ -1,6 +1,5 @@
 using Player.Controller;
 using State.PlayerState;
-using UnityEngine;
 
 public class DeadState : IPlayerState
 {
@@ -23,7 +22,7 @@ public class DeadState : IPlayerState
 
     public void Execute()
     {
-        if(!_player.IsDead)
+        if (!_player.IsDead)
         {
             _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._idleState);
         }

@@ -1,6 +1,5 @@
 using System;
 using DG.Tweening;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace EventHandler
@@ -20,7 +19,7 @@ namespace EventHandler
         /// <param name="vibrato"> 진동 횟수 </param>
         /// <param name="randomness"> 무작위성 </param>
         /// <param name="isFadeOut"> 시간이 지날수록 흔들림을 줄일 것인지 </param>
-        public static void Shake(Camera camera, float duration, float strength, int vibrato, float randomness, bool isFadeOut, TweenCallback callbackAction  = null)
+        public static void Shake(Camera camera, float duration, float strength, int vibrato, float randomness, bool isFadeOut, TweenCallback callbackAction = null)
         {
             Tween tween = camera.DOShakePosition(duration, strength, vibrato, randomness, isFadeOut);
             if (callbackAction != null)

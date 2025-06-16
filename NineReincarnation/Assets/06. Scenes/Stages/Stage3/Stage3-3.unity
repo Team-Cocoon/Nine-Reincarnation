@@ -155,23 +155,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8319898939587200427, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
   m_PrefabInstance: {fileID: 1114752804}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &437413790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6447439290839013839, guid: 72fb7cfff70563a4dbab4fd54122e7fd, type: 3}
-  m_PrefabInstance: {fileID: 2075159622526780835}
-  m_PrefabAsset: {fileID: 0}
---- !u!210 &437413794
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437413790}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortAtRoot: 0
 --- !u!1 &591753293
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +767,7 @@ GameObject:
   - component: {fileID: 957792028}
   - component: {fileID: 957792032}
   - component: {fileID: 957792031}
+  - component: {fileID: 957792033}
   m_Layer: 0
   m_Name: Water
   m_TagString: Ground
@@ -1528,6 +1512,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &957792033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957792026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8729cfccb3479b74b8290af52b5910eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1084325817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7020353441586991872, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8319898939587200427, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2712,10 +2708,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6447439290839013839, guid: 72fb7cfff70563a4dbab4fd54122e7fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 437413794}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72fb7cfff70563a4dbab4fd54122e7fd, type: 3}
 --- !u!1001 &2757676672380366249
 PrefabInstance:

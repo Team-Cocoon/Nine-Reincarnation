@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -26,7 +24,7 @@ public class DataManager : MonoBehaviour
     {
         Instance = this;
         Dialogue[] dialogues = _dialogueParser.Parse(_csvFileName);
-        for(int i = 0; i < dialogues.Length; i++)
+        for (int i = 0; i < dialogues.Length; i++)
         {
             _dialogueDict.Add(i + 1, dialogues[i]);
         }

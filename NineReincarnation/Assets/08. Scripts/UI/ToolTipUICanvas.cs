@@ -23,7 +23,7 @@ public class ToolTipUICanvas : MonoBehaviour
     private void Awake()
     {
         UIEventHandler.OnOpenListUpdateToolTipUI += OpenListUpdateToolTip;
-        UIEventHandler.OnOpenLockedProfileToolTipUI+= OpenLockedProfileToolTip;
+        UIEventHandler.OnOpenLockedProfileToolTipUI += OpenLockedProfileToolTip;
         UIEventHandler.OnOpenLockedListToolTipUI += OpenLockedListToolTip;
 
         _toolTipUI.SetActive(false);
@@ -49,8 +49,8 @@ public class ToolTipUICanvas : MonoBehaviour
         canvasGroup.alpha = 1.0f;
 
         canvasGroup.DOFade(0f, _fadeDuration).SetUpdate(true).SetDelay(_delay)
-            .OnComplete(() => 
-            { 
+            .OnComplete(() =>
+            {
                 _isRun = false;
                 _toolTipUI.SetActive(false);
             });

@@ -1,4 +1,3 @@
-using Player.Controller;
 using UnityEngine;
 
 public class WickedGhost : MonoBehaviour, ICollidable
@@ -11,7 +10,7 @@ public class WickedGhost : MonoBehaviour, ICollidable
 
     private void Update()
     {
-        if(_coolTime <= float.Epsilon)
+        if (_coolTime <= float.Epsilon)
         {
             _coolTime = _duration;
             CreateHellFire();
@@ -26,7 +25,7 @@ public class WickedGhost : MonoBehaviour, ICollidable
 
     public void Enter(GameObject go = null)
     {
-        if(LightManager.Instance.State != StatusEffect.VisionLimited)
+        if (LightManager.Instance.State != StatusEffect.VisionLimited)
         {
             LightManager.Instance.State = StatusEffect.VisionLimited;
             LightManager.Instance.OnVisionLimited();

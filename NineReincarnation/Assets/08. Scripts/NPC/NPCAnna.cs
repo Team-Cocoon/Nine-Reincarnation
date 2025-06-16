@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class NPCAnna : NPC, IEvent
 {
     public override void StartAnim(string animName)

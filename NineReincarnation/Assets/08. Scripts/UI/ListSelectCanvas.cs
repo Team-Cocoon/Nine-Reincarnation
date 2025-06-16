@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +19,7 @@ public class ListSelectCanvas : MonoBehaviour
 
     private void Init()
     {
-        for(int i = 0; i < _unlocked.Length; ++i)
+        for (int i = 0; i < _unlocked.Length; ++i)
         {
             if (_unlocked[i])
             {

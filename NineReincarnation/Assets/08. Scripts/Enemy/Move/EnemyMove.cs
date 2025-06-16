@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;  //에디터 전용 네임스페이스
 #endif
 
 namespace Enemy.Move
@@ -20,7 +19,7 @@ namespace Enemy.Move
         [SerializeField] private float _spawnTime = 0.0f;
         [SerializeField] private float _delay = 0.0f;
         [SerializeField] private bool isVisible = false;
-         private bool isStopAnimator = false;
+        [SerializeField] private bool isStopAnimator = false;
 
         [Header("운동 형태 세팅")]
         [SerializeField] private WaypointPathType _pathType = WaypointPathType.LineClosed; //닫힘 => 맨 마지막 웨이포인트와 처음이 이어짐
@@ -74,7 +73,7 @@ namespace Enemy.Move
 
         private void Start()
         {
-            if(isStopAnimator)
+            if (isStopAnimator)
             {
                 GetComponent<Animator>().speed = 0.0f;
             }
@@ -121,11 +120,12 @@ namespace Enemy.Move
         {
             Vector3 center = transform.position - new Vector3(0, _elipseRadiusY, 0);
             _angleRad *= Mathf.Deg2Rad;
-            DOTween.To(() => _angleRad, x => _angleRad = x, 
-                        _angleRad - 2f * _elipseDirection * Mathf.PI, 
+            DOTween.To(() => _angleRad, x => _angleRad = x,
+                        _angleRad - 2f * _elipseDirection * Mathf.PI,
                         _duration)
                    .SetEase(Ease.Linear)
-                   .OnUpdate(() => {
+                   .OnUpdate(() =>
+                   {
                        Vector3 offset = new Vector3(
                            Mathf.Cos(_angleRad) * _elipseRadiusX,
                            Mathf.Sin(_angleRad) * _elipseRadiusY,
@@ -154,7 +154,7 @@ namespace Enemy.Move
 
             for (int i = 1; i < wayPointsCount; ++i)
             {
-                if(i == 1 || i == wayPointsCount - 1) //처음 목적지
+                if (i == 1 || i == wayPointsCount - 1) //처음 목적지
                 {
                     seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(_animaionType));
                 }
@@ -164,10 +164,10 @@ namespace Enemy.Move
                 }
             }
 
-            seq.AppendCallback(() => 
-            { 
+            seq.AppendCallback(() =>
+            {
                 transform.position = _waypoints[0];
-                if(!isVisible)
+                if (!isVisible)
                 {
                     GetComponent<SpriteRenderer>().enabled = false;
                     GetComponent<Collider2D>().enabled = false;
@@ -208,7 +208,7 @@ namespace Enemy.Move
 
             for (int i = 1; i < wayPointsCount; ++i)
             {
-                 seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(_animaionType));
+                seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(_animaionType));
             }
 
             seq.Append(_rb2d.DOMove(_waypoints[0], _duration).SetEase(_animaionType));

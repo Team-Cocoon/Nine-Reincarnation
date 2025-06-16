@@ -2,9 +2,7 @@ using System.Collections;
 using EventHandler;
 using Febucci.UI.Core.Parsing;
 using Player.Controller;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 
 public class Story3 : Story
@@ -52,7 +50,7 @@ public class Story3 : Story
     public override void PlayStory(string eventFunc)
     {
         base.PlayStory(eventFunc);
-        switch(eventFunc) 
+        switch (eventFunc)
         {
             case "Event1-7":
                 EventFinger();
@@ -87,12 +85,13 @@ public class Story3 : Story
             case "Event3-12":
                 // 안나가 오른쪽 밖으로 나가는 기능 추가해야 함
                 AnnaActive(true);
+                UIEventHandler.OnOpenListUpdateToolTipUI();
                 break;
         }
     }
     public override void OnTextEvent(EventMarker eventMarker)
     {
-        switch(eventMarker.name)
+        switch (eventMarker.name)
         {
             case "event1_6":
                 StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_Laughing");
@@ -109,7 +108,7 @@ public class Story3 : Story
     /* NPCAnna, Anna 스왑 */
     private void AnnaActive(bool isActive)
     {
-        if(isActive == true) // Anna로
+        if (isActive == true) // Anna로
         {
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
@@ -123,7 +122,7 @@ public class Story3 : Story
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _npcAnna.transform.position = _annaController.gameObject.transform.position;
-            _npcAnna.GetComponent<SpriteRenderer>().flipX 
+            _npcAnna.GetComponent<SpriteRenderer>().flipX
                 = _annaController.gameObject.GetComponent<SpriteRenderer>().flipX;
         }
     }
@@ -174,7 +173,7 @@ public class Story3 : Story
         yield return new WaitForSeconds(2f);
         StartStory();
     }
-    
+
     private void RepeatLaughing()
     {
         if (_laughingCount < 3)
@@ -236,7 +235,7 @@ public class Story3 : Story
     {
         _dialogue3_8.SetActive(true);
         yield return new WaitUntil(() => _isTextShowed);
-        yield return new WaitUntil(()=> Input.GetMouseButtonDown(0));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _dialogue3_8.SetActive(false);
         StartStory();
     }

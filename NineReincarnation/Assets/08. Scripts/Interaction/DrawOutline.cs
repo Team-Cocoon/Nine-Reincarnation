@@ -1,4 +1,3 @@
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class DrawOutline : MonoBehaviour, IInteractableToggle
@@ -9,13 +8,13 @@ public class DrawOutline : MonoBehaviour, IInteractableToggle
     [SerializeField] private Color _outlineColor;
     [SerializeField] private float _thickness;
 
-    
+
     private Texture _tex;
     private Renderer _render;
     private MaterialPropertyBlock _propBlock;
 
     public bool IsOutline
-    {      
+    {
         get
         {
             return _isOutline;
