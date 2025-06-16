@@ -10,6 +10,10 @@ public class CheckPoint : MonoBehaviour, ICollidable
         AudioManger.Instance.PlaySfx(AudioManger.Sfx.SavePoint);
         player = go.GetComponent<PlayerController>();
         player?.SetCheckPoint(transform.position);
+        if (player != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Exit(GameObject go = null)

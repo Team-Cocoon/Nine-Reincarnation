@@ -1,18 +1,20 @@
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Effect.WipeFade
 {
-    public class WipeFadeEffect
+    public class FadeEffect
     {
         /// <summary>
         /// 서서히 밝아짐 (매개변수는 페이드 전용 머티리얼)
         /// </summary>
-        public static void FadeIn(Material material, float duration, float delay = 0.0f, Action action = null)
+        public static void WipeFadeIn(Material material, float duration, bool isRight, float delay = 0.0f, Action action = null)
         {
             float progress = 0f;
+            material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 1f);
 
             DOTween.To(() => progress, x =>
@@ -25,32 +27,33 @@ namespace Effect.WipeFade
         /// <summary>
         /// 서서히 밝아짐 (매개변수는 그래픽)
         /// </summary>
-        public static void FadeIn(Graphic graphic, float duration)
+        public static void FadeIn(Graphic graphic, float duration, Action action = null)
         {
-            graphic.DOFade(1.0f, duration).SetEase(Ease.Linear).SetUpdate(true);
+            graphic.DOFade(0.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> { action?.Invoke(); } );
         }
 
         /// <summary>
         /// 서서히 어두워짐 (매개변수는 페이드 전용 머티리얼)
         /// </summary>
-        public static void FadeOut(Material material, float duration)
+        public static void WipeFadeOut(Material material, float duration, bool isRight, float delay = 0.0f, Action action = null)
         {
             float progress = 0f;
+            material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 0f);
 
             DOTween.To(() => progress, x =>
             {
                 progress = x;
                 material.SetFloat("_Progress", progress);
-            }, 1.0f, duration).SetEase(Ease.Linear).SetUpdate(true);
+            }, 1.0f, duration).SetEase(Ease.Linear).SetDelay(delay).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
         }
 
         /// <summary>
         /// 서서히 어두워짐 (매개변수는 그래픽)
         /// </summary>
-        public static void FadeOut(Graphic graphic, float duration)
+        public static void FadeOut(Graphic graphic, float duration, Action action)
         {
-            graphic.DOFade(0.0f, duration).SetEase(Ease.Linear).SetUpdate(true);
+            graphic.DOFade(1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
         }
     }
 }

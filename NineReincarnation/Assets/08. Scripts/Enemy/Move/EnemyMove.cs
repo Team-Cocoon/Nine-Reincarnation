@@ -75,6 +75,7 @@ namespace Enemy.Move
         {
             if (isStopAnimator)
             {
+                GetComponent<Animator>().Play(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0f);
                 GetComponent<Animator>().speed = 0.0f;
             }
 
@@ -152,6 +153,7 @@ namespace Enemy.Move
 
             Sequence seq = DOTween.Sequence();
 
+            seq.SetLink(gameObject);
             for (int i = 1; i < wayPointsCount; ++i)
             {
                 if (i == 1 || i == wayPointsCount - 1) //처음 목적지
@@ -175,6 +177,7 @@ namespace Enemy.Move
 
                 if (isStopAnimator)
                 {
+                    GetComponent<Animator>().Play(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0f);
                     GetComponent<Animator>().speed = 0.0f;
                 }
             });
@@ -206,6 +209,7 @@ namespace Enemy.Move
 
             Sequence seq = DOTween.Sequence();
 
+            seq.SetLink(gameObject);
             for (int i = 1; i < wayPointsCount; ++i)
             {
                 seq.Append(_rb2d.DOMove(_waypoints[i], _duration).SetEase(_animaionType));

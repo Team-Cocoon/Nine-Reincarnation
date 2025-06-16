@@ -15,11 +15,19 @@ public class UIEventHandler
 
     public static Action OnCloseMainUI;
 
-    public static Action OnOpenListUpdateToolTipUI;
+    public static Action<Action> OnOpenListUpdateToolTipUI;
 
     public static Action OnOpenLockedListToolTipUI;
 
     public static Action OnOpenLockedProfileToolTipUI;
+
+    public static Action<Action> OnSceneWipeFadeIn;
+
+    public static Action<Action> OnSceneFadeIn;
+
+    public static Action<Action> OnSceneWipeFadeOut;
+
+    public static Action<Action> OnSceneFadeOut;
     public static bool ToggleMainUI()
     {
         if (isOpen)

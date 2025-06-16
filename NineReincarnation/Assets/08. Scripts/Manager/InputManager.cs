@@ -69,6 +69,6 @@ public class InputManager : MonoBehaviour
 
         _action.SetPlayer(playeName, _players[playeName]);
 
-        CameraManager.Instance.ChangeTarget(_players[playeName].GetTransform());
+        //CameraManager.Instance.ChangeTarget(_players[playeName].GetTransform());
     }
 }
