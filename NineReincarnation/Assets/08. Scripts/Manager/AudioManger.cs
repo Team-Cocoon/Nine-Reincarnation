@@ -29,7 +29,8 @@ public class AudioManger : MonoBehaviour
         Jump,
         SavePoint,
         Zoom,
-        Text
+        Text,
+        Click = 10
     }
     public enum LoopSfx
     {
