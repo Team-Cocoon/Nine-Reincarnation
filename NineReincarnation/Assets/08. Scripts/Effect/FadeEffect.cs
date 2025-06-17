@@ -1,6 +1,5 @@
 using System;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ namespace Effect.WipeFade
             material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 1f);
 
+
             DOTween.To(() => progress, x =>
             {
                 progress = x;
@@ -29,7 +29,7 @@ namespace Effect.WipeFade
         /// </summary>
         public static void FadeIn(Graphic graphic, float duration, Action action = null)
         {
-            graphic.DOFade(0.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> { action?.Invoke(); } );
+            graphic.DOFade(0.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
         }
 
         /// <summary>
@@ -41,11 +41,15 @@ namespace Effect.WipeFade
             material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 0f);
 
-            DOTween.To(() => progress, x =>
+            Sequence seq = DOTween.Sequence();
+
+            seq.Join(DOTween.To(() => progress, x =>
             {
                 progress = x;
                 material.SetFloat("_Progress", progress);
-            }, 1.0f, duration).SetEase(Ease.Linear).SetDelay(delay).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
+            }, 1.0f, duration).SetEase(Ease.Linear))
+            .AppendInterval(1.0f)
+            .SetDelay(delay).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
         }
 
         /// <summary>

@@ -192,7 +192,7 @@ namespace Player.Controller
         public void DownJump()
         {
             _oneWayPlatform?.Ignore(_collider);
-            if(_oneWayPlatform != null)
+            if (_oneWayPlatform != null)
             {
                 _isGround = false;
             }

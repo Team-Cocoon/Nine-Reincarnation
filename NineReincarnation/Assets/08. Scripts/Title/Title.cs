@@ -5,7 +5,7 @@ public class Title : MonoBehaviour
 {
     public void StartNextScene()
     {
-        UIEventHandler.OnSceneWipeFadeOut(() => { SceneManager.LoadScene("Story3"); });
+        UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Story3"); });
     }
 
     public void ExitGame()

@@ -1,5 +1,4 @@
 using Player.Controller;
-using State.PlayerState;
 using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
@@ -33,7 +32,7 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Platform"))
+        if (collision.CompareTag("Platform"))
         {
             if (isResetJump) return;
             if (Mathf.Abs(player.Rb2d.linearVelocityY) > float.Epsilon) return;

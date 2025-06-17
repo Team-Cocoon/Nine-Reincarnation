@@ -16,7 +16,7 @@ public class SceneFade : MonoBehaviour
     {
         UIEventHandler.OnSceneWipeFadeIn += WipeFadeIn;
 
-        UIEventHandler.OnSceneFadeIn += FadeOut;
+        UIEventHandler.OnSceneFadeIn += FadeIn;
 
         UIEventHandler.OnSceneWipeFadeOut += WipeFadeOut;
 
@@ -36,11 +36,14 @@ public class SceneFade : MonoBehaviour
     {
         UIEventHandler.OnSceneWipeFadeIn -= WipeFadeIn;
 
-        UIEventHandler.OnSceneFadeIn -= FadeOut;
+        UIEventHandler.OnSceneFadeIn -= FadeIn;
 
         UIEventHandler.OnSceneWipeFadeOut -= WipeFadeOut;
 
         UIEventHandler.OnSceneFadeOut -= FadeOut;
+
+        DOTween.Kill(_image);
+        DOTween.Kill(_image.material);
     }
 
     private void WipeFadeIn(Action action = null)
@@ -49,8 +52,9 @@ public class SceneFade : MonoBehaviour
         _image.material.SetFloat("_Progress", 0.0f);
         FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
-            _fade.SetActive(false);
             action?.Invoke();
+            _image.material.SetFloat("_Progress", 1.0f);
+            _fade.SetActive(false);
         });
     }
 
@@ -58,7 +62,9 @@ public class SceneFade : MonoBehaviour
     {
         _fade.SetActive(true);
         _image.material.SetFloat("_Progress", 1.0f);
-        FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () => { 
+        FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
+        {
+            _image.material.SetFloat("_Progress", 0.0f);
             action?.Invoke();
         });
     }
@@ -66,7 +72,14 @@ public class SceneFade : MonoBehaviour
     private void FadeIn(Action action = null)
     {
         _fade.SetActive(true);
-        FadeEffect.FadeIn(_image, 2.0f, action);
+        _image.material.SetFloat("_Progress", 0.0f);
+        Color color = _image.color;
+        color.a = 1.0f;
+
+        FadeEffect.FadeIn(_image, 2.0f, () =>
+        {
+            action?.Invoke();
+        });
     }
 
     private void FadeOut(Action action = null)
