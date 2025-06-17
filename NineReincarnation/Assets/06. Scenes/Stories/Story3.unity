@@ -811,12 +811,6 @@ MonoBehaviour:
         m_CallState: 2
   onTypewriterStart:
     m_PersistentCalls:
-      m_Calls: []
-  onTextDisappeared:
-    m_PersistentCalls:
-      m_Calls: []
-  onCharacterVisible:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 713582524}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
@@ -830,6 +824,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTextDisappeared:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterVisible:
+    m_PersistentCalls:
+      m_Calls: []
   onMessage:
     m_PersistentCalls:
       m_Calls: []
@@ -932,8 +932,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC548\uB098"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65feaa49b6650234692e83646064dd50, type: 2}
-  m_sharedMaterial: {fileID: 3182817582064239442, guid: 65feaa49b6650234692e83646064dd50, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
+  m_sharedMaterial: {fileID: -691115318593132985, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -998,7 +998,7 @@ MonoBehaviour:
   m_margin: {x: -0.078147426, y: 1.8404672, z: -0.2890783, w: -1.7122269}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &178757103
@@ -1730,8 +1730,8 @@ Transform:
   m_GameObject: {fileID: 610305502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78, y: -4.95, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.71, y: -4.4, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2278,12 +2278,6 @@ MonoBehaviour:
         m_CallState: 2
   onTypewriterStart:
     m_PersistentCalls:
-      m_Calls: []
-  onTextDisappeared:
-    m_PersistentCalls:
-      m_Calls: []
-  onCharacterVisible:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 713582524}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
@@ -2297,6 +2291,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTextDisappeared:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterVisible:
+    m_PersistentCalls:
+      m_Calls: []
   onMessage:
     m_PersistentCalls:
       m_Calls: []
