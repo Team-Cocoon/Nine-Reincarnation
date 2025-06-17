@@ -97,9 +97,6 @@ public class Story3 : Story
     {
         switch (eventMarker.name)
         {
-            case "sound":
-                DialogueManager.Instance.PlayTextSound();
-                break;
             case "event1_6":
                 StoryManager.Instance.eventObj["혼령2"]?.StartAnim("Ghost_Laughing");
                 break;
@@ -259,10 +256,10 @@ public class Story3 : Story
         _mKey.SetActive(true);
         while (true)
         {
-            _mKey.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
-            yield return new WaitForSeconds(0.5f);
-            _mKey.transform.localScale = new Vector3(0.3f, 0.2f, 1f);
-            yield return new WaitForSeconds(0.5f);
+            _mKey.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            yield return new WaitForSeconds(1f);
+            _mKey.transform.localScale = new Vector3(0.5f, 0.4f, 1f);
+            yield return new WaitForSeconds(1f);
         }
     }
     #endregion

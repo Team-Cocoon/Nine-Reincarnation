@@ -7,11 +7,11 @@ namespace Map.Platform
 {
     public class OneWayPlatform : MonoBehaviour, ICollidable
     {
-        private CompositeCollider2D _platformCollider;
+        private Collider2D _platformCollider;
         private PlayerController player;
         private void Awake()
         {
-            _platformCollider = GetComponent<CompositeCollider2D>();
+            _platformCollider = GetComponent<Collider2D>();
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace Map.Platform
 
         private void ResetPlatform(Collider2D collider)
         {
-            DOVirtual.DelayedCall(0.35f, () =>
+            player?.SetContactPlatform(); //접촉한 플랫폼 null로 초기화
+            DOVirtual.DelayedCall(0.2f, () =>
             {
-                player?.SetContactPlatform(); //접촉한 플랫폼 null로 초기화
                 Physics2D.IgnoreCollision(_platformCollider, collider, false);
             });
         }

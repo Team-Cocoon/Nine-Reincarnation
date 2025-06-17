@@ -1,4 +1,5 @@
 using Player.Controller;
+using State.PlayerState;
 using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
@@ -7,7 +8,14 @@ public class GroundDetector : MonoBehaviour
     [SerializeField] private PlayerController player;
 
     private bool isResetJump = false;
+    private Collider2D prevCollider;
     private int _groundCount = 0;
+
+    private void Init()
+    {
+        player.ResetJumpCount();
+        isResetJump = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,25 +23,31 @@ public class GroundDetector : MonoBehaviour
         {
             _groundCount++;
             player.IsGround = true;
+            Init();
+        }
+        if (collision.CompareTag("Platform"))
+        {
+            _groundCount++;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if(collision.CompareTag("Platform"))
         {
             if (isResetJump) return;
-            if (player.Rb2d.linearVelocityY > 0.05f || player.Rb2d.linearVelocityY < -0.05f) return;
+            if (Mathf.Abs(player.Rb2d.linearVelocityY) > float.Epsilon) return;
 
             player.IsGround = true;
-            player.ResetJumpCount();
-            isResetJump = true;
+            Init();
         }
+
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground") || collision.CompareTag("Platform"))
         {
             _groundCount--;
             if (_groundCount == 0)

@@ -177,7 +177,7 @@ public class RespawnThread : Thread, ICollidable
             _initGravity = rb.gravityScale;
             _initDamping = rb.linearDamping;
 
-            rb.gravityScale = 0f;
+            //rb.gravityScale = 0f;
             rb.linearDamping = _damping;
         }
         if (_disappearCoroutine == null)

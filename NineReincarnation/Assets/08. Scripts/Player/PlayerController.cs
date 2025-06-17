@@ -43,7 +43,10 @@ namespace Player.Controller
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
         private bool _isBusy;
+        private PlayerAnimationState _currentState;
 
+        public int JumpCount => _jumpCount;
+        public PlayerAnimationState CurrentState => _currentState;
         public Rigidbody2D Rb2d => _rb2d;
 
         public bool IsDead => _isDead;
@@ -145,6 +148,7 @@ namespace Player.Controller
         public void SetStop()
         {
             _direction = PlayerDirection.Stop;
+            _rb2d.linearVelocityX = 0.0f;
         }
 
         /// <summary>
@@ -235,7 +239,8 @@ namespace Player.Controller
 
         public void ChangeAnimation(IState state)
         {
-            switch ((state as IPlayerState).AnimationState)
+            _currentState = (state as IPlayerState).AnimationState;
+            switch (_currentState)
             {
                 case PlayerAnimationState.Idle:
                     _animator.SetTrigger("isIdle");
