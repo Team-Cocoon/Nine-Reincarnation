@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class UIEventHandler
 {
-    public static bool isOpen = false;
+    public static bool isMainUIOpen = false;
+    public static bool isSettingUIOpen = false;
 
     public static Action OnOpenListSeclectUI;
 
@@ -28,21 +29,45 @@ public class UIEventHandler
     public static Action<Action> OnSceneWipeFadeOut;
 
     public static Action<Action> OnSceneFadeOut;
+
+    public static Action OnOpenSettingUI;
+
+    public static Action OnCloseSettingUI;
+
+
     public static bool ToggleMainUI()
     {
-        if (isOpen)
+        if (isMainUIOpen)
         {
             Time.timeScale = 1.0f;
             OnCloseMainUI();
-            isOpen = false;
+            isMainUIOpen = false;
         }
         else
         {
             Time.timeScale = 0.0f;
             OnOpenListSeclectUI();
-            isOpen = true;
+            isMainUIOpen = true;
         }
 
-        return isOpen;
+        return isMainUIOpen;
+    }
+
+    public static bool ToggleSettingUI()
+    {
+        if (isSettingUIOpen)
+        {
+            Time.timeScale = 1.0f;
+            OnCloseSettingUI();
+            isSettingUIOpen = false;
+        }
+        else
+        {
+            Time.timeScale = 0.0f;
+            OnOpenSettingUI();
+            isSettingUIOpen = true;
+        }
+
+        return isSettingUIOpen;
     }
 }

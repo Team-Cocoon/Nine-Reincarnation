@@ -10,7 +10,6 @@ public class SceneFade : MonoBehaviour
     [SerializeField] private GameObject _fade;
     [SerializeField] private Image _image;
     [SerializeField] private float _duration;
-    [SerializeField] private bool isStart;
 
     private void Awake()
     {
@@ -22,14 +21,13 @@ public class SceneFade : MonoBehaviour
 
         UIEventHandler.OnSceneFadeOut += FadeOut;
 
+        Material instancedMat = Instantiate(_image.material);
+        _image.material = instancedMat;
     }
 
     private void Start()
     {
-        if (isStart)
-        {
-            WipeFadeIn();
-        }
+
     }
 
     private void OnDestroy()
@@ -41,9 +39,6 @@ public class SceneFade : MonoBehaviour
         UIEventHandler.OnSceneWipeFadeOut -= WipeFadeOut;
 
         UIEventHandler.OnSceneFadeOut -= FadeOut;
-
-        DOTween.Kill(_image);
-        DOTween.Kill(_image.material);
     }
 
     private void WipeFadeIn(Action action = null)
@@ -53,7 +48,6 @@ public class SceneFade : MonoBehaviour
         FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
             action?.Invoke();
-            _image.material.SetFloat("_Progress", 1.0f);
             _fade.SetActive(false);
         });
     }
@@ -64,7 +58,6 @@ public class SceneFade : MonoBehaviour
         _image.material.SetFloat("_Progress", 1.0f);
         FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
         {
-            _image.material.SetFloat("_Progress", 0.0f);
             action?.Invoke();
         });
     }

@@ -49,7 +49,7 @@ namespace Effect.WipeFade
                 material.SetFloat("_Progress", progress);
             }, 1.0f, duration).SetEase(Ease.Linear))
             .AppendInterval(1.0f)
-            .SetDelay(delay).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
+            .SetDelay(delay).SetUpdate(true).OnComplete(() => { DOTween.KillAll(); action?.Invoke(); });
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Effect.WipeFade
         /// </summary>
         public static void FadeOut(Graphic graphic, float duration, Action action)
         {
-            graphic.DOFade(1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => { action?.Invoke(); });
+            graphic.DOFade(1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => { DOTween.KillAll(); action?.Invoke(); });
         }
     }
 }

@@ -1,24 +1,25 @@
+using System.Xml.Linq;
 using UnityEngine;
 
 public class AudioManger : MonoBehaviour
 {
     public static AudioManger Instance { get; private set; }
 
+    [Header("#Volmue")]
+    public SoundVolumeSO volumeData;
+
     [Header("#BGM")]
     public AudioClip BgmClip;
-    public float BgmVolume;
     private AudioSource _bgmPlayer;
 
     [Header("#SFX")]
     public AudioClip[] SfxClips;
-    public float SfxVolume;
     public int Chnnels;
     private AudioSource[] _sfxPlayers;
     private int _channelIndex;
 
     [Header("#LoopingSFX")]
     public AudioClip[] LoopingSfxClips;
-    public float LoopingSfxVolume;
     public int LoopingChnnels;
     private AudioSource[] _loopingSfxPlayers;
     private int _loopingChannelIndex;
@@ -40,7 +41,19 @@ public class AudioManger : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SoundEventHandler.OnUpdateSfxVolmue += UpdateSfxVolmue;
+        SoundEventHandler.OnUpdateBgmVolmue += UpdateBgmVolmue;
+        SoundEventHandler.OnReturnSfxVolmue += volumeData.SfxVolume;
+        SoundEventHandler.OnReturnBgmVolmue += volumeData.BgmVolume;
         Init();
+    }
+
+    private void OnDestroy()
+    {
+        SoundEventHandler.OnUpdateSfxVolmue -= UpdateSfxVolmue;
+        SoundEventHandler.OnUpdateBgmVolmue -= UpdateBgmVolmue;
+        SoundEventHandler.OnReturnSfxVolmue -= volumeData.SfxVolume;
+        SoundEventHandler.OnReturnBgmVolmue -= volumeData.BgmVolume;
     }
 
     private void Start()
@@ -56,7 +69,7 @@ public class AudioManger : MonoBehaviour
         _bgmPlayer = bgmObject.AddComponent<AudioSource>();
         _bgmPlayer.playOnAwake = false;
         _bgmPlayer.loop = true;
-        _bgmPlayer.volume = BgmVolume;
+        _bgmPlayer.volume = volumeData.BgmVolume;
         _bgmPlayer.clip = BgmClip;
 
         //효과음 플레이어 초기화
@@ -68,7 +81,7 @@ public class AudioManger : MonoBehaviour
         {
             _sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
             _sfxPlayers[index].playOnAwake = false;
-            _sfxPlayers[index].volume = SfxVolume;
+            _sfxPlayers[index].volume = volumeData.SfxVolume;
         }
 
         //반복 재생이 필요한 효과음 플레이어 초기화
@@ -80,10 +93,29 @@ public class AudioManger : MonoBehaviour
         {
             _loopingSfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
             _loopingSfxPlayers[index].playOnAwake = false;
-            _loopingSfxPlayers[index].volume = SfxVolume;
+            _loopingSfxPlayers[index].volume = volumeData.SfxVolume;
             _loopingSfxPlayers[index].loop = true;
         }
     }
+
+    private void UpdateSfxVolmue(float volume)
+    {
+        for (int index = 0; index < _sfxPlayers.Length; index++)
+        {
+            _sfxPlayers[index].volume = volume;
+        }
+
+        for (int index = 0; index < _loopingSfxPlayers.Length; index++)
+        {
+            _loopingSfxPlayers[index].volume = volume;
+        }
+    }
+
+    private void UpdateBgmVolmue(float volume)
+    {
+        _bgmPlayer.volume = volume;
+    }
+
 
     public void PlayBgm(bool isPlay)
     {

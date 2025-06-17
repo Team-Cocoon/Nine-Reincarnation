@@ -5,13 +5,13 @@ public class Title : MonoBehaviour
 {
     public void StartNextScene()
     {
-        UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Story3"); });
         AudioManger.Instance.PlaySfx(AudioManger.Sfx.Click);
+        UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Story3"); });
     }
 
     public void ExitGame()
     {
-        Application.Quit();
         AudioManger.Instance.PlaySfx(AudioManger.Sfx.Click);
+        Application.Quit();
     }
 }

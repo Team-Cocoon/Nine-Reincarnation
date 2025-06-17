@@ -33,6 +33,7 @@ namespace Player.Controller
         [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
+        [SerializeField] private bool _isBusy = false;
 
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
@@ -42,7 +43,6 @@ namespace Player.Controller
         private SpriteRenderer _spriteRenderer; //플레이어 이미지
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
-        private bool _isBusy;
         private PlayerAnimationState _currentState;
 
         public int JumpCount => _jumpCount;
@@ -166,6 +166,10 @@ namespace Player.Controller
         private void Move()
         {
             if (_isDead) return;
+            if (_isBusy)
+            {
+                SetStop();
+            }
             _rb2d.linearVelocityX = (int)_direction * _speed;
         }
 
