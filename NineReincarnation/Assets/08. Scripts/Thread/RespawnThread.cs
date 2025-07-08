@@ -98,8 +98,8 @@ public class RespawnThread : Thread, ICollidable
         if (rb == null)
             return;
 
-        rb.gravityScale = 0f;
-        rb.linearDamping = _damping;
+        //rb.gravityScale = 0f;
+        //rb.linearDamping = _damping;
     }
     private void AppearThread()
     {
@@ -174,11 +174,11 @@ public class RespawnThread : Thread, ICollidable
             _playersOnRope.Add(player);
 
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
-            _initGravity = rb.gravityScale;
-            _initDamping = rb.linearDamping;
+            //_initGravity = rb.gravityScale;
+           // _initDamping = rb.linearDamping;
 
             //rb.gravityScale = 0f;
-            rb.linearDamping = _damping;
+            //rb.linearDamping = _damping;
         }
         if (_disappearCoroutine == null)
         {
@@ -195,8 +195,8 @@ public class RespawnThread : Thread, ICollidable
             _playersOnRope.Remove(player);
 
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
-            rb.gravityScale = _initGravity;
-            rb.linearDamping = _initDamping;
+            //rb.gravityScale = _initGravity;
+            //rb.linearDamping = _initDamping;
         }
     }
 }

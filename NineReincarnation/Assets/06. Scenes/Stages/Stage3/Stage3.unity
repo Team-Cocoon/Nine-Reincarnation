@@ -2426,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: _jumpForce
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2153693473223386151, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Size.y
@@ -2459,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 4261131757496409152, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Offset.y
       value: -0.5216682
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221455579449346538, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalPosition.x
