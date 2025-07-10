@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 230192775}
   - component: {fileID: 230192779}
   - component: {fileID: 230192778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1106,9 +1106,9 @@ GameObject:
   - component: {fileID: 231355448}
   - component: {fileID: 231355447}
   - component: {fileID: 231355446}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform1
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1707,9 +1707,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 380231457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2274,9 +2274,9 @@ GameObject:
   - component: {fileID: 706154660}
   - component: {fileID: 706154663}
   - component: {fileID: 706154662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2639,7 +2639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4707294657651084786, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Slope
       objectReference: {fileID: 0}
     - target: {fileID: 8319898939587200427, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_LocalPosition.x

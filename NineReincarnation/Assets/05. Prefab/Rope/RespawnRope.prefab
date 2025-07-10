@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 7020353441586991872}
   - component: {fileID: 4111604346479018761}
   - component: {fileID: 8917633105700320164}
-  m_Layer: 0
+  - component: {fileID: 7655470255879235254}
+  - component: {fileID: 5413446610664339497}
+  m_Layer: 7
   m_Name: RespawnRope
-  m_TagString: Ground
+  m_TagString: Slope
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,7 +178,7 @@ EdgeCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -213,6 +215,37 @@ MonoBehaviour:
   _disappearTime: 5
   _respawnTime: 3.5
   _damping: 5
+--- !u!251 &7655470255879235254
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707294657651084786}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!114 &5413446610664339497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707294657651084786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9ad82c20c8c324b83db145eae3c771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6390715635798646408
 GameObject:
   m_ObjectHideFlags: 0

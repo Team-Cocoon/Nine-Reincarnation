@@ -34,6 +34,7 @@ namespace Player.Controller
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isBusy = false;
+        [SerializeField] private bool _isSlope = false;
 
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
@@ -44,6 +45,7 @@ namespace Player.Controller
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
         private PlayerAnimationState _currentState;
+        private Vector2 _slopeDir = Vector2.right; //경사면 이동을 위한 벡터
 
         public int JumpCount => _jumpCount;
         public PlayerAnimationState CurrentState => _currentState;
@@ -88,6 +90,18 @@ namespace Player.Controller
         {
             get => _isBusy;
             set => _isBusy = value;
+        }
+
+        public bool IsSlope
+        {
+            get => _isSlope;
+            set => _isSlope = value;
+        }
+
+        public Vector2 SlopeDir
+        {
+            get => _slopeDir;
+            set => _slopeDir = value;
         }
 
         private void Awake()
@@ -170,7 +184,15 @@ namespace Player.Controller
             {
                 SetStop();
             }
-            _rb2d.linearVelocityX = (int)_direction * _speed;
+
+            if (IsSlope)
+            {
+                _rb2d.linearVelocity = (int)_direction * _speed * _slopeDir;
+            }
+            else
+            {
+                _rb2d.linearVelocityX = (int)_direction * _speed;
+            }
         }
 
         /// <summary>
@@ -179,6 +201,10 @@ namespace Player.Controller
         public void Jump()
         {
             if (_jumpCount >= 2) return;
+
+            _isSlope = false;
+            _isGround = false;
+            _slopeDir = Vector2.right;
 
             _rb2d.linearVelocityY = 0;
 
