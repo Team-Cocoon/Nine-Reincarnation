@@ -18,6 +18,8 @@ public class IdleState : IPlayerState
     public void Enter()
     {
         _animationState = PlayerAnimationState.Idle;
+        _player.Rb2d.bodyType = UnityEngine.RigidbodyType2D.Kinematic;
+        _player.Rb2d.linearVelocity = UnityEngine.Vector2.zero;
     }
 
     public void Execute()
@@ -41,6 +43,6 @@ public class IdleState : IPlayerState
 
     public void Exit()
     {
-
+        _player.Rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
     }
 }

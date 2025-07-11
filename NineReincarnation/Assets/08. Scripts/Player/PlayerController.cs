@@ -4,6 +4,7 @@ using State;
 using State.PlayerState;
 using State.StateMachine.PlayerStateMachine;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public interface IObjectData
 {
@@ -22,7 +23,6 @@ namespace Player.Controller
         Stop = 0,
         Left = -1
     }
-
     public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
@@ -106,11 +106,11 @@ namespace Player.Controller
 
         private void Awake()
         {
+            _rb2d = GetComponent<Rigidbody2D>();
             _collider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playersStateMachine = new PlayerStateMachine(this);
             _animator = GetComponent<Animator>();
-            _rb2d = GetComponent<Rigidbody2D>();
 
             _playersStateMachine.Initialize(_playersStateMachine._idleState);
             _playersStateMachine.stateChanged += ChangeAnimation;
@@ -202,12 +202,11 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
-            _isSlope = false;
             _isGround = false;
-            _slopeDir = Vector2.right;
+            _isSlope = false;
+            _rb2d.linearVelocityY = 0.0f;
 
-            _rb2d.linearVelocityY = 0;
-
+            _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
             AudioManger.Instance.PlaySfx(AudioManger.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
@@ -218,10 +217,11 @@ namespace Player.Controller
         /// </summary>
         public void DownJump()
         {
-            _oneWayPlatform?.Ignore(_collider);
             if (_oneWayPlatform != null)
             {
-                _isGround = false;
+                _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
+                _oneWayPlatform.Ignore(_collider);
+                //_isGround = false;
             }
         }
         #endregion

@@ -1,98 +1,126 @@
+using System.Collections.Generic;
 using Player.Controller;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
+public enum DetectorState
+{
+    None,
+    Ground,
+    Slope
+}
+
 public class GroundDetector : MonoBehaviour
 {
     [Header("--- 플레이어 컨트롤러 ---")]
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerController _player;
 
-    private int _groundCount = 0;
+    private DetectorState _detectorState;
+    private LayerMask _groundMask;
+    private LayerMask _slopeMask;
+    private Vector2 _slopeDir = Vector2.right;
+    private ContactFilter2D _filter = new ContactFilter2D();
 
+    private void Awake()
+    {
+        _groundMask = LayerMask.GetMask("Ground");
+        _slopeMask = LayerMask.GetMask("Slope");
+    }
 
     private void Init()
     {
-        player.IsGround = true;
-        _groundCount++;
-        player.ResetJumpCount();
+        _player.IsGround = true;
+        _player.ResetJumpCount();
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Slope"))
-        {
-            if (player.Rb2d.linearVelocityY < 0.1f)
-            {
-                player.IsSlope = true;
-                Init();
-            }
-        }
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        bool isGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
+        bool isSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
+
+        if (isGround)
         {
-            if (player.IsGround)
+            if (_detectorState != DetectorState.Ground)
+            {
+                _player.SlopeDir = Vector2.right;
+                _player.IsSlope = false;
+                _detectorState = DetectorState.Ground;
+            }
+
+            if (_player.IsGround)
             {
                 return;
             }
 
-            if (Mathf.Abs(player.Rb2d.linearVelocityY) <= 0.1f)
+            Debug.Log(_player.Rb2d.linearVelocityY);
+            if (Mathf.Abs(_player.Rb2d.linearVelocityY) <= 0.001f)
             {
-                player.IsGround = true;
+                _player.SlopeDir = Vector2.right;
+                Debug.Log("땅이라 + 1");
                 Init();
             }
         }
-        else if (collision.CompareTag("Slope"))
+        
+        if (isSlope)
         {
-            if (player.IsSlope)
+            _player.IsSlope = GetSlopeVector();
+            _player.SlopeDir = _slopeDir;
+
+            if (_detectorState == DetectorState.Ground)
             {
-                CalculateSlopeVector();
+                _player.IsSlope = false;
                 return;
             }
 
-            if (player.Rb2d.linearVelocityY <= 0.1f)
+            if (_detectorState == DetectorState.Slope)
             {
-                player.IsSlope = true;
+                return;
+            }
+
+            if (_player.IsSlope)
+            {
+                _detectorState = DetectorState.Slope;
+                Debug.Log("실이라 + 1");
                 Init();
             }
         }
     }
 
-    private void CalculateSlopeVector() //경사진 곳의 경사 벡터를 구함
+    bool GetSlopeVector() //경사진 곳의 경사 벡터를 구함
     {
         Vector2 origin = transform.position;
         float distance = 1.0f;
-        LayerMask groundMask = LayerMask.GetMask("Ground");
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, distance, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, distance, _slopeMask);
 
         if (hit.collider != null)
         {
             Vector2 groundNormal = hit.normal;
-            player.SlopeDir = -Vector2.Perpendicular(groundNormal); //반시게 방향으로 90도 회전
-            Debug.DrawRay(hit.point, player.SlopeDir, Color.green, 1f);
+            Debug.DrawRay(hit.point, -Vector2.Perpendicular(groundNormal), Color.green, 1f);
+            _slopeDir = - Vector2.Perpendicular(groundNormal); //반시게 방향으로 90도 회전
+            return true;
+        }
+        else
+        {
+            _slopeDir = Vector2.right;
+            return false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground") || collision.CompareTag("Slope"))
-        {
-            if (collision.CompareTag("Slope"))
-            {
-                player.IsSlope = false;
-                player.SlopeDir = Vector2.right;
-            }
+        bool isGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
+        bool isSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
 
-            _groundCount--;
-            if (_groundCount <= 0)
-            {
-                _groundCount = 0;
-                player.IsGround = false;
-            }
+        if (isGround || isSlope)
+        {
+            _detectorState = DetectorState.None;
+
+            List<Collider2D> results = new List<Collider2D>();
+            int count = collision.Overlap(_filter, results);
+
+            _player.IsGround = false;
         }
     }
 }
