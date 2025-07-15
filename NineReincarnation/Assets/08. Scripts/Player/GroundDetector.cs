@@ -1,26 +1,25 @@
 using System.Collections.Generic;
 using Player.Controller;
+using State.PlayerState;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.UI.Image;
-
-public enum DetectorState
-{
-    None,
-    Ground,
-    Slope
-}
 
 public class GroundDetector : MonoBehaviour
 {
     [Header("--- 플레이어 컨트롤러 ---")]
     [SerializeField] private PlayerController _player;
 
-    private DetectorState _detectorState;
+
+    private bool _isSlope = false;
     private LayerMask _groundMask;
     private LayerMask _slopeMask;
     private Vector2 _slopeDir = Vector2.right;
     private ContactFilter2D _filter = new ContactFilter2D();
+
+    private bool _detectedGround;
+    private bool _detectedSlope;
 
     private void Awake()
     {
@@ -30,61 +29,78 @@ public class GroundDetector : MonoBehaviour
 
     private void Init()
     {
+        _player.IsJump = false;
         _player.IsGround = true;
         _player.ResetJumpCount();
     }
 
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnSlope()
     {
-        bool isGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
-        bool isSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
-
-        if (isGround)
+        if (_player.IsJump)
         {
-            if (_detectorState != DetectorState.Ground)
-            {
-                _player.SlopeDir = Vector2.right;
-                _player.IsSlope = false;
-                _detectorState = DetectorState.Ground;
-            }
-
-            if (_player.IsGround)
-            {
-                return;
-            }
-
+            Debug.Log("1번 조건");
             Debug.Log(_player.Rb2d.linearVelocityY);
-            if (Mathf.Abs(_player.Rb2d.linearVelocityY) <= 0.001f)
+
+            //착지 시
+            if (_player.Rb2d.linearVelocityY <= float.Epsilon)
             {
-                _player.SlopeDir = Vector2.right;
-                Debug.Log("땅이라 + 1");
                 Init();
+                _player.IsSlope = true;
+                _player.SlopeDir = _slopeDir;
             }
         }
-        
-        if (isSlope)
+        //점프 중이 아니라면
+        else
         {
-            _player.IsSlope = GetSlopeVector();
             _player.SlopeDir = _slopeDir;
+            Init();
+            _player.IsSlope = true;
+        }
+    }
 
-            if (_detectorState == DetectorState.Ground)
+    private void OnGround()
+    {
+        //땅을 감지했고, 착지 or 가만히 있다면
+        if (Mathf.Abs(_player.Rb2d.linearVelocityY) <= 0.01f)
+        {
+            Init();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        _detectedGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
+        _detectedSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
+
+        //밑에 경사면 감지
+        if (_detectedSlope)
+        {
+            //경사면이 있으면 경사면이 ground보다 우선순위
+            _isSlope = GetSlopeVector();
+
+            if (_isSlope) //레이캐스트까지 충돌 판정 났다면
             {
+                OnSlope();
+                return;
+            }
+            else if (_detectedGround)
+            {
+                _player.Rb2d.linearVelocityY = 0.0f;
                 _player.IsSlope = false;
-                return;
+                OnGround();
             }
-
-            if (_detectorState == DetectorState.Slope)
+        }
+        else
+        {
+            if (_player.IsSlope == true)
             {
-                return;
+                _player.Rb2d.linearVelocityY = 0.0f;
             }
+            _player.IsSlope = false;
+        }
 
-            if (_player.IsSlope)
-            {
-                _detectorState = DetectorState.Slope;
-                Debug.Log("실이라 + 1");
-                Init();
-            }
+        if (_detectedGround)
+        {
+            OnGround();
         }
     }
 
@@ -93,12 +109,13 @@ public class GroundDetector : MonoBehaviour
         Vector2 origin = transform.position;
         float distance = 1.0f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, distance, _slopeMask);
+        Debug.DrawRay(origin, Vector2.down * distance, Color.red, 1f);
 
         if (hit.collider != null)
         {
             Vector2 groundNormal = hit.normal;
             Debug.DrawRay(hit.point, -Vector2.Perpendicular(groundNormal), Color.green, 1f);
-            _slopeDir = - Vector2.Perpendicular(groundNormal); //반시게 방향으로 90도 회전
+            _slopeDir = -Vector2.Perpendicular(groundNormal); //반시게 방향으로 90도 회전
             return true;
         }
         else
@@ -110,16 +127,11 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        bool isGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
-        bool isSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
+        _detectedGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
+        _detectedSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
 
-        if (isGround || isSlope)
+        if (_detectedGround || _detectedSlope)
         {
-            _detectorState = DetectorState.None;
-
-            List<Collider2D> results = new List<Collider2D>();
-            int count = collision.Overlap(_filter, results);
-
             _player.IsGround = false;
         }
     }

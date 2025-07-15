@@ -35,6 +35,7 @@ namespace Player.Controller
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isBusy = false;
         [SerializeField] private bool _isSlope = false;
+        [SerializeField] private bool _isJump = false;
 
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
@@ -97,7 +98,11 @@ namespace Player.Controller
             get => _isSlope;
             set => _isSlope = value;
         }
-
+        public bool IsJump
+        {
+            get => _isJump;
+            set => _isJump = value;
+        }
         public Vector2 SlopeDir
         {
             get => _slopeDir;
@@ -201,12 +206,12 @@ namespace Player.Controller
         public void Jump()
         {
             if (_jumpCount >= 2) return;
+            
+            IsSlope = false;
+            IsJump = true;
 
-            _isGround = false;
-            _isSlope = false;
             _rb2d.linearVelocityY = 0.0f;
 
-            _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
             AudioManger.Instance.PlaySfx(AudioManger.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;

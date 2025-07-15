@@ -2436,6 +2436,10 @@ PrefabInstance:
       propertyPath: _checkPoint.x
       value: -13
       objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _checkPoint.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2153693473223386151, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Size.y
       value: 0.6735689
@@ -2462,15 +2466,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4261131757496409152, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Size.y
-      value: 0.09
+      value: 0.051392257
       objectReference: {fileID: 0}
     - target: {fileID: 4261131757496409152, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Offset.x
-      value: 0.04
+      value: 0.040000007
       objectReference: {fileID: 0}
     - target: {fileID: 4261131757496409152, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Offset.y
-      value: -0.5
+      value: -0.5193038
       objectReference: {fileID: 0}
     - target: {fileID: 5221455579449346538, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_GravityScale
