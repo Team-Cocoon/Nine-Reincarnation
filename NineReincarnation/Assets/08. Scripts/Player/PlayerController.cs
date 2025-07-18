@@ -35,7 +35,8 @@ namespace Player.Controller
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isBusy = false;
         [SerializeField] private bool _isSlope = false;
-        [SerializeField] private bool _isJump = false;
+        [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
+        [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
 
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
@@ -98,11 +99,6 @@ namespace Player.Controller
             get => _isSlope;
             set => _isSlope = value;
         }
-        public bool IsJump
-        {
-            get => _isJump;
-            set => _isJump = value;
-        }
         public Vector2 SlopeDir
         {
             get => _slopeDir;
@@ -112,6 +108,7 @@ namespace Player.Controller
         private void Awake()
         {
             _rb2d = GetComponent<Rigidbody2D>();
+            IdleEnter();
             _collider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playersStateMachine = new PlayerStateMachine(this);
@@ -180,6 +177,14 @@ namespace Player.Controller
         #endregion
 
         #region 움직임 관련 부분
+        public void IdleEnter()
+        {
+            _rb2d.sharedMaterial = _idlePhysicsMaterial;
+        }
+        public void IdleExit()
+        {
+            _rb2d.sharedMaterial = _defaultPhysicsMaterial;
+        }
 
         //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
@@ -208,7 +213,7 @@ namespace Player.Controller
             if (_jumpCount >= 2) return;
             
             IsSlope = false;
-            IsJump = true;
+            IsGround = false;
 
             _rb2d.linearVelocityY = 0.0f;
 

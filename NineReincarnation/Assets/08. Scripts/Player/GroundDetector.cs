@@ -29,25 +29,27 @@ public class GroundDetector : MonoBehaviour
 
     private void Init()
     {
-        _player.IsJump = false;
         _player.IsGround = true;
         _player.ResetJumpCount();
     }
 
     private void OnSlope()
     {
-        if (_player.IsJump)
+        if (_player.CurrentState == PlayerAnimationState.Jump)
         {
+            //점프 시작 시점은 제거하기 위해서
+            if(_player.Rb2d.linearVelocityY >= 2.0f)
+            {
+                return;
+            }
+
             Debug.Log("1번 조건");
             Debug.Log(_player.Rb2d.linearVelocityY);
 
-            //착지 시
-            if (_player.Rb2d.linearVelocityY <= float.Epsilon)
-            {
-                Init();
-                _player.IsSlope = true;
-                _player.SlopeDir = _slopeDir;
-            }
+
+            Init();
+            _player.IsSlope = true;
+            _player.SlopeDir = _slopeDir;
         }
         //점프 중이 아니라면
         else
