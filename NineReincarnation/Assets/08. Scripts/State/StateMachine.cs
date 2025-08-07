@@ -1,5 +1,6 @@
 using System;
-namespace State.StateMachine
+using State;
+namespace StateMachine
 {
     public class StateMachine
     {

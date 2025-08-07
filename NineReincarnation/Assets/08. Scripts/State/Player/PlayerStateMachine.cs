@@ -1,6 +1,6 @@
 using Player.Controller;
 
-namespace State.StateMachine.PlayerStateMachine
+namespace StateMachine.PlayerStateMachine
 {
     public class PlayerStateMachine : StateMachine
     {
