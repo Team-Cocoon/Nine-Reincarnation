@@ -1256,8 +1256,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 9, y: 5.3}
       - {x: -9, y: 5.3}
-      - {x: -9, y: -5}
-      - {x: 9, y: -5}
+      - {x: -9, y: -4.8}
+      - {x: 9, y: -4.8}
   m_UseDelaunayMesh: 0
 --- !u!4 &314828552
 Transform:

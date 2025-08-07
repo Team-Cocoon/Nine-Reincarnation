@@ -142,11 +142,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: 16, y: 11}
-        - {x: -7, y: 11}
-        - {x: -7, y: 6}
-        - {x: -7, y: 0}
-        - {x: -7, y: -6}
-        - {x: 1, y: -16}
+        - {x: -5, y: 11}
+        - {x: -16, y: -16}
         - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
@@ -219,12 +216,9 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: 16, y: 11}
-        - {x: -7, y: 11}
-        - {x: -7, y: 6}
-        - {x: -7, y: 0}
-        - {x: -7, y: -6}
-        - {x: 1, y: -16}
-        - {x: 16, y: -16}
+        - {x: -6, y: 11}
+        - {x: -6, y: -3}
+        - {x: 16, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: d196c990755692440800000000000000
@@ -320,13 +314,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 7, y: -6}
-        - {x: 7, y: 0}
-        - {x: 7, y: 6}
-        - {x: 7, y: 11}
+      - - {x: 4, y: 11}
         - {x: -16, y: 11}
         - {x: -16, y: -16}
-        - {x: 0, y: -16}
+        - {x: 13, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 954cc673c7c72a744b01e7bb798691ad
@@ -349,8 +340,8 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: -16, y: -16}
-        - {x: 16, y: -16}
+      - - {x: -16, y: -4}
+        - {x: 16, y: -4}
         - {x: 16, y: 11}
         - {x: -16, y: 11}
       tessellationDetail: 0
@@ -375,13 +366,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 7, y: -6}
-        - {x: 7, y: 0}
-        - {x: 7, y: 6}
-        - {x: 7, y: 11}
+      - - {x: 7, y: 11}
         - {x: -16, y: 11}
-        - {x: -16, y: -16}
-        - {x: 0, y: -16}
+        - {x: -16, y: -3}
+        - {x: 7, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: b3f6bbf5dfb62dc418981bd4f70ad984
@@ -523,8 +511,8 @@ TextureImporter:
       name: Stage3_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 0
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -532,11 +520,73 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16, y: 11}
+        - {x: -7, y: 11}
+        - {x: -7, y: 6}
+        - {x: -7, y: 0}
+        - {x: -7, y: -6}
+        - {x: 1, y: -16}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: e6ef174f6293a2f4287a71f711017452
       internalID: 660757211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stage3_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 16, y: 11}
+        - {x: -16, y: 11}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3290f42d32758f4a9ca4d9190174af4
+      internalID: -1029039489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stage3_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 7, y: -6}
+        - {x: 7, y: 0}
+        - {x: 7, y: 6}
+        - {x: 7, y: 11}
+        - {x: -16, y: 11}
+        - {x: -16, y: -16}
+        - {x: 0, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d087d898bf9658d4ebecddb215e69c55
+      internalID: -207132331
       vertices: []
       indices: 
       edges: []
@@ -571,6 +621,8 @@ TextureImporter:
       KakaoTalk_20250531_223728686_9: -1974484832
       Stage3_0: -301860374
       Stage3_1: 660757211
+      Stage3_2: -1029039489
+      Stage3_3: -207132331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

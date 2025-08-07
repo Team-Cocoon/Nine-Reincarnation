@@ -25,7 +25,7 @@ public class TitleUI : MonoBehaviour
 
     private void GameEvent_Start()
     {
-        GameEventHandler.Start?.Invoke();
+        //GameEventHandler.Start?.Invoke();
     }
 
     private void GameEvent_Option()
