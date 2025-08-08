@@ -7,9 +7,6 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
-        [Header("--- 씬 시작, 탈출 시 실행할 효과들을 담은 캔버스 ---")]
-        //[SerializeField] private Canvas _sceneStarter;
-
         private Scene _mainScene; //메인 씬
         private Scene _lastLoadedScene; //가장 최근 열린 씬
         private Stack<string> _additiveScenePaths = new Stack<string>(); //현재 열려있는 씬 리스트
@@ -163,11 +160,6 @@ namespace Utilities
                 yield break;
             }
 
-            //if (_sceneStarter != null && _lastLoadedScene.IsValid())
-            //{
-            //    yield return _sceneStarter.ExitSceneRoutine();
-            //}
-
             if (!string.IsNullOrEmpty(lastScenePath))
             {
                 yield return UnloadAllAdditiveScenesRoutine();
@@ -178,10 +170,6 @@ namespace Utilities
             yield return LoadAdditiveSceneRoutine(scenePath);
 
             yield return new WaitForSecondsRealtime(0.5f);
-            //if (_sceneStarter != null)
-            //{
-            //    yield return _sceneStarter.BeginSceneRoutine();
-            //}
         }
 
         /// <summary>

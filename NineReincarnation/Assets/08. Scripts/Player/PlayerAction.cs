@@ -115,15 +115,15 @@ namespace Player.Action
 
             if (context.started)
             {
-                bool isOpen = UIEventHandler.ToggleMainUI();
-                if (isOpen)
-                {
-                    _playerInput.SwitchCurrentActionMap("UI");
-                }
-                else
-                {
-                    _playerInput.SwitchCurrentActionMap("Player");
-                }
+                //bool isOpen = UIEventHandler.ToggleMainUI();
+                //if (isOpen)
+                //{
+                //    _playerInput.SwitchCurrentActionMap("UI");
+                //}
+                //else
+                //{
+                //    _playerInput.SwitchCurrentActionMap("Player");
+                //}
             }
         }
     }

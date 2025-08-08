@@ -16,7 +16,6 @@ namespace Effect.WipeFade
             material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 1f);
 
-
             DOTween.To(() => progress, x =>
             {
                 progress = x;

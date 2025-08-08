@@ -1,7 +1,8 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingUICanvas : MonoBehaviour
+public class SettingUI : ToggleUI
 {
     [Header("--- 버튼 ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
@@ -11,74 +12,49 @@ public class SettingUICanvas : MonoBehaviour
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _bgmSlider;
 
-    [Header("--- UI ---")]
-    [SerializeField] private GameObject _settingUI;
+    [Header("--- SettingButton ---")]
     [SerializeField] private GameObject _button;
 
     private void Awake()
     {
-        _settingUI.SetActive(false);
+        _ui.SetActive(false);
         _button.SetActive(true);
 
-        UIEventHandler.OnOpenSettingUI += OpenSettingUI;
-        UIEventHandler.OnCloseSettingUI += CloseSettingUI;
+        UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _sfxSlider.value = SoundEventHandler.OnReturnSfxVolmue;
         _bgmSlider.value = SoundEventHandler.OnReturnBgmVolmue;
 
-        _button.GetComponent<Button>().onClick.AddListener(Toggle);
-        _exitButton.onClick.AddListener(ExitButtonEvent);
+        _button.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
+        _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
         _endButton.onClick.AddListener(EndButtonEvent);
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
     }
 
-    private void Update()
+    protected override void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Toggle();
-        }
-    }
+        base.OnDestroy();
 
-    private void OnDestroy()
-    {
-        _button.GetComponent<Button>().onClick.RemoveListener(Toggle);
-        _exitButton.onClick.RemoveListener(ExitButtonEvent);
+        _button.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
+        _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
         _endButton.onClick.RemoveListener(EndButtonEvent);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
 
-        UIEventHandler.OnOpenSettingUI -= OpenSettingUI;
-        UIEventHandler.OnCloseSettingUI -= CloseSettingUI;
+        UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
     }
 
-    private void Toggle()
-    {
-        UIEventHandler.ToggleSettingUI();
-    }
 
-    private void OpenSettingUI()
+    private void ButtonEvent_SettingUI()
     {
         PlayClickSound();
-        _settingUI.SetActive(true);
-        _button.SetActive(false);
-    }
-
-    private void CloseSettingUI()
-    {
-        PlayClickSound();
-        _settingUI.SetActive(false);
-        _button.SetActive(true);
-    }
-
-    private void ExitButtonEvent()
-    {
-        PlayClickSound();
-        Toggle();
+        UIEvent_ToggleUI();
     }
 
     private void EndButtonEvent()

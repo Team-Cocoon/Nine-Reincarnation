@@ -4,57 +4,53 @@ using Effect.WipeFade;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SceneFade : MonoBehaviour
+public class FadeUI : ToggleUI
 {
     [Header("--- 페이드에 필요한 변수 ---")]
-    [SerializeField] private GameObject _fade;
     [SerializeField] private Image _image;
     [SerializeField] private float _duration;
 
     private void Awake()
     {
-        UIEventHandler.OnSceneWipeFadeIn += WipeFadeIn;
-
-        UIEventHandler.OnSceneFadeIn += FadeIn;
-
-        UIEventHandler.OnSceneWipeFadeOut += WipeFadeOut;
-
-        UIEventHandler.OnSceneFadeOut += FadeOut;
+        UIEventHandler.OnSceneWipeFadeIn += UIEvent_WipeFadeIn;
+        UIEventHandler.OnSceneFadeIn += UIEvent_FadeIn;
+        UIEventHandler.OnSceneWipeFadeOut += UIEvent_WipeFadeOut;
+        UIEventHandler.OnSceneFadeOut += UIEvent_FadeOut;
 
         Material instancedMat = Instantiate(_image.material);
+
         _image.material = instancedMat;
     }
 
-    private void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        UIEventHandler.OnSceneWipeFadeIn -= WipeFadeIn;
+        base.OnDestroy();
 
-        UIEventHandler.OnSceneFadeIn -= FadeIn;
-
-        UIEventHandler.OnSceneWipeFadeOut -= WipeFadeOut;
-
-        UIEventHandler.OnSceneFadeOut -= FadeOut;
+        UIEventHandler.OnSceneWipeFadeIn -= UIEvent_WipeFadeIn;
+        UIEventHandler.OnSceneFadeIn -= UIEvent_FadeIn;
+        UIEventHandler.OnSceneWipeFadeOut -= UIEvent_WipeFadeOut;
+        UIEventHandler.OnSceneFadeOut -= UIEvent_FadeOut;
     }
 
-    private void WipeFadeIn(Action action = null)
+    private void UIEvent_WipeFadeIn(Action action = null)
     {
-        _fade.SetActive(true);
+        UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
         FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
             action?.Invoke();
-            _fade.SetActive(false);
+            UIEvent_ToggleUI();
         });
     }
 
-    private void WipeFadeOut(Action action = null)
+    private void UIEvent_WipeFadeOut(Action action = null)
     {
-        _fade.SetActive(true);
+        UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 1.0f);
         FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
         {
@@ -62,9 +58,9 @@ public class SceneFade : MonoBehaviour
         });
     }
 
-    private void FadeIn(Action action = null)
+    private void UIEvent_FadeIn(Action action = null)
     {
-        _fade.SetActive(true);
+        UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
         Color color = _image.color;
         color.a = 1.0f;
@@ -75,9 +71,9 @@ public class SceneFade : MonoBehaviour
         });
     }
 
-    private void FadeOut(Action action = null)
+    private void UIEvent_FadeOut(Action action = null)
     {
-        _fade.SetActive(true);
+        UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
         Color color = _image.color;
         color.a = 0.0f;
