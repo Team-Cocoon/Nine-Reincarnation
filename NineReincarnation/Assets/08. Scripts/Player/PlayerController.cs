@@ -2,7 +2,7 @@ using EventHandler;
 using Map.Platform;
 using State;
 using State.PlayerState;
-using State.StateMachine.PlayerStateMachine;
+using StateMachine.PlayerStateMachine;
 using UnityEngine;
 
 public interface IObjectData

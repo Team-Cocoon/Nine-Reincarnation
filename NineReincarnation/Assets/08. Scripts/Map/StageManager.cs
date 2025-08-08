@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
             string scenePath = _stages[i].ScenePath;
             if (!string.IsNullOrEmpty(scenePath))
             {
-                SceneLoader.Instance.LoadSceneAdditivelyByPath(scenePath);
+                //SceneLoader.Instance.LoadSceneAdditivelyByPath(scenePath);
             }
         }
     }
