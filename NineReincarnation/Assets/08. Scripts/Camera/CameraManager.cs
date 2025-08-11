@@ -16,6 +16,7 @@ namespace Manager
         {
             Instance = this;
             //_camera = GetComponent<CinemachineCamera>();
+            SceneEventHandler.SceneStarted += AddStackCamera;
         }
 
         void OnDestroy()

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +9,11 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
+        [Header("--- 로딩 씬 경로 ---")]
+        [SerializeField] private string LoadingScenePath;
+
+        [Header("--- 스토리 씬 경로 ---")]
+
         private Scene _mainScene; //메인 씬
         private Scene _lastLoadedScene; //가장 최근 열린 씬
         private Stack<string> _additiveScenePaths = new Stack<string>(); //현재 열려있는 씬 리스트
@@ -146,38 +153,103 @@ namespace Utilities
             StartCoroutine(UnloadLastSceneRoutine());
         }
 
-
         /// <summary>
-        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드
+        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드(상태 전환 X)
         /// </summary>
         /// <param name="scenePath"></param>
         /// <returns></returns>
-        public IEnumerator LoadScene(string scenePath, string lastScenePath = "")
+        public IEnumerator LoadScene(string scenePath)
         {
             if (string.IsNullOrEmpty(scenePath))
             {
                 yield break;
             }
 
+            yield return UnloadLastSceneRoutine();
+            yield return LoadAdditiveSceneRoutine(scenePath);
+
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
+
+        /// <summary>
+        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드
+        /// </summary>
+        /// <param name="scenePath"></param>
+        /// <returns></returns>
+        public IEnumerator LoadScene(string scenePath, string lastScenePath)
+        {
+            if (string.IsNullOrEmpty(scenePath))
+            {
+                yield break;
+            }
+
+            yield return SceneEventHandler.SceneFadeOut?.Invoke().WaitForCompletion();
             SceneEventHandler.SceneExited?.Invoke();
 
-            if (!string.IsNullOrEmpty(lastScenePath))
+            yield return LoadingSceneRoutine(scenePath, lastScenePath);
+
+            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
+            SceneEventHandler.SceneStarted?.Invoke();
+
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
+
+        /// <summary>
+        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드
+        /// </summary>
+        /// <param name="scenePath"></param>
+        /// <returns></returns>
+        public IEnumerator LoadScene(string[] scenePaths, string lastScenePath)
+        {
+            foreach (string scenePath in scenePaths)
             {
-                yield return UnloadAllAdditiveScenesRoutine();
-                _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
+                if (string.IsNullOrEmpty(scenePath))
+                {
+                    yield break;
+                }
             }
+
+            yield return SceneEventHandler.SceneFadeOut?.Invoke().WaitForCompletion();
+            SceneEventHandler.SceneExited?.Invoke();
+
+            yield return LoadingSceneRoutine(scenePaths, lastScenePath);
+
+            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
+            SceneEventHandler.SceneStarted?.Invoke();
+
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
+
+        private IEnumerator LoadingSceneRoutine(string scenePath, string lastScenePath)
+        {
+            yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
+
+            yield return UnloadAllAdditiveScenesRoutine();
+            _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
 
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath);
 
+            yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
+        }
 
-            if (!string.IsNullOrEmpty(lastScenePath))
+
+        private IEnumerator LoadingSceneRoutine(string[] scenePaths, string lastScenePath)
+        {
+            yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
+
+            yield return UnloadAllAdditiveScenesRoutine();
+            _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
+
+            yield return UnloadLastSceneRoutine();
+            foreach(string scenePath in scenePaths)
             {
-                SceneEventHandler.SceneStarted?.Invoke();
+                yield return LoadAdditiveSceneRoutine(scenePath);
             }
 
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
         }
+
 
         /// <summary>
         /// 씬을 리스트에 등록하고 겹쳐서 로드

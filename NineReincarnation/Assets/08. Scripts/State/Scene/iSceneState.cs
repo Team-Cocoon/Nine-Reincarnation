@@ -1,3 +1,5 @@
+using DG.Tweening;
+
 namespace State.SceneState
 {
     public enum SceneState
@@ -13,9 +15,9 @@ namespace State.SceneState
         public string ScenePath { get; }
         public SceneState CurrentSceneState { get; }
 
-        public void SceneEvent_FadeIn();
+        public Tween SceneEvent_FadeIn();
 
-        public void SceneEvent_FadeOut();
+        public Tween SceneEvent_FadeOut();
 
         public void SceneEvent_BgmPlay();
     }

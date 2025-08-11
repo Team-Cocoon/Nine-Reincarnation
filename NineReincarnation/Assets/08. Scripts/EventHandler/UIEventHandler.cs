@@ -1,17 +1,19 @@
 using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class UIEventHandler
 {
     public static Action ToggleSettingUI;
 
-    public static Action OnSceneWipeFadeIn;
+    public static Func<Tween> OnSceneWipeFadeIn;
 
-    public static Action OnSceneFadeIn;
+    public static Func<Tween> OnSceneFadeIn;
 
-    public static Action OnSceneWipeFadeOut;
+    public static Func<Tween> OnSceneWipeFadeOut;
 
-    public static Action OnSceneFadeOut;
+    public static Func<Tween> OnSceneFadeOut;
 
     public static Action OnOpenListSeclectUI;
 

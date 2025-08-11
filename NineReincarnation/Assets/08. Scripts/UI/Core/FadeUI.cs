@@ -37,41 +37,58 @@ public class FadeUI : ToggleUI
         UIEventHandler.OnSceneFadeOut -= UIEvent_FadeOut;
     }
 
-    private void UIEvent_WipeFadeIn()
+    private Tween UIEvent_WipeFadeIn()
     {
         UIEvent_ToggleUI();
+
         _image.material.SetFloat("_Progress", 0.0f);
-        FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
+        return FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
             UIEvent_ToggleUI();
         });
     }
 
-    private void UIEvent_WipeFadeOut()
+    private Tween UIEvent_WipeFadeOut()
     {
         UIEvent_ToggleUI();
+
         _image.material.SetFloat("_Progress", 1.0f);
-        FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
+        return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
+        {
+            UIEvent_ToggleUI();
+        });
     }
 
-    private void UIEvent_FadeIn()
+    private Tween UIEvent_FadeIn()
     {
-        UIEvent_ToggleUI();
+        Debug.Log("페이드 인");
         _image.material.SetFloat("_Progress", 0.0f);
+        _image.material.SetFloat("_IsFadeIn", 1.0f);
         Color color = _image.color;
         color.a = 1.0f;
 
-        FadeEffect.FadeIn(_image, 2.0f);
+        UIEvent_ToggleUI();
+
+        return FadeEffect.FadeIn(_image, 2.0f, () =>
+        {
+            UIEvent_ToggleUI();
+        });
     }
 
-    private void UIEvent_FadeOut()
+    private Tween UIEvent_FadeOut()
     {
-        UIEvent_ToggleUI();
+        Debug.Log("페이드 아웃");
         _image.material.SetFloat("_Progress", 0.0f);
+        _image.material.SetFloat("_IsFadeIn", 0.0f);
         Color color = _image.color;
         color.a = 0.0f;
-
         _image.color = color;
-        FadeEffect.FadeOut(_image, 2.0f);
+
+        UIEvent_ToggleUI();
+
+        return FadeEffect.FadeOut(_image, 2.0f, () =>
+        {
+            UIEvent_ToggleUI();
+        });
     }
 }

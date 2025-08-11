@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846371cf80735dc448ce23897f43187d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadingScenePath: Assets/06. Scenes/CoreScene/LoadingScene.unity
 --- !u!4 &1896007814
 Transform:
   m_ObjectHideFlags: 0
@@ -639,7 +640,7 @@ GameObject:
   - component: {fileID: 1899500778}
   m_Layer: 0
   m_Name: UI Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
