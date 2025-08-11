@@ -9,7 +9,7 @@ public class Continue : MonoBehaviour, ICollidable
         PlayerController player = go.GetComponent<PlayerController>();
         if (player != null)
         {
-            UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Continue"); });
+            //UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Continue"); });
         }
     }
 

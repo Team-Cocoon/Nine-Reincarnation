@@ -5,6 +5,14 @@ public class UIEventHandler
 {
     public static Action ToggleSettingUI;
 
+    public static Action OnSceneWipeFadeIn;
+
+    public static Action OnSceneFadeIn;
+
+    public static Action OnSceneWipeFadeOut;
+
+    public static Action OnSceneFadeOut;
+
     public static Action OnOpenListSeclectUI;
 
     public static Action OnOpenListUI;
@@ -20,12 +28,4 @@ public class UIEventHandler
     public static Action OnOpenLockedListToolTipUI;
 
     public static Action OnOpenLockedProfileToolTipUI;
-
-    public static Action<Action> OnSceneWipeFadeIn;
-
-    public static Action<Action> OnSceneFadeIn;
-
-    public static Action<Action> OnSceneWipeFadeOut;
-
-    public static Action<Action> OnSceneFadeOut;
 }

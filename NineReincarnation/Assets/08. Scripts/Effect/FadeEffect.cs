@@ -54,7 +54,7 @@ namespace Effect.WipeFade
         /// <summary>
         /// 서서히 어두워짐 (매개변수는 그래픽)
         /// </summary>
-        public static void FadeOut(Graphic graphic, float duration, Action action)
+        public static void FadeOut(Graphic graphic, float duration, Action action = null)
         {
             graphic.DOFade(1.0f, duration).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => { DOTween.KillAll(); action?.Invoke(); });
         }

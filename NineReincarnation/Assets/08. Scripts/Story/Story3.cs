@@ -46,7 +46,7 @@ public class Story3 : Story
         StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
-        _fade.FadeInStart(StartStory);
+        //_fade.FadeInStart(StartStory);
     }
 
     public override void PlayStory(string eventFunc)
@@ -269,6 +269,6 @@ public class Story3 : Story
 
     public override void Enter(GameObject go = null)
     {
-        UIEventHandler.OnSceneWipeFadeOut(() => { SceneManager.LoadScene("Stage3"); });
+        GameEventHandler.TitleExcuted?.Invoke();
     }
 }

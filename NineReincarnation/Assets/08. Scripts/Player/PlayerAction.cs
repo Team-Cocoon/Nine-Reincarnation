@@ -1,4 +1,4 @@
-using Manager.Camera;
+using Manager;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;

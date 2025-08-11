@@ -37,41 +37,34 @@ public class FadeUI : ToggleUI
         UIEventHandler.OnSceneFadeOut -= UIEvent_FadeOut;
     }
 
-    private void UIEvent_WipeFadeIn(Action action = null)
+    private void UIEvent_WipeFadeIn()
     {
         UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
         FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
-            action?.Invoke();
             UIEvent_ToggleUI();
         });
     }
 
-    private void UIEvent_WipeFadeOut(Action action = null)
+    private void UIEvent_WipeFadeOut()
     {
         UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 1.0f);
-        FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
-        {
-            action?.Invoke();
-        });
+        FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
     }
 
-    private void UIEvent_FadeIn(Action action = null)
+    private void UIEvent_FadeIn()
     {
         UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
         Color color = _image.color;
         color.a = 1.0f;
 
-        FadeEffect.FadeIn(_image, 2.0f, () =>
-        {
-            action?.Invoke();
-        });
+        FadeEffect.FadeIn(_image, 2.0f);
     }
 
-    private void UIEvent_FadeOut(Action action = null)
+    private void UIEvent_FadeOut()
     {
         UIEvent_ToggleUI();
         _image.material.SetFloat("_Progress", 0.0f);
@@ -79,6 +72,6 @@ public class FadeUI : ToggleUI
         color.a = 0.0f;
 
         _image.color = color;
-        FadeEffect.FadeOut(_image, 2.0f, action);
+        FadeEffect.FadeOut(_image, 2.0f);
     }
 }

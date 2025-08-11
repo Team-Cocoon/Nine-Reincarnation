@@ -2,7 +2,9 @@ using System;
 
 public class SceneEventHandler
 {
-    public static Action<Action> OnSceneStart;
+    public static Action SceneExited;
+
+    public static Action SceneStarted;
 
     public static Action<string> SceneLoadedByPath;
 

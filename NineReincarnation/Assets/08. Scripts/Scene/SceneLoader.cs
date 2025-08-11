@@ -147,7 +147,6 @@ namespace Utilities
         }
 
 
-
         /// <summary>
         /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드
         /// </summary>
@@ -160,6 +159,8 @@ namespace Utilities
                 yield break;
             }
 
+            SceneEventHandler.SceneExited?.Invoke();
+
             if (!string.IsNullOrEmpty(lastScenePath))
             {
                 yield return UnloadAllAdditiveScenesRoutine();
@@ -168,6 +169,12 @@ namespace Utilities
 
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath);
+
+
+            if (!string.IsNullOrEmpty(lastScenePath))
+            {
+                SceneEventHandler.SceneStarted?.Invoke();
+            }
 
             yield return new WaitForSecondsRealtime(0.5f);
         }

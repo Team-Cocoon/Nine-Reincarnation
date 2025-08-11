@@ -1,28 +1,38 @@
-using System.Xml.Linq;
 using UnityEngine;
 
-public class AudioManger : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static AudioManger Instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
 
     [Header("#Volmue")]
     public SoundVolumeSO volumeData;
 
     [Header("#BGM")]
-    public AudioClip BgmClip;
+    public AudioClip[] BgmClips;
+    public int BGMChannels;
     private AudioSource _bgmPlayer;
 
     [Header("#SFX")]
     public AudioClip[] SfxClips;
-    public int Chnnels;
+    public int SFXChannels;
     private AudioSource[] _sfxPlayers;
-    private int _channelIndex;
+    private int _sfxChannelIndex;
 
     [Header("#LoopingSFX")]
     public AudioClip[] LoopingSfxClips;
-    public int LoopingChnnels;
+    public int LoopingChannels;
     private AudioSource[] _loopingSfxPlayers;
     private int _loopingChannelIndex;
+
+    private GameObject _target = null;
+
+
+    public enum Bgm
+    {
+        None = -1,
+        Title,
+        Stage
+    }
 
     public enum Sfx
     {
@@ -41,6 +51,9 @@ public class AudioManger : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SceneEventHandler.SceneStarted += SceneEvent_SetTarget;
+        SceneEventHandler.SceneExited += SceneEvent_ClearTarget;
+
         SoundEventHandler.OnUpdateSfxVolmue += UpdateSfxVolmue;
         SoundEventHandler.OnUpdateBgmVolmue += UpdateBgmVolmue;
         SoundEventHandler.OnReturnSfxVolmue += volumeData.SfxVolume;
@@ -50,15 +63,32 @@ public class AudioManger : MonoBehaviour
 
     private void OnDestroy()
     {
+        SceneEventHandler.SceneStarted -= SceneEvent_SetTarget;
+        SceneEventHandler.SceneExited -= SceneEvent_ClearTarget;
+
         SoundEventHandler.OnUpdateSfxVolmue -= UpdateSfxVolmue;
         SoundEventHandler.OnUpdateBgmVolmue -= UpdateBgmVolmue;
         SoundEventHandler.OnReturnSfxVolmue -= volumeData.SfxVolume;
         SoundEventHandler.OnReturnBgmVolmue -= volumeData.BgmVolume;
     }
 
-    private void Start()
+    private void LateUpdate()
     {
-        PlayBgm(true);
+        if(_target != null)
+        {
+            transform.position = _target.transform.position;
+        }
+    }
+
+    private void SceneEvent_SetTarget()
+    {
+        _target = Camera.main.gameObject;
+    }
+
+    private void SceneEvent_ClearTarget()
+    {
+        _target = null;
+        transform.position = Vector3.zero;
     }
 
     private void Init()
@@ -70,12 +100,11 @@ public class AudioManger : MonoBehaviour
         _bgmPlayer.playOnAwake = false;
         _bgmPlayer.loop = true;
         _bgmPlayer.volume = volumeData.BgmVolume;
-        _bgmPlayer.clip = BgmClip;
 
         //효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");
         sfxObject.transform.parent = transform;
-        _sfxPlayers = new AudioSource[Chnnels];
+        _sfxPlayers = new AudioSource[SFXChannels];
 
         for (int index = 0; index < _sfxPlayers.Length; index++)
         {
@@ -87,11 +116,11 @@ public class AudioManger : MonoBehaviour
         //반복 재생이 필요한 효과음 플레이어 초기화
         GameObject loopingSfxObject = new GameObject("LoopingSfxPlayer");
         loopingSfxObject.transform.parent = transform;
-        _loopingSfxPlayers = new AudioSource[LoopingChnnels];
+        _loopingSfxPlayers = new AudioSource[LoopingChannels];
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {
-            _loopingSfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
+            _loopingSfxPlayers[index] = loopingSfxObject.AddComponent<AudioSource>();
             _loopingSfxPlayers[index].playOnAwake = false;
             _loopingSfxPlayers[index].volume = volumeData.SfxVolume;
             _loopingSfxPlayers[index].loop = true;
@@ -117,16 +146,17 @@ public class AudioManger : MonoBehaviour
     }
 
 
-    public void PlayBgm(bool isPlay)
+    public void PlayBgm(Bgm bgm)
     {
-        if (isPlay)
-        {
-            _bgmPlayer.Play();
-        }
-        else
-        {
-            _bgmPlayer.Stop();
-        }
+        _bgmPlayer.Stop();
+
+
+        if (bgm == Bgm.None) return;
+
+        _bgmPlayer.clip = BgmClips[(int)bgm];
+
+        // 새로운 BGM 재생
+        _bgmPlayer.Play();
     }
 
     public void PlayLoopingSfx(LoopSfx sfx)
@@ -172,14 +202,14 @@ public class AudioManger : MonoBehaviour
     {
         for (int index = 0; index < _sfxPlayers.Length; index++)
         {
-            int loopIndex = (index + _channelIndex) % _sfxPlayers.Length;
+            int loopIndex = (index + _sfxChannelIndex) % _sfxPlayers.Length;
 
             if (_sfxPlayers[loopIndex].isPlaying)
             {
                 continue;
             }
 
-            _channelIndex = loopIndex;
+            _sfxChannelIndex = loopIndex;
 
             _sfxPlayers[loopIndex].clip = SfxClips[(int)sfx];
             _sfxPlayers[loopIndex].Play();

@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        UIEventHandler.OnSceneWipeFadeIn(() => { InputManager.Instance.Action.Player.IsBusy = false; });
+        //UIEventHandler.OnSceneWipeFadeIn(() => { InputManager.Instance.Action.Player.IsBusy = false; });
 
         for (int i = 0; i < _stages.Length; ++i)
         {

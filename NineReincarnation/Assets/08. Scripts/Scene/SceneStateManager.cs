@@ -20,7 +20,7 @@ namespace Manager
         public SceneStateMachine SceneStateMachine => _sceneStateMachine;
         public string TitleScenePath => _titleScenePath;
         public string StageScenePath => _stageScenePath;
-        public string StoryScenePath => _stageScenePath;
+        public string StoryScenePath => _storyScenePath;
         public string ClearScenePath => _clearScenePath;
 
 
@@ -83,6 +83,8 @@ namespace Manager
         private void ChangeScene(IState state)
         {
             string scenePath = (state as ISceneState).ScenePath;
+
+            Debug.Log(scenePath);
 
             SceneEventHandler.SceneStateChanged(scenePath, _currentScenePath);
 

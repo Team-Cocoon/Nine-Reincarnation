@@ -99,6 +99,6 @@ public class DialogueManager : MonoBehaviour
 
     public void PlayTextSound()
     {
-        AudioManger.Instance.PlaySfx(AudioManger.Sfx.Text);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Text);
     }
 }

@@ -185,7 +185,7 @@ namespace Player.Controller
                 _rb2d.linearVelocityY = 0;
             }
 
-            AudioManger.Instance.PlaySfx(AudioManger.Sfx.Jump);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
@@ -209,7 +209,7 @@ namespace Player.Controller
         {
             if (_isDead) return;
 
-            AudioManger.Instance.PlaySfx(AudioManger.Sfx.DIe);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
             SetStop();
             _isDead = true;
         }
