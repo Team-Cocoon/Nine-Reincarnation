@@ -17,12 +17,13 @@ public class MoveState : IPlayerState
     }
     public void Enter()
     {
+        AudioManager.Instance.PlayLoopingSfx(AudioManager.LoopSfx.Walk);
         _animationState = PlayerAnimationState.Move;
     }
 
     public void Execute()
     {
-        //공중 상태 진입 시 Jump 싱태로 변환
+        //공중 상태 진입 시 Jump 상태로 변환
         if (!_player.IsGround)
         {
             _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._jumpState);
@@ -36,6 +37,6 @@ public class MoveState : IPlayerState
 
     public void Exit()
     {
-
+        AudioManager.Instance.StopLoopingSfx(AudioManager.LoopSfx.Walk);
     }
 }

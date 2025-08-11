@@ -1,8 +1,18 @@
+using EventHandler;
 using Map.Platform;
 using State;
 using State.PlayerState;
-using State.StateMachine.PlayerStateMachine;
+using StateMachine.PlayerStateMachine;
 using UnityEngine;
+
+public interface IObjectData
+{
+    public float Speed
+    {
+        get;
+        set;
+    }
+}
 
 namespace Player.Controller
 {
@@ -13,16 +23,19 @@ namespace Player.Controller
         Left = -1
     }
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private string _playerName; //플레이어 식별 변수
         [SerializeField] private Vector3 _checkPoint; //플레이어 리스폰 위치
+        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
+        [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
+        [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
+        [SerializeField] private bool _isBusy = false;
 
         private int _jumpCount = 0; //더블 점프 제어
-        private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         private PlayerDirection _direction; //플레이어 방향
         private Animator _animator;
         private Rigidbody2D _rb2d;
@@ -30,7 +43,19 @@ namespace Player.Controller
         private SpriteRenderer _spriteRenderer; //플레이어 이미지
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
+        private PlayerAnimationState _currentState;
 
+        public int JumpCount => _jumpCount;
+        public PlayerAnimationState CurrentState => _currentState;
+        public Rigidbody2D Rb2d => _rb2d;
+
+        public bool IsDead => _isDead;
+
+        public bool IsLook
+        {
+            get => _isLook;
+            set => _isLook = value;
+        }
         public PlayerDirection Direction
         {
             get => _direction;
@@ -43,9 +68,26 @@ namespace Player.Controller
         }
         public PlayerStateMachine PlayerStateMachine => _playersStateMachine;
         public string PlayerName
-        { 
+        {
             get => _playerName;
             set => _playerName = value;
+        }
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
+        public Vector3 CheckPoint
+        {
+            get => _checkPoint;
+            set => _checkPoint = value;
+        }
+
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => _isBusy = value;
         }
 
         private void Awake()
@@ -79,6 +121,11 @@ namespace Player.Controller
             Move();
         }
 
+        public bool DiablePlayerInput()
+        {
+            return _isLook || _isDead || _isBusy;
+        }
+
         #region 내부 변수 제어
         public void ResetJumpCount()
         {
@@ -101,6 +148,7 @@ namespace Player.Controller
         public void SetStop()
         {
             _direction = PlayerDirection.Stop;
+            _rb2d.linearVelocityX = 0.0f;
         }
 
         /// <summary>
@@ -117,6 +165,11 @@ namespace Player.Controller
         //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
         {
+            if (_isDead) return;
+            if (_isBusy)
+            {
+                SetStop();
+            }
             _rb2d.linearVelocityX = (int)_direction * _speed;
         }
 
@@ -127,11 +180,12 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
-            if(_rb2d.linearVelocityY < float.Epsilon)
+            if (_rb2d.linearVelocityY < float.Epsilon)
             {
                 _rb2d.linearVelocityY = 0;
             }
 
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
@@ -142,14 +196,33 @@ namespace Player.Controller
         public void DownJump()
         {
             _oneWayPlatform?.Ignore(_collider);
+            if (_oneWayPlatform != null)
+            {
+                _isGround = false;
+            }
         }
         #endregion
 
         #region 플레이어 상태 제어
 
+        public void Dead()
+        {
+            if (_isDead) return;
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
+            SetStop();
+            _isDead = true;
+        }
+
         public void Respawn()
         {
+            _isDead = false;
             transform.position = _checkPoint;
+        }
+
+        public void Look()
+        {
+            CameraEventHandler.OnLook(_isLook);
         }
 
         /// <summary>
@@ -167,10 +240,11 @@ namespace Player.Controller
                     break;
             }
         }
-        
+
         public void ChangeAnimation(IState state)
         {
-            switch ((state as IPlayerState).AnimationState)
+            _currentState = (state as IPlayerState).AnimationState;
+            switch (_currentState)
             {
                 case PlayerAnimationState.Idle:
                     _animator.SetTrigger("isIdle");
@@ -181,6 +255,12 @@ namespace Player.Controller
                 case PlayerAnimationState.Jump:
                     _animator.SetTrigger("isJump");
                     break;
+                case PlayerAnimationState.Look:
+                    _animator.SetTrigger("isLook");
+                    break;
+                case PlayerAnimationState.Dead:
+                    _animator.SetTrigger("isDead");
+                    break;
             }
         }
         #endregion
@@ -188,24 +268,14 @@ namespace Player.Controller
         #region 충돌 제어
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
-            
-            /* 늪 충돌 */
-            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
-            sinkCollision?.Sink();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            /* 실 충돌 */
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Exit(gameObject);
-
-            /* 늪 충돌 */
-            ISink sinkCollision = collision.gameObject.GetComponent<ISink>();
-            sinkCollision?.Exit();
         }
         #endregion
     }

@@ -4,7 +4,9 @@ namespace State.PlayerState
     {
         Move,
         Idle,
-        Jump
+        Jump,
+        Look,
+        Dead
     }
 
     public interface IPlayerState : IState

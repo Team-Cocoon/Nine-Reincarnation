@@ -1,4 +1,5 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 using static Enemy.Move.EnemyMove;
 
@@ -376,3 +377,4 @@ namespace Enemy.Move
         }
     }
 }
+#endif

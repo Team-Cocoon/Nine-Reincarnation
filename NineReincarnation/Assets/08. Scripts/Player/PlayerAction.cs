@@ -1,4 +1,4 @@
-using Manager.Camera;
+using Manager;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,8 +10,14 @@ namespace Player.Action
     {
         private string _playerName;
         private PlayerController _player;
+        private PlayerInput _playerInput;
 
         public PlayerController Player => _player;
+
+        private void Awake()
+        {
+            _playerInput = GetComponent<PlayerInput>();
+        }
 
         /// <summary>
         /// 조종할 플레이어 설정
@@ -25,7 +31,7 @@ namespace Player.Action
             _playerName = name;
             _player = controller;
 
-            CameraManager.Instance?.ChangeTarget(controller.GetTransform());        
+            CameraManager.Instance?.ChangeTarget(controller.GetTransform());
         }
 
         /// <summary>
@@ -39,6 +45,7 @@ namespace Player.Action
 
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.ChangePlayerDirection();
             }
         }
@@ -50,6 +57,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.Jump();
             }
         }
@@ -62,6 +70,7 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 InputManager.Instance.Swap(_playerName);
             }
         }
@@ -73,7 +82,48 @@ namespace Player.Action
         {
             if (context.started)
             {
+                if (_player.DiablePlayerInput()) return;
                 _player.DownJump();
+            }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 Look관련 함수
+        /// </summary>
+        /// <param name="context"></param>
+        public void ActionLook(InputAction.CallbackContext context)
+        {
+            if (_player.IsDead) return;
+
+            if (context.started)
+            {
+                _player.IsLook = true;
+            }
+            else if (context.canceled)
+            {
+                _player.IsLook = false;
+            }
+        }
+
+        /// <summary>
+        /// 인풋 액션에서 실행시킬 MainUI관련 함수
+        /// </summary>
+        /// <param name="context"></param>
+        public void ActionToggleMainUI(InputAction.CallbackContext context)
+        {
+            if (_player.DiablePlayerInput()) return;
+
+            if (context.started)
+            {
+                //bool isOpen = UIEventHandler.ToggleMainUI();
+                //if (isOpen)
+                //{
+                //    _playerInput.SwitchCurrentActionMap("UI");
+                //}
+                //else
+                //{
+                //    _playerInput.SwitchCurrentActionMap("Player");
+                //}
             }
         }
     }

@@ -14,7 +14,6 @@ namespace Map.Platform
             _platformCollider = GetComponent<Collider2D>();
         }
 
-
         /// <summary>
         /// 대상과의 충돌을 무시
         /// </summary>
@@ -38,9 +37,9 @@ namespace Map.Platform
 
         private void ResetPlatform(Collider2D collider)
         {
-            DOVirtual.DelayedCall(0.5f, () =>
+            player?.SetContactPlatform(); //접촉한 플랫폼 null로 초기화
+            DOVirtual.DelayedCall(0.3f, () =>
             {
-                player?.SetContactPlatform(); //접촉한 플랫폼 null로 초기화
                 Physics2D.IgnoreCollision(_platformCollider, collider, false);
             });
         }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3898375073072105077}
   - component: {fileID: 1076367601128857737}
   - component: {fileID: 1809331973419787375}
+  - component: {fileID: -2254772518858133648}
   m_Layer: 0
   m_Name: Scissors
   m_TagString: Untagged
@@ -147,7 +148,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.035077095, y: -0.046769395}
+  m_Offset: {x: -0.0022625886, y: -0.04676938}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +158,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.349905, y: 0.7474443}
+  m_Size: {x: 0.18561044, y: 0.7474443}
   m_EdgeRadius: 0
 --- !u!50 &1076367601128857737
 Rigidbody2D:
@@ -198,14 +199,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39acc06c143e73146bee8adea9d98be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnTime: 0
+  _delay: 5
+  isVisible: 0
   _pathType: 3
   _animationLoopType: 0
   _loopCount: -1
   _snappingSettings: {x: 0.1, y: 0.1}
-  _editing: 1
+  _editing: 0
   _waypoints:
-  - {x: 19.5, y: 0.8, z: 0}
-  - {x: 19.5, y: -3, z: 0}
+  - {x: 112, y: -0.7, z: 0}
+  - {x: 81.3, y: -0.7, z: 0}
   _circleRadius: 5
   _angleRad: 0
   _circleDirection: 1
@@ -214,5 +218,17 @@ MonoBehaviour:
   _elipseDirection: 1
   _handleRadius: 0.5
   _gizmoDeselectedColor: {r: 0, g: 0, b: 1, a: 1}
-  _duration: 1
-  _animaionType: 11
+  _duration: 3
+  _animaionType: 1
+--- !u!114 &-2254772518858133648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348858082921156181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8729cfccb3479b74b8290af52b5910eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
