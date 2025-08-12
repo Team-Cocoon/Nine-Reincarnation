@@ -200,6 +200,11 @@ namespace Player.Controller
         public void Jump()
         {
             if (_jumpCount >= 2) return;
+
+            if(_jumpCount == 1)
+            {
+                _animator.SetTrigger("isJump");
+            }
             
             IsSlope = false;
             IsGround = false;
