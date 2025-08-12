@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public class SceneEventHandler
@@ -14,6 +15,8 @@ public class SceneEventHandler
     public static Action<string> SceneLoadedByPath;
 
     public static Action<string, string> SceneStateChanged;
+
+    public static Action<string, string, List<string>> SceneStateChangedAndLoadScenes;
 
     public static Action<string> SceneLoadedAdditivelyByPath;
 

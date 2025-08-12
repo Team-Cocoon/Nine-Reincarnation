@@ -9,14 +9,10 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
-        [Header("--- 로딩 씬 경로 ---")]
-        [SerializeField] private string LoadingScenePath;
-
-        [Header("--- 스토리 씬 경로 ---")]
-
         private Scene _mainScene; //메인 씬
         private Scene _lastLoadedScene; //가장 최근 열린 씬
         private Stack<string> _additiveScenePaths = new Stack<string>(); //현재 열려있는 씬 리스트
+        private string LoadingScenePath => SceneDataManager.Instance.LoadingScene;
 
         private void Awake()
         {
@@ -27,6 +23,7 @@ namespace Utilities
         {
             SceneEventHandler.SceneLoadedByPath += SceneEvents_LoadSceneByPath;
             SceneEventHandler.SceneStateChanged += SceneEvents_ChangeSceneStateByPath;
+            SceneEventHandler.SceneStateChangedAndLoadScenes += SceneEvents_ChangeSceneStateAndLoadScenesByPath;
             SceneEventHandler.SceneLoadedAdditivelyByPath += SceneEvents_LoadSceneAdditivelyByPath;
             SceneEventHandler.SceneUnloadedByPath += SceneEvents_UnloadSceneByPath;
             SceneEventHandler.AllSceneUnloaded += SceneEvents_AllSceneUnloaded;
@@ -37,6 +34,7 @@ namespace Utilities
         {
             SceneEventHandler.SceneLoadedByPath -= SceneEvents_LoadSceneByPath;
             SceneEventHandler.SceneStateChanged -= SceneEvents_ChangeSceneStateByPath;
+            SceneEventHandler.SceneStateChangedAndLoadScenes -= SceneEvents_ChangeSceneStateAndLoadScenesByPath;
             SceneEventHandler.SceneLoadedAdditivelyByPath -= SceneEvents_LoadSceneAdditivelyByPath;
             SceneEventHandler.SceneUnloadedByPath -= SceneEvents_UnloadSceneByPath;
             SceneEventHandler.AllSceneUnloaded -= SceneEvents_AllSceneUnloaded;
@@ -56,6 +54,11 @@ namespace Utilities
         private void SceneEvents_LoadSceneByPath(string scenePath)
         {
             LoadSceneByPath(scenePath);
+        }
+
+        private void SceneEvents_ChangeSceneStateAndLoadScenesByPath(string scenePath, string lastScenePath, List<string> subScenePaths)
+        {
+            ChangeSceneStateAndLoadScenesByPath(scenePath, lastScenePath, subScenePaths);
         }
 
         private void SceneEvents_ChangeSceneStateByPath(string scenePath, string lastScenePath)
@@ -137,6 +140,15 @@ namespace Utilities
         }
 
         /// <summary>
+        /// 씬의 상태 변경
+        /// </summary>
+        /// <param name="scenePath"></param>
+        public void ChangeSceneStateAndLoadScenesByPath(string scenePath, string lastScenePath, List<string> subScenePaths)
+        {
+            StartCoroutine(LoadScene(scenePath, lastScenePath, subScenePaths));
+        }
+
+        /// <summary>
         /// 경로를 통한 씬 변경
         /// </summary>
         /// <param name="scenePath"></param>
@@ -188,36 +200,83 @@ namespace Utilities
 
             yield return LoadingSceneRoutine(scenePath, lastScenePath);
 
-            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
             SceneEventHandler.SceneStarted?.Invoke();
+            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
 
             yield return new WaitForSecondsRealtime(0.5f);
         }
 
         /// <summary>
-        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드
+        /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드(여러개 겹쳐서)
         /// </summary>
-        /// <param name="scenePath"></param>
+        /// <param name="coreScenePath"></param>
+        /// <param name="lastScenePath"></param>
+        /// <param name="subScenePaths"></param>
         /// <returns></returns>
-        public IEnumerator LoadScene(string[] scenePaths, string lastScenePath)
+        public IEnumerator LoadScene(string coreScenePath, string lastScenePath, List<string> subScenePaths)
         {
-            foreach (string scenePath in scenePaths)
+            if (string.IsNullOrEmpty(coreScenePath))
             {
-                if (string.IsNullOrEmpty(scenePath))
-                {
-                    yield break;
-                }
+                yield break;
             }
 
             yield return SceneEventHandler.SceneFadeOut?.Invoke().WaitForCompletion();
             SceneEventHandler.SceneExited?.Invoke();
 
-            yield return LoadingSceneRoutine(scenePaths, lastScenePath);
+            yield return LoadingSceneRoutine(coreScenePath, lastScenePath, subScenePaths);
 
-            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
             SceneEventHandler.SceneStarted?.Invoke();
+            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
 
             yield return new WaitForSecondsRealtime(0.5f);
+        }
+
+
+        private IEnumerator LoadingSceneRoutine(string coreScenePath, string lastScenePath, List<string> subScenePaths)
+        {
+            yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
+
+            yield return UnloadAllAdditiveScenesRoutine();
+            _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
+
+            List<AsyncOperation> ops = new List<AsyncOperation>();
+            ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
+
+            // 서브 씬들을 추가적으로 로드
+            foreach (string scenePath in subScenePaths)
+            {
+                if (!_additiveScenePaths.Contains(scenePath))
+                {
+                    _additiveScenePaths.Push(scenePath);
+                }
+                ops.Add(SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive));
+            }
+
+            bool allOperationsAreDone = false;
+            while (!allOperationsAreDone)
+            {
+                float totalProgress = 0f;
+                allOperationsAreDone = true;
+
+                foreach (var op in ops)
+                {
+                    totalProgress += op.progress;
+                    if (!op.isDone)
+                    {
+                        allOperationsAreDone = false;
+                    }
+                }
+
+                float averageProgress = totalProgress / ops.Count;
+
+                yield return null; // 다음 프레임까지 대기
+            }
+
+            _lastLoadedScene = SceneManager.GetSceneByPath(subScenePaths.Last());
+            SceneManager.SetActiveScene(_lastLoadedScene); //활성 씬을 현재 씬으로 변경
+
+            yield return new WaitForSecondsRealtime(0.5f);
+            yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
         }
 
         private IEnumerator LoadingSceneRoutine(string scenePath, string lastScenePath)
@@ -229,23 +288,6 @@ namespace Utilities
 
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath);
-
-            yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
-        }
-
-
-        private IEnumerator LoadingSceneRoutine(string[] scenePaths, string lastScenePath)
-        {
-            yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
-
-            yield return UnloadAllAdditiveScenesRoutine();
-            _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
-
-            yield return UnloadLastSceneRoutine();
-            foreach(string scenePath in scenePaths)
-            {
-                yield return LoadAdditiveSceneRoutine(scenePath);
-            }
 
             yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
         }

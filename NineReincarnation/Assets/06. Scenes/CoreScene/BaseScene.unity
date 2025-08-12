@@ -163,10 +163,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bea866cd0a348242a4e3beecae0ad50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleScenePath: Assets/06. Scenes/Title/Title.unity
-  _storyScenePath: Assets/06. Scenes/Stories/StoryCoreScene.unity
-  _stageScenePath: Assets/06. Scenes/Stages/StageCoreScene.unity
-  _clearScenePath: '?'
+--- !u!1 &668648388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668648390}
+  - component: {fileID: 668648389}
+  m_Layer: 0
+  m_Name: SceneDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &668648389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668648388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f749c0ff5b3ea0459f3b48cbe6ed58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneData: {fileID: 11400000, guid: 7bc58bd53c0bb8e40b9801e24a3fd1b8, type: 2}
+--- !u!4 &668648390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668648388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &953369639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +259,14 @@ PrefabInstance:
     - target: {fileID: 2404990243147909731, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: m_Name
       value: AudioManger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: SFXChannels
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: LoopingChannels
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: BgmClips.Array.size
@@ -611,7 +660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846371cf80735dc448ce23897f43187d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingScenePath: Assets/06. Scenes/CoreScene/LoadingScene.unity
 --- !u!4 &1896007814
 Transform:
   m_ObjectHideFlags: 0
@@ -960,7 +1008,8 @@ SceneRoots:
   - {fileID: 1939993269}
   - {fileID: 1263955276}
   - {fileID: 1896007814}
-  - {fileID: 611806355}
   - {fileID: 2005028051}
   - {fileID: 1239545583}
+  - {fileID: 611806355}
   - {fileID: 1185052127}
+  - {fileID: 668648390}
