@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 1255308403}
   - component: {fileID: 1255308405}
   - component: {fileID: 1255308404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1828,9 +1828,9 @@ GameObject:
   - component: {fileID: 1384989170}
   - component: {fileID: 1384989169}
   - component: {fileID: 1384989173}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2081,9 +2081,9 @@ GameObject:
   - component: {fileID: 1396235333}
   - component: {fileID: 1396235332}
   - component: {fileID: 1396235331}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform1
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2211,9 +2211,9 @@ GameObject:
   - component: {fileID: 1529053078}
   - component: {fileID: 1529053077}
   - component: {fileID: 1529053076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform3
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2337,9 +2337,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570684253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2441,7 +2441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4707294657651084786, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Slope
       objectReference: {fileID: 0}
     - target: {fileID: 8319898939587200427, guid: 9b930cfb396826a4f949e4f0ca2b7fb2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2536,9 +2536,9 @@ GameObject:
   - component: {fileID: 1914948632}
   - component: {fileID: 1914948631}
   - component: {fileID: 1914948630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform2
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

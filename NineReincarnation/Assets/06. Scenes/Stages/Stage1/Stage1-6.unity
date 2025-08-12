@@ -132,9 +132,9 @@ GameObject:
   - component: {fileID: 120812058}
   - component: {fileID: 120812057}
   - component: {fileID: 120812056}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform1
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,9 +260,9 @@ GameObject:
   - component: {fileID: 386125086}
   - component: {fileID: 386125089}
   - component: {fileID: 386125088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 389996085}
   - component: {fileID: 389996089}
   - component: {fileID: 389996088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2269,9 +2269,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1602567966}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
