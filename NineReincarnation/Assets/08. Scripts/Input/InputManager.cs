@@ -20,12 +20,15 @@ public class InputManager : MonoBehaviour
     {
         Instance = this;
         _action = GetComponent<PlayerAction>();
+
+        SceneEventHandler.SceneStarted += Init;
     }
 
-    private void Start()
+    private void OnDestroy()
     {
-        Init();
+        SceneEventHandler.SceneStarted -= Init;
     }
+
 
     //데이터 실행
     private void Init()

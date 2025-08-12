@@ -87,8 +87,7 @@ public class Story3 : Story
             case "Event3-12":
                 // 안나가 오른쪽 밖으로 나가는 기능 추가해야 함
                 AnnaActive(true);
-                _annaController.IsBusy = true;
-                UIEventHandler.OnOpenListUpdateToolTipUI(() => { _annaController.IsBusy = false; });
+                //UIEventHandler.OnOpenListUpdateToolTipUI(() => {  });
                 StartCoroutine(KeyShow());
                 break;
         }

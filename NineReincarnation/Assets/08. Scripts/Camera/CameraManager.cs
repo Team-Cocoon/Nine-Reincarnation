@@ -12,10 +12,15 @@ namespace Manager
 
         private CinemachineCamera _camera;
 
+        public CinemachineCamera CinemachineCamera
+        {
+            get { return _camera; }
+            set { _camera = value; }
+        }
+
         private void Awake()
         {
             Instance = this;
-            //_camera = GetComponent<CinemachineCamera>();
             SceneEventHandler.SceneStarted += AddStackCamera;
         }
 

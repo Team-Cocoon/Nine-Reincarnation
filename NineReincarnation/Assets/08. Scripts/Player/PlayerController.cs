@@ -33,7 +33,6 @@ namespace Player.Controller
         [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
-        [SerializeField] private bool _isBusy = false;
         [SerializeField] private bool _isSlope = false;
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
@@ -88,12 +87,6 @@ namespace Player.Controller
             set => _checkPoint = value;
         }
 
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set => _isBusy = value;
-        }
-
         public bool IsSlope
         {
             get => _isSlope;
@@ -139,7 +132,7 @@ namespace Player.Controller
 
         public bool DiablePlayerInput()
         {
-            return _isLook || _isDead || _isBusy;
+            return _isLook || _isDead;
         }
 
         #region 내부 변수 제어
@@ -190,11 +183,6 @@ namespace Player.Controller
         private void Move()
         {
             if (_isDead) return;
-            if (_isBusy)
-            {
-                SetStop();
-            }
-
             if (IsSlope)
             {
                 _rb2d.linearVelocity = (int)_direction * _speed * _slopeDir;
@@ -203,6 +191,7 @@ namespace Player.Controller
             {
                 _rb2d.linearVelocityX = (int)_direction * _speed;
             }
+            _rb2d.linearVelocityX = (int)_direction * _speed;
         }
 
         /// <summary>
