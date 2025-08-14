@@ -1,5 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Jobs;
+using Unity.Collections;
+using System.Linq;
+using Unity.Mathematics;
+using Unity.Burst;
+using System.Threading;
 
 /* 실 최상위 부모 */
 public abstract class Thread : MonoBehaviour
@@ -15,9 +21,14 @@ public abstract class Thread : MonoBehaviour
 
     protected LineRenderer _lineRenderer;
     protected EdgeCollider2D _edgeCollider;
-    protected List<Segment> segments = new List<Segment>();
+    protected Vector3[] _segmentPositions;
 
-    private Vector2 _gravity = new Vector2(0, -9.81f);
+    protected NativeArray<Segment> segments;
+    private JobHandle _currentJobHandle;
+
+    private Vector2 _gravity = new Vector2(0, -5f);
+    protected bool _isInCamera = false; // 카메라 안에 들어오는지
+
     protected abstract void UpdateThread();
 
     protected virtual void Start()
@@ -25,79 +36,67 @@ public abstract class Thread : MonoBehaviour
         Initialize();
         CreateRope();
     }
+    protected void OnDestroy()
+    {
+        if (segments.IsCreated)
+            segments.Dispose();
+    }
     protected virtual void FixedUpdate()
     {
-        UpdateThread();
+        if (_currentJobHandle.IsCompleted)
+        {
+            UpdateThread();
+        }
+    }
+    protected virtual void LateUpdate()
+    {
+        _currentJobHandle.Complete();
+        if (_isInCamera) RenderThread();
     }
     protected virtual void Initialize()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _segmentPositions = new Vector3[segmentCount];
+        segments = new NativeArray<Segment>(segmentCount, Allocator.Persistent);
     }
-    /// <summary>
-    /// 각 노드정보 갱신
-    /// </summary>
-    protected void UpdateSegments()
-    {
-        Vector2 gravityEffect = _gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
-        for (int i = 0; i < segments.Count; i++)
-        {
-            segments[i].velocity = segments[i].position - segments[i].prevPosition;
-            segments[i].prevPosition = segments[i].position;
-            segments[i].position += gravityEffect;
-            segments[i].position += segments[i].velocity;
-        }
-    }
-    /// <summary>
-    /// 각 노드의 운동방향 갱신
-    /// </summary>
-    protected void ApplyConstraint()
-    {
-        segments[0].position = _startTransform.position;
-        segments[segments.Count - 1].position = _endTransform.position;
-        for (int i = 0; i < segments.Count - 1; i++)
-        {
-            float distance = (segments[i].position - segments[i + 1].position).magnitude;
-            float difference = segmentDist - distance;
-            Vector2 dir = (segments[i + 1].position - segments[i].position).normalized;
-
-            Vector2 movement = dir * difference;
-            if (i == 0)
-                segments[i + 1].position += movement;
-            else if (i == segments.Count - 2)
-                segments[i].position -= movement;
-            else
-            {
-                segments[i].position -= movement * 0.5f;
-                segments[i + 1].position += movement * 0.5f;
-            }
-        }
-    }
+   
     /// <summary>
     /// 실 그리기
     /// </summary>
     protected virtual void RenderThread()
     {
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
-        Vector3[] segmentPositions = new Vector3[segments.Count];
-        for (int i = 0; i < segments.Count; i++)
+        for (int i = 0; i < segmentCount; i++)
         {
-            segmentPositions[i] = segments[i].position;
+            _segmentPositions[i] = segments[i].position;
         }
-        _lineRenderer.positionCount = segmentPositions.Length;
-        _lineRenderer.SetPositions(segmentPositions);
+        _lineRenderer.positionCount = _segmentPositions.Length;
+        _lineRenderer.SetPositions(_segmentPositions);
     }
+    protected void UpdateSegments()
+    {
+        UpdateSegmentJob updateJob = new UpdateSegmentJob
+        {
+            gravity = _gravity,
+            deltaTime = Time.deltaTime,
+            segments = segments
+        };
+        ApplyConstraintJob applyJob = new ApplyConstraintJob
+        {
+            segments = segments,
+            segmentCount = segmentCount,
+            segmentDist = segmentDist,
+            startPosition = _startTransform.position,
+            endPosition = _endTransform.position
+        };
+
+        JobHandle UpdateSegmentHandle = updateJob.Schedule(segmentCount, 64, _currentJobHandle);
+        JobHandle ApplyConstraintHandle = applyJob.Schedule(UpdateSegmentHandle);
+        _currentJobHandle = ApplyConstraintHandle;
+    }
+
     private void CreateRope()
     {
-        //Vector2 gravityEffect = _gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
-        //Vector2 segmentPos = _endTransform.position;
-        //for (int i = 0; i < segmentCount; i++)
-        //{
-        //    segments.Add(new Segment(segmentPos));
-        //    segmentPos.y -= segmentDist;
-        //    segments[i].prevPosition = segments[i].position;
-        //    segments[i].position += gravityEffect;
-        //    segments[i].position += segments[i].velocity;
-        //}
         Vector2 start = _startTransform.position;
         Vector2 end = _endTransform.position;
         int segmentCount = this.segmentCount;
@@ -106,7 +105,6 @@ public abstract class Thread : MonoBehaviour
         Vector2 dir = (end - start).normalized;
         Vector2 right = new Vector2(1, 0); // x축 기준 방향
 
-        // x축 기준으로 정렬된 줄 만들기
         for (int i = 0; i < segmentCount; i++)
         {
             float t = i / (float)(segmentCount - 1); // 0 ~ 1
@@ -118,12 +116,89 @@ public abstract class Thread : MonoBehaviour
             // 방향 벡터를 따라 x축으로 이동 + y는 아래로 sag
             Vector2 pos = start + dir * x + Vector2.up * y;
 
-            segments.Add(new Segment(pos));
-            segments[i].prevPosition = pos;
+            //segments.Add(new Segment(pos));
+            segments[i] = new Segment(pos);
+        }
+    }
+    protected void OnBecameVisible()
+    {
+        _isInCamera = true;
+    }
+
+    protected void OnBecameInvisible()
+    {
+        _isInCamera = false;
+    }
+    
+}
+
+[BurstCompile(FloatPrecision.Standard, FloatMode.Fast)]
+struct UpdateSegmentJob : IJobParallelFor
+{
+    [ReadOnly] public Vector2 gravity;
+    [ReadOnly] public float deltaTime;
+    public NativeArray<Segment> segments;
+    public void Execute(int index)
+    {
+        Segment seg = segments[index];
+        seg.velocity = seg.position - seg.prevPosition;
+        seg.prevPosition = seg.position;
+        seg.position += gravity * deltaTime * deltaTime;
+        seg.position += seg.velocity;
+        segments[index] = seg;
+    }
+}
+
+[BurstCompile(FloatPrecision.Standard, FloatMode.Fast)]
+public struct ApplyConstraintJob : IJob
+{
+    public NativeArray<Segment> segments;
+    public int segmentCount;
+    public float segmentDist;
+    public Vector2 startPosition;
+    public Vector2 endPosition;
+
+    public void Execute()
+    {
+        Segment startSeg = segments[0];
+        startSeg.position = startPosition;
+        segments[0] = startSeg;
+
+        Segment endSeg = segments[segmentCount - 1];
+        endSeg.position = endPosition;
+        segments[segmentCount - 1] = endSeg;
+
+        for (int i = 0; i < segmentCount - 1; i++)
+        {
+            Segment segA = segments[i];
+            Segment segB = segments[i + 1];
+
+            float distance = (segA.position - segB.position).magnitude; 
+            float difference = segmentDist - distance;
+            Vector2 dir = (segB.position - segA.position).normalized;
+            Vector2 movement = dir * difference;
+
+            if (i == 0)
+            {
+                segB.position += movement;
+            }
+            else if (i == segmentCount - 2)
+            {
+                segA.position -= movement;
+            }
+            else
+            {
+                segA.position -= movement * 0.5f;
+                segB.position += movement * 0.5f;
+            }
+
+            segments[i] = segA;
+            segments[i + 1] = segB;
         }
     }
 }
-public class Segment
+
+public struct Segment
 {
     public Vector2 prevPosition;
     public Vector2 position;
