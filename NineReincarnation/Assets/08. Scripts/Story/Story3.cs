@@ -268,6 +268,6 @@ public class Story3 : Story
 
     public override void Enter(GameObject go = null)
     {
-        GameEventHandler.TitleExcuted?.Invoke();
+        GameEventHandler.TitleExcuted_Invoke();
     }
 }

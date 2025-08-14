@@ -49,11 +49,11 @@ public class ListSelectCanvas : MonoBehaviour
 
     private void ListUnlock()
     {
-        UIEventHandler.OnOpenListUI();
+        //UIEventHandler.OnOpenListUI();
     }
 
     private void ListLock()
     {
-        UIEventHandler.OnOpenLockedListToolTipUI();
+        //UIEventHandler.OnOpenLockedListToolTipUI();
     }
 }

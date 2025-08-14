@@ -9,12 +9,6 @@ namespace Manager
 {
     public class SceneStateManager : MonoBehaviour
     {
-        private string _titleScenePath => SceneDataManager.Instance.TitleScene;
-        private string _storyScenePath => SceneDataManager.Instance.StoryCoreScene;
-        private string _stageScenePath => SceneDataManager.Instance.StageCoreScene;
-
-        private string _clearScenePath => SceneDataManager.Instance.ClearScene;
-
         private List<string> _stageSubScenes => SceneDataManager.Instance.GetStageSubScene(0);
 
         private List<string> _storySubScenes => SceneDataManager.Instance.GetStorySubScene(0);
@@ -24,10 +18,10 @@ namespace Manager
         private string _currentScenePath;
 
         public SceneStateMachine SceneStateMachine => _sceneStateMachine;
-        public string TitleScenePath => _titleScenePath;
-        public string StageScenePath => _stageScenePath;
-        public string StoryScenePath => _storyScenePath;
-        public string ClearScenePath => _clearScenePath;
+        public string TitleScenePath => SceneDataManager.Instance.TitleScene;
+        public string StageScenePath => SceneDataManager.Instance.StageCoreScene;
+        public string StoryScenePath => SceneDataManager.Instance.StoryCoreScene;
+        public string ClearScenePath => SceneDataManager.Instance.ClearScene;
 
 
         private void Awake()
@@ -92,13 +86,13 @@ namespace Manager
             switch ((state as ISceneState).CurrentSceneState)
             {
                 case SceneState.Stage:
-                    SceneEventHandler.SceneStateChangedAndLoadScenes(scenePath, _currentScenePath, _stageSubScenes);
+                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _stageSubScenes);
                     break;
                 case SceneState.Story:
-                    SceneEventHandler.SceneStateChangedAndLoadScenes(scenePath, _currentScenePath, _storySubScenes);
+                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _storySubScenes);
                     break;
                 default:
-                    SceneEventHandler.SceneStateChanged(scenePath, _currentScenePath);
+                    SceneEventHandler.SceneStateChanged_Invoke(scenePath, _currentScenePath);
                     break;
             }
 

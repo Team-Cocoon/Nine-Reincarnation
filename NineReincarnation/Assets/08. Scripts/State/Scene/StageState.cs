@@ -44,12 +44,12 @@ namespace State.SceneState
 
         public Tween SceneEvent_FadeIn()
         {
-            return UIEventHandler.OnSceneFadeIn?.Invoke();
+            return UIEventHandler.OnSceneFadeIn_Invoke();
         }
 
         public Tween SceneEvent_FadeOut()
         {
-            return UIEventHandler.OnSceneFadeOut?.Invoke();
+            return UIEventHandler.OnSceneFadeOut_Invoke();
         }
 
         public void SceneEvent_BgmPlay()
