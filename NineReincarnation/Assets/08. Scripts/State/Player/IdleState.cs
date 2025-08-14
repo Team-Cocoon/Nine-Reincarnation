@@ -18,6 +18,7 @@ public class IdleState : IPlayerState
     public void Enter()
     {
         _animationState = PlayerAnimationState.Idle;
+        _player.IdleEnter();
     }
 
     public void Execute()
@@ -41,6 +42,6 @@ public class IdleState : IPlayerState
 
     public void Exit()
     {
-
+        _player.IdleExit();
     }
 }

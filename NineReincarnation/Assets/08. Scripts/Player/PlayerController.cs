@@ -2,8 +2,9 @@ using EventHandler;
 using Map.Platform;
 using State;
 using State.PlayerState;
-using State.StateMachine.PlayerStateMachine;
+using StateMachine.PlayerStateMachine;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public interface IObjectData
 {
@@ -22,7 +23,6 @@ namespace Player.Controller
         Stop = 0,
         Left = -1
     }
-
     public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
@@ -33,7 +33,9 @@ namespace Player.Controller
         [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
-        [SerializeField] private bool _isBusy = false;
+        [SerializeField] private bool _isSlope = false;
+        [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
+        [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
 
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
@@ -44,6 +46,7 @@ namespace Player.Controller
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
         private PlayerAnimationState _currentState;
+        private Vector2 _slopeDir = Vector2.right; //경사면 이동을 위한 벡터
 
         public int JumpCount => _jumpCount;
         public PlayerAnimationState CurrentState => _currentState;
@@ -84,19 +87,25 @@ namespace Player.Controller
             set => _checkPoint = value;
         }
 
-        public bool IsBusy
+        public bool IsSlope
         {
-            get => _isBusy;
-            set => _isBusy = value;
+            get => _isSlope;
+            set => _isSlope = value;
+        }
+        public Vector2 SlopeDir
+        {
+            get => _slopeDir;
+            set => _slopeDir = value;
         }
 
         private void Awake()
         {
+            _rb2d = GetComponent<Rigidbody2D>();
+            IdleEnter();
             _collider = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playersStateMachine = new PlayerStateMachine(this);
             _animator = GetComponent<Animator>();
-            _rb2d = GetComponent<Rigidbody2D>();
 
             _playersStateMachine.Initialize(_playersStateMachine._idleState);
             _playersStateMachine.stateChanged += ChangeAnimation;
@@ -123,7 +132,7 @@ namespace Player.Controller
 
         public bool DiablePlayerInput()
         {
-            return _isLook || _isDead || _isBusy;
+            return _isLook || _isDead;
         }
 
         #region 내부 변수 제어
@@ -161,14 +170,26 @@ namespace Player.Controller
         #endregion
 
         #region 움직임 관련 부분
+        public void IdleEnter()
+        {
+            _rb2d.sharedMaterial = _idlePhysicsMaterial;
+        }
+        public void IdleExit()
+        {
+            _rb2d.sharedMaterial = _defaultPhysicsMaterial;
+        }
 
         //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
         {
             if (_isDead) return;
-            if (_isBusy)
+            if (IsSlope)
             {
-                SetStop();
+                _rb2d.linearVelocity = (int)_direction * _speed * _slopeDir;
+            }
+            else
+            {
+                _rb2d.linearVelocityX = (int)_direction * _speed;
             }
             _rb2d.linearVelocityX = (int)_direction * _speed;
         }
@@ -180,12 +201,17 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
-            if (_rb2d.linearVelocityY < float.Epsilon)
+            if(_jumpCount == 1)
             {
-                _rb2d.linearVelocityY = 0;
+                _animator.SetTrigger("isJump");
             }
+            
+            IsSlope = false;
+            IsGround = false;
 
-            AudioManger.Instance.PlaySfx(AudioManger.Sfx.Jump);
+            _rb2d.linearVelocityY = 0.0f;
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
@@ -195,10 +221,11 @@ namespace Player.Controller
         /// </summary>
         public void DownJump()
         {
-            _oneWayPlatform?.Ignore(_collider);
             if (_oneWayPlatform != null)
             {
-                _isGround = false;
+                _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
+                _oneWayPlatform.Ignore(_collider);
+                //_isGround = false;
             }
         }
         #endregion
@@ -209,7 +236,7 @@ namespace Player.Controller
         {
             if (_isDead) return;
 
-            AudioManger.Instance.PlaySfx(AudioManger.Sfx.DIe);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
             SetStop();
             _isDead = true;
         }

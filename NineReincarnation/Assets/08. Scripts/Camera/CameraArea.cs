@@ -14,6 +14,7 @@ public class CameraArea : MonoBehaviour
 
     private void Awake()
     {
+        _camera = Camera.main;
         _camHeight = _camera.orthographicSize;
         _camWidth = _camHeight * _camera.aspect;
 

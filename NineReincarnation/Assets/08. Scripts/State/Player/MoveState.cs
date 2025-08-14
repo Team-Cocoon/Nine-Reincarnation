@@ -17,7 +17,7 @@ public class MoveState : IPlayerState
     }
     public void Enter()
     {
-        AudioManger.Instance.PlayLoopingSfx(AudioManger.LoopSfx.Walk);
+        AudioManager.Instance.PlayLoopingSfx(AudioManager.LoopSfx.Walk);
         _animationState = PlayerAnimationState.Move;
     }
 
@@ -37,6 +37,6 @@ public class MoveState : IPlayerState
 
     public void Exit()
     {
-        AudioManger.Instance.StopLoopingSfx(AudioManger.LoopSfx.Walk);
+        AudioManager.Instance.StopLoopingSfx(AudioManager.LoopSfx.Walk);
     }
 }

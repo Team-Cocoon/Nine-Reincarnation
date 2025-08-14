@@ -18,7 +18,7 @@ public class LookState : IPlayerState
 
     public void Enter()
     {
-        AudioManger.Instance.PlaySfx(AudioManger.Sfx.Zoom);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Zoom);
         _animationState = PlayerAnimationState.Look;
     }
 
