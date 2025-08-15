@@ -46,7 +46,7 @@ public class Story3 : Story
         StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
-        //_fade.FadeInStart(StartStory);
+        StartStory();
     }
 
     public override void PlayStory(string eventFunc)
