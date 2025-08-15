@@ -35,6 +35,7 @@ namespace Manager
         /// <param name="transform"></param>
         public void ChangeTarget(Transform transform)
         {
+            if (_camera == null) return;
             _camera.Follow = transform;
         }
 

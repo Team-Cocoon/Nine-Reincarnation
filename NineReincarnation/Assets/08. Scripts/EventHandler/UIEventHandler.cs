@@ -7,13 +7,13 @@ public class UIEventHandler
 {
     public static Action ToggleSettingUI;
 
-    public static Func<Tween> OnSceneWipeFadeIn;
+    public static Func<bool,Tween> OnSceneWipeFadeIn;
 
-    public static Func<Tween> OnSceneFadeIn;
+    public static Func<bool, Tween> OnSceneFadeIn;
 
-    public static Func<Tween> OnSceneWipeFadeOut;
+    public static Func<bool, Tween> OnSceneWipeFadeOut;
 
-    public static Func<Tween> OnSceneFadeOut;
+    public static Func<bool, Tween> OnSceneFadeOut;
 
     public static Action OnOpenListSeclectUI;
 

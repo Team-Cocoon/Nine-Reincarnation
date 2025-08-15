@@ -37,7 +37,7 @@ public class FadeUI : ToggleUI
         UIEventHandler.OnSceneFadeOut -= UIEvent_FadeOut;
     }
 
-    private Tween UIEvent_WipeFadeIn()
+    private Tween UIEvent_WipeFadeIn(bool stopTime)
     {
         _image.material.SetFloat("_Progress", 0.0f);
         return FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
@@ -46,7 +46,7 @@ public class FadeUI : ToggleUI
         });
     }
 
-    private Tween UIEvent_WipeFadeOut()
+    private Tween UIEvent_WipeFadeOut(bool stopTime)
     {
         UIEvent_ToggleUI();
 
@@ -54,7 +54,7 @@ public class FadeUI : ToggleUI
         return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
     }
 
-    private Tween UIEvent_FadeIn()
+    private Tween UIEvent_FadeIn(bool stopTime)
     {
         Debug.Log("페이드 인");
         _image.material.SetFloat("_Progress", 0.0f);
@@ -69,7 +69,7 @@ public class FadeUI : ToggleUI
         });
     }
 
-    private Tween UIEvent_FadeOut()
+    private Tween UIEvent_FadeOut(bool stopTime)
     {
         Debug.Log("페이드 아웃");
         _image.material.SetFloat("_Progress", 1.0f);

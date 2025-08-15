@@ -31,7 +31,7 @@ public class TitleUI : MonoBehaviour
 
         if (SaveManager.Instance.SaveData.State == GameState.Stoty)
         {
-            GameEventHandler.StoryExcuted?.Invoke(); 
+            GameEventHandler.StageExcuted?.Invoke(); 
         }
         else if (SaveManager.Instance.SaveData.State == GameState.Stage)
         {
