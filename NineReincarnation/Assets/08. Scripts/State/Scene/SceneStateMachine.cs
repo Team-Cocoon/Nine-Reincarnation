@@ -1,4 +1,5 @@
 using Manager;
+using State;
 using State.SceneState;
 
 namespace StateMachine.SceneStateMachine
@@ -37,6 +38,18 @@ namespace StateMachine.SceneStateMachine
         private void AnyState()
         {
 
+        }
+
+        public ISceneState GetStateByEnum(SceneState stateEnum)
+        {
+            switch (stateEnum)
+            {
+                case SceneState.Title: return _titleState;
+                case SceneState.Story: return _storyState;
+                case SceneState.Stage: return _stageState;
+                case SceneState.Clear: return _clearState;
+                default: return null;
+            }
         }
 
         /// <summary>

@@ -13,11 +13,12 @@ public class DeadState : IPlayerState
     public DeadState(PlayerController player)
     {
         _player = player;
+        _animationState = PlayerAnimationState.Dead;
     }
 
     public void Enter()
     {
-        _animationState = PlayerAnimationState.Dead;
+
     }
 
     public void Execute()

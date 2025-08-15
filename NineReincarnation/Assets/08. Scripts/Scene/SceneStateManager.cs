@@ -15,6 +15,8 @@ namespace Manager
 
         private SceneStateMachine _sceneStateMachine;
 
+        private SceneState _nextSceneState;
+
         private string _currentScenePath;
 
         public SceneStateMachine SceneStateMachine => _sceneStateMachine;
@@ -33,57 +35,70 @@ namespace Manager
         {
             _sceneStateMachine = new SceneStateMachine(this);
 
-            _sceneStateMachine.stateChanged += ChangeScene;
-
             _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
+            GameEvent_ToTitle();
 
             GameEventHandler.TitleExcuted += GameEvent_ToTitle;
             GameEventHandler.StoryExcuted += GameEvent_ToStory;
             GameEventHandler.StageExcuted += GameEvent_ToStage;
             GameEventHandler.GameClearExcuted += GameEvent_ToClear;
+            SceneEventHandler.SceneExited += HandleSceneExited;
         }
         
 
         private void OnDestroy()
         {
-            _sceneStateMachine.stateChanged -= ChangeScene;
-
             GameEventHandler.TitleExcuted -= GameEvent_ToTitle;
             GameEventHandler.StoryExcuted -= GameEvent_ToStory;
             GameEventHandler.StageExcuted -= GameEvent_ToStage;
             GameEventHandler.GameClearExcuted -= GameEvent_ToClear;
+            SceneEventHandler.SceneExited -= HandleSceneExited;
         }
 
         private void GameEvent_ToTitle()
         {
-            GameEvent_TransitionState(SceneState.Title);
+            _nextSceneState = SceneState.Title;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToStory()
         {
-            GameEvent_TransitionState(SceneState.Story);
+            _nextSceneState = SceneState.Story;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToStage()
         {
-            GameEvent_TransitionState(SceneState.Stage);
+            _nextSceneState = SceneState.Stage;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToClear()
         {
-            GameEvent_TransitionState(SceneState.Clear);
+            _nextSceneState = SceneState.Clear;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
-        private void GameEvent_TransitionState(SceneState state)
+        private void GameEvent_TransitionScene(SceneState state)
         {
-            _sceneStateMachine.TransitionState(state);
+            ISceneState sceneState = _sceneStateMachine.GetStateByEnum(state);
+            ChangeScene(sceneState);
         }
 
-        private void ChangeScene(IState state)
+        private void HandleSceneExited()
         {
-            string scenePath = (state as ISceneState).ScenePath;
+             _sceneStateMachine.TransitionState(_nextSceneState);
+        }
 
-            switch ((state as ISceneState).CurrentSceneState)
+        private void ChangeScene(ISceneState state)
+        {
+            string scenePath = state.ScenePath;
+
+            switch (state.StateType)
             {
                 case SceneState.Stage:
                     SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _stageSubScenes);

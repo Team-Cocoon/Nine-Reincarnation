@@ -7,9 +7,9 @@ namespace State.SceneState
     {
         private SceneStateManager _sceneStateManager;
 
-        private SceneState _currentSceneState;
+        private SceneState _stateType;
         private string _scenePath;
-        public SceneState CurrentSceneState => _currentSceneState;
+        public SceneState StateType => _stateType;
 
         public string ScenePath => _scenePath;
 
@@ -21,6 +21,7 @@ namespace State.SceneState
         {
             _sceneStateManager = sceneStateManager;
             _scenePath = sceneStateManager.ClearScenePath;
+            _stateType = SceneState.Clear;
         }
 
 
@@ -29,7 +30,6 @@ namespace State.SceneState
             SceneEventHandler.SceneStarted += SceneEvent_BgmPlay;
             SceneEventHandler.SceneFadeOut += SceneEvent_FadeOut;
             SceneEventHandler.SceneFadeIn += SceneEvent_FadeIn;
-            _currentSceneState = SceneState.Clear;
         }
 
         public void Execute()
