@@ -195,13 +195,13 @@ namespace Utilities
                 yield break;
             }
 
-            yield return SceneEventHandler.SceneFadeOut?.Invoke().WaitForCompletion();
-            SceneEventHandler.SceneExited?.Invoke();
+            yield return SceneEventHandler.SceneFadeOut_Invoke().WaitForCompletion();
+            SceneEventHandler.SceneExited_Invoke();
 
             yield return LoadingSceneRoutine(scenePath, lastScenePath);
 
-            SceneEventHandler.SceneStarted?.Invoke();
-            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
+            SceneEventHandler.SceneStarted_Invoke();
+            yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
 
             yield return new WaitForSecondsRealtime(0.5f);
         }
@@ -220,13 +220,13 @@ namespace Utilities
                 yield break;
             }
 
-            yield return SceneEventHandler.SceneFadeOut?.Invoke().WaitForCompletion();
-            SceneEventHandler.SceneExited?.Invoke();
+            yield return SceneEventHandler.SceneFadeOut_Invoke().WaitForCompletion();
+            SceneEventHandler.SceneExited_Invoke();
 
             yield return LoadingSceneRoutine(coreScenePath, lastScenePath, subScenePaths);
 
-            SceneEventHandler.SceneStarted?.Invoke();
-            yield return SceneEventHandler.SceneFadeIn?.Invoke().WaitForCompletion();
+            SceneEventHandler.SceneStarted_Invoke();
+            yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
 
             yield return new WaitForSecondsRealtime(0.5f);
         }

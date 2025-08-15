@@ -5,7 +5,7 @@ public class LookState : IPlayerState
 {
     private PlayerController _player;
     private PlayerAnimationState _animationState;
-    public PlayerAnimationState AnimationState { get => _animationState; set => _animationState = value; }
+    public PlayerAnimationState AnimationState => _animationState;
 
     /// <summary>
     /// 생성자
@@ -14,12 +14,12 @@ public class LookState : IPlayerState
     public LookState(PlayerController player)
     {
         _player = player;
+        _animationState = PlayerAnimationState.Look;
     }
 
     public void Enter()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Zoom);
-        _animationState = PlayerAnimationState.Look;
     }
 
     public void Execute()

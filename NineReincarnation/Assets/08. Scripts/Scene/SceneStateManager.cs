@@ -9,25 +9,21 @@ namespace Manager
 {
     public class SceneStateManager : MonoBehaviour
     {
-        private string _titleScenePath => SceneDataManager.Instance.TitleScene;
-        private string _storyScenePath => SceneDataManager.Instance.StoryCoreScene;
-        private string _stageScenePath => SceneDataManager.Instance.StageCoreScene;
-
-        private string _clearScenePath => SceneDataManager.Instance.ClearScene;
-
         private List<string> _stageSubScenes => SceneDataManager.Instance.GetStageSubScene(0);
 
         private List<string> _storySubScenes => SceneDataManager.Instance.GetStorySubScene(0);
 
         private SceneStateMachine _sceneStateMachine;
 
+        private SceneState _nextSceneState;
+
         private string _currentScenePath;
 
         public SceneStateMachine SceneStateMachine => _sceneStateMachine;
-        public string TitleScenePath => _titleScenePath;
-        public string StageScenePath => _stageScenePath;
-        public string StoryScenePath => _storyScenePath;
-        public string ClearScenePath => _clearScenePath;
+        public string TitleScenePath => SceneDataManager.Instance.TitleScene;
+        public string StageScenePath => SceneDataManager.Instance.StageCoreScene;
+        public string StoryScenePath => SceneDataManager.Instance.StoryCoreScene;
+        public string ClearScenePath => SceneDataManager.Instance.ClearScene;
 
 
         private void Awake()
@@ -39,66 +35,79 @@ namespace Manager
         {
             _sceneStateMachine = new SceneStateMachine(this);
 
-            _sceneStateMachine.stateChanged += ChangeScene;
-
             _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
+            GameEvent_ToTitle();
 
             GameEventHandler.TitleExcuted += GameEvent_ToTitle;
             GameEventHandler.StoryExcuted += GameEvent_ToStory;
             GameEventHandler.StageExcuted += GameEvent_ToStage;
             GameEventHandler.GameClearExcuted += GameEvent_ToClear;
+            SceneEventHandler.SceneExited += HandleSceneExited;
         }
         
 
         private void OnDestroy()
         {
-            _sceneStateMachine.stateChanged -= ChangeScene;
-
             GameEventHandler.TitleExcuted -= GameEvent_ToTitle;
             GameEventHandler.StoryExcuted -= GameEvent_ToStory;
             GameEventHandler.StageExcuted -= GameEvent_ToStage;
             GameEventHandler.GameClearExcuted -= GameEvent_ToClear;
+            SceneEventHandler.SceneExited -= HandleSceneExited;
         }
 
         private void GameEvent_ToTitle()
         {
-            GameEvent_TransitionState(SceneState.Title);
+            _nextSceneState = SceneState.Title;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToStory()
         {
-            GameEvent_TransitionState(SceneState.Story);
+            _nextSceneState = SceneState.Story;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToStage()
         {
-            GameEvent_TransitionState(SceneState.Stage);
+            _nextSceneState = SceneState.Stage;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_ToClear()
         {
-            GameEvent_TransitionState(SceneState.Clear);
+            _nextSceneState = SceneState.Clear;
+
+            GameEvent_TransitionScene(_nextSceneState);
         }
 
-        private void GameEvent_TransitionState(SceneState state)
+        private void GameEvent_TransitionScene(SceneState state)
         {
-            _sceneStateMachine.TransitionState(state);
+            ISceneState sceneState = _sceneStateMachine.GetStateByEnum(state);
+            ChangeScene(sceneState);
         }
 
-        private void ChangeScene(IState state)
+        private void HandleSceneExited()
         {
-            string scenePath = (state as ISceneState).ScenePath;
+             _sceneStateMachine.TransitionState(_nextSceneState);
+        }
 
-            switch ((state as ISceneState).CurrentSceneState)
+        private void ChangeScene(ISceneState state)
+        {
+            string scenePath = state.ScenePath;
+
+            switch (state.StateType)
             {
                 case SceneState.Stage:
-                    SceneEventHandler.SceneStateChangedAndLoadScenes(scenePath, _currentScenePath, _stageSubScenes);
+                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _stageSubScenes);
                     break;
                 case SceneState.Story:
-                    SceneEventHandler.SceneStateChangedAndLoadScenes(scenePath, _currentScenePath, _storySubScenes);
+                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _storySubScenes);
                     break;
                 default:
-                    SceneEventHandler.SceneStateChanged(scenePath, _currentScenePath);
+                    SceneEventHandler.SceneStateChanged_Invoke(scenePath, _currentScenePath);
                     break;
             }
 

@@ -27,8 +27,8 @@ public class SettingUI : ToggleUI
     {
         base.Start();
 
-        _sfxSlider.value = SoundEventHandler.OnReturnSfxVolmue;
-        _bgmSlider.value = SoundEventHandler.OnReturnBgmVolmue;
+        _sfxSlider.value = AudioManager.Instance.VolumData.SfxVolume;
+        _bgmSlider.value = AudioManager.Instance.VolumData.BgmVolume;
 
         _button.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
         _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
@@ -70,11 +70,11 @@ public class SettingUI : ToggleUI
 
     private void OnSfxSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateSfxVolmue(value);
+        SoundEventHandler.OnUpdateSfxVolmue_Invoke(value);
     }
 
     private void OnBgmSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateBgmVolmue(value);
+        SoundEventHandler.OnUpdateBgmVolmue_Invoke(value);
     }
 }

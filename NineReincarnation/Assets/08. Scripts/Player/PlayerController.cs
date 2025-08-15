@@ -249,7 +249,7 @@ namespace Player.Controller
 
         public void Look()
         {
-            CameraEventHandler.OnLook(_isLook);
+            CameraEventHandler.OnLook_Invoke(_isLook);
         }
 
         /// <summary>

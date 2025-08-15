@@ -31,11 +31,11 @@ public class TitleUI : MonoBehaviour
 
         if (SaveManager.Instance.SaveData.State == GameState.Stoty)
         {
-            GameEventHandler.StageExcuted?.Invoke(); 
+            GameEventHandler.StoryExcuted_Invoke(); 
         }
         else if (SaveManager.Instance.SaveData.State == GameState.Stage)
         {
-            GameEventHandler.StageExcuted?.Invoke();
+            GameEventHandler.StageExcuted_Invoke();
         }
     }
 
@@ -47,6 +47,6 @@ public class TitleUI : MonoBehaviour
     private void GameEvent_Exit()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        GameEventHandler.ExitExcuted?.Invoke();
+        GameEventHandler.ExitExcuted_Invoke();
     }
 }
