@@ -85,7 +85,6 @@ namespace Manager
         private void GameEvent_TransitionScene(SceneState state)
         {
             ISceneState sceneState = _sceneStateMachine.GetStateByEnum(state);
-            Debug.Log(sceneState.ScenePath);
             ChangeScene(sceneState);
         }
 
