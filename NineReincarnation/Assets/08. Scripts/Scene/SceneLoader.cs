@@ -285,12 +285,16 @@ namespace Utilities
         {
             yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
 
+            yield return new WaitForSecondsRealtime(0.1f);
+
             yield return UnloadAllAdditiveScenesRoutine();
             _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
 
+            Debug.Log(scenePath);
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath);
 
+            yield return new WaitForSecondsRealtime(0.5f);
             yield return SceneManager.UnloadSceneAsync(LoadingScenePath);
         }
 

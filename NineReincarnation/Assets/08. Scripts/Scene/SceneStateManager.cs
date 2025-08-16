@@ -35,8 +35,8 @@ namespace Manager
             _sceneStateMachine = new SceneStateMachine(this);
 
             _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
-            GameEvent_ToTitle();
 
+            GameEvent_ToTitle();
             GameEventHandler.TitleExcuted += GameEvent_ToTitle;
             GameEventHandler.StoryExcuted += GameEvent_ToStory;
             GameEventHandler.StageExcuted += GameEvent_ToStage;
@@ -78,13 +78,14 @@ namespace Manager
         private void GameEvent_ToClear()
         {
             _nextSceneState = SceneState.Clear;
-
+         
             GameEvent_TransitionScene(_nextSceneState);
         }
 
         private void GameEvent_TransitionScene(SceneState state)
         {
             ISceneState sceneState = _sceneStateMachine.GetStateByEnum(state);
+            Debug.Log(sceneState.ScenePath);
             ChangeScene(sceneState);
         }
 

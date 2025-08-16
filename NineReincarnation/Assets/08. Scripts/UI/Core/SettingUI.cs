@@ -54,7 +54,7 @@ public class SettingUI : ToggleUI
     private void ButtonEvent_SettingUI()
     {
         PlayClickSound();
-        UIEvent_ToggleUI();
+        UIEvent_ToggleUI(true);
     }
 
     private void EndButtonEvent()

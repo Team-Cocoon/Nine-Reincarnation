@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-class UIState
+[Serializable]
+class UIInfo
 {
+    [Header("---- 초기 등록 UI ----")]
+
     public bool IsOpen;
     public GameObject UI;
 
-    public UIState(bool _IsOpen, GameObject _UI)
+    public UIInfo(bool _IsOpen, GameObject _UI)
     {
         IsOpen = _IsOpen;
         UI = _UI;
@@ -17,14 +21,32 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; set; }
 
-    private Dictionary<string, UIState> _uiDict = new Dictionary<string, UIState>();
+    [Header("---- 초기 등록 UI ----")]
+    [SerializeField] private ToggleUI[] _coreUI;
+
+    private Dictionary<string, UIInfo> _uiDict = new Dictionary<string, UIInfo>();
+
+    private void Awake()
+    {
+        Instance = this;
+        foreach (ToggleUI coreUI in _coreUI)
+        {
+            AddUIDictionary(coreUI.Name, coreUI.UI);
+        }
+    }
 
     public void AddUIDictionary(string name, GameObject go)
     {
-        _uiDict.Add(name, new UIState(go.activeSelf, go));
+        //이미 있으면 리턴
+        if (_uiDict.ContainsKey(name)) return;
+
+        _uiDict.Add(name, new UIInfo(go.activeSelf, go));
     }
     public void RemoveUIDictionary(string name)
     {
+        //없으면 리턴
+        if (!_uiDict.ContainsKey(name)) return;
+
         _uiDict.Remove(name);
     }
 
@@ -42,10 +64,7 @@ public class UIManager : MonoBehaviour
         if (isOpen)
         {
             //닫어
-            if (isStop)
-            {
-                Time.timeScale = 1.0f;
-            }
+            Time.timeScale = 1.0f;
 
             _uiDict[name].IsOpen = false;
             ui.SetActive(false);
@@ -60,12 +79,10 @@ public class UIManager : MonoBehaviour
             {
                 Time.timeScale = 0.0f;
             }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
         }
-    }
-
-    private void Awake()
-    {
-        Debug.Log("UIManager");
-        Instance = this;
     }
 }

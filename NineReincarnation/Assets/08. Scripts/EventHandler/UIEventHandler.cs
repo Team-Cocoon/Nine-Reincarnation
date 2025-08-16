@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public static class UIEventHandler
 {
-    public static event Action ToggleSettingUI;
+    public static event Action<bool> ToggleSettingUI;
 
     public static Func<bool, Tween> OnSceneWipeFadeIn;
 
@@ -30,7 +30,7 @@ public static class UIEventHandler
     public static event Action OnOpenLockedProfileToolTipUI;
 
     #region Invoke 처리
-    public static void ToggleSettingUI_Invoke() => ToggleSettingUI?.Invoke();
+    public static void ToggleSettingUI_Invoke(bool isStop) => ToggleSettingUI?.Invoke(isStop);
     public static Tween OnSceneWipeFadeIn_Invoke(bool stopTime)
     {
         return OnSceneWipeFadeIn?.Invoke(stopTime);

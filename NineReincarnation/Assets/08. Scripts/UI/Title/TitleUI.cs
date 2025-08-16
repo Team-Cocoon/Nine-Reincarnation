@@ -46,6 +46,7 @@ public class TitleUI : MonoBehaviour
     private void GameEvent_Exit()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        GameEventHandler.ExitExcuted_Invoke();
+        Application.Quit();
+        //GameEventHandler.ExitExcuted_Invoke();
     }
 }

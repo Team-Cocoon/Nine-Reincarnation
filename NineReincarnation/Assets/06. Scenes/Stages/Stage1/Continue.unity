@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 7099232854627776982}
   - component: {fileID: 6292409046303976423}
   m_Layer: 5
-  m_Name: FadeCanvas
+  m_Name: ContinueUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,7 +452,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -33719957
   m_SortingOrder: 0

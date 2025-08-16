@@ -11,7 +11,7 @@ public class SceneDataManager : MonoBehaviour
     public string TitleScene => sceneData.TitleScene;
     public string StoryCoreScene => sceneData.StoryScene.CoreScene;
     public string StageCoreScene => sceneData.StageScene.CoreScene;
-    public string ClearScene => sceneData.StageScene.CoreScene;
+    public string ClearScene => sceneData.ClearScene;
 
     public List<string> GetStorySubScene(int index)
     {

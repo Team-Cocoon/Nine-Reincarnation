@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &244900252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+  m_PrefabInstance: {fileID: 1939993269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa5fdb273528a14dbbabd2fbfb91ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &611806354
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abb87235b7e07c47966fe325eb24857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coreUI:
+  - {fileID: 244900252}
+  - {fileID: 2126316902}
 --- !u!1 &1263955273
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +576,14 @@ PrefabInstance:
     - target: {fileID: 4269172032954602935, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
       propertyPath: m_RenderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269172032954602935, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269172032954602935, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1880745385
       objectReference: {fileID: 0}
     - target: {fileID: 4269172032954602935, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
@@ -993,6 +1015,14 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3928982017162382352, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928982017162382352, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1880745385
+      objectReference: {fileID: 0}
     - target: {fileID: 6841162033583306375, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1060,6 +1090,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCamera: {fileID: 1899500776}
+--- !u!114 &2126316902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4748312249264494432, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
+  m_PrefabInstance: {fileID: 1553223073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91fd134df5f79f43b5787787db4c224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

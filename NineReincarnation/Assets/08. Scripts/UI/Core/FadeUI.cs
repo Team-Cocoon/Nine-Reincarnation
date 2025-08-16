@@ -40,18 +40,25 @@ public class FadeUI : ToggleUI
     private Tween UIEvent_WipeFadeIn(bool stopTime)
     {
         _image.material.SetFloat("_Progress", 0.0f);
+
+        UIEvent_ToggleUI(stopTime);
+
         return FadeEffect.WipeFadeIn(_image.material, _duration, false, 2.0f, () =>
         {
-            UIEvent_ToggleUI();
+            UIEvent_ToggleUI(stopTime);
         });
     }
 
     private Tween UIEvent_WipeFadeOut(bool stopTime)
     {
-        UIEvent_ToggleUI();
-
         _image.material.SetFloat("_Progress", 1.0f);
-        return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
+
+        UIEvent_ToggleUI(stopTime);
+
+        return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f, () =>
+        {
+            UIEvent_ToggleUI(stopTime);
+        });
     }
 
     private Tween UIEvent_FadeIn(bool stopTime)
@@ -63,9 +70,11 @@ public class FadeUI : ToggleUI
 
         color.a = 1.0f;
 
+        UIEvent_ToggleUI(stopTime);
+
         return FadeEffect.FadeIn(_image, 2.0f, () =>
         {
-            UIEvent_ToggleUI();
+            UIEvent_ToggleUI(stopTime);
         });
     }
 
@@ -78,8 +87,11 @@ public class FadeUI : ToggleUI
         color.a = 0.0f;
         _image.color = color;
 
-        UIEvent_ToggleUI();
+        UIEvent_ToggleUI(stopTime);
 
-        return FadeEffect.FadeOut(_image, 2.0f);
+        return FadeEffect.FadeOut(_image, 2.0f, () => 
+        { 
+            UIEvent_ToggleUI(stopTime); 
+        });
     }
 }
