@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingScene: Assets/06. Scenes/CoreScene/LoadingScene.unity
   TitleScene: Assets/06. Scenes/Title/Title.unity
-  ClearScene: 
+  ClearScene: Assets/06. Scenes/Stages/Stage1/Continue.unity
   StoryScene:
     CoreScene: Assets/06. Scenes/CoreScene/StoryCoreScene.unity
     SubSceneGroups:

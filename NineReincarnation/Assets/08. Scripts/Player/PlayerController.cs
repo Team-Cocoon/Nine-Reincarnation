@@ -4,7 +4,6 @@ using State;
 using State.PlayerState;
 using StateMachine.PlayerStateMachine;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public interface IObjectData
 {
@@ -201,11 +200,11 @@ namespace Player.Controller
         {
             if (_jumpCount >= 2) return;
 
-            if(_jumpCount == 1)
+            if (_jumpCount == 1)
             {
                 _animator.SetTrigger("isJump");
             }
-            
+
             IsSlope = false;
             IsGround = false;
 

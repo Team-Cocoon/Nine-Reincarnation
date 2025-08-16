@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("UIManager");
         Instance = this;
     }
 }

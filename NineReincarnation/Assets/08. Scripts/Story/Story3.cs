@@ -3,7 +3,6 @@ using EventHandler;
 using Febucci.UI.Core.Parsing;
 using Player.Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Story3 : Story
 {
@@ -266,8 +265,9 @@ public class Story3 : Story
     #region Event 3-12
     private IEnumerator KeyShow()
     {
-        yield return new WaitForSeconds(3f);
         _mKey.SetActive(true);
+        //yield return new WaitForSeconds(3f);
+        //_mKey.SetActive(true);
         while (true)
         {
             _mKey.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
@@ -280,6 +280,6 @@ public class Story3 : Story
 
     public override void Enter(GameObject go = null)
     {
-        GameEventHandler.StageExcuted?.Invoke();
+        GameEventHandler.StageExcuted_Invoke();
     }
 }

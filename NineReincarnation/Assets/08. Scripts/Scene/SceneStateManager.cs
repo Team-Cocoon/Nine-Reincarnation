@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using State;
 using State.SceneState;
 using StateMachine.SceneStateMachine;
 using UnityEngine;
@@ -44,7 +43,7 @@ namespace Manager
             GameEventHandler.GameClearExcuted += GameEvent_ToClear;
             SceneEventHandler.SceneExited += HandleSceneExited;
         }
-        
+
 
         private void OnDestroy()
         {
@@ -91,7 +90,7 @@ namespace Manager
 
         private void HandleSceneExited()
         {
-             _sceneStateMachine.TransitionState(_nextSceneState);
+            _sceneStateMachine.TransitionState(_nextSceneState);
         }
 
         private void ChangeScene(ISceneState state)

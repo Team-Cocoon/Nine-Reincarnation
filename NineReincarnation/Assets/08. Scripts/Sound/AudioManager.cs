@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -72,7 +71,7 @@ public class AudioManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(_target != null)
+        if (_target != null)
         {
             transform.position = _target.transform.position;
         }

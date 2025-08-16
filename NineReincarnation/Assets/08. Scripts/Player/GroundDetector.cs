@@ -1,10 +1,6 @@
-using System.Collections.Generic;
 using Player.Controller;
 using State.PlayerState;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.UI.Image;
 
 public class GroundDetector : MonoBehaviour
 {
@@ -38,7 +34,7 @@ public class GroundDetector : MonoBehaviour
         if (_player.CurrentState == PlayerAnimationState.Jump)
         {
             //점프 시작 시점은 제거하기 위해서
-            if(_player.Rb2d.linearVelocityY >= 2.0f)
+            if (_player.Rb2d.linearVelocityY >= 2.0f)
             {
                 return;
             }

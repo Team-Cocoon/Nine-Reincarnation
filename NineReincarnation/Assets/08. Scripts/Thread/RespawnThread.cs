@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public interface ICollidable
@@ -139,7 +138,7 @@ public class RespawnThread : Thread, ICollidable
     public void Enter(GameObject go)
     {
         _isHit = true;
-       
+
         if (_disappearCoroutine == null)
         {
             _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());

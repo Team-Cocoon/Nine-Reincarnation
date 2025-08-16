@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
-using State.SceneState;
-using UnityEngine;
 
 public static class UIEventHandler
 {
     public static event Action ToggleSettingUI;
 
-    public static Func<bool,Tween> OnSceneWipeFadeIn;
+    public static Func<bool, Tween> OnSceneWipeFadeIn;
 
     public static Func<bool, Tween> OnSceneFadeIn;
 

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +30,7 @@ public class TitleUI : MonoBehaviour
 
         if (SaveManager.Instance.SaveData.State == GameState.Stoty)
         {
-            GameEventHandler.StoryExcuted_Invoke(); 
+            GameEventHandler.StoryExcuted_Invoke();
         }
         else if (SaveManager.Instance.SaveData.State == GameState.Stage)
         {

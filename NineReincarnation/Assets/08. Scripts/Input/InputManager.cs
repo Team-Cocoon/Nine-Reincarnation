@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Player.Action;
 using Player.Controller;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [Serializable]
 public class PlayerInfo

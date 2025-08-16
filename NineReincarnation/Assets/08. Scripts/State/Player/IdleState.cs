@@ -18,6 +18,7 @@ public class IdleState : IPlayerState
 
     public void Enter()
     {
+        _player.IdleEnter();
     }
 
     public void Execute()

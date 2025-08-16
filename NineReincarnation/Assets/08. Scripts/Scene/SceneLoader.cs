@@ -239,6 +239,8 @@ namespace Utilities
             yield return UnloadAllAdditiveScenesRoutine();
             _lastLoadedScene = SceneManager.GetSceneByPath(lastScenePath);
 
+            yield return UnloadLastSceneRoutine();
+
             List<AsyncOperation> ops = new List<AsyncOperation>();
             ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
 
@@ -380,9 +382,16 @@ namespace Utilities
             if (!_lastLoadedScene.IsValid())
                 yield break;
 
-            yield return UnloadLastSceneRoutine();
+            foreach (string scenePath in _additiveScenePaths)
+            {
+                Scene scene = SceneManager.GetSceneByPath(scenePath);
+                if (scene.IsValid() && scene != _mainScene)
+                {
+                    yield return StartCoroutine(UnloadSceneRoutine(scene));
+                }
+            }
 
-            UnloadAllAdditiveScenes();
+            _additiveScenePaths.Clear();
         }
 
         // 씬 언로드 코루틴

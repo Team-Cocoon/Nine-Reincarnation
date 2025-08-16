@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Jobs;
-using Unity.Collections;
-using System.Linq;
-using Unity.Mathematics;
 using Unity.Burst;
-using System.Threading;
+using Unity.Collections;
+using Unity.Jobs;
+using UnityEngine;
 
 /* 실 최상위 부모 */
 public abstract class Thread : MonoBehaviour
@@ -59,7 +55,7 @@ public abstract class Thread : MonoBehaviour
         _segmentPositions = new Vector3[segmentCount];
         segments = new NativeArray<Segment>(segmentCount, Allocator.Persistent);
     }
-   
+
     /// <summary>
     /// 실 그리기
     /// </summary>
@@ -129,7 +125,7 @@ public abstract class Thread : MonoBehaviour
     {
         _isInCamera = false;
     }
-    
+
 }
 
 [BurstCompile(FloatPrecision.Standard, FloatMode.Fast)]
@@ -173,7 +169,7 @@ public struct ApplyConstraintJob : IJob
             Segment segA = segments[i];
             Segment segB = segments[i + 1];
 
-            float distance = (segA.position - segB.position).magnitude; 
+            float distance = (segA.position - segB.position).magnitude;
             float difference = segmentDist - distance;
             Vector2 dir = (segB.position - segA.position).normalized;
             Vector2 movement = dir * difference;
