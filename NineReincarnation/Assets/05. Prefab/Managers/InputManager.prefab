@@ -120,45 +120,21 @@ MonoBehaviour:
     m_ActionId: 4c11a470-d673-40e3-b78b-53fd0eede062
     m_ActionName: 'Player/Switch[/Keyboard/shift]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8a6bdf06-153e-4041-ab07-48c8514184c7
-    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 364104ec-82e7-40ba-852a-5884ea945ffb
-    m_ActionName: 'UI/Submit[/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionToggleMainUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 413d8a29-4797-48e1-9963-69b7b159a772
     m_ActionName: 'UI/Cancel[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 35408fb4-2bbd-4c56-9176-470237090744
-    m_ActionName: 'UI/Point[/Mouse/position]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2aec461e-85a1-4b1c-9b9d-a476c1d1b95a
-    m_ActionName: 'UI/Click[/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 08f0c5bd-4c70-453b-af3c-e2bd9c9824ba
-    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 44a97346-6e61-430d-87ed-be2383e29f5a
-    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 09c79dbc-744c-4397-9b34-983da212fe37
-    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 640d581f-944c-45cd-ae8a-d91efb77163d
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6fd89dec-b95e-4685-a47d-62397f8371a5
-    m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5848109479736679958}
@@ -208,7 +184,7 @@ MonoBehaviour:
     m_ActionId: 08b24fb8-ff7e-47c4-9619-7f000fcde6d1
     m_ActionName: 'Player/ToggleMainUI[/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -225,3 +201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerName: Anna
+  _playerInfo:
+  - _name: Anna
+    _player: {fileID: 0}

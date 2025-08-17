@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace EventHandler
 {
-    public class CameraEventHandler
+    public static class CameraEventHandler
     {
         /// <summary>
         /// 플레이어 카메라 Look 이벤트
         /// </summary>
-        public static Action<bool> OnLook;
+        public static event Action<bool> OnLook;
+        public static void OnLook_Invoke(bool isTrue) => OnLook?.Invoke(isTrue);
 
         /// <summary>
         /// 카메라 셰이크

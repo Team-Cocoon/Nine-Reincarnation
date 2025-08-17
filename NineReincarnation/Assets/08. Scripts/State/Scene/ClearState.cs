@@ -7,9 +7,9 @@ namespace State.SceneState
     {
         private SceneStateManager _sceneStateManager;
 
-        private SceneState _currentSceneState;
+        private SceneState _stateType;
         private string _scenePath;
-        public SceneState CurrentSceneState => _currentSceneState;
+        public SceneState StateType => _stateType;
 
         public string ScenePath => _scenePath;
 
@@ -21,14 +21,15 @@ namespace State.SceneState
         {
             _sceneStateManager = sceneStateManager;
             _scenePath = sceneStateManager.ClearScenePath;
+            _stateType = SceneState.Clear;
         }
+
 
         public void Enter()
         {
             SceneEventHandler.SceneStarted += SceneEvent_BgmPlay;
             SceneEventHandler.SceneFadeOut += SceneEvent_FadeOut;
             SceneEventHandler.SceneFadeIn += SceneEvent_FadeIn;
-            _currentSceneState = SceneState.Clear;
         }
 
         public void Execute()
@@ -45,12 +46,12 @@ namespace State.SceneState
 
         public Tween SceneEvent_FadeIn()
         {
-            return UIEventHandler.OnSceneFadeIn?.Invoke();
+            return UIEventHandler.OnSceneFadeIn_Invoke(true);
         }
 
         public Tween SceneEvent_FadeOut()
         {
-            return UIEventHandler.OnSceneFadeOut?.Invoke();
+            return UIEventHandler.OnSceneFadeOut_Invoke(true);
         }
 
         public void SceneEvent_BgmPlay()

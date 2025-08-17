@@ -1,4 +1,3 @@
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -23,9 +22,9 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     private void DataClear(int index)
     {
         _saveData[index].Init();

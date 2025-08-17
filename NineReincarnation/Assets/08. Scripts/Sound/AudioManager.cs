@@ -5,7 +5,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [Header("#Volmue")]
-    public SoundVolumeSO volumeData;
+    [SerializeField] private SoundVolumeSO volumeData;
+    public SoundVolumeSO VolumData => volumeData;
 
     [Header("#BGM")]
     public AudioClip[] BgmClips;
@@ -56,8 +57,6 @@ public class AudioManager : MonoBehaviour
 
         SoundEventHandler.OnUpdateSfxVolmue += UpdateSfxVolmue;
         SoundEventHandler.OnUpdateBgmVolmue += UpdateBgmVolmue;
-        SoundEventHandler.OnReturnSfxVolmue += volumeData.SfxVolume;
-        SoundEventHandler.OnReturnBgmVolmue += volumeData.BgmVolume;
         Init();
     }
 
@@ -68,13 +67,11 @@ public class AudioManager : MonoBehaviour
 
         SoundEventHandler.OnUpdateSfxVolmue -= UpdateSfxVolmue;
         SoundEventHandler.OnUpdateBgmVolmue -= UpdateBgmVolmue;
-        SoundEventHandler.OnReturnSfxVolmue -= volumeData.SfxVolume;
-        SoundEventHandler.OnReturnBgmVolmue -= volumeData.BgmVolume;
     }
 
     private void LateUpdate()
     {
-        if(_target != null)
+        if (_target != null)
         {
             transform.position = _target.transform.position;
         }

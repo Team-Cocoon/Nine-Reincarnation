@@ -19,6 +19,15 @@ namespace Player.Action
             _playerInput = GetComponent<PlayerInput>();
         }
 
+        public void DisableInput()
+        {
+            _playerInput.enabled = false;
+        }
+        public void EnableInput()
+        {
+            _playerInput.enabled = true;
+        }
+
         /// <summary>
         /// 조종할 플레이어 설정
         /// </summary>

@@ -1,6 +1,5 @@
 using Player.Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Continue : MonoBehaviour, ICollidable
 {
@@ -9,6 +8,7 @@ public class Continue : MonoBehaviour, ICollidable
         PlayerController player = go.GetComponent<PlayerController>();
         if (player != null)
         {
+            GameEventHandler.GameClearExcuted_Invoke();
             //UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Continue"); });
         }
     }

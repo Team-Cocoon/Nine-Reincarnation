@@ -11,7 +11,7 @@ namespace State.PlayerState
 
     public interface IPlayerState : IState
     {
-        public PlayerAnimationState AnimationState { get; set; }
+        public PlayerAnimationState AnimationState { get; }
     }
 }
 
