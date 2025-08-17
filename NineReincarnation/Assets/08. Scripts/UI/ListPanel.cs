@@ -8,6 +8,6 @@ public class ListPanel : MonoBehaviour
     public void OpenProfile()
     {
         _fadeImage.SetActive(true);
-        //UIEventHandler.OnOpenProfileUI();
+        UIEventHandler.OnOpenProfileUI();
     }
 }

@@ -5,9 +5,6 @@ public class ToggleUI : MonoBehaviour
     [SerializeField] private string _name;
     [SerializeField] protected GameObject _ui;
 
-    public string Name => _name;
-    public GameObject UI => _ui;
-
     private void Awake()
     {
         _ui.SetActive(false);
@@ -17,13 +14,14 @@ public class ToggleUI : MonoBehaviour
     {
         UIManager.Instance.AddUIDictionary(_name, _ui);
     }
+
     protected virtual void OnDestroy()
     {
         UIManager.Instance.RemoveUIDictionary(_name);
     }
 
-    protected void UIEvent_ToggleUI(bool isStop)
+    protected void UIEvent_ToggleUI()
     {
-        UIManager.Instance.ToggleUI(name, isStop);
+        UIManager.Instance.ToggleUI(name, true);
     }
 }

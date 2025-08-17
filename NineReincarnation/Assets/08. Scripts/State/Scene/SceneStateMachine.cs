@@ -39,18 +39,6 @@ namespace StateMachine.SceneStateMachine
 
         }
 
-        public ISceneState GetStateByEnum(SceneState stateEnum)
-        {
-            switch (stateEnum)
-            {
-                case SceneState.Title: return _titleState;
-                case SceneState.Story: return _storyState;
-                case SceneState.Stage: return _stageState;
-                case SceneState.Clear: return _clearState;
-                default: return null;
-            }
-        }
-
         /// <summary>
         /// 트랜지션 전환
         /// </summary>

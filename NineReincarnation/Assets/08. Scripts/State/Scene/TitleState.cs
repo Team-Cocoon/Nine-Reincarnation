@@ -1,5 +1,7 @@
+using System;
 using DG.Tweening;
 using Manager;
+using State.SceneState;
 
 namespace State.SceneState
 {
@@ -7,9 +9,9 @@ namespace State.SceneState
     {
         private SceneStateManager _sceneStateManager;
 
-        private SceneState _stateType;
+        private SceneState _currentSceneState;
         private string _scenePath;
-        public SceneState StateType => _stateType;
+        public SceneState CurrentSceneState => _currentSceneState;
         public string ScenePath => _scenePath;
 
         /// <summary>
@@ -20,7 +22,6 @@ namespace State.SceneState
         {
             _sceneStateManager = sceneStateManager;
             _scenePath = sceneStateManager.TitleScenePath;
-            _stateType = SceneState.Title;
         }
 
         public void Enter()
@@ -28,6 +29,7 @@ namespace State.SceneState
             SceneEventHandler.SceneStarted += SceneEvent_BgmPlay;
             SceneEventHandler.SceneFadeOut += SceneEvent_FadeOut;
             SceneEventHandler.SceneFadeIn += SceneEvent_FadeIn;
+            _currentSceneState = SceneState.Title;
         }
 
         public void Execute()
@@ -44,12 +46,12 @@ namespace State.SceneState
 
         public Tween SceneEvent_FadeIn()
         {
-            return UIEventHandler.OnSceneFadeIn_Invoke(true);
+            return UIEventHandler.OnSceneFadeIn?.Invoke();
         }
 
         public Tween SceneEvent_FadeOut()
         {
-            return UIEventHandler.OnSceneFadeOut_Invoke(true);
+            return UIEventHandler.OnSceneFadeOut?.Invoke();
         }
 
         public void SceneEvent_BgmPlay()

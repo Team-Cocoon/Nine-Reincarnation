@@ -4,5 +4,10 @@ public class BasicThread : Thread
     protected override void UpdateThread()
     {
         UpdateSegments();
+        for (int i = 0; i < segmentCount / 2; i++)
+        {
+            ApplyConstraint();
+        }
+        RenderThread();
     }
 }

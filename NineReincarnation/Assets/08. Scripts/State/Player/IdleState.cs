@@ -5,7 +5,7 @@ public class IdleState : IPlayerState
 {
     private PlayerController _player;
     private PlayerAnimationState _animationState;
-    public PlayerAnimationState AnimationState => _animationState;
+    public PlayerAnimationState AnimationState { get => _animationState; set => _animationState = value; }
     /// <summary>
     /// 생성자
     /// </summary>
@@ -13,12 +13,11 @@ public class IdleState : IPlayerState
     public IdleState(PlayerController player)
     {
         _player = player;
-        _animationState = PlayerAnimationState.Idle;
     }
 
     public void Enter()
     {
-        _player.IdleEnter();
+        _animationState = PlayerAnimationState.Idle;
     }
 
     public void Execute()
@@ -42,6 +41,6 @@ public class IdleState : IPlayerState
 
     public void Exit()
     {
-        _player.IdleExit();
+
     }
 }

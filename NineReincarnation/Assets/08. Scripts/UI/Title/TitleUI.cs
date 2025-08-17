@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,11 +31,11 @@ public class TitleUI : MonoBehaviour
 
         if (SaveManager.Instance.SaveData.State == GameState.Stoty)
         {
-            GameEventHandler.StoryExcuted_Invoke();
+            GameEventHandler.StoryExcuted?.Invoke(); 
         }
         else if (SaveManager.Instance.SaveData.State == GameState.Stage)
         {
-            GameEventHandler.StageExcuted_Invoke();
+            GameEventHandler.StageExcuted?.Invoke();
         }
     }
 
@@ -46,7 +47,6 @@ public class TitleUI : MonoBehaviour
     private void GameEvent_Exit()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        Application.Quit();
-        //GameEventHandler.ExitExcuted_Invoke();
+        GameEventHandler.ExitExcuted?.Invoke();
     }
 }

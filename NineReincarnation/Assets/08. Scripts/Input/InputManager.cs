@@ -1,16 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Player.Action;
 using Player.Controller;
 using UnityEngine;
-
-[Serializable]
-public class PlayerInfo
-{
-    public string _name;
-    public PlayerController _player;
-}
-
 
 public class InputManager : MonoBehaviour
 {
@@ -19,45 +10,31 @@ public class InputManager : MonoBehaviour
     [Header("---처음 움직일 플레이어---")]
     [SerializeField] string _playerName = "Anna";
 
-    [Header("---플레이어 정보들---")]
-    [SerializeField] private List<PlayerInfo> _playerInfo;
-
     private int _currentIdx = 0;
     private List<string> _playerNames = new List<string>();
     private Dictionary<string, PlayerController> _players = new Dictionary<string, PlayerController>();
     private PlayerAction _action;
     public PlayerAction Action => _action;
-    public Dictionary<string, PlayerController> Players => _players;
 
     private void Awake()
     {
         Instance = this;
         _action = GetComponent<PlayerAction>();
-
-        SceneEventHandler.SceneStarted += Init;
     }
 
-    private void OnDestroy()
+    private void Start()
     {
-        SceneEventHandler.SceneStarted -= Init;
+        Init();
     }
-
-    public void DisableInput()
-    {
-        _action.DisableInput();
-    }
-    public void EnableInput()
-    {
-        _action.EnableInput();
-    }
-
 
     //데이터 실행
     private void Init()
     {
-        for (int i = 0; i < _playerInfo.Count; ++i)
+        PlayerController[] pc = GameObject.FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < pc.Length; ++i)
         {
-            AddPlayer(_playerInfo[i]._name, _playerInfo[i]._player);
+            AddPlayer(pc[i].PlayerName, pc[i]);
         }
 
         _currentIdx = _playerNames.IndexOf(_playerName);

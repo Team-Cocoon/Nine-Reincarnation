@@ -1,5 +1,4 @@
 using EventHandler;
-using Manager;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -10,12 +9,11 @@ namespace PlayerCamera
         [Header("--- 카메라로 볼 수 있는 최대 거리 ---")]
         [SerializeField] private float _maxLookArea = 10.0f;
         [SerializeField] private float _lookSpeed = 2.0f;
-        private CinemachineFollow _followCamera;
+        private CinemachineFollow _cinemachine;
 
         private void Awake()
         {
-            CameraManager.Instance.CinemachineCamera = GetComponent<CinemachineCamera>();
-            _followCamera = GetComponent<CinemachineFollow>();
+            _cinemachine = GetComponent<CinemachineFollow>();
         }
 
         private void OnEnable()
@@ -36,13 +34,13 @@ namespace PlayerCamera
         {
             if (!isLook)
             {
-                _followCamera.FollowOffset.x = 0.0f;
+                _cinemachine.FollowOffset.x = 0.0f;
                 return;
             }
 
-            if (_followCamera.FollowOffset.x <= _maxLookArea)
+            if (_cinemachine.FollowOffset.x <= _maxLookArea)
             {
-                _followCamera.FollowOffset.x += Time.deltaTime * _lookSpeed;
+                _cinemachine.FollowOffset.x += Time.deltaTime * _lookSpeed;
             }
         }
     }
