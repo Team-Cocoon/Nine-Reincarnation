@@ -25,7 +25,7 @@ namespace Utilities
         {
             SceneEventHandler.SceneLoadedByPath += SceneEvents_LoadSceneByPath;
             SceneEventHandler.SceneStateChanged += SceneEvents_ChangeSceneState;
-            SceneEventHandler.SceneStateChangedAndLoadScenes += SceneEvents_ChangeSceneStateAndLoadScenesByPath;
+            SceneEventHandler.SceneStateChangedAndLoadScenes += SceneEvents_ChangeSceneStateAndLoadScenes;
             SceneEventHandler.SceneLoadedAdditivelyByPath += SceneEvents_LoadSceneAdditivelyByPath;
             SceneEventHandler.SceneUnloadedByPath += SceneEvents_UnloadSceneByPath;
             SceneEventHandler.AllSceneUnloaded += SceneEvents_AllSceneUnloaded;
@@ -36,7 +36,7 @@ namespace Utilities
         {
             SceneEventHandler.SceneLoadedByPath -= SceneEvents_LoadSceneByPath;
             SceneEventHandler.SceneStateChanged -= SceneEvents_ChangeSceneState;
-            SceneEventHandler.SceneStateChangedAndLoadScenes -= SceneEvents_ChangeSceneStateAndLoadScenesByPath;
+            SceneEventHandler.SceneStateChangedAndLoadScenes -= SceneEvents_ChangeSceneStateAndLoadScenes;
             SceneEventHandler.SceneLoadedAdditivelyByPath -= SceneEvents_LoadSceneAdditivelyByPath;
             SceneEventHandler.SceneUnloadedByPath -= SceneEvents_UnloadSceneByPath;
             SceneEventHandler.AllSceneUnloaded -= SceneEvents_AllSceneUnloaded;
@@ -58,9 +58,9 @@ namespace Utilities
             LoadSceneByPath(scenePath);
         }
 
-        private void SceneEvents_ChangeSceneStateAndLoadScenesByPath(string scenePath, string lastScenePath, List<string> subScenePaths)
+        private void SceneEvents_ChangeSceneStateAndLoadScenes(string coreScenePath, string prevScenePath, List<string> subScenePaths)
         {
-            ChangeSceneStateAndLoadScenesByPath(scenePath, lastScenePath, subScenePaths);
+            ChangeSceneStateAndLoadScenes(coreScenePath, prevScenePath, subScenePaths);
         }
 
         private void SceneEvents_ChangeSceneState(string coreScenePath, string prevScenePath)
@@ -100,9 +100,9 @@ namespace Utilities
         /// 씬의 상태 변경
         /// </summary>
         /// <param name="scenePath"></param>
-        public void ChangeSceneStateAndLoadScenesByPath(string scenePath, string lastScenePath, List<string> subScenePaths)
+        public void ChangeSceneStateAndLoadScenes(string coreScenePath, string prevScenePath, List<string> subScenePaths)
         {
-            StartCoroutine(LoadScene(scenePath, lastScenePath, subScenePaths));
+            StartCoroutine(LoadScene(coreScenePath, prevScenePath, subScenePaths));
         }
 
         /// <summary>
@@ -177,8 +177,8 @@ namespace Utilities
             SceneEventHandler.SceneStarted_Invoke();
             yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
 
-            yield return new WaitForSecondsRealtime(0.5f);
             isLoading = false;
+            yield return new WaitForSecondsRealtime(0.5f);
         }
         #endregion
 
@@ -188,6 +188,7 @@ namespace Utilities
             yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
 
             yield return UnloadAllAdditiveScenesRoutine();
+
             yield return UnloadSceneRoutine(prevCoreScenePath);
 
             List<AsyncOperation> ops = new List<AsyncOperation>();
@@ -246,8 +247,8 @@ namespace Utilities
             SceneEventHandler.SceneStarted_Invoke();
             yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
 
-            yield return new WaitForSecondsRealtime(0.5f);
             isLoading = false;
+            yield return new WaitForSecondsRealtime(0.5f);
         }
         #endregion
 
