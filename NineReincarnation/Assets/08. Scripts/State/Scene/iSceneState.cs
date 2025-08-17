@@ -13,7 +13,7 @@ namespace State.SceneState
     public interface ISceneState : IState
     {
         public string ScenePath { get; }
-        public SceneState StateType { get; }
+        public SceneState CurrentSceneState { get; }
 
         public Tween SceneEvent_FadeIn();
 

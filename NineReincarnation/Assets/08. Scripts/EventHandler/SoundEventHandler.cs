@@ -1,14 +1,13 @@
 using System;
+using UnityEngine;
 
-public static class SoundEventHandler
+public class SoundEventHandler
 {
-    public static event Action<float> OnUpdateBgmVolmue;
+    public static Action<float> OnUpdateBgmVolmue;
 
-    public static event Action<float> OnUpdateSfxVolmue;
+    public static Action<float> OnUpdateSfxVolmue;
 
+    public static float OnReturnBgmVolmue;
 
-    #region Invoke 처리
-    public static void OnUpdateBgmVolmue_Invoke(float value) => OnUpdateBgmVolmue?.Invoke(value);
-    public static void OnUpdateSfxVolmue_Invoke(float value) => OnUpdateSfxVolmue?.Invoke(value);
-    #endregion
+    public static float OnReturnSfxVolmue;
 }

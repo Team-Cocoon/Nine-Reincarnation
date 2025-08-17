@@ -48,11 +48,11 @@ public class ProfileCanvas : MonoBehaviour
 
     private void ListUnlock()
     {
-        //UIEventHandler.OnOpenInfoUI();
+        UIEventHandler.OnOpenInfoUI();
     }
 
     private void ListLock()
     {
-        //UIEventHandler.OnOpenLockedProfileToolTipUI();
+        UIEventHandler.OnOpenLockedProfileToolTipUI();
     }
 }

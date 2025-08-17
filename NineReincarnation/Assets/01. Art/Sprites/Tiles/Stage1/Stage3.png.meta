@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Left_Precipice
+      name: KakaoTalk_20250531_223728686_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,7 +154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up_Vine
+      name: KakaoTalk_20250531_223728686_1
       rect:
         serializedVersion: 2
         x: 96
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Void
+      name: KakaoTalk_20250531_223728686_2
       rect:
         serializedVersion: 2
         x: 128
@@ -202,7 +202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Thin_Platform
+      name: KakaoTalk_20250531_223728686_3
       rect:
         serializedVersion: 2
         x: 0
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Slope
+      name: KakaoTalk_20250531_223728686_4
       rect:
         serializedVersion: 2
         x: 0
@@ -253,7 +253,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Solid_Full_Tile1
+      name: KakaoTalk_20250531_223728686_5
       rect:
         serializedVersion: 2
         x: 0
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Middle_Precipice
+      name: KakaoTalk_20250531_223728686_6
       rect:
         serializedVersion: 2
         x: 32
@@ -301,7 +301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Precipice
+      name: KakaoTalk_20250531_223728686_7
       rect:
         serializedVersion: 2
         x: 64
@@ -327,7 +327,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Middle_Thin_Platform
+      name: KakaoTalk_20250531_223728686_8
       rect:
         serializedVersion: 2
         x: 32
@@ -353,7 +353,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Thin_Platform
+      name: KakaoTalk_20250531_223728686_9
       rect:
         serializedVersion: 2
         x: 64
@@ -379,7 +379,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Middle_Slope
+      name: KakaoTalk_20250531_223728686_10
       rect:
         serializedVersion: 2
         x: 32
@@ -405,7 +405,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Middle_Vine
+      name: KakaoTalk_20250531_223728686_11
       rect:
         serializedVersion: 2
         x: 96
@@ -431,7 +431,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Vine
+      name: KakaoTalk_20250531_223728686_12
       rect:
         serializedVersion: 2
         x: 96
@@ -457,7 +457,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up_Void
+      name: KakaoTalk_20250531_223728686_13
       rect:
         serializedVersion: 2
         x: 128
@@ -483,7 +483,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Slope
+      name: Stage3_0
       rect:
         serializedVersion: 2
         x: 64
@@ -508,7 +508,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Thick_Platform
+      name: Stage3_1
       rect:
         serializedVersion: 2
         x: 0
@@ -537,7 +537,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Thic_Platform
+      name: Stage3_2
       rect:
         serializedVersion: 2
         x: 32
@@ -563,7 +563,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Thi_Platform
+      name: Stage3_3
       rect:
         serializedVersion: 2
         x: 64
@@ -591,116 +591,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Solid_Full_Tile2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19b9632d9ca717e49ab67b8c9862101c
-      internalID: 1220705728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Solid_Full_Tile3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4fd9f5d15f37c3a4884123cca8349bda
-      internalID: 409019483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gradation_Full_Tile1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6074356fdec33464fb745b03b8268a71
-      internalID: -485985389
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gradation_Full_Tile2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e2bf57805e30694f827ee9de8f14d96
-      internalID: -1204877436
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gradation_Full_Tile3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39d212833048d754491a8b439048fdf0
-      internalID: 629096249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -715,31 +605,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Down_Vine: -1983794429
-      Down_Void: 6080745492972358557
-      Gradation_Full_1: -485985389
-      Gradation_Full_Tile1: -485985389
-      Gradation_Full_Tile2: -1204877436
-      Gradation_Full_Tile3: 629096249
-      Left_Precipice: 6810985973597973918
-      Left_Slope: -4479292675177623214
-      Left_Thi_Platform: -207132331
-      Left_Thic_Platform: -1029039489
-      Left_Thick_Platform: 660757211
-      Left_Thin_Platform: 4911568293122042141
-      Middle_Precipice: 1562689788
-      Middle_Slope: -1229660251
-      Middle_Thin_Platform: 487493325
-      Middle_Vine: 1327110829
-      Right_Precipice: 366343114
-      Right_Slope: -301860374
-      Right_Thin_Platform: -1974484832
-      Solid_Full_Tile1: 3801865289917317709
-      Solid_Full_Tile2: 1220705728
-      Solid_Full_Tile3: 409019483
-      Up_Vine: 7927937729162507832
-      Up_Void: -1961552599
-      precipice: 6810985973597973918
+      KakaoTalk_20250531_223728686_0: 6810985973597973918
+      KakaoTalk_20250531_223728686_1: 7927937729162507832
+      KakaoTalk_20250531_223728686_10: -1229660251
+      KakaoTalk_20250531_223728686_11: 1327110829
+      KakaoTalk_20250531_223728686_12: -1983794429
+      KakaoTalk_20250531_223728686_13: -1961552599
+      KakaoTalk_20250531_223728686_2: 6080745492972358557
+      KakaoTalk_20250531_223728686_3: 4911568293122042141
+      KakaoTalk_20250531_223728686_4: -4479292675177623214
+      KakaoTalk_20250531_223728686_5: 3801865289917317709
+      KakaoTalk_20250531_223728686_6: 1562689788
+      KakaoTalk_20250531_223728686_7: 366343114
+      KakaoTalk_20250531_223728686_8: 487493325
+      KakaoTalk_20250531_223728686_9: -1974484832
+      Stage3_0: -301860374
+      Stage3_1: 660757211
+      Stage3_2: -1029039489
+      Stage3_3: -207132331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

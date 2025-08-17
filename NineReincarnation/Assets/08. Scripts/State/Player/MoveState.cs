@@ -5,7 +5,7 @@ public class MoveState : IPlayerState
 {
     private PlayerController _player;
     private PlayerAnimationState _animationState;
-    public PlayerAnimationState AnimationState => _animationState;
+    public PlayerAnimationState AnimationState { get => _animationState; set => _animationState = value; }
 
     /// <summary>
     /// 생성자
@@ -14,11 +14,11 @@ public class MoveState : IPlayerState
     public MoveState(PlayerController player)
     {
         _player = player;
-        _animationState = PlayerAnimationState.Move;
     }
     public void Enter()
     {
         AudioManager.Instance.PlayLoopingSfx(AudioManager.LoopSfx.Walk);
+        _animationState = PlayerAnimationState.Move;
     }
 
     public void Execute()

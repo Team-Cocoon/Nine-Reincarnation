@@ -12,7 +12,7 @@ public class SoundVolumeSO : ScriptableObject
         set
         {
             _sfxVolume = value;
-            SoundEventHandler.OnUpdateSfxVolmue_Invoke(_sfxVolume);
+            SoundEventHandler.OnUpdateSfxVolmue(_sfxVolume);
         }
     }
 
@@ -22,7 +22,7 @@ public class SoundVolumeSO : ScriptableObject
         set
         {
             _bgmVolume = value;
-            SoundEventHandler.OnUpdateSfxVolmue_Invoke(_bgmVolume);
+            SoundEventHandler.OnUpdateSfxVolmue(_bgmVolume);
         }
     }
 }

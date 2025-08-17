@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum GameState
-{
+{ 
     Stoty,
     Stage
 }
