@@ -282,4 +282,8 @@ public class Story3 : Story
     {
         GameEventHandler.StageExcuted_Invoke();
     }
+    public void NextStage()
+    {
+        Enter(null);
+    }
 }
