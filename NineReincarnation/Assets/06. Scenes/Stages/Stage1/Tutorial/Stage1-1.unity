@@ -1445,8 +1445,8 @@ GameObject:
   - component: {fileID: 2027021752}
   - component: {fileID: 2027021751}
   - component: {fileID: 2027021754}
-  - component: {fileID: 2027021755}
   - component: {fileID: 2027021756}
+  - component: {fileID: 2027021755}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
@@ -2417,7 +2417,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
+  m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -2425,12 +2425,14 @@ CompositeCollider2D:
     m_ColliderPaths:
     - - X: 10000000
         Y: -30000000
-      - X: 9062500
+      - X: 9375000
         Y: -30000000
-      - X: 6250000
+      - X: 9375000
         Y: -21562500
-      - X: -26562500
+      - X: -29375000
         Y: -21562500
+      - X: -29375000
+        Y: -30000000
       - X: -30000000
         Y: -30000000
       - X: -30000000
@@ -2439,9 +2441,9 @@ CompositeCollider2D:
         Y: -60000000
     - - X: -50000000
         Y: -40000000
-      - X: -50937500
+      - X: -50625000
         Y: -40000000
-      - X: -53750000
+      - X: -50625000
         Y: -31562500
       - X: -230000000
         Y: -31562500
@@ -2453,15 +2455,16 @@ CompositeCollider2D:
     m_Paths:
     - - {x: 0.99997073, y: -6}
       - {x: 0.99997073, y: -3}
-      - {x: 0.9062435, y: -2.999981}
-      - {x: 0.62498003, y: -2.15625}
-      - {x: -2.6562572, y: -2.156267}
-      - {x: -3, y: -3.0000048}
+      - {x: 0.9375, y: -2.9999707}
+      - {x: 0.93747073, y: -2.15625}
+      - {x: -2.9375, y: -2.1562793}
+      - {x: -2.9375293, y: -3}
+      - {x: -3, y: -3.0000293}
       - {x: -2.999971, y: -6}
     - - {x: -5.000029, y: -6}
       - {x: -5.000029, y: -4}
-      - {x: -5.0937567, y: -3.999981}
-      - {x: -5.37502, y: -3.15625}
+      - {x: -5.0625, y: -3.9999704}
+      - {x: -5.062529, y: -3.15625}
       - {x: -23, y: -3.1562793}
       - {x: -22.999971, y: -6}
   m_VertexDistance: 0.0005
