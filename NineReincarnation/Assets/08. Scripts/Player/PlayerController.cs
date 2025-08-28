@@ -25,6 +25,13 @@ namespace Player.Controller
     public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
+        [SerializeField] private float _defaultGravity; //상승 중력
+        [SerializeField] private float _defaultDownForce; //기본 하강시 최대 보정
+        [SerializeField] private float _gliderDownForce; //글라이딩 하강시 최대 보정
+        [SerializeField] private float _maxDownForce; //하강시 최대 보정
+        [SerializeField] private float _jumpGravity; //상승 중력
+        [SerializeField] private float _lighterGravity; //가벼워 질때 중력
+        [SerializeField] private float _downGravity; //떨어질때 중력
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpForce;
         [SerializeField] private string _playerName; //플레이어 식별 변수
@@ -33,6 +40,8 @@ namespace Player.Controller
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isSlope = false;
+        [SerializeField] private bool _isJump = false; 
+        [SerializeField] private bool _isFalling = false;
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
 
@@ -91,6 +100,13 @@ namespace Player.Controller
             get => _isSlope;
             set => _isSlope = value;
         }
+
+        public bool IsJump
+        {
+            get => _isJump;
+            set => _isJump = value;
+        }
+
         public Vector2 SlopeDir
         {
             get => _slopeDir;
@@ -105,6 +121,9 @@ namespace Player.Controller
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playersStateMachine = new PlayerStateMachine(this);
             _animator = GetComponent<Animator>();
+
+            _rb2d.gravityScale = _defaultGravity;
+
 
             _playersStateMachine.Initialize(_playersStateMachine._idleState);
             _playersStateMachine.stateChanged += ChangeAnimation;
@@ -127,6 +146,22 @@ namespace Player.Controller
         private void FixedUpdate()
         {
             Move();
+
+            if (!_isFalling && _rb2d.linearVelocity.y <= float.Epsilon)
+            {
+                _rb2d.gravityScale = _downGravity;
+                _isFalling = true;
+            }
+            else if (_isFalling && _rb2d.linearVelocity.y > float.Epsilon)
+            {
+                _rb2d.gravityScale = _jumpGravity;
+                _isFalling = false;
+            }
+
+            if(_maxDownForce > _rb2d.linearVelocity.y)
+            {
+                _rb2d.linearVelocity = new Vector2(_rb2d.linearVelocity.x, _maxDownForce);
+            }
         }
 
         public bool DiablePlayerInput()
@@ -143,6 +178,20 @@ namespace Player.Controller
         public Transform GetTransform()
         {
             return transform;
+        }
+
+        public void BecomeLighter()
+        {
+            _jumpGravity = _lighterGravity;
+            _downGravity = _lighterGravity;
+            _maxDownForce = _gliderDownForce;
+        }
+
+        public void InitGravity()
+        {
+            _jumpGravity = _defaultGravity;
+            _downGravity = _defaultGravity;
+            _maxDownForce = _defaultDownForce;
         }
 
         public void SetCheckPoint(Vector3 position)
@@ -205,6 +254,7 @@ namespace Player.Controller
                 _animator.SetTrigger("isJump");
             }
 
+            IsJump = true;
             IsSlope = false;
             IsGround = false;
 

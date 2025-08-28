@@ -16,6 +16,9 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    [Header("---- 테스트 ----")]
+    [SerializeField] private bool isTest;
+
     [Header("---처음 움직일 플레이어---")]
     [SerializeField] string _playerName = "Anna";
 
@@ -34,6 +37,10 @@ public class InputManager : MonoBehaviour
         Instance = this;
         _action = GetComponent<PlayerAction>();
 
+        if (isTest)
+        {
+            Init();
+        }
         SceneEventHandler.SceneStarted += Init;
     }
 

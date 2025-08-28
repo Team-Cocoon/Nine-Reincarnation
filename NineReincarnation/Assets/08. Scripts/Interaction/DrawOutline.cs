@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class DrawOutline : MonoBehaviour, IInteractableToggle
+public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
 {
     [Header("--- 아웃라인 설정 관련 변수 ---")]
     [SerializeField] private bool _isOutline;
     [ColorUsage(true, true)] //HDR 사용 여부
     [SerializeField] private Color _outlineColor;
     [SerializeField] private float _thickness;
-
 
     private Texture _tex;
     private Renderer _render;
@@ -78,13 +77,15 @@ public class DrawOutline : MonoBehaviour, IInteractableToggle
         _render.SetPropertyBlock(_propBlock);
     }
 
-    public void EnableInteraction()
+    public void EnableHoverInteraction()
     {
+        Debug.Log("아웃라인 활성화");
         IsOutline = true;
     }
 
-    public void DisableInteraction()
+    public void DisableHoverInteraction()
     {
+        Debug.Log("아웃라인 비활성화");
         IsOutline = false;
     }
 }
