@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4626978774484731853}
   - component: {fileID: 1285429716836269916}
   - component: {fileID: 2153693473223386151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anna
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 5
   _playerName: Anna
-  _checkPoint: {x: -13, y: -1, z: 0}
+  _checkPoint: {x: -7, y: 2, z: 0}
   _isGround: 0
   _isLook: 0
   _isDead: 0

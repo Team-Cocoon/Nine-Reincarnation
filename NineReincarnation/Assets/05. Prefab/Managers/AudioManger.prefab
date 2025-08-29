@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeData: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
-  BgmClip: {fileID: 8300000, guid: b9ac65e0404a375409cdc955d3bb4da4, type: 3}
+  BgmClips: []
+  BGMChannels: 4
   SfxClips:
   - {fileID: 8300000, guid: 2a01b586ed384e3429092266b52a3cf4, type: 3}
   - {fileID: 8300000, guid: 18415eeb0cd7e4f4892454d56f0fb85f, type: 3}
@@ -58,7 +59,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f836882404177bf449db4b6225095d72, type: 3}
   - {fileID: 8300000, guid: e8f9060906249cf42b240a2161a9f986, type: 3}
   - {fileID: 8300000, guid: a549324fcccb3ae46a29b9b2cdde0d4b, type: 3}
-  Chnnels: 16
+  SFXChannels: 20
   LoopingSfxClips:
   - {fileID: 8300000, guid: d1ace1a9c703c1e4391406919bbb1eb2, type: 3}
-  LoopingChnnels: 5
+  LoopingChannels: 1

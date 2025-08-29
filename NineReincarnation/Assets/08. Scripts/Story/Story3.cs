@@ -237,7 +237,7 @@ public class Story3 : Story
     void TreeClickEvent()
     {
         _interaction.IsInteraction = true;
-        _interaction.SetAction(NoClick);
+        //_interaction.SetAction(NoClick);
     }
     void NoClick()
     {

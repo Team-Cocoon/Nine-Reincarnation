@@ -34,7 +34,7 @@ public class GroundDetector : MonoBehaviour
         if (_player.CurrentState == PlayerAnimationState.Jump)
         {
             //점프 시작 시점은 제거하기 위해서
-            if (_player.Rb2d.linearVelocityY >= 2.0f)
+            if (_player.Rb2d.linearVelocityY >= 3.0f)
             {
                 return;
             }

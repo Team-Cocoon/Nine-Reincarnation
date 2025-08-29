@@ -7,8 +7,8 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     [Header("상호작용 여부")]
     [SerializeField] private bool _isInteraction = false;
 
-    private IInteractableToggle[] _interactableToggles;
-    private Action _eventAction;
+    private IHoverInteractableToggle[] _hoverInteractableToggles;
+    private IClickInteractableToggle[] _clickInteractableToggles;
 
     public bool IsInteraction
     {
@@ -18,38 +18,47 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     private void Awake()
     {
-        _interactableToggles = GetComponents<IInteractableToggle>();
+        _hoverInteractableToggles = GetComponents<IHoverInteractableToggle>();
+        _clickInteractableToggles = GetComponents<IClickInteractableToggle>();
     }
 
-    private void OnInteraction()
+    private void OnHoverInteraction()
     {
-        foreach (IInteractableToggle interactableToggle in _interactableToggles)
+        foreach (IHoverInteractableToggle interactableToggle in _hoverInteractableToggles)
         {
-            interactableToggle.EnableInteraction();
+            interactableToggle.EnableHoverInteraction();
         }
     }
 
-    private void OffInteraction()
+    private void OffHoverInteraction()
     {
-        foreach (IInteractableToggle interactableToggle in _interactableToggles)
+        foreach (IHoverInteractableToggle interactableToggle in _hoverInteractableToggles)
         {
-            interactableToggle.DisableInteraction();
+            interactableToggle.DisableHoverInteraction();
         }
     }
-    /// <summary>
-    /// 이벤트 함수 등록
-    /// </summary>
-    /// <param name="action"></param>
-    public void SetAction(Action action)
+
+    private void OnClickInteraction()
     {
-        _eventAction = action;
+        foreach (IClickInteractableToggle interactableToggle in _clickInteractableToggles)
+        {
+            interactableToggle.EnableClickInteraction();
+        }
     }
+
+    private void OffClickInteraction()
+    {
+        foreach (IClickInteractableToggle interactableToggle in _clickInteractableToggles)
+        {
+            interactableToggle.DisableClickInteraction();
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isInteraction)
         {
-            _eventAction?.Invoke();
-            _eventAction = null;
+            OnClickInteraction();
         }
     }
 
@@ -57,7 +66,7 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         if (_isInteraction)
         {
-            OnInteraction();
+            OnHoverInteraction();
         }
     }
 
@@ -65,7 +74,7 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         if (_isInteraction)
         {
-            OffInteraction();
+            OffHoverInteraction();
         }
     }
 }
