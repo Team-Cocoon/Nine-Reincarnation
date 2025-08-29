@@ -21,35 +21,50 @@ EditorBuildSettings:
     path: Assets/06. Scenes/CoreScene/StageCoreScene.unity
     guid: 221d96be027195b4cb51ca45742ed9e9
   - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1.unity
-    guid: 6aa2277c327743448bb493872679d17a
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-1.unity
-    guid: 71d52ba1a292d6a4dbf9148a57cf93f9
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-2.unity
-    guid: ff0b2f405b6756a47a8b975d0859e8b6
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-3.unity
-    guid: 2249735ddb21cd64caf366f92c1930dd
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-4.unity
-    guid: b0b4d365808e7854fb62d17efcf70988
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-5.unity
-    guid: 8ce060bf1b398f244a19dac7c1067451
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-6.unity
-    guid: 8a159ecfcfbe3cb45b16bf6883afbdc5
-  - enabled: 1
-    path: Assets/06. Scenes/Stages/Stage1/Stage1-7.unity
-    guid: 6c2aadfc046bdef409c494e344d6272f
-  - enabled: 1
     path: Assets/06. Scenes/Stages/Stage1/Continue.unity
     guid: 6918ad8a28b0caa41b29a17273896f21
   - enabled: 1
     path: Assets/06. Scenes/CoreScene/LoadingScene.unity
     guid: 8ee8f6a8222e876438db53b30ca88ec7
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial.unity
+    guid: 6aa2277c327743448bb493872679d17a
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-1.unity
+    guid: 71d52ba1a292d6a4dbf9148a57cf93f9
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-2.unity
+    guid: ff0b2f405b6756a47a8b975d0859e8b6
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-3.unity
+    guid: 2249735ddb21cd64caf366f92c1930dd
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-4.unity
+    guid: b0b4d365808e7854fb62d17efcf70988
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-5.unity
+    guid: 8ce060bf1b398f244a19dac7c1067451
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-6.unity
+    guid: 8a159ecfcfbe3cb45b16bf6883afbdc5
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Tutorial/Tutorial-7.unity
+    guid: 6c2aadfc046bdef409c494e344d6272f
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Stage1/Stage1.unity
+    guid: 8a72e761a86de0a4c83827e626da0c49
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Stage1/Stage1-1.unity
+    guid: e878f60d4051eb64f881b4f8aa43c590
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Stage1/Stage1-2.unity
+    guid: b400b4b01c00c394faf2fc68db11aeea
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Stage1/Stage1-3.unity
+    guid: 3b35c90b623c0a649ad9603aa0704f4e
+  - enabled: 1
+    path: Assets/06. Scenes/Stages/Stage1/Stage1/Stage1-4.unity
+    guid: 55a2c34ec365097449cd923ecadcb4fc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e237c813e18f7ed43969fa00dcdb2851, type: 3}
   m_UseUCBPForAssetBundles: 0
