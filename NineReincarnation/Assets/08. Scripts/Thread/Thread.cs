@@ -20,9 +20,9 @@ public abstract class Thread : MonoBehaviour
     protected Vector3[] _segmentPositions;
 
     protected NativeArray<Segment> segments;
-    private JobHandle _currentJobHandle;
+    protected JobHandle _currentJobHandle;
 
-    private Vector2 _gravity = new Vector2(0, -5f);
+    protected Vector3 _gravity = new Vector3(0, -5f, 0);
     protected bool _isInCamera = false; // 카메라 안에 들어오는지
 
     protected abstract void UpdateThread();
@@ -35,7 +35,10 @@ public abstract class Thread : MonoBehaviour
     protected void OnDestroy()
     {
         if (segments.IsCreated)
+        {
+            _currentJobHandle.Complete();
             segments.Dispose();
+        }
     }
     protected virtual void FixedUpdate()
     {
@@ -66,7 +69,7 @@ public abstract class Thread : MonoBehaviour
         {
             _segmentPositions[i] = segments[i].position;
         }
-        _lineRenderer.positionCount = _segmentPositions.Length;
+        _lineRenderer.positionCount = segmentCount;
         _lineRenderer.SetPositions(_segmentPositions);
     }
     protected void UpdateSegments()
