@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
     {
         Instance = this;
         _action = GetComponent<PlayerAction>();
-
+        Init();
         SceneEventHandler.SceneStarted += Init;
     }
 
