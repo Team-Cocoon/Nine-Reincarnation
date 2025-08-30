@@ -114,7 +114,7 @@ namespace Player.Controller
         }
 
         private void Awake()
-        {
+        {   
             _rb2d = GetComponent<Rigidbody2D>();
             IdleEnter();
             _collider = GetComponent<Collider2D>();

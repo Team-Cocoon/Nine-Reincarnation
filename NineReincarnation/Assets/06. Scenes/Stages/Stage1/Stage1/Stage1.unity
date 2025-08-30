@@ -1497,6 +1497,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _lighterGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _defaultDownForce
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 3296145436470254660, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Name
       value: Anna
@@ -1507,15 +1515,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_SortingLayerID
-      value: 0
+      value: 1418728397
       objectReference: {fileID: 0}
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalPosition.x

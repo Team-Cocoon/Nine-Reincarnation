@@ -50,7 +50,8 @@ public abstract class Thread : MonoBehaviour
     protected virtual void LateUpdate()
     {
         _currentJobHandle.Complete();
-        if (_isInCamera) RenderThread();
+        //if (_isInCamera)
+        RenderThread();
     }
     protected virtual void Initialize()
     {

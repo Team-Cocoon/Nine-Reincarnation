@@ -154,6 +154,7 @@ public class ThrowThread : Thread
             clickable?.OnClicked();
             targetTransform = hit.collider.transform;
             targetPos = targetTransform.position;
+
             StartCoroutine(Throwing(() => { _state = ThrowThreadState.Exist; }));
         }
         else

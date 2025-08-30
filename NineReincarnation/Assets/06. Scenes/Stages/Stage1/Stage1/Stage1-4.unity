@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 1116371437}
   - component: {fileID: 1116371439}
   - component: {fileID: 1116371438}
+  - component: {fileID: 1116371440}
   m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
@@ -361,7 +362,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1418728397
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1254,7 +1255,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1310,6 +1311,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1116371440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116371433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8729cfccb3479b74b8290af52b5910eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1507245825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1512,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1418728397
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3597,7 +3610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989044740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3696,7 +3709,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1418728397
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3795,7 +3808,7 @@ GameObject:
   - component: {fileID: 2143164072}
   - component: {fileID: 2143164075}
   - component: {fileID: 2143164074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
