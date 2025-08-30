@@ -78,7 +78,7 @@ namespace Manager
         private void GameEvent_ToClear()
         {
             _nextSceneState = SceneState.Clear;
-         
+
             GameEvent_TransitionScene(_nextSceneState);
         }
 

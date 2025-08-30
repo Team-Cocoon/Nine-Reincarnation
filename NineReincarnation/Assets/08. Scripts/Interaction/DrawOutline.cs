@@ -51,7 +51,7 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _render = GetComponent<Renderer>();
         _tex = GetComponent<SpriteRenderer>().sprite.texture;
@@ -77,13 +77,13 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
         _render.SetPropertyBlock(_propBlock);
     }
 
-    public void EnableHoverInteraction()
+    public virtual void EnableHoverInteraction()
     {
         Debug.Log("아웃라인 활성화");
         IsOutline = true;
     }
 
-    public void DisableHoverInteraction()
+    public virtual void DisableHoverInteraction()
     {
         Debug.Log("아웃라인 비활성화");
         IsOutline = false;

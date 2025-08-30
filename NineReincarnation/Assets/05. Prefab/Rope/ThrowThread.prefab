@@ -154,10 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentCount: 2
   segmentDist: 0.2
-  threadWidth: 0.15
+  threadWidth: 0.08
   _startTransform: {fileID: 0}
   _endTransform: {fileID: 0}
   _segAmount: 0.3
+  targetTransform: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
-  limitDistance: 12
+  limitDistance: 5.5
   _throwSpeed: 20

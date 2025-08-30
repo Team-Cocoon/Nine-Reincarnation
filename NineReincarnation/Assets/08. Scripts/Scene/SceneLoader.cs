@@ -188,7 +188,11 @@ namespace Utilities
             yield return SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
 
             yield return UnloadAllAdditiveScenesRoutine();
-            yield return UnloadSceneRoutine(prevCoreScenePath);
+
+            if (coreScenePath != prevCoreScenePath)
+            {
+                yield return UnloadSceneRoutine(prevCoreScenePath);
+            }
 
             List<AsyncOperation> ops = new List<AsyncOperation>();
             ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));

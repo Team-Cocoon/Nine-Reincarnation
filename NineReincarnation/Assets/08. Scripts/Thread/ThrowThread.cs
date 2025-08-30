@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Linq;
-using NUnit.Framework;
 using Unity.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public enum ThrowThreadState 
+public enum ThrowThreadState
 {
     Idle,
     Throwing,
@@ -22,10 +18,10 @@ public class ThrowThread : Thread
     [Header("한계 거리")]
     [SerializeField] private float limitDistance = 5f;
     [Header("속도")]
-    [SerializeField] private  float _throwSpeed = 1f;
+    [SerializeField] private float _throwSpeed = 1f;
 
     private ThrowThreadState _state;
-    
+
     private int maxSegmentCount;
     private Vector3 prevNodePos;
 
@@ -41,7 +37,7 @@ public class ThrowThread : Thread
             ClickEvent();
         }
     }
-    /*  이것만 호출하면 됨 */ 
+    /*  이것만 호출하면 됨 */
     public void ClickEvent()
     {
         switch (_state)
@@ -61,12 +57,12 @@ public class ThrowThread : Thread
     {
         if (_state == ThrowThreadState.Exist)
         {
-            if(targetTransform != null)
+            if (targetTransform != null)
             {
                 targetPos = targetTransform.position;
                 float currentDistance = Vector3.Distance(_startTransform.position, targetPos);
 
-                if(currentDistance > limitDistance)
+                if (currentDistance > limitDistance)
                 {
                     StartDeleting();
                     return;
@@ -92,14 +88,14 @@ public class ThrowThread : Thread
         }
         // targetPos 보정
         maxSegmentCount = (int)((_startTransform.position - targetPos).magnitude * 4);
-        
+
         maxSegmentCount = Mathf.Max(maxSegmentCount, 2);
         _segmentPositions = new Vector3[maxSegmentCount];
         segments = new NativeArray<Segment>(maxSegmentCount, Allocator.Persistent);
-        for(int i = 0; i < segmentCount; i++)
+        for (int i = 0; i < segmentCount; i++)
         {
             Vector2 pos = _startTransform.position;
-            segments[i]=new Segment(pos);
+            segments[i] = new Segment(pos);
         }
         _lineRenderer.positionCount = segmentCount;
         _lineRenderer.SetPositions(_segmentPositions);
@@ -134,7 +130,8 @@ public class ThrowThread : Thread
         _state = ThrowThreadState.Throwing;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
 
         targetTransform = null;
 
@@ -150,7 +147,7 @@ public class ThrowThread : Thread
 
         InitThread();
 
-        hit = Physics2D.Raycast(targetPos, Vector2.zero);
+        hit = Physics2D.Raycast(targetPos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
         if (hit.collider != null)
         {
             IClickable clickable = hit.collider.GetComponent<IClickable>();

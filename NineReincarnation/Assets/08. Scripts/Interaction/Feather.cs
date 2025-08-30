@@ -1,11 +1,8 @@
 using Player.Controller;
 using UnityEngine;
 
-public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractableToggle
+public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractableToggle
 {
-    [Header("----- 아웃라인 조절 ------")]
-    [SerializeField] private DrawOutline _outline;
-    [ColorUsage(true, true)] //HDR 사용 여부
     [SerializeField] private Color _activeColor;
     [SerializeField] private Color _inactiveColor;
     [SerializeField] private Color _activatedColor;
@@ -14,13 +11,16 @@ public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractab
     [SerializeField] private bool _possibleActive;
     [SerializeField] private bool _isActivated;
 
-    [Header("----- 플레이어 ------")]
-    [SerializeField] PlayerController _player;
+    PlayerController _player => InputManager.Instance.Action.Player;
 
     private LayerMask _playerMask;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        _possibleActive = false;
+        _isActivated = false;
         _playerMask = LayerMask.GetMask("Player");
     }
 
@@ -40,28 +40,35 @@ public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractab
     {
         if (_possibleActive)
         {
-            if(_isActivated) //이미 활성화 되어있다면
+            if (_isActivated) //이미 활성화 되어있다면
             {
-                _outline.OutlineColor = _activeColor;
+                OutlineColor = _activeColor;
                 InactivateFeather();
             }
             else
             {
-                _outline.OutlineColor = _activatedColor;
+                OutlineColor = _activatedColor;
                 ActivateFeather();
             }
         }
     }
-    public void EnableHoverInteraction()
+    public override void EnableHoverInteraction()
     {
+        if (_isActivated)
+        {
+            return;
+        }
+
         if (_possibleActive)
         {
-            _outline.OutlineColor = _activeColor;
+            OutlineColor = _activeColor;
         }
         else
         {
-            _outline.OutlineColor = _inactiveColor;
+            OutlineColor = _inactiveColor;
         }
+
+        base.EnableHoverInteraction();
     }
 
     public void DisableClickInteraction()
@@ -69,8 +76,13 @@ public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractab
         return;
     }
 
-    public void DisableHoverInteraction()
+    public override void DisableHoverInteraction()
     {
+        if (_isActivated)
+        {
+            return;
+        }
+        base.DisableHoverInteraction();
         return;
     }
 
@@ -79,7 +91,7 @@ public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractab
         bool _detectedPlayer = ((1 << collision.gameObject.layer) & _playerMask) != 0;
         if (_detectedPlayer)
         {
-            _outline.OutlineColor = _activeColor;
+            OutlineColor = _activeColor;
             _possibleActive = true;
         }
     }
@@ -89,7 +101,7 @@ public class Feather : MonoBehaviour, IClickInteractableToggle, IHoverInteractab
         bool _detectedPlayer = ((1 << collision.gameObject.layer) & _playerMask) != 0;
         if (_detectedPlayer)
         {
-            _outline.OutlineColor = _inactiveColor;
+            OutlineColor = _inactiveColor;
             _possibleActive = false;
             InactivateFeather();
         }

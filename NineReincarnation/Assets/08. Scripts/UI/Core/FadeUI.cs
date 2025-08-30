@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Effect.WipeFade;
 using UnityEngine;
@@ -89,9 +88,9 @@ public class FadeUI : ToggleUI
 
         UIEvent_ToggleUI(stopTime);
 
-        return FadeEffect.FadeOut(_image, 2.0f, () => 
-        { 
-            UIEvent_ToggleUI(stopTime); 
+        return FadeEffect.FadeOut(_image, 2.0f, () =>
+        {
+            UIEvent_ToggleUI(stopTime);
         });
     }
 }

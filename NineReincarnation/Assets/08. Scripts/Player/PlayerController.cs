@@ -40,7 +40,7 @@ namespace Player.Controller
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isSlope = false;
-        [SerializeField] private bool _isJump = false; 
+        [SerializeField] private bool _isJump = false;
         [SerializeField] private bool _isFalling = false;
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
@@ -158,7 +158,7 @@ namespace Player.Controller
                 _isFalling = false;
             }
 
-            if(_maxDownForce > _rb2d.linearVelocity.y)
+            if (_maxDownForce > _rb2d.linearVelocity.y)
             {
                 _rb2d.linearVelocity = new Vector2(_rb2d.linearVelocity.x, _maxDownForce);
             }
