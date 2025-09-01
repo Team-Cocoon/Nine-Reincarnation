@@ -919,6 +919,18 @@ PrefabInstance:
       propertyPath: _name
       value: SettingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2175970673994839192, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2175970673994839192, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2175970673994839192, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2576769841311336435, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Pivot.x
       value: 0

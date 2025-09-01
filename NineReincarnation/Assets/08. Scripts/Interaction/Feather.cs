@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using Player.Controller;
 using UnityEngine;
 
 public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractableToggle
 {
+    public static bool IsTotalActive;
+    public static List<Feather> ActiveFeather = new List<Feather>();
+
     [SerializeField] private Color _activeColor;
     [SerializeField] private Color _inactiveColor;
     [SerializeField] private Color _activatedColor;
@@ -25,13 +29,18 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     }
 
     private void ActivateFeather()
-    {
+    {     
+        OutlineColor = _activatedColor;
+        IsTotalActive = true;
         _isActivated = true;
         _player.BecomeLighter();
     }
 
     private void InactivateFeather()
     {
+        IsOutline = false;
+        OutlineColor = _activeColor;
+        IsTotalActive = false;
         _isActivated = false;
         _player.InitGravity();
     }
@@ -40,14 +49,20 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     {
         if (_possibleActive)
         {
-            if (_isActivated) //이미 활성화 되어있다면
-            {
-                OutlineColor = _activeColor;
+            if (_isActivated || IsTotalActive) //이미 활성화 되어있다면
+            {//활성화 해제
+                foreach(Feather feather in ActiveFeather)
+                {
+                    feather.InactivateFeather();
+                }
+                ActiveFeather.Clear();
+
                 InactivateFeather();
             }
             else
-            {
-                OutlineColor = _activatedColor;
+            {//활성화
+
+                ActiveFeather.Add(this);
                 ActivateFeather();
             }
         }
