@@ -29,7 +29,7 @@ public class Story3 : Story
     [Header("Event3-7")]
     [SerializeField] private float _cameraSize = 6f;
     [SerializeField] private float _zoomDuration = 2f;
-    [SerializeField] private Interaction _interaction;
+    [SerializeField] private GameObject _bigTree;
     [SerializeField] private DrawOutline _outline;
     [Header("Event3-8")]
     [SerializeField] private GameObject _dialogue3_8;
@@ -236,13 +236,13 @@ public class Story3 : Story
     #region Event 3-7
     void TreeClickEvent()
     {
-        _interaction.IsInteraction = true;
-        //_interaction.SetAction(NoClick);
+        _bigTree.GetComponent<Interaction>().IsInteraction = true;
+        _bigTree.GetComponent<Tree>().SetAction += NoClick;
     }
     void NoClick()
     {
         StartStory();
-        _interaction.IsInteraction = false;
+        _bigTree.GetComponent<Interaction>().IsInteraction = false;
         _outline.IsOutline = false;
     }
     #endregion
