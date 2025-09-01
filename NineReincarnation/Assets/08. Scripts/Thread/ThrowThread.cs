@@ -194,6 +194,8 @@ public class ThrowThread : Thread
 
     private IEnumerator Disappearing(System.Action onComplete)
     {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
+
         float elapsedTime = 0f;
         Color startColor = _lineRenderer.startColor;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);

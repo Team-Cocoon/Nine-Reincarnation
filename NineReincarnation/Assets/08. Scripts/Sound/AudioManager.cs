@@ -42,7 +42,8 @@ public class AudioManager : MonoBehaviour
         SavePoint,
         Zoom,
         Text,
-        Click = 10
+        Click = 10,
+        DeleteThread
     }
     public enum LoopSfx
     {

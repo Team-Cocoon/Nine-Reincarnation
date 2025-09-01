@@ -89,6 +89,7 @@ public class RespawnThread : Thread, ICollidable
     }
     private IEnumerator DisappearThreadCoroutine()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
         float waitTime = _disappearTime - 1f;
         float timer = 0f;
 
