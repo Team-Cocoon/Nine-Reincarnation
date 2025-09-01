@@ -108,11 +108,11 @@ public class RespawnThread : Thread, ICollidable
 
         while (elapsedTime < 1f)
         {
-            if (!_isHit)
-            {
-                AppearThread();
-                yield break;  // 중간에 빠졌으면 중단
-            }
+            //if (!_isHit)
+            //{
+            //    AppearThread();
+            //    yield break;  // 중간에 빠졌으면 중단
+            //}
             elapsedTime += Time.deltaTime;
             Color currentColor = Color.Lerp(startColor, endColor, elapsedTime / 1f);
 
