@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scissors3
       objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -335,6 +339,10 @@ PrefabInstance:
     - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_Name
       value: Scissors8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1599,7 +1607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &427309188
 Transform:
   m_ObjectHideFlags: 0
@@ -2001,6 +2009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scissors2
       objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2098,6 +2110,10 @@ PrefabInstance:
     - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_Name
       value: Scissors1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2693,6 +2709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scissors5
       objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3056,6 +3076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scissors7
       objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3184,6 +3208,10 @@ PrefabInstance:
     - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_Name
       value: Scissors4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3685,6 +3713,10 @@ PrefabInstance:
     - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
       propertyPath: m_Name
       value: Scissors6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348858082921156181, guid: 448a4df4f99c2fb4cac0fc50f25e8262, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
