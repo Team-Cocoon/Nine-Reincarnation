@@ -8,7 +8,7 @@ namespace Manager
 {
     public class SceneStateManager : MonoBehaviour
     {
-        private List<string> _stageSubScenes => SceneDataManager.Instance.GetStageSubScene(0);
+        private List<string> _stageSubScenes => SceneDataManager.Instance.GetStageSubScene(1);
 
         private List<string> _storySubScenes => SceneDataManager.Instance.GetStorySubScene(0);
 
