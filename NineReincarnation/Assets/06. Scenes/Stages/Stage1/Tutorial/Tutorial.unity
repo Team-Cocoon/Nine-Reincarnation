@@ -708,6 +708,14 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _maxDownForce
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _defaultDownForce
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: _idlePhysicsMaterial
       value: 
       objectReference: {fileID: 6200000, guid: cf5b98e6af7391440850f6a7997cc5f4, type: 2}

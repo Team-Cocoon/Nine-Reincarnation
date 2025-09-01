@@ -39,18 +39,18 @@ namespace Player.Controller
         [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
         [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
+        [SerializeField] private bool _isAnimation = false; //다른 기타 사항 판별
         [SerializeField] private bool _isSlope = false;
         [SerializeField] private bool _isJump = false;
         [SerializeField] private bool _isFalling = false;
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
-
+        [SerializeField] private SpriteRenderer _spriteRenderer; //플레이어 이미지
         private int _jumpCount = 0; //더블 점프 제어
         private PlayerDirection _direction; //플레이어 방향
         private Animator _animator;
         private Rigidbody2D _rb2d;
         private PlayerStateMachine _playersStateMachine; //플레이어 상태머신
-        private SpriteRenderer _spriteRenderer; //플레이어 이미지
         private Collider2D _collider;
         private OneWayPlatform _oneWayPlatform;
         private PlayerAnimationState _currentState;
@@ -114,11 +114,10 @@ namespace Player.Controller
         }
 
         private void Awake()
-        {   
+        {
             _rb2d = GetComponent<Rigidbody2D>();
             IdleEnter();
             _collider = GetComponent<Collider2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
             _playersStateMachine = new PlayerStateMachine(this);
             _animator = GetComponent<Animator>();
 
@@ -230,7 +229,7 @@ namespace Player.Controller
         //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
         {
-            if (_isDead) return;
+            if (_isDead || _isAnimation) return;
             if (IsSlope)
             {
                 _rb2d.linearVelocity = (int)_direction * _speed * _slopeDir;
@@ -247,7 +246,7 @@ namespace Player.Controller
         /// </summary>
         public void Jump()
         {
-            if (_jumpCount >= 2) return;
+            if (_jumpCount >= 2 || _isAnimation) return;
 
             if (_jumpCount == 1)
             {
@@ -339,6 +338,21 @@ namespace Player.Controller
                     break;
             }
         }
+        #endregion
+
+        #region 애니메이션
+        //public void TutorialEnd()
+        //{
+        //    Debug.Log("여기");
+        //    _isAnimation = true;
+        //    SetStop();
+        //    _animator.SetTrigger("isStageFinal");
+        //    DOVirtual.DelayedCall(3f, () =>
+        //    {
+        //        _isAnimation = true;
+        //    });
+        //}
+
         #endregion
 
         #region 충돌 제어

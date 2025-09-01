@@ -8,7 +8,7 @@ public class TutorialBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-        if(layerName == "Player")
+        if (layerName == "Player")
         {
             _tutorialObject.SetActive(true);
         }

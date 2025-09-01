@@ -360,7 +360,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -417,7 +418,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -931,7 +933,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -988,7 +991,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1021,7 +1025,7 @@ MonoBehaviour:
   _animationLoopType: 1
   _loopCount: -1
   _snappingSettings: {x: 0.1, y: 0.1}
-  _editing: 1
+  _editing: 0
   _waypoints:
   - {x: 70, y: -1.8, z: 0}
   - {x: 75.7, y: -1.8, z: 0}
@@ -1497,33 +1501,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: _lighterGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: _defaultDownForce
-      value: -100
-      objectReference: {fileID: 0}
     - target: {fileID: 3296145436470254660, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_Name
       value: Anna
       objectReference: {fileID: 0}
-    - target: {fileID: 3296145436470254660, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5546431793339523123, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1418728397
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1863,11 +1847,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2722889856789072161, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 86062de7d0daf76428ff6945991c0f80, type: 3}
     - target: {fileID: 8418252998242377184, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
       propertyPath: m_Name
       value: Feather 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1951,11 +1940,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2722889856789072161, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 86062de7d0daf76428ff6945991c0f80, type: 3}
     - target: {fileID: 8418252998242377184, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
       propertyPath: m_Name
       value: Feather 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2143,7 +2137,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feather 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6682873060510841788, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

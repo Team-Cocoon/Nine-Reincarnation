@@ -265,7 +265,7 @@ public class Story3 : Story
     #region Event 3-12
     private IEnumerator KeyShow()
     {
-        _mKey.SetActive(true);
+        //_mKey.SetActive(true);
         //yield return new WaitForSeconds(3f);
         //_mKey.SetActive(true);
         while (true)
@@ -282,8 +282,12 @@ public class Story3 : Story
     {
         GameEventHandler.StageExcuted_Invoke();
     }
+
+    private bool isNext = false;
     public void NextStage()
     {
+        if (isNext) return;
+        isNext = true;
         Enter(null);
     }
 }

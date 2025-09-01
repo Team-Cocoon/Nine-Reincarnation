@@ -29,7 +29,7 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     }
 
     private void ActivateFeather()
-    {     
+    {
         OutlineColor = _activatedColor;
         IsTotalActive = true;
         _isActivated = true;
@@ -51,7 +51,7 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
         {
             if (_isActivated || IsTotalActive) //이미 활성화 되어있다면
             {//활성화 해제
-                foreach(Feather feather in ActiveFeather)
+                foreach (Feather feather in ActiveFeather)
                 {
                     feather.InactivateFeather();
                 }

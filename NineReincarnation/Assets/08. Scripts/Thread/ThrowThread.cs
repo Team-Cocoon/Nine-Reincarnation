@@ -153,6 +153,10 @@ public class ThrowThread : Thread
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             clickable?.OnClicked();
             targetTransform = hit.collider.transform;
+
+            _endTransform.SetParent(targetTransform);
+            _endTransform.localPosition = Vector2.zero;
+
             targetPos = targetTransform.position;
 
             StartCoroutine(Throwing(() => { _state = ThrowThreadState.Exist; }));
@@ -194,8 +198,6 @@ public class ThrowThread : Thread
 
     private IEnumerator Disappearing(System.Action onComplete)
     {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
-
         float elapsedTime = 0f;
         Color startColor = _lineRenderer.startColor;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);

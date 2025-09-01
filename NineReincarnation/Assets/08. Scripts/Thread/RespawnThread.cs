@@ -89,7 +89,6 @@ public class RespawnThread : Thread, ICollidable
     }
     private IEnumerator DisappearThreadCoroutine()
     {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
         float waitTime = _disappearTime - 1f;
         float timer = 0f;
 
@@ -123,6 +122,8 @@ public class RespawnThread : Thread, ICollidable
 
             yield return null;
         }
+
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
         _lineRenderer.startColor = endColor;
         _lineRenderer.endColor = endColor;
 
