@@ -51,6 +51,8 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
         }
     }
 
+    public virtual bool IsHoverControlToSelf { get => false; }
+
     protected virtual void Awake()
     {
         _render = GetComponent<Renderer>();

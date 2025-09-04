@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Player.Controller;
 using UnityEngine;
 
-public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractableToggle
+public class Feather : DrawOutline, IClickInteractableToggle
 {
     public static bool IsTotalActive;
     public static List<Feather> ActiveFeather = new List<Feather>();
@@ -14,6 +14,12 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     [Header("----- 상호작용 조절 ------")]
     [SerializeField] private bool _possibleActive;
     [SerializeField] private bool _isActivated;
+    [SerializeField] private bool _isClickControlToSelf;
+    [SerializeField] private bool _isHoverControlToSelf;
+
+    public bool IsClickControlToSelf { get => _isClickControlToSelf; }
+    public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
+
 
     PlayerController _player => InputManager.Instance.Action.Player;
 
@@ -67,6 +73,7 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
             }
         }
     }
+
     public override void EnableHoverInteraction()
     {
         if (_isActivated)
@@ -114,7 +121,7 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     private void OnTriggerExit2D(Collider2D collision)
     {
         bool _detectedPlayer = ((1 << collision.gameObject.layer) & _playerMask) != 0;
-        if (_detectedPlayer)
+        if (_detectedPlayer && _isActivated)
         {
             OutlineColor = _inactiveColor;
             _possibleActive = false;

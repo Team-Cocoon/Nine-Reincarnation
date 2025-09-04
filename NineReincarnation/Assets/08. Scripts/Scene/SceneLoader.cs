@@ -195,7 +195,11 @@ namespace Utilities
             }
 
             List<AsyncOperation> ops = new List<AsyncOperation>();
-            ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
+
+            if (coreScenePath != prevCoreScenePath)
+            {
+                ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
+            }
 
             // 서브 씬들을 추가적으로 로드
             foreach (string scenePath in subScenePaths)

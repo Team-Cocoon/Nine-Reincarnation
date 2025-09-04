@@ -199,7 +199,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -267,6 +267,8 @@ MonoBehaviour:
   _activatedColor: {r: 0, g: 0.15639663, b: 1, a: 0}
   _possibleActive: 0
   _isActivated: 1
+  _isClickControlToSelf: 1
+  _isHoverControlToSelf: 0
 --- !u!114 &6682873060510841788
 MonoBehaviour:
   m_ObjectHideFlags: 0

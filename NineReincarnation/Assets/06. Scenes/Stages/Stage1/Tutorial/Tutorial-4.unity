@@ -2815,6 +2815,10 @@ PrefabInstance:
       value: 0.7607843
       objectReference: {fileID: 0}
     - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
+      propertyPath: _editing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203877033962230474, guid: 3ba52c6d1a9fc1e49b97831625f5b1d0, type: 3}
       propertyPath: isStopAnimator
       value: 0
       objectReference: {fileID: 0}

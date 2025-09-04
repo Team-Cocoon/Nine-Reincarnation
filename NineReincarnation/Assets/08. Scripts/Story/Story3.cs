@@ -237,7 +237,8 @@ public class Story3 : Story
     void TreeClickEvent()
     {
         _bigTree.GetComponent<Interaction>().IsInteraction = true;
-        _bigTree.GetComponent<Tree>().SetAction += NoClick;
+        _bigTree.GetComponent<BigTree>().SetAction += NoClick;
+        _bigTree.GetComponent<Interaction>().enabled = true;
     }
     void NoClick()
     {

@@ -24,7 +24,7 @@ public class MoveState : IPlayerState
     public void Execute()
     {
         //공중 상태 진입 시 Jump 상태로 변환
-        if (!_player.IsGround)
+        if (!_player.IsGround && !_player.IsSlope)
         {
             _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._jumpState);
         }

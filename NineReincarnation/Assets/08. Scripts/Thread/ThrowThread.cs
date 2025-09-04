@@ -24,6 +24,7 @@ public class ThrowThread : Thread
 
     private int maxSegmentCount;
     private Vector3 prevNodePos;
+    private IClickInteractableToggle clickable;
 
     protected override void Initialize()
     {
@@ -150,8 +151,8 @@ public class ThrowThread : Thread
         hit = Physics2D.Raycast(targetPos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
         if (hit.collider != null)
         {
-            IClickable clickable = hit.collider.GetComponent<IClickable>();
-            clickable?.OnClicked();
+            clickable = hit.collider.GetComponent<IClickInteractableToggle>();
+            clickable?.EnableClickInteraction();
             targetTransform = hit.collider.transform;
 
             _endTransform.SetParent(targetTransform);
@@ -169,6 +170,8 @@ public class ThrowThread : Thread
     private void StartDeleting()
     {
         _state = ThrowThreadState.Deleting;
+        clickable?.EnableClickInteraction();
+        clickable = null;
         StartCoroutine(Disappearing(() => { _state = ThrowThreadState.Idle; }));
     }
     private IEnumerator Throwing(System.Action onComplete)

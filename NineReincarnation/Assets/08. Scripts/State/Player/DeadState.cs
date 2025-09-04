@@ -25,6 +25,7 @@ public class DeadState : IPlayerState
     {
         if (!_player.IsDead)
         {
+            _player.IsGround = true;
             _player.PlayerStateMachine.TransitionTo(_player.PlayerStateMachine._idleState);
         }
     }

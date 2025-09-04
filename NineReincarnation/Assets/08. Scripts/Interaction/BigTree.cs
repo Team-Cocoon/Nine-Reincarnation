@@ -1,7 +1,9 @@
 using System;
 
-public class Tree : DrawOutline, IClickInteractableToggle
+public class BigTree : DrawOutline, IClickInteractableToggle
 {
+    public bool IsClickControlToSelf => false;
+
     public event Action SetAction;
 
     public void DisableClickInteraction()
