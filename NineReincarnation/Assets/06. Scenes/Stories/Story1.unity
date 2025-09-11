@@ -238,7 +238,7 @@ Transform:
   m_GameObject: {fileID: 58060109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 0.95, y: 0.95, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2891,7 +2891,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3021,6 +3021,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1456557922}
     - target: {fileID: 7467071464973920249, guid: 3c2cecae40ebad64b906fab82c04cdcb, type: 3}
+      propertyPath: _zoomInSize
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467071464973920249, guid: 3c2cecae40ebad64b906fab82c04cdcb, type: 3}
       propertyPath: _dialogue1_9
       value: 
       objectReference: {fileID: 567982061}
@@ -3061,6 +3065,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1597688479}
     m_Modifications:
+    - target: {fileID: 204138043376125801, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589848096353621436, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1622296082689154148, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
       propertyPath: onTextShowed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3103,7 +3115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3442393337818457949, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.9200003
+      value: -3.95629
       objectReference: {fileID: 0}
     - target: {fileID: 3442393337818457949, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3137,6 +3149,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3825236275078061635, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5584072884636979602, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
       propertyPath: onTextShowed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3145,10 +3161,24 @@ PrefabInstance:
       propertyPath: onTypewriterStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 713582524}
+    - target: {fileID: 8138829234102463295, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138829234102463295, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8048235683952503561, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4789212430675254524, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 4f16c4e582e3c754fa1082643714c180, type: 3}
 --- !u!1001 &4178394454706848409
 PrefabInstance:
