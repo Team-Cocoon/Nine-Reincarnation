@@ -431,7 +431,6 @@ namespace Player.Controller
 
             if (_detectedSlope)
             {
-                Debug.Log("응애");
                 UpdateSlopeDetector(true);
                 IsJump = false;
             }

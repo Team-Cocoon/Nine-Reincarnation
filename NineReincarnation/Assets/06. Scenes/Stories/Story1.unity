@@ -1647,7 +1647,6 @@ MonoBehaviour:
   _bigTree: {fileID: 1075824983}
   _outline: {fileID: 1852088191}
   _dialogue3_8: {fileID: 617645460}
-  _mKey: {fileID: 0}
 --- !u!61 &625727841
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3456,7 +3455,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 1983439449}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

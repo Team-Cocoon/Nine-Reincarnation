@@ -37,6 +37,8 @@ namespace Manager
             _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
 
             GameEvent_ToTitle();
+
+            SceneEventHandler.OnSceneChanged += ChandedScene;
             GameEventHandler.TitleExcuted += GameEvent_ToTitle;
             GameEventHandler.StoryExcuted += GameEvent_ToStory;
             GameEventHandler.StageExcuted += GameEvent_ToStage;
@@ -47,6 +49,7 @@ namespace Manager
 
         private void OnDestroy()
         {
+            SceneEventHandler.OnSceneChanged -= ChandedScene;
             GameEventHandler.TitleExcuted -= GameEvent_ToTitle;
             GameEventHandler.StoryExcuted -= GameEvent_ToStory;
             GameEventHandler.StageExcuted -= GameEvent_ToStage;
@@ -96,20 +99,25 @@ namespace Manager
         private void ChangeScene(ISceneState state)
         {
             string scenePath = state.ScenePath;
-
             switch (state.StateType)
             {
                 case SceneState.Stage:
+                    Debug.Log(string.Format("로딩 스테이지 : {0}, 현재 스테이지 : {1} : {2}", scenePath, _currentScenePath, state.StateType.ToString()));
                     SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _stageSubScenes);
                     break;
                 case SceneState.Story:
+                    Debug.Log(string.Format("로딩 스테이지 : {0}, 현재 스테이지 : {1} : {2}", scenePath, _currentScenePath, state.StateType.ToString()));
                     SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _storySubScenes);
                     break;
                 default:
+                    Debug.Log(string.Format("로딩 스테이지 : {0}, 현재 스테이지 : {1} : {2}", scenePath, _currentScenePath, state.StateType.ToString()));
                     SceneEventHandler.SceneStateChanged_Invoke(scenePath, _currentScenePath);
                     break;
             }
+        }
 
+        public void ChandedScene(string scenePath)
+        {
             _currentScenePath = scenePath;
         }
     }
