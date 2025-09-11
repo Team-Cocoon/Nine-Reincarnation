@@ -11,6 +11,18 @@ public class NPCAnna : NPC, IEvent
             case "Anna_Wake":
                 _animator.SetTrigger("isWake");
                 break;
+            case "Anna_Move":
+                PlayMoveSound();
+                _animator.SetTrigger("isMove");
+                break;
+            case "Anna_Idle":
+                _animator.SetTrigger("isIdle");
+                break;
         }
+    }
+
+    public void PlayMoveSound()
+    {
+        AudioManager.Instance.PlayLoopingSfx(AudioManager.LoopSfx.Walk);
     }
 }

@@ -26,15 +26,26 @@ public class Story3 : Story
     [SerializeField] private GameObject _ghost2;
     [SerializeField] private float _fadeTime = 1f;
     private float _time = 0f;
+    [Header("Event3-2")]
+    [SerializeField] private GameObject _dialogue3_2;
+    [Header("Event3-3")]
+    [SerializeField] private GameObject _dialogue3_3;
+    [Header("Event3-4")]
+    private float _cameraOrginSize;
+    private Vector3 _cameraOriginPos;
+    [SerializeField] private float _zoomInSize = 3f;
+    [SerializeField] private GameObject _dialogue3_4;
+    [Header("Event3-5")]
+    [SerializeField] private GameObject _dialogue3_5;
     [Header("Event3-7")]
-    [SerializeField] private float _cameraSize = 6f;
+    [SerializeField] private float _zoomOutSize = 6f;
     [SerializeField] private float _zoomDuration = 2f;
     [SerializeField] private GameObject _bigTree;
     [SerializeField] private DrawOutline _outline;
     [Header("Event3-8")]
     [SerializeField] private GameObject _dialogue3_8;
     private bool _isTextShowed = false;
-    [Header("Event3-8")]
+    [Header("Event3-12")]
     [SerializeField] private GameObject _mKey;
 
     /* Event1-10 에 필요한 변수 */
@@ -52,9 +63,11 @@ public class Story3 : Story
     private void SetStart()
     {
         InputManager.Instance.DisableInput();
-        StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
-        StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
+        //StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
+        //StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
+        _cameraOrginSize = _camera.orthographicSize;
+        _cameraOriginPos = _camera.transform.position;
         StartStory();
     }
 
@@ -63,6 +76,9 @@ public class Story3 : Story
         base.PlayStory(eventFunc);
         switch (eventFunc)
         {
+            case "Event":
+                StartStory(); // 임시 테스트용
+                break;
             case "Event1-7":
                 EventFinger();
                 break;
@@ -82,9 +98,21 @@ public class Story3 : Story
             case "Event3-2":
                 StartCoroutine(Event3_2());
                 break;
+            case "Event3-3":
+                StartCoroutine(Event3_3());
+                break;
+            case "Event3-4":
+                StartCoroutine(Event3_4());
+                break;
+            case "Event3-5":
+                StartCoroutine(Event3_5());
+                break;
+            case "Event3-6":
+                StartCoroutine(Event3_6());
+                break;
             case "Event3-7":
                 // 나무 클릭하는 기능 추가해야 함
-                CameraEventHandler.Zoom(_camera, _cameraSize, _zoomDuration, TreeClickEvent);
+                CameraEventHandler.Zoom(_camera, _zoomOutSize, _zoomDuration, TreeClickEvent);
                 break;
             case "Event3-8":
                 StartCoroutine(Event3_8());
@@ -223,12 +251,73 @@ public class Story3 : Story
     #endregion
 
     #region Event 3-2
+    /* 두리번 거리는 이벤트 */
+    //private IEnumerator Event3_2()
+    //{
+    //    _npcAnna.GetComponent<SpriteRenderer>().flipX = true;
+    //    yield return new WaitForSeconds(2f);
+    //    _npcAnna.GetComponent<SpriteRenderer>().flipX = false;
+    //    yield return new WaitForSeconds(2f);
+    //    StartStory();
+    //}
     private IEnumerator Event3_2()
     {
-        _npcAnna.GetComponent<SpriteRenderer>().flipX = true;
-        yield return new WaitForSeconds(2f);
-        _npcAnna.GetComponent<SpriteRenderer>().flipX = false;
-        yield return new WaitForSeconds(2f);
+        _dialogue3_2.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        _isTextShowed = false;
+        _dialogue3_2.SetActive(false);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-3
+    private IEnumerator Event3_3()
+    {
+        _dialogue3_3.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        _isTextShowed = false;
+        _dialogue3_3.SetActive(false);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-4
+    private IEnumerator Event3_4()
+    {
+        CameraEventHandler.Shake(_camera, _shakeDuration, 0.1f, 10, 90, true);
+        bool isZoomFinished = false;
+        CameraEventHandler.ZoomToTarget(_camera, _npcAnna.transform.position, _zoomInSize, _zoomDuration, () => isZoomFinished = true);
+        _dialogue3_4.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
+        _isTextShowed = false;
+        _dialogue3_4.SetActive(false);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-5
+    private IEnumerator Event3_5()
+    {
+        CameraEventHandler.Shake(_camera, _shakeDuration, 0.1f, 10, 90, true);
+        bool isZoomFinished = false;
+        CameraEventHandler.ZoomToTarget(_camera, _npcAnna.transform.position, _zoomInSize - 0.3f, _zoomDuration, () => isZoomFinished = true);
+        _dialogue3_5.SetActive(true);
+        yield return new WaitUntil(() => _isTextShowed);
+        yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
+        _isTextShowed = false;
+        _dialogue3_5.SetActive(false);
+        StartStory();
+    }
+    #endregion
+
+    #region Event 3-6
+    private IEnumerator Event3_6()
+    {
+        CameraEventHandler.ZoomToTarget(_camera, _cameraOriginPos, _cameraOrginSize, _zoomDuration);
+        yield return new WaitForSeconds(4f);
         StartStory();
     }
     #endregion
