@@ -31,13 +31,6 @@ public class ThrowThread : Thread
         _lineRenderer = GetComponent<LineRenderer>();
         InitThread();
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickEvent();
-        }
-    }
     /*  이것만 호출하면 됨 */
     public void ClickEvent()
     {

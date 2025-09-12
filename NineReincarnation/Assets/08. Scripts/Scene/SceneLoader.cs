@@ -171,14 +171,14 @@ namespace Utilities
 
             isLoading = true;
 
-            yield return SceneEventHandler.SceneFadeOut_Invoke().WaitForCompletion();
+            yield return SceneEventHandler.SceneFadeOut_Invoke()?.WaitForCompletion();
             SceneEventHandler.SceneExited_Invoke();
 
             yield return LoadingSceneRoutine(coreScenePath, prevCoreScenePath);
             SceneEventHandler.OnSceneChanged_Invoke(coreScenePath);
 
             SceneEventHandler.SceneStarted_Invoke();
-            yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
+            yield return SceneEventHandler.SceneFadeIn_Invoke()?.WaitForCompletion();
 
             yield return new WaitForSecondsRealtime(0.5f);
             isLoading = false;

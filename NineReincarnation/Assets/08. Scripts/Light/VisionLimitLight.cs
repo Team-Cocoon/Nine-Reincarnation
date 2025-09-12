@@ -19,7 +19,7 @@ public class VisionLimitLight : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.parent = InputManager.Instance.Action.Player.transform;
+        transform.parent = InputManager.Instance.CurPlayer.transform;
         transform.localPosition = Vector3.zero;
     }
 

@@ -10,7 +10,7 @@ public class Story3 : Story
     [SerializeField] private Fade _fade;
 
     [Header("안나")]
-    private PlayerController _annaController => InputManager.Instance.Players["Anna"];
+    private PlayerController _annaController => InputManager.Instance.CurPlayer;
     [SerializeField] private GameObject _npcAnna;
 
     [Header("가위")]
@@ -51,7 +51,7 @@ public class Story3 : Story
     }
     private void SetStart()
     {
-        InputManager.Instance.DisableInput();
+        InputEventHandler.OnChangedForceActionToUI_Invoke();
         StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
@@ -125,7 +125,7 @@ public class Story3 : Story
     {
         if (isActive == true) // Anna로
         {
-            InputManager.Instance.EnableInput();
+            InputEventHandler.OnChangedForceActionToPlayer_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _annaController.CheckPoint = _npcAnna.transform.position;
@@ -135,7 +135,7 @@ public class Story3 : Story
         }
         else // NPCAnna로
         {
-            InputManager.Instance.DisableInput();
+            InputEventHandler.OnChangedForceActionToUI_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _npcAnna.transform.position = _annaController.gameObject.transform.position;

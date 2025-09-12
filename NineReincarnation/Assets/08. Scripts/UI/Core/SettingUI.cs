@@ -72,7 +72,6 @@ public class SettingUI : ToggleUI
 
     private void Awake()
     {
-        _ui.SetActive(false);
         _button.SetActive(true);
 
         UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
@@ -118,7 +117,7 @@ public class SettingUI : ToggleUI
     private void ButtonEvent_SettingUI()
     {
         PlayClickSound();
-        UIEvent_ToggleUI(true);
+        UIEvent_ToggleUI();
     }
 
     private void EndButtonEvent()

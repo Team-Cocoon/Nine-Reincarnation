@@ -21,7 +21,7 @@ public class Feather : DrawOutline, IClickInteractableToggle
     public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
 
 
-    PlayerController _player => InputManager.Instance.Action.Player;
+    PlayerController _player => InputManager.Instance.CurPlayer;
 
     private LayerMask _playerMask;
 
