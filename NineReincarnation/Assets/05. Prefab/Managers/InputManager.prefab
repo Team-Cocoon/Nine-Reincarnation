@@ -141,7 +141,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5848109479736679958}
         m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
         m_MethodName: ActionLook
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -154,8 +154,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Keyboard/q]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4330408941620496009}
-        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
         m_MethodName: ActionToggleMainUI
         m_Mode: 1
         m_Arguments:
@@ -218,9 +218,9 @@ MonoBehaviour:
     m_ActionName: 'UI/ToggleSettingUI[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8595296017942002913}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: ChangeActionToUI
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleMainUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

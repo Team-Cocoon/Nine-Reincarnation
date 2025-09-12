@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManger
       objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'BgmClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 007d3c0a0009aac4ebf4d0f1540fecd1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
