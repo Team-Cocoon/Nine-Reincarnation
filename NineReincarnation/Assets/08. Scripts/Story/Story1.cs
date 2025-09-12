@@ -9,7 +9,7 @@ using UnityEngine;
 public class Story1 : Story
 {
     [Header("안나")]
-    private PlayerController _annaController => InputManager.Instance.Players["Anna"];
+    private PlayerController _annaController => InputManager.Instance.CurPlayer;
     [SerializeField] private GameObject _npcAnna;
     
     [Header("Event 4-2")]
@@ -89,7 +89,7 @@ public class Story1 : Story
     {
         if (isActive == true) // Anna로
         {
-            InputManager.Instance.EnableInput();
+            InputEventHandler.OnChangedForceActionToPlayer_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _annaController.CheckPoint = _npcAnna.transform.position;
@@ -99,7 +99,7 @@ public class Story1 : Story
         }
         else // NPCAnna로
         {
-            InputManager.Instance.DisableInput();
+            InputEventHandler.OnChangedForceActionToUI_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _npcAnna.transform.position = _annaController.gameObject.transform.position;
