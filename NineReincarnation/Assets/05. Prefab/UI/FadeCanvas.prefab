@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5043396761611993162}
   - component: {fileID: 8929194491879936542}
   - component: {fileID: 8232702502578032156}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,9 +87,8 @@ GameObject:
   - component: {fileID: 4269172032954602935}
   - component: {fileID: 6754879752711073293}
   - component: {fileID: 7099232854587694176}
-  - component: {fileID: 6292409046343519825}
   - component: {fileID: 4748312249264494432}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: FadeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +124,7 @@ Canvas:
   m_GameObject: {fileID: 4190540744364541100}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -133,11 +132,11 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1880745385
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6754879752711073293
 MonoBehaviour:
@@ -179,18 +178,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!210 &6292409046343519825
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4190540744364541100}
-  m_Enabled: 1
-  m_SortingLayerID: -1319807141
-  m_SortingLayer: 4
-  m_SortingOrder: 2
-  m_SortAtRoot: 0
 --- !u!114 &4748312249264494432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91fd134df5f79f43b5787787db4c224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fade: {fileID: 3088493774958320094}
+  _name: FadeUI
+  _ui: {fileID: 3088493774958320094}
   _image: {fileID: 8232702502578032156}
   _duration: 1

@@ -401,6 +401,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8595296017942002913, guid: 717410625a607934c99b689c9672bd07, type: 3}
+      propertyPath: _players.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8595296017942002913, guid: 717410625a607934c99b689c9672bd07, type: 3}
+      propertyPath: '_players.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2026104988}
+    - target: {fileID: 8595296017942002913, guid: 717410625a607934c99b689c9672bd07, type: 3}
       propertyPath: _playerInfo.Array.data[0]._player
       value: 
       objectReference: {fileID: 2026104988}

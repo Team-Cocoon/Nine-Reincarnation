@@ -10,7 +10,7 @@ public class Story3 : Story
     [SerializeField] private Fade _fade;
 
     [Header("안나")]
-    private PlayerController _annaController => InputManager.Instance.Players["Anna"];
+    private PlayerController _annaController => InputManager.Instance.CurPlayer;
     [SerializeField] private GameObject _npcAnna;
 
     [Header("가위")]
@@ -46,7 +46,7 @@ public class Story3 : Story
     [SerializeField] private GameObject _dialogue3_8;
     private bool _isTextShowed = false;
     [Header("Event3-12")]
-    [SerializeField] private GameObject _mKey;
+    //[SerializeField] private GameObject _mKey;
 
     /* Event1-10 에 필요한 변수 */
     private int _laughingCount = 0;
@@ -62,7 +62,7 @@ public class Story3 : Story
     }
     private void SetStart()
     {
-        InputManager.Instance.DisableInput();
+        InputEventHandler.OnChangedForceActionToUI_Invoke();
         //StoryManager.Instance.eventObj["혼령1"].StartAnim("Ghost_Down");
         //StoryManager.Instance.eventObj["혼령2"].StartAnim("Ghost_Down");
         StoryManager.Instance.eventObj["안나"].StartAnim("Anna_Down");
@@ -153,7 +153,7 @@ public class Story3 : Story
     {
         if (isActive == true) // Anna로
         {
-            InputManager.Instance.EnableInput();
+            InputEventHandler.OnChangedForceActionToPlayer_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _annaController.CheckPoint = _npcAnna.transform.position;
@@ -163,7 +163,7 @@ public class Story3 : Story
         }
         else // NPCAnna로
         {
-            InputManager.Instance.DisableInput();
+            InputEventHandler.OnChangedForceActionToUI_Invoke();
             _annaController.gameObject.SetActive(isActive);
             _npcAnna.SetActive(!isActive);
             _npcAnna.transform.position = _annaController.gameObject.transform.position;
@@ -358,13 +358,14 @@ public class Story3 : Story
         //_mKey.SetActive(true);
         //yield return new WaitForSeconds(3f);
         //_mKey.SetActive(true);
-        while (true)
-        {
-            _mKey.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
-            yield return new WaitForSeconds(0.5f);
-            _mKey.transform.localScale = new Vector3(0.3f, 0.2f, 1f);
-            yield return new WaitForSeconds(0.5f);
-        }
+        //while (true)
+        //{
+        //    _mKey.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+        //    yield return new WaitForSeconds(0.5f);
+        //    _mKey.transform.localScale = new Vector3(0.3f, 0.2f, 1f);
+        //    yield return new WaitForSeconds(0.5f);
+        //}
+        yield break;
     }
     #endregion
 
@@ -376,8 +377,7 @@ public class Story3 : Story
     private bool isNext = false;
     public void NextStage()
     {
-        if (isNext) return;
-        isNext = true;
+        Debug.Log("스킵 버튼 실행");
         Enter(null);
     }
 }

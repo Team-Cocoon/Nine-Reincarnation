@@ -19,11 +19,12 @@ class UIInfo
 
 public class UIManager : MonoBehaviour
 {
+    public static int OpenUICount = 0;
+
     public static UIManager Instance { get; set; }
 
     [Header("---- 초기 등록 UI ----")]
     [SerializeField] private ToggleUI[] _coreUI;
-
     private Dictionary<string, UIInfo> _uiDict = new Dictionary<string, UIInfo>();
 
     private void Awake()
@@ -50,6 +51,20 @@ public class UIManager : MonoBehaviour
         _uiDict.Remove(name);
     }
 
+    private void UpdateInputActionMap()
+    {
+        if(OpenUICount > 0)
+        {
+            InputManager.Instance?.CurPlayer.SetStop();
+            InputEventHandler.OnChangedActionToUI_Invoke();
+        }
+        else
+        {
+            InputEventHandler.OnChangedActionToPlayer_Invoke();
+        }
+    }
+
+
     /// <summary>
     /// UI 토글
     /// </summary>
@@ -64,8 +79,12 @@ public class UIManager : MonoBehaviour
         if (isOpen)
         {
             //닫어
-            Time.timeScale = 1.0f;
+            if (isStop)
+            {
+                Time.timeScale = 1.0f;
+            }
 
+            OpenUICount--;
             _uiDict[name].IsOpen = false;
             ui.SetActive(false);
         }
@@ -75,14 +94,13 @@ public class UIManager : MonoBehaviour
             _uiDict[name].IsOpen = true;
             ui.SetActive(true);
 
+            OpenUICount++;
             if (isStop)
             {
                 Time.timeScale = 0.0f;
             }
-            else
-            {
-                Time.timeScale = 1.0f;
-            }
         }
+
+        UpdateInputActionMap();
     }
 }

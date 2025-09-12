@@ -11,14 +11,14 @@ public class TitleUI : MonoBehaviour
     private void Start()
     {
         _startButton.onClick.AddListener(GameEvent_Start);
-        //_optionButton.onClick.AddListener(GameEvent_Option);
+        _optionButton.onClick.AddListener(GameEvent_Option);
         _exitButton.onClick.AddListener(GameEvent_Exit);
     }
 
     private void OnDestroy()
     {
         _startButton.onClick.RemoveListener(GameEvent_Start);
-        //_optionButton.onClick.RemoveListener(GameEvent_Option);
+        _optionButton.onClick.RemoveListener(GameEvent_Option);
         _exitButton.onClick.RemoveListener(GameEvent_Exit);
     }
 
@@ -41,7 +41,7 @@ public class TitleUI : MonoBehaviour
     private void GameEvent_Option()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        //UIEventHandler
+        UIEventHandler.ToggleSettingUI_Invoke();
     }
     private void GameEvent_Exit()
     {
