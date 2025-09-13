@@ -17,6 +17,7 @@ public class StageFinal : MonoBehaviour, ICollidable
         _player = go.GetComponent<PlayerController>();
         if (_player != null)
         {
+            _player.SetStop();
             _player.gameObject.SetActive(false);
             _animationPlayer.transform.position = _player.transform.position;
             _timeLine.Play();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Player.Action;
 using Player.Controller;
@@ -13,12 +12,12 @@ public class InputManager : MonoBehaviour
     [Header("---플레이어 정보들---")]
     [SerializeField] private List<PlayerController> _players;
 
-    private string           _curActionMap;
-    private int              _curPlayerIdx = 0;
+    private string _curActionMap;
+    private int _curPlayerIdx = 0;
     private PlayerController _curPlayer;
-    private PlayerInput      _playerInput;
-    private PlayerAction     _playerAction;
-    private bool             _isForce      = false;
+    private PlayerInput _playerInput;
+    private PlayerAction _playerAction;
+    private bool _isForce = false;
 
     public PlayerController CurPlayer => _curPlayer;
 
@@ -26,7 +25,7 @@ public class InputManager : MonoBehaviour
     {
         Instance = this;
 
-        _playerInput  = GetComponent<PlayerInput>();
+        _playerInput = GetComponent<PlayerInput>();
         _playerAction = GetComponent<PlayerAction>();
 
         _curPlayer = _players[_curPlayerIdx];
@@ -34,23 +33,23 @@ public class InputManager : MonoBehaviour
 
         _curActionMap = _playerInput.defaultActionMap;
 
-        InputEventHandler.OnChangedActionToUI          += InputEvent_OnChangedActionToUI;
-        InputEventHandler.OnChangedActionToPlayer      += InputEvent_OnChangedActionToPlayer;
-        InputEventHandler.OnChangedForceActionToUI     += InputEvent_OnChangedForceActionToUI;
+        InputEventHandler.OnChangedActionToUI += InputEvent_OnChangedActionToUI;
+        InputEventHandler.OnChangedActionToPlayer += InputEvent_OnChangedActionToPlayer;
+        InputEventHandler.OnChangedForceActionToUI += InputEvent_OnChangedForceActionToUI;
         InputEventHandler.OnChangedForceActionToPlayer += InputEvent_OnChangedForceActionToPlayer;
     }
 
     private void OnDestroy()
     {
-        InputEventHandler.OnChangedActionToUI          -= InputEvent_OnChangedActionToUI;
-        InputEventHandler.OnChangedActionToPlayer      -= InputEvent_OnChangedActionToPlayer;
-        InputEventHandler.OnChangedForceActionToUI     -= InputEvent_OnChangedForceActionToUI;
+        InputEventHandler.OnChangedActionToUI -= InputEvent_OnChangedActionToUI;
+        InputEventHandler.OnChangedActionToPlayer -= InputEvent_OnChangedActionToPlayer;
+        InputEventHandler.OnChangedForceActionToUI -= InputEvent_OnChangedForceActionToUI;
         InputEventHandler.OnChangedForceActionToPlayer -= InputEvent_OnChangedForceActionToPlayer;
     }
 
     private void InputEvent_OnChangedActionToUI()
     {
-        if(_isForce)
+        if (_isForce)
         {
             return;
         }

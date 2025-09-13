@@ -25,47 +25,47 @@ namespace Player.Controller
     public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
-        [SerializeField] private float             _defaultGravity;   //상승 중력
-        [SerializeField] private float             _defaultDownForce; //기본 하강시 최대 보정
-        [SerializeField] private float             _gliderDownForce;  //글라이딩 하강시 최대 보정
-        [SerializeField] private float             _maxDownForce;     //하강시 최대 보정
-        [SerializeField] private float             _jumpGravity;      //상승 중력
-        [SerializeField] private float             _lighterGravity;   //가벼워 질때 중력
-        [SerializeField] private float             _downGravity;      //떨어질때 중력
-        [SerializeField] private float             _speed;
-        [SerializeField] private float             _jumpForce;
-        [SerializeField] private string            _playerName;       //플레이어 식별 변수
-        [SerializeField] private Vector3           _checkPoint;       //플레이어 리스폰 위치
-        [SerializeField] private GroundDetector    _groundDetector;
-        [SerializeField] private SlopeDetector     _slopeDetector;
+        [SerializeField] private float _defaultGravity;   //상승 중력
+        [SerializeField] private float _defaultDownForce; //기본 하강시 최대 보정
+        [SerializeField] private float _gliderDownForce;  //글라이딩 하강시 최대 보정
+        [SerializeField] private float _maxDownForce;     //하강시 최대 보정
+        [SerializeField] private float _jumpGravity;      //상승 중력
+        [SerializeField] private float _lighterGravity;   //가벼워 질때 중력
+        [SerializeField] private float _downGravity;      //떨어질때 중력
+        [SerializeField] private float _speed;
+        [SerializeField] private float _jumpForce;
+        [SerializeField] private string _playerName;       //플레이어 식별 변수
+        [SerializeField] private Vector3 _checkPoint;       //플레이어 리스폰 위치
+        [SerializeField] private GroundDetector _groundDetector;
+        [SerializeField] private SlopeDetector _slopeDetector;
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial;
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;
-        [SerializeField] private SpriteRenderer    _spriteRenderer;   //플레이어 이미지
-        [SerializeField] private ThrowThread       _thread;           //던질 실
+        [SerializeField] private SpriteRenderer _spriteRenderer;   //플레이어 이미지
+        [SerializeField] private ThrowThread _thread;           //던질 실
 
-        [SerializeField] private bool _isGround         = false; //플레이어가 땅을 밟고 있는가 판별
-        [SerializeField] private bool _isLook           = false; //플레이어가 줌을 실행하고 있는가 판별
-        [SerializeField] private bool _isDead           = false; //플레이어가 죽었는가 판별
-        [SerializeField] private bool _isSlope          = false;
-        [SerializeField] private bool _isJump           = false;
-        [SerializeField] private bool _isFalling        = false;
+        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
+        [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
+        [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
+        [SerializeField] private bool _isSlope = false;
+        [SerializeField] private bool _isJump = false;
+        [SerializeField] private bool _isFalling = false;
         [SerializeField] private bool _onGroundDetector = false;
-        [SerializeField] private bool _onSlopeDetector  = false;
+        [SerializeField] private bool _onSlopeDetector = false;
 
-        private int                  _jumpCount = 0;             //더블 점프 제어
-        private Vector2              _slopeDir  = Vector2.right; //경사면 이동을 위한 벡터
-        private PlayerDirection      _direction;                 //플레이어 방향
-        private Animator             _animator;
-        private Rigidbody2D          _rb2d;
-        private PlayerStateMachine   _playersStateMachine;       //플레이어 상태머신
-        private Collider2D           _collider;
-        private OneWayPlatform       _oneWayPlatform;
+        private int _jumpCount = 0;             //더블 점프 제어
+        private Vector2 _slopeDir = Vector2.right; //경사면 이동을 위한 벡터
+        private PlayerDirection _direction;                 //플레이어 방향
+        private Animator _animator;
+        private Rigidbody2D _rb2d;
+        private PlayerStateMachine _playersStateMachine;       //플레이어 상태머신
+        private Collider2D _collider;
+        private OneWayPlatform _oneWayPlatform;
         private PlayerAnimationState _currentState;
 
-        public bool                 IsDead       => _isDead;
-        public int                  JumpCount    => _jumpCount;
+        public bool IsDead => _isDead;
+        public int JumpCount => _jumpCount;
         public PlayerAnimationState CurrentState => _currentState;
-        public Rigidbody2D          Rb2d         => _rb2d;
+        public Rigidbody2D Rb2d => _rb2d;
 
         public bool IsLook
         {
@@ -120,13 +120,13 @@ namespace Player.Controller
 
         private void Init()
         {
-            _isDead           = false;
-            _isGround         = false;
-            _isSlope          = false;
-            _isJump           = false;
-            _isFalling        = false;
+            _isDead = false;
+            _isGround = false;
+            _isSlope = false;
+            _isJump = false;
+            _isFalling = false;
             _onGroundDetector = false;
-            _onSlopeDetector  = false;
+            _onSlopeDetector = false;
         }
 
         private void Awake()
@@ -147,6 +147,11 @@ namespace Player.Controller
         {
             Respawn();
         }
+        private void OnDisable()
+        {
+            AudioManager.Instance.StopLoopingSfx(AudioManager.LoopSfx.Walk);
+        }
+
         private void OnDestroy()
         {
             _playersStateMachine.stateChanged -= ChangeAnimation;
@@ -224,7 +229,7 @@ namespace Player.Controller
         public void SetStop()
         {
             _direction = PlayerDirection.Stop;
-            if(_rb2d != null)
+            if (_rb2d != null)
             {
                 _rb2d.linearVelocityX = 0.0f;
             }
@@ -313,7 +318,7 @@ namespace Player.Controller
         /// </summary>
         public void Jump()
         {
-            if (_jumpCount >= 2) return;
+            if (_jumpCount >= 2 || _isDead) return;
 
             if (_jumpCount == 1)
             {
@@ -325,8 +330,8 @@ namespace Player.Controller
             UpdateSlopeDetector(false);
 
             IsGround = false;
-            IsSlope  = false;
-            IsJump   = true;
+            IsSlope = false;
+            IsJump = true;
 
             _rb2d.linearVelocityY = 0.0f;
 

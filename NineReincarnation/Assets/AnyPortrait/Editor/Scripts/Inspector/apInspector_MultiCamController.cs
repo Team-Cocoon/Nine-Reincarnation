@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -11,46 +11,41 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEditor;
-
-using AnyPortrait;
+using UnityEngine;
 
 namespace AnyPortrait
 {
-	[CustomEditor(typeof(apOptMultiCameraController))]
-	public class apInspector_MultiCamController : Editor
-	{
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
+    [CustomEditor(typeof(apOptMultiCameraController))]
+    public class apInspector_MultiCamController : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
 
-			if(!Application.isPlaying)
-			{
-				return;
-			}
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
-			apOptMultiCameraController targetMCC = target as apOptMultiCameraController;
+            apOptMultiCameraController targetMCC = target as apOptMultiCameraController;
 
-			if(targetMCC == null)
-			{
-				return;
-			}
-			
-			GUILayout.Space(10);
-			// Dictionary<apOptMesh, apOptMultiCameraController.FUNC_MESH_PRE_RENDERED> preRenderedEvents = targetMCC.GetPreRenderedEvents();
-			// if(preRenderedEvents != null && preRenderedEvents.Count > 0)
-			// {
-			// 	int index = 0;
-			// 	foreach (KeyValuePair<apOptMesh, apOptMultiCameraController.FUNC_MESH_PRE_RENDERED> pair in preRenderedEvents)
-			// 	{
-			// 		EditorGUILayout.LabelField("[" + index + "] : " + pair.Key.name);
-			// 		index++;
-			// 	}
-			// }
-		}
-	}
+            if (targetMCC == null)
+            {
+                return;
+            }
+
+            GUILayout.Space(10);
+            // Dictionary<apOptMesh, apOptMultiCameraController.FUNC_MESH_PRE_RENDERED> preRenderedEvents = targetMCC.GetPreRenderedEvents();
+            // if(preRenderedEvents != null && preRenderedEvents.Count > 0)
+            // {
+            // 	int index = 0;
+            // 	foreach (KeyValuePair<apOptMesh, apOptMultiCameraController.FUNC_MESH_PRE_RENDERED> pair in preRenderedEvents)
+            // 	{
+            // 		EditorGUILayout.LabelField("[" + index + "] : " + pair.Key.name);
+            // 		index++;
+            // 	}
+            // }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -48,7 +48,7 @@
 //			Ring = 3
 //		}
 //		public MapperShape _shape = MapperShape.Quad;
-		
+
 //		public class ControlPoint
 //		{
 //			public Vector2 _pos_Org = Vector2.zero;
@@ -71,15 +71,15 @@
 //			//GUI를 위한 연결 관계
 //			public List<ControlPoint> _linkedOuterPoints = new List<ControlPoint>();
 //			public List<ControlPoint> _linkedInnerOrCrossPoints = new List<ControlPoint>();
-			
-			
+
+
 //			public ControlPoint()
 //			{
 //				_pos_Org = Vector2.zero;
 //				_pos_Cur = Vector2.zero;
 
 //				_isOuter = false;
-				
+
 
 //				_quad_iX = 0;
 //				_quad_iY = 0;
@@ -109,7 +109,7 @@
 //				newPoint._quad_LerpX = lerpX;
 //				newPoint._quad_LerpY = lerpY; 
 
-				
+
 
 //				return newPoint;
 //			}
@@ -135,7 +135,7 @@
 //				newPoint._pos_Org = pos;
 //				newPoint._pos_Cur = pos;
 //				newPoint._isOuter = false;
-				
+
 //				return newPoint;
 //			}
 
@@ -152,9 +152,9 @@
 
 //				return newPoint;
 //			}
-			
+
 //		}
-		
+
 
 
 //		//각 Shape별로 포인트를 동시에 가지고 있는다.
@@ -226,7 +226,7 @@
 //			_numPoint_ComplexQuadX = Mathf.Max(_editor._meshAutoGenOption_numControlPoint_ComplexQuad_X, 3);
 //			_numPoint_ComplexQuadY = Mathf.Max(_editor._meshAutoGenOption_numControlPoint_ComplexQuad_Y, 3);
 //			_numPoint_CircleRing = Mathf.Max(_editor._meshAutoGenOption_numControlPoint_CircleRing, 4);
-			
+
 //			MakeQuadPoints();
 //			MakeCircleRingPoints();
 //		}
@@ -238,7 +238,7 @@
 //			//TODO : 속성만 바뀌었을 때
 //			//최대한 Lerp 값을 이용해서 위치를 추적해서 포인트를 만들자
 //		}
-		
+
 
 
 
@@ -395,7 +395,7 @@
 //			//Ring은 Outer->Inner
 //			ControlPoint curPoint = null;
 //			ControlPoint nextPoint = null;
-			
+
 //			for (int i = 0; i < _numPoint_CircleRing; i++)
 //			{
 //				//Circle 먼저
@@ -484,10 +484,10 @@
 //			{
 //				return _controlPointArr_RingOuter;
 //			}
-			
+
 //			return _controlPointArr_RingInner;
 //		}
-		
+
 //		public List<ControlPoint> GetControlPointList(MapperShape shape)
 //		{
 //			switch (shape)
@@ -499,6 +499,6 @@
 //			}
 //			return null;
 //		}
-		
+
 //	}
 //}

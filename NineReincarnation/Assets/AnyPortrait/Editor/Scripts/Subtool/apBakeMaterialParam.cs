@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -49,7 +49,7 @@
 //		}
 
 //		private List<MaterialUnit> _materialUnits = new List<MaterialUnit>();
-		
+
 
 //		// Init
 //		//---------------------------------------------
@@ -62,7 +62,7 @@
 //		{
 //			_materialUnits.Clear();
 //		}
-		
+
 //		// Functions
 //		//---------------------------------------------
 //		public Material GetMaterial(Texture2D texture,

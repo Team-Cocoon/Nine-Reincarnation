@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -201,7 +201,7 @@
 //					string barLabel = (int)(Mathf.Clamp01(barRatio) * 100.0f) + " %";
 //					EditorGUI.ProgressBar(barRect, barRatio, barLabel);
 //				}
-				
+
 //				return;
 //			}
 
@@ -459,7 +459,7 @@
 //			{
 //				//경로가 바뀌었다. -> 저장
 //				apEditorUtil.SetEditorDirty();
-				
+
 //			}
 
 //			//"Make Thumbnail"
@@ -478,7 +478,7 @@
 //				{
 //					//RequestExport(EXPORT_TYPE.Thumbnail);//<<이전 코드
 //					StartMakeThumbnail();//<<새로운 코드
-					
+
 //				}
 //			}
 
@@ -655,7 +655,7 @@
 //			{
 //				//RequestExport(EXPORT_TYPE.GIFAnimation);//리퀘스트 안할래..
 
-				
+
 //				//string defFileName = "GIF_" + DateTime.Now.Year + "" + DateTime.Now.Month + "" + DateTime.Now.Day + "_" + DateTime.Now.Hour + "" + DateTime.Now.Minute + "" + DateTime.Now.Second + ".gif";
 //				//string saveFilePath = EditorUtility.SaveFilePanel("Save GIF Animation", _prevFilePath_Directory, defFileName, "gif");
 //				//if (!string.IsNullOrEmpty(saveFilePath))
@@ -698,7 +698,7 @@
 //			{
 //				guiStyle_Selected.normal.textColor = Color.white;
 //			}
-			
+
 //			//"Animation Clips"
 //			GUILayout.Button(_editor.GetText(TEXT.DLG_AnimationClips), guiStyle_None, GUILayout.Width(width), GUILayout.Height(20));//투명 버튼
 
@@ -839,7 +839,7 @@
 //				srcThumbWidth = (int)((srcThumbHeight * preferAspectRatio) + 0.5f);
 //			}
 
-			
+
 //			//Request를 만든다.
 //			apScreenCaptureRequest newRequest = new apScreenCaptureRequest();
 //			_captureLoadKey = newRequest.MakeScreenShot(OnThumbnailCaptured,
@@ -855,7 +855,7 @@
 //			//에디터에 대신 렌더링해달라고 요청을 합시다.
 //			_editor.ScreenCaptureRequest(newRequest);
 //			_editor.SetRepaint();
-			
+
 //		}
 
 //		private void OnThumbnailCaptured(bool isSuccess, Texture2D captureImage, int iProcessStep, string filePath, object loadKey)
@@ -873,7 +873,7 @@
 //					DestroyImmediate(captureImage);
 //				}
 //				_captureLoadKey = null;
-				
+
 //				return;
 //			}
 //			if(_captureLoadKey != loadKey)
@@ -1019,7 +1019,7 @@
 //			}
 //			catch (Exception)
 //			{
-				
+
 //			}
 //		}
 
@@ -1037,7 +1037,7 @@
 //					DestroyImmediate(captureImage);
 //				}
 //				_captureLoadKey = null;
-				
+
 //				return;
 //			}
 //			if(_captureLoadKey != loadKey)
@@ -1086,7 +1086,7 @@
 //			{
 //				return;
 //			}
-			
+
 //			string defFileName = "GIF_" + DateTime.Now.Year + "" + DateTime.Now.Month + "" + DateTime.Now.Day + "_" + DateTime.Now.Hour + "" + DateTime.Now.Minute + "" + DateTime.Now.Second + ".gif";
 //			string saveFilePath = EditorUtility.SaveFilePanel("Save GIF Animation", _prevFilePath_Directory, defFileName, "gif");
 //			if (!string.IsNullOrEmpty(saveFilePath))
@@ -1249,7 +1249,7 @@
 //				}
 //			}
 
-			
+
 //			//다음 프레임을 렌더링하자
 //			//Request를 만든다.
 //			apScreenCaptureRequest newRequest = new apScreenCaptureRequest();
@@ -1273,7 +1273,7 @@
 //			Repaint();
 
 //		}
-		
+
 
 //		#region [미사용 코드]
 //		//private void Process_PNGScreenShot()

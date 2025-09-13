@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -139,7 +139,7 @@
 //			foreach (KeyValuePair<ShaderType, ShaderPair> shaderPair in _shaderPairs)
 //			{
 //				GenerateShader(shaderPair.Key, true);
-				
+
 //			}
 //			AssetDatabase.Refresh();
 //			Refresh();
@@ -216,14 +216,14 @@
 
 //				FileInfo fi_Normal = new FileInfo(projPath + pair._folderPath_Normal + "/" + pair._fileName_Normal);
 //				FileInfo fi_LWRP = new FileInfo(projPath + pair._folderPath_LWRP + "/" + pair._fileName_LWRP);
-				
+
 //				//fi_Normal.CopyTo(projPath + pair._folderPath_LWRP + "/" + pair._fileName_LWRP, isOverwrite);
 //				fs_Src = new FileStream(fi_Normal.FullName, FileMode.Open, FileAccess.Read);
 //				sr_Src = new StreamReader(fs_Src);
 
 //				fs_Dst = new FileStream(fi_LWRP.FullName, FileMode.Create, FileAccess.Write);
 //				sw_Dst = new StreamWriter(fs_Dst);
-				
+
 //				//하나씩 읽고 하나씩 적는다.
 //				string strReadLine = null;
 //				string strWriteLine = null;

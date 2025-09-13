@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using EventHandler;
-using Febucci.UI.Core.Parsing;
 using Manager;
 using Player.Controller;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class Story1 : Story
     [Header("안나")]
     private PlayerController _annaController => InputManager.Instance.CurPlayer;
     [SerializeField] private GameObject _npcAnna;
-    
+
     [Header("Event 4-2")]
     [SerializeField] private GameObject _dialogue4_2;
     private bool _isTextShowed = false;

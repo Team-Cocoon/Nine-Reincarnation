@@ -11,13 +11,6 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-
-using AnyPortrait;
-
 namespace AnyPortrait
 {
     /// <summary>
@@ -42,7 +35,7 @@ namespace AnyPortrait
         {
             _linkedBone = bone;
             _linkedChainRootBone = chainRootBone;
-            if(_linkedChainRootBone == null)
+            if (_linkedChainRootBone == null)
             {
                 //Debug.LogError("Chain Root Bone이 없다. [" + _linkedBone._name + "]");
                 _linkedChainRootBone = _linkedBone;
@@ -51,39 +44,39 @@ namespace AnyPortrait
             _index = index;
             _depth = bone._IKDepth;//추가된 옵션을 실행한다.
 
-            
+
         }
 
 
-		/// <summary>
-		/// IK의 초기 포즈 연산 여부를 초기화한다.
-		/// </summary>
-		public void ResetInitPoseFlag()
-		{
-			ResetInitPoseFlagRecursive(_linkedChainRootBone);
-		}
+        /// <summary>
+        /// IK의 초기 포즈 연산 여부를 초기화한다.
+        /// </summary>
+        public void ResetInitPoseFlag()
+        {
+            ResetInitPoseFlagRecursive(_linkedChainRootBone);
+        }
 
-		private void ResetInitPoseFlagRecursive(apOptBone bone)
-		{
-			bone._IKInitPoseWeightSum = 0.0f;//연산된 가중치 = 0
-			
-			int nChild = bone._childBones != null ? bone._childBones.Length : 0;
-			if(nChild == 0)
-			{
-				return;
-			}
+        private void ResetInitPoseFlagRecursive(apOptBone bone)
+        {
+            bone._IKInitPoseWeightSum = 0.0f;//연산된 가중치 = 0
 
-			apOptBone childBone = null;
-			for (int i = 0; i < nChild; i++)
-			{
-				childBone = bone._childBones[i];
-				if(childBone == null || childBone == bone)
-				{
-					continue;
-				}
-				ResetInitPoseFlagRecursive(childBone);
-			}
-		}
+            int nChild = bone._childBones != null ? bone._childBones.Length : 0;
+            if (nChild == 0)
+            {
+                return;
+            }
+
+            apOptBone childBone = null;
+            for (int i = 0; i < nChild; i++)
+            {
+                childBone = bone._childBones[i];
+                if (childBone == null || childBone == bone)
+                {
+                    continue;
+                }
+                ResetInitPoseFlagRecursive(childBone);
+            }
+        }
 
 
 

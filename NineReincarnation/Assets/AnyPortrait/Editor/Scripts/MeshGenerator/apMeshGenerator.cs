@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -47,7 +47,7 @@
 //		private TextureImporter _textureImporter = null;
 
 
-		
+
 //		public enum TileType
 //		{
 //			Empty,
@@ -127,7 +127,7 @@
 //		private int _scan_Width = 0;
 //		private int _scan_Height = 0;
 
-		
+
 //		public class OuterPoint
 //		{
 //			public int _iX = 0;
@@ -159,8 +159,8 @@
 //			public bool _isInversedNormal_Next = false;
 
 //			public bool _isSplitPoint = false;
-			
-			
+
+
 //			public OuterPoint(OuterPoint src)
 //			{
 //				_isSplitPoint = false;
@@ -294,7 +294,7 @@
 //				_iX = src._iX;
 //				_iY = src._iY;
 //				_pos = src._pos;
-				
+
 
 //				_prevPoint = null;
 //				_nextPoint = null;
@@ -335,7 +335,7 @@
 //				_isNeedShapeCheck = true;
 //				_isSplitPoint = true;
 //			}
-			
+
 //		}
 
 
@@ -385,7 +385,7 @@
 
 
 //				//mesh._offsetPos + imageHalfOffset
-				
+
 //				return ltrb;
 //			}
 //		}
@@ -429,7 +429,7 @@
 //			public INNER_MOVE_LOCK _moveLock = INNER_MOVE_LOCK.None;
 //			public Vector2 _limitedPosA = Vector2.zero;
 //			public Vector2 _limitedPosB = Vector2.zero;
-			
+
 
 //			public InnerPoint(Vector2 pos, float lerpAxis1, float lerpAxis2)
 //			{
@@ -613,7 +613,7 @@
 //				_scan_PosMinY = (int)(Mathf.Min(_targetMesh._atlasFromPSD_LT.y, _targetMesh._atlasFromPSD_RB.y) + offset.y);
 //				_scan_PosMaxY = (int)(Mathf.Max(_targetMesh._atlasFromPSD_LT.y, _targetMesh._atlasFromPSD_RB.y) + 0.5f + offset.y);
 
-				
+
 //				_scan_Width = (_scan_PosMaxX - _scan_PosMinX);
 //				_scan_Height = (_scan_PosMaxY - _scan_PosMinY);
 
@@ -655,7 +655,7 @@
 //				ScanTile curTile = null;
 //				Color curColor;
 //				int halfSize = _scan_TileSize / 2;
-				
+
 
 //				//float alphaOffset = 2.0f / 256.0f;//
 //				float alphaOffset = _editor._meshAutoGenOption_AlphaCutOff;
@@ -854,7 +854,7 @@
 //					curGroup.AddTile(startTile);
 
 //					processedTiles.Add(startTile);
-					
+
 //					if (startTile._linkedOutlineTiles != null)
 //					{
 //						for (int iLink = 0; iLink < startTile._linkedOutlineTiles.Count; iLink++)
@@ -867,7 +867,7 @@
 //							}
 //						}
 //					}
-					
+
 //					//이제 하나씩 연결된 것을 증가/감소 하면서 Group에 추가하자
 //					while(linkedTiles.Count > 0)
 //					{
@@ -898,8 +898,8 @@
 //					}
 //				}
 
-				
-				
+
+
 //				//6. 점 + 외곽선을 만들어주자.
 //				//먼저 사각형 점을 기준으로 변화량이 바뀌는 부분에 점을 만들자.
 //				for (int iGroup = 0; iGroup < _outlineGroups.Count; iGroup++)
@@ -978,7 +978,7 @@
 //							{
 //								nextPoint = new OuterPoint(curPoint._iX, curPoint._iY - 1, GetTilePos(curPoint._iX, curPoint._iY - 1));
 //							}
-							
+
 //						}
 //						else if (IsOuterPointPair(curPoint._iX, curPoint._iY, curPoint._iX + 1, curPoint._iY)
 //							&& !(prevPoint != null && prevPoint._iX > curPoint._iX))
@@ -1047,7 +1047,7 @@
 //					}
 //				}
 
-				
+
 //				//7. 외곽선을 이루는 점 중에서 불필요한 점을 삭제한다.
 //				//루틴0) Concave 중에서 1칸짜리가 있다면 삭제한다.
 //				//루틴1) 직선 점은 삭제한다.
@@ -1149,7 +1149,7 @@
 //							}
 //						}
 
-						
+
 //					}
 
 
@@ -1169,12 +1169,12 @@
 //						//? 뭐지 최적화를 할수가 없는뎅?
 //						continue;
 //					}
-					
+
 //					//이제 루틴을 돌면서 Linear인 Point를 삭제하자
 //					curPoint = startPoint;
 
 //					nRemoved = 0;
-					
+
 //					while(true)
 //					{
 //						if(curPoint.IsLinearPoint())
@@ -1184,7 +1184,7 @@
 //							curPoint._nextPoint._prevPoint = curPoint._prevPoint;
 
 //							nextPoint = curPoint._nextPoint;
-							
+
 //							//Linear 포인트는 삭제한다.
 //							curGroup._outerPoints.Remove(curPoint);
 //							nRemoved++;
@@ -1204,7 +1204,7 @@
 //						}
 //					}
 
-					
+
 
 //					//-----------------------------------------------------------------------------
 //					//루틴2) 오목 코너를 찾아서 생략 가능한지 체크하자
@@ -1235,7 +1235,7 @@
 //					int distToPrev = 0;
 //					int distToNearConcave = 0;
 //					int distToNext = 0;
-					
+
 
 //					nRemoved = 0;
 
@@ -1344,7 +1344,7 @@
 //						}
 //					}
 
-					
+
 //					//----------------------------------------------------------------------------------
 //					//루틴3) 각각의 선분의 기울기(float Vector와 index X/Y차이)와 Normal을 체크한다. (Normal은 외곽을 향하도록 한다)
 //					for (int iPoint = 0; iPoint < curGroup._outerPoints.Count; iPoint++)
@@ -1389,7 +1389,7 @@
 //					float subMinAngle = 0.0f;
 //					float curAngle = 0.0f;
 //					int count = 0;
-					
+
 //					nRemoved = 0;
 
 //					while (true)
@@ -1403,7 +1403,7 @@
 //								subCheckAngle = Vector2.Angle(subCheckPoint._normal_Avg, curPoint._pos - subCheckPoint._pos);
 //								subMinAngle = subCheckAngle;
 //								count++;
-								
+
 //							}
 //							else
 //							{
@@ -1412,7 +1412,7 @@
 //								if (dist > farLimitDist)
 //								{
 //									isTryOptimize = true;
-									
+
 //								}
 //								else
 //								{
@@ -1422,14 +1422,14 @@
 //										//한칸 이동하면서 각도가 줄어든다. (점점 펼쳐진다.)
 //										subMinAngle = curAngle;
 //										count++;
-										
+
 //									}
 //									else
 //									{
 //										//각도가 다시 벌어졌다.
 //										//꺾인 부분을 발견했다.
 //										isTryOptimize = true;
-										
+
 //									}
 //								}
 //							}
@@ -1475,7 +1475,7 @@
 //								optimizablePoints.Clear();//이제 클리어
 //								optimizablePoints.Add(curPoint);//<<이번껀 새롭게 넣자
 //								subCheckPoint = curPoint;//<<여기서부터 다시 시작
-								
+
 //								curPoint = curPoint._nextPoint;
 //							}
 //							else if (optimizablePoints.Count == 1)
@@ -1484,7 +1484,7 @@
 //								optimizablePoints.Clear();//이제 클리어
 //								optimizablePoints.Add(curPoint);//<<이번껀 새롭게 넣자
 //								subCheckPoint = curPoint;//<<여기서부터 다시 시작
-								
+
 //								//curPoint = curPoint._nextPoint;//<Next로 이동하지 않는다.
 //							}
 //							else
@@ -1514,7 +1514,7 @@
 //					}
 
 
-					
+
 
 //					//-----------------------------------------------------------------------------
 //					//루틴5) 직선 점은 한번 더 삭제한다.
@@ -1538,12 +1538,12 @@
 //						//? 뭐지 최적화를 할수가 없는뎅?
 //						continue;
 //					}
-					
+
 //					//이제 루틴을 돌면서 Linear인 Point를 삭제하자
 //					curPoint = startPoint;
 
 //					nRemoved = 0;
-					
+
 //					while(true)
 //					{
 //						if(curPoint.IsLinearPoint())
@@ -1553,7 +1553,7 @@
 //							curPoint._nextPoint._prevPoint = curPoint._prevPoint;
 
 //							nextPoint = curPoint._nextPoint;
-							
+
 //							//Linear 포인트는 삭제한다.
 //							curGroup._outerPoints.Remove(curPoint);
 //							nRemoved++;
@@ -1572,11 +1572,11 @@
 //							break;
 //						}
 //					}
-					
-					
+
+
 
 //					//----------------------------------------------------------------------------------
-				
+
 //					for (int iPoint = 0; iPoint < curGroup._outerPoints.Count; iPoint++)
 //					{
 //						curPoint = curGroup._outerPoints[iPoint];
@@ -1618,7 +1618,7 @@
 //							point_RB.x = Mathf.Max(point_RB.x, curPoint._pos.x);
 //							point_RB.y = Mathf.Max(point_RB.y, curPoint._pos.y);
 //						}
-						
+
 //					}
 //				}
 //				Mapper.Make(point_LT, point_RB);
@@ -1627,7 +1627,7 @@
 //				_selectedControlPoints.Clear();
 //				_selectedOuterGroup = null;
 //				_selectedOuterGroupIndex = -1;
-				
+
 
 //				if(_outlineGroups.Count > 0)
 //				{
@@ -1644,7 +1644,7 @@
 //		}
 
 //		//---------------------------------------------------------------
-		
+
 //		//단계 2 - Preview
 //		public void Step2_Preview()
 //		{
@@ -1669,7 +1669,7 @@
 //						//Complex Quad 방식에 맞게 Inner Point를 생성한다.
 //						CreateInnerPoints_Quad(true);
 //						break;
-						
+
 
 //					case apMeshGenMapper.MapperShape.Circle:
 //						//Circle 방식에 맞게 Inner Point를 생성한다.
@@ -1708,7 +1708,7 @@
 //			//4. OuterPoint와 가장자리의 InnerPoint를 연결한다.
 //			//- 빠짐없이 최소 거리로 각각 최소 1개씩 연결한다.
 //			//5. Relax를 조금 실행한다.
-			
+
 //			apMeshGenMapper.ControlPoint[,] controlPointArr = Mapper.GetQuadControlPointArr(isComplex);
 //			List<apMeshGenMapper.ControlPoint> controlPointList = Mapper.GetControlPointList(isComplex ? apMeshGenMapper.MapperShape.ComplexQuad : apMeshGenMapper.MapperShape.Quad);
 
@@ -1716,8 +1716,8 @@
 //			apMeshGenMapper.ControlPoint nextPoint = null;
 
 //			_outerPoints_Preview.Clear();
-			
-			
+
+
 
 //			//1. Divide 개수를 이용해서 대략 버텍스의 간격을 추측하자.
 //			int nDivide = Mathf.Max(_editor._meshAutoGenOption_GridDivide, 1);
@@ -1795,7 +1795,7 @@
 //					outerPointCopy2Src.Add(newPoint, curOutPoint);
 //				}
 //			}
-			
+
 //			//Next/Prev를 Mapping을 이용해서 연결하자
 //			OuterPoint srcOutPoint = null;
 //			for (int iPoint = 0; iPoint < _outerPoints_Preview.Count; iPoint++)
@@ -1808,7 +1808,7 @@
 
 //			//Margin 만큼 확장하자. (일부 포인트는 삭제된다)
 //			ExtendOuterPointsPreview(margin, outerPointSrc2Copy, outerPointCopy2Src);
-			
+
 //			//리스트를 돌면서 Next와의 거리가 멀다면 나누어주자 (일단 별도의 리스트를 만들어서 나중에 참조)
 //			List<OuterPoint> splitOutPoints = new List<OuterPoint>();
 //			OuterPoint nextOutPoint = null;
@@ -1872,7 +1872,7 @@
 //			float minDistControlPointAxis_Y = 20.0f;
 //			for (int iCX = 0; iCX < controlPointArr.GetLength(0) - 1; iCX++)
 //			{
-				
+
 //				for (int iCY = 0; iCY < controlPointArr.GetLength(1) - 1; iCY++)
 //				{
 //					apMeshGenMapper.ControlPoint cp_A = controlPointArr[iCX, iCY];
@@ -1988,14 +1988,14 @@
 //					apMeshGenMapper.ControlPoint cp_LB = controlPointArr[iControlPointX_A, iControlPointY_B];
 //					apMeshGenMapper.ControlPoint cp_RB = controlPointArr[iControlPointX_B, iControlPointY_B];
 
-					
+
 
 //					posLT = cp_LT._pos_Cur;
 //					posRT = cp_RT._pos_Cur;
 //					posLB = cp_LB._pos_Cur;
 //					posRB = cp_RB._pos_Cur;
-					
-					
+
+
 
 //					Vector2 posT = posLT * (1.0f - lerpXReal) + posRT * lerpXReal;
 //					Vector2 posB = posLB * (1.0f - lerpXReal) + posRB * lerpXReal;
@@ -2100,7 +2100,7 @@
 //						float properDist = 0.0f;
 //						bool isProperDist_X = false;
 //						bool isProperDist_Y = false;
-						
+
 //						if(iX == 0)
 //						{
 //							normalVec.x = -1;
@@ -2135,7 +2135,7 @@
 //						{
 //							properDist = minDistControlPointAxis_Y * 0.5f;
 //						}
-						
+
 
 
 //						curInnerPoint._normalIfOuter = normalVec.normalized;
@@ -2187,7 +2187,7 @@
 //			}
 
 
-			
+
 //			//4. OuterPoint와 가장자리의 InnerPoint를 연결한다.
 //			//- 빠짐없이 최소 거리로 각각 최소 1개씩 연결한다.
 //			//- InnerPoint의 Normal과 Inner -> Out의 벡터의 각도를 계산해서, 가중치를 넣는다.
@@ -2279,7 +2279,7 @@
 
 //			//5. Relax를 조금 실행한다. (1회)
 //			RelaxInnerPoints(1);
-			
+
 //		}
 
 //		private void CreateInnerPoints_Circle()
@@ -2287,7 +2287,7 @@
 //			//Circle 방식
 //			//외곽 > Center로 이어지는 방식이다.
 //			//각 좌표계(각 + 거리)로 이루어져있다.
-			
+
 
 //			//1. Divide 개수를 이용해서 대략 버텍스의 간격을 추측하자.
 //			//2. 외곽 선분들 중에서 그 간격보다 너무 긴 선분은 미리 쪼개주자 (별도의 플래그를 걸고 삭제될 수 있게)
@@ -2296,16 +2296,16 @@
 //			//4. OuterPoint와 가장자리의 InnerPoint를 연결한다.
 //			//- 빠짐없이 최소 거리로 각각 최소 1개씩 연결한다.
 //			//5. Relax를 조금 실행한다.
-			
+
 //			apMeshGenMapper.ControlPoint[] controlPointOuterArr = Mapper.GetCircleControlPointArr();
 //			apMeshGenMapper.ControlPoint controlPoint_Center = Mapper.GetCircleCenterControlPoint();
 //			//List<apMeshGenMapper.ControlPoint> controlPointList = Mapper.GetControlPointList(apMeshGenMapper.MapperShape.Circle);
-			
+
 //			apMeshGenMapper.ControlPoint curPoint = null;
 //			apMeshGenMapper.ControlPoint nextPoint = null;
 
 //			_outerPoints_Preview.Clear();
-			
+
 
 //			//1. Divide 개수를 이용해서 대략 버텍스의 간격을 추측하자.
 //			int nDivide = Mathf.Max(_editor._meshAutoGenOption_GridDivide, 1);
@@ -2345,7 +2345,7 @@
 //				avgDist = 5;
 //			}
 
-			
+
 //			//2. 외곽 선분들 중에서 그 간격보다 너무 긴 선분은 미리 쪼개주자 (별도의 플래그를 걸고 삭제될 수 있게)
 //			//- 동시에 플래그가 있었던 Tmp OuterPoint는 미리 삭제한다.
 
@@ -2374,7 +2374,7 @@
 //					outerPointCopy2Src.Add(newPoint, curOutPoint);
 //				}
 //			}
-			
+
 //			//Next/Prev를 Mapping을 이용해서 연결하자
 //			OuterPoint srcOutPoint = null;
 //			for (int iPoint = 0; iPoint < _outerPoints_Preview.Count; iPoint++)
@@ -2387,7 +2387,7 @@
 
 //			//Margin 만큼 확장한다.
 //			ExtendOuterPointsPreview(margin, outerPointSrc2Copy, outerPointCopy2Src);
-			
+
 //			//리스트를 돌면서 Next와의 거리가 멀다면 나누어주자 (일단 별도의 리스트를 만들어서 나중에 참조)
 //			List<OuterPoint> splitOutPoints = new List<OuterPoint>();
 //			OuterPoint nextOutPoint = null;
@@ -2500,7 +2500,7 @@
 
 //					Vector2 pos_L = posCenter * (1.0f - lerpRad) + posOut_L * lerpRad;
 //					Vector2 pos_R = posCenter * (1.0f - lerpRad) + posOut_R * lerpRad;
-					
+
 
 //					Vector2 pos = pos_L * (1.0f - lerpAngle) + pos_R * lerpAngle;
 //					InnerPoint newPoint = new InnerPoint(pos, lerpAngle, realLerpRad);
@@ -2556,7 +2556,7 @@
 //					leftInnerPoint = innerPointArr[iLeft, iRad];
 //					rightInnerPoint = innerPointArr[iRight, iRad];
 
-					
+
 //					if (iRad - 1 >= 0)
 //					{
 //						upInnerPoint = innerPointArr[iAngle, iRad - 1];
@@ -2569,7 +2569,7 @@
 //					{
 //						downInnerPoint = innerPointArr[iAngle, iRad + 1];
 //					}
-					
+
 
 //					//Left 추가
 //					curInnerPoint._linkedPoint.Add(leftInnerPoint);
@@ -2577,7 +2577,7 @@
 //					//Right 추가
 //					curInnerPoint._linkedPoint.Add(rightInnerPoint);
 //					curInnerPoint._linkedPoint_GUI.Add(rightInnerPoint);
-					
+
 //					if (upInnerPoint != null)
 //					{
 //						curInnerPoint._linkedPoint.Add(upInnerPoint);
@@ -2619,7 +2619,7 @@
 //			}
 
 //			_innerPoints.Add(innerPointCenter);
-			
+
 //			//우선순위 계산
 //			MakePriority();
 
@@ -2655,7 +2655,7 @@
 //			for (int iOutPoint = 0; iOutPoint < _outerPoints_Preview.Count; iOutPoint++)
 //			{
 //				curOutPoint = _outerPoints_Preview[iOutPoint];
-				
+
 
 //				//가장 가까운 InnerPoint를 찾자
 //				float minDist = float.MaxValue;
@@ -2754,7 +2754,7 @@
 //			//외경 > 내경로 이어지는 방식이다.
 //			//각 좌표계(각 + 거리)로 이루어져있다.
 //			//Circle과 거의 동일하지만, Center의 점 1개가 아닌 내경의 OuterPoint가 있으므로 잘 연결해야한다.
-			
+
 
 //			//1. Divide 개수를 이용해서 대략 버텍스의 간격을 추측하자.
 //			//2. 외곽 선분들 중에서 그 간격보다 너무 긴 선분은 미리 쪼개주자 (별도의 플래그를 걸고 삭제될 수 있게)
@@ -2763,16 +2763,16 @@
 //			//4. OuterPoint와 가장자리의 InnerPoint를 연결한다.
 //			//- 빠짐없이 최소 거리로 각각 최소 1개씩 연결한다.
 //			//5. Relax를 조금 실행한다.
-			
+
 //			apMeshGenMapper.ControlPoint[] controlPointOuterArr = Mapper.GetRingControlPointArr(true);
 //			apMeshGenMapper.ControlPoint[] controlPointInnerArr = Mapper.GetRingControlPointArr(false);
 //			//List<apMeshGenMapper.ControlPoint> controlPointList = Mapper.GetControlPointList(apMeshGenMapper.MapperShape.Ring);
-			
+
 //			apMeshGenMapper.ControlPoint curPoint = null;
 //			apMeshGenMapper.ControlPoint nextPoint = null;
 
 //			_outerPoints_Preview.Clear();
-			
+
 
 //			//1. Divide 개수를 이용해서 대략 버텍스의 간격을 추측하자.
 //			int nDivide = Mathf.Max(_editor._meshAutoGenOption_GridDivide, 1);
@@ -2841,7 +2841,7 @@
 //				}
 //			}
 
-			
+
 
 //			//Next/Prev를 Mapping을 이용해서 연결하자
 //			OuterPoint srcOutPoint = null;
@@ -2855,7 +2855,7 @@
 
 //			//Margin 만큼 확장한다.
 //			ExtendOuterPointsPreview(margin, outerPointSrc2Copy, outerPointCopy2Src);
-			
+
 //			//리스트를 돌면서 Next와의 거리가 멀다면 나누어주자 (일단 별도의 리스트를 만들어서 나중에 참조)
 //			List<OuterPoint> splitOutPoints = new List<OuterPoint>();
 //			OuterPoint nextOutPoint = null;
@@ -2901,7 +2901,7 @@
 //					_outerPoints_Preview.Add(splitOutPoints[iSplit]);
 //				}
 //			}
-			
+
 
 //			//3. 각 좌표계에 따른 Inner Point를 생성한다.
 //			//- 내부 교차점에서는 "이동 제한이 걸린" Inner Point를 생성한다. <옵션에 따라서>
@@ -2935,8 +2935,8 @@
 
 
 //			InnerPoint[,] innerPointArr = new InnerPoint[innerPointNumAngle, innerPointNumRadius];
-			
-			
+
+
 //			for (int iAngle = 0; iAngle < innerPointNumAngle; iAngle++)
 //			{
 //				int iControlPointAngle_A = iAngle / nDivide;
@@ -2977,7 +2977,7 @@
 //					//float radiusR = dirR.magnitude;
 //					Vector2 pos_L = posIn_L * (1.0f - lerpRad) + posOut_L * lerpRad;
 //					Vector2 pos_R = posIn_R * (1.0f - lerpRad) + posOut_R * lerpRad;
-					
+
 
 //					Vector2 pos = pos_L * (1.0f - lerpAngle) + pos_R * lerpAngle;
 //					InnerPoint newPoint = new InnerPoint(pos, lerpAngle, realLerpRad);
@@ -2999,7 +2999,7 @@
 //				}
 //			}
 
-			
+
 //			//이제 연결을 하자
 //			InnerPoint curInnerPoint = null;
 //			InnerPoint leftInnerPoint = null;
@@ -3028,7 +3028,7 @@
 //					leftInnerPoint = innerPointArr[iLeft, iRad];
 //					rightInnerPoint = innerPointArr[iRight, iRad];
 
-					
+
 //					if (iRad - 1 >= 0)
 //					{
 //						upInnerPoint = innerPointArr[iAngle, iRad - 1];
@@ -3037,7 +3037,7 @@
 //					{
 //						downInnerPoint = innerPointArr[iAngle, iRad + 1];
 //					}
-					
+
 
 //					//Left 추가
 //					curInnerPoint._linkedPoint.Add(leftInnerPoint);
@@ -3045,7 +3045,7 @@
 //					//Right 추가
 //					curInnerPoint._linkedPoint.Add(rightInnerPoint);
 //					curInnerPoint._linkedPoint_GUI.Add(rightInnerPoint);
-					
+
 //					if (upInnerPoint != null)
 //					{
 //						curInnerPoint._linkedPoint.Add(upInnerPoint);
@@ -3086,11 +3086,11 @@
 //			}
 
 //			//_maxInnerPointPriority = 2;
-			
+
 //			//우선순위 계산
 //			//_maxInnerPointPriority = 1;
 //			MakePriority();
-			
+
 //			//추가 >> 각 지점에서 축에 대한 끝점을 서로 연결해야한다.
 //			for (int iAngle = 0; iAngle < innerPointNumAngle; iAngle++)
 //			{
@@ -3121,7 +3121,7 @@
 //			for (int iOutPoint = 0; iOutPoint < _outerPoints_Preview.Count; iOutPoint++)
 //			{
 //				curOutPoint = _outerPoints_Preview[iOutPoint];
-				
+
 
 //				//가장 가까운 InnerPoint를 찾자
 //				float minDist = float.MaxValue;
@@ -3213,7 +3213,7 @@
 
 
 //		//---------------------------------------------------------------
-		
+
 //		//단계 3 - Generate
 //		public void Step3_Generate(bool isRemovePreviousVertices)
 //		{
@@ -3252,7 +3252,7 @@
 //				//_innerPoints//<<이거를 서로 연결합시당
 
 //				//아래의 함수를 사용합시다.
-				
+
 //				List<RawDataVertexPair> rawDataVertPairs = new List<RawDataVertexPair>();
 //				Dictionary<apVertex, RawDataVertexPair> vertex2RawData = new Dictionary<apVertex, RawDataVertexPair>();
 //				Dictionary<OuterPoint, RawDataVertexPair> outPoint2RawData = new Dictionary<OuterPoint, RawDataVertexPair>();
@@ -3378,10 +3378,10 @@
 //								nResult++;
 //							}
 //						}
-						
+
 //					}
 
-					
+
 //				}
 
 //				//Debug.Log("Added Edges : " + nResult);
@@ -3478,8 +3478,8 @@
 //			{
 //				bool isAnyNotCalculated = false;
 //				bool isAnyCalculated = false;
-				
-				
+
+
 //				for (int i = 0; i < _innerPoints.Count; i++)
 //				{
 //					curInPoint = _innerPoints[i];
@@ -3594,7 +3594,7 @@
 //						}
 //					}
 
-					
+
 //				}
 
 //				if (curInnerPoint._linkedPoint.Count > 0)
@@ -3610,7 +3610,7 @@
 //			{
 //				avgLinkDist /= nDist;
 //			}
-			
+
 //			moveRatio *= 0.2f;
 //			relaxCount *= 2;
 
@@ -3655,13 +3655,13 @@
 //						else
 //						{
 //							float dotVec = Vector2.Dot(nextPos - curInnerPoint._correctedPos, curInnerPoint._normalIfOuter);
-							
+
 //							//이게 0보다 크면, 밖으로 나갔다는 것
 //							if(dotVec > 0.0f)
 //							{
 //								nextPos = curInnerPoint._correctedPos;
 //							}
-							
+
 //						}
 //						//이동 제한 옵션
 //						if(curInnerPoint._moveLock == INNER_MOVE_LOCK.Locked)
@@ -3707,9 +3707,9 @@
 //						}
 //					}
 //				}
-				
+
 //			}
-			
+
 //		}
 
 //		private Vector2 CalculateRelaxForce(InnerPoint innerPoint, float avgLinkDist, bool is2StepCheck)
@@ -3734,7 +3734,7 @@
 //				float properDist = Mathf.Max(innerPoint._properDistIfOuter, 2f);
 //				innerPoint._correctedPos = Vector2.zero;
 //				float totalCorrectionWeight = 0.0f;
-				
+
 //				OuterPoint linkedOuterPoint = null;
 //				for (int iLink = 0; iLink < innerPoint._linkedOuterPoints.Count; iLink++)
 //				{
@@ -3757,7 +3757,7 @@
 
 //					innerPoint._correctedPos += ((-1.0f * linkedOuterPoint._normal_Avg.normalized) * properDist + linkedOuterPoint._pos) * correctWeight;
 //					totalCorrectionWeight += correctWeight;
-					
+
 //					nCalculated++;
 //				}
 
@@ -3805,7 +3805,7 @@
 //						float weight2Step_In = 0.2f;
 //						if(linkedInnerPoint._linkedOuterPoints.Count > 0)
 //						{
-							
+
 //							for (int iOut = 0; iOut < linkedInnerPoint._linkedOuterPoints.Count; iOut++)
 //							{
 //								link2StepOutPoint = linkedInnerPoint._linkedOuterPoints[iOut];
@@ -4101,7 +4101,7 @@
 //				}
 //				//----------------------------------------------------
 //			}
-			
+
 //		}
 
 //		//---------------------------------------------------------------
@@ -4220,7 +4220,7 @@
 //			bool isEmptyTile_LD = false;
 //			bool isEmptyTile_RD = false;
 
-			
+
 //			if(point._iX <= 0)
 //			{
 //				isEmptyTile_LU = true;
@@ -4354,7 +4354,7 @@
 //			{
 //				point._isInversedNormal_Prev = false;
 //			}
-			
+
 //			if(IsInversedVector(point._normal_Next, point._isEmptyTile_LU, point._isEmptyTile_RU, point._isEmptyTile_LD, point._isEmptyTile_RD))
 //			{
 //				point._normal_Next *= -1.0f;
@@ -4367,7 +4367,7 @@
 //			//point._isInversedNormal_Next = isVectorInversed;
 
 //			point._normal_Avg = (point._normal_Prev + point._normal_Next).normalized;
-			
+
 //			point._slopeAngle_Prev = Mathf.Atan2(point._normal_Prev.y, point._normal_Prev.x) * Mathf.Rad2Deg;
 //			point._slopeAngle_Next = Mathf.Atan2(point._normal_Next.y, point._normal_Next.x) * Mathf.Rad2Deg;
 //			point._slopeAngle_Avg = Mathf.Atan2(point._normal_Avg.y, point._normal_Avg.x) * Mathf.Rad2Deg;
@@ -4453,10 +4453,10 @@
 //			{
 //				point._isInversedNormal_Next = false;
 //			}
-			
+
 
 //			point._normal_Avg = (point._normal_Prev + point._normal_Next).normalized;
-			
+
 //			point._slopeAngle_Prev = Mathf.Atan2(point._normal_Prev.y, point._normal_Prev.x) * Mathf.Rad2Deg;
 //			point._slopeAngle_Next = Mathf.Atan2(point._normal_Next.y, point._normal_Next.x) * Mathf.Rad2Deg;
 //			point._slopeAngle_Avg = Mathf.Atan2(point._normal_Avg.y, point._normal_Avg.x) * Mathf.Rad2Deg;
@@ -4523,7 +4523,7 @@
 //				//상하 비어있는 칸 수를 비교한다.
 //				int nUpEmpty = (isEmpty_LU ? 1 : 0) + (isEmpty_RU ? 1 : 0);
 //				int nDownEmpty = (isEmpty_LD ? 1 : 0) + (isEmpty_RD ? 1 : 0);
-					
+
 
 //				if (vec2.y < 0.0f)
 //				{

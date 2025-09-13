@@ -11,13 +11,6 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-
-using AnyPortrait;
-
 namespace AnyPortrait
 {
     /// <summary>
@@ -44,7 +37,7 @@ namespace AnyPortrait
         {
             _linkedBone = bone;
             _linkedChainRootBone = chainRootBone;
-            if(_linkedChainRootBone == null)
+            if (_linkedChainRootBone == null)
             {
                 _linkedChainRootBone = _linkedBone;
             }
@@ -52,38 +45,38 @@ namespace AnyPortrait
             _index = index;
             _depth = bone._IKDepth;//추가된 옵션을 실행한다.
 
-            
+
         }
 
-		/// <summary>
-		/// IK의 초기 포즈 연산 여부를 초기화한다.
-		/// </summary>
-		public void ResetInitPoseFlag()
-		{
-			ResetInitPoseFlagRecursive(_linkedChainRootBone);
-		}
+        /// <summary>
+        /// IK의 초기 포즈 연산 여부를 초기화한다.
+        /// </summary>
+        public void ResetInitPoseFlag()
+        {
+            ResetInitPoseFlagRecursive(_linkedChainRootBone);
+        }
 
-		private void ResetInitPoseFlagRecursive(apBone bone)
-		{
-			bone._IKInitPoseWeightSum = 0.0f;//연산된 가중치 = 0
+        private void ResetInitPoseFlagRecursive(apBone bone)
+        {
+            bone._IKInitPoseWeightSum = 0.0f;//연산된 가중치 = 0
 
-			int nChild = bone._childBones != null ? bone._childBones.Count : 0;
-			if(nChild == 0)
-			{
-				return;
-			}
+            int nChild = bone._childBones != null ? bone._childBones.Count : 0;
+            if (nChild == 0)
+            {
+                return;
+            }
 
-			apBone childBone = null;
-			for (int i = 0; i < nChild; i++)
-			{
-				childBone = bone._childBones[i];
-				if(childBone == null || childBone == bone)
-				{
-					continue;
-				}
-				ResetInitPoseFlagRecursive(childBone);
-			}
-		}
+            apBone childBone = null;
+            for (int i = 0; i < nChild; i++)
+            {
+                childBone = bone._childBones[i];
+                if (childBone == null || childBone == bone)
+                {
+                    continue;
+                }
+                ResetInitPoseFlagRecursive(childBone);
+            }
+        }
 
         /// <summary>
         /// IK를 계산한다. Recursive하지 않으며, 이 노드의 본의 Chain만 연산한다.
@@ -98,7 +91,7 @@ namespace AnyPortrait
         /// IK를 연산한 결과를 입력한다.
         /// </summary>
         public void MakeMatrixIK()
-        {            
+        {
             _linkedChainRootBone.MakeWorldMatrixForIK_ByRunNode(true, false);
         }
     }

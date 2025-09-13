@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -11,50 +11,46 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using System;
-
-using AnyPortrait;
+using UnityEngine;
 
 namespace AnyPortrait
 {
 
-	public class apTransform_Vertex
-	{
-		// Members
-		//--------------------------------------------
-		[SerializeField]
-		public int _meshUniqueID = -1;
+    public class apTransform_Vertex
+    {
+        // Members
+        //--------------------------------------------
+        [SerializeField]
+        public int _meshUniqueID = -1;
 
-		[SerializeField]
-		public int _vertexID = -1;
+        [SerializeField]
+        public int _vertexID = -1;
 
-		[NonSerialized]
-		public apMesh _mesh = null;
+        [NonSerialized]
+        public apMesh _mesh = null;
 
-		[NonSerialized]
-		public apVertex _vertex = null;
+        [NonSerialized]
+        public apVertex _vertex = null;
 
-		[SerializeField]
-		public apMatrix _matrix = new apMatrix();
-
-
-		// Init
-		//--------------------------------------------
-		public apTransform_Vertex()
-		{
-
-		}
+        [SerializeField]
+        public apMatrix _matrix = new apMatrix();
 
 
-		// Functions
-		//--------------------------------------------
+        // Init
+        //--------------------------------------------
+        public apTransform_Vertex()
+        {
+
+        }
+
+
+        // Functions
+        //--------------------------------------------
 
 
 
-		// Get / Set
-		//--------------------------------------------
-	}
+        // Get / Set
+        //--------------------------------------------
+    }
 }

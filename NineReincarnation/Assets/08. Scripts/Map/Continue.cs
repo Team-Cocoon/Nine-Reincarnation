@@ -6,7 +6,6 @@ public class Continue : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("dasfdfs");
             SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(SceneDataManager.Instance.StageCoreScene, SceneDataManager.Instance.StageCoreScene, SceneDataManager.Instance.GetStageSubScene(1));
             Destroy(gameObject);
         }

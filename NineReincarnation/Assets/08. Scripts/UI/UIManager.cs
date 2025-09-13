@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateInputActionMap()
     {
-        if(OpenUICount > 0)
+        if (OpenUICount > 0)
         {
             InputManager.Instance?.CurPlayer.SetStop();
             InputEventHandler.OnChangedActionToUI_Invoke();

@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -12,34 +12,33 @@
 */
 
 using UnityEngine;
-using AnyPortrait;
 
 namespace AnyPortrait
 {
 
-	public class apTutorial_SDController : MonoBehaviour
-	{
-		// Target AnyPortrait
-		public apPortrait portrait;
+    public class apTutorial_SDController : MonoBehaviour
+    {
+        // Target AnyPortrait
+        public apPortrait portrait;
 
-		void Start()
-		{
+        void Start()
+        {
 
-		}
+        }
 
-		void Update()
-		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				if (portrait.IsPlaying("Idle"))
-				{
-					portrait.StopAll(0.3f);
-				}
-				else
-				{
-					portrait.CrossFade("Idle", 0.3f);
-				}
-			}
-		}
-	}
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (portrait.IsPlaying("Idle"))
+                {
+                    portrait.StopAll(0.3f);
+                }
+                else
+                {
+                    portrait.CrossFade("Idle", 0.3f);
+                }
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -11,56 +11,51 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using System;
-
-
-using AnyPortrait;
+using UnityEngine;
 
 namespace AnyPortrait
 {
-	/// <summary>
-	/// apModifiedVertex에 상응하는 Pin에 대한 데이터
-	/// </summary>
-	[Serializable]
-	public class apModifiedPin
-	{
-		// Members
-		//----------------------------------------------------------
-		[NonSerialized]
-		public apModifiedMesh _modifiedMesh = null;
+    /// <summary>
+    /// apModifiedVertex에 상응하는 Pin에 대한 데이터
+    /// </summary>
+    [Serializable]
+    public class apModifiedPin
+    {
+        // Members
+        //----------------------------------------------------------
+        [NonSerialized]
+        public apModifiedMesh _modifiedMesh = null;
 
-		public int _pinUniqueID = -1;
+        public int _pinUniqueID = -1;
 
-		[NonSerialized]
-		public apMesh _mesh = null;
+        [NonSerialized]
+        public apMesh _mesh = null;
 
-		[NonSerialized]
-		public apMeshPin _pin = null;
+        [NonSerialized]
+        public apMeshPin _pin = null;
 
-		[SerializeField]
-		public Vector2 _deltaPos = Vector2.zero;
+        [SerializeField]
+        public Vector2 _deltaPos = Vector2.zero;
 
 
-		// Init
-		//----------------------------------------------------------
-		public apModifiedPin() { }
+        // Init
+        //----------------------------------------------------------
+        public apModifiedPin() { }
 
-		public void Init(int pinUniqueID, apMeshPin pin)
-		{
-			_pinUniqueID = pinUniqueID;
+        public void Init(int pinUniqueID, apMeshPin pin)
+        {
+            _pinUniqueID = pinUniqueID;
 
-			_pin = pin;
-			_deltaPos = Vector2.zero;
-		}
+            _pin = pin;
+            _deltaPos = Vector2.zero;
+        }
 
-		public void Link(apModifiedMesh modifiedMesh, apMesh mesh, apMeshPin pin)
-		{
-			_modifiedMesh = modifiedMesh;
-			_mesh = mesh;
-			_pin = pin;
-		}
-	}
+        public void Link(apModifiedMesh modifiedMesh, apMesh mesh, apMeshPin pin)
+        {
+            _modifiedMesh = modifiedMesh;
+            _mesh = mesh;
+            _pin = pin;
+        }
+    }
 }

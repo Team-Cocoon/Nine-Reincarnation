@@ -11,13 +11,9 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
 using System;
 using System.Collections.Generic;
-
-
-using AnyPortrait;
+using UnityEngine;
 
 namespace AnyPortrait
 {
@@ -58,7 +54,7 @@ namespace AnyPortrait
             [SerializeField] public float _value_Float = 0.0f;
             [SerializeField] public Vector2 _value_Vector = Vector2.zero;
 
-            
+
 
             public ControlParamValue()
             {
@@ -78,6 +74,6 @@ namespace AnyPortrait
 
         }
 
-        
+
     }
 }

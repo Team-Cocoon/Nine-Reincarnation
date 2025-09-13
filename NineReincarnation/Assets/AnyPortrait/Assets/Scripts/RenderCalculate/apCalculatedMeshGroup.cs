@@ -1,4 +1,4 @@
-﻿/*
+/*
 *	Copyright (c) RainyRizzle Inc. All rights reserved
 *	Contact to : www.rainyrizzle.com , contactrainyrizzle@gmail.com
 *
@@ -11,35 +11,28 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-
-using AnyPortrait;
-
 namespace AnyPortrait
 {
 
-	public class apCalculatedMeshGroup
-	{
-		// Members
-		//--------------------------------
+    public class apCalculatedMeshGroup
+    {
+        // Members
+        //--------------------------------
 
 
 
-		// Init
-		//--------------------------------
+        // Init
+        //--------------------------------
 
 
 
-		// Functions
-		//--------------------------------
+        // Functions
+        //--------------------------------
 
 
 
-		// Get / Set
-		//--------------------------------
-	}
+        // Get / Set
+        //--------------------------------
+    }
 
 }

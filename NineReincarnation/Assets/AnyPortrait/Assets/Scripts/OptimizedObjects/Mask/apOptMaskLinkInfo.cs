@@ -11,13 +11,6 @@
 *	In that case, the act could be subject to legal sanctions.
 */
 
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-
-using AnyPortrait;
-
 namespace AnyPortrait
 {
     /// <summary>
@@ -41,8 +34,8 @@ namespace AnyPortrait
         //Send Data의 경우
         private apOptSendMaskData _parentSendData = null;
 
-		//렌더 카메라에 등록된 Receiver
-		private apOptMaskReceiver _linkedReceiver = null;
+        //렌더 카메라에 등록된 Receiver
+        private apOptMaskReceiver _linkedReceiver = null;
 
         //참고. Shared Mask를 받더라도, 데이터 수신은 Mesh > Mesh 관계이다.
         //Link Info를 바탕으로 Shader 프로퍼티 입력을 해야한다.
@@ -66,11 +59,11 @@ namespace AnyPortrait
 
 
         private apOptMaskLinkInfo()
-		{
-			_maskMesh = null;
-			_parentSendData = null;
-			_linkedReceiver = null;
-		}
+        {
+            _maskMesh = null;
+            _parentSendData = null;
+            _linkedReceiver = null;
+        }
 
         private void SetClipping(apOptMesh clippingParentMesh)
         {
@@ -86,10 +79,10 @@ namespace AnyPortrait
             _parentSendData = sendData;
         }
 
-		public void SetReceiver(apOptMaskReceiver receiver)
-		{
-			_linkedReceiver = receiver;
-		}
+        public void SetReceiver(apOptMaskReceiver receiver)
+        {
+            _linkedReceiver = receiver;
+        }
 
         // Get        
         //-------------------------------------------------------------
@@ -98,7 +91,7 @@ namespace AnyPortrait
 
         //Send Data의 경우
         public apOptSendMaskData ReceivedSendData { get { return _parentSendData; } }
-		
-		public apOptMaskReceiver LinkedReceiver { get { return _linkedReceiver; } }//사용하진 않지만 일단 만들어두면 어딘가 쓰지 않을까
+
+        public apOptMaskReceiver LinkedReceiver { get { return _linkedReceiver; } }//사용하진 않지만 일단 만들어두면 어딘가 쓰지 않을까
     }
 }
