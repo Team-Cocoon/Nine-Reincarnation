@@ -294,7 +294,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -33719957
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -464,8 +464,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278192126
-  m_fontColor: {r: 0.9960785, g: 0.027450982, b: 0, a: 1}
+    rgba: 4278190240
+  m_fontColor: {r: 0.627451, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -600,8 +600,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278192126
-  m_fontColor: {r: 0.9960785, g: 0.027450982, b: 0, a: 1}
+    rgba: 4278190240
+  m_fontColor: {r: 0.627451, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1253,35 +1253,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.6
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.9622642
+      value: 0.49056602
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.9622642
+      value: 0.49056602
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.9622642
+      value: 0.49056602
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.minColor.b
-      value: 0.94541776
+      value: 0.1792453
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.minColor.g
-      value: 0.9009434
+      value: 0.1792453
       objectReference: {fileID: 0}
     - target: {fileID: 2276485399891011012, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: InitialModule.startColor.minColor.r
-      value: 1
+      value: 0.1792453
       objectReference: {fileID: 0}
     - target: {fileID: 5339952449952861153, guid: ddae0d3373d3d9641adf23987fed027d, type: 3}
       propertyPath: m_SortingLayer
@@ -1421,8 +1425,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278192126
-  m_fontColor: {r: 0.9960785, g: 0.027450982, b: 0, a: 1}
+    rgba: 4278190240
+  m_fontColor: {r: 0.627451, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1847,7 +1851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6470460504253458178, guid: f1b4f378b8b583540a94ddd4690d3ff4, type: 3}
+  m_Sprite: {fileID: 136537078364505614, guid: 86be0cf884071264298bde2e7fc0d526, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

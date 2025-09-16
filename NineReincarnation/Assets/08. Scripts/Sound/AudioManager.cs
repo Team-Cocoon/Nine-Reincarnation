@@ -179,7 +179,10 @@ public class AudioManager : MonoBehaviour
 
     public void StopLoopingSfx(LoopSfx sfx)
     {
-        AudioClip targetClip = _loopingSfxPlayers[(int)sfx].clip;
+        AudioSource source = _loopingSfxPlayers[(int)sfx];
+        if (source == null) return;
+
+        AudioClip targetClip = source.clip;
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {

@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 1583015620401426800}
   - component: {fileID: 1012395176211371393}
   - component: {fileID: 6682873060510841788}
+  - component: {fileID: 8248723227383116022}
   m_Layer: 12
   m_Name: Feather
   m_TagString: Untagged
@@ -150,7 +151,7 @@ SpriteRenderer:
   m_SortingLayerID: 10875939
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 86062de7d0daf76428ff6945991c0f80, type: 3}
+  m_Sprite: {fileID: -1559174069, guid: 495060e6e8f2fb041acf275b8e550be2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -303,3 +304,25 @@ MonoBehaviour:
   _gizmoDeselectedColor: {r: 0, g: 0, b: 1, a: 1}
   _duration: 3
   _animaionType: 4
+--- !u!95 &8248723227383116022
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418252998242377184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4eaae9cc03f99b84888272fba8641d68, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

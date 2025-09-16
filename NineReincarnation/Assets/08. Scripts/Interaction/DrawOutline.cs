@@ -59,16 +59,16 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
         _tex = GetComponent<SpriteRenderer>().sprite.texture;
         _propBlock = new MaterialPropertyBlock();
 
-        SetTexelSize();
+        //SetTexelSize();
         SetOutline();
     }
 
-    private void SetTexelSize()
-    {
-        _render.GetPropertyBlock(_propBlock);
-        _propBlock.SetVector("_OutlineTexelSize", new Vector2(_tex.width, _tex.height));
-        _render.SetPropertyBlock(_propBlock);
-    }
+    //private void SetTexelSize()
+    //{
+    //    _render.GetPropertyBlock(_propBlock);
+    //    _propBlock.SetVector("_OutlineTexelSize", new Vector2(_tex.width, _tex.height));
+    //    _render.SetPropertyBlock(_propBlock);
+    //}
 
     public void SetOutline()
     {

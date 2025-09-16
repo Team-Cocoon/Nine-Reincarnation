@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: eeabf05827577ed41804cd970381f696
+guid: 495060e6e8f2fb041acf275b8e550be2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2181639703944109262
-    second: "\uC0C8 fly_0"
+      213: -7752779854839813385
+    second: "\uC0C8 fly 1_0"
   - first:
-      213: -8298224494852517904
-    second: "\uC0C8 fly_1"
+      213: -5516465452376936585
+    second: "\uC0C8 fly 1_1"
   - first:
-      213: -6434231302040168177
-    second: "\uC0C8 fly_2"
+      213: 3997400583120511773
+    second: "\uC0C8 fly 1_2"
   - first:
-      213: -6242916416629795347
-    second: "\uC0C8 fly_3"
+      213: 2743784421531748242
+    second: "\uC0C8 fly 1_3"
   - first:
-      213: -2538659233328315959
-    second: "\uC0C8 fly_4"
-  - first:
-      213: -6362212876015843832
-    second: "\uC0C8 fly_5"
+      213: 8192475292249553574
+    second: "\uC0C8 fly 1_4"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,8 +130,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5afb1c4f0d2b4974ea309829436522b5
-      internalID: -339083645
+      spriteID: d9a052a74a26f8447b619c4adf42de24
+      internalID: -1559174069
       vertices: []
       indices: 
       edges: []
@@ -153,10 +150,10 @@ TextureImporter:
       name: "\uC0C8 fly_1"
       rect:
         serializedVersion: 2
-        x: 133
+        x: 32
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e44e53c233ce4404db8ca65b9c8ccb65
-      internalID: -160453947
+      spriteID: 56b8d8de8857eb64b9ab08881fbd1915
+      internalID: -415722681
       vertices: []
       indices: 
       edges: []
@@ -175,10 +172,10 @@ TextureImporter:
       name: "\uC0C8 fly_2"
       rect:
         serializedVersion: 2
-        x: 266
+        x: 64
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdb44bcc3946fbc4dab1ef725e06738c
-      internalID: 1175497955
+      spriteID: 945d844a46bbe134e878185915f2d26f
+      internalID: -213266138
       vertices: []
       indices: 
       edges: []
@@ -197,10 +194,10 @@ TextureImporter:
       name: "\uC0C8 fly_3"
       rect:
         serializedVersion: 2
-        x: 399
+        x: 96
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,8 +206,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df5059c6477542245939b9e66a4a33df
-      internalID: -1245732342
+      spriteID: 77f4599578ab5084ba806397857601d6
+      internalID: 1277388563
       vertices: []
       indices: 
       edges: []
@@ -219,10 +216,10 @@ TextureImporter:
       name: "\uC0C8 fly_4"
       rect:
         serializedVersion: 2
-        x: 532
+        x: 128
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e090fc416b72f484b800c6a936853721
-      internalID: -545205012
+      spriteID: 05fdfc465f98a734d8e352bbafcc2d7e
+      internalID: -1599127226
       vertices: []
       indices: 
       edges: []
@@ -241,10 +238,10 @@ TextureImporter:
       name: "\uC0C8 fly_5"
       rect:
         serializedVersion: 2
-        x: 665
+        x: 160
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31807237bc246e54093257f9c06a9059
-      internalID: -1521024416
+      spriteID: 7434dd88249d09347826c0d59428e038
+      internalID: 634142675
       vertices: []
       indices: 
       edges: []
@@ -263,10 +260,10 @@ TextureImporter:
       name: "\uC0C8 fly_6"
       rect:
         serializedVersion: 2
-        x: 798
+        x: 192
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,8 +272,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41e9d65199fee9b4a94c076fb3ed66d8
-      internalID: -1950366916
+      spriteID: f2dbb1828b9377b409adc270aa2e2b45
+      internalID: 1912885865
       vertices: []
       indices: 
       edges: []
@@ -285,10 +282,10 @@ TextureImporter:
       name: "\uC0C8 fly_7"
       rect:
         serializedVersion: 2
-        x: 931
+        x: 224
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,8 +294,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a24959681ede0204880345e680631c7a
-      internalID: -1879116117
+      spriteID: 2e5155c1675731e4d8b49272100c4278
+      internalID: -964838052
       vertices: []
       indices: 
       edges: []
@@ -307,10 +304,10 @@ TextureImporter:
       name: "\uC0C8 fly_8"
       rect:
         serializedVersion: 2
-        x: 1064
+        x: 256
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,8 +316,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4001d4e0a2e9c2c4ea085ab3b628ea3b
-      internalID: 886054499
+      spriteID: 005b856bbf40c01428ae437b8287bcb8
+      internalID: -953472719
       vertices: []
       indices: 
       edges: []
@@ -329,10 +326,10 @@ TextureImporter:
       name: "\uC0C8 fly_9"
       rect:
         serializedVersion: 2
-        x: 1197
+        x: 288
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,8 +338,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d48b817edfc62c4ca24a6a8fb7761da
-      internalID: -1151471337
+      spriteID: f8978029a26e7ac4bb7993535a053fa7
+      internalID: 49087411
       vertices: []
       indices: 
       edges: []
@@ -351,10 +348,10 @@ TextureImporter:
       name: "\uC0C8 fly_10"
       rect:
         serializedVersion: 2
-        x: 1330
+        x: 320
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,8 +360,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956f1727be3eabb4c9d253d8ace95aa5
-      internalID: 1457791432
+      spriteID: 9f6e6a2ec52128d43b618514e0d97cfb
+      internalID: 498021392
       vertices: []
       indices: 
       edges: []
@@ -373,10 +370,10 @@ TextureImporter:
       name: "\uC0C8 fly_11"
       rect:
         serializedVersion: 2
-        x: 1463
+        x: 352
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -385,8 +382,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 293972ecb30d9a84381716df0371601d
-      internalID: -309607754
+      spriteID: 8e1c48e380f343148ac5e5678bfc6532
+      internalID: -1402275088
       vertices: []
       indices: 
       edges: []
@@ -395,10 +392,10 @@ TextureImporter:
       name: "\uC0C8 fly_12"
       rect:
         serializedVersion: 2
-        x: 1596
+        x: 384
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,8 +404,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa7f2afeb0690bd4a91a4ddde1b29bb2
-      internalID: -2144299043
+      spriteID: 3440ba6c3340f074d8b02fdeae37e777
+      internalID: -245599521
       vertices: []
       indices: 
       edges: []
@@ -417,10 +414,10 @@ TextureImporter:
       name: "\uC0C8 fly_13"
       rect:
         serializedVersion: 2
-        x: 1729
+        x: 416
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,8 +426,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7901a567d15488e42ac3e40fedf00c85
-      internalID: -173026638
+      spriteID: 94d1d42f0f538e1478086991d4bb3715
+      internalID: 1760658947
       vertices: []
       indices: 
       edges: []
@@ -439,10 +436,10 @@ TextureImporter:
       name: "\uC0C8 fly_14"
       rect:
         serializedVersion: 2
-        x: 1862
+        x: 448
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -451,8 +448,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cd19ff274652924080a31fe9ce28131
-      internalID: -1082790814
+      spriteID: 4a2a241d5b3052841983098b4b98596b
+      internalID: -1020113160
       vertices: []
       indices: 
       edges: []
@@ -461,10 +458,10 @@ TextureImporter:
       name: "\uC0C8 fly_15"
       rect:
         serializedVersion: 2
-        x: 1995
+        x: 480
         y: 0
-        width: 133
-        height: 135
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,8 +470,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6efb20c32da3e7a49ae12ad666a06879
-      internalID: 1709114439
+      spriteID: 990fcf590cb9b154d8f87dda001765d8
+      internalID: 614056540
       vertices: []
       indices: 
       edges: []
@@ -483,7 +480,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5c1d6c51413d2c54582d2382e5fa2f99
+    spriteID: 17de0ad898bfc3740beb442a4265c15c
     internalID: 0
     vertices: []
     indices: 
@@ -493,24 +490,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":133.0,"y":135.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "\uC0C8 fly_0": -339083645
-      "\uC0C8 fly_1": -160453947
-      "\uC0C8 fly_10": 1457791432
-      "\uC0C8 fly_11": -309607754
-      "\uC0C8 fly_12": -2144299043
-      "\uC0C8 fly_13": -173026638
-      "\uC0C8 fly_14": -1082790814
-      "\uC0C8 fly_15": 1709114439
-      "\uC0C8 fly_2": 1175497955
-      "\uC0C8 fly_3": -1245732342
-      "\uC0C8 fly_4": -545205012
-      "\uC0C8 fly_5": -1521024416
-      "\uC0C8 fly_6": -1950366916
-      "\uC0C8 fly_7": -1879116117
-      "\uC0C8 fly_8": 886054499
-      "\uC0C8 fly_9": -1151471337
+      "\uC0C8 fly_0": -1559174069
+      "\uC0C8 fly_1": -415722681
+      "\uC0C8 fly_10": 498021392
+      "\uC0C8 fly_11": -1402275088
+      "\uC0C8 fly_12": -245599521
+      "\uC0C8 fly_13": 1760658947
+      "\uC0C8 fly_14": -1020113160
+      "\uC0C8 fly_15": 614056540
+      "\uC0C8 fly_2": -213266138
+      "\uC0C8 fly_3": 1277388563
+      "\uC0C8 fly_4": -1599127226
+      "\uC0C8 fly_5": 634142675
+      "\uC0C8 fly_6": 1912885865
+      "\uC0C8 fly_7": -964838052
+      "\uC0C8 fly_8": -953472719
+      "\uC0C8 fly_9": 49087411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

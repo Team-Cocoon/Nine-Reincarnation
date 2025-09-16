@@ -4,6 +4,7 @@ using State;
 using State.PlayerState;
 using StateMachine.PlayerStateMachine;
 using UnityEngine;
+using static AudioManager;
 
 public interface IObjectData
 {
@@ -171,7 +172,7 @@ namespace Player.Controller
 
         private void UpdateGravityAndFallSpeed()
         {
-            if (!_isFalling && _rb2d.linearVelocity.y <= float.Epsilon)
+            if (!_isFalling && _rb2d.linearVelocity.y <= 0.5f)
             {
                 _rb2d.gravityScale = _downGravity;
                 _isFalling = true;
