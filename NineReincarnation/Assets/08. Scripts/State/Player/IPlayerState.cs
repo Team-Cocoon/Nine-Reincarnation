@@ -6,7 +6,8 @@ namespace State.PlayerState
         Idle,
         Jump,
         Look,
-        Dead
+        Dead,
+        Throw
     }
 
     public interface IPlayerState : IState

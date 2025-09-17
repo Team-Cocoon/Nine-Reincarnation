@@ -3,22 +3,20 @@ using UnityEngine;
 
 public class AnnaThrowState : StateMachineBehaviour
 {
-    public PlayerController _player;
+    public PlayerController Player;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-        _player.SetStop();
+        Player.IsThrow = true;
+        InputEventHandler.OnChangedForceActionToUI_Invoke();
+        Player.SetStop();
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        Debug.Log("호출");
+        InputEventHandler.OnChangedForceActionToPlayer_Invoke();
+        Player.IsThrow = false;
     }
 }

@@ -10,6 +10,7 @@ namespace StateMachine.PlayerStateMachine
         public JumpState _jumpState;
         public LookState _lookState;
         public DeadState _deadState;
+        public ThrowState _throwState;
 
         private PlayerController _player;
 
@@ -26,6 +27,7 @@ namespace StateMachine.PlayerStateMachine
             _jumpState = new JumpState(player);
             _lookState = new LookState(player);
             _deadState = new DeadState(player);
+            _throwState = new ThrowState(player);
         }
 
         public override void Excute()

@@ -33,7 +33,7 @@ namespace Player.Action
         {
             if (context.started)
             {
-                _player.ExcuteThrowThread();
+                _player.ExcuteThrowMotion();
             }
         }
 

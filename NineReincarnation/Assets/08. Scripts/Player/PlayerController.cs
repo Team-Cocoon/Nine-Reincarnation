@@ -49,6 +49,7 @@ namespace Player.Controller
         [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
         [SerializeField] private bool _isSlope = false;
         [SerializeField] private bool _isJump = false;
+        [SerializeField] private bool _isThrow = false;
         [SerializeField] private bool _isFalling = false;
         [SerializeField] private bool _onGroundDetector = false;
         [SerializeField] private bool _onSlopeDetector = false;
@@ -112,6 +113,11 @@ namespace Player.Controller
             get => _isJump;
             set => _isJump = value;
         }
+        public bool IsThrow
+        {
+            get => _isThrow;
+            set => _isThrow = value;
+        }
 
         public Vector2 SlopeDir
         {
@@ -128,6 +134,7 @@ namespace Player.Controller
             _isFalling = false;
             _onGroundDetector = false;
             _onSlopeDetector = false;
+            _isThrow = false;
         }
 
         private void Awake()
@@ -142,6 +149,8 @@ namespace Player.Controller
 
             _playersStateMachine.Initialize(_playersStateMachine._idleState);
             _playersStateMachine.stateChanged += ChangeAnimation;
+
+            _animator.GetBehaviour<AnnaThrowState>().Player = this;
         }
 
         private void Start()
@@ -187,6 +196,11 @@ namespace Player.Controller
             {
                 _rb2d.linearVelocity = new Vector2(_rb2d.linearVelocity.x, _maxDownForce);
             }
+        }
+
+        public void ExcuteThrowMotion()
+        {
+            _animator.SetTrigger("isThrow");
         }
 
         public void ExcuteThrowThread()
