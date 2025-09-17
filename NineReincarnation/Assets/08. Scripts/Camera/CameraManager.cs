@@ -20,6 +20,10 @@ namespace Manager
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(this);
+            }
             Instance = this;
             SceneEventHandler.SceneStarted += AddStackCamera;
         }

@@ -1,91 +1,86 @@
-using System;
 using System.Collections.Generic;
 using Player.Action;
 using Player.Controller;
 using UnityEngine;
-
-[Serializable]
-public class PlayerInfo
-{
-    public string _name;
-    public PlayerController _player;
-}
+using UnityEngine.InputSystem;
 
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    [Header("---- 테스트 ----")]
-    [SerializeField] private bool isTest;
-
-    [Header("---처음 움직일 플레이어---")]
-    [SerializeField] string _playerName = "Anna";
-
     [Header("---플레이어 정보들---")]
-    [SerializeField] private List<PlayerInfo> _playerInfo;
+    [SerializeField] private List<PlayerController> _players;
 
-    private int _currentIdx = 0;
-    private List<string> _playerNames = new List<string>();
-    private Dictionary<string, PlayerController> _players = new Dictionary<string, PlayerController>();
-    private PlayerAction _action;
-    public PlayerAction Action => _action;
-    public Dictionary<string, PlayerController> Players => _players;
+    private string _curActionMap;
+    private int _curPlayerIdx = 0;
+    private PlayerController _curPlayer;
+    private PlayerInput _playerInput;
+    private PlayerAction _playerAction;
+    private bool _isForce = false;
+
+    public PlayerController CurPlayer => _curPlayer;
 
     private void Awake()
     {
         Instance = this;
-        _action = GetComponent<PlayerAction>();
 
-        if (isTest)
-        {
-            Init();
-        }
-        SceneEventHandler.SceneStarted += Init;
+        _playerInput = GetComponent<PlayerInput>();
+        _playerAction = GetComponent<PlayerAction>();
+
+        _curPlayer = _players[_curPlayerIdx];
+        _playerAction.SetPlayer(_curPlayer);
+
+        _curActionMap = _playerInput.defaultActionMap;
+
+        InputEventHandler.OnChangedActionToUI += InputEvent_OnChangedActionToUI;
+        InputEventHandler.OnChangedActionToPlayer += InputEvent_OnChangedActionToPlayer;
+        InputEventHandler.OnChangedForceActionToUI += InputEvent_OnChangedForceActionToUI;
+        InputEventHandler.OnChangedForceActionToPlayer += InputEvent_OnChangedForceActionToPlayer;
     }
 
     private void OnDestroy()
     {
-        SceneEventHandler.SceneStarted -= Init;
+        InputEventHandler.OnChangedActionToUI -= InputEvent_OnChangedActionToUI;
+        InputEventHandler.OnChangedActionToPlayer -= InputEvent_OnChangedActionToPlayer;
+        InputEventHandler.OnChangedForceActionToUI -= InputEvent_OnChangedForceActionToUI;
+        InputEventHandler.OnChangedForceActionToPlayer -= InputEvent_OnChangedForceActionToPlayer;
     }
 
-    public void DisableInput()
+    private void InputEvent_OnChangedActionToUI()
     {
-        _action.DisableInput();
-    }
-    public void EnableInput()
-    {
-        _action.EnableInput();
-    }
-
-
-    //데이터 실행
-    private void Init()
-    {
-        for (int i = 0; i < _playerInfo.Count; ++i)
+        if (_isForce)
         {
-            AddPlayer(_playerInfo[i]._name, _playerInfo[i]._player);
+            return;
         }
-
-        _currentIdx = _playerNames.IndexOf(_playerName);
-        _action.SetPlayer(_playerName, _players[_playerName]);
+        ChangeActionToUI();
+    }
+    private void InputEvent_OnChangedActionToPlayer()
+    {
+        if (_isForce)
+        {
+            return;
+        }
+        ChangeActionToPlayer();
+    }
+    private void InputEvent_OnChangedForceActionToUI()
+    {
+        _isForce = !_isForce;
+        ChangeActionToUI();
+    }
+    private void InputEvent_OnChangedForceActionToPlayer()
+    {
+        _isForce = !_isForce;
+        ChangeActionToPlayer();
     }
 
-    private void Clear()
+    public void ChangeActionToUI()
     {
-        _playerNames.Clear();
-        _players.Clear();
+        _playerInput.SwitchCurrentActionMap("UI");
     }
-
-    /// <summary>
-    /// 플레이어 추가
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="controller"></param>
-    public void AddPlayer(string name, PlayerController controller)
+    public void ChangeActionToPlayer()
     {
-        _playerNames.Add(name);
-        _players.Add(name, controller);
+        _playerInput.SwitchCurrentActionMap("Player");
     }
 
     /// <summary>
@@ -93,10 +88,10 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void Swap(string name)
     {
-        _currentIdx = (_currentIdx + 1) % _playerNames.Count;
-        string playeName = _playerNames[_currentIdx];
+        //_currentIdx = (_currentIdx + 1) % _playerNames.Count;
+        //string playeName = _playerNames[_currentIdx];
 
-        _action.SetPlayer(playeName, _players[playeName]);
+        //_action.SetPlayer(playeName, _players[playeName]);
 
         //CameraManager.Instance.ChangeTarget(_players[playeName].GetTransform());
     }

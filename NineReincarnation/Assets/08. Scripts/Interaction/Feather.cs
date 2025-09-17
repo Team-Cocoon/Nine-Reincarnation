@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using Player.Controller;
 using UnityEngine;
 
-public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractableToggle
+public class Feather : DrawOutline, IClickInteractableToggle
 {
+    public static bool IsTotalActive;
+    public static List<Feather> ActiveFeather = new List<Feather>();
+
     [SerializeField] private Color _activeColor;
     [SerializeField] private Color _inactiveColor;
     [SerializeField] private Color _activatedColor;
@@ -10,8 +14,14 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     [Header("----- 상호작용 조절 ------")]
     [SerializeField] private bool _possibleActive;
     [SerializeField] private bool _isActivated;
+    [SerializeField] private bool _isClickControlToSelf;
+    [SerializeField] private bool _isHoverControlToSelf;
 
-    PlayerController _player => InputManager.Instance.Action.Player;
+    public bool IsClickControlToSelf { get => _isClickControlToSelf; }
+    public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
+
+
+    PlayerController _player => InputManager.Instance.CurPlayer;
 
     private LayerMask _playerMask;
 
@@ -26,12 +36,17 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
 
     private void ActivateFeather()
     {
+        OutlineColor = _activatedColor;
+        IsTotalActive = true;
         _isActivated = true;
         _player.BecomeLighter();
     }
 
     private void InactivateFeather()
     {
+        IsOutline = false;
+        OutlineColor = _activeColor;
+        IsTotalActive = false;
         _isActivated = false;
         _player.InitGravity();
     }
@@ -40,18 +55,25 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     {
         if (_possibleActive)
         {
-            if (_isActivated) //이미 활성화 되어있다면
-            {
-                OutlineColor = _activeColor;
+            if (_isActivated || IsTotalActive) //이미 활성화 되어있다면
+            {//활성화 해제
+                foreach (Feather feather in ActiveFeather)
+                {
+                    feather.InactivateFeather();
+                }
+                ActiveFeather.Clear();
+
                 InactivateFeather();
             }
             else
-            {
-                OutlineColor = _activatedColor;
+            {//활성화
+
+                ActiveFeather.Add(this);
                 ActivateFeather();
             }
         }
     }
+
     public override void EnableHoverInteraction()
     {
         if (_isActivated)
@@ -99,7 +121,7 @@ public class Feather : DrawOutline, IClickInteractableToggle, IHoverInteractable
     private void OnTriggerExit2D(Collider2D collision)
     {
         bool _detectedPlayer = ((1 << collision.gameObject.layer) & _playerMask) != 0;
-        if (_detectedPlayer)
+        if (_detectedPlayer && _isActivated)
         {
             OutlineColor = _inactiveColor;
             _possibleActive = false;

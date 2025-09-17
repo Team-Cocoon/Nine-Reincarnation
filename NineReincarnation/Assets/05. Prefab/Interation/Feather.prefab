@@ -82,6 +82,8 @@ GameObject:
   - component: {fileID: 5949948417687427517}
   - component: {fileID: 1583015620401426800}
   - component: {fileID: 1012395176211371393}
+  - component: {fileID: 6682873060510841788}
+  - component: {fileID: 8248723227383116022}
   m_Layer: 12
   m_Name: Feather
   m_TagString: Untagged
@@ -149,12 +151,12 @@ SpriteRenderer:
   m_SortingLayerID: 10875939
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9af68b10c21034e40bdcc405fafabc07, type: 3}
+  m_Sprite: {fileID: -1559174069, guid: 495060e6e8f2fb041acf275b8e550be2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -198,8 +200,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96875, y: 0.90625}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -266,4 +268,61 @@ MonoBehaviour:
   _activatedColor: {r: 0, g: 0.15639663, b: 1, a: 0}
   _possibleActive: 0
   _isActivated: 1
-  _player: {fileID: 0}
+  _isClickControlToSelf: 1
+  _isHoverControlToSelf: 0
+--- !u!114 &6682873060510841788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418252998242377184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39acc06c143e73146bee8adea9d98be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnTime: 0
+  _delay: 0
+  isVisible: 0
+  isStopAnimator: 0
+  _pathType: 2
+  _animationLoopType: 1
+  _loopCount: -1
+  _snappingSettings: {x: 0.1, y: 0.1}
+  _editing: 1
+  _waypoints:
+  - {x: -0.5, y: -0, z: 0}
+  - {x: 5.3, y: -0, z: 0}
+  _circleRadius: 5
+  _angleRad: 0
+  _circleDirection: 1
+  _elipseRadiusX: 5
+  _elipseRadiusY: 10
+  _elipseDirection: 1
+  _handleRadius: 0.5
+  _gizmoDeselectedColor: {r: 0, g: 0, b: 1, a: 1}
+  _duration: 3
+  _animaionType: 4
+--- !u!95 &8248723227383116022
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418252998242377184}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4eaae9cc03f99b84888272fba8641d68, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

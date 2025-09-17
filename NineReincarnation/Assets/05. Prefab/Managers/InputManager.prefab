@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5848109479736679958}
   - component: {fileID: 5922702560739776728}
   - component: {fileID: 8595296017942002913}
+  - component: {fileID: 4330408941620496009}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -123,22 +124,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5848109479736679958}
         m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
-        m_MethodName: ActionToggleMainUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 413d8a29-4797-48e1-9963-69b7b159a772
-    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5848109479736679958}
-        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
         m_MethodName: ActionDownJump
         m_Mode: 0
         m_Arguments:
@@ -156,7 +141,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5848109479736679958}
         m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
         m_MethodName: ActionLook
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -172,7 +157,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5848109479736679958}
         m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
         m_MethodName: ActionToggleMainUI
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -183,6 +168,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 08b24fb8-ff7e-47c4-9619-7f000fcde6d1
     m_ActionName: 'Player/ToggleMainUI[/Keyboard/m]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleSettingUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5dbfc645-9abc-4d2d-bbae-c0f041c540b2
+    m_ActionName: 'Player/ToggleSettingUI[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionThrowThread
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b8db8d37-125f-4d17-8601-cd1387cd4c25
+    m_ActionName: 'Player/ThrowThread[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleSettingUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6bb32106-14a4-4c59-949e-8d62db9914b8
+    m_ActionName: 'UI/ToggleSettingUI[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleMainUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c4066fb5-8d80-4750-8b23-ddfe74e4a732
+    m_ActionName: 'UI/ToggleMainUI[/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -200,7 +249,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52dafbe18d7e5b479f9638551e6c32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerName: Anna
-  _playerInfo:
-  - _name: Anna
-    _player: {fileID: 0}
+  _players:
+  - {fileID: 0}
+--- !u!114 &4330408941620496009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8904a42049dfe4c901eac172f0df82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

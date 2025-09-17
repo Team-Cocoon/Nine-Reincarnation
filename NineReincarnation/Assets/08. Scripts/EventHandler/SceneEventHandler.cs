@@ -4,6 +4,8 @@ using DG.Tweening;
 
 public static class SceneEventHandler
 {
+    public static event Action<string> OnSceneChanged;
+
     public static event Action SceneExited;
 
     public static event Func<Tween> SceneFadeOut;
@@ -28,6 +30,7 @@ public static class SceneEventHandler
 
 
     #region Invoke 처리
+    public static void OnSceneChanged_Invoke(string scenePath) => OnSceneChanged?.Invoke(scenePath);
     public static void SceneExited_Invoke() => SceneExited?.Invoke();
     public static Tween SceneFadeOut_Invoke()
     {

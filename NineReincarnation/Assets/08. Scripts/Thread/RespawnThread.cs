@@ -25,6 +25,7 @@ public class RespawnThread : Thread, ICollidable
     [SerializeField] private bool _isHit;
     [SerializeField] private float _disappearTime = 0f;
     [SerializeField] private float _respawnTime = 0f;
+    [SerializeField] private float _margin = 0.5f;
 
     //private List<GameObject> _playersOnRope = new List<GameObject>();
     private Coroutine _disappearCoroutine;
@@ -50,7 +51,7 @@ public class RespawnThread : Thread, ICollidable
         }
         _lineRenderer.positionCount = _segmentPositions.Length;
         _lineRenderer.SetPositions(_segmentPositions);
-        _edgeCollider.edgeRadius = threadWidth * 0.5f;
+        _edgeCollider.edgeRadius = threadWidth * _margin;
         _edgeCollider.points = _colliderPositions;
     }
     /// <summary>
@@ -108,11 +109,11 @@ public class RespawnThread : Thread, ICollidable
 
         while (elapsedTime < 1f)
         {
-            if (!_isHit)
-            {
-                AppearThread();
-                yield break;  // 중간에 빠졌으면 중단
-            }
+            //if (!_isHit)
+            //{
+            //    AppearThread();
+            //    yield break;  // 중간에 빠졌으면 중단
+            //}
             elapsedTime += Time.deltaTime;
             Color currentColor = Color.Lerp(startColor, endColor, elapsedTime / 1f);
 
@@ -121,6 +122,8 @@ public class RespawnThread : Thread, ICollidable
 
             yield return null;
         }
+
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
         _lineRenderer.startColor = endColor;
         _lineRenderer.endColor = endColor;
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
+    [Header("대화창에 뜰 이미지")]
     public List<Sprite> images;
 
     public bool isTextShowed = false;
@@ -65,6 +66,7 @@ public class DialogueManager : MonoBehaviour
     {
         isTextShowed = false;
         contextsData = contextsData.Replace("*", "\n");
+        contextsData = contextsData.Replace("#", ",");
         _typeWriter.TextAnimator.textFull = contextsData;
     }
 

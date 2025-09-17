@@ -35,6 +35,7 @@ namespace StateMachine.PlayerStateMachine
             base.Excute();
         }
 
+
         private void AnyState()
         {
             if (_player.IsDead)

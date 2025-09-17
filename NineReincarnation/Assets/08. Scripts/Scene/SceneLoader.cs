@@ -137,6 +137,7 @@ namespace Utilities
 
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath, false);
+            SceneEventHandler.OnSceneChanged_Invoke(scenePath);
 
             isLoading = false;
         }
@@ -162,6 +163,7 @@ namespace Utilities
         /// <returns></returns>
         public IEnumerator LoadScene(string coreScenePath, string prevCoreScenePath)
         {
+            if (isLoading) Debug.Log("이미 씬 로딩 중 입니다.");
             if (string.IsNullOrEmpty(coreScenePath) || isLoading)
             {
                 yield break;
@@ -169,16 +171,17 @@ namespace Utilities
 
             isLoading = true;
 
-            yield return SceneEventHandler.SceneFadeOut_Invoke().WaitForCompletion();
+            yield return SceneEventHandler.SceneFadeOut_Invoke()?.WaitForCompletion();
             SceneEventHandler.SceneExited_Invoke();
 
             yield return LoadingSceneRoutine(coreScenePath, prevCoreScenePath);
+            SceneEventHandler.OnSceneChanged_Invoke(coreScenePath);
 
             SceneEventHandler.SceneStarted_Invoke();
-            yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
+            yield return SceneEventHandler.SceneFadeIn_Invoke()?.WaitForCompletion();
 
-            isLoading = false;
             yield return new WaitForSecondsRealtime(0.5f);
+            isLoading = false;
         }
         #endregion
 
@@ -195,7 +198,11 @@ namespace Utilities
             }
 
             List<AsyncOperation> ops = new List<AsyncOperation>();
-            ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
+
+            if (coreScenePath != prevCoreScenePath)
+            {
+                ops.Add(SceneManager.LoadSceneAsync(coreScenePath, LoadSceneMode.Additive));
+            }
 
             // 서브 씬들을 추가적으로 로드
             foreach (string scenePath in subScenePaths)
@@ -236,6 +243,7 @@ namespace Utilities
         }
         public IEnumerator LoadScene(string coreScenePath, string prevCoreScenePath, List<string> subScenePaths)
         {
+            if (isLoading) Debug.Log("이미 씬 로딩 중 입니다.");
             if (string.IsNullOrEmpty(coreScenePath) || isLoading)
             {
                 yield break;
@@ -246,12 +254,13 @@ namespace Utilities
             SceneEventHandler.SceneExited_Invoke();
 
             yield return LoadingSceneRoutine(coreScenePath, prevCoreScenePath, subScenePaths);
+            SceneEventHandler.OnSceneChanged_Invoke(coreScenePath);
 
             SceneEventHandler.SceneStarted_Invoke();
             yield return SceneEventHandler.SceneFadeIn_Invoke().WaitForCompletion();
 
-            isLoading = false;
             yield return new WaitForSecondsRealtime(0.5f);
+            isLoading = false;
         }
         #endregion
 

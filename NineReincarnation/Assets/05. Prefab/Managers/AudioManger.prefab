@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216674782899389832}
   - component: {fileID: 8199785517519974067}
+  - component: {fileID: 1252738069070018177}
   m_Layer: 0
   m_Name: AudioManger
   m_TagString: Untagged
@@ -45,7 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeData: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
-  BgmClips: []
+  BgmClips:
+  - {fileID: 8300000, guid: b9ac65e0404a375409cdc955d3bb4da4, type: 3}
+  - {fileID: 8300000, guid: 1960082bd329b2847a5405569b4e5aae, type: 3}
   BGMChannels: 4
   SfxClips:
   - {fileID: 8300000, guid: 2a01b586ed384e3429092266b52a3cf4, type: 3}
@@ -59,7 +62,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f836882404177bf449db4b6225095d72, type: 3}
   - {fileID: 8300000, guid: e8f9060906249cf42b240a2161a9f986, type: 3}
   - {fileID: 8300000, guid: a549324fcccb3ae46a29b9b2cdde0d4b, type: 3}
+  - {fileID: 8300000, guid: d9cdddfac237d0047b21b2d3ff785149, type: 3}
   SFXChannels: 20
   LoopingSfxClips:
   - {fileID: 8300000, guid: d1ace1a9c703c1e4391406919bbb1eb2, type: 3}
   LoopingChannels: 1
+--- !u!81 &1252738069070018177
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2404990243147909731}
+  m_Enabled: 1

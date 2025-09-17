@@ -1,21 +1,13 @@
-using Player.Controller;
 using UnityEngine;
 
-public class Continue : MonoBehaviour, ICollidable
+public class Continue : MonoBehaviour
 {
-    public void Enter(GameObject go = null)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player = go.GetComponent<PlayerController>();
-        if (player != null)
+        if (collision.CompareTag("Player"))
         {
-            //GameEventHandler.GameClearExcuted_Invoke();
             SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(SceneDataManager.Instance.StageCoreScene, SceneDataManager.Instance.StageCoreScene, SceneDataManager.Instance.GetStageSubScene(1));
-            //UIEventHandler.OnSceneFadeOut(() => { SceneManager.LoadScene("Continue"); });
+            Destroy(gameObject);
         }
-    }
-
-    public void Exit(GameObject go = null)
-    {
-        return;
     }
 }

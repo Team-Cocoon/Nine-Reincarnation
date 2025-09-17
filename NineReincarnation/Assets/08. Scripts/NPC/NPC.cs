@@ -36,6 +36,7 @@ public class NPC : MonoBehaviour, IEvent
     protected string _currentAnimName;
 
     public string objName => _objName;
+    public Animator Animator => _animator;
 
     private void Awake()
     {

@@ -42,7 +42,8 @@ public class AudioManager : MonoBehaviour
         SavePoint,
         Zoom,
         Text,
-        Click = 10
+        Click = 10,
+        DeleteThread
     }
     public enum LoopSfx
     {
@@ -178,7 +179,10 @@ public class AudioManager : MonoBehaviour
 
     public void StopLoopingSfx(LoopSfx sfx)
     {
-        AudioClip targetClip = _loopingSfxPlayers[(int)sfx].clip;
+        AudioSource source = _loopingSfxPlayers[(int)sfx];
+        if (source == null) return;
+
+        AudioClip targetClip = source.clip;
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {
