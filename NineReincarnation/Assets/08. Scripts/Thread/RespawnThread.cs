@@ -107,6 +107,7 @@ public class RespawnThread : Thread, ICollidable
         Color startColor = _lineRenderer.startColor;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
 
+        bool isSound = true;
         while (elapsedTime < 1f)
         {
             //if (!_isHit)
@@ -120,10 +121,14 @@ public class RespawnThread : Thread, ICollidable
             _lineRenderer.startColor = currentColor;
             _lineRenderer.endColor = currentColor;
 
+            if (elapsedTime >= 0.8f && isSound)
+            {
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
+                isSound = false;
+            }
             yield return null;
         }
 
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.DeleteThread);
         _lineRenderer.startColor = endColor;
         _lineRenderer.endColor = endColor;
 
