@@ -693,12 +693,42 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: c4141a307ca013d4fab64e848a99bad8, type: 2}
+    - {fileID: 11400000, guid: 688d18ebf74d87147a484f71fb4fa15b, type: 2}
+    - {fileID: 11400000, guid: a8f7d995dd8dc9c43b7e35e0141eb182, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 466741059}
           m_TargetAssemblyTypeName: StageFinal, Assembly-CSharp
           m_MethodName: DestroyThread
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 466741059}
+          m_TargetAssemblyTypeName: StageFinal, Assembly-CSharp
+          m_MethodName: Suprise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 466741059}
+          m_TargetAssemblyTypeName: StageFinal, Assembly-CSharp
+          m_MethodName: Look
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1280,6 +1310,10 @@ PlayableDirector:
     value: {fileID: 466741061}
   - key: {fileID: 1663671136033898721, guid: 9faca4e7f2c5c3342a85436541af14eb, type: 2}
     value: {fileID: 5795373135215769315}
+  - key: {fileID: 7436056600231662655, guid: 9faca4e7f2c5c3342a85436541af14eb, type: 2}
+    value: {fileID: 466741061}
+  - key: {fileID: 5731427625534122826, guid: 9faca4e7f2c5c3342a85436541af14eb, type: 2}
+    value: {fileID: 466741061}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1089236010

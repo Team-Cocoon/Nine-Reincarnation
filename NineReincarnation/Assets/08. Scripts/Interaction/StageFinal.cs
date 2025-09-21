@@ -24,6 +24,16 @@ public class StageFinal : MonoBehaviour, ICollidable
         }
     }
 
+    public void Look()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Look);
+    }
+
+    public void Suprise()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Surprise);
+    }
+
     public void DestroyThread()
     {
         Destroy(gameObject.transform.root.gameObject);
