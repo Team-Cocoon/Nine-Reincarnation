@@ -24,8 +24,10 @@ public class SettingUI : ToggleUI
     [SerializeField] private Button _endButton; //게임종료 버튼
 
     [Header("--- 사운드 조절 ---")]
+    [SerializeField] private Slider _masterSlider;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _bgmSlider;
+    [SerializeField] private Button _sfxTestButton;
 
     [Header("--- SettingButton ---")]
     [SerializeField] private GameObject _button;
@@ -81,6 +83,7 @@ public class SettingUI : ToggleUI
     {
         base.Start();
 
+        _masterSlider.value = AudioManager.Instance.VolumData.MasterVolume;
         _sfxSlider.value = AudioManager.Instance.VolumData.SfxVolume;
         _bgmSlider.value = AudioManager.Instance.VolumData.BgmVolume;
 
@@ -94,8 +97,11 @@ public class SettingUI : ToggleUI
         _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
         _resolutionDropdown.onValueChanged.AddListener(ResolutionChange);
         _endButton.onClick.AddListener(EndButtonEvent);
+
+        _masterSlider.onValueChanged.AddListener(OnMasterSliderChanged);
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
+        _sfxTestButton.onClick.AddListener(OnSfxTest);
     }
 
     protected override void OnDestroy()
@@ -107,8 +113,11 @@ public class SettingUI : ToggleUI
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
         _resolutionDropdown.onValueChanged.RemoveListener(ResolutionChange);
         _endButton.onClick.RemoveListener(EndButtonEvent);
+
+        _masterSlider.onValueChanged.RemoveListener(OnMasterSliderChanged);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
+        _sfxTestButton.onClick.RemoveListener(OnSfxTest);
 
         UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
     }
@@ -131,13 +140,22 @@ public class SettingUI : ToggleUI
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
     }
 
+    private void OnMasterSliderChanged(float value)
+    {
+        AudioManager.Instance.UpdateMasterVolmue(value);
+    }
     private void OnSfxSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateSfxVolmue_Invoke(value);
+        AudioManager.Instance.UpdateSfxVolmue(value);
     }
 
     private void OnBgmSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateBgmVolmue_Invoke(value);
+        AudioManager.Instance.UpdateBgmVolmue(value);
+    }
+
+    private void OnSfxTest()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
     }
 }
