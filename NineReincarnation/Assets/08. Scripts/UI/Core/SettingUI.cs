@@ -24,6 +24,7 @@ public class SettingUI : ToggleUI
     [SerializeField] private Button _endButton; //게임종료 버튼
 
     [Header("--- 사운드 조절 ---")]
+    [SerializeField] private SoundVolumeSO volumData;
     [SerializeField] private Slider _masterSlider;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _bgmSlider;
@@ -83,9 +84,9 @@ public class SettingUI : ToggleUI
     {
         base.Start();
 
-        _masterSlider.value = AudioManager.Instance.VolumData.MasterVolume;
-        _sfxSlider.value = AudioManager.Instance.VolumData.SfxVolume;
-        _bgmSlider.value = AudioManager.Instance.VolumData.BgmVolume;
+        _masterSlider.value = volumData.MasterVolume;
+        _sfxSlider.value = volumData.SfxVolume;
+        _bgmSlider.value = volumData.BgmVolume;
 
         InitResolution();
 
@@ -142,16 +143,16 @@ public class SettingUI : ToggleUI
 
     private void OnMasterSliderChanged(float value)
     {
-        AudioManager.Instance.UpdateMasterVolmue(value);
+        volumData.UpdateMasterVolume(value);
     }
     private void OnSfxSliderChanged(float value)
     {
-        AudioManager.Instance.UpdateSfxVolmue(value);
+        volumData.UpdateSfxVolume(value);
     }
 
     private void OnBgmSliderChanged(float value)
     {
-        AudioManager.Instance.UpdateBgmVolmue(value);
+        volumData.UpdateBgmVolume(value);
     }
 
     private void OnSfxTest()

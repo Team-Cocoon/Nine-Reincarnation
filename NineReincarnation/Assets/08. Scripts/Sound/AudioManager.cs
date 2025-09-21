@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup BGMAudioMixer;
 
     [Header("#Volmue")]
-    [SerializeField] private SoundVolumeSO volumeData;
-    public SoundVolumeSO VolumData => volumeData;
+    [SerializeField] private SoundVolumeSO _volumeData;
+    public SoundVolumeSO VolumData => _volumeData;
 
     [Header("#BGM")]
     public AudioClip[] BgmClips;
@@ -61,21 +62,31 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        _volumeData.OnChangeMasterVolume += UpdateMasterVolmue;
+        _volumeData.OnChangeSfxVolume += UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume += UpdateBgmVolmue;
+
         SceneEventHandler.SceneStarted += SceneEvent_SetTarget;
         SceneEventHandler.SceneExited += SceneEvent_ClearTarget;
 
-        SoundEventHandler.OnUpdateSfxVolmue += UpdateSfxVolmue;
-        SoundEventHandler.OnUpdateBgmVolmue += UpdateBgmVolmue;
         Init();
+    }
+
+    private void Start()
+    {
+        _volumeData.InitStart();
     }
 
     private void OnDestroy()
     {
+        _volumeData.OnChangeMasterVolume -= UpdateMasterVolmue;
+        _volumeData.OnChangeSfxVolume -= UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume -= UpdateBgmVolmue;
+
         SceneEventHandler.SceneStarted -= SceneEvent_SetTarget;
         SceneEventHandler.SceneExited -= SceneEvent_ClearTarget;
 
-        SoundEventHandler.OnUpdateSfxVolmue -= UpdateSfxVolmue;
-        SoundEventHandler.OnUpdateBgmVolmue -= UpdateBgmVolmue;
     }
 
     private void LateUpdate()
@@ -134,19 +145,16 @@ public class AudioManager : MonoBehaviour
     }
     public void UpdateMasterVolmue(float volume)
     {
-        volumeData.MasterVolume = volume;
         MasterAudioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
     public void UpdateSfxVolmue(float volume)
     {
-        volumeData.SfxVolume = volume;
         MasterAudioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
     }
 
     public void UpdateBgmVolmue(float volume)
     {
-        volumeData.BgmVolume = volume;
         MasterAudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
 

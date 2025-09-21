@@ -303,6 +303,10 @@ PrefabInstance:
       value: AudioManger
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: _volumeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: BGMAudioMixer
       value: 
       objectReference: {fileID: -6518296806390621914, guid: 8063df8ef0a176745910707fc54705e3, type: 2}
@@ -1135,6 +1139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: volumData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
     - target: {fileID: 2576769841311336435, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
