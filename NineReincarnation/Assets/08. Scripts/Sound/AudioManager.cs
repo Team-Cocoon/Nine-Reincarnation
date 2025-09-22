@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [Header("#AudioMixer")]
-    public AudioMixer MasterAudioMixer;
+    public AudioMixer      MasterAudioMixer;
     public AudioMixerGroup SFXAudioMixer;
     public AudioMixerGroup BGMAudioMixer;
 
@@ -64,11 +64,11 @@ public class AudioManager : MonoBehaviour
         Instance = this;
 
         _volumeData.OnChangeMasterVolume += UpdateMasterVolmue;
-        _volumeData.OnChangeSfxVolume += UpdateSfxVolmue;
-        _volumeData.OnChangeBgmVolume += UpdateBgmVolmue;
+        _volumeData.OnChangeSfxVolume    += UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume    += UpdateBgmVolmue;
 
-        SceneEventHandler.SceneStarted += SceneEvent_SetTarget;
-        SceneEventHandler.SceneExited += SceneEvent_ClearTarget;
+        SceneEventHandler.SceneStarted   += SceneEvent_SetTarget;
+        SceneEventHandler.SceneExited    += SceneEvent_ClearTarget;
 
         Init();
     }
@@ -81,11 +81,11 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         _volumeData.OnChangeMasterVolume -= UpdateMasterVolmue;
-        _volumeData.OnChangeSfxVolume -= UpdateSfxVolmue;
-        _volumeData.OnChangeBgmVolume -= UpdateBgmVolmue;
+        _volumeData.OnChangeSfxVolume    -= UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume    -= UpdateBgmVolmue;
 
-        SceneEventHandler.SceneStarted -= SceneEvent_SetTarget;
-        SceneEventHandler.SceneExited -= SceneEvent_ClearTarget;
+        SceneEventHandler.SceneStarted   -= SceneEvent_SetTarget;
+        SceneEventHandler.SceneExited    -= SceneEvent_ClearTarget;
 
     }
 
@@ -113,34 +113,35 @@ public class AudioManager : MonoBehaviour
         //배경음 플레이어 초기화
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
-        _bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        _bgmPlayer.playOnAwake = false;
-        _bgmPlayer.loop = true;
+
+        _bgmPlayer                       = bgmObject.AddComponent<AudioSource>();
+        _bgmPlayer.playOnAwake           = false;
+        _bgmPlayer.loop                  = true;
         _bgmPlayer.outputAudioMixerGroup = BGMAudioMixer;
 
         //효과음 플레이어 초기화
-        GameObject sfxObject = new GameObject("SfxPlayer");
+        GameObject sfxObject       = new GameObject("SfxPlayer");
         sfxObject.transform.parent = transform;
-        _sfxPlayers = new AudioSource[SFXChannels];
+        _sfxPlayers                = new AudioSource[SFXChannels];
 
         for (int index = 0; index < _sfxPlayers.Length; index++)
         {
-            _sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
-            _sfxPlayers[index].playOnAwake = false;
+            _sfxPlayers[index]                       = sfxObject.AddComponent<AudioSource>();
+            _sfxPlayers[index].playOnAwake           = false;
             _sfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
         }
 
         //반복 재생이 필요한 효과음 플레이어 초기화
-        GameObject loopingSfxObject = new GameObject("LoopingSfxPlayer");
+        GameObject loopingSfxObject       = new GameObject("LoopingSfxPlayer");
         loopingSfxObject.transform.parent = transform;
-        _loopingSfxPlayers = new AudioSource[LoopingChannels];
+        _loopingSfxPlayers                = new AudioSource[LoopingChannels];
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {
-            _loopingSfxPlayers[index] = loopingSfxObject.AddComponent<AudioSource>();
-            _loopingSfxPlayers[index].playOnAwake = false;
+            _loopingSfxPlayers[index]                = loopingSfxObject.AddComponent<AudioSource>();
+            _loopingSfxPlayers[index].playOnAwake    = false;
             _sfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
-            _loopingSfxPlayers[index].loop = true;
+            _loopingSfxPlayers[index].loop           = true;
         }
     }
     public void UpdateMasterVolmue(float volume)
