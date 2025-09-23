@@ -72,7 +72,6 @@ public class SettingUI : ToggleUI
         Screen.SetResolution(width, height, _screenMode);
     }
 
-
     private void Awake()
     {
         _uiToggleButton.SetActive(true);
@@ -87,7 +86,7 @@ public class SettingUI : ToggleUI
         _sfxSlider.value = AudioManager.Instance.VolumData.SfxVolume;
         _bgmSlider.value = AudioManager.Instance.VolumData.BgmVolume;
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL && !UNITY_EDITOR
         _resolutionPanel.SetActive(false); //웹 빌드 시 해상도 관련 패널 완전닫음
 #else
         InitResolution();
@@ -110,7 +109,7 @@ public class SettingUI : ToggleUI
     {
         base.OnDestroy();
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL && !UNITY_EDITOR
 
 
 #else
@@ -119,8 +118,10 @@ public class SettingUI : ToggleUI
 #endif
 
         _uiToggleButton.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
+
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
-        _endButton.onClick.RemoveListener(TitleButtonEvent);
+        _endButton.onClick .RemoveListener(TitleButtonEvent);
+
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
 
