@@ -1159,10 +1159,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b1503b511f8e70349ac3bb169b699ebe, type: 3}
+    - target: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: _uiToggleButton
+      value: 
+      objectReference: {fileID: 1939993271}
+    - target: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: _resolutionPanel
+      value: 
+      objectReference: {fileID: 1939993270}
     - target: {fileID: 1251476967547878468, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a173570d5aaa8244da78008990f46a27, type: 3}
+    - target: {fileID: 1559213014843111885, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1634541953748984756, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1311,6 +1323,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8549d2eeab08c5842a090564c7e109a9, type: 3}
+    - target: {fileID: 6009577734500106154, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_text
+      value: "\uD0C0\uC774\uD2C0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009577734500106154, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_fontSize
+      value: 42.85
+      objectReference: {fileID: 0}
     - target: {fileID: 6446054255171486473, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1423,6 +1443,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8756900032563683823, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8769439068498742915, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1436,6 +1460,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+--- !u!1 &1939993270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8756900032563683823, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+  m_PrefabInstance: {fileID: 1939993269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1939993271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1559213014843111885, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+  m_PrefabInstance: {fileID: 1939993269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2005028050
 GameObject:
   m_ObjectHideFlags: 0
