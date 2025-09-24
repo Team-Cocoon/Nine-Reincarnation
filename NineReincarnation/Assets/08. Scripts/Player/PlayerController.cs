@@ -204,11 +204,29 @@ namespace Player.Controller
             }
         }
 
-        public void ExcuteThrowMotion()
+        public void ExcuteThrowMotion(Vector2 mousePostion)
         {
             if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
             {
-                IsThrow = true;
+                Vector2 rightVector    = transform.right;
+                Vector2 playerPosition = transform.position;
+                Vector2 playerToMouse  = (mousePostion - playerPosition).normalized;
+
+                float dot = Vector3.Dot(rightVector, playerToMouse);
+                
+                //플레이어 기준 왼쪽 클릭
+                if (dot <= float.Epsilon)
+                {
+                    _spriteRenderer.flipX = true;
+                }
+                //플레이어 기준 오른쪽 클릭
+                else
+                {
+                    _spriteRenderer.flipX = false;
+                }
+
+
+                    IsThrow = true;
             }
         }
         public void ExcuteThrowThread()
