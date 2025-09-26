@@ -22,7 +22,7 @@ public class AnnaIdleState : PlayerStateMachineBehaviour
             Player.IsThrow = false;
         }
         //공중 상태 진입 시 강제로 Jump 상태로 변환
-        else if ((Player.IsGround && Player.IsSlope) || Player.IsJump)
+        else if (!(Player.IsGround || Player.IsSlope) || Player.IsJump)
         {
             animator.SetTrigger("IsJump");
             Player.IsJump = false;

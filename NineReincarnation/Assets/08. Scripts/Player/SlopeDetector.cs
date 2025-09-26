@@ -15,48 +15,30 @@ public class SlopeDetector : MonoBehaviour
         _slopeMask = LayerMask.GetMask("Slope");
     }
 
-
-    private void FixedUpdate()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (_player.IsJump)
+        if (_player.CurrentState == PlayerAnimationState.Jump)
         {
             return;
         }
 
-
-        if (_player.IsSlope)
-        {
-            GetSlopeVector();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        _detectedSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
-
         //밑에 경사면 감지
-        if (_detectedSlope)
+        if (_player.IsSlope)
         {
             //경사면이 있으면 경사면이 ground보다 우선순위
             GetSlopeVector();
-
-            _player.IsSlope = true;
-        }
-        else
-        {
-            _player.IsSlope = false;
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _detectedSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
 
-
         //밑에 경사면 감지
         if (_detectedSlope)
         {
+            _player.IsSlope = true;
+            _player.IsJump = false;
             _player.ResetJumpCount();
         }
     }
@@ -64,7 +46,6 @@ public class SlopeDetector : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         _detectedSlope = ((1 << collision.gameObject.layer) & _slopeMask) != 0;
-
 
         //밑에 경사면 감지
         if (_detectedSlope)

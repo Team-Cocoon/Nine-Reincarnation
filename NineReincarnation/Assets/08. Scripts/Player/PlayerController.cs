@@ -61,6 +61,7 @@ namespace Player.Controller
         [SerializeField] private bool _onGroundDetector = false;
         [SerializeField] private bool _onSlopeDetector  = false;
 
+        private bool                _isInteract = false;
         private int                 _jumpCount = 0;             //더블 점프 제어
         private Vector2             _slopeDir  = Vector2.right; //경사면 이동을 위한 벡터
         private PlayerDirection     _direction;                 //플레이어 방향
@@ -143,9 +144,12 @@ namespace Player.Controller
             _isSlope          = false;
             _isJump           = false;
             _isFalling        = false;
-            _onGroundDetector = false;
-            _onSlopeDetector  = false;
             _isThrow          = false;
+
+            _onGroundDetector = false;
+            _onSlopeDetector = false;
+            
+            InitGravity();
         }
 
         private void Awake()
@@ -155,7 +159,10 @@ namespace Player.Controller
             _animator = GetComponent<Animator>();
 
             _rb2d.gravityScale = _defaultGravity;
+        }
 
+        private void OnEnable()
+        {
             //모든 상태비헤비어 초기화
             foreach (PlayerStateMachineBehaviour behaviour in _animator.GetBehaviours<PlayerStateMachineBehaviour>())
             {
@@ -187,6 +194,7 @@ namespace Player.Controller
 
         private void UpdateGravityAndFallSpeed()
         {
+            //떨어지고 있는 상태로 변경
             if (!_isFalling && _rb2d.linearVelocity.y <= 0.5f)
             {
                 _rb2d.gravityScale = _downGravity;
@@ -204,11 +212,36 @@ namespace Player.Controller
             }
         }
 
-        public void ExcuteThrowMotion()
+        public void ExcuteThrowMotion(Vector2 mousePostion)
         {
-            if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+            //상호작용 중이면
+            if (_isInteract)
             {
-                IsThrow = true;
+                _thread?.ClickEvent();
+            }
+            else 
+            {
+                if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+                {
+                    Vector2 rightVector = transform.right;
+                    Vector2 playerPosition = transform.position;
+                    Vector2 playerToMouse = (mousePostion - playerPosition).normalized;
+
+                    float dot = Vector3.Dot(rightVector, playerToMouse);
+
+                    //플레이어 기준 왼쪽 클릭
+                    if (dot <= float.Epsilon)
+                    {
+                        _spriteRenderer.flipX = true;
+                    }
+                    //플레이어 기준 오른쪽 클릭
+                    else
+                    {
+                        _spriteRenderer.flipX = false;
+                    }
+
+                    IsThrow = true;
+                }
             }
         }
         public void ExcuteThrowThread()
@@ -229,6 +262,7 @@ namespace Player.Controller
 
         public void BecomeLighter()
         {
+            _isInteract = true;
             _jumpGravity = _lighterGravity;
             _downGravity = _lighterGravity;
             _maxDownForce = _gliderDownForce;
@@ -236,6 +270,7 @@ namespace Player.Controller
 
         public void InitGravity()
         {
+            _isInteract = false;
             _jumpGravity = _defaultGravity;
             _downGravity = _defaultGravity;
             _maxDownForce = _defaultDownForce;
@@ -284,7 +319,6 @@ namespace Player.Controller
                 {
                     return;
                 }
-
             }
             else
             {
@@ -344,12 +378,8 @@ namespace Player.Controller
 
             if(_jumpCount == 0)
             {
-                UpdateGroundDetector(false);
-                UpdateSlopeDetector(false);
-
                 _isGround = false;
                 _isSlope = false;
-
             }
             _isJump = true;
 
@@ -379,6 +409,9 @@ namespace Player.Controller
         {
             if (_currentState == PlayerAnimationState.Dead) return;
 
+            UpdateGroundDetector(false);
+            UpdateSlopeDetector(false);
+
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
             SetStop();
             _isDead = true;
@@ -388,6 +421,8 @@ namespace Player.Controller
         {
             Init();
             transform.position = _checkPoint;
+            UpdateGroundDetector(true);
+            UpdateSlopeDetector(true);
         }
 
         public void Look()
@@ -413,28 +448,6 @@ namespace Player.Controller
         #endregion
 
         #region 충돌 제어
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            bool _detectedSlope = ((1 << collision.gameObject.layer) & LayerMask.GetMask("Slope")) != 0;
-            bool _detectedGround = ((1 << collision.gameObject.layer) & LayerMask.GetMask("Ground")) != 0;
-
-            if (_detectedSlope)
-            {
-                UpdateSlopeDetector(true);
-                IsJump = false;
-            }
-
-            if (_detectedGround)
-            {
-                if (_rb2d.linearVelocityY <= 0.01f)
-                {
-                    UpdateGroundDetector(true);
-                    IsJump = false;
-                }
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();

@@ -144,8 +144,10 @@ public class ThrowThread : Thread
         hit = Physics2D.Raycast(targetPos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
         if (hit.collider != null)
         {
+            //상호작용 시작
             clickable = hit.collider.GetComponent<IClickInteractableToggle>();
             clickable?.EnableClickInteraction();
+
             targetTransform = hit.collider.transform;
 
             _endTransform.SetParent(targetTransform);
@@ -163,8 +165,7 @@ public class ThrowThread : Thread
     private void StartDeleting()
     {
         _state = ThrowThreadState.Deleting;
-        clickable?.EnableClickInteraction();
-        clickable = null;
+
         StartCoroutine(Disappearing(() => { _state = ThrowThreadState.Idle; }));
     }
     private IEnumerator Throwing(System.Action onComplete)
@@ -194,6 +195,10 @@ public class ThrowThread : Thread
 
     private IEnumerator Disappearing(System.Action onComplete)
     {
+        //상호작용 종료
+        clickable?.EnableClickInteraction();
+        clickable = null;
+
         float elapsedTime = 0f;
         Color startColor = _lineRenderer.startColor;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
