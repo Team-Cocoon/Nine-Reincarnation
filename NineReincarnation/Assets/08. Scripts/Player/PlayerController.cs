@@ -194,6 +194,7 @@ namespace Player.Controller
 
         private void UpdateGravityAndFallSpeed()
         {
+            //떨어지고 있는 상태로 변경
             if (!_isFalling && _rb2d.linearVelocity.y <= 0.5f)
             {
                 _rb2d.gravityScale = _downGravity;
@@ -318,7 +319,6 @@ namespace Player.Controller
                 {
                     return;
                 }
-
             }
             else
             {
@@ -378,12 +378,8 @@ namespace Player.Controller
 
             if(_jumpCount == 0)
             {
-                UpdateGroundDetector(false);
-                UpdateSlopeDetector(false);
-
                 _isGround = false;
                 _isSlope = false;
-
             }
             _isJump = true;
 
@@ -413,6 +409,9 @@ namespace Player.Controller
         {
             if (_currentState == PlayerAnimationState.Dead) return;
 
+            UpdateGroundDetector(false);
+            UpdateSlopeDetector(false);
+
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
             SetStop();
             _isDead = true;
@@ -422,6 +421,8 @@ namespace Player.Controller
         {
             Init();
             transform.position = _checkPoint;
+            UpdateGroundDetector(true);
+            UpdateSlopeDetector(true);
         }
 
         public void Look()
@@ -447,28 +448,6 @@ namespace Player.Controller
         #endregion
 
         #region 충돌 제어
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            bool _detectedSlope = ((1 << collision.gameObject.layer) & LayerMask.GetMask("Slope")) != 0;
-            bool _detectedGround = ((1 << collision.gameObject.layer) & LayerMask.GetMask("Ground")) != 0;
-
-            if (_detectedSlope)
-            {
-                UpdateSlopeDetector(true);
-                IsJump = false;
-            }
-
-            if (_detectedGround)
-            {
-                if (_rb2d.linearVelocityY <= 0.01f)
-                {
-                    UpdateGroundDetector(true);
-                    IsJump = false;
-                }
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();

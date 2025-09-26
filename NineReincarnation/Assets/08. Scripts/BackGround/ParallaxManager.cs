@@ -44,6 +44,7 @@ public class ParallaxManager : MonoBehaviour
     private void MoveBackground()
     {
         float distance = Mathf.Abs(_camera.position.x - _prevPosition.x);
+
         if (distance >= float.Epsilon)
         {
             for (int i = 0; i < _transforms.Length; i++)

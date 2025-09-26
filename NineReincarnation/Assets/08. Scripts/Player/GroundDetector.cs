@@ -15,27 +15,15 @@ public class GroundDetector : MonoBehaviour
         _groundMask = LayerMask.GetMask("Ground");
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        _detectedGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
-
-        if (_detectedGround)
-        {
-            _player.IsGround = true;
-        }
-        else
-        {
-            _player.IsGround = false;
-        }
-    }
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _detectedGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
 
         if (_detectedGround)
         {
+            Debug.Log("땅에 들어옴");
+            _player.IsGround = true;
+            _player.IsJump = false;
             _player.ResetJumpCount();
         }
     }
@@ -45,6 +33,7 @@ public class GroundDetector : MonoBehaviour
         _detectedGround = ((1 << collision.gameObject.layer) & _groundMask) != 0;
         if (_detectedGround)
         {
+            Debug.Log("땅에서 나감");
             _player.IsGround = false;
         }
     }
