@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "SoundVolmueSO", menuName = "Scriptable Objects/SoundVolmueSO")]
 public class SoundVolumeSO : ScriptableObject
@@ -14,8 +13,8 @@ public class SoundVolumeSO : ScriptableObject
     public event Action<float> OnChangeBgmVolume;
 
     public float MasterVolume => _masterVolume;
-    public float SfxVolume    => _sfxVolume;
-    public float BgmVolume    => _bgmVolume;
+    public float SfxVolume => _sfxVolume;
+    public float BgmVolume => _bgmVolume;
     public void InitStart()
     {
         OnChangeMasterVolume?.Invoke(_masterVolume);

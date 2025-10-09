@@ -28,7 +28,6 @@ public class SettingUI : ToggleUI
     [SerializeField] private Slider _masterSlider;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _bgmSlider;
-    [SerializeField] private Button _sfxTestButton;
 
     [Header("--- SettingButton ---")]
     [SerializeField] private GameObject _button;
@@ -102,7 +101,6 @@ public class SettingUI : ToggleUI
         _masterSlider.onValueChanged.AddListener(OnMasterSliderChanged);
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
-        _sfxTestButton.onClick.AddListener(OnSfxTest);
     }
 
     protected override void OnDestroy()
@@ -118,7 +116,6 @@ public class SettingUI : ToggleUI
         _masterSlider.onValueChanged.RemoveListener(OnMasterSliderChanged);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
-        _sfxTestButton.onClick.RemoveListener(OnSfxTest);
 
         UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
     }
@@ -153,10 +150,5 @@ public class SettingUI : ToggleUI
     private void OnBgmSliderChanged(float value)
     {
         volumData.UpdateBgmVolume(value);
-    }
-
-    private void OnSfxTest()
-    {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
     }
 }

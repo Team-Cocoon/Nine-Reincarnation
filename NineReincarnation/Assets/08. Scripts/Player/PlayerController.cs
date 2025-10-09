@@ -4,7 +4,6 @@ using State;
 using State.PlayerState;
 using StateMachine.PlayerStateMachine;
 using UnityEngine;
-using static AudioManager;
 
 public interface IObjectData
 {
