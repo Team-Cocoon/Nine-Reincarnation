@@ -56,6 +56,7 @@ public class Story : MonoBehaviour, ICollidable
         StoryManager.Instance?.SetDialogueData();
         StoryManager.Instance?.StartAnim();
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
+        yield return null;
         StartStory();
     }
     /// <summary>
@@ -71,6 +72,7 @@ public class Story : MonoBehaviour, ICollidable
         DialogueManager.Instance?.TypeWriter.onMessage.AddListener(OnTextEvent);
         yield return new WaitUntil(() => DialogueManager.Instance.EndDialogue());
         DialogueManager.Instance?.TypeWriter.onMessage.RemoveListener(OnTextEvent);
+        yield return null;
         StartStory();
     }
 
