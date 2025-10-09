@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "SoundVolmueSO", menuName = "Scriptable Objects/SoundVolmueSO")]
 public class SoundVolumeSO : ScriptableObject
@@ -24,6 +25,7 @@ public class SoundVolumeSO : ScriptableObject
 
     public void UpdateMasterVolume(float volume)
     {
+        Debug.Log("전체음 변경");
         _masterVolume = volume;
         OnChangeMasterVolume?.Invoke(volume);
     }

@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: bd0ae6d535a8e6741b4ddbb0062f8b70
+guid: 84b7a79f0aec728429065e5f8cd82e49
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4112660435884316749
-    second: "\uC548\uB098 jump 1_0"
+      213: 6756586239770483551
+    second: "\uC548\uB098 jump 3_0"
   - first:
-      213: -4258122119582585605
-    second: "\uC548\uB098 jump 1_1"
+      213: 5139861303860921511
+    second: "\uC548\uB098 jump 3_1"
   - first:
-      213: -1836672600643239768
-    second: "\uC548\uB098 jump 1_2"
+      213: 8820815530587501495
+    second: "\uC548\uB098 jump 3_2"
   - first:
-      213: -2768825309692665439
-    second: "\uC548\uB098 jump 1_3"
+      213: 4870187950687136873
+    second: "\uC548\uB098 jump 3_3"
   - first:
-      213: 4560075438885405705
-    second: "\uC548\uB098 jump 1_4"
+      213: -2079472087463023359
+    second: "\uC548\uB098 jump 3_4"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -125,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC548\uB098 jump 1_0"
+      name: "\uC548\uB098 jump 3_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b7ef459f15ece6c0800000000000000
-      internalID: -4112660435884316749
+      spriteID: f5bdfcb136734cd50800000000000000
+      internalID: 6756586239770483551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uC548\uB098 jump 1_1"
+      name: "\uC548\uB098 jump 3_1"
       rect:
         serializedVersion: 2
         x: 32
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bfceb042e7c18e4c0800000000000000
-      internalID: -4258122119582585605
+      spriteID: 7a4086baf94745740800000000000000
+      internalID: 5139861303860921511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uC548\uB098 jump 1_2"
+      name: "\uC548\uB098 jump 3_2"
       rect:
         serializedVersion: 2
         x: 64
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a087f53004d286e0800000000000000
-      internalID: -1836672600643239768
+      spriteID: 7b3bae98df4d96a70800000000000000
+      internalID: 8820815530587501495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uC548\uB098 jump 1_3"
+      name: "\uC548\uB098 jump 3_3"
       rect:
         serializedVersion: 2
         x: 96
@@ -206,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a168aafc082399d0800000000000000
-      internalID: -2768825309692665439
+      spriteID: 96c28164322669340800000000000000
+      internalID: 4870187950687136873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uC548\uB098 jump 1_4"
+      name: "\uC548\uB098 jump 3_4"
       rect:
         serializedVersion: 2
         x: 128
@@ -228,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9048fbb8374a84f30800000000000000
-      internalID: 4560075438885405705
+      spriteID: 10d2d6a672b3423e0800000000000000
+      internalID: -2079472087463023359
       vertices: []
       indices: 
       edges: []
@@ -238,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f00d368aca061eb489a4951e23745879
+    spriteID: a33653ab0247d544ab08364751bdf074
     internalID: 0
     vertices: []
     indices: 
@@ -250,11 +250,11 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "\uC548\uB098 jump 1_0": -4112660435884316749
-      "\uC548\uB098 jump 1_1": -4258122119582585605
-      "\uC548\uB098 jump 1_2": -1836672600643239768
-      "\uC548\uB098 jump 1_3": -2768825309692665439
-      "\uC548\uB098 jump 1_4": 4560075438885405705
+      "\uC548\uB098 jump 3_0": 6756586239770483551
+      "\uC548\uB098 jump 3_1": 5139861303860921511
+      "\uC548\uB098 jump 3_2": 8820815530587501495
+      "\uC548\uB098 jump 3_3": 4870187950687136873
+      "\uC548\uB098 jump 3_4": -2079472087463023359
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
