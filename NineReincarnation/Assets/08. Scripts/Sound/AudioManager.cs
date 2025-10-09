@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [Header("#AudioMixer")]
+    public AudioMixer MasterAudioMixer;
+    public AudioMixerGroup SFXAudioMixer;
+    public AudioMixerGroup BGMAudioMixer;
+
     [Header("#Volmue")]
-    [SerializeField] private SoundVolumeSO volumeData;
-    public SoundVolumeSO VolumData => volumeData;
+    [SerializeField] private SoundVolumeSO _volumeData;
+    public SoundVolumeSO VolumData => _volumeData;
 
     [Header("#BGM")]
     public AudioClip[] BgmClips;
@@ -26,7 +32,6 @@ public class AudioManager : MonoBehaviour
     private int _loopingChannelIndex;
 
     private GameObject _target = null;
-
 
     public enum Bgm
     {
@@ -55,21 +60,31 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        _volumeData.OnChangeMasterVolume += UpdateMasterVolmue;
+        _volumeData.OnChangeSfxVolume += UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume += UpdateBgmVolmue;
+
         SceneEventHandler.SceneStarted += SceneEvent_SetTarget;
         SceneEventHandler.SceneExited += SceneEvent_ClearTarget;
 
-        SoundEventHandler.OnUpdateSfxVolmue += UpdateSfxVolmue;
-        SoundEventHandler.OnUpdateBgmVolmue += UpdateBgmVolmue;
         Init();
+    }
+
+    private void Start()
+    {
+        _volumeData.InitStart();
     }
 
     private void OnDestroy()
     {
+        _volumeData.OnChangeMasterVolume -= UpdateMasterVolmue;
+        _volumeData.OnChangeSfxVolume -= UpdateSfxVolmue;
+        _volumeData.OnChangeBgmVolume -= UpdateBgmVolmue;
+
         SceneEventHandler.SceneStarted -= SceneEvent_SetTarget;
         SceneEventHandler.SceneExited -= SceneEvent_ClearTarget;
 
-        SoundEventHandler.OnUpdateSfxVolmue -= UpdateSfxVolmue;
-        SoundEventHandler.OnUpdateBgmVolmue -= UpdateBgmVolmue;
     }
 
     private void LateUpdate()
@@ -96,10 +111,11 @@ public class AudioManager : MonoBehaviour
         //배경음 플레이어 초기화
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
+
         _bgmPlayer = bgmObject.AddComponent<AudioSource>();
         _bgmPlayer.playOnAwake = false;
         _bgmPlayer.loop = true;
-        _bgmPlayer.volume = volumeData.BgmVolume;
+        _bgmPlayer.outputAudioMixerGroup = BGMAudioMixer;
 
         //효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");
@@ -110,7 +126,7 @@ public class AudioManager : MonoBehaviour
         {
             _sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
             _sfxPlayers[index].playOnAwake = false;
-            _sfxPlayers[index].volume = volumeData.SfxVolume;
+            _sfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
         }
 
         //반복 재생이 필요한 효과음 플레이어 초기화
@@ -122,34 +138,29 @@ public class AudioManager : MonoBehaviour
         {
             _loopingSfxPlayers[index] = loopingSfxObject.AddComponent<AudioSource>();
             _loopingSfxPlayers[index].playOnAwake = false;
-            _loopingSfxPlayers[index].volume = volumeData.SfxVolume;
+            _sfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
             _loopingSfxPlayers[index].loop = true;
         }
     }
-
-    private void UpdateSfxVolmue(float volume)
+    public void UpdateMasterVolmue(float volume)
     {
-        for (int index = 0; index < _sfxPlayers.Length; index++)
-        {
-            _sfxPlayers[index].volume = volume;
-        }
-
-        for (int index = 0; index < _loopingSfxPlayers.Length; index++)
-        {
-            _loopingSfxPlayers[index].volume = volume;
-        }
+        MasterAudioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
-    private void UpdateBgmVolmue(float volume)
+    public void UpdateSfxVolmue(float volume)
     {
-        _bgmPlayer.volume = volume;
+        MasterAudioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+    }
+
+    public void UpdateBgmVolmue(float volume)
+    {
+        MasterAudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
 
 
     public void PlayBgm(Bgm bgm)
     {
         _bgmPlayer.Stop();
-
 
         if (bgm == Bgm.None) return;
 
