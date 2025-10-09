@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     /* 기본 폰트 정보 */
     private Color _initFontColor;
     private float _initFontSize;
+    private float _initTypingSpeed;
 
     private Dictionary<string, Sprite> _imageDict = new();
 
@@ -56,6 +57,13 @@ public class DialogueManager : MonoBehaviour
             SetFontSize(InitFontSize);
             return true;
         }
+        else if (!isTextShowed && Input.GetMouseButtonDown(0))
+        {
+            if (_typeWriter.isShowingText)
+            {
+                _typeWriter.SkipTypewriter();
+            }
+        }
         return false;
     }
     public void ShowWindow(bool show)
@@ -86,7 +94,6 @@ public class DialogueManager : MonoBehaviour
     public void TextShowed()
     {
         isTextShowed = true;
-        _tmpText.fontSize = 25;
     }
 
     public void SetFontColor(Color color)
