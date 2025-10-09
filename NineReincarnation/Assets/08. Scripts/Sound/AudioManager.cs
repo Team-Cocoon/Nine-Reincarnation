@@ -50,7 +50,10 @@ public class AudioManager : MonoBehaviour
         Click = 10,
         DeleteThread,
         Surprise,
-        Look
+        Look,
+        ThrowThread,
+        SnapThread,
+        LinkThread
     }
     public enum LoopSfx
     {

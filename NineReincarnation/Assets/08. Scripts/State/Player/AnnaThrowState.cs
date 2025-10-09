@@ -8,6 +8,7 @@ public class AnnaThrowState : PlayerStateMachineBehaviour
         Player.CurrentState = PlayerAnimationState.Throw;
         InputEventHandler.OnChangedForceActionToUI_Invoke();
         Player.SetStop();
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.ThrowThread);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

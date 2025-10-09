@@ -320,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 24100000, guid: 8063df8ef0a176745910707fc54705e3, type: 2}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: SfxClips.Array.size
-      value: 14
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: 'BgmClips.Array.data[0]'
@@ -337,7 +337,15 @@ PrefabInstance:
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: 'SfxClips.Array.data[14]'
       value: 
-      objectReference: {fileID: 8300000, guid: c97492afe1b6be4488ce72c68ec6b72b, type: 3}
+      objectReference: {fileID: 8300000, guid: b24376b32fce41a42bd29906ba6179cd, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[15]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d92b669b6df055a4096ac98ef468dbb6, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[16]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e83ae099f913b584482b0ecc59225168, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

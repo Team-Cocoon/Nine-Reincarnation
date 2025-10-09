@@ -155,7 +155,11 @@ public class ThrowThread : Thread
 
             targetPos = targetTransform.position;
 
-            StartCoroutine(Throwing(() => { _state = ThrowThreadState.Exist; }));
+            StartCoroutine(Throwing(() => 
+            { 
+                _state = ThrowThreadState.Exist;
+                AudioManager.Instance?.PlaySfx(AudioManager.Sfx.LinkThread);
+            }));
         }
         else
         {
@@ -189,6 +193,7 @@ public class ThrowThread : Thread
                 yield break;
             }
             AddSegments();
+
             yield return null;
         }
     }
