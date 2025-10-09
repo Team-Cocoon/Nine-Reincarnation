@@ -23,7 +23,7 @@ public class SettingUI : ToggleUI
 {
     [Header("--- 버튼 ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
-    [SerializeField] private Button _endButton; //게임종료 버튼
+    [SerializeField] private Button _titleButton; //게임종료 버튼
 
     [Header("--- 사운드 조절 ---")]
     [SerializeField] private Slider _sfxSlider;
@@ -99,7 +99,7 @@ public class SettingUI : ToggleUI
         _uiToggleButton.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
 
         _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
-        _endButton.onClick .AddListener(TitleButtonEvent);
+        _titleButton.onClick .AddListener(TitleButtonEvent);
 
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
@@ -120,7 +120,7 @@ public class SettingUI : ToggleUI
         _uiToggleButton.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
 
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
-        _endButton.onClick .RemoveListener(TitleButtonEvent);
+        _titleButton.onClick .RemoveListener(TitleButtonEvent);
 
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
