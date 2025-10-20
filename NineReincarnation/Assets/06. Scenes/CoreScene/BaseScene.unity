@@ -886,6 +886,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3088493774958320094, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4190540744364541100, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
       propertyPath: m_Name
       value: FadeUI
