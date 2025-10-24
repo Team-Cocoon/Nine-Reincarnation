@@ -15,20 +15,20 @@ MonoBehaviour:
   m_DefaultSprite: {fileID: -1433303609, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
-  m_MaskType: 0
+  m_MaskType: 1
   m_AutoTileDictionary:
-    keyData: 0c0000000f00000003000000
+    keyData: 920000001200000090000000
     valueData:
-    - spriteList:
-      - {fileID: 203900027, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
-      textureList:
-      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
     - spriteList:
       - {fileID: -1433303609, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
       textureList:
       - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
     - spriteList:
       - {fileID: 1996679050, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+      textureList:
+      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+    - spriteList:
+      - {fileID: 203900027, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
       textureList:
       - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
   m_TextureList:
