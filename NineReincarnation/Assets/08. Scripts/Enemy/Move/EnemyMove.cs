@@ -70,6 +70,13 @@ namespace Enemy.Move
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
+        private void OnValidate()
+        {
+            if(_waypoints.Count > 0 && (_pathType == WaypointPathType.LineOpen || _pathType == WaypointPathType.LineClosed))
+            {
+                transform.position = _waypoints[0];
+            } 
+        }
 
         private void Start()
         {
