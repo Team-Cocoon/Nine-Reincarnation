@@ -17,7 +17,7 @@ MonoBehaviour:
   m_DefaultColliderType: 1
   m_MaskType: 0
   m_AutoTileDictionary:
-    keyData: 02000000080000000a000000040000000c00000001000000030000000f00000005000000
+    keyData: 02000000080000000a000000040000000c00000001000000030000000f000000050000000e0000000b000000070000000d000000
     valueData:
     - spriteList:
       - {fileID: 2687057441370610899, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
@@ -53,6 +53,22 @@ MonoBehaviour:
       - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
     - spriteList:
       - {fileID: -877640471, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+      textureList:
+      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+    - spriteList:
+      - {fileID: -1077508975, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+      textureList:
+      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+    - spriteList:
+      - {fileID: -1148467510, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+      textureList:
+      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+    - spriteList:
+      - {fileID: 893432746, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+      textureList:
+      - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
+    - spriteList:
+      - {fileID: -1561069367, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
       textureList:
       - {fileID: 2800000, guid: a2aed3b43980eb14bb454845378a061c, type: 3}
   m_TextureList:
