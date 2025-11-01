@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+
 #if UNITY_EDITOR
 using UnityEditor;
 using static Enemy.Move.EnemyMove;
@@ -235,6 +237,7 @@ namespace Enemy.Move
             {
                 int newPointIndex = (selectionInfo.mouseIsOverLine) ? selectionInfo.lineIndex + 1 : platformController.Waypoints.Count;
                 Undo.RecordObject(platformController, "Add waypoint");
+
                 platformController.Waypoints.Insert(newPointIndex, mousePosition);
                 selectionInfo.pointIndex = newPointIndex;
             }
