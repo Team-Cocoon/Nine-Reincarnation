@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "73a63b7f672b88f7e9992f6917eb458a8cbb6fa9"
+    },
     "com.unity.2d.animation": {
       "version": "11.0.0",
       "depth": 1,
@@ -133,23 +140,6 @@
         "com.unity.nuget.mono-cecil": "1.11.4",
         "com.unity.test-framework.performance": "3.0.3"
       },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.connect.share": {
-      "version": "4.2.3",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.editorcoroutines": "1.0.0",
-        "com.unity.settings-manager": "1.0.2"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.editorcoroutines": {
-      "version": "1.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
@@ -291,7 +281,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.1.0",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -366,6 +356,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "jp.hadashikick.vcontainer": {
+      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.16.8",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5e6f5cc14b6dc8b94251bf6c0d6c37025a6ecf77"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
