@@ -13,7 +13,16 @@ public class RopeColliderDrawer : MonoBehaviour
         Vector2 offset = (Start.position + End.position) / 2;
         Vector2 size = new Vector2(Mathf.Abs(End.position.x - Start.position.x), Mathf.Abs(End.position.y - Start.position.y));
 
-        Gizmos.color = Color.blue;
+#if UNITY_EDITOR
+        if (UnityEditor.Selection.activeGameObject == gameObject)
+        {
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+#endif
         Gizmos.DrawLine(Start.position, End.position);      // 내부 면
     }
 }

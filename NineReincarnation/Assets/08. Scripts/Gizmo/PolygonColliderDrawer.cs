@@ -9,7 +9,16 @@ public class PolygonColliderDrawer : MonoBehaviour
         if (collider == null || collider.points.Length == 0)
             return;
 
-        Gizmos.color = Color.yellow;
+#if UNITY_EDITOR
+        if (UnityEditor.Selection.activeGameObject == gameObject)
+        {
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+        }
+#endif
 
         // PolygonCollider2D는 다각형 path를 여러 개 가질 수 있음
         for (int pathIndex = 0; pathIndex < collider.pathCount; pathIndex++)

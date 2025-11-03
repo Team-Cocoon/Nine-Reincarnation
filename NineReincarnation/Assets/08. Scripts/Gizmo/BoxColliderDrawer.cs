@@ -21,8 +21,19 @@ public class BoxColliderDrawer : MonoBehaviour
         Matrix4x4 matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
         Gizmos.matrix = matrix;
 
+
         Gizmos.DrawCube(offset, size);      // 내부 면
-        Gizmos.color = Color.green;
+#if UNITY_EDITOR
+        if (UnityEditor.Selection.activeGameObject == gameObject)
+        {
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.green;
+        }
+#endif
+
         Gizmos.DrawWireCube(offset, size);  // 외곽선
     }
 }
