@@ -1,6 +1,7 @@
 using EventHandler;
 using Map.Platform;
 using UnityEngine;
+using VContainer;
 
 public enum PlayerAnimationState
 {
@@ -135,8 +136,14 @@ namespace Player.Controller
             get => _currentState;
             set => _currentState = value;
         }
-#endregion
+        #endregion
 
+        [Inject]
+        public void Construct(ThrowThread thread)
+        {
+            _thread = thread;
+            _thread.SetStart(this.transform);
+        }
         private void Init()
         {
             _isDead           = false;

@@ -1,6 +1,8 @@
 using System.Collections;
+using Player.Controller;
 using Unity.Collections;
 using UnityEngine;
+using VContainer;
 
 public enum ThrowThreadState
 {
@@ -25,6 +27,12 @@ public class ThrowThread : Thread
     private int maxSegmentCount;
     private Vector3 prevNodePos;
     private IClickInteractableToggle clickable;
+
+    
+    public void SetStart(Transform transform)
+    {
+        _startTransform = transform;
+    }
 
     protected override void Initialize()
     {

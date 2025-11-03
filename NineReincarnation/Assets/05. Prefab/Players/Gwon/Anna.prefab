@@ -363,7 +363,7 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 7
   _playerName: Anna
-  _checkPoint: {x: -40, y: -1, z: 0}
+  _checkPoint: {x: 0, y: -1, z: 0}
   _groundDetector: {fileID: 196964441453532725}
   _slopeDetector: {fileID: 8227496466836733011}
   _defaultPhysicsMaterial: {fileID: 6200000, guid: e7afcac988a26b64fb480c14bad06290, type: 2}

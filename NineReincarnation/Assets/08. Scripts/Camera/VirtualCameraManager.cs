@@ -15,7 +15,7 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera[] _cams;
     [SerializeField] private PolygonCollider2D[] _areas;
     [SerializeField] private int _currentIndex = 0;
-    [Inject] private Transform _player;
+    [Inject] private PlayerController _player;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class VirtualCameraManager : MonoBehaviour
             _cams[i].GetComponent<CinemachineConfiner2D>().BoundingShape2D = _areas[i];
             _cams[i].GetComponent<CinemachineConfiner2D>().InvalidateBoundingShapeCache();
             _cams[i].Priority = (int)CameraPriority.None;
-            _cams[i].Follow = _player;
+            _cams[i].Follow = _player.transform;
         }
 
 
@@ -39,6 +39,8 @@ public class VirtualCameraManager : MonoBehaviour
 
     public void SetPrioriy(int index)
     {
+        Debug.Log(index);
+        Debug.Log(_currentIndex);
         if (_currentIndex == index) return;
 
         _cams[_currentIndex].Priority = (int)CameraPriority.None;

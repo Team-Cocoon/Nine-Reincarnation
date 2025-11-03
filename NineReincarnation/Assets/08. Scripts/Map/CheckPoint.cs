@@ -1,9 +1,10 @@
 using Player.Controller;
 using UnityEngine;
+using VContainer;
 
 public class CheckPoint : MonoBehaviour, ICollidable
 {
-    PlayerController player;
+    private PlayerController player;
 
     public void Enter(GameObject go = null)
     {
