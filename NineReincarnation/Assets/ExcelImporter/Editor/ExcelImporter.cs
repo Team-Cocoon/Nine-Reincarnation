@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -83,9 +83,9 @@ public class ExcelImporter : AssetPostprocessor
 
 		if (asset == null)
 		{
-			asset = ScriptableObject.CreateInstance(assetType.Name);
-			AssetDatabase.CreateAsset((ScriptableObject)asset, assetPath);
-			asset.hideFlags = HideFlags.NotEditable;
+            asset = ScriptableObject.CreateInstance(assetType);
+            AssetDatabase.CreateAsset((ScriptableObject)asset, assetPath);
+            asset.hideFlags = HideFlags.NotEditable;
 		}
 
 		return asset;
@@ -118,12 +118,36 @@ public class ExcelImporter : AssetPostprocessor
 	{
 		var type = isFormulaEvalute ? cell.CachedFormulaResultType : cell.CellType;
 
-		switch(type)
-		{
-			case CellType.String:
-				if (fieldInfo.FieldType.IsEnum) return Enum.Parse(fieldInfo.FieldType, cell.StringCellValue);
-				else return cell.StringCellValue;
-			case CellType.Boolean:
+        switch (type)
+        {
+            case CellType.String:
+                string strValue = cell.StringCellValue.Trim();
+
+                if (fieldInfo.FieldType.IsEnum)
+                {
+                    // 여러 개의 enum 이름이 콤마로 구분되어 있을 경우
+                    if (strValue.Contains(","))
+                    {
+                        long combinedValue = 0;
+                        var names = strValue.Split(',');
+                        foreach (var name in names)
+                        {
+                            string n = name.Trim();
+                            if (Enum.TryParse(fieldInfo.FieldType, n, true, out object value))
+                                combinedValue |= Convert.ToInt64(value);
+                            else
+                                throw new Exception($"Invalid enum name '{n}' for {fieldInfo.FieldType.Name}");
+                        }
+                        return Enum.ToObject(fieldInfo.FieldType, combinedValue);
+                    }
+
+                    // 일반 Enum 이름 처리
+                    return Enum.Parse(fieldInfo.FieldType, strValue, true);
+                }
+
+                // Enum이 아닐 경우 그냥 문자열로 반환
+                return strValue;
+            case CellType.Boolean:
 				return cell.BooleanCellValue;
 			case CellType.Numeric:
 				return Convert.ChangeType(cell.NumericCellValue, fieldInfo.FieldType);
