@@ -5,66 +5,46 @@ using UnityEngine;
 
 public class DialogueDB
 {
-    private Dictionary<int, DialogueClass> _dialogues;
-    private Dictionary<int, CameraClass> _cameraEvents;
-    private Dictionary<int, AnimationClass> _animations;
+    private Dictionary<Type, object> _databases = new();
 
     public DialogueDB()
     {
-        _dialogues = new Dictionary<int, DialogueClass>();
-        _cameraEvents = new Dictionary<int, CameraClass>();
-        _animations = new Dictionary<int, AnimationClass>();
         DialogueData res = Resources.Load<DialogueData>("DialogueData");
 
-        int[] ad = new int[5];
+        RegisterDatabase<DialogueClass>(res.Dialogue  , item => item.ID);
+        RegisterDatabase<CameraClass>(res.Camera      , item => item.ID);
+        RegisterDatabase<AnimationClass>(res.Animation, item => item.ID);
+        RegisterDatabase<ScriptClass>(res.Script      , item => item.ID);
+        RegisterDatabase<BubbleClass>(res.Bubble      , item => item.ID);
+    }
+    private void RegisterDatabase<T>(IEnumerable<T> sourceList, Func<T, int> keySelector)
+    {
+        if (sourceList == null) return;
 
-        foreach(DialogueClass dialogue in res.Dialogue)
+        Dictionary<int, T> newDictionary = new Dictionary<int, T>();
+
+        foreach (T item in sourceList)
         {
-            int key = dialogue.ID;
+            int key = keySelector(item);
 
-            _dialogues.Add(key, dialogue);
+            newDictionary.Add(key, item);
         }
 
-        foreach (CameraClass camera in res.Camera)
-        {
-            int key = camera.ID;
-
-            _cameraEvents.Add(key, camera);
-        }
-
-        foreach (AnimationClass animation in res.Animation)
-        {
-            int key = animation.ID;
-
-            _animations.Add(key, animation);
-        }
+        _databases.Add(typeof(T), newDictionary);
     }
 
-    public DialogueClass GetDialogue(int id)
+    public T GetData<T>(int id) where T : class
     {
-        if(_dialogues.ContainsKey(id))
+        Type type = typeof(T);
+
+        if (_databases.TryGetValue(type, out object db))
         {
-            return _dialogues[id];
-        }
+            Dictionary<int, T> typedDict = (Dictionary<int, T>)db;
 
-        return null;
-    }
-
-    public CameraClass GetCameraEvent(int id)
-    {
-        if (_cameraEvents.ContainsKey(id))
-        {
-            return _cameraEvents[id];
-        }
-
-        return null;
-    }
-
-    public AnimationClass GetAnimationEvent(int id)
-    {
-        if (_animations.ContainsKey(id))
-        {
-            return _animations[id];
+            if (typedDict.TryGetValue(id, out T value))
+            {
+                return value;
+            }
         }
 
         return null;

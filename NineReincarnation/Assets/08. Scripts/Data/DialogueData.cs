@@ -39,7 +39,6 @@ namespace ExcelData
         public string Script;
     }
 
-
     [Serializable]
     public class AnimationClass
     {
