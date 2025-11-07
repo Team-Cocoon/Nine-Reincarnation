@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
+using Cysharp.Threading.Tasks;
 using ExcelData;
 using Febucci.UI.Core;
 using TMPro;
@@ -27,7 +27,7 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    public void UpdateUI(ScriptClass scriptData)
+    public async UniTask UpdateUI(ScriptClass scriptData)
     {
         string name = scriptData.Name;
         string imageName = scriptData.ImageName;
@@ -40,12 +40,12 @@ public class DialogueUI : MonoBehaviour
 
         if (!string.IsNullOrEmpty(imageName))
         {
-            ChangeScript(imageName);
+            ChangeSprite(imageName);
         }
 
         if (!string.IsNullOrEmpty(script))
         {
-            ChangeName(script);
+            await ChangeScript(script);
         }
     }
 
@@ -54,11 +54,17 @@ public class DialogueUI : MonoBehaviour
     {
         _image.sprite = _spriteDict[name];
     }
+
     //스크립트 변경
-    private void ChangeScript(string script)
+    private async UniTask ChangeScript(string script)
     {
+        var waitTask = _scriptText.onTextShowed.OnInvokeAsync(this.GetCancellationTokenOnDestroy());
+
         _scriptText.TextAnimator.textFull = script;
+
+        await waitTask;
     }
+
     //화자 변경
     private void ChangeName(string name)
     {

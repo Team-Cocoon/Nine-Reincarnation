@@ -12,4 +12,6 @@ public class StoryEvent : MonoBehaviour
         if (curIndex >= _storyEvent.Length) return;
         _storyEvent[curIndex++]?.Invoke();
     }
+
+
 }

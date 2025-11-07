@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using ExcelData;
 using UnityEngine;
 
@@ -18,16 +21,18 @@ namespace DialogueSpace
             
         }
 
-        public void NextDialogue()
+        public async UniTask NextDialogue()
         {
             DialogueClass dialogue = _dialogueDB.GetData<DialogueClass>(_id);
-
+            
             _nextId = dialogue.ID;
+
+            List<UniTask> tasks = new();
             if (dialogue.EventType != ExcelData.EventType.End)
             {
                 if ((dialogue.EventType & ExcelData.EventType.Script) == ExcelData.EventType.Script)
                 {
-                    _ui.UpdateUI(_dialogueDB.GetData<ScriptClass>(_id));
+                    tasks.Add(_ui.UpdateUI(_dialogueDB.GetData<ScriptClass>(_id)));
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
                 {
@@ -39,9 +44,11 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Animation) == ExcelData.EventType.Animation)
                 {
-                    _saManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id));
+                    tasks.Add(_saManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id)));
                 }
             }
+
+            await UniTask.WhenAll(tasks);
             _id = _nextId;
         }
     }
