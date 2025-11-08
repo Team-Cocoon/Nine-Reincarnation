@@ -13,7 +13,7 @@ public class CheckPoint : MonoBehaviour, ICollidable
         player?.SetCheckPoint(transform.position);
         if (player != null)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

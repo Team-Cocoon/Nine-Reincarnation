@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
@@ -10,8 +10,8 @@ namespace DialogueSpace
     {
         [SerializeField] private int _id;
         [SerializeField] private DialogueUI _ui;
-        [SerializeField] private StoryAnimationManager _saManager;
-        //[SerializeField] private StoryCameraManager _ui;
+        [SerializeField] private StoryAnimationManager _storyAnimationManager;
+        [SerializeField] private StoryEventManager _storyEventManager;
 
         private DialogueDB _dialogueDB = new();
         private int _nextId;
@@ -36,7 +36,7 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
                 {
-
+                    //tasks.Add(_storyEventManager);
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Camera) == ExcelData.EventType.Camera)
                 {
@@ -44,7 +44,7 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Animation) == ExcelData.EventType.Animation)
                 {
-                    tasks.Add(_saManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id)));
+                    tasks.Add(_storyAnimationManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id)));
                 }
             }
 

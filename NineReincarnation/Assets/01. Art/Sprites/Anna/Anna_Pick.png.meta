@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 1d2705786e95f604c9b105422d100255
+guid: 602e6e9743c307e4eb5df82d7f882fc5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7968991041327105299
-    second: Anna_Throw_0
+      213: -4622988307772357526
+    second: Anna_Pick_0
   - first:
-      213: 3681630846407743520
-    second: Anna_Throw_1
+      213: 2016677879091320745
+    second: Anna_Pick_1
   - first:
-      213: 7425383827315097546
-    second: Anna_Throw_2
+      213: 2185530793461983396
+    second: Anna_Pick_2
   - first:
-      213: -4712047969585109592
-    second: Anna_Throw_3
+      213: -392756470338736364
+    second: Anna_Pick_3
   - first:
-      213: 4347522587657537449
-    second: Anna_Throw_4
+      213: -7440400759283104034
+    second: Anna_Pick_4
   - first:
-      213: 7458625625019732821
-    second: Anna_Throw_5
+      213: -7498081009407795468
+    second: Anna_Pick_5
   - first:
-      213: -724962693173730005
-    second: Anna_Throw_6
+      213: 6658085852601780083
+    second: Anna_Pick_6
   - first:
-      213: 2170316468989257024
-    second: Anna_Throw_7
+      213: -2525605744613366929
+    second: Anna_Pick_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,13 +134,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anna_Throw_0
+      name: Anna_Pick_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 9
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dea7d639ed4786190800000000000000
-      internalID: -7968991041327105299
+      spriteID: a64c172b0a8d7dfb0800000000000000
+      internalID: -4622988307772357526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_1
+      name: Anna_Pick_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 41
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 028114aafb7c71330800000000000000
-      internalID: 3681630846407743520
+      spriteID: 9a750a1a8ddacfb10800000000000000
+      internalID: 2016677879091320745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_2
+      name: Anna_Pick_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 75
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acffb04ef334c0760800000000000000
-      internalID: 7425383827315097546
+      spriteID: 4a8aafd5da0945e10800000000000000
+      internalID: 2185530793461983396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_3
+      name: Anna_Pick_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 106
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a5674056517b9eb0800000000000000
-      internalID: -4712047969585109592
+      spriteID: 41f29363216ac8af0800000000000000
+      internalID: -392756470338736364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_4
+      name: Anna_Pick_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 137
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a7805262c0855c30800000000000000
-      internalID: 4347522587657537449
+      spriteID: ed6426c2ee26eb890800000000000000
+      internalID: -7440400759283104034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_5
+      name: Anna_Pick_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 169
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5535deb0d7c528760800000000000000
-      internalID: 7458625625019732821
+      spriteID: 4fe55296c0771f790800000000000000
+      internalID: -7498081009407795468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_6
+      name: Anna_Pick_6
       rect:
         serializedVersion: 2
-        x: 192
+        x: 200
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b2528f5854a60f5f0800000000000000
-      internalID: -724962693173730005
+      spriteID: 37702609ec5466c50800000000000000
+      internalID: 6658085852601780083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Throw_7
+      name: Anna_Pick_7
       rect:
         serializedVersion: 2
-        x: 224
+        x: 231
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 045e84864538e1e10800000000000000
-      internalID: 2170316468989257024
+      spriteID: f6362add4fe33fcd0800000000000000
+      internalID: -2525605744613366929
       vertices: []
       indices: 
       edges: []
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f345da0fba365f148909b63f5ee67e65
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -321,18 +321,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Anna_Throw_0: -7968991041327105299
-      Anna_Throw_1: 3681630846407743520
-      Anna_Throw_2: 7425383827315097546
-      Anna_Throw_3: -4712047969585109592
-      Anna_Throw_4: 4347522587657537449
-      Anna_Throw_5: 7458625625019732821
-      Anna_Throw_6: -724962693173730005
-      Anna_Throw_7: 2170316468989257024
+      Anna_Pick_0: -4622988307772357526
+      Anna_Pick_1: 2016677879091320745
+      Anna_Pick_2: 2185530793461983396
+      Anna_Pick_3: -392756470338736364
+      Anna_Pick_4: -7440400759283104034
+      Anna_Pick_5: -7498081009407795468
+      Anna_Pick_6: 6658085852601780083
+      Anna_Pick_7: -2525605744613366929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

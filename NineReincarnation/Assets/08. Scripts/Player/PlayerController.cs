@@ -72,7 +72,11 @@ namespace Player.Controller
         private OneWayPlatform      _oneWayPlatform;
         private PlayerAnimationState _currentState;
 
-#region 프로퍼티 영역
+        private float accelerationTimeAirborne = 0.05f;
+        private float accelerationTimeGrounded = 0.05f;
+        private float velocityXSmoothing;
+
+        #region 프로퍼티 영역
         public int JumpCount => _jumpCount;
         public Rigidbody2D Rb2d => _rb2d;
         public bool IsLook
@@ -372,7 +376,8 @@ namespace Player.Controller
             }
             else
             {
-                _rb2d.linearVelocityX = (int)_direction * _speed;
+                float targetVelocityX = (int)_direction * _speed;
+                _rb2d.linearVelocityX = Mathf.SmoothDamp(_rb2d.linearVelocityX, targetVelocityX, ref velocityXSmoothing, (IsGround) ? accelerationTimeGrounded : accelerationTimeAirborne);
             }
         }
 
