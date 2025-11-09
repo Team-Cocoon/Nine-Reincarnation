@@ -1,8 +1,6 @@
 using System.Collections;
-using Player.Controller;
 using Unity.Collections;
 using UnityEngine;
-using VContainer;
 
 public enum ThrowThreadState
 {
@@ -28,7 +26,7 @@ public class ThrowThread : Thread
     private Vector3 prevNodePos;
     private IClickInteractableToggle clickable;
 
-    
+
     public void SetStart(Transform transform)
     {
         _startTransform = transform;
@@ -163,8 +161,8 @@ public class ThrowThread : Thread
 
             targetPos = targetTransform.position;
 
-            StartCoroutine(Throwing(() => 
-            { 
+            StartCoroutine(Throwing(() =>
+            {
                 _state = ThrowThreadState.Exist;
                 AudioManager.Instance?.PlaySfx(AudioManager.Sfx.LinkThread);
             }));

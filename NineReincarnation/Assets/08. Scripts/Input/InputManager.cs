@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
     [Inject]
     public void Construct(PlayerController player)
     {
-        if(_players.Count > 0)
+        if (_players.Count > 0)
         {
             _players[0] = player;
         }

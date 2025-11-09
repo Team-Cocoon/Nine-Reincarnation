@@ -11,24 +11,24 @@ namespace Manager
         public static SceneStateManager Instance { get; private set; }
 
         private SceneStateMachine _sceneStateMachine;
-        private SceneState        _currentSceneState;
-        private string            _currentScenePath;
+        private SceneState _currentSceneState;
+        private string _currentScenePath;
 
         private List<string> _stageSubScenes => SceneDataManager.Instance.GetStageSubScene(0);
         private List<string> _storySubScenes => SceneDataManager.Instance.GetStorySubScene(0);
 
-        public SceneState CurrentSceneState        => _currentSceneState;
+        public SceneState CurrentSceneState => _currentSceneState;
         public SceneStateMachine SceneStateMachine => _sceneStateMachine;
-        public string TitleScenePath               => SceneDataManager.Instance.TitleScene;
-        public string StageScenePath               => SceneDataManager.Instance.StageCoreScene;
-        public string StoryScenePath               => SceneDataManager.Instance.StoryCoreScene;
-        public string ClearScenePath               => SceneDataManager.Instance.ClearScene;
+        public string TitleScenePath => SceneDataManager.Instance.TitleScene;
+        public string StageScenePath => SceneDataManager.Instance.StageCoreScene;
+        public string StoryScenePath => SceneDataManager.Instance.StoryCoreScene;
+        public string ClearScenePath => SceneDataManager.Instance.ClearScene;
 
 
         private void Awake()
         {
             _currentScenePath = "";
-            Instance          = this;
+            Instance = this;
         }
 
         private void Start()
@@ -39,23 +39,23 @@ namespace Manager
 
             GameEvent_ToTitle();
 
-            SceneEventHandler.OnSceneChanged  += ChandedScene;
-            GameEventHandler.TitleExcuted     += GameEvent_ToTitle;
-            GameEventHandler.StoryExcuted     += GameEvent_ToStory;
-            GameEventHandler.StageExcuted     += GameEvent_ToStage;
+            SceneEventHandler.OnSceneChanged += ChandedScene;
+            GameEventHandler.TitleExcuted += GameEvent_ToTitle;
+            GameEventHandler.StoryExcuted += GameEvent_ToStory;
+            GameEventHandler.StageExcuted += GameEvent_ToStage;
             GameEventHandler.GameClearExcuted += GameEvent_ToClear;
-            SceneEventHandler.SceneExited     += HandleSceneExited;
+            SceneEventHandler.SceneExited += HandleSceneExited;
         }
 
 
         private void OnDestroy()
         {
-            SceneEventHandler.OnSceneChanged  -= ChandedScene;
-            GameEventHandler.TitleExcuted     -= GameEvent_ToTitle;
-            GameEventHandler.StoryExcuted     -= GameEvent_ToStory;
-            GameEventHandler.StageExcuted     -= GameEvent_ToStage;
+            SceneEventHandler.OnSceneChanged -= ChandedScene;
+            GameEventHandler.TitleExcuted -= GameEvent_ToTitle;
+            GameEventHandler.StoryExcuted -= GameEvent_ToStory;
+            GameEventHandler.StageExcuted -= GameEvent_ToStage;
             GameEventHandler.GameClearExcuted -= GameEvent_ToClear;
-            SceneEventHandler.SceneExited     -= HandleSceneExited;
+            SceneEventHandler.SceneExited -= HandleSceneExited;
         }
 
         private void GameEvent_ToTitle()
@@ -104,7 +104,10 @@ namespace Manager
             {
                 case SceneState.Stage:
                     Debug.Log(string.Format("로딩 스테이지 : {0}, 현재 스테이지 : {1} : {2}", scenePath, _currentScenePath, state.StateType.ToString()));
-                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _stageSubScenes);
+
+                    List<string> _subScenes = _stageSubScenes.GetRange(0, 2);
+
+                    SceneEventHandler.SceneStateChangedAndLoadScenes_Invoke(scenePath, _currentScenePath, _subScenes);
                     break;
                 case SceneState.Story:
                     Debug.Log(string.Format("로딩 스테이지 : {0}, 현재 스테이지 : {1} : {2}", scenePath, _currentScenePath, state.StateType.ToString()));

@@ -18,13 +18,13 @@ namespace DialogueSpace
 
         private void Awake()
         {
-            
+
         }
 
         public async UniTask NextDialogue()
         {
             DialogueClass dialogue = _dialogueDB.GetData<DialogueClass>(_id);
-            
+
             _nextId = dialogue.ID;
 
             List<UniTask> tasks = new();

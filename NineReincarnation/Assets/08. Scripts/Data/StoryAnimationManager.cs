@@ -1,8 +1,6 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
-using Febucci.UI.Core;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class StoryAnimationManager : MonoBehaviour
@@ -19,7 +17,7 @@ public class StoryAnimationManager : MonoBehaviour
             _animatorDict.Add(animator.gameObject.name, animator);
         }
     }
-    
+
     public async UniTask ExcuteAnimation(AnimationClass animationData)
     {
         string name = animationData.Name;

@@ -61,6 +61,6 @@ public class NPC : MonoBehaviour, IEvent
     }
     public virtual void TriggerEvent(string eventName, Action triggerAction)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

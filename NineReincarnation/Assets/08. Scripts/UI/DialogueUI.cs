@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
@@ -21,7 +20,7 @@ public class DialogueUI : MonoBehaviour
 
     private void Awake()
     {
-        foreach(Sprite sprite in _sprites)
+        foreach (Sprite sprite in _sprites)
         {
             _spriteDict.Add(sprite.name, sprite);
         }

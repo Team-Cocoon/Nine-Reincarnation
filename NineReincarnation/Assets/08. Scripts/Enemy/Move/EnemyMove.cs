@@ -72,10 +72,10 @@ namespace Enemy.Move
 
         private void OnValidate()
         {
-            if(_waypoints.Count > 0 && (_pathType == WaypointPathType.LineOpen || _pathType == WaypointPathType.LineClosed))
+            if (_waypoints.Count > 0 && (_pathType == WaypointPathType.LineOpen || _pathType == WaypointPathType.LineClosed))
             {
                 transform.position = _waypoints[0];
-            } 
+            }
         }
 
         private void Start()

@@ -1,6 +1,5 @@
 using Player.Controller;
 using UnityEngine;
-using VContainer;
 
 public class CheckPoint : MonoBehaviour, ICollidable
 {

@@ -1,6 +1,5 @@
 using Player.Controller;
 using Unity.Cinemachine;
-using Unity.ProjectAuditor.Editor;
 using UnityEngine;
 using VContainer;
 
@@ -20,7 +19,7 @@ public class VirtualCameraManager : MonoBehaviour
     private void Awake()
     {
 
-        for(int i = 0; i < _areas.Length; ++i)
+        for (int i = 0; i < _areas.Length; ++i)
         {
             _areas[i].GetComponent<VCamArea>().Index = i;
         }
@@ -39,8 +38,6 @@ public class VirtualCameraManager : MonoBehaviour
 
     public void SetPrioriy(int index)
     {
-        Debug.Log(index);
-        Debug.Log(_currentIndex);
         if (_currentIndex == index) return;
 
         _cams[_currentIndex].Priority = (int)CameraPriority.None;

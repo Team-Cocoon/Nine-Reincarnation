@@ -4,12 +4,10 @@ using VContainer.Unity;
 
 public class StageScope : LifetimeScope
 {
-    [SerializeField] private VirtualCameraManager _vCammanager;
-    [SerializeField] private StoryEventManager _storyEventmanager;
+    [SerializeField] private Transform _player;
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponent<VirtualCameraManager>(_vCammanager);
-        //builder.RegisterComponent<StoryEventManager>(_storyEventmanager);
+        builder.RegisterComponent<Transform>(_player);
     }
 }

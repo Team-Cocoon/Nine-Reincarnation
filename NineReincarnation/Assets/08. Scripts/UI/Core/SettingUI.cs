@@ -61,7 +61,7 @@ public class SettingUI : ToggleUI
     {
         if (_resolutionList[x].width != width || _resolutionList[x].height != height)
         {
-            width  = _resolutionList[x].width;
+            width = _resolutionList[x].width;
             height = _resolutionList[x].height;
 
             Screen.SetResolution(width, height, _screenMode);
@@ -95,14 +95,14 @@ public class SettingUI : ToggleUI
         InitResolution();
         ResolutionChange(0);
         ScreenModeChange(true);
-        _screenToggle.onValueChanged      .AddListener(ScreenModeChange);
+        _screenToggle.onValueChanged.AddListener(ScreenModeChange);
         _resolutionDropdown.onValueChanged.AddListener(ResolutionChange);
 #endif
 
         _uiToggleButton.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
 
         _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
-        _titleButton.onClick .AddListener(TitleButtonEvent);
+        _titleButton.onClick.AddListener(TitleButtonEvent);
 
         _totalSlider.onValueChanged.AddListener(OnTotalSliderChanged);
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
@@ -124,7 +124,7 @@ public class SettingUI : ToggleUI
         _uiToggleButton.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
 
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
-        _titleButton.onClick .RemoveListener(TitleButtonEvent);
+        _titleButton.onClick.RemoveListener(TitleButtonEvent);
 
         _totalSlider.onValueChanged.RemoveListener(OnTotalSliderChanged);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);

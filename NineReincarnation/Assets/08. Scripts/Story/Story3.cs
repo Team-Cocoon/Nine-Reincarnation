@@ -312,7 +312,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue3_5.SetActive(false);
-        yield return null; 
+        yield return null;
         StartStory();
     }
     #endregion

@@ -1,4 +1,3 @@
-using Player.Controller;
 using UnityEngine;
 
 public class AnnaThrowState : PlayerStateMachineBehaviour

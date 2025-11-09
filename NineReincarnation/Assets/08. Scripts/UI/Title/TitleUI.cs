@@ -10,16 +10,16 @@ public class TitleUI : MonoBehaviour
 
     private void Start()
     {
-        _startButton.onClick .AddListener(GameEvent_Start);
+        _startButton.onClick.AddListener(GameEvent_Start);
         _optionButton.onClick.AddListener(GameEvent_Option);
-        _exitButton.onClick  .AddListener(GameEvent_Exit);
+        _exitButton.onClick.AddListener(GameEvent_Exit);
     }
 
     private void OnDestroy()
     {
-        _startButton.onClick .RemoveListener(GameEvent_Start);
+        _startButton.onClick.RemoveListener(GameEvent_Start);
         _optionButton.onClick.RemoveListener(GameEvent_Option);
-        _exitButton.onClick  .RemoveListener(GameEvent_Exit);
+        _exitButton.onClick.RemoveListener(GameEvent_Exit);
     }
 
     private void GameEvent_Start()

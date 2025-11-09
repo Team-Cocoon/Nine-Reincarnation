@@ -11,7 +11,7 @@ public class AnnaIdleState : PlayerStateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Player.IsDead)
+        if (Player.IsDead)
         {
             animator.SetTrigger("IsDead");
             Player.IsDead = false;

@@ -9032,12 +9032,10 @@ MonoBehaviour:
   - {fileID: 1891191396}
   - {fileID: 2077137473}
   - {fileID: 527694911}
-  - {fileID: 0}
   _areas:
   - {fileID: 574151729}
   - {fileID: 1977379517}
   - {fileID: 1265038236}
-  - {fileID: 0}
   _currentIndex: 0
 --- !u!4 &1594513119
 Transform:
@@ -9055,6 +9053,56 @@ Transform:
   - {fileID: 1891191400}
   - {fileID: 2077137477}
   - {fileID: 527694915}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1624201489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624201491}
+  - component: {fileID: 1624201490}
+  m_Layer: 0
+  m_Name: StageSubScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1624201490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624201489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2ea012d4a55f34fbef962d27b430d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: StageCoreScope
+  autoRun: 1
+  autoInjectGameObjects: []
+  _vCammanager: {fileID: 1594513118}
+  _storyEventmanager: {fileID: 0}
+--- !u!4 &1624201491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624201489}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.13654, y: -0.84712, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675416583
@@ -10403,3 +10451,4 @@ SceneRoots:
   - {fileID: 2134834076}
   - {fileID: 1675416584}
   - {fileID: 1864563225}
+  - {fileID: 1624201491}

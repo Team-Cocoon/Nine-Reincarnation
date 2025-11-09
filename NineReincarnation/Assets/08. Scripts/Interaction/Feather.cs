@@ -19,7 +19,7 @@ public class Feather : DrawOutline, IClickInteractableToggle
     [SerializeField] private float _interactionDistance;
     private Vector2 _playerPosition => InputManager.Instance.CurPlayer.transform.position;
 
-    public bool          IsClickControlToSelf { get => _isClickControlToSelf; }
+    public bool IsClickControlToSelf { get => _isClickControlToSelf; }
     public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
 
     PlayerController _player => InputManager.Instance.CurPlayer;
@@ -37,7 +37,7 @@ public class Feather : DrawOutline, IClickInteractableToggle
 
     private void Update()
     {
-        if(IsOutline == true)
+        if (IsOutline == true)
         {
             float dist = Vector2.Distance(_playerPosition, transform.position);
 
@@ -46,11 +46,11 @@ public class Feather : DrawOutline, IClickInteractableToggle
             {
                 if (!_possibleActive) return;
 
-                OutlineColor    = _inactiveColor;
+                OutlineColor = _inactiveColor;
                 _possibleActive = false;
 
                 //이미 상호작용 중이라면
-                if(_isActivated)
+                if (_isActivated)
                 {
                     InactivateFeather();
                     IsOutline = false;
@@ -61,7 +61,7 @@ public class Feather : DrawOutline, IClickInteractableToggle
             {
                 if (_isActivated || _possibleActive) return;
 
-                 OutlineColor   = _activeColor;
+                OutlineColor = _activeColor;
                 _possibleActive = true;
             }
         }

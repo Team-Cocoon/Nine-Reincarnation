@@ -10,7 +10,7 @@ namespace Utilities
     public class SceneLoader : MonoBehaviour
     {
         private Scene _mainScene; //메인 씬
-        private string _lastLoadedScenePath; //가장 최근 열린 씬
+        [SerializeField] private string _lastLoadedScenePath; //가장 최근 열린 씬
         private Stack<string> _additiveScenePaths = new Stack<string>(); //현재 열려있는 씬 리스트
         private string LoadingScenePath => SceneDataManager.Instance.LoadingScene;
 
@@ -122,6 +122,7 @@ namespace Utilities
             StartCoroutine(UnloadLastSceneRoutine());
         }
 
+
         /// <summary>
         /// 현재 겹쳐서 연 모든 씬을 닫고 다음 씬을 로드(상태 전환 X)
         /// </summary>
@@ -135,12 +136,22 @@ namespace Utilities
             }
             isLoading = true;
 
+            yield return SceneEventHandler.SceneFadeOut_Invoke()?.WaitForCompletion();
+            SceneEventHandler.SceneExited_Invoke();
+
             yield return UnloadLastSceneRoutine();
             yield return LoadAdditiveSceneRoutine(scenePath, false);
             SceneEventHandler.OnSceneChanged_Invoke(scenePath);
 
+            SceneEventHandler.SceneStarted_Invoke();
+            yield return SceneEventHandler.SceneFadeIn_Invoke()?.WaitForCompletion();
+
+            yield return new WaitForSecondsRealtime(0.5f);
+
             isLoading = false;
         }
+
+
 
         #region 씬 상태 변경 및 단일 씬 로드
         private IEnumerator LoadingSceneRoutine(string coreScenePath, string prevCoreScenePath)
@@ -234,7 +245,7 @@ namespace Utilities
                 yield return null; // 다음 프레임까지 대기
             }
 
-            _lastLoadedScenePath = _additiveScenePaths.Last(); //가장 마지막에 열린 씬 할당
+            _lastLoadedScenePath = subScenePaths.Last(); //가장 마지막에 열린 씬 할당
             Scene scene = SceneManager.GetSceneByPath(_lastLoadedScenePath);
             SceneManager.SetActiveScene(scene); //활성 씬을 현재 씬으로 변경
 

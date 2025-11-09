@@ -11,11 +11,11 @@ public class DialogueDB
     {
         DialogueData res = Resources.Load<DialogueData>("DialogueData");
 
-        RegisterDatabase<DialogueClass>(res.Dialogue  , item => item.ID);
-        RegisterDatabase<CameraClass>(res.Camera      , item => item.ID);
+        RegisterDatabase<DialogueClass>(res.Dialogue, item => item.ID);
+        RegisterDatabase<CameraClass>(res.Camera, item => item.ID);
         RegisterDatabase<AnimationClass>(res.Animation, item => item.ID);
-        RegisterDatabase<ScriptClass>(res.Script      , item => item.ID);
-        RegisterDatabase<BubbleClass>(res.Bubble      , item => item.ID);
+        RegisterDatabase<ScriptClass>(res.Script, item => item.ID);
+        RegisterDatabase<BubbleClass>(res.Bubble, item => item.ID);
     }
     private void RegisterDatabase<T>(IEnumerable<T> sourceList, Func<T, int> keySelector)
     {
