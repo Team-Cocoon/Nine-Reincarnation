@@ -5,22 +5,22 @@ namespace State.SceneState
 {
     public class StageState : ISceneState
     {
-        private SceneStateManager _sceneStateManager;
+        private CoreSceneLoader _sceneStateManager;
 
-        private SceneState _stateType;
+        private SceneStateType _stateType;
         private string _scenePath;
-        public SceneState StateType => _stateType;
+        public SceneStateType StateType => _stateType;
         public string ScenePath => _scenePath;
 
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="sceneStateManager"></param>
-        public StageState(SceneStateManager sceneStateManager)
+        public StageState(CoreSceneLoader sceneStateManager)
         {
             _sceneStateManager = sceneStateManager;
             _scenePath = sceneStateManager.StageScenePath;
-            _stateType = SceneState.Stage;
+            _stateType = SceneStateType.Stage;
         }
 
         public void Enter()

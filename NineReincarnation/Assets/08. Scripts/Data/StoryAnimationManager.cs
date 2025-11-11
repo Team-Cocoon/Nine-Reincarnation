@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
@@ -14,7 +15,8 @@ public class StoryAnimationManager : MonoBehaviour
     {
         foreach (Animator animator in _animators)
         {
-            _animatorDict.Add(animator.gameObject.name, animator);
+            string name = animator.gameObject.name;
+            _animatorDict.Add(name, animator);
         }
     }
 

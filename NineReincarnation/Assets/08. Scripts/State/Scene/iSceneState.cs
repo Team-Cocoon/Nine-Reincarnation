@@ -2,7 +2,7 @@ using DG.Tweening;
 
 namespace State.SceneState
 {
-    public enum SceneState
+    public enum SceneStateType
     {
         Title,
         Stage,
@@ -13,12 +13,6 @@ namespace State.SceneState
     public interface ISceneState : IState
     {
         public string ScenePath { get; }
-        public SceneState StateType { get; }
-
-        public Tween SceneEvent_FadeIn();
-
-        public Tween SceneEvent_FadeOut();
-
-        public void SceneEvent_BgmPlay();
+        public SceneStateType StateType { get; }
     }
 }
