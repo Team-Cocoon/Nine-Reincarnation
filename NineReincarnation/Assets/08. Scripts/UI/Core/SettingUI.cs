@@ -144,7 +144,7 @@ public class SettingUI : ToggleUI
     {
         PlayClickSound();
         UIEvent_ToggleUI();
-        if (SceneStateManager.Instance.CurrentSceneState != SceneState.Title)
+        if (SceneStateManager.Instance.CurrentSceneState != SceneStateType.Title)
         {
             GameEventHandler.TitleExcuted_Invoke();
         }

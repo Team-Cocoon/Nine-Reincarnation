@@ -11,13 +11,13 @@ namespace StateMachine.SceneStateMachine
         public StoryState _storyState;
         public ClearState _clearState;
 
-        private SceneStateManager _sceneManager;
+        private CoreSceneLoader _sceneManager;
 
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="player"></param>
-        public SceneStateMachine(SceneStateManager sceneManager)
+        public SceneStateMachine(CoreSceneLoader sceneManager)
         {
             _sceneManager = sceneManager;
 
@@ -39,14 +39,14 @@ namespace StateMachine.SceneStateMachine
 
         }
 
-        public ISceneState GetStateByEnum(SceneState stateEnum)
+        public ISceneState GetStateByEnum(SceneStateType stateEnum)
         {
             switch (stateEnum)
             {
-                case SceneState.Title: return _titleState;
-                case SceneState.Story: return _storyState;
-                case SceneState.Stage: return _stageState;
-                case SceneState.Clear: return _clearState;
+                case SceneStateType.Title: return _titleState;
+                case SceneStateType.Story: return _storyState;
+                case SceneStateType.Stage: return _stageState;
+                case SceneStateType.Clear: return _clearState;
                 default: return null;
             }
         }
@@ -55,20 +55,20 @@ namespace StateMachine.SceneStateMachine
         /// 트랜지션 전환
         /// </summary>
         /// <param name="state"></param>
-        public void TransitionState(SceneState state)
+        public void TransitionState(SceneStateType state)
         {
             switch (state)
             {
-                case SceneState.Title:
+                case SceneStateType.Title:
                     TransitionTo(_titleState);
                     break;
-                case SceneState.Story:
+                case SceneStateType.Story:
                     TransitionTo(_storyState);
                     break;
-                case SceneState.Stage:
+                case SceneStateType.Stage:
                     TransitionTo(_stageState);
                     break;
-                case SceneState.Clear:
+                case SceneStateType.Clear:
                     TransitionTo(_clearState);
                     break;
             }
