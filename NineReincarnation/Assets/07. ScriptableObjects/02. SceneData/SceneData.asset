@@ -19,6 +19,8 @@ MonoBehaviour:
     CoreScene: Assets/06. Scenes/CoreScene/StoryCoreScene.unity
     SubSceneGroups:
     - SubScenePaths:
+      - Assets/06. Scenes/Stories/Story0.unity
+    - SubScenePaths:
       - Assets/06. Scenes/Stories/Story1.unity
   StageScene:
     CoreScene: Assets/06. Scenes/CoreScene/StageCoreScene.unity
