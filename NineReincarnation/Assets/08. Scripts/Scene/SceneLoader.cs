@@ -9,13 +9,40 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
-        private CancellationToken _token;
+        protected CancellationToken _token;
         private List<string> _scenePathList = new();
+
+        public string LoadingScenePath => SceneDataManager.Instance.LoadingScene;
 
         protected virtual void Awake()
         {
             _token = this.GetCancellationTokenOnDestroy();
         }
+
+        public async UniTask LoadLoadingScene()
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
+
+            while (!asyncLoad.isDone) //언로드 될때까지 대기
+            {
+                await UniTask.Yield(_token);
+            }
+
+            await asyncLoad.WithCancellation(_token);
+        }
+
+        public async UniTask UnLoadLoadingScene()
+        {
+            AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(LoadingScenePath);
+
+            while (!asyncLoad.isDone) //언로드 될때까지 대기
+            {
+                await UniTask.Yield(_token);
+            }
+
+            await asyncLoad.WithCancellation(_token);
+        }
+
 
         /// <summary>
         /// 씬 열기
@@ -25,6 +52,11 @@ namespace Utilities
         public async UniTask LoadSceneByPath(string path)
         {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(path, LoadSceneMode.Additive);
+
+            while (!asyncLoad.isDone) //언로드 될때까지 대기
+            {
+                await UniTask.Yield(_token);
+            }
 
             await asyncLoad.WithCancellation(_token);
 
@@ -41,7 +73,7 @@ namespace Utilities
         public async UniTask UnloadSceneByPath(string path)
         {
             Scene scene = SceneManager.GetSceneByPath(path);
-            
+
             //해당 씬이 유효한지 확인
             if (scene.IsValid())
             {

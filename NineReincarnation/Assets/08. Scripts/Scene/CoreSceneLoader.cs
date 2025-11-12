@@ -39,6 +39,15 @@ public class CoreSceneLoader : SceneLoader
     {
         ISceneState sceneState = state as ISceneState;
 
+        bool isLoad = false;
+
+        await LoadLoadingScene();
+
+        await UnloadLastScene();
         await LoadSceneByPath(sceneState.ScenePath);
+        //LoadSceneByPath(sceneState.ScenePath);로 실행되는 씬에서 Awake에서 비동기 함수가 끝날때까지 대기해야함
+
+        await UniTask.WaitUntil(() => isLoad == false, cancellationToken: _token);
+        await UnLoadLoadingScene();
     }
 }
