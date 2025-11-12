@@ -9,6 +9,7 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
+        static protected int _loadSceneCount = 0;
         protected CancellationToken _token;
         private List<string> _scenePathList = new();
 
@@ -21,6 +22,8 @@ namespace Utilities
 
         public async UniTask LoadLoadingScene()
         {
+            if (_loadSceneCount > 1) return;
+
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(LoadingScenePath, LoadSceneMode.Additive);
 
             while (!asyncLoad.isDone) //언로드 될때까지 대기
@@ -33,6 +36,8 @@ namespace Utilities
 
         public async UniTask UnLoadLoadingScene()
         {
+            if(_loadSceneCount > 1) return;
+
             AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(LoadingScenePath);
 
             while (!asyncLoad.isDone) //언로드 될때까지 대기

@@ -14,16 +14,6 @@ public static class SceneEventHandler
 
     public static event Func<Tween> SceneFadeIn;
 
-    public static event Action<string> SceneLoadedByPath;
-
-    public static event Action<string, string> SceneStateChanged;
-
-    public static event Action<string, string, List<string>> SceneStateChangedAndLoadScenes;
-
-    public static event Action<string> SceneLoadedAdditivelyByPath;
-
-    public static event Action<string> SceneUnloadedByPath;
-
     public static event Action AllSceneUnloaded;
 
     public static event Action LastSceneUnloaded;
@@ -41,11 +31,6 @@ public static class SceneEventHandler
     {
         return SceneFadeIn?.Invoke();
     }
-    public static void SceneStateChanged_Invoke(string path1, string path2) => SceneStateChanged?.Invoke(path1, path2);
-    public static void SceneStateChangedAndLoadScenes_Invoke(string path1, string path2, List<string> pathList) => SceneStateChangedAndLoadScenes?.Invoke(path1, path2, pathList);
-    public static void SceneLoadedByPath_Invoke(string path) => SceneLoadedByPath?.Invoke(path);
-    public static void SceneLoadedAdditivelyByPath_Invoke(string path) => SceneLoadedAdditivelyByPath?.Invoke(path);
-    public static void SceneUnloadedByPath_Invoke(string path) => SceneUnloadedByPath?.Invoke(path);
     public static void AllSceneUnloaded_Invoke() => AllSceneUnloaded?.Invoke();
     public static void LastSceneUnloaded_Invoke() => LastSceneUnloaded?.Invoke();
     #endregion

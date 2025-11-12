@@ -7,6 +7,5 @@ public class StorySceneManager : MonoBehaviour
     private void Awake()
     {
         int index = SaveManager.Instance.SaveData.StoryIndex;
-        SceneEventHandler.SceneLoadedByPath_Invoke(storyScenePaths[index]);
     }
 }

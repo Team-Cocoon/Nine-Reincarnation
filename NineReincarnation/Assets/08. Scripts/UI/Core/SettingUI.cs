@@ -5,6 +5,7 @@ using State.SceneState;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 [Serializable]
 struct Resolution
@@ -42,6 +43,8 @@ public class SettingUI : ToggleUI
     [SerializeField] private Toggle _screenToggle;
     [SerializeField] private FullScreenMode _screenMode;
 
+
+    [Inject] private CoreSceneLoader _coreSceneLoader;
     private List<Resolution> _resolutions = new List<Resolution>();
     private int width = 1920;
     private int height = 1080;
@@ -144,7 +147,7 @@ public class SettingUI : ToggleUI
     {
         PlayClickSound();
         UIEvent_ToggleUI();
-        if (SceneStateManager.Instance.CurrentSceneState != SceneStateType.Title)
+        if (_coreSceneLoader.CurrentSceneState != SceneStateType.Title)
         {
             GameEventHandler.TitleExcuted_Invoke();
         }
