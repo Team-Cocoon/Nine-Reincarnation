@@ -12,13 +12,16 @@ public class SaveDataSO : ScriptableObject
 {
     public GameState State;
     public int StageIndex;
+    public int StageSubIndex;
     public int StoryIndex;
+
     public Vector3? CheckPoint;
 
     public void Init()
     {
         State = GameState.Stoty;
         StageIndex = 0;
+        StageSubIndex = 0;
         StoryIndex = 0;
         CheckPoint = null;
     }

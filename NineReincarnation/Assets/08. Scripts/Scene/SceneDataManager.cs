@@ -13,14 +13,24 @@ public class SceneDataManager : MonoBehaviour
     public string StageCoreScene => sceneData.StageScene.CoreScene;
     public string ClearScene => sceneData.ClearScene;
 
-    public List<string> GetStorySubScene(int index)
+    public List<string> GetStorySubScenes(int index)
     {
         return sceneData.StoryScene.SubSceneGroups[index].SubScenePaths;
     }
 
-    public List<string> GetStageSubScene(int index)
+    public List<string> GetStageSubScenes(int index)
     {
         return sceneData.StageScene.SubSceneGroups[index].SubScenePaths;
+    }
+
+    public string GetStageSubScene(int index, int subIndex)
+    {
+        return sceneData.StageScene.SubSceneGroups[index].SubScenePaths[subIndex];
+    }
+
+    public string GetStorySubScene(int index, int subIndex)
+    {
+        return sceneData.StoryScene.SubSceneGroups[index].SubScenePaths[subIndex];
     }
 
     private void Awake()

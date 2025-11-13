@@ -1,12 +1,10 @@
-using Player.Controller;
-using UnityEditor.Overlays;
 using UnityEngine;
-using VContainer;
 using VContainer.Unity;
+using VContainer;
 
-public class StageCoreScope : LifetimeScope
+public class StoryCoreScope : LifetimeScope
 {
-    [SerializeField] private SubSceneLoader _subSceneLoader; 
+    [SerializeField] private SubSceneLoader _subSceneLoader;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -14,16 +12,15 @@ public class StageCoreScope : LifetimeScope
         SaveManager saveManager = Parent.Container.Resolve<SaveManager>();
         SaveDataSO saveData = saveManager.SaveData;
 
-        int StageIndex = saveData.StageIndex;
-        int SubIndex = saveData.StageSubIndex++;
+        int StoryIndex = saveData.StoryIndex;
 
-        string scenePath = sceneDataManager.GetStageSubScene(StageIndex, SubIndex);
+        string scenePath = sceneDataManager.GetStorySubScene(StoryIndex, 0);
 
         builder.RegisterInstance(scenePath);
 
         builder.RegisterComponent<SubSceneLoader>(_subSceneLoader);
 
-       
+
         //서브 씬 로더에서 실행할 씬을 미리 주입
     }
 }

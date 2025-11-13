@@ -1,15 +1,16 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Utilities;
+using VContainer;
 
 public class SubSceneLoader : SceneLoader
 {
-    [SerializeField] private string subScenePath;
+    [Inject] private string subScenePath;
 
     protected override void Awake()
     {
         base.Awake();
-        
+       
         _loadSceneCount++;
     }
 

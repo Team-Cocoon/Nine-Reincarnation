@@ -417,6 +417,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717410625a607934c99b689c9672bd07, type: 3}
+--- !u!1 &1348305012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348305013}
+  - component: {fileID: 1348305014}
+  m_Layer: 0
+  m_Name: StoryCoreScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348305013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348305012}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.23843, y: -0.62181, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348305014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348305012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffd49ba017e1e44a938716e7f169017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: BaseScope
+  autoRun: 1
+  autoInjectGameObjects: []
+  _subSceneLoader: {fileID: 1454818215}
 --- !u!1 &1454818214
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6418dcb84180b1840b0f60f03132a5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subScenePath: Assets/06. Scenes/Stories/Story0.unity
 --- !u!4 &1454818216
 Transform:
   m_ObjectHideFlags: 0
@@ -581,3 +629,4 @@ SceneRoots:
   - {fileID: 1113401757}
   - {fileID: 2026104986}
   - {fileID: 1454818216}
+  - {fileID: 1348305013}
