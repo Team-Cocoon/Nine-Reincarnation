@@ -1,7 +1,24 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+
+public interface IFadeEffect
+{
+    /// <summary>
+    /// 밝아지는 효과
+    /// </summary>
+    /// <returns></returns>
+    public UniTask FadeIn();
+
+    /// <summary>
+    /// 어두워지는 효과
+    /// </summary>
+    /// <returns></returns>
+    public UniTask FadeOut();
+}
+
 
 namespace Effect.WipeFade
 {

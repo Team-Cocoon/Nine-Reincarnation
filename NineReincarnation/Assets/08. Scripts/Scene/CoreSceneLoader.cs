@@ -1,5 +1,3 @@
-
-
 using Cysharp.Threading.Tasks;
 using State;
 using State.SceneState;
@@ -7,7 +5,7 @@ using StateMachine.SceneStateMachine;
 using UnityEngine;
 using Utilities;
 
-public class CoreSceneLoader : SceneLoader
+public class CoreSceneLoader : SceneLoader, IFadeEffect
 {
     private SceneLoader _sceneLoader;
     private SceneStateMachine _sceneStateMachine;
@@ -74,10 +72,14 @@ public class CoreSceneLoader : SceneLoader
         ISceneState sceneState = state as ISceneState;
 
         _loadSceneCount++;
+
+        //페이드 아웃
+        await FadeOut();
+
         int loadSceneCount = _loadSceneCount;
         await LoadLoadingScene();
 
-        await UnloadLastScene();
+        await UnloadAllScene();
         await LoadSceneByPath(sceneState.ScenePath);
 
         Debug.Log(string.Format("Core {0}, {1}", loadSceneCount, _loadSceneCount));
@@ -85,6 +87,41 @@ public class CoreSceneLoader : SceneLoader
 
         Debug.Log(string.Format("코어 종료"));
         await UnLoadLoadingScene();
+
+        //페이드 인 순서
+        _currentSceneState = sceneState.StateType;
+        await FadeIn();
+
         _loadSceneCount--;
+    }
+
+    //밝아지는 효과
+    public async UniTask FadeIn()
+    {
+        switch (_currentSceneState)
+        {
+            case SceneStateType.Story:
+            case SceneStateType.Title:
+                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_token);
+                break;
+            default:
+                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+                break;
+        }
+    }
+
+    //어두워지는 효과
+    public async UniTask FadeOut()
+    {
+        switch (_currentSceneState)
+        {
+            case SceneStateType.Story:
+            case SceneStateType.Title:
+                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_token);
+                break;
+            default:
+                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
+                break;
+        }
     }
 }

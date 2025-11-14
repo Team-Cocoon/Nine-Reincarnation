@@ -84,10 +84,8 @@ public class SettingUI : ToggleUI
         UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
         _totalSlider.value = _volume.MasterVolume;
         _sfxSlider.value = _volume.SfxVolume;
         _bgmSlider.value = _volume.BgmVolume;

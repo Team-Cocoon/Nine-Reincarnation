@@ -23,17 +23,11 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance { get; set; }
 
-    [Header("---- 초기 등록 UI ----")]
-    [SerializeField] private ToggleUI[] _coreUI;
     private Dictionary<string, UIInfo> _uiDict = new Dictionary<string, UIInfo>();
 
     private void Awake()
     {
         Instance = this;
-        foreach (ToggleUI coreUI in _coreUI)
-        {
-            AddUIDictionary(coreUI.Name, coreUI.UI);
-        }
     }
 
     public void AddUIDictionary(string name, GameObject go)

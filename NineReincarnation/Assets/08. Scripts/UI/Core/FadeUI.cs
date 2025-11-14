@@ -2,6 +2,7 @@ using DG.Tweening;
 using Effect.WipeFade;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class FadeUI : ToggleUI
 {
@@ -9,7 +10,8 @@ public class FadeUI : ToggleUI
     [SerializeField] private Image _image;
     [SerializeField] private float _duration;
 
-    private void Awake()
+    [Inject]
+    private void Construct()
     {
         UIEventHandler.OnSceneWipeFadeIn += UIEvent_WipeFadeIn;
         UIEventHandler.OnSceneFadeIn += UIEvent_FadeIn;
@@ -19,11 +21,6 @@ public class FadeUI : ToggleUI
         Material instancedMat = Instantiate(_image.material);
 
         _image.material = instancedMat;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
     }
 
     protected override void OnDestroy()

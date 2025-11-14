@@ -130,17 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &244900252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
-  m_PrefabInstance: {fileID: 1939993269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa5fdb273528a14dbbabd2fbfb91ee8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &668648388
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,9 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abb87235b7e07c47966fe325eb24857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreUI:
-  - {fileID: 244900252}
-  - {fileID: 2126316902}
 --- !u!1 &1255829264
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,10 +463,13 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 1479231551}
   _sceneDataManager: {fileID: 668648389}
   _coreSceneLoader: {fileID: 773115212}
   _saveManager: {fileID: 1185052128}
+  _fadeUI: {fileID: 2126316902}
+  _uiManager: {fileID: 1239545584}
 --- !u!4 &1255829266
 Transform:
   m_ObjectHideFlags: 0
@@ -880,6 +869,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+--- !u!1 &1479231551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 274934920158506908, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+  m_PrefabInstance: {fileID: 1939993269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1513691501 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1559213014843111885, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}

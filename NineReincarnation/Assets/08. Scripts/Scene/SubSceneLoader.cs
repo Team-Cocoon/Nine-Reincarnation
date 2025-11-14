@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using State.SceneState;
 using UnityEngine;
 using Utilities;
 using VContainer;
 
-public class SubSceneLoader : SceneLoader
+public class SubSceneLoader : SceneLoader, IFadeEffect
 {
     [Inject] private string subScenePath;
 
@@ -22,10 +23,15 @@ public class SubSceneLoader : SceneLoader
 
     public async UniTask LoadSubScene()
     {
+        if (_loadSceneCount == 1)
+        {
+            await FadeOut();
+        }
         await LoadLoadingScene();
 
         int loadSceneCount = _loadSceneCount;
-        await UnloadLastScene();
+
+        await UnloadAllScene();
         await LoadSceneByPath(subScenePath);
 
         Debug.Log(string.Format("Sub {0}, {1}", loadSceneCount, _loadSceneCount));
@@ -33,5 +39,19 @@ public class SubSceneLoader : SceneLoader
 
         Debug.Log(string.Format("서브 종료"));
         await UnLoadLoadingScene();
+        if (_loadSceneCount == 1)
+        {
+            await FadeIn();
+        }
+    }
+
+    public async UniTask FadeIn()
+    {
+        await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+    }
+
+    public async UniTask FadeOut()
+    {
+        await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
     }
 }

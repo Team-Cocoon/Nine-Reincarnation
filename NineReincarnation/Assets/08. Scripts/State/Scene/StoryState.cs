@@ -25,9 +25,7 @@ namespace State.SceneState
 
         public void Enter()
         {
-            SceneEventHandler.SceneStarted += SceneEvent_BgmPlay;
-            SceneEventHandler.SceneFadeOut += SceneEvent_FadeOut;
-            SceneEventHandler.SceneFadeIn += SceneEvent_FadeIn;
+
         }
 
         public void Execute()
@@ -37,9 +35,7 @@ namespace State.SceneState
 
         public void Exit()
         {
-            SceneEventHandler.SceneStarted -= SceneEvent_BgmPlay;
-            SceneEventHandler.SceneFadeOut -= SceneEvent_FadeOut;
-            SceneEventHandler.SceneFadeIn -= SceneEvent_FadeIn;
+
         }
 
         public Tween SceneEvent_FadeIn()
