@@ -12,13 +12,10 @@ public class ToggleUI : MonoBehaviour
     {
         _uiManager = uiManager;
         _uiManager.AddUIDictionary(_name, _ui);
+        _ui.SetActive(false);
     }
     public string Name => _name;
     public GameObject UI => _ui;
-    private void Awake()
-    {
-        _ui.SetActive(false);
-    }
 
     protected virtual void OnDestroy()
     {

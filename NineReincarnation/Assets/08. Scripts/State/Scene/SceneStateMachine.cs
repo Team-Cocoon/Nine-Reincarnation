@@ -1,5 +1,8 @@
 using Manager;
 using State.SceneState;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace StateMachine.SceneStateMachine
 {
@@ -11,20 +14,16 @@ namespace StateMachine.SceneStateMachine
         public StoryState _storyState;
         public ClearState _clearState;
 
-        private CoreSceneLoader _sceneManager;
-
         /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="player"></param>
-        public SceneStateMachine(CoreSceneLoader sceneManager)
+        public SceneStateMachine(CoreSceneLoader coreSceneLoader)
         {
-            _sceneManager = sceneManager;
-
-            _titleState = new TitleState(sceneManager);
-            _stageState = new StageState(sceneManager);
-            _storyState = new StoryState(sceneManager);
-            _clearState = new ClearState(sceneManager);
+            _titleState = new TitleState(coreSceneLoader);
+            _stageState = new StageState(coreSceneLoader);
+            _storyState = new StoryState(coreSceneLoader);
+            _clearState = new ClearState(coreSceneLoader);
         }
 
         public override void Excute()

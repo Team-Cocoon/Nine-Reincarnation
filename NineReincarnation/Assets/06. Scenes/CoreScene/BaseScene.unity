@@ -250,6 +250,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830952249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+  m_PrefabInstance: {fileID: 953369639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cfd8199c702e884ba420677cd843330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &953369639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,13 +474,15 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 1479231551}
+  autoInjectGameObjects: []
+  _audioManager: {fileID: 830952249}
   _sceneDataManager: {fileID: 668648389}
   _coreSceneLoader: {fileID: 773115212}
   _saveManager: {fileID: 1185052128}
   _fadeUI: {fileID: 2126316902}
   _uiManager: {fileID: 1239545584}
+  _uiCamera: {fileID: 1899500776}
+  _settingUI: {fileID: 1479231552}
 --- !u!4 &1255829266
 Transform:
   m_ObjectHideFlags: 0
@@ -869,11 +882,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
---- !u!1 &1479231551 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 274934920158506908, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+--- !u!114 &1479231552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1230226191214042063, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
   m_PrefabInstance: {fileID: 1939993269}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa5fdb273528a14dbbabd2fbfb91ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1513691501 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1559213014843111885, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
@@ -1157,6 +1176,10 @@ PrefabInstance:
       propertyPath: _resolutionPanel
       value: 
       objectReference: {fileID: 1643990412}
+    - target: {fileID: 1559213014843111885, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1608118379097330234, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1289,51 +1312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2005028050
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2005028051}
-  - component: {fileID: 2005028052}
-  m_Layer: 0
-  m_Name: CameraManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2005028051
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005028050}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2005028052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005028050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8189bf16ea5d0e4982c2a6487980dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiCamera: {fileID: 1899500776}
 --- !u!114 &2126316902 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4748312249264494432, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
@@ -1352,7 +1330,6 @@ SceneRoots:
   - {fileID: 1899500777}
   - {fileID: 1263955276}
   - {fileID: 994820552}
-  - {fileID: 2005028051}
   - {fileID: 1239545583}
   - {fileID: 1185052127}
   - {fileID: 953369639}

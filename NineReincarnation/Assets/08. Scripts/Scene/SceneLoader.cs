@@ -4,16 +4,19 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
+        [Inject] protected SceneDataManager _sceneDataManager;
+
         static protected int _loadSceneCount = 0;
         protected CancellationToken _token;
         private List<string> _scenePathList = new();
 
-        public string LoadingScenePath => SceneDataManager.Instance.LoadingScene;
+        public string LoadingScenePath => _sceneDataManager.LoadingScene;
 
         protected virtual void Awake()
         {

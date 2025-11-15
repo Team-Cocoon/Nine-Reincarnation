@@ -43,7 +43,6 @@ public class SettingUI : ToggleUI
     [SerializeField] private Toggle _screenToggle;
     [SerializeField] private FullScreenMode _screenMode;
 
-
     [Inject] private CoreSceneLoader _coreSceneLoader;
     private List<Resolution> _resolutions = new List<Resolution>();
     private int width = 1920;

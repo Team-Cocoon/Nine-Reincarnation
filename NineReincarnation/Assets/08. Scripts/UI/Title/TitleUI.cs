@@ -4,10 +4,12 @@ using VContainer;
 
 public class TitleUI : MonoBehaviour
 {
-    [Header("---- 버튼 ----")]
+    [Header("---- Button ----")]
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _optionButton;
     [SerializeField] private Button _exitButton;
+
+    [Inject] private SaveManager _saveManager;
 
     private void Start()
     {
@@ -27,13 +29,13 @@ public class TitleUI : MonoBehaviour
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
 
-        SaveManager.Instance.SetSaveData(0);
+        _saveManager.SetSaveData(0);
 
-        if (SaveManager.Instance.SaveData.State == GameState.Stoty)
+        if (_saveManager.SaveData.State == GameState.Stoty)
         {
             GameEventHandler.StoryExcuted_Invoke();
         }
-        else if (SaveManager.Instance.SaveData.State == GameState.Stage)
+        else if (_saveManager.SaveData.State == GameState.Stage)
         {
             GameEventHandler.StageExcuted_Invoke();
         }

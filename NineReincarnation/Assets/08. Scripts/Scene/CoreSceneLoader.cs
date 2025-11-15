@@ -4,27 +4,28 @@ using State.SceneState;
 using StateMachine.SceneStateMachine;
 using UnityEngine;
 using Utilities;
+using VContainer;
 
 public class CoreSceneLoader : SceneLoader, IFadeEffect
 {
-    private SceneLoader _sceneLoader;
     private SceneStateMachine _sceneStateMachine;
     private SceneStateType _currentSceneState;
-
-    public string TitleScenePath => SceneDataManager.Instance.TitleScene;
-    public string StageScenePath => SceneDataManager.Instance.StageCoreScene;
-    public string StoryScenePath => SceneDataManager.Instance.StoryCoreScene;
-    public string ClearScenePath => SceneDataManager.Instance.ClearScene;
+    
+    public string TitleScenePath => _sceneDataManager.TitleScene;
+    public string StageScenePath => _sceneDataManager.StageCoreScene;
+    public string StoryScenePath => _sceneDataManager.StoryCoreScene;
+    public string ClearScenePath => _sceneDataManager.ClearScene;
 
     public SceneStateType CurrentSceneState => _currentSceneState;
-
 
     protected override void Awake()
     {
         base.Awake();
-        
         _sceneStateMachine = new SceneStateMachine(this);
+    }
 
+    private void Start()
+    {
         _sceneStateMachine.stateChanged += OnStateChanged_LoadCoreScene;
         _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
 

@@ -6,6 +6,7 @@ namespace State.SceneState
     public class StageState : ISceneState
     {
         private CoreSceneLoader _sceneStateManager;
+        private AudioManager _audioManager;
 
         private SceneStateType _stateType;
         private string _scenePath;

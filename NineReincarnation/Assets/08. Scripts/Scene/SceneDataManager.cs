@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class SceneDataManager : MonoBehaviour
 {
-    public static SceneDataManager Instance { get; private set; }
-
     [SerializeField] private SceneDataSO sceneData;
 
     public string LoadingScene => sceneData.LoadingScene;
@@ -31,10 +29,5 @@ public class SceneDataManager : MonoBehaviour
     public string GetStorySubScene(int index, int subIndex)
     {
         return sceneData.StoryScene.SubSceneGroups[index].SubScenePaths[subIndex];
-    }
-
-    private void Awake()
-    {
-        Instance = this;
     }
 }
