@@ -40,15 +40,15 @@ public class Story1 : Story
 
     private void Awake()
     {
-        _stageCameraSize = CameraManager.Instance.CinemachineCamera.Lens.OrthographicSize;
-        //CameraManager.Instance.CinemachineCamera.Lens.OrthographicSize = _cameraOriginSize;
+        //_stageCameraSize = //CameraManager.Instance.CinemachineCamera.Lens.OrthographicSize;
+        ////CameraManager.Instance.CinemachineCamera.Lens.OrthographicSize = _cameraOriginSize;
         //_camera.orthographicSize = _cameraOriginSize;
     }
 
-    void Start()
-    {
-        StartCoroutine(StartSetting(StartStory));
-    }
+    //void Start()
+    //{
+    //    StartCoroutine(StartSetting(StartStory));
+    //}
 
     public override void PlayStory(string eventFunc)
     {
@@ -72,13 +72,13 @@ public class Story1 : Story
                 StartCoroutine(Event4_5());
                 break;
             case "Event4-6":
-                //CameraEventHandler.ZoomToTarget(_camera, CameraManager.Instance.CinemachineCamera, _cameraOriginPos, _cameraOrginSize, _zoomDuration, StartStory);
+                //CameraEventHandler.ZoomToTarget(_camera, //CameraManager.Instance.CinemachineCamera, _cameraOriginPos, _cameraOrginSize, _zoomDuration, StartStory);
                 StartStory();
                 break;
             case "Event4-7":
-                StartCoroutine(Event4_7());
+                //StartCoroutine(Event4_7());
                 // 안나로 바꿀 때 다시 넣어야됨
-                //CameraManager.Instance.ChangeTarget(_annaController.transform);
+                ////CameraManager.Instance.ChangeTarget(_annaController.transform);
                 break;
         }
     }
@@ -141,7 +141,7 @@ public class Story1 : Story
         AnnaActive(false);
         _npcAnnaAnim.Animator.Play("Anna_Move");
         Vector3 vector3 = _npcAnna.transform.position;
-        CameraManager.Instance.ChangeTarget(_npcAnna.transform);
+        ////CameraManager.Instance.ChangeTarget(_npcAnna.transform);
         while (_npcAnna.transform.position.x < _targetPosition.position.x)
         {
             vector3.x += Time.deltaTime * _moveSpeed;
@@ -160,7 +160,7 @@ public class Story1 : Story
         _cameraOriginSize = _camera.orthographicSize;
         _cameraOriginPos = _camera.transform.position;
         bool isZoomFinished = false;
-        CameraEventHandler.Zoom(_camera, CameraManager.Instance.CinemachineCamera, _zoomInSize, _zoomDuration, () => isZoomFinished = true);
+        //CameraEventHandler.Zoom(_camera, //CameraManager.Instance.CinemachineCamera, _zoomInSize, _zoomDuration, () => isZoomFinished = true);
         _dialogue4_4.SetActive(true);
         yield return new WaitUntil(() => _isTextShowed);
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
@@ -175,8 +175,8 @@ public class Story1 : Story
     private IEnumerator Event4_5()
     {
         bool isZoomFinished = false;
-        //CameraEventHandler.Zoom(_camera, CameraManager.Instance.CinemachineCamera, _zoomInSize - 0.5f, _zoomDuration, () => isZoomFinished = true);
-        CameraEventHandler.ZoomInOut(_camera, CameraManager.Instance.CinemachineCamera, _zoomInSize - 0.5f, _cameraOriginSize, _zoomDuration, 0.5f, () => isZoomFinished = true);
+        //CameraEventHandler.Zoom(_camera, //CameraManager.Instance.CinemachineCamera, _zoomInSize - 0.5f, _zoomDuration, () => isZoomFinished = true);
+        //CameraEventHandler.ZoomInOut(_camera, //CameraManager.Instance.CinemachineCamera, _zoomInSize - 0.5f, _cameraOriginSize, _zoomDuration, 0.5f, () => isZoomFinished = true);
         _dialogue4_5.SetActive(true);
         yield return new WaitUntil(() => _isTextShowed);
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
@@ -188,28 +188,28 @@ public class Story1 : Story
     #endregion
 
     #region Event 4-7
-    private IEnumerator Event4_7()
-    {
-        bool isZoomFinished = false;
-        CameraEventHandler.Zoom(_camera, CameraManager.Instance.CinemachineCamera, _stageCameraSize, _zoomDuration, () => isZoomFinished = true);
-        yield return new WaitUntil(() => isZoomFinished);
-        AnnaActive(true);
-        CameraManager.Instance.ChangeTarget(_annaController.transform);
-        _wall.SetActive(false);
-    }
+    //private IEnumerator Event4_7()
+    //{
+    //    bool isZoomFinished = false;
+    //    CameraEventHandler.Zoom(_camera, //CameraManager.Instance.CinemachineCamera, _stageCameraSize, _zoomDuration, () => isZoomFinished = true);
+    //    //yield return new WaitUntil(() => isZoomFinished);
+    //    AnnaActive(true);
+    //    //CameraManager.Instance.ChangeTarget(_annaController.transform);
+    //    _wall.SetActive(false);
+    //}
     #endregion
 
-    private IEnumerator StartSetting(Action action)
-    {
-        yield return new WaitUntil(() => _annaController.IsGround);
-        AnnaActive(false);
-        yield return new WaitForSeconds(1f);
-        bool isZoomFinished = false;
-        CameraEventHandler.Zoom(_camera, CameraManager.Instance.CinemachineCamera, _cameraOriginSize, _zoomDuration, () => isZoomFinished = true);
-        yield return new WaitUntil(() => isZoomFinished);
-        yield return new WaitForSeconds(1f);
-        action?.Invoke();
-    }
+    //private IEnumerator StartSetting(Action action)
+    //{
+    //    yield return new WaitUntil(() => _annaController.IsGround);
+    //    AnnaActive(false);
+    //    yield return new WaitForSeconds(1f);
+    //    bool isZoomFinished = false;
+    //    CameraEventHandler.Zoom(_camera, //CameraManager.Instance.CinemachineCamera, _cameraOriginSize, _zoomDuration, () => isZoomFinished = true);
+    //    yield return new WaitUntil(() => isZoomFinished);
+    //    yield return new WaitForSeconds(1f);
+    //    action?.Invoke();
+    //}
     public override void Enter(GameObject go = null)
     {
         if (_isCheck) return;

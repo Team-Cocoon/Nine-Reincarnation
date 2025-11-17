@@ -2,7 +2,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class StageSubScope : LifetimeScope
+public class SubStageScope : LifetimeScope
 {
     [SerializeField] private VirtualCameraManager _vCammanager;
     [SerializeField] private StoryEventManager _storyEventmanager;

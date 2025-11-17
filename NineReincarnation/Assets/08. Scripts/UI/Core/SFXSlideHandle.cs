@@ -4,9 +4,16 @@ using UnityEngine.UI;
 
 public class SFXSlideHandle : Slider, IEndDragHandler
 {
+    private bool playedOnDown = false;
+
     public void OnEndDrag(PointerEventData eventData)
     {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
+        if (!playedOnDown)
+        {
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
+        }
+
+        playedOnDown = false;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -14,8 +21,10 @@ public class SFXSlideHandle : Slider, IEndDragHandler
         if (handleRect != null && !RectTransformUtility.RectangleContainsScreenPoint(handleRect, eventData.pointerPressRaycast.screenPosition, eventData.enterEventCamera))
         {
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
+            playedOnDown = true;
         }
 
         base.OnPointerDown(eventData);
     }
 }
+

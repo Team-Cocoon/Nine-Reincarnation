@@ -31,11 +31,11 @@ public class TitleUI : MonoBehaviour
 
         _saveManager.SetSaveData(0);
 
-        if (_saveManager.SaveData.State == GameState.Stoty)
+        if (_saveManager.GameData.State == GameState.Stoty)
         {
             GameEventHandler.StoryExcuted_Invoke();
         }
-        else if (_saveManager.SaveData.State == GameState.Stage)
+        else if (_saveManager.GameData.State == GameState.Stage)
         {
             GameEventHandler.StageExcuted_Invoke();
         }

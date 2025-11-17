@@ -50,11 +50,13 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
 
     private void SceneEvent_Story()
     {
+        _saveManager.SetState(GameState.Stoty);
         _sceneStateMachine.TransitionState(SceneStateType.Story);
     }
 
     private void SceneEvent_Stage()
     {
+        _saveManager.SetState(GameState.Stage);
         _sceneStateMachine.TransitionState(SceneStateType.Stage);
     }
 
@@ -72,28 +74,27 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
     {
         ISceneState sceneState = state as ISceneState;
 
-        _loadSceneCount++;
+        IncrementLoadCount();
 
         //페이드 아웃
         await FadeOut();
 
-        int loadSceneCount = _loadSceneCount;
+        int loadSceneCount = LoadSceneCount;
         await LoadLoadingScene();
 
+        await UnloadStack();
         await UnloadAllScene();
         await LoadSceneByPath(sceneState.ScenePath);
 
-        Debug.Log(string.Format("Core {0}, {1}", loadSceneCount, _loadSceneCount));
-        await UniTask.WaitUntil(() => loadSceneCount == _loadSceneCount, cancellationToken: _token);
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _token);
 
-        Debug.Log(string.Format("코어 종료"));
         await UnLoadLoadingScene();
 
         //페이드 인 순서
         _currentSceneState = sceneState.StateType;
         await FadeIn();
 
-        _loadSceneCount--;
+        DecrementLoadCount();
     }
 
     //밝아지는 효과

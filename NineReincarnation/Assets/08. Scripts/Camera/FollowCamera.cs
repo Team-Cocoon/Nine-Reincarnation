@@ -14,7 +14,7 @@ namespace PlayerCamera
 
         private void Awake()
         {
-            CameraManager.Instance.CinemachineCamera = GetComponent<CinemachineCamera>();
+            ////CameraManager.Instance.CinemachineCamera = GetComponent<CinemachineCamera>();
             _followCamera = GetComponent<CinemachineFollow>();
         }
 

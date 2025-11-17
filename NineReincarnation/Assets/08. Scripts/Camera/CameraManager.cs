@@ -1,51 +1,34 @@
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using VContainer;
 
 namespace Manager
 {
     public class CameraManager : MonoBehaviour
     {
-        public static CameraManager Instance { get; private set; }
+        [SerializeField] private Camera _camera;
+        private Camera _uiCamera;
 
-        [SerializeField] private Camera _uiCamera;
-
-        private CinemachineCamera _camera;
-
-        public CinemachineCamera CinemachineCamera
+        [Inject]
+        public void Constrct(Camera uiCamera)
         {
-            get { return _camera; }
-            set { _camera = value; }
-        }
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(this);
-            }
-            Instance = this;
-            SceneEventHandler.SceneStarted += AddStackCamera;
-        }
-
-        void OnDestroy()
-        {
-            SceneEventHandler.SceneStarted -= AddStackCamera;
+            _uiCamera = uiCamera;
+            AddStackCamera(_uiCamera);
         }
 
         /// <summary>
         /// 카메라가 따라다니는 타겟 변경
         /// </summary>
         /// <param name="transform"></param>
-        public void ChangeTarget(Transform transform)
-        {
-            if (_camera == null) return;
-            _camera.Follow = transform;
-        }
+        //public void ChangeTarget(Transform transform)
+        //{
+        //    if (_camera == null) return;
+        //    _camera.Follow = transform;
+        //}
 
-        private void AddStackCamera()
+        private void AddStackCamera(Camera camera)
         {
-            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(_uiCamera);
+            _camera.GetUniversalAdditionalCameraData().cameraStack.Add(camera);
         }
     }
 }

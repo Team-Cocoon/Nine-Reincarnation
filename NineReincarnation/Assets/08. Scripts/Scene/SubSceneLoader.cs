@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using State.SceneState;
 using UnityEngine;
@@ -6,40 +7,39 @@ using VContainer;
 
 public class SubSceneLoader : SceneLoader, IFadeEffect
 {
-    [Inject] private string subScenePath;
+    public string SubScenePath;
 
     protected override void Awake()
     {
         base.Awake();
-       
-        _loadSceneCount++;
+
+        IncrementLoadCount();
     }
 
     private async void Start()
     {
         await LoadSubScene();
-        _loadSceneCount--;
+        DecrementLoadCount();
     }
 
     public async UniTask LoadSubScene()
     {
-        if (_loadSceneCount == 1)
+        if (LoadSceneCount == 1)
         {
             await FadeOut();
         }
         await LoadLoadingScene();
 
-        int loadSceneCount = _loadSceneCount;
+        int loadSceneCount = LoadSceneCount;
 
+        await UnloadStack();
         await UnloadAllScene();
-        await LoadSceneByPath(subScenePath);
+        await LoadSceneByPath(SubScenePath);
 
-        Debug.Log(string.Format("Sub {0}, {1}", loadSceneCount, _loadSceneCount));
-        await UniTask.WaitUntil(() => loadSceneCount == _loadSceneCount, cancellationToken: _token);
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _token);
 
-        Debug.Log(string.Format("서브 종료"));
         await UnLoadLoadingScene();
-        if (_loadSceneCount == 1)
+        if (LoadSceneCount == 1)
         {
             await FadeIn();
         }

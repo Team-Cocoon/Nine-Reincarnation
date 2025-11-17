@@ -55,7 +55,6 @@ public class FadeUI : ToggleUI
 
     private Tween UIEvent_FadeIn(bool stopTime)
     {
-        Debug.Log("페이드 인");
         _image.material.SetFloat("_Progress", 0.0f);
         _image.material.SetFloat("_IsFadeIn", 1.0f);
         Color color = _image.color;
@@ -71,7 +70,6 @@ public class FadeUI : ToggleUI
 
     private Tween UIEvent_FadeOut(bool stopTime)
     {
-        Debug.Log("페이드 아웃");
         _image.material.SetFloat("_Progress", 1.0f);
         _image.material.SetFloat("_IsFadeIn", 0.0f);
         Color color = _image.color;

@@ -11,16 +11,31 @@ namespace Utilities
     public class SceneLoader : MonoBehaviour
     {
         [Inject] protected SceneDataManager _sceneDataManager;
+        [Inject] protected SaveManager _saveManager;
 
-        static protected int _loadSceneCount = 0;
+        static private int _loadSceneCount = 0;
+        static private Stack<SceneLoader> _sceneLoaders = new();
+
         protected CancellationToken _token;
         private List<string> _scenePathList = new();
 
+        public int LoadSceneCount => _loadSceneCount;
+        public void IncrementLoadCount() => _loadSceneCount++;
+        public void DecrementLoadCount() => _loadSceneCount--;
         public string LoadingScenePath => _sceneDataManager.LoadingScene;
 
         protected virtual void Awake()
         {
+            _sceneLoaders.Push(this);
             _token = this.GetCancellationTokenOnDestroy();
+        }
+
+        private void OnDestroy()
+        {
+            if(_sceneLoaders.Peek() == this) 
+            { 
+                _sceneLoaders.Pop(); 
+            }
         }
 
         public async UniTask LoadLoadingScene()
@@ -127,14 +142,26 @@ namespace Utilities
         /// <returns></returns>
         public async UniTask UnloadAllScene()
         {
-            if (_scenePathList.Count < 1) return;
-
             int last = _scenePathList.Count - 1;
 
             for (int i = last; i >= 0; i--)
             {
                 await UnloadLastScene();
             }
+        }
+
+        public async UniTask UnloadStack()
+        {
+            int count = _sceneLoaders.Count;
+
+            for(int i = 0; i < count; ++i)
+            {
+                SceneLoader top = _sceneLoaders.Peek();
+                if (top == this) return;
+
+                await top.UnloadAllScene();
+                _sceneLoaders.Pop();
+            }            
         }
     }
 }
