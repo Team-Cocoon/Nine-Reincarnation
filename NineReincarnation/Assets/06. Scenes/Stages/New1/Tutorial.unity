@@ -388,6 +388,10 @@ PrefabInstance:
       value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 6680838354253225121, guid: c7c1fbf50ebce424bbaf5f91610ab96e, type: 3}
+      propertyPath: m_GridSnapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680838354253225121, guid: c7c1fbf50ebce424bbaf5f91610ab96e, type: 3}
       propertyPath: m_RefResolutionX
       value: 480
       objectReference: {fileID: 0}
