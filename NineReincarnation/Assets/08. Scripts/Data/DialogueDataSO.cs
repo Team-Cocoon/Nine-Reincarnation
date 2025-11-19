@@ -27,6 +27,8 @@ namespace ExcelData
     {
         public int ID;
         public EventType EventType; //이벤트 함수
+        public bool IsAuto;
+        public float Duration;
         public int NextID;
     }
 
@@ -45,7 +47,6 @@ namespace ExcelData
         public int ID;
         public string Name;
         public string AnimationName;
-        public float Duration;
     }
 
     [Serializable]
@@ -62,12 +63,12 @@ namespace ExcelData
     {
         public int ID;
         public string Name;
+        public string ImageName;
         public string Script;
     }
 
-
     [ExcelAsset(ExcelName = "DialogueData", HeaderRow = 0, DataStartRow = 1, DataStartColumn = 0, AssetPath = "Resources", LogOnImport = true)]
-    public class DialogueData : ScriptableObject
+    public class DialogueDataSO : ScriptableObject
     {
         //변수명은 시트 명으로
         public List<DialogueClass> Dialogue;

@@ -889,6 +889,10 @@ PrefabInstance:
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 109468468945318981, guid: b78e32b1f3e24a54293cd15688eddb07, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 924531697898949504, guid: b78e32b1f3e24a54293cd15688eddb07, type: 3}
       propertyPath: m_Name
       value: MainUI_Canvas

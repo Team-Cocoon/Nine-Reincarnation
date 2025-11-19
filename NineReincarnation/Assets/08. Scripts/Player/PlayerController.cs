@@ -163,6 +163,11 @@ namespace Player.Controller
             InitGravity();
         }
 
+        private void OnValidate()
+        {
+           _checkPoint = transform.position;
+        }
+
         private void Awake()
         {
             _rb2d = GetComponent<Rigidbody2D>();

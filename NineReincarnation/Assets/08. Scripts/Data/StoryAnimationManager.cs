@@ -24,7 +24,6 @@ public class StoryAnimationManager : MonoBehaviour
     {
         string name = animationData.Name;
         string animationName = animationData.AnimationName;
-        float duration = animationData.Duration;
 
         if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(animationName))
         {

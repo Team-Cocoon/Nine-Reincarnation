@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_New Shader Graph
+  m_Name: VideoMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 0c5106b1ea853ad4ab7d6f7d7f122887, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -62,6 +62,6 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.7137255, g: 0.7137255, b: 0.70980394, a: 1}
+    - _Color: {r: 0.4901961, g: 0.4901961, b: 0.4901961, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

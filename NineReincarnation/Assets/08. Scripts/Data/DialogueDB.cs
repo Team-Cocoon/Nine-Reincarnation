@@ -9,7 +9,7 @@ public class DialogueDB
 
     public DialogueDB()
     {
-        DialogueData res = Resources.Load<DialogueData>("DialogueData");
+        DialogueDataSO res = Resources.Load<DialogueDataSO>("DialogueData");
 
         RegisterDatabase<DialogueClass>(res.Dialogue, item => item.ID);
         RegisterDatabase<CameraClass>(res.Camera, item => item.ID);
