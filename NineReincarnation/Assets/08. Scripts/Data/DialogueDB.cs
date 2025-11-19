@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using ExcelData;
 using UnityEngine;
+using VContainer;
 
 public class DialogueDB
 {
     private Dictionary<Type, object> _databases = new();
 
-    public DialogueDB()
+    [Inject]
+    public DialogueDB(DialogueDataSO dialogueData)
     {
-        DialogueDataSO res = Resources.Load<DialogueDataSO>("DialogueData");
-
-        RegisterDatabase<DialogueClass>(res.Dialogue, item => item.ID);
-        RegisterDatabase<CameraClass>(res.Camera, item => item.ID);
-        RegisterDatabase<AnimationClass>(res.Animation, item => item.ID);
-        RegisterDatabase<ScriptClass>(res.Script, item => item.ID);
-        RegisterDatabase<BubbleClass>(res.Bubble, item => item.ID);
+        RegisterDatabase<DialogueClass>(dialogueData.Dialogue, item => item.ID);
+        RegisterDatabase<CameraClass>(dialogueData.Camera, item => item.ID);
+        RegisterDatabase<AnimationClass>(dialogueData.Animation, item => item.ID);
+        RegisterDatabase<ScriptClass>(dialogueData.Script, item => item.ID);
+        RegisterDatabase<BubbleClass>(dialogueData.Bubble, item => item.ID);
     }
+
     private void RegisterDatabase<T>(IEnumerable<T> sourceList, Func<T, int> keySelector)
     {
         if (sourceList == null) return;

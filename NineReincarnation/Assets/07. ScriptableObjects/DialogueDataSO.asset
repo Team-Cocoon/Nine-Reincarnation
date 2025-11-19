@@ -9,70 +9,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86681f2ed67214a4d8d4b7c733e47c22, type: 3}
-  m_Name: DialogueData
+  m_Script: {fileID: 11500000, guid: dcd21951de86c344ab1b08ffb3b01acf, type: 3}
+  m_Name: DialogueDataSO
   m_EditorClassIdentifier: 
   Dialogue:
   - ID: 101001
     EventType: 1
+    IsAuto: 1
+    Duration: 0
     NextID: 101002
   - ID: 101002
     EventType: 1
+    IsAuto: 1
+    Duration: 0
     NextID: 101003
   - ID: 101003
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101004
   - ID: 101004
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101005
   - ID: 101005
     EventType: 4
+    IsAuto: 1
+    Duration: 0
     NextID: 101006
   - ID: 101006
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101007
   - ID: 101007
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101008
   - ID: 101008
     EventType: 34
+    IsAuto: 1
+    Duration: 0
     NextID: 101009
   - ID: 101009
     EventType: 34
+    IsAuto: 1
+    Duration: 0
     NextID: 101010
   - ID: 101010
     EventType: 34
+    IsAuto: 0
+    Duration: 0
     NextID: 101011
   - ID: 101011
     EventType: 2
+    IsAuto: 1
+    Duration: 0
     NextID: 101012
   - ID: 101012
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101013
   - ID: 101013
     EventType: 4
+    IsAuto: 1
+    Duration: 0
     NextID: 101014
   - ID: 101014
     EventType: 16
+    IsAuto: 0
+    Duration: 0
     NextID: 101015
   - ID: 101015
     EventType: 32
+    IsAuto: 0
+    Duration: 0
     NextID: 101016
   - ID: 101016
     EventType: 2
+    IsAuto: 1
+    Duration: 0
     NextID: 101017
   - ID: 101017
     EventType: 0
+    IsAuto: 0
+    Duration: 0
     NextID: 0
   Animation:
   - ID: 101001
     Name: "\uC548\uB098"
     AnimationName: Anna_Down
-    Duration: 0
   - ID: 101002
     Name: "\uC548\uB098"
     AnimationName: Anna_Wake
-    Duration: 0
   Script:
   - ID: 101003
     Name: "\uC548\uB098"
@@ -83,10 +115,6 @@ MonoBehaviour:
     ImageName: Anna_Blank
     Script: "{fade a=3.5} \uB09C \uBD84\uBA85 \uAD50\uC2E4\uC5D0 \uC788\uC5C8\uB358
       \uAC83 \uAC19\uC740\uB370 \uC5EC\uAE30\uB294 \uB3C4\uB300\uCCB4 \uC5B4\uB514\uC9C0?"
-  - ID: 101005
-    Name: "\uC548\uB098"
-    ImageName: 
-    Script: 
   - ID: 101006
     Name: "\uC548\uB098"
     ImageName: Anna_Confusion
@@ -102,10 +130,6 @@ MonoBehaviour:
     Name: "\uC548\uB098"
     ImageName: Anna_Blank
     Script: "{fade a=3.5} \uADFC\uB370 \uC5B4\uB514\uB85C \uAC00\uC57C\uD558\uC9C0?"
-  - ID: 101013
-    Name: "\uC548\uB098"
-    ImageName: 
-    Script: 
   - ID: 101014
     Name: "\uC548\uB098"
     ImageName: Anna_Determination
@@ -135,15 +159,19 @@ MonoBehaviour:
   Bubble:
   - ID: 101008
     Name: "\uC548\uB098"
+    ImageName: 
     Script: "{fade a=3.5}<bounce a=0.2>\uC77C\uB2E8 \uAC00\uBCF4\uC790\uACE0!</>"
   - ID: 101009
     Name: "\uC548\uB098"
+    ImageName: 
     Script: "{fade a=3.5}\uC5B4\uB5BB\uAC8C\uB4E0 \uB098\uAC08 \uBC29\uBC95\uC744
       \uCC3E\uC544\uC11C..."
   - ID: 101010
     Name: "\uC548\uB098"
+    ImageName: 
     Script: "{horiexp}<size=120%>\uB09C \uBC18\uB4DC\uC2DC \uC9D1\uC73C\uB85C \uB3CC\uC544\uAC08
       \uAC70\uC57C!!!"
   - ID: 101015
     Name: "\uC548\uB098"
+    ImageName: 
     Script: "{fade a=3.5} <wiggle a=0.1>\uAC70\uAE30 \uC11C!!!</>"

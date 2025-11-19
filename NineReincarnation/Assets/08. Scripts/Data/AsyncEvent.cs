@@ -1,14 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-
-public interface IEventInterface
-{
-    public UniTask ExecuteEvent();
-}
-
 public class AsyncEvent : MonoBehaviour
 {
-    [SerializeField] private StoryEventManager _storyEventManager;
     private IEventInterface _event;
 
     private void Awake()
@@ -16,21 +9,15 @@ public class AsyncEvent : MonoBehaviour
         _event = GetComponent<IEventInterface>();
     }
 
-    public void Execute()
+    public void Execute(StoryEventManager storyEventManager)
     {
-        RunTaskAsync().Forget();
+        RunTaskAsync(storyEventManager).Forget();
     }
 
-    private async UniTaskVoid RunTaskAsync()
+    private async UniTaskVoid RunTaskAsync(StoryEventManager storyEventManager)
     {
-        if (_storyEventManager == null || _event == null)
-        {
-            _storyEventManager?.SignalEventComplete(); //즉시 완료시켜 멈춤 방지
-            return;
-        }
-
         await _event.ExecuteEvent();
 
-        _storyEventManager.SignalEventComplete();
+        storyEventManager.SignalEventComplete();
     }
 }

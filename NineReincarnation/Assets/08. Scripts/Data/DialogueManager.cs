@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
 using UnityEngine;
+using VContainer;
 
 namespace DialogueSpace
 {
     public class DialogueManager : MonoBehaviour
     {
         [SerializeField] private int _id;
-        [SerializeField] private DialogueUI _ui;
-        [SerializeField] private StoryAnimationManager _storyAnimationManager;
-        [SerializeField] private StoryEventManager _storyEventManager;
+        [Inject] private DialogueUI _ui;
+        [Inject] private StoryAnimationManager _storyAnimationManager;
+        [Inject] private StoryEventManager _storyEventManager;
+        [Inject] private DialogueDB _dialogueDB;
 
-        private DialogueDB _dialogueDB = new();
         private int _nextId;
-
-        private void Awake()
-        {
-
-        }
 
         public async UniTask NextDialogue()
         {
@@ -28,6 +24,8 @@ namespace DialogueSpace
             _nextId = dialogue.ID;
 
             List<UniTask> tasks = new();
+
+            //End면 종료
             if (dialogue.EventType != ExcelData.EventType.End)
             {
                 if ((dialogue.EventType & ExcelData.EventType.Script) == ExcelData.EventType.Script)
@@ -36,7 +34,7 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
                 {
-                    //tasks.Add(_storyEventManager);
+                    tasks.Add(_storyEventManager.ExcuteEvent());
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Camera) == ExcelData.EventType.Camera)
                 {
@@ -49,6 +47,7 @@ namespace DialogueSpace
             }
 
             await UniTask.WhenAll(tasks);
+            await UniTask.WaitForSeconds(dialogue.Duration);
             _id = _nextId;
         }
     }

@@ -4,12 +4,17 @@ using UnityEngine.Events;
 
 public class StoryEventManager : MonoBehaviour
 {
-    [SerializeField] private UnityEvent[] _storyEvent;
+    [SerializeField] private AsyncEvent[] _storyEvent;
 
     private UniTaskCompletionSource _eventCompletionSource;
     private int curIndex = 0;
 
-    public async UniTask ExcuteEvent() // UniTaskVoid -> UniTask
+    private void OnDestroy()
+    {
+        SignalEventComplete();
+    }
+
+    public async UniTask ExcuteEvent()
     {
         if (curIndex >= _storyEvent.Length) return;
 
@@ -17,7 +22,7 @@ public class StoryEventManager : MonoBehaviour
         _eventCompletionSource = new UniTaskCompletionSource();
 
         // UnityEvent를 실행
-        _storyEvent[curIndex++].Invoke();
+        _storyEvent[curIndex++].Execute(this);
 
         // _eventCompletionSource.TrySetResult()가 호출될 때까지 여기서 대기
         await _eventCompletionSource.Task;

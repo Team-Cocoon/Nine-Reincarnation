@@ -1,4 +1,7 @@
+using ExcelData;
+using Player.Controller;
 using StateMachine.SceneStateMachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 using VContainer;
@@ -22,8 +25,14 @@ public class BaseScope : LifetimeScope
     [SerializeField] private Camera _uiCamera;
     [SerializeField] private SettingUI _settingUI;
 
+    [Header("----- Data ------")]
+    [SerializeField] private DialogueDataSO _dialogueData;
+
     protected override void Configure(IContainerBuilder builder)
     {
+        builder.RegisterInstance<DialogueDataSO>(_dialogueData);
+        builder.Register<DialogueDB>(Lifetime.Singleton);
+
         builder.RegisterComponent<CoreSceneLoader>(_coreSceneLoader);
         builder.RegisterComponent<SceneDataManager>(_sceneDataManager);
         builder.RegisterComponent<SaveManager>(_saveManager);
@@ -32,5 +41,11 @@ public class BaseScope : LifetimeScope
         builder.RegisterComponent<Camera>(_uiCamera);
         builder.RegisterComponent<SettingUI>(_settingUI);
         builder.RegisterComponent<AudioManager>(_audioManager);
+
+        builder.RegisterBuildCallback(container =>
+        {
+            // VContainer 빌드가 끝나면, 이 코드를 즉시 실행해라.
+            container.Resolve<DialogueDB>();
+        });
     }
 }
