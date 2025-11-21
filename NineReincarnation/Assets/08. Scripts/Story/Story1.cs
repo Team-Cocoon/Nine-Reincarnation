@@ -166,6 +166,7 @@ public class Story1 : Story
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue4_4.SetActive(false);
+        yield return null;
         StartStory();
     }
     #endregion
@@ -181,6 +182,7 @@ public class Story1 : Story
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue4_5.SetActive(false);
+        yield return null;
         StartStory();
     }
     #endregion

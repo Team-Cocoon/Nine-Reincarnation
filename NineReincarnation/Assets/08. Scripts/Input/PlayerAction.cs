@@ -33,7 +33,10 @@ namespace Player.Action
         {
             if (context.started)
             {
-                _player.ExcuteThrowThread();
+                Vector2 screenPos = Mouse.current.position.ReadValue();
+                Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+                
+                _player.ExcuteThrowMotion(worldPos);
             }
         }
 

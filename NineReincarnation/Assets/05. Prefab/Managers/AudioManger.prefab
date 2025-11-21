@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfd8199c702e884ba420677cd843330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeData: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
+  MasterAudioMixer: {fileID: 24100000, guid: 8063df8ef0a176745910707fc54705e3, type: 2}
+  SFXAudioMixer: {fileID: 6511206479796716292, guid: 8063df8ef0a176745910707fc54705e3, type: 2}
+  BGMAudioMixer: {fileID: -6518296806390621914, guid: 8063df8ef0a176745910707fc54705e3, type: 2}
+  _volumeData: {fileID: 11400000, guid: 6e0117d69ccdc4e49985d80224c65a25, type: 2}
   BgmClips:
-  - {fileID: 8300000, guid: b9ac65e0404a375409cdc955d3bb4da4, type: 3}
+  - {fileID: 8300000, guid: 007d3c0a0009aac4ebf4d0f1540fecd1, type: 3}
   - {fileID: 8300000, guid: 1960082bd329b2847a5405569b4e5aae, type: 3}
   BGMChannels: 4
   SfxClips:
@@ -63,6 +66,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e8f9060906249cf42b240a2161a9f986, type: 3}
   - {fileID: 8300000, guid: a549324fcccb3ae46a29b9b2cdde0d4b, type: 3}
   - {fileID: 8300000, guid: d9cdddfac237d0047b21b2d3ff785149, type: 3}
+  - {fileID: 8300000, guid: d67be0f97c4434e4591f257ff877dfe7, type: 3}
+  - {fileID: 8300000, guid: bdfe991d791a80748ad009e3ae1ae019, type: 3}
+  - {fileID: 8300000, guid: b24376b32fce41a42bd29906ba6179cd, type: 3}
+  - {fileID: 8300000, guid: d92b669b6df055a4096ac98ef468dbb6, type: 3}
+  - {fileID: 8300000, guid: e83ae099f913b584482b0ecc59225168, type: 3}
   SFXChannels: 20
   LoopingSfxClips:
   - {fileID: 8300000, guid: d1ace1a9c703c1e4391406919bbb1eb2, type: 3}

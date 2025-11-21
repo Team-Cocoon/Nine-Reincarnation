@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: 0ad8c4a2904c3ec4085307bc347adaa6
+guid: bd0ae6d535a8e6741b4ddbb0062f8b70
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8699070766360563691
-    second: "\uC548\uB098 jump_0"
+      213: -4112660435884316749
+    second: "\uC548\uB098 jump 1_0"
   - first:
-      213: -1705596326478808834
-    second: "\uC548\uB098 jump_1"
+      213: -4258122119582585605
+    second: "\uC548\uB098 jump 1_1"
   - first:
-      213: -2930873417616091221
-    second: "\uC548\uB098 jump_2"
+      213: -1836672600643239768
+    second: "\uC548\uB098 jump 1_2"
   - first:
-      213: 769035624981601740
-    second: "\uC548\uB098 jump_3"
+      213: -2768825309692665439
+    second: "\uC548\uB098 jump 1_3"
   - first:
-      213: -1835425939461129106
-    second: "\uC548\uB098 jump_4"
-  - first:
-      213: -7685983640642783142
-    second: "\uC548\uB098 jump_5"
-  - first:
-      213: -5939478998616196699
-    second: "\uC548\uB098 jump_6"
-  - first:
-      213: -5810275399471004459
-    second: "\uC548\uB098 jump_7"
+      213: 4560075438885405705
+    second: "\uC548\uB098 jump 1_4"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anna_Jump_0
+      name: "\uC548\uB098 jump 1_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -147,16 +138,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fc47b603ced1c234c8f5df1daf895249
-      internalID: 35406105
+      spriteID: 3b7ef459f15ece6c0800000000000000
+      internalID: -4112660435884316749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Jump_1
+      name: "\uC548\uB098 jump 1_1"
       rect:
         serializedVersion: 2
         x: 32
@@ -169,16 +160,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 08d03f68458f5334eac1e83dcfb472c4
-      internalID: -383775586
+      spriteID: bfceb042e7c18e4c0800000000000000
+      internalID: -4258122119582585605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Jump_2
+      name: "\uC548\uB098 jump 1_2"
       rect:
         serializedVersion: 2
         x: 64
@@ -191,16 +182,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 72e183689e3bfd146a084363fa35e2f8
-      internalID: 917150963
+      spriteID: 8a087f53004d286e0800000000000000
+      internalID: -1836672600643239768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Jump_3
+      name: "\uC548\uB098 jump 1_3"
       rect:
         serializedVersion: 2
         x: 96
@@ -213,16 +204,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 43b5cc8b479664a42b80c0a6f38438e3
-      internalID: 1960551557
+      spriteID: 1a168aafc082399d0800000000000000
+      internalID: -2768825309692665439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anna_Jump_4
+      name: "\uC548\uB098 jump 1_4"
       rect:
         serializedVersion: 2
         x: 128
@@ -235,76 +226,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5dc9184e3e9912540a31c18727b03a02
-      internalID: 392827088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Anna_Jump_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e8e0aa10ca6e1540aefc7298349f5d1
-      internalID: -410421679
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Anna_Jump_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa87ee6e51e0900498af89adb7b3ffab
-      internalID: -1412690192
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Anna_Jump_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77b405fcafc42bf488abd46ed62c8928
-      internalID: 1009536732
+      spriteID: 9048fbb8374a84f30800000000000000
+      internalID: 4560075438885405705
       vertices: []
       indices: 
       edges: []
@@ -313,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8eed106480cd00f41a506d3d7e505725
+    spriteID: f00d368aca061eb489a4951e23745879
     internalID: 0
     vertices: []
     indices: 
@@ -325,14 +250,11 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Anna_Jump_0: 35406105
-      Anna_Jump_1: -383775586
-      Anna_Jump_2: 917150963
-      Anna_Jump_3: 1960551557
-      Anna_Jump_4: 392827088
-      Anna_Jump_5: -410421679
-      Anna_Jump_6: -1412690192
-      Anna_Jump_7: 1009536732
+      "\uC548\uB098 jump 1_0": -4112660435884316749
+      "\uC548\uB098 jump 1_1": -4258122119582585605
+      "\uC548\uB098 jump 1_2": -1836672600643239768
+      "\uC548\uB098 jump 1_3": -2768825309692665439
+      "\uC548\uB098 jump 1_4": 4560075438885405705
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

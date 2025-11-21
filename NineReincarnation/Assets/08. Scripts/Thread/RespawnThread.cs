@@ -27,6 +27,9 @@ public class RespawnThread : Thread, ICollidable
     [SerializeField] private float _respawnTime = 0f;
     [SerializeField] private float _margin = 0.5f;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource _source;
+
     //private List<GameObject> _playersOnRope = new List<GameObject>();
     private Coroutine _disappearCoroutine;
     private Vector2[] _colliderPositions;
@@ -149,12 +152,14 @@ public class RespawnThread : Thread, ICollidable
 
         if (_disappearCoroutine == null)
         {
+            _source.Play();
             _disappearCoroutine = StartCoroutine(DisappearThreadCoroutine());
         }
     }
 
     public void Exit(GameObject go)
     {
+        _source.Stop();
         _isHit = false;
     }
 }

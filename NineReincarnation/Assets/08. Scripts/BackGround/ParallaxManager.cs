@@ -43,7 +43,7 @@ public class ParallaxManager : MonoBehaviour
     //배경을 움직이는 함수
     private void MoveBackground()
     {
-        float distance = Vector3.Distance(_prevPosition, _camera.position);
+        float distance = Mathf.Abs(_camera.position.x - _prevPosition.x);
 
         if (distance >= float.Epsilon)
         {

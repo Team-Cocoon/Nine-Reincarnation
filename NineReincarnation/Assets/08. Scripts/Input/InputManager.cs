@@ -3,6 +3,7 @@ using Player.Action;
 using Player.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 
 public class InputManager : MonoBehaviour
@@ -20,6 +21,15 @@ public class InputManager : MonoBehaviour
     private bool _isForce = false;
 
     public PlayerController CurPlayer => _curPlayer;
+
+    [Inject]
+    public void Construct(PlayerController player)
+    {
+        if(_players.Count > 0)
+        {
+            _players[0] = player;
+        }
+    }
 
     private void Awake()
     {

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Manager;
+using State.SceneState;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,16 +23,19 @@ public class SettingUI : ToggleUI
 {
     [Header("--- 버튼 ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
-    [SerializeField] private Button _endButton; //게임종료 버튼
+    [SerializeField] private Button _titleButton; //게임종료 버튼
 
     [Header("--- 사운드 조절 ---")]
+    [SerializeField] private SoundVolumeSO _volume;
+    [SerializeField] private Slider _totalSlider;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _bgmSlider;
 
     [Header("--- SettingButton ---")]
-    [SerializeField] private GameObject _button;
+    [SerializeField] private GameObject _uiToggleButton;
 
     [Header("--- 해상도 조절 ---")]
+    [SerializeField] private GameObject _resolutionPanel;
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private List<Resolution> _resolutionList;
     [SerializeField] private int resolutionNum;
@@ -56,7 +61,7 @@ public class SettingUI : ToggleUI
     {
         if (_resolutionList[x].width != width || _resolutionList[x].height != height)
         {
-            width = _resolutionList[x].width;
+            width  = _resolutionList[x].width;
             height = _resolutionList[x].height;
 
             Screen.SetResolution(width, height, _screenMode);
@@ -69,10 +74,9 @@ public class SettingUI : ToggleUI
         Screen.SetResolution(width, height, _screenMode);
     }
 
-
     private void Awake()
     {
-        _button.SetActive(true);
+        _uiToggleButton.SetActive(true);
 
         UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
     }
@@ -81,19 +85,26 @@ public class SettingUI : ToggleUI
     {
         base.Start();
 
-        _sfxSlider.value = AudioManager.Instance.VolumData.SfxVolume;
-        _bgmSlider.value = AudioManager.Instance.VolumData.BgmVolume;
+        _totalSlider.value = _volume.MasterVolume;
+        _sfxSlider.value = _volume.SfxVolume;
+        _bgmSlider.value = _volume.BgmVolume;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+        _resolutionPanel.SetActive(false); //웹 빌드 시 해상도 관련 패널 완전닫음
+#else
         InitResolution();
-
         ResolutionChange(0);
         ScreenModeChange(true);
-
-        _screenToggle.onValueChanged.AddListener(ScreenModeChange);
-        _button.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
-        _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
+        _screenToggle.onValueChanged      .AddListener(ScreenModeChange);
         _resolutionDropdown.onValueChanged.AddListener(ResolutionChange);
-        _endButton.onClick.AddListener(EndButtonEvent);
+#endif
+
+        _uiToggleButton.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
+
+        _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
+        _titleButton.onClick .AddListener(TitleButtonEvent);
+
+        _totalSlider.onValueChanged.AddListener(OnTotalSliderChanged);
         _sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
     }
@@ -102,11 +113,20 @@ public class SettingUI : ToggleUI
     {
         base.OnDestroy();
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+
+
+#else
         _screenToggle.onValueChanged.RemoveListener(ScreenModeChange);
-        _button.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
-        _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
         _resolutionDropdown.onValueChanged.RemoveListener(ResolutionChange);
-        _endButton.onClick.RemoveListener(EndButtonEvent);
+#endif
+
+        _uiToggleButton.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
+
+        _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
+        _titleButton.onClick .RemoveListener(TitleButtonEvent);
+
+        _totalSlider.onValueChanged.RemoveListener(OnTotalSliderChanged);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
 
@@ -120,10 +140,14 @@ public class SettingUI : ToggleUI
         UIEvent_ToggleUI();
     }
 
-    private void EndButtonEvent()
+    private void TitleButtonEvent()
     {
         PlayClickSound();
-        Application.Quit();
+        UIEvent_ToggleUI();
+        if (SceneStateManager.Instance.CurrentSceneState != SceneState.Title)
+        {
+            GameEventHandler.TitleExcuted_Invoke();
+        }
     }
 
     private void PlayClickSound()
@@ -131,13 +155,18 @@ public class SettingUI : ToggleUI
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
     }
 
+    private void OnTotalSliderChanged(float value)
+    {
+        _volume.UpdateMasterVolume(value);
+    }
+
     private void OnSfxSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateSfxVolmue_Invoke(value);
+        _volume.UpdateSfxVolume(value);
     }
 
     private void OnBgmSliderChanged(float value)
     {
-        SoundEventHandler.OnUpdateBgmVolmue_Invoke(value);
+        _volume.UpdateBgmVolume(value);
     }
 }

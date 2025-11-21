@@ -146,7 +146,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.027879529, y: -0.5216682}
+  m_Offset: {x: 0.027879529, y: -0.54}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -156,7 +156,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.31985354, y: 0.046663523}
+  m_Size: {x: 0.18, y: 0.05}
   m_EdgeRadius: 0
 --- !u!50 &3688301946724151147
 Rigidbody2D:
@@ -363,21 +363,22 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 7
   _playerName: Anna
-  _checkPoint: {x: -40, y: -1, z: 0}
-  _isGround: 0
-  _isLook: 0
-  _isDead: 0
-  _isAnimation: 0
-  _isSlope: 0
-  _isJump: 0
-  _isFalling: 0
-  _onGroundDetector: 1
-  _onSlopeDetector: 1
+  _checkPoint: {x: 0, y: -1, z: 0}
   _groundDetector: {fileID: 196964441453532725}
   _slopeDetector: {fileID: 8227496466836733011}
   _defaultPhysicsMaterial: {fileID: 6200000, guid: e7afcac988a26b64fb480c14bad06290, type: 2}
   _idlePhysicsMaterial: {fileID: 6200000, guid: cf5b98e6af7391440850f6a7997cc5f4, type: 2}
   _spriteRenderer: {fileID: 5546431793339523123}
+  _thread: {fileID: 0}
+  _isGround: 0
+  _isLook: 0
+  _isDead: 0
+  _isSlope: 0
+  _isJump: 0
+  _isThrow: 0
+  _isFalling: 0
+  _onGroundDetector: 1
+  _onSlopeDetector: 1
 --- !u!70 &2153693473223386151
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -483,7 +484,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.027879529, y: -0.5216682}
+  m_Offset: {x: 0.027879529, y: -0.54}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -493,7 +494,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.31985354, y: 0.046663523}
+  m_Size: {x: 0.18, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &196964441453532725
 MonoBehaviour:

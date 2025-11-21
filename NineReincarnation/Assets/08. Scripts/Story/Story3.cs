@@ -267,6 +267,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue3_2.SetActive(false);
+        yield return null;
         StartStory();
     }
     #endregion
@@ -279,6 +280,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue3_3.SetActive(false);
+        yield return null;
         StartStory();
     }
     #endregion
@@ -294,6 +296,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue3_4.SetActive(false);
+        yield return null;
         StartStory();
     }
     #endregion
@@ -309,6 +312,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => isZoomFinished && Input.GetMouseButtonDown(0));
         _isTextShowed = false;
         _dialogue3_5.SetActive(false);
+        yield return null; 
         StartStory();
     }
     #endregion
@@ -344,6 +348,7 @@ public class Story3 : Story
         yield return new WaitUntil(() => _isTextShowed);
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _dialogue3_8.SetActive(false);
+        yield return null;
         StartStory();
     }
     public void TextShowed()
