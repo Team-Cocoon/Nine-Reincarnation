@@ -17,6 +17,10 @@ public class Feather : DrawOutline, IClickInteractableToggle
     [SerializeField] private bool _isClickControlToSelf;
     [SerializeField] private bool _isHoverControlToSelf;
     [SerializeField] private float _interactionDistance;
+
+    [Header("----- Sprite -----")]
+    [SerializeField] private SpriteRenderer _sprite;
+
     private Vector2 _playerPosition => InputManager.Instance.CurPlayer.transform.position;
 
     public bool IsClickControlToSelf { get => _isClickControlToSelf; }
@@ -25,11 +29,13 @@ public class Feather : DrawOutline, IClickInteractableToggle
     PlayerController _player => InputManager.Instance.CurPlayer;
 
     private LayerMask _playerMask;
+    private Vector2 _lastPosition;
 
     protected override void Awake()
     {
         base.Awake();
 
+        _lastPosition = transform.position;
         _possibleActive = false;
         _isActivated = false;
         _playerMask = LayerMask.GetMask("Player");
@@ -37,6 +43,8 @@ public class Feather : DrawOutline, IClickInteractableToggle
 
     private void Update()
     {
+        SetSpriteDirection();
+
         if (IsOutline == true)
         {
             float dist = Vector2.Distance(_playerPosition, transform.position);
@@ -65,6 +73,25 @@ public class Feather : DrawOutline, IClickInteractableToggle
                 _possibleActive = true;
             }
         }
+    }
+
+    private void SetSpriteDirection()
+    {
+        float moveX = transform.position.x - _lastPosition.x;
+
+        if (Mathf.Abs(moveX) > float.Epsilon)
+        {
+            if (moveX > 0)
+            {
+                _sprite.flipX = true;
+            }
+            else if (moveX < 0)
+            {
+                _sprite.flipX = false;
+            }
+        }
+
+        _lastPosition = transform.position;
     }
 
     private void ActivateFeather()

@@ -1,57 +1,115 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Unity.Cinemachine;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CinemachineShake : CinemachineExtension
 {
-    private Vector3 shakeOffset = Vector3.zero;
-    private Tween _tween;
-    private float _strength;
+    private Vector3 _shakeOffset = Vector3.zero;
 
-    /// <summary>
-    /// 카메라 흔들기
-    /// </summary>
+    private CancellationTokenSource _token;
+
+    private float _currentStrength = 0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void CancelCurrentShake()
+    {
+        if (_token != null)
+        {
+            _token.Cancel();
+            _token.Dispose();
+            _token = null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        CancelCurrentShake();
+    }
+
     public async UniTask Shake(float duration, float strength)
     {
-        // 기존 셰이크 값 초기화
-        shakeOffset = Vector3.zero;
+        CancelCurrentShake();
 
-        await DOTween.Shake(
-            () => shakeOffset,
-            x => shakeOffset = x,
-            duration,
-            strength
-        ).ToUniTask(cancellationToken: this.destroyCancellationToken);
+        _token = new CancellationTokenSource();
+
+        await ProcessShake(duration, strength, _token);
     }
 
-    public void UpdateShake(float newStrength)
+    public async UniTask ShakeFadeOut(float fadeDuration = 0.5f)
     {
-        if (_tween != null && _tween.IsActive())
-            _tween.Kill();
+        // 현재 흔들리는 게 없으면 무시
+        if (_currentStrength <= 0f) return;
 
-        _tween = DOTween.Shake(
-            () => shakeOffset,
-            x => shakeOffset = x,
-            0.5f,          // 갱신용 짧은 duration
-            newStrength
-        );
-    }
+        CancelCurrentShake();
 
-    public void StopShake()
-    { 
-    
+        _token = new CancellationTokenSource();
+
+        await ProcessFadeOut(fadeDuration, _currentStrength, _token);
     }
 
 
+    private async UniTask ProcessShake(float duration, float strength, CancellationTokenSource token)
+    {
+        _currentStrength = strength;
+        float timer = 0f;
 
+        if (duration == -1f)
+        {
+            while (!_token.IsCancellationRequested)
+            {
+                _shakeOffset = Random.insideUnitSphere * _currentStrength;
+                await UniTask.NextFrame(token.Token);
+            }
+        }
+        else
+        {
+            float shakeTime = duration * 0.8f;
+            float fadeTime = duration * 0.2f;
+
+            while (timer < shakeTime)
+            {
+                timer += Time.deltaTime;
+                _shakeOffset = Random.insideUnitSphere * _currentStrength;
+                await UniTask.NextFrame(token.Token);
+            }
+
+            float startStrength = _currentStrength;
+
+            await ProcessFadeOut(fadeTime, startStrength, _token);
+        }
+    }
+
+    private async UniTask ProcessFadeOut(float duration, float startStrength, CancellationTokenSource token)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            _currentStrength = Mathf.Lerp(startStrength, 0f, t);
+            _shakeOffset = Random.insideUnitSphere * _currentStrength;
+
+            await UniTask.NextFrame(token.Token);
+        }
+
+        _shakeOffset = Vector3.zero;
+        _currentStrength = 0f;
+    }
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        // Follow, Aim 모두 계산한 최종 단계에서 위치를 덮어쓰기
         if (stage == CinemachineCore.Stage.Finalize)
         {
-            state.RawPosition += shakeOffset;
+            state.RawPosition += _shakeOffset;
         }
     }
 }
