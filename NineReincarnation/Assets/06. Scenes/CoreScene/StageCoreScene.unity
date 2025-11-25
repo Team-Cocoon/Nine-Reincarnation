@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &332170110
 Transform:
   m_ObjectHideFlags: 0
@@ -239,10 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
-  _ui: {fileID: 0}
-  _storyAnimationManager: {fileID: 0}
-  _storyEventManager: {fileID: 0}
-  _dialogueData: {fileID: 0}
 --- !u!1 &356574473
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1364869056
 MonoBehaviour:
   m_ObjectHideFlags: 0

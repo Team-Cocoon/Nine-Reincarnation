@@ -33,7 +33,6 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         int loadSceneCount = LoadSceneCount;
 
         await UnloadStack();
-        await UnloadAllScene();
         await LoadSceneByPath(SubScenePath);
 
         await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _token);

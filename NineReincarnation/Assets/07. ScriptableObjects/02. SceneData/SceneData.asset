@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SceneData
   m_EditorClassIdentifier: 
   LoadingScene: Assets/06. Scenes/CoreScene/LoadingScene.unity
-  TitleScene: Assets/06. Scenes/CoreScene/Title.unity
-  ClearScene: Assets/06. Scenes/Stages/Stage1/Continue.unity
+  TitleScene: Assets/06. Scenes/CoreScene/TitleScene.unity
+  ClearScene: Assets/06. Scenes/CoreScene/ClearScene.unity
   StoryScene:
     CoreScene: Assets/06. Scenes/CoreScene/StoryCoreScene.unity
     SubSceneGroups:
@@ -29,9 +29,3 @@ MonoBehaviour:
       - Assets/06. Scenes/Stages/New1/Tutorial.unity
       - Assets/06. Scenes/Stages/New1/Tutorial-1.unity
       - Assets/06. Scenes/Stages/New1/Tutorial-2.unity
-    - SubScenePaths:
-      - Assets/06. Scenes/Stages/Stage1/Stage1.unity
-      - Assets/06. Scenes/Stages/Stage1/Stage1-1.unity
-      - Assets/06. Scenes/Stages/Stage1/Stage1-2.unity
-      - Assets/06. Scenes/Stages/Stage1/Stage1-3.unity
-      - Assets/06. Scenes/Stages/Stage1/Stage1-4.unity

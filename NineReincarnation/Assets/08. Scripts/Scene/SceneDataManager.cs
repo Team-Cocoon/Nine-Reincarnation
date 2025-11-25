@@ -33,9 +33,6 @@ public class SceneDataManager : MonoBehaviour
 
     public bool NextStage(ref int index, ref int subIndex)
     {
-        Debug.Log(_sceneData.StageScene.SubSceneGroups[index].Size);
-        Debug.Log(subIndex + 1);
-
         if (_sceneData.StageScene.SubSceneGroups[index].Size <= subIndex + 1) 
         {
             subIndex = 0;

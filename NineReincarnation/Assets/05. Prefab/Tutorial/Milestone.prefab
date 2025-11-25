@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2287357086639371963}
@@ -362,7 +362,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -392,7 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _color:
     serializedVersion: 2
-    rgba: 0
+    rgba: 11974326
   _spriteRenderer: {fileID: 6624512469710435328}
   _renderer: {fileID: 1961477923397391825}
   _panel: {fileID: 2997622739294474028}
+  _videoPlayer: {fileID: 2613206400599936072}

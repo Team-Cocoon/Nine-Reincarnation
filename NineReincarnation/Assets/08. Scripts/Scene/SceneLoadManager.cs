@@ -50,7 +50,7 @@ public class SceneLoadManager : MonoBehaviour
         if(!isReturn)
         {
             _saveManager.Save();
-            GameEventHandler.TitleExcuted_Invoke();
+            GameEventHandler.GameClearExcuted_Invoke();
         }
 
         return scenePath;

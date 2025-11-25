@@ -1,20 +1,23 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Video;
 using static UnityEngine.Rendering.DebugUI;
 
 public class MileStone : MonoBehaviour
 {
-    [SerializeField] private Color32 _color;
+    [SerializeField] private Color32        _color;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Renderer _renderer;
-    [SerializeField] private GameObject _panel;
+    [SerializeField] private Renderer       _renderer;
+    [SerializeField] private GameObject     _panel;
+    [SerializeField] private VideoPlayer    _videoPlayer;
 
     private MaterialPropertyBlock _propBlock;
     private Vector2               _defaultScale;
-    private string                _palyerTag = "player";
+    private string                _palyerTag = "Player";
     private Tween                 _tween;
     private Vector2               _targetScale = Vector2.zero;
+
     private void Awake()
     {
         _defaultScale = _panel.transform.localScale;
@@ -32,16 +35,19 @@ public class MileStone : MonoBehaviour
 
     private void OpenPanel()
     {
-        _panel.SetActive(true);
+        _tween.Kill();
+
+        _videoPlayer.Play();
 
         _tween = _panel.transform.DOScale(_defaultScale, 0.5f).SetEase(Ease.OutBack);
     }
 
     private void ClosePanel()
     {
-        _tween = _panel.transform.DOScale(_targetScale, 1f).SetEase(Ease.InBack);
+        _tween.Kill();
 
-        _panel.SetActive(false);
+        _tween = _panel.transform.DOScale(_targetScale, 0.5f).SetEase(Ease.InBack)
+            .OnComplete(() => _videoPlayer.Pause());
     }
 
     public void SetColor(Color32 newColor)
