@@ -29,18 +29,20 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         _sceneStateMachine.stateChanged += OnStateChanged_LoadCoreScene;
         _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
 
-        GameEventHandler.TitleExcuted += SceneEvent_Title;
-        GameEventHandler.StoryExcuted += SceneEvent_Story;
-        GameEventHandler.StageExcuted += SceneEvent_Stage;
+        GameEventHandler.TitleExcuted     += SceneEvent_Title;
+        GameEventHandler.StoryExcuted     += SceneEvent_Story;
+        GameEventHandler.StageExcuted     += SceneEvent_Stage;
+        GameEventHandler.GameClearExcuted += SceneEvent_Clear;
     }
 
     private void OnDestroy()
     {
         _sceneStateMachine.stateChanged -= OnStateChanged_LoadCoreScene;
 
-        GameEventHandler.TitleExcuted -= SceneEvent_Title;
-        GameEventHandler.StoryExcuted -= SceneEvent_Story;
-        GameEventHandler.StageExcuted -= SceneEvent_Stage;
+        GameEventHandler.TitleExcuted     -= SceneEvent_Title;
+        GameEventHandler.StoryExcuted     -= SceneEvent_Story;
+        GameEventHandler.StageExcuted     -= SceneEvent_Stage;
+        GameEventHandler.GameClearExcuted -= SceneEvent_Clear;
     }
 
     private void SceneEvent_Title()

@@ -323,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 375828863}
-  - component: {fileID: 375828862}
+  - component: {fileID: 375828864}
   m_Layer: 0
   m_Name: SceneLoadScope
   m_TagString: Untagged
@@ -331,24 +331,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &375828862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375828861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a75c9fb907995642bdc045e80664222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: BaseScope
-  autoRun: 1
-  autoInjectGameObjects: []
-  _sceneLoadManager: {fileID: 651123062}
-  _subSceneLoader: {fileID: 1695555754}
 --- !u!4 &375828863
 Transform:
   m_ObjectHideFlags: 0
@@ -366,6 +348,24 @@ Transform:
   - {fileID: 1695555755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &375828864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375828861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ed8f1331688854eae0384b08a878c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: BaseScope
+  autoRun: 1
+  autoInjectGameObjects: []
+  _sceneLoadManager: {fileID: 651123062}
+  _subSceneLoader: {fileID: 1695555754}
 --- !u!1 &589829811
 GameObject:
   m_ObjectHideFlags: 0

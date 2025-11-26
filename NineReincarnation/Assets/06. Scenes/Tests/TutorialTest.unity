@@ -3668,6 +3668,10 @@ PrefabInstance:
       propertyPath: _sprite
       value: 
       objectReference: {fileID: 525221171}
+    - target: {fileID: 1012395176211371393, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
+      propertyPath: _isOutline
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1114162071741136715, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.95

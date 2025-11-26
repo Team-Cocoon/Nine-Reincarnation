@@ -83,6 +83,8 @@ namespace Utilities
 
             await asyncLoad.WithCancellation(_token);
 
+            Debug.Log("로드 되는 씬 : " + path);
+
             Scene scene = SceneManager.GetSceneByPath(path);
             SceneManager.SetActiveScene(scene);
             _scenePathList.Add(path);
@@ -112,6 +114,7 @@ namespace Utilities
                     SceneManager.SetActiveScene(scene);
                 }
 
+                Debug.Log("언로드 되는 씬 : " + path);
                 AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(path);
 
                 while (!asyncUnload.isDone) //언로드 될때까지 대기

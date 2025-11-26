@@ -5,11 +5,11 @@ public class SceneDataManager : MonoBehaviour
 {
     [SerializeField] private SceneDataSO _sceneData;
 
-    public string LoadingScene => _sceneData.LoadingScene;
-    public string TitleScene => _sceneData.TitleScene;
+    public string LoadingScene   => _sceneData.LoadingScene;
+    public string TitleScene     => _sceneData.TitleScene;
     public string StoryCoreScene => _sceneData.StoryScene.CoreScene;
     public string StageCoreScene => _sceneData.StageScene.CoreScene;
-    public string ClearScene => _sceneData.ClearScene;
+    public string ClearScene     => _sceneData.ClearScene;
 
     public List<string> GetStorySubScenes(int index)
     {
@@ -31,41 +31,41 @@ public class SceneDataManager : MonoBehaviour
         return _sceneData.StoryScene.SubSceneGroups[index].SubScenePaths[subIndex];
     }
 
-    public bool NextStage(ref int index, ref int subIndex)
+    public bool HasStage(int index)
     {
-        if (_sceneData.StageScene.SubSceneGroups[index].Size <= subIndex + 1) 
-        {
-            subIndex = 0;
+        if (_sceneData.StageScene.Size <= index) return false;
 
-            if (_sceneData.StageScene.Size <= index + 1)
-            {
-                return false;
-            }
-
-            index++;
-            return true;
-        }
-
-        subIndex++;
         return true;
     }
 
-    public bool NextStory(ref int index, ref int subIndex)
+    public bool HasStory(int index)
     {
-        if (_sceneData.StoryScene.SubSceneGroups[index].Size <= subIndex + 1)
+        if (_sceneData.StoryScene.Size <= index) return false;
+
+        return true;
+    }
+
+    public void NextStage(ref int index, ref int subIndex)
+    {
+        subIndex++;
+
+        if (_sceneData.StageScene.SubSceneGroups[index].Size <= subIndex)
         {
             subIndex = 0;
-
-            if (_sceneData.StoryScene.Size <= index + 1)
-            {
-                return false;
-            }
-
             index++;
-            return true;
+            return;
         }
+    }
 
+    public void NextStory(ref int index, ref int subIndex)
+    {
         subIndex++;
-        return true;
+
+        if (_sceneData.StoryScene.SubSceneGroups[index].Size <= subIndex)
+        {
+            subIndex = 0;
+            index++;
+            return;
+        }
     }
 }

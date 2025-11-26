@@ -141,7 +141,7 @@ public class AudioManager : MonoBehaviour
         {
             _loopingSfxPlayers[index] = loopingSfxObject.AddComponent<AudioSource>();
             _loopingSfxPlayers[index].playOnAwake = false;
-            _sfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
+            _loopingSfxPlayers[index].outputAudioMixerGroup = SFXAudioMixer;
             _loopingSfxPlayers[index].loop = true;
         }
     }
@@ -159,7 +159,6 @@ public class AudioManager : MonoBehaviour
     {
         MasterAudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
-
 
     public void PlayBgm(Bgm bgm)
     {

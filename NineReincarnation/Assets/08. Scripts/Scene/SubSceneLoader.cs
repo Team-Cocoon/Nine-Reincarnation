@@ -30,6 +30,7 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         }
         await LoadLoadingScene();
 
+        await UnloadAllScene();
         int loadSceneCount = LoadSceneCount;
 
         await UnloadStack();

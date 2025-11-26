@@ -26,9 +26,7 @@ namespace State.SceneState
 
         public void Enter()
         {
-            SceneEventHandler.SceneStarted += SceneEvent_BgmPlay;
-            SceneEventHandler.SceneFadeOut += SceneEvent_FadeOut;
-            SceneEventHandler.SceneFadeIn += SceneEvent_FadeIn;
+
         }
 
         public void Execute()
@@ -38,24 +36,7 @@ namespace State.SceneState
 
         public void Exit()
         {
-            SceneEventHandler.SceneStarted -= SceneEvent_BgmPlay;
-            SceneEventHandler.SceneFadeOut -= SceneEvent_FadeOut;
-            SceneEventHandler.SceneFadeIn -= SceneEvent_FadeIn;
-        }
 
-        public Tween SceneEvent_FadeIn()
-        {
-            return UIEventHandler.OnSceneWipeFadeIn_Invoke(false);
-        }
-
-        public Tween SceneEvent_FadeOut()
-        {
-            return UIEventHandler.OnSceneWipeFadeOut_Invoke(false);
-        }
-
-        public void SceneEvent_BgmPlay()
-        {
-            //
         }
     }
 }

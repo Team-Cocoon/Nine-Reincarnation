@@ -37,20 +37,5 @@ namespace State.SceneState
         {
 
         }
-
-        public Tween SceneEvent_FadeIn()
-        {
-            return UIEventHandler.OnSceneFadeIn_Invoke(true);
-        }
-
-        public Tween SceneEvent_FadeOut()
-        {
-            return UIEventHandler.OnSceneFadeOut_Invoke(true);
-        }
-
-        public void SceneEvent_BgmPlay()
-        {
-            AudioManager.Instance.PlayBgm(AudioManager.Bgm.Stage);
-        }
     }
 }
