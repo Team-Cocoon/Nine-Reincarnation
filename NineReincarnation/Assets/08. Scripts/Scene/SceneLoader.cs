@@ -32,9 +32,9 @@ namespace Utilities
 
         private void OnDestroy()
         {
-            if(_sceneLoaders.Peek() == this) 
-            { 
-                _sceneLoaders.Pop(); 
+            if (_sceneLoaders.Peek() == this)
+            {
+                _sceneLoaders.Pop();
             }
         }
 
@@ -54,7 +54,7 @@ namespace Utilities
 
         public async UniTask UnLoadLoadingScene()
         {
-            if(_loadSceneCount > 1) return;
+            if (_loadSceneCount > 1) return;
 
             AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(LoadingScenePath);
 
@@ -157,14 +157,14 @@ namespace Utilities
         {
             int count = _sceneLoaders.Count;
 
-            for(int i = 0; i < count; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 SceneLoader top = _sceneLoaders.Peek();
                 if (top == this) return;
 
                 await top.UnloadAllScene();
                 _sceneLoaders.Pop();
-            }            
+            }
         }
     }
 }

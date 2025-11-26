@@ -1,22 +1,20 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Video;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MileStone : MonoBehaviour
 {
-    [SerializeField] private Color32        _color;
+    [SerializeField] private Color32 _color;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Renderer       _renderer;
-    [SerializeField] private GameObject     _panel;
-    [SerializeField] private VideoPlayer    _videoPlayer;
+    [SerializeField] private Renderer _renderer;
+    [SerializeField] private GameObject _panel;
+    [SerializeField] private VideoPlayer _videoPlayer;
 
     private MaterialPropertyBlock _propBlock;
-    private Vector2               _defaultScale;
-    private string                _palyerTag = "Player";
-    private Tween                 _tween;
-    private Vector2               _targetScale = Vector2.zero;
+    private Vector2 _defaultScale;
+    private string _palyerTag = "Player";
+    private Tween _tween;
+    private Vector2 _targetScale = Vector2.zero;
 
     private void Awake()
     {
@@ -61,7 +59,7 @@ public class MileStone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag(_palyerTag))
+        if (collision.CompareTag(_palyerTag))
         {
             OpenPanel();
         }

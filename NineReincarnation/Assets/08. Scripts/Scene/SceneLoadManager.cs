@@ -1,22 +1,20 @@
-using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Utilities;
 using VContainer;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    [Inject] private SubSceneLoader   _subSceneLoader;
-             private SceneDataManager _sceneDataManager;
-             private SaveManager      _saveManager;
+    [Inject] private SubSceneLoader _subSceneLoader;
+    private SceneDataManager _sceneDataManager;
+    private SaveManager _saveManager;
 
-             private GameProgressData _gameData => _saveManager.GameData;
+    private GameProgressData _gameData => _saveManager.GameData;
 
-    [Inject] 
+    [Inject]
     public void Construct(SceneDataManager sceneDataManager, SaveManager saveManager)
     {
         _sceneDataManager = sceneDataManager;
-        _saveManager      = saveManager;
+        _saveManager = saveManager;
 
         GetScenePath(ref _subSceneLoader.SubScenePath);
     }
@@ -56,7 +54,6 @@ public class SceneLoadManager : MonoBehaviour
         if (!isReturn)
         {
             _saveManager.Save();
-            Debug.Log("여기잖아");
             GameEventHandler.GameClearExcuted_Invoke();
             return false;
         }

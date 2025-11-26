@@ -160,10 +160,16 @@ public class AudioManager : MonoBehaviour
         MasterAudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
 
+    public void StopBgm()
+    {
+        if (_bgmPlayer.isPlaying)
+        {
+            _bgmPlayer.Stop();
+        }
+    }
+
     public void PlayBgm(Bgm bgm)
     {
-        _bgmPlayer.Stop();
-
         if (bgm == Bgm.None) return;
 
         _bgmPlayer.clip = BgmClips[(int)bgm];

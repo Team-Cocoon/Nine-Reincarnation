@@ -1,8 +1,4 @@
-using Manager;
 using State.SceneState;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using VContainer;
 
 namespace StateMachine.SceneStateMachine
 {

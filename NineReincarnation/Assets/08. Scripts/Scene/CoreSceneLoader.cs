@@ -2,15 +2,13 @@ using Cysharp.Threading.Tasks;
 using State;
 using State.SceneState;
 using StateMachine.SceneStateMachine;
-using UnityEngine;
 using Utilities;
-using VContainer;
 
 public class CoreSceneLoader : SceneLoader, IFadeEffect
 {
     private SceneStateMachine _sceneStateMachine;
     private SceneStateType _currentSceneState;
-    
+
     public string TitleScenePath => _sceneDataManager.TitleScene;
     public string StageScenePath => _sceneDataManager.StageCoreScene;
     public string StoryScenePath => _sceneDataManager.StoryCoreScene;
@@ -29,9 +27,9 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         _sceneStateMachine.stateChanged += OnStateChanged_LoadCoreScene;
         _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
 
-        GameEventHandler.TitleExcuted     += SceneEvent_Title;
-        GameEventHandler.StoryExcuted     += SceneEvent_Story;
-        GameEventHandler.StageExcuted     += SceneEvent_Stage;
+        GameEventHandler.TitleExcuted += SceneEvent_Title;
+        GameEventHandler.StoryExcuted += SceneEvent_Story;
+        GameEventHandler.StageExcuted += SceneEvent_Stage;
         GameEventHandler.GameClearExcuted += SceneEvent_Clear;
     }
 
@@ -39,9 +37,9 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
     {
         _sceneStateMachine.stateChanged -= OnStateChanged_LoadCoreScene;
 
-        GameEventHandler.TitleExcuted     -= SceneEvent_Title;
-        GameEventHandler.StoryExcuted     -= SceneEvent_Story;
-        GameEventHandler.StageExcuted     -= SceneEvent_Stage;
+        GameEventHandler.TitleExcuted -= SceneEvent_Title;
+        GameEventHandler.StoryExcuted -= SceneEvent_Story;
+        GameEventHandler.StageExcuted -= SceneEvent_Stage;
         GameEventHandler.GameClearExcuted -= SceneEvent_Clear;
     }
 

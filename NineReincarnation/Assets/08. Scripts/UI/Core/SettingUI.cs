@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Manager;
 using State.SceneState;
 using TMPro;
 using UnityEngine;

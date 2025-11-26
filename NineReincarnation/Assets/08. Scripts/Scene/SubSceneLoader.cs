@@ -1,12 +1,17 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using State.SceneState;
 using UnityEngine;
 using Utilities;
-using VContainer;
+
+enum FadeType
+{
+    Default,
+    Directional
+}
 
 public class SubSceneLoader : SceneLoader, IFadeEffect
 {
+    [SerializeField] private FadeType _fadeType;
     public string SubScenePath;
 
     protected override void Awake()
@@ -47,11 +52,27 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
 
     public async UniTask FadeIn()
     {
-        await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+        switch (_fadeType)
+        {
+            case FadeType.Default:
+                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_token);
+                break;
+            case FadeType.Directional:
+                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+                break;
+        }
     }
 
     public async UniTask FadeOut()
     {
-        await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
+        switch (_fadeType)
+        {
+            case FadeType.Default:
+                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_token);
+                break;
+            case FadeType.Directional:
+                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
+                break;
+        }
     }
 }

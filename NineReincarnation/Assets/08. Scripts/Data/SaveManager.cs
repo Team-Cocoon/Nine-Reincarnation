@@ -5,13 +5,13 @@ public class SaveManager : MonoBehaviour
     [Header("---- Save Data ----")]
     [SerializeField] private SaveDataSO[] _saveDatas;
     [SerializeField] private bool _isTest;
-    
+
     private SaveDataSO _saveData;
     public GameProgressData GameData;
 
     public void SetSaveData(int index)
     {
-        if(_isTest)
+        if (_isTest)
         {
             DataClear(index);
         }

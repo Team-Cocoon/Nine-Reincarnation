@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public class EventCamera : MonoBehaviour

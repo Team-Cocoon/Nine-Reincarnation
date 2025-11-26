@@ -12,10 +12,10 @@ public class GameProgressData
 
     public GameProgressData(SaveDataSO saveData)
     {
-        State         = saveData.State;
-        StageIndex    = saveData.StageIndex;
+        State = saveData.State;
+        StageIndex = saveData.StageIndex;
         StageSubIndex = saveData.StageSubIndex;
-        StoryIndex    = saveData.StoryIndex;
+        StoryIndex = saveData.StoryIndex;
         StorySubIndex = saveData.StorySubIndex;
     }
 }

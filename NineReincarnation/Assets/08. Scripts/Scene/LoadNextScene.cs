@@ -10,7 +10,11 @@ public class LoadNextScene : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(_playerTag)) return;
+        NextScene();
+    }
 
+    public void NextScene()
+    {
         if (_isTriggered) return; // 이미 실행됐으면 무시
         _isTriggered = true;
         gameObject.SetActive(false);

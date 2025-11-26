@@ -1,6 +1,3 @@
-using DG.Tweening;
-using Manager;
-
 namespace State.SceneState
 {
     public class TitleState : ISceneState

@@ -5,11 +5,11 @@ public class SceneDataManager : MonoBehaviour
 {
     [SerializeField] private SceneDataSO _sceneData;
 
-    public string LoadingScene   => _sceneData.LoadingScene;
-    public string TitleScene     => _sceneData.TitleScene;
+    public string LoadingScene => _sceneData.LoadingScene;
+    public string TitleScene => _sceneData.TitleScene;
     public string StoryCoreScene => _sceneData.StoryScene.CoreScene;
     public string StageCoreScene => _sceneData.StageScene.CoreScene;
-    public string ClearScene     => _sceneData.ClearScene;
+    public string ClearScene => _sceneData.ClearScene;
 
     public List<string> GetStorySubScenes(int index)
     {

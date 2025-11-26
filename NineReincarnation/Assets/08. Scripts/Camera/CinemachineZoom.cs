@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Unity.Cinemachine;
-using UnityEngine;
 
 public class CinemachineZoom : CinemachineExtension
 {

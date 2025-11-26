@@ -1,5 +1,3 @@
-using DG.Tweening;
-
 namespace State.SceneState
 {
     public enum SceneStateType

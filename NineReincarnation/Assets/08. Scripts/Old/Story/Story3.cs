@@ -53,13 +53,9 @@ public class Story3 : Story
 
     private void Start()
     {
-        SceneEventHandler.SceneStarted += SetStart;
+        SetStart();
     }
 
-    private void OnDestroy()
-    {
-        SceneEventHandler.SceneStarted -= SetStart;
-    }
     private void SetStart()
     {
         InputEventHandler.OnChangedForceActionToUI_Invoke();

@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using EventHandler;
-using Manager;
 using Player.Controller;
 using UnityEngine;
 

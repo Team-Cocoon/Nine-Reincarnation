@@ -1,5 +1,4 @@
 using EventHandler;
-using Manager;
 using Unity.Cinemachine;
 using UnityEngine;
 

@@ -22,12 +22,12 @@ public class KeyboardTest : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(_keyCode))
+        if (Input.GetKeyDown(_keyCode))
         {
             _sprite.color = _downColor;
             transform.localPosition = transform.localPosition + Vector3.down * 0.1f;
         }
-        else if(Input.GetKeyUp(_keyCode))
+        else if (Input.GetKeyUp(_keyCode))
         {
             _sprite.color = _defaultColor;
             transform.localPosition = transform.localPosition - Vector3.down * 0.1f;

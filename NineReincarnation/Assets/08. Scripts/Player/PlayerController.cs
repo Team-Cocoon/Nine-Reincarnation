@@ -165,7 +165,7 @@ namespace Player.Controller
 
         private void OnValidate()
         {
-           _checkPoint = transform.position;
+            _checkPoint = transform.position;
         }
 
         private void Awake()

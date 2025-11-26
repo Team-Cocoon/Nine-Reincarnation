@@ -53,6 +53,8 @@ namespace Effect.WipeFade
         /// </summary>
         public static Tween WipeFadeOut(Material material, float duration, bool isRight, float delay = 0.0f, Action action = null)
         {
+            Debug.Log("실행");
+
             float progress = 0f;
             material.SetFloat("_isRight", isRight == true ? 1f : 0f);
             material.SetFloat("_IsFadeIn", 0f);
