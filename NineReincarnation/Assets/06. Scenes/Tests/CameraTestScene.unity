@@ -557,8 +557,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1743530900}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1060723798
@@ -575,7 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultOthoSize: 8.4375
   _shake: {fileID: 0}
-  _zoom: {fileID: 0}
+  _zoom: {fileID: 1743530903}
 --- !u!1 &1743530896
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,9 +586,9 @@ GameObject:
   - component: {fileID: 1743530900}
   - component: {fileID: 1743530897}
   - component: {fileID: 1743530899}
-  - component: {fileID: 1743530901}
-  - component: {fileID: 1743530902}
   - component: {fileID: 1743530903}
+  - component: {fileID: 1743530902}
+  - component: {fileID: 1743530904}
   m_Layer: 0
   m_Name: EventCamera
   m_TagString: Untagged
@@ -611,7 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 3
+    m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -626,7 +625,7 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 1
+    ModeOverride: 0
     PhysicalProperties:
       GateFit: 2
       SensorSize: {x: 21.946, y: 16.002}
@@ -672,20 +671,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1060723797}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1743530901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743530896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb3033a095e723446b853bbc390ed8de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1743530902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,9 +688,21 @@ MonoBehaviour:
   _priority: 0
   _endPriority: 0
   _defaultOthoSize: 0
-  _zoom: {fileID: 1743530901}
-  _shake: {fileID: 1743530903}
+  _zoom: {fileID: 0}
+  _shake: {fileID: 0}
 --- !u!114 &1743530903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743530896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3033a095e723446b853bbc390ed8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1743530904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -983,3 +982,4 @@ SceneRoots:
   - {fileID: 1057594098}
   - {fileID: 1909580160}
   - {fileID: 1060723797}
+  - {fileID: 1743530900}

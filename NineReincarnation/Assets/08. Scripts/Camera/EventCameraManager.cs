@@ -6,8 +6,8 @@ public class EventCameraManager : MonoBehaviour
     [SerializeField] private CinemachineShake _shake;
     [SerializeField] private CinemachineZoom _zoom;
 
-    private void Start()
+    private async void Start()
     {
-        //_zoom.Zoom();
+        await _zoom.Zoom(3.5f, 0.8f);
     }
 }

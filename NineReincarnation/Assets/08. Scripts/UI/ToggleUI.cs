@@ -5,7 +5,7 @@ public class ToggleUI : MonoBehaviour
     [Header("------ UI ------")]
     [SerializeField] private string _name;
     [SerializeField] private GameObject _ui;
-    private UIManager _uiManager;
+    protected UIManager _uiManager;
 
     [Inject]
     private void Construct(UIManager uiManager)
@@ -22,8 +22,8 @@ public class ToggleUI : MonoBehaviour
         _uiManager.RemoveUIDictionary(_name);
     }
 
-    protected virtual void UIEvent_ToggleUI()
+    protected virtual void UIEvent_ToggleUI(bool isStop = true)
     {
-        _uiManager.ToggleUI(name, true);
+        _uiManager.ToggleUI(name, isStop);
     }
 }

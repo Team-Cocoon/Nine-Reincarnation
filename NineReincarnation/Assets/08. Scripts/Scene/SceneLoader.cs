@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -5,38 +6,52 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
+using VContainer.Unity;
 
 namespace Utilities
 {
-    public class SceneLoader : MonoBehaviour
+    public class SceneLoader : IInitializable, IStartable, IDisposable
     {
         [Inject] protected SceneDataManager _sceneDataManager;
-        [Inject] protected SaveManager _saveManager;
+        [Inject] protected SaveManager      _saveManager;
 
-        static private int _loadSceneCount = 0;
-        static private Stack<SceneLoader> _sceneLoaders = new();
+        static private int                _loadSceneCount = 0;
+        static private Stack<SceneLoader> _sceneLoaders   = new();
 
-        protected CancellationToken _token;
-        private List<string> _scenePathList = new();
+        protected CancellationTokenSource _cts;
+        private List<string>              _scenePathList = new();
 
-        public int LoadSceneCount => _loadSceneCount;
-        public void IncrementLoadCount() => _loadSceneCount++;
-        public void DecrementLoadCount() => _loadSceneCount--;
-        public string LoadingScenePath => _sceneDataManager.LoadingScene;
+        public int    LoadSceneCount       => _loadSceneCount;
+        public void   IncrementLoadCount() => _loadSceneCount++;
+        public void   DecrementLoadCount() => _loadSceneCount--;
+        public string LoadingScenePath     => _sceneDataManager.LoadingScene;
 
-        protected virtual void Awake()
+        public virtual void Initialize()
         {
             _sceneLoaders.Push(this);
-            _token = this.GetCancellationTokenOnDestroy();
+            _cts = new CancellationTokenSource();
         }
 
-        private void OnDestroy()
+        public virtual void Start()
+        {
+
+        }
+
+        public virtual void Dispose()
         {
             if (_sceneLoaders.Peek() == this)
             {
                 _sceneLoaders.Pop();
             }
+
+            if (_cts != null)
+            {
+                _cts.Cancel();
+                _cts.Dispose();
+                _cts = null;
+            }
         }
+
 
         public async UniTask LoadLoadingScene()
         {
@@ -46,10 +61,10 @@ namespace Utilities
 
             while (!asyncLoad.isDone) //언로드 될때까지 대기
             {
-                await UniTask.Yield(_token);
+                await UniTask.Yield(_cts.Token);
             }
 
-            await asyncLoad.WithCancellation(_token);
+            await asyncLoad.WithCancellation(_cts.Token);
         }
 
         public async UniTask UnLoadLoadingScene()
@@ -60,10 +75,10 @@ namespace Utilities
 
             while (!asyncLoad.isDone) //언로드 될때까지 대기
             {
-                await UniTask.Yield(_token);
+                await UniTask.Yield(_cts.Token);
             }
 
-            await asyncLoad.WithCancellation(_token);
+            await asyncLoad.WithCancellation(_cts.Token);
         }
 
 
@@ -78,10 +93,10 @@ namespace Utilities
 
             while (!asyncLoad.isDone) //언로드 될때까지 대기
             {
-                await UniTask.Yield(_token);
+                await UniTask.Yield(_cts.Token);
             }
 
-            await asyncLoad.WithCancellation(_token);
+            await asyncLoad.WithCancellation(_cts.Token);
 
             Debug.Log("로드 되는 씬 : " + path);
 
@@ -119,7 +134,7 @@ namespace Utilities
 
                 while (!asyncUnload.isDone) //언로드 될때까지 대기
                 {
-                    await UniTask.Yield(_token);
+                    await UniTask.Yield(_cts.Token);
                 }
             }
         }

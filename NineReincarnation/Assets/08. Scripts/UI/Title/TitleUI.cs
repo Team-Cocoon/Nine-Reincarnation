@@ -44,7 +44,7 @@ public class TitleUI : MonoBehaviour
     private void GameEvent_Option()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        UIEventHandler.ToggleSettingUI_Invoke();
+        UIEventHandler.ToggleSettingUI_Invoke(true);
     }
     private void GameEvent_Exit()
     {

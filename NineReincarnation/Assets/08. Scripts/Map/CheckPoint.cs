@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour, ICollidable
 {
+    [SerializeField] private bool _playSFX = true; 
     private PlayerController player;
 
     public void Enter(GameObject go = null)
     {
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
+        if(_playSFX)
+        {
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
+        }
         player = go.GetComponent<PlayerController>();
         player?.SetCheckPoint(transform.position);
         if (player != null)

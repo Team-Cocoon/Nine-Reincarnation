@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using State;
 using State.SceneState;
 using StateMachine.SceneStateMachine;
+using UnityEngine;
 using Utilities;
 
 public class CoreSceneLoader : SceneLoader, IFadeEffect
@@ -16,14 +17,16 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
 
     public SceneStateType CurrentSceneState => _currentSceneState;
 
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
+        base.Initialize();
         _sceneStateMachine = new SceneStateMachine(this);
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         _sceneStateMachine.stateChanged += OnStateChanged_LoadCoreScene;
         _sceneStateMachine.Initialize(_sceneStateMachine._titleState);
 
@@ -33,8 +36,10 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         GameEventHandler.GameClearExcuted += SceneEvent_Clear;
     }
 
-    private void OnDestroy()
+    public override void Dispose()
     {
+        base.Dispose();
+
         _sceneStateMachine.stateChanged -= OnStateChanged_LoadCoreScene;
 
         GameEventHandler.TitleExcuted -= SceneEvent_Title;
@@ -83,10 +88,12 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         await LoadLoadingScene();
 
         await UnloadStack();
+
         await UnloadAllScene();
+
         await LoadSceneByPath(sceneState.ScenePath);
 
-        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _token);
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
 
@@ -104,10 +111,10 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         {
             case SceneStateType.Story:
             case SceneStateType.Title:
-                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_cts.Token);
                 break;
             default:
-                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_cts.Token);
                 break;
         }
     }
@@ -119,10 +126,10 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         {
             case SceneStateType.Story:
             case SceneStateType.Title:
-                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_cts.Token);
                 break;
             default:
-                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_cts.Token);
                 break;
         }
     }

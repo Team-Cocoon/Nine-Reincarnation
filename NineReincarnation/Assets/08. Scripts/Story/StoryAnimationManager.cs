@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using ExcelData;
+using Player.Controller;
+using UnityEngine;
+
+public class StoryAnimationManager : IDisposable
+{
+    private Dictionary<string, StoryNPC> _storyNpcDict = new();
+    private CancellationTokenSource _cts = new();
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = null;
+    }
+
+    public StoryAnimationManager(StoryNPC[] storyNpcArray)
+    {
+        foreach (StoryNPC storyNpc in storyNpcArray)
+        {
+            string name = storyNpc.name;
+            _storyNpcDict.Add(name, storyNpc);
+        }
+    }
+
+    public async UniTask ExcuteAnimation(AnimationClass animationData)
+    {
+        string name = animationData.Name;
+        string animationName = animationData.AnimationName;
+        PlayerDirection playerDirection = animationData.Direction;
+
+        if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(animationName))
+        {
+            Animator animator = _storyNpcDict[name].NpcAnimator;
+
+            _storyNpcDict[name].Flip(playerDirection);
+
+            animator.Play(animationName);
+
+            //애니메이션 상태 감지용
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            //Play()가 실제로 적용되려면 '다음 프레임'까지 최소 1프레임을 대기
+            await UniTask.Yield(_cts.Token);
+
+            //상태 진입 대기
+            // Play()가 실패했거나 즉시 다른 상태로 전환되는 경우를 대비
+            await UniTask.WaitUntil(() =>
+                animator.GetCurrentAnimatorStateInfo(0).IsName(animationName),
+                cancellationToken: _cts.Token);
+
+            await UniTask.WaitUntil(() =>
+            {
+                var current = animator.GetCurrentAnimatorStateInfo(0);
+
+                // (상태를 빠져나갔거나 || 상태가 끝났다면) 대기 종료
+                return !current.IsName(animationName) || current.normalizedTime >= 1.0f;
+
+            }, cancellationToken: _cts.Token);
+        }
+    }
+}

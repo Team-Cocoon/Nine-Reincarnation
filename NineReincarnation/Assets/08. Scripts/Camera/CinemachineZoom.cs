@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Unity.Cinemachine;
+using UnityEngine;
 
 public class CinemachineZoom : CinemachineExtension
 {
@@ -9,14 +10,13 @@ public class CinemachineZoom : CinemachineExtension
 
     protected override void Awake()
     {
-        base.Awake();
         _cam = GetComponent<CinemachineCamera>();
+        sizeOffset = _cam.Lens.OrthographicSize;
+        base.Awake();
     }
 
     public async UniTask Zoom(float duration, float amount)
     {
-        sizeOffset = _cam.Lens.OrthographicSize;
-
         await DOTween.To(
             () => sizeOffset,
             x => sizeOffset = x,

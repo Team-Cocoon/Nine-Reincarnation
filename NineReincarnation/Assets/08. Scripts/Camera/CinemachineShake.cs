@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CinemachineShake : CinemachineExtension
@@ -11,10 +13,9 @@ public class CinemachineShake : CinemachineExtension
 
     private float _currentStrength = 0f;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    private bool _isFinishRequested = false;
+
+    public bool IsFinishRequested => _isFinishRequested;
 
     private void CancelCurrentShake()
     {
@@ -34,13 +35,14 @@ public class CinemachineShake : CinemachineExtension
     public async UniTask Shake(float duration, float strength)
     {
         CancelCurrentShake();
+        _isFinishRequested = false;
 
         _token = new CancellationTokenSource();
 
         await ProcessShake(duration, strength, _token);
     }
 
-    public async UniTask ShakeFadeOut(float fadeDuration = 0.5f)
+    public async UniTask ShakeFadeOut(float fadeDuration = 1.0f)
     {
         // 현재 흔들리는 게 없으면 무시
         if (_currentStrength <= 0f) return;
@@ -52,6 +54,26 @@ public class CinemachineShake : CinemachineExtension
         await ProcessFadeOut(fadeDuration, _currentStrength, _token);
     }
 
+    public void StopShakeImmediate()
+    {
+        if (_currentStrength <= 0f) return;
+
+        CancelCurrentShake();
+
+        _shakeOffset = Vector3.zero;
+        _currentStrength = 0f;
+    }
+
+
+    private async UniTaskVoid ShakeInfinite(CancellationTokenSource token)
+    {
+        while (!_token.IsCancellationRequested)
+        {
+            _shakeOffset = Random.insideUnitSphere * _currentStrength;
+
+            await UniTask.NextFrame(token.Token);
+        }
+    }
 
     private async UniTask ProcessShake(float duration, float strength, CancellationTokenSource token)
     {
@@ -60,16 +82,14 @@ public class CinemachineShake : CinemachineExtension
 
         if (duration == -1f)
         {
-            while (!_token.IsCancellationRequested)
-            {
-                _shakeOffset = Random.insideUnitSphere * _currentStrength;
-                await UniTask.NextFrame(token.Token);
-            }
+            _isFinishRequested = true;
+
+            ShakeInfinite(token).Forget();
         }
         else
         {
-            float shakeTime = duration * 0.8f;
-            float fadeTime = duration * 0.2f;
+            float shakeTime = duration;
+            float fadeTime = 2.0f;
 
             while (timer < shakeTime)
             {

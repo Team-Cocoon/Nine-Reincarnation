@@ -88,6 +88,7 @@ public class AudioManager : MonoBehaviour
         SceneEventHandler.SceneStarted -= SceneEvent_SetTarget;
         SceneEventHandler.SceneExited -= SceneEvent_ClearTarget;
 
+        StopBgm();
     }
 
     private void LateUpdate()

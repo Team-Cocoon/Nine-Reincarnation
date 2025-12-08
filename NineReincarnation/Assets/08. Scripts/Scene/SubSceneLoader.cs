@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utilities;
+using VContainer;
 
-enum FadeType
+public enum FadeType
 {
     Default,
     Directional
@@ -11,43 +13,91 @@ enum FadeType
 
 public class SubSceneLoader : SceneLoader, IFadeEffect
 {
-    [SerializeField] private FadeType _fadeType;
+    [Inject] private FadeType _fadeType;
     public string SubScenePath;
 
-    protected override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
+        base.Initialize();
+    }
 
+    public async UniTask AddSubScene()
+    {
         IncrementLoadCount();
-    }
 
-    private async void Start()
-    {
-        await LoadSubScene();
-        DecrementLoadCount();
-    }
-
-    public async UniTask LoadSubScene()
-    {
         if (LoadSceneCount == 1)
         {
             await FadeOut();
         }
         await LoadLoadingScene();
 
-        await UnloadAllScene();
         int loadSceneCount = LoadSceneCount;
 
-        await UnloadStack();
         await LoadSceneByPath(SubScenePath);
 
-        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _token);
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
         if (LoadSceneCount == 1)
         {
             await FadeIn();
         }
+
+        DecrementLoadCount();
+    }
+
+    public async UniTask ChangeSubScene()
+    {
+        IncrementLoadCount();
+
+        if (LoadSceneCount == 1)
+        {
+            await FadeOut();
+        }
+        await LoadLoadingScene();
+
+        int loadSceneCount = LoadSceneCount;
+
+        await UnloadLastScene();
+        await LoadSceneByPath(SubScenePath);
+
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
+
+        await UnLoadLoadingScene();
+        if (LoadSceneCount == 1)
+        {
+            await FadeIn();
+        }
+
+        DecrementLoadCount();
+    }
+
+    public async UniTask LoadSubScene()
+    {
+        IncrementLoadCount();
+
+        if (LoadSceneCount == 1)
+        {
+            await FadeOut();
+        }
+        await LoadLoadingScene();
+
+        int loadSceneCount = LoadSceneCount;
+
+        await UnloadStack();
+        await LoadSceneByPath(SubScenePath);
+
+        await UniTask.NextFrame();
+
+        await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
+
+        await UnLoadLoadingScene();
+        if (LoadSceneCount == 1)
+        {
+            await FadeIn();
+        }
+
+        DecrementLoadCount();
     }
 
     public async UniTask FadeIn()
@@ -55,10 +105,10 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         switch (_fadeType)
         {
             case FadeType.Default:
-                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneFadeIn_Invoke(true).WithCancellation(_cts.Token);
                 break;
             case FadeType.Directional:
-                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneWipeFadeIn_Invoke(true).WithCancellation(_cts.Token);
                 break;
         }
     }
@@ -68,10 +118,10 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         switch (_fadeType)
         {
             case FadeType.Default:
-                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneFadeOut_Invoke(true).WithCancellation(_cts.Token);
                 break;
             case FadeType.Directional:
-                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_token);
+                await UIEventHandler.OnSceneWipeFadeOut_Invoke(true).WithCancellation(_cts.Token);
                 break;
         }
     }

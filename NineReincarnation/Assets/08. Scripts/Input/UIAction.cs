@@ -9,6 +9,6 @@ public class UIAction : MonoBehaviour
 
     public void ActionToggleSettingUI()
     {
-        UIEventHandler.ToggleSettingUI_Invoke();
+        UIEventHandler.ToggleSettingUI_Invoke(true);
     }
 }

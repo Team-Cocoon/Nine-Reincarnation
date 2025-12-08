@@ -45,7 +45,7 @@ public class SceneDataManager : MonoBehaviour
         return true;
     }
 
-    public void NextStage(ref int index, ref int subIndex)
+    public bool NextStage(ref int index, ref int subIndex)
     {
         subIndex++;
 
@@ -53,8 +53,10 @@ public class SceneDataManager : MonoBehaviour
         {
             subIndex = 0;
             index++;
-            return;
+
+            return true;
         }
+        return false;
     }
 
     public void NextStory(ref int index, ref int subIndex)

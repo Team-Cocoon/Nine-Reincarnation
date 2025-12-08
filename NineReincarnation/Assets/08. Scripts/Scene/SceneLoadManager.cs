@@ -1,12 +1,13 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Utilities;
 using VContainer;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    [Inject] private SubSceneLoader _subSceneLoader;
-    private SceneDataManager _sceneDataManager;
-    private SaveManager _saveManager;
+    [Inject] private SceneDataManager _sceneDataManager;
+    [Inject] private SaveManager      _saveManager;
+             private bool             _isNextStage;
 
     private GameProgressData _gameData => _saveManager.GameData;
 
@@ -14,22 +15,7 @@ public class SceneLoadManager : MonoBehaviour
     public void Construct(SceneDataManager sceneDataManager, SaveManager saveManager)
     {
         _sceneDataManager = sceneDataManager;
-        _saveManager = saveManager;
-
-        GetScenePath(ref _subSceneLoader.SubScenePath);
-    }
-
-    public async UniTaskVoid LoadNextScene()
-    {
-        if (!GetScenePath(ref _subSceneLoader.SubScenePath))
-        {
-            _subSceneLoader.SubScenePath = "";
-            return;
-        }
-
-        _subSceneLoader.IncrementLoadCount();
-        await _subSceneLoader.LoadSubScene();
-        _subSceneLoader.DecrementLoadCount();
+        _saveManager      = saveManager;
     }
 
     public bool GetScenePath(ref string scenePath)
@@ -54,6 +40,7 @@ public class SceneLoadManager : MonoBehaviour
         if (!isReturn)
         {
             _saveManager.Save();
+            scenePath = null;
             GameEventHandler.GameClearExcuted_Invoke();
             return false;
         }
@@ -72,14 +59,14 @@ public class SceneLoadManager : MonoBehaviour
         if (!isReturn)
         {
             _saveManager.Save();
-            Debug.Log("여기잖아");
+            scenePath = null;
             GameEventHandler.GameClearExcuted_Invoke();
             return false;
         }
 
         scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, _gameData.StageSubIndex);
 
-        _sceneDataManager.NextStage(ref _gameData.StageIndex, ref _gameData.StageSubIndex);
+        _isNextStage = _sceneDataManager.NextStage(ref _gameData.StageIndex, ref _gameData.StageSubIndex);
 
         return true;
     }
