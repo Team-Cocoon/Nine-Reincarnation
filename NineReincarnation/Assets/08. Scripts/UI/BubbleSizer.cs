@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-using Febucci.UI.Core;
 using TMPro;
 using UnityEngine;
 

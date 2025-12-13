@@ -6,8 +6,8 @@ public class StageCoreScope : LifetimeScope
 {
     [Header("---- SceneTriggerInstaller ----")]
     [SerializeField] private SceneLoadManager _sceneLoadManager;
-    [SerializeField] private LoadNextScene    _loadNextScene;
-    [SerializeField] private FadeType         _fadeType;
+    [SerializeField] private LoadNextScene _loadNextScene;
+    [SerializeField] private FadeType _fadeType;
 
     protected override void Configure(IContainerBuilder builder)
     {

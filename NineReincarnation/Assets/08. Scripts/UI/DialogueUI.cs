@@ -4,8 +4,6 @@ using Cysharp.Threading.Tasks;
 using ExcelData;
 using Febucci.UI.Core;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +13,10 @@ public class DialogueUI : ToggleUI
     [SerializeField] private Sprite[] _sprites;
 
     [Header("---- UI-----")]
-    [SerializeField] private GameObject     _panel;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private TypewriterCore _scriptText;
-    [SerializeField] private TMP_Text       _nameText;
-    [SerializeField] private Image          _image;
+    [SerializeField] private TMP_Text _nameText;
+    [SerializeField] private Image _image;
 
     private Dictionary<string, Sprite> _spriteDict = new();
     private CancellationToken _token;

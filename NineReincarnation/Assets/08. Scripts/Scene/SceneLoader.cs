@@ -13,18 +13,18 @@ namespace Utilities
     public class SceneLoader : IInitializable, IStartable, IDisposable
     {
         [Inject] protected SceneDataManager _sceneDataManager;
-        [Inject] protected SaveManager      _saveManager;
+        [Inject] protected SaveManager _saveManager;
 
-        static private int                _loadSceneCount = 0;
-        static private Stack<SceneLoader> _sceneLoaders   = new();
+        static private int _loadSceneCount = 0;
+        static private Stack<SceneLoader> _sceneLoaders = new();
 
         protected CancellationTokenSource _cts;
-        private List<string>              _scenePathList = new();
+        private List<string> _scenePathList = new();
 
-        public int    LoadSceneCount       => _loadSceneCount;
-        public void   IncrementLoadCount() => _loadSceneCount++;
-        public void   DecrementLoadCount() => _loadSceneCount--;
-        public string LoadingScenePath     => _sceneDataManager.LoadingScene;
+        public int LoadSceneCount => _loadSceneCount;
+        public void IncrementLoadCount() => _loadSceneCount++;
+        public void DecrementLoadCount() => _loadSceneCount--;
+        public string LoadingScenePath => _sceneDataManager.LoadingScene;
 
         public virtual void Initialize()
         {

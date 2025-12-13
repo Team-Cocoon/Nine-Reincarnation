@@ -1,13 +1,11 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Utilities;
 using VContainer;
 
 public class SceneLoadManager : MonoBehaviour
 {
     [Inject] private SceneDataManager _sceneDataManager;
-    [Inject] private SaveManager      _saveManager;
-             private bool             _isNextStage;
+    [Inject] private SaveManager _saveManager;
+    private bool _isNextStage;
 
     private GameProgressData _gameData => _saveManager.GameData;
 
@@ -15,7 +13,7 @@ public class SceneLoadManager : MonoBehaviour
     public void Construct(SceneDataManager sceneDataManager, SaveManager saveManager)
     {
         _sceneDataManager = sceneDataManager;
-        _saveManager      = saveManager;
+        _saveManager = saveManager;
     }
 
     public bool GetScenePath(ref string scenePath)

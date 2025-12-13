@@ -1,4 +1,3 @@
-using Unity.Behavior;
 using UnityEngine;
 
 public class ChaseCollider : MonoBehaviour
@@ -8,7 +7,7 @@ public class ChaseCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag(_playerTag))
+        if (collision.CompareTag(_playerTag))
         {
             _chaseGhost.IsTargetDetected.Value = true;
         }

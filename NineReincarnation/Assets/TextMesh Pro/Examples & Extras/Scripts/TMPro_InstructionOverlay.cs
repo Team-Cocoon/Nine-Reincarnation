@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+using UnityEngine;
 
 
 namespace TMPro.Examples
 {
-    
+
     public class TMPro_InstructionOverlay : MonoBehaviour
     {
 

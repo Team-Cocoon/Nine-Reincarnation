@@ -1,4 +1,3 @@
-using System.Drawing;
 using Cysharp.Threading.Tasks;
 using ExcelData;
 using UnityEngine;
@@ -26,7 +25,7 @@ public class EventCamera : MonoBehaviour
         switch (type)
         {
             case CameraEventType.Shake:
-                if(duration == -1.0f)
+                if (duration == -1.0f)
                 {
                     _hasSkipEvent = true;
                 }
@@ -59,7 +58,7 @@ public class EventCamera : MonoBehaviour
 
     public async UniTask CancelShake()
     {
-        if(_shake.IsFinishRequested)
+        if (_shake.IsFinishRequested)
         {
             await _shake.ShakeFadeOut();
         }

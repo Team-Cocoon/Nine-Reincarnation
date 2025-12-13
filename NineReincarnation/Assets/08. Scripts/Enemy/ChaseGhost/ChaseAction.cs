@@ -1,9 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
-using Cysharp.Threading.Tasks;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Chase", story: "[Enemy] Chase [Target] With [isTargetDetected]", category: "Action", id: "b4312b99ee1b375ba96e55ed65f69edc")]
@@ -15,7 +14,7 @@ public partial class ChaseAction : Action
 
     [SerializeReference] public BlackboardVariable<float> TurnSpeed = new(5f);
     [SerializeReference] public BlackboardVariable<float> MaxSpeed = new(5f); // 최대 이동 속도
-    [SerializeReference] public BlackboardVariable<Vector2> ChaseStopPotion= new(Vector2.zero);
+    [SerializeReference] public BlackboardVariable<Vector2> ChaseStopPotion = new(Vector2.zero);
     [SerializeReference] public BlackboardVariable<Vector2> EndVector = new(Vector2.zero);
     [SerializeReference] public BlackboardVariable<Vector2> EndVectorYRange = new(Vector2.zero);
 

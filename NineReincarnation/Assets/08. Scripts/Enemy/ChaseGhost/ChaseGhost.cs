@@ -1,16 +1,13 @@
-using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.OnScreen.OnScreenStick;
 
 public class ChaseGhost : MonoBehaviour
 {
     [SerializeField] private BehaviorGraphAgent _agent;
-    [SerializeField] private Animator           _animator;
-    [SerializeField] private Transform          _player;
-    [SerializeField] private Animator           _alertAnimator;
-    [SerializeField] private SpriteRenderer     _spriteRenderer;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Animator _alertAnimator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     public BlackboardVariable<bool> IsTargetDetected;
     private float _prevX;
@@ -32,7 +29,7 @@ public class ChaseGhost : MonoBehaviour
 
     void LateUpdate()
     {
-        if(Mathf.Sign(transform.position.x - _prevX) >= float.Epsilon)
+        if (Mathf.Sign(transform.position.x - _prevX) >= float.Epsilon)
         {
             Flip(false);
         }
@@ -54,11 +51,11 @@ public class ChaseGhost : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour, ICollidable
 {
-    [SerializeField] private bool _playSFX = true; 
+    [SerializeField] private bool _playSFX = true;
     private PlayerController player;
 
     public void Enter(GameObject go = null)
     {
-        if(_playSFX)
+        if (_playSFX)
         {
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.SavePoint);
         }

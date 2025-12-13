@@ -158,7 +158,7 @@ namespace Enemy.Move
             transform.localPosition = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
 
-            Sequence seq = DOTween.Sequence();  
+            Sequence seq = DOTween.Sequence();
 
             seq.SetLink(gameObject);
             for (int i = 1; i < wayPointsCount; ++i)
@@ -176,7 +176,7 @@ namespace Enemy.Move
             seq.AppendCallback(() =>
             {
                 transform.localPosition = _waypoints[0];
-                if (!isVisible) 
+                if (!isVisible)
                 {
                     GetComponent<SpriteRenderer>().enabled = false;
                     GetComponent<Collider2D>().enabled = false;

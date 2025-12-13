@@ -1,11 +1,10 @@
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 public class SceneTriggerInstaller : IInstaller
 {
     private readonly SceneLoadManager _sceneLoadManager;
-    private readonly FadeType         _fadeType;
+    private readonly FadeType _fadeType;
 
     public SceneTriggerInstaller(
         SceneLoadManager sceneLoadManager,
@@ -13,7 +12,7 @@ public class SceneTriggerInstaller : IInstaller
         )
     {
         _sceneLoadManager = sceneLoadManager;
-        _fadeType        = fadeType;
+        _fadeType = fadeType;
     }
 
     public void Install(IContainerBuilder builder)

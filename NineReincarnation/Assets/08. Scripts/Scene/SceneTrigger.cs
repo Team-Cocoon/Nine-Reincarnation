@@ -3,21 +3,21 @@ using VContainer;
 
 public enum SceneLoadType
 {
-    None   = 0,
-    Add    = 1,
+    None = 0,
+    Add = 1,
     Change = 2,
-    Load   = 3
+    Load = 3
 }
 
 public class SceneTrigger
 {
-    private SubSceneLoader   _sceneLoader;
+    private SubSceneLoader _sceneLoader;
     private SceneLoadManager _sceneLoadManager;
 
     [Inject]
     public SceneTrigger(SubSceneLoader sceneLoader, SceneLoadManager sceneLoadManager)
     {
-        _sceneLoader      = sceneLoader;
+        _sceneLoader = sceneLoader;
         _sceneLoadManager = sceneLoadManager;
     }
 

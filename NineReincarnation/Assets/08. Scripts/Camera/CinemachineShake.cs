@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CinemachineShake : CinemachineExtension

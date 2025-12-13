@@ -5,15 +5,15 @@ using VContainer.Unity;
 public class StoryInstaller : IInstaller
 {
     private readonly DialogueSpace.DialogueManager _dialogueManager;
-    private readonly StoryEventManager             _storyEventManager;
+    private readonly StoryEventManager _storyEventManager;
     //버블 매니저도 추가예정
 
     public StoryInstaller(
-        DialogueSpace.DialogueManager dialogueManaer, 
+        DialogueSpace.DialogueManager dialogueManaer,
         StoryEventManager storyEventManager)
     {
-        _dialogueManager       = dialogueManaer;
-        _storyEventManager     = storyEventManager;
+        _dialogueManager = dialogueManaer;
+        _storyEventManager = storyEventManager;
     }
 
     public void Install(IContainerBuilder builder)

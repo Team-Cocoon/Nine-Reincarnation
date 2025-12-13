@@ -1,6 +1,5 @@
 using Player.Controller;
 using UnityEngine;
-using UnityEngine.LightTransport;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,7 +7,7 @@ public class SubStageSceneScope : LifetimeScope
 {
     [Header("----- StoryInstaller ------")]
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private StoryEventManager             _storyEventManager;
+    [SerializeField] private StoryEventManager _storyEventManager;
 
     [Header("----- SubSceneInstaller ------")]
     [SerializeField] private LoadNextScene _loadNextScene;
@@ -22,7 +21,7 @@ public class SubStageSceneScope : LifetimeScope
     private PlayerController player;
     protected override void Configure(IContainerBuilder builder)
     {
-        if((_dialogueManager != null) || (_storyEventManager != null))
+        if ((_dialogueManager != null) || (_storyEventManager != null))
         {
             new StoryInstaller(_dialogueManager, _storyEventManager).Install(builder);
         }

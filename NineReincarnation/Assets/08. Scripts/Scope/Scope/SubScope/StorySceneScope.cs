@@ -12,7 +12,7 @@ public class StorySceneScope : LifetimeScope
     {
         builder.RegisterComponent<CameraManager>(_cameraManager);
 
-        if(_loadNextScene != null)
+        if (_loadNextScene != null)
         {
             builder.RegisterComponent<LoadNextScene>(_loadNextScene);
         }

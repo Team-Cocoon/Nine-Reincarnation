@@ -4,7 +4,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using ExcelData;
 using Player.Controller;
-using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 
@@ -12,15 +11,15 @@ namespace DialogueSpace
 {
     public class DialogueManager : MonoBehaviour
     {
-        [Inject]         private DialogueUI            _dialogueUI;
-        [Inject]         private DialogueDB            _dialogueDB;
-        [Inject]         private StoryAnimationManager _storyAnimationManager;
-        [Inject]         private StoryEventManager     _storyEventManager;
-        [Inject]         private BubbleManager         _bubbleManager;
-        [Inject]         private PlayerController      _anna;
-        [SerializeField] private GameObject            _npcAnna;
-        [SerializeField] private int                   _id;
-        [SerializeField] private EventCamera           _camera;
+        [Inject] private DialogueUI _dialogueUI;
+        [Inject] private DialogueDB _dialogueDB;
+        [Inject] private StoryAnimationManager _storyAnimationManager;
+        [Inject] private StoryEventManager _storyEventManager;
+        [Inject] private BubbleManager _bubbleManager;
+        [Inject] private PlayerController _anna;
+        [SerializeField] private GameObject _npcAnna;
+        [SerializeField] private int _id;
+        [SerializeField] private EventCamera _camera;
 
         private List<UniTask> tasks = new(5);
         private CancellationTokenSource _cts;
@@ -85,7 +84,7 @@ namespace DialogueSpace
                 {
                     tasks.Add(_storyAnimationManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id)));
                 }
-                if((dialogue.EventType & ExcelData.EventType.Bubble) == ExcelData.EventType.Bubble)
+                if ((dialogue.EventType & ExcelData.EventType.Bubble) == ExcelData.EventType.Bubble)
                 {
                     tasks.Add(_bubbleManager.ExcuteBubble(_dialogueDB.GetData<BubbleClass>(_id)));
                 }
@@ -93,7 +92,7 @@ namespace DialogueSpace
                 await UniTask.WhenAll(tasks).AttachExternalCancellation(_cts.Token);
                 await UniTask.WaitForSeconds(dialogue.Duration, cancellationToken: _cts.Token);
 
-                if(_bubbleManager.HasSkipEvent || _camera.HasSkipEvent || _dialogueUI.HasSkipEvent)
+                if (_bubbleManager.HasSkipEvent || _camera.HasSkipEvent || _dialogueUI.HasSkipEvent)
                 {
                     await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0), cancellationToken: _cts.Token);
 
@@ -118,11 +117,11 @@ namespace DialogueSpace
             {
                 _bubbleManager.CloseBubble();
             }
-            
-            if(_dialogueUI.HasSkipEvent)
+
+            if (_dialogueUI.HasSkipEvent)
             {
                 _dialogueUI.CloseUI();
-            }    
+            }
 
             await UniTask.NextFrame();
         }

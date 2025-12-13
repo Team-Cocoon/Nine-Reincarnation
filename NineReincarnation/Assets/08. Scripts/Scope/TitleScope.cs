@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 public class TitleScope : LifetimeScope
 {
-    [SerializeField] private TitleUI       _titleUI;
+    [SerializeField] private TitleUI _titleUI;
     [SerializeField] private CameraManager _cameraManager;
     protected override void Configure(IContainerBuilder builder)
     {

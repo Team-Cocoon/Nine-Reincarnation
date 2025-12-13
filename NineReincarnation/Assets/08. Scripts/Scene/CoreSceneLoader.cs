@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using State;
 using State.SceneState;
 using StateMachine.SceneStateMachine;
-using UnityEngine;
 using Utilities;
 
 public class CoreSceneLoader : SceneLoader, IFadeEffect

@@ -6,23 +6,23 @@ using UnityEngine.UI;
 
 public class BubbleUI : MonoBehaviour
 {
-    [SerializeField] private GameObject      _panel;
-    [SerializeField] private BubbleDataSO    _bubbleImageData;
-    [SerializeField] private Image           _image;
-    [SerializeField] private TypewriterCore  _scriptText;
-    [SerializeField] private BubbleSizer     _sizer;
+    [SerializeField] private GameObject _panel;
+    [SerializeField] private BubbleDataSO _bubbleImageData;
+    [SerializeField] private Image _image;
+    [SerializeField] private TypewriterCore _scriptText;
+    [SerializeField] private BubbleSizer _sizer;
     [SerializeField] private BubbleImageType _currentType = BubbleImageType.None;
 
     public async UniTask UpdateUI(BubbleClass bubbleData)
     {
         OpenUI();
 
-        if(_currentType != bubbleData.Type)
+        if (_currentType != bubbleData.Type)
         {
             SetImage(bubbleData.Type);
             _currentType = bubbleData.Type;
         }
-        
+
         if (!string.IsNullOrEmpty(bubbleData.Script))
         {
             await ChangeScript(bubbleData.Script);

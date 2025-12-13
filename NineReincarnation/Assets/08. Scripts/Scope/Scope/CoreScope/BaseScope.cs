@@ -15,10 +15,10 @@ public class BaseScope : LifetimeScope
     [SerializeField] private SaveManager _saveManager;
 
     [Header("----- UI ------")]
-    [SerializeField] private FadeUI     _fadeUI;
-    [SerializeField] private UIManager  _uiManager;
-    [SerializeField] private Camera     _uiCamera;
-    [SerializeField] private SettingUI  _settingUI;
+    [SerializeField] private FadeUI _fadeUI;
+    [SerializeField] private UIManager _uiManager;
+    [SerializeField] private Camera _uiCamera;
+    [SerializeField] private SettingUI _settingUI;
     [SerializeField] private DialogueUI _dialogueUI;
 
     [Header("----- Data ------")]

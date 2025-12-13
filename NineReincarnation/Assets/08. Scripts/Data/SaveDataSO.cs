@@ -19,21 +19,21 @@ public class SaveDataSO : ScriptableObject
 
     public void Init()
     {
-        State         = GameState.Stoty;
-        StageIndex    = 0;
+        State = GameState.Stoty;
+        StageIndex = 0;
         StageSubIndex = 0;
-        StoryIndex    = 0;
+        StoryIndex = 0;
         StorySubIndex = 0;
-        CheckPoint    = null;
+        CheckPoint = null;
     }
 
     public void Save(GameProgressData data)
     {
-        State         = data.State;
-        StageIndex    = data.StageIndex;
+        State = data.State;
+        StageIndex = data.StageIndex;
         StageSubIndex = data.StageSubIndex;
-        StoryIndex    = data.StoryIndex;
+        StoryIndex = data.StoryIndex;
         StorySubIndex = data.StorySubIndex;
-        CheckPoint    = null;
+        CheckPoint = null;
     }
 }

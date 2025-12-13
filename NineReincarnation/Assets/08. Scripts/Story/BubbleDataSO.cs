@@ -3,10 +3,10 @@ using UnityEngine;
 
 public enum BubbleImageType
 {
-    None   = -1,
+    None = -1,
     Normal = 0,
-    Round  = 1,
-    Spiky  = 2
+    Round = 1,
+    Spiky = 2
 }
 
 [CreateAssetMenu(fileName = "BubbleDataSO", menuName = "Scriptable Objects/BubbleDataSO")]

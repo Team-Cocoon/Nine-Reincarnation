@@ -8,15 +8,15 @@ public interface ILoadNext
 
 public class LoadNextScene : MonoBehaviour
 {
-    [Inject]         private SceneTrigger  _sceneTrigger;
+    [Inject] private SceneTrigger _sceneTrigger;
     [SerializeField] private SceneLoadType _type;
-    [SerializeField] private bool          _loadSceneOnStart = false;
-    [SerializeField] private string        _playerTag        = "Player";
-                     private bool          _isTriggered      = false;
+    [SerializeField] private bool _loadSceneOnStart = false;
+    [SerializeField] private string _playerTag = "Player";
+    private bool _isTriggered = false;
 
     public void Start()
     {
-        if(_loadSceneOnStart)
+        if (_loadSceneOnStart)
         {
             _sceneTrigger.LoadScene(_type);
         }
