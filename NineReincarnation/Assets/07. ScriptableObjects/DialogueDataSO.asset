@@ -85,6 +85,74 @@ MonoBehaviour:
     EventType: 0
     Duration: 0
     NextID: 0
+  - ID: 104001
+    EventType: 4
+    Duration: 0
+    NextID: 104002
+  - ID: 104002
+    EventType: 2
+    Duration: 1
+    NextID: 104003
+  - ID: 104003
+    EventType: 16
+    Duration: 0
+    NextID: 104004
+  - ID: 104004
+    EventType: 16
+    Duration: 0
+    NextID: 104005
+  - ID: 104005
+    EventType: 2
+    Duration: 0
+    NextID: 104006
+  - ID: 104006
+    EventType: 4
+    Duration: 0
+    NextID: 104007
+  - ID: 104007
+    EventType: 2
+    Duration: 0
+    NextID: 104008
+  - ID: 104008
+    EventType: 1
+    Duration: 0
+    NextID: 104009
+  - ID: 104009
+    EventType: 1
+    Duration: 2
+    NextID: 104010
+  - ID: 104010
+    EventType: 16
+    Duration: 0
+    NextID: 104011
+  - ID: 104011
+    EventType: 32
+    Duration: 0
+    NextID: 104012
+  - ID: 104012
+    EventType: 32
+    Duration: 0
+    NextID: 104013
+  - ID: 104013
+    EventType: 32
+    Duration: 0
+    NextID: 104014
+  - ID: 104014
+    EventType: 32
+    Duration: 0
+    NextID: 104015
+  - ID: 104015
+    EventType: 34
+    Duration: 0
+    NextID: 104016
+  - ID: 104016
+    EventType: 2
+    Duration: 0
+    NextID: 104017
+  - ID: 104017
+    EventType: 0
+    Duration: 0
+    NextID: 0
   Animation:
   - ID: 101001
     Name: Anna
@@ -101,6 +169,14 @@ MonoBehaviour:
   - ID: 101006
     Name: Anna
     AnimationName: Anna_LookAround
+    Direction: -1
+  - ID: 104008
+    Name: ghost
+    AnimationName: "\uC791\uC5C5 \uC804"
+    Direction: 1
+  - ID: 104009
+    Name: Anna
+    AnimationName: "\uC791\uC5C5 \uC804"
     Direction: -1
   Script:
   - ID: 101003
@@ -129,17 +205,31 @@ MonoBehaviour:
     Script: "{fade a=3.5} \uADFC\uB370 \uC5B4\uB514\uB85C \uAC00\uC57C\uD558\uC9C0?"
   - ID: 101015
     ShowName: "\uC548\uB098"
-    ImageName: Anna_Determination
+    ImageName: 
     Script: "{fade a=3.5} \uC800\uAC74... \uC544\uAE4C \uB0B4\uAC00 \uAD50\uC2E4\uC5D0\uC11C
       \uBD24\uB358 \uADF8 \uAC00\uC704\uC796\uC544!!"
+  - ID: 104003
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uD6C4 \uC544\uBB34\uB9AC \uCAD3\uC544\uC640\uB3C4 \uADF8
+      \uAC00\uC704\uB294 \uC548 \uBCF4\uC774\uB294 \uAC83 \uAC19\uB124"
+  - ID: 104004
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uADF8\uB098\uC800\uB098 \uC774 \uD070 \uB098\uBB34\uB294
+      \uBB50\uC9C0?"
+  - ID: 104010
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Confusion
+    Script: "{fade a=3.5} \uC73C\uC545 \uC800\uAC74 \uBB50\uC57C?!!"
   Camera:
   - ID: 101009
     Type: 0
-    Size: 6
+    Size: 3.5
     Duration: 0.8
   - ID: 101010
     Type: 0
-    Size: 5.5
+    Size: 3
     Duration: 0.8
   - ID: 101011
     Type: 2
@@ -147,9 +237,29 @@ MonoBehaviour:
     Duration: -1
   - ID: 101012
     Type: 1
-    Size: 7
+    Size: 4
     Duration: 0.8
   - ID: 101017
+    Type: 1
+    Size: 8
+    Duration: 0.8
+  - ID: 104002
+    Type: 0
+    Size: 4
+    Duration: 0.8
+  - ID: 104005
+    Type: 1
+    Size: 5
+    Duration: 0.8
+  - ID: 104007
+    Type: 0
+    Size: 4
+    Duration: 0.8
+  - ID: 104015
+    Type: 2
+    Size: 5
+    Duration: -1
+  - ID: 104016
     Type: 1
     Size: 8
     Duration: 0.8
@@ -172,3 +282,27 @@ MonoBehaviour:
     Name: Anna
     Type: 0
     Script: "{fade a=3.5} <wiggle a=0.1>\uAC70\uAE30 \uC11C!!!</>"
+  - ID: 104011
+    Name: ghost
+    Type: 0
+    Script: "{fade a=3.5}<size=60%> \uC544\uBB34\uB3C4 \uB3C4\uC640\uC8FC\uC9C0 \uC54A\uC558\uC5B4..."
+  - ID: 104012
+    Name: ghost
+    Type: 0
+    Script: "{fade a=3.5} <size=60%>\uC544\uBB34\uB3C4 \uC190 \uB0B4\uBC00\uC9C0
+      \uC54A\uC558\uC5B4..."
+  - ID: 104013
+    Name: ghost
+    Type: 2
+    Script: "{fade a=3.5} <shake>\uADF8\uB7F0 \uB108\uD76C\uB4E4 \uB54C\uBB38\uC5D0
+      \uB098\uB294 \uB9D8 \uD3B8\uD788 \uC8FD\uC9C0\uB3C4 \uBABB\uD558\uACE0 \uC788\uB294\uB370...!!!</>"
+  - ID: 104014
+    Name: ghost
+    Type: 2
+    Script: "{fade a=3.5} <shake>\uB108\uB294 \uC0B4\uC544\uC788\uB294 \uC790\uC758
+      \uB0C4\uC0C8\uB97C \uD48D\uAE30\uBA70 \uC798\uB3C4 \uC788\uAD6C\uB098!!</>"
+  - ID: 104015
+    Name: ghost
+    Type: 2
+    Script: "{fade a=3.5} <size=120%><shake>\uADF8\uB7EC\uB2C8 \uC0B0 \uC790\uC758
+      \uC778\uC5F0\uC758 \uC2E4\uC744 \uB0B4\uAC00 \uAC00\uC838\uAC00\uC57C\uACA0\uC5B4!!!</>"

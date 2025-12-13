@@ -21,6 +21,9 @@ public class StoryInstaller : IInstaller
         StoryNPC[] allNpcs = Object.FindObjectsByType<StoryNPC>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         BubbleUI[] allBubbles = Object.FindObjectsByType<BubbleUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
+        Debug.Log(allNpcs.Length);
+        Debug.Log(allBubbles.Length);
+
         builder.RegisterEntryPoint<StoryAnimationManager>(Lifetime.Scoped)
             .WithParameter(allNpcs)
             .AsSelf();

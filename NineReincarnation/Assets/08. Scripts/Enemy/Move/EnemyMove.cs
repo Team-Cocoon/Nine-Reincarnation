@@ -106,7 +106,7 @@ namespace Enemy.Move
         //원 움직임
         private void MoveCircle()
         {
-            Vector3 center = transform.position - new Vector3(0, _circleRadius, 0);
+            Vector3 center = transform.localPosition - new Vector3(0, _circleRadius, 0);
             _angleRad *= Mathf.Deg2Rad;
             DOTween.To(() => _angleRad,
                                  x => _angleRad = x,
@@ -126,7 +126,7 @@ namespace Enemy.Move
         //타원 움직임
         private void MoveElipse()
         {
-            Vector3 center = transform.position - new Vector3(0, _elipseRadiusY, 0);
+            Vector3 center = transform.localPosition - new Vector3(0, _elipseRadiusY, 0);
             _angleRad *= Mathf.Deg2Rad;
             DOTween.To(() => _angleRad, x => _angleRad = x,
                         _angleRad - 2f * _elipseDirection * Mathf.PI,
@@ -155,10 +155,10 @@ namespace Enemy.Move
                 return;
             }
 
-            transform.position = _waypoints[0];
+            transform.localPosition = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
 
-            Sequence seq = DOTween.Sequence();
+            Sequence seq = DOTween.Sequence();  
 
             seq.SetLink(gameObject);
             for (int i = 1; i < wayPointsCount; ++i)
@@ -175,8 +175,8 @@ namespace Enemy.Move
 
             seq.AppendCallback(() =>
             {
-                transform.position = _waypoints[0];
-                if (!isVisible)
+                transform.localPosition = _waypoints[0];
+                if (!isVisible) 
                 {
                     GetComponent<SpriteRenderer>().enabled = false;
                     GetComponent<Collider2D>().enabled = false;
@@ -211,7 +211,7 @@ namespace Enemy.Move
             {
                 return;
             }
-            transform.position = _waypoints[0];
+            transform.localPosition = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
 
             Sequence seq = DOTween.Sequence();
@@ -253,7 +253,7 @@ namespace Enemy.Move
         //타원 그리기
         private void DrawElipse()
         {
-            Vector3 centerPosition = transform.position - new Vector3(0, _elipseRadiusY, 0);
+            Vector3 centerPosition = transform.localPosition - new Vector3(0, _elipseRadiusY, 0);
 
             Matrix4x4 prev = Gizmos.matrix;
 
@@ -271,7 +271,7 @@ namespace Enemy.Move
         //원 그리기
         private void DrawCircle()
         {
-            Vector3 centerPosition = transform.position - new Vector3(0, _circleRadius, 0);
+            Vector3 centerPosition = transform.localPosition - new Vector3(0, _circleRadius, 0);
             Gizmos.color = _gizmoDeselectedColor;
 
             Gizmos.DrawWireSphere(centerPosition, _circleRadius);

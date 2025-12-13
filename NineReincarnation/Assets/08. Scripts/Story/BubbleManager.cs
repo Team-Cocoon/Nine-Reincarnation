@@ -20,7 +20,7 @@ public class BubbleManager : IDisposable
     {
         foreach (BubbleUI bubble in bubbleArray)
         {
-            string name = bubble.transform.root.name;
+            string name = bubble.transform.parent.name;
             _bubbleDict.Add(name, bubble);
         }
     }
