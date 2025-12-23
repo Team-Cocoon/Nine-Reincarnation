@@ -18,6 +18,6 @@ public class StageCoreScope : LifetimeScope
 
     private void Start()
     {
-        AudioManager.Instance?.PlayBgm(AudioManager.Bgm.Stage);
+
     }
 }

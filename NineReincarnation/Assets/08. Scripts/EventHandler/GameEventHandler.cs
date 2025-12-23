@@ -16,6 +16,10 @@ public static class GameEventHandler
 
     #region 게임 플레이 상태 관련 이벤트
     public static event Action GameStartExcuted;
+
+    public static event Action OnPlayerDead;
+
+
     #endregion
 
 
@@ -27,5 +31,7 @@ public static class GameEventHandler
 
     public static void StageExcuted_Invoke() => StageExcuted?.Invoke();
     public static void GameStartExcuted_Invoke() => GameStartExcuted?.Invoke();
+    public static void OnPlayerDead_Invoke() => OnPlayerDead?.Invoke();
+
     #endregion
 }

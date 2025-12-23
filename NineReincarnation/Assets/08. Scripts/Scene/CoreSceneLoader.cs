@@ -92,13 +92,20 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
 
         await LoadSceneByPath(sceneState.ScenePath);
 
+        await UniTask.NextFrame();
         await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
 
         //페이드 인 순서
         _currentSceneState = sceneState.StateType;
-        await FadeIn();
+
+        if(loadSceneCount == 1)
+        {
+            await FadeIn();
+
+            SceneEventHandler.SceneStarted_Invoke();
+        }
 
         DecrementLoadCount();
     }

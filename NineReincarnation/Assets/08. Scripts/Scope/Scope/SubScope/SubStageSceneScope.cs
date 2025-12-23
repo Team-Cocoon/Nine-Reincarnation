@@ -7,7 +7,7 @@ public class SubStageSceneScope : LifetimeScope
 {
     [Header("----- StoryInstaller ------")]
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private StoryEventManager _storyEventManager;
+    [SerializeField] private StoryEventManager             _storyEventManager;
 
     [Header("----- SubSceneInstaller ------")]
     [SerializeField] private LoadNextScene _loadNextScene;

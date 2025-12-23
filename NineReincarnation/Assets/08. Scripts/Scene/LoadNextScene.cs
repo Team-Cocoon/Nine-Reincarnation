@@ -13,7 +13,7 @@ public class LoadNextScene : MonoBehaviour
     [SerializeField] private bool _loadSceneOnStart = false;
     [SerializeField] private string _playerTag = "Player";
     private bool _isTriggered = false;
-
+    
     public void Start()
     {
         if (_loadSceneOnStart)

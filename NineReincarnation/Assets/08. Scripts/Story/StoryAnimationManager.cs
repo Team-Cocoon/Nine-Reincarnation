@@ -39,6 +39,8 @@ public class StoryAnimationManager : IDisposable
 
             _storyNpcDict[name].Flip(playerDirection);
 
+            Debug.Log(name);
+            Debug.Log(animationName);
             animator.Play(animationName);
 
             //애니메이션 상태 감지용

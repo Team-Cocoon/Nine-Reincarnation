@@ -525,6 +525,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManger
       objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: BgmClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: SfxClips.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'BgmClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1fe36b10e61a918499f1d6dd5f87ef6f, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'BgmClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d819bb70ddb6fbf4a9bd633a33a8478f, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'BgmClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0dcf06de6a4e044438d6259a51aaa762, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[17]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a2edd969311286b4b91417d5d87ba0da, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[18]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 25079165e8d004f478469601a9fa5468, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[19]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 231a6566ed251fd4ba29d21876123c05, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[20]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 9422d89f43520304cad3a5ffaf2b9a17, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1852,6 +1888,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 2545853248696762936, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545853248696762936, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545853248696762936, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545853248696762936, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2576769841311336435, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1995,6 +2047,22 @@ PrefabInstance:
     - target: {fileID: 5075081922758353235, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323656650950860593, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323656650950860593, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323656650950860593, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323656650950860593, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5786396057033435172, guid: 970cd8b6bc4625a49830d8783ef69bcb, type: 3}
       propertyPath: m_Layer

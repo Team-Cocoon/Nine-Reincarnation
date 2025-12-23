@@ -211,7 +211,7 @@ namespace Enemy.Move
             {
                 return;
             }
-            transform.localPosition = _waypoints[0];
+            transform.position = _waypoints[0];
             int wayPointsCount = _waypoints.Count;
 
             Sequence seq = DOTween.Sequence();

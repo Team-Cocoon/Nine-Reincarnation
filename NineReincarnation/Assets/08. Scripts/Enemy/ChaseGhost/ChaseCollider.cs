@@ -5,6 +5,16 @@ public class ChaseCollider : MonoBehaviour
     [SerializeField] private ChaseGhost _chaseGhost;
     [SerializeField] private string _playerTag = "Player";
 
+    private void OnEnable()
+    {
+
+
+    }
+    private void OnDisable()
+    {
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(_playerTag))

@@ -37,7 +37,8 @@ public class AudioManager : MonoBehaviour
     {
         None = -1,
         Title,
-        Stage
+        Stage,
+        Chase
     }
 
     public enum Sfx
@@ -53,7 +54,11 @@ public class AudioManager : MonoBehaviour
         Look,
         ThrowThread,
         SnapThread,
-        LinkThread
+        LinkThread,
+        GrassHide,
+        CameraShake,
+        Surprised,
+        GhoseDetected
     }
     public enum LoopSfx
     {

@@ -1,4 +1,6 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class StoryEventManager : MonoBehaviour
@@ -13,7 +15,7 @@ public class StoryEventManager : MonoBehaviour
         SignalEventComplete();
     }
 
-    public async UniTask ExcuteEvent()
+    public async UniTask ExcuteEvent(CancellationTokenSource cts)
     {
         if (curIndex >= _storyEvent.Length) return;
 

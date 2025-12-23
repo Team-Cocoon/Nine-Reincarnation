@@ -11,14 +11,16 @@ enum CameraPriority
 
 public class VirtualCameraManager : MonoBehaviour
 {
+    [SerializeField] private CinemachineCamera _eventCam;
+    [SerializeField] private Transform         _storyObj;
+
     [SerializeField] private CinemachineCamera[] _cams;
     [SerializeField] private PolygonCollider2D[] _areas;
     [SerializeField] private int _currentIndex = 0;
     [Inject] private PlayerController _player;
 
-    private void Awake()
+    private void Start()
     {
-
         for (int i = 0; i < _areas.Length; ++i)
         {
             _areas[i].GetComponent<VCamArea>().Index = i;
@@ -33,6 +35,12 @@ public class VirtualCameraManager : MonoBehaviour
         }
 
 
+        if(_eventCam != null)
+        {
+            _eventCam.Follow = _storyObj;
+        }
+
+
         _cams[0].Priority = (int)CameraPriority.Priority;
     }
 
@@ -43,5 +51,10 @@ public class VirtualCameraManager : MonoBehaviour
         _cams[_currentIndex].Priority = (int)CameraPriority.None;
         _currentIndex = index;
         _cams[_currentIndex].Priority = (int)CameraPriority.Priority;
+    }
+
+    public void SetPlayer()
+    {
+        _eventCam.Follow = _player.transform;
     }
 }

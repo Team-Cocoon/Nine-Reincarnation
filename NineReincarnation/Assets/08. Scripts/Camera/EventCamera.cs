@@ -9,7 +9,7 @@ public class EventCamera : MonoBehaviour
     [SerializeField] private float _defaultOthoSize;
     [SerializeField] private CinemachineZoom _zoom;
     [SerializeField] private CinemachineShake _shake;
-
+    [SerializeField] private bool _playSound = false;
     private bool _hasSkipEvent = false;
     public bool HasSkipEvent => _hasSkipEvent;
 
@@ -29,7 +29,13 @@ public class EventCamera : MonoBehaviour
                 {
                     _hasSkipEvent = true;
                 }
+
+                if (_playSound)
+                {
+                    AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CameraShake);
+                }
                 await Shake(duration, size);
+
                 break;
             case CameraEventType.ZoomIn:
             case CameraEventType.ZoomOut:

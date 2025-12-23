@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Utilities;
 using VContainer;
 
@@ -33,12 +34,16 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
 
         await LoadSceneByPath(SubScenePath);
 
+        await UniTask.NextFrame();
         await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
         if (LoadSceneCount == 1)
         {
             await FadeIn();
+
+            Debug.Log("씬 시작");
+            SceneEventHandler.SceneStarted_Invoke();
         }
 
         DecrementLoadCount();
@@ -48,10 +53,7 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
     {
         IncrementLoadCount();
 
-        if (LoadSceneCount == 1)
-        {
-            await FadeOut();
-        }
+        if (LoadSceneCount == 1) await FadeOut();
         await LoadLoadingScene();
 
         int loadSceneCount = LoadSceneCount;
@@ -59,15 +61,20 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         await UnloadLastScene();
         await LoadSceneByPath(SubScenePath);
 
+        await UniTask.NextFrame();
         await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
         if (LoadSceneCount == 1)
         {
             await FadeIn();
+
+            Debug.Log("씬 시작");
+            SceneEventHandler.SceneStarted_Invoke();
         }
 
         DecrementLoadCount();
+
     }
 
     public async UniTask LoadSubScene()
@@ -86,13 +93,15 @@ public class SubSceneLoader : SceneLoader, IFadeEffect
         await LoadSceneByPath(SubScenePath);
 
         await UniTask.NextFrame();
-
         await UniTask.WaitUntil(() => loadSceneCount == LoadSceneCount, cancellationToken: _cts.Token);
 
         await UnLoadLoadingScene();
         if (LoadSceneCount == 1)
         {
             await FadeIn();
+
+            Debug.Log("씬 시작");
+            SceneEventHandler.SceneStarted_Invoke();
         }
 
         DecrementLoadCount();

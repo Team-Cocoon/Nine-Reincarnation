@@ -11,6 +11,9 @@ public class BGMPlayer : MonoBehaviour
 
     private void OnDestroy()
     {
-        AudioManager.Instance.StopBgm();
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBgm();
+        }
     }
 }

@@ -2,5 +2,5 @@ using Cysharp.Threading.Tasks;
 
 public interface IEventInterface
 {
-    public UniTask ExecuteEvent();
+    public UniTask ExecuteEvent(int index);
 }

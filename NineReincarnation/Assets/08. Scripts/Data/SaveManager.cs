@@ -6,7 +6,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private SaveDataSO[] _saveDatas;
     [SerializeField] private bool _isTest;
 
-    private SaveDataSO _saveData;
+    private SaveDataSO _curSaveData;
     public GameProgressData GameData;
 
     public void SetSaveData(int index)
@@ -16,17 +16,17 @@ public class SaveManager : MonoBehaviour
             DataClear(index);
         }
 
-        _saveData = _saveDatas[index];
+        _curSaveData = _saveDatas[index];
         if (GameData != null)
         {
             GameData = null;
         }
-        GameData = new GameProgressData(_saveData);
+        GameData = new GameProgressData(_curSaveData);
     }
 
     public void Save()
     {
-        _saveData.Save(GameData);
+        _curSaveData.Save(GameData);
     }
 
     public void SetState(GameState state)

@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -11,17 +12,20 @@ namespace DialogueSpace
 {
     public class DialogueManager : MonoBehaviour
     {
-        [Inject] private DialogueUI _dialogueUI;
-        [Inject] private DialogueDB _dialogueDB;
-        [Inject] private StoryAnimationManager _storyAnimationManager;
-        [Inject] private StoryEventManager _storyEventManager;
-        [Inject] private BubbleManager _bubbleManager;
-        [Inject] private PlayerController _anna;
-        [SerializeField] private GameObject _npcAnna;
-        [SerializeField] private int _id;
-        [SerializeField] private EventCamera _camera;
+        [Inject]         private DialogueUI            _dialogueUI;
+        [Inject]         private DialogueDB            _dialogueDB;
+        [Inject]         private StoryAnimationManager _storyAnimationManager;
+        [Inject]         private StoryEventManager     _storyEventManager;
+        [Inject]         private BubbleManager         _bubbleManager;
+        [Inject]         private PlayerController      _anna;
+        [SerializeField] private GameObject            _npcAnna;
+        [SerializeField] private int                   _id;
+        [SerializeField] private EventCamera           _camera;
+        [SerializeField] private VirtualCameraManager  _virtualCameraManager;
+        [SerializeField] private bool _startScene = false;
 
-        private List<UniTask> tasks = new(5);
+
+        List<UniTask> tasks = new List<UniTask>(5);
         private CancellationTokenSource _cts;
         private int _nextId;
         private void Awake()
@@ -30,9 +34,31 @@ namespace DialogueSpace
             _cts.Token.RegisterWithoutCaptureExecutionContext(ResetState);
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            NextDialogue().Forget();
+            if(_startScene)
+            {
+                if (_anna.gameObject.activeSelf)
+                {
+                    _anna.gameObject.SetActive(false);
+                    _npcAnna.SetActive(true);
+                }
+                SceneEventHandler.SceneStarted += DialogueStart;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_startScene)
+            {
+                SceneEventHandler.SceneStarted -= DialogueStart;
+            }
+        }
+
+        private void DialogueStart()
+        {
+            Debug.Log("다이얼로그 시작");
+            DialogueExctute(_id).Forget();
         }
 
         private void OnDestroy()
@@ -45,36 +71,52 @@ namespace DialogueSpace
             }
         }
 
-        public async UniTask NextDialogue()
+        public async UniTaskVoid DialogueExctute(int id)
         {
+            _id = id;
+
+            bool isNext = true;
+
             if (_anna.gameObject.activeSelf)
             {
                 _anna.gameObject.SetActive(false);
                 _npcAnna.SetActive(true);
             }
 
-            DialogueClass dialogue = _dialogueDB.GetData<DialogueClass>(_id);
-
-            _nextId = dialogue.NextID;
-
-            //End면 종료
-            if (dialogue.EventType == ExcelData.EventType.End)
+            while (isNext)
             {
-                await _camera.ZoomDefault();
-
-                _anna.transform.position = _npcAnna.transform.position;
-                _npcAnna.SetActive(false);
-                _anna.gameObject.SetActive(true);
+                isNext = await NextDialogue();
             }
-            else
+        }
+
+        private async UniTask<bool> NextDialogue()
+        {
+            try
             {
+                DialogueClass dialogue = _dialogueDB.GetData<DialogueClass>(_id);
+
+                _nextId = dialogue.NextID;
+
+                //End면 종료
+                if (dialogue.EventType == ExcelData.EventType.End)
+                {
+                    await _camera.ZoomDefault();
+
+                    _anna.transform.position = _npcAnna.transform.position;
+                    _npcAnna.SetActive(false);
+                    _anna.gameObject.SetActive(true);
+                    _virtualCameraManager.SetPlayer();
+
+                    return false;
+                }
+
                 if ((dialogue.EventType & ExcelData.EventType.Script) == ExcelData.EventType.Script)
                 {
                     tasks.Add(_dialogueUI.UpdateUI(_dialogueDB.GetData<ScriptClass>(_id), _cts.Token));
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
                 {
-                    tasks.Add(_storyEventManager.ExcuteEvent());
+                    tasks.Add(_storyEventManager.ExcuteEvent(_cts));
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Camera) == ExcelData.EventType.Camera)
                 {
@@ -100,10 +142,14 @@ namespace DialogueSpace
                 }
 
                 _id = _nextId;
+            }
+            finally
+            {
 
                 tasks.Clear();
-                NextDialogue().Forget();
             }
+
+            return true;
         }
 
         private async UniTask FinishEvent()

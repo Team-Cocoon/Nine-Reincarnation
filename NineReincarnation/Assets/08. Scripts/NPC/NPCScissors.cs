@@ -69,7 +69,8 @@ public class NPCScissors : NPC, IEventInterface
     //    _triggerAction = null;
     //}
 
-    public async UniTask ExecuteEvent()
+
+    public async UniTask ExecuteEvent(int index)
     {
         await Move();
     }

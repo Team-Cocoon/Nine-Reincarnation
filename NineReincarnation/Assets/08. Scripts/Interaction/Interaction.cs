@@ -5,6 +5,7 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 {
     [Header("상호작용 여부")]
     [SerializeField] private bool _isInteraction = false;
+    private bool _isHovered = false;
 
     private IHoverInteractableToggle[] _hoverInteractableToggles;
     private IClickInteractableToggle[] _clickInteractableToggles;
@@ -12,7 +13,21 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     public bool IsInteraction
     {
         get => _isInteraction;
-        set => _isInteraction = value;
+        set
+        {
+            _isInteraction = value;
+            if(_isInteraction == false)
+            {
+                OffHoverInteraction();
+            }
+            else
+            {
+                if(_isHovered)
+                {
+                    OnHoverInteraction();
+                }
+            }
+        }
     }
 
     private void Awake()
@@ -23,23 +38,24 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     private void OnEnable()
     {
-        Camera cam = Camera.main;
-        if (cam == null) return;
+        //Camera cam = Camera.main;
+        //if (cam == null) return;
 
-        // 마우스 좌표를 월드 좌표로 변환
-        Vector2 mouseWorld = cam.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 mouseWorld = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        // 마우스 위치에서 2D Raycast 실행
-        RaycastHit2D hit = Physics2D.Raycast(mouseWorld, Vector2.zero);
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
-        {
-            // 마우스가 이미 이 오브젝트 위에 있으면 OnPointerEnter 강제 실행
-            PointerEventData eventData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-            ExecuteEvents.Execute(gameObject, eventData, ExecuteEvents.pointerEnterHandler);
-        }
+        //// 마우스 위치에서 2D Raycast 실행
+        //RaycastHit2D hit = Physics2D.Raycast(mouseWorld, Vector2.zero);
+        //if (hit.collider != null && hit.collider.gameObject == gameObject)
+        //{
+        //    // 마우스가 이미 이 오브젝트 위에 있으면 OnPointerEnter 강제 실행
+        //    PointerEventData eventData = new PointerEventData(EventSystem.current)
+        //    {
+        //        position = Input.mousePosition
+        //    };
+
+        //    Debug.Log("실행 1");
+        //    ExecuteEvents.Execute(gameObject, eventData, ExecuteEvents.pointerEnterHandler);
+        //}
     }
 
     private void OnHoverInteraction()
@@ -93,16 +109,16 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("들어옴");
+        _isHovered = true;
         if (_isInteraction)
         {
-            Debug.Log("실행");
             OnHoverInteraction();
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        _isHovered = false;
         if (_isInteraction)
         {
             OffHoverInteraction();

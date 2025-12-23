@@ -11,16 +11,19 @@ public partial class ChaseAction : Action
     [SerializeReference] public BlackboardVariable<Transform> Enemy;
     [SerializeReference] public BlackboardVariable<Transform> Target;
     [SerializeReference] public BlackboardVariable<bool> IsTargetDetected;
+    [SerializeReference] public BlackboardVariable<bool> IsTargetCatched;
 
     [SerializeReference] public BlackboardVariable<float> TurnSpeed = new(5f);
     [SerializeReference] public BlackboardVariable<float> MaxSpeed = new(5f); // 최대 이동 속도
     [SerializeReference] public BlackboardVariable<Vector2> ChaseStopPotion = new(Vector2.zero);
-    [SerializeReference] public BlackboardVariable<Vector2> EndVector = new(Vector2.zero);
     [SerializeReference] public BlackboardVariable<Vector2> EndVectorYRange = new(Vector2.zero);
 
     private Vector2 _currentVelocity = Vector2.zero;
     protected override Status OnStart()
     {
+        _currentVelocity = Vector2.zero;
+
+        Enemy.Value.GetComponent<ChaseGhost>().SoundPlay();
         return Status.Running;
     }
 
@@ -38,24 +41,22 @@ public partial class ChaseAction : Action
         }
         else
         {
-            _currentVelocity = Vector2.MoveTowards(_currentVelocity, Vector2.zero, TurnSpeed.Value * Time.deltaTime);
+            _currentVelocity = Vector2.MoveTowards(_currentVelocity, Vector2.zero, 1.0f);
             Enemy.Value.position += (Vector3)_currentVelocity * Time.deltaTime;
 
-            if (_currentVelocity.magnitude < 0.01f) return Status.Success;
+            if (_currentVelocity.magnitude < 0.01f)
+            {
+                ChaseStopPotion.Value = Enemy.Value.position;
 
-            ChaseStopPotion.Value = Enemy.Value.position;
+                Vector2 newVector = Enemy.Value.position;
+                newVector.y = UnityEngine.Random.Range(EndVectorYRange.Value.x, EndVectorYRange.Value.y);
+                ChaseStopPotion.Value = newVector;
 
-            Vector2 newVector = Enemy.Value.position;
-            newVector.y = UnityEngine.Random.Range(EndVectorYRange.Value.x, EndVectorYRange.Value.y);
-            ChaseStopPotion.Value = newVector;
+                return Status.Success;
+            }
         }
         return Status.Running;
     }
 
-    protected override void OnEnd()
-    {
-
-
-    }
 }
 
