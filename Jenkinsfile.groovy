@@ -33,7 +33,7 @@ pipeline
         {
             when
             {
-                expression {BUILD_WINDOWS == 'true'}
+                expression {params.BUILD_WINDOWS == 'true'}
             }
             steps
             {
@@ -53,7 +53,7 @@ pipeline
         {
             when
             {
-                expression {DEPLOY_WINDOWS == 'true'}
+                expression {params.DEPLOY_WINDOWS == 'true'}
             }
             steps
             {
@@ -65,7 +65,7 @@ pipeline
         {
             when
             {
-                expression {BUILD_WEBGL == 'true'}
+                expression {params.BUILD_WEBGL == 'true'}
             }
             steps
             {
@@ -85,7 +85,7 @@ pipeline
         {
             when
             {
-                expression {DEPLOY_WEBGL == 'true'}
+                expression {params.DEPLOY_WEBGL == 'true'}
             }
             steps
             {
