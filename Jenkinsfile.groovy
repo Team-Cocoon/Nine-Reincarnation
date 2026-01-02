@@ -35,7 +35,7 @@ pipeline
         {
             when
             {
-                expression {params.BUILD_WINDOWS == true}
+                expression {BUILD_WINDOWS == 'true'}
             }
             steps
             {
