@@ -1,11 +1,11 @@
 def PROJECT_NAME = "Nine-Reincarnation"
-def CUSTOM_WORKSPCE = "C:\\Git\\${PROJECT_NAME}"
+def CUSTOM_WORKSPACE = "C:\\Git\\${PROJECT_NAME}"
 def UNITY_VERSION = "6000.1.17f1"
-def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION}\\Editor\\Unity.exe"
+def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION}\\Editor"
 
-pipline
+pipeline
 {
-    environmant
+    environment
     {
         PROJECT_PATH = "${CUSTOM_WORKSPACE}\\${PROJECT_NAME}"
     }
@@ -15,32 +15,32 @@ pipline
         label
         {
             label ""
-            customWorkspace "${CUSTOM_WORKSPCE}"
+            customWorkspace "${CUSTOM_WORKSPACE}"
         }
     }
 
     stages
     {
-        stages("Build Windows")
+        stage("Build Windows")
         {
-            when(expression {BUILD_WINDOWS = 'true'})
-            stages
+            when(expression {BUILD_WINDOWS == 'true'})
+            steps
             {
                 script
                 {
-                    withEnv(["UNITY_PATH${UNITY_INSTALLATION}"])
+                    withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"])
                     {
                         bat '''
-                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -excuteMethod BuildScript.BuildWindows -logfile -
+                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -executeMethod BuildScript.BuildWindows -logfile -
                         '''
                     }
                 }
             }
         }
 
-        stages("Deploy Windows")
+        stage("Deploy Windows")
         {
-            whie(expression {DEPLOY_WINDOWS == 'true'})
+            when(expression {DEPLOY_WINDOWS == 'true'})
             stages
             {
                 echo 'Deploy Windows'
