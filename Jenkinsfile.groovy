@@ -47,7 +47,7 @@ pipeline
             {
                 expression {DEPLOY_WINDOWS == 'true'}
             }
-            stages
+            steps
             {
                 echo 'Deploy Windows'
             }
