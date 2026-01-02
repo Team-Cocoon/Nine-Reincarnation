@@ -23,7 +23,10 @@ pipeline
     {
         stage("Build Windows")
         {
-            when(expression {BUILD_WINDOWS == 'true'})
+            when
+            {
+                expression {BUILD_WINDOWS == 'true'}
+            }
             steps
             {
                 script
@@ -40,7 +43,10 @@ pipeline
 
         stage("Deploy Windows")
         {
-            when(expression {DEPLOY_WINDOWS == 'true'})
+            when
+            {
+                expression {DEPLOY_WINDOWS == 'true'}
+            }
             stages
             {
                 echo 'Deploy Windows'
