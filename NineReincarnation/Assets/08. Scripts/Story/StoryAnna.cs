@@ -11,9 +11,19 @@ public class StoryAnna : StoryNPC, IEventInterface
 
     private Queue<Transform> _wayPointQueue;
 
+    private void OnEnable()
+    {
+        
+    }
+
     private void Awake()
     {
         _wayPointQueue = new Queue<Transform>(_wayPoints);
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.Instance?.StopLoopingSfx(AudioManager.LoopSfx.Walk);
     }
 
     private async UniTask MoveToTarget()

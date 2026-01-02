@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 6273296981928984883}
   - component: {fileID: 8757269081382764078}
   - component: {fileID: 8081624250716652702}
+  - component: {fileID: 786113613046560872}
   m_Layer: 0
   m_Name: Milestone
   m_TagString: Untagged
@@ -397,3 +398,17 @@ MonoBehaviour:
   _renderer: {fileID: 1961477923397391825}
   _panel: {fileID: 2997622739294474028}
   _videoPlayer: {fileID: 2613206400599936072}
+--- !u!114 &786113613046560872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8143994413101042560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417a911d28c9d0640b80ef49fe359288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vp: {fileID: 2613206400599936072}
+  _videoName: 

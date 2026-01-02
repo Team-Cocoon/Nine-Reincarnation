@@ -29,7 +29,12 @@ public class SubStageSceneScope : LifetimeScope
 
         builder.RegisterComponent<LoadNextScene>(_loadNextScene);
 
+
         player = Parent.Container.Resolve<PlayerController>();
+        if(!player.gameObject.activeSelf)
+        {
+            player.gameObject.SetActive(true);
+        }
         player.ResetVelocityY();
     }
 

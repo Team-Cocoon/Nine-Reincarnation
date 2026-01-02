@@ -13,6 +13,10 @@ public class EventCamera : MonoBehaviour
     private bool _hasSkipEvent = false;
     public bool HasSkipEvent => _hasSkipEvent;
 
+    public void ZoomIn()
+    {
+        Zoom(1.0f, 7.0f).Forget();
+    }
 
     public async UniTask ExcuteEvent(CameraClass data)
     {

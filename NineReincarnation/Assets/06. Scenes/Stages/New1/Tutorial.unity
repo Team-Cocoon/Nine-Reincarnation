@@ -352,6 +352,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6680838354253225121, guid: c7c1fbf50ebce424bbaf5f91610ab96e, type: 3}
+      propertyPath: m_CropFrame
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680838354253225121, guid: c7c1fbf50ebce424bbaf5f91610ab96e, type: 3}
+      propertyPath: m_FilterMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680838354253225121, guid: c7c1fbf50ebce424bbaf5f91610ab96e, type: 3}
       propertyPath: m_GridSnapping
       value: 0
       objectReference: {fileID: 0}
