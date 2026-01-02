@@ -10,8 +10,8 @@ pipeline
     {
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\WindowBuild"
-        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\WebBuild"
+        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window"
+        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\WebBuild\\Web"
     }
 
     parameters {
