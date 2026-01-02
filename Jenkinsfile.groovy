@@ -4,6 +4,8 @@ def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION
 
 pipeline
 {
+    options { disableConcurrentBuilds(abortPrevious: true) }
+
     environment
     {
         PROJECT_PATH = "${CUSTOM_WORKSPACE}\\${PROJECT_NAME}"
@@ -42,7 +44,7 @@ pipeline
                     withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"])
                     {
                         bat '''
-                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -executeMethod BuildScript.BuildWindows -logfile -
+                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -executeMethod BuildScript.BuildWindows -buildOutput "%OUTPUT_WIN%" -logfile -
                         '''
                     }
                 }
@@ -74,7 +76,7 @@ pipeline
                     withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"])
                     {
                         bat '''
-                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -executeMethod BuildScript.BuildWindows -logfile -
+                        "%UNITY_PATH%/Unity.exe" -quit -batchmode -projectPath %PROJECT_PATH% -executeMethod BuildScript.BuildWebGL -buildOutput "%OUTPUT_WEB%" -logfile -
                         '''
                     }
                 }
