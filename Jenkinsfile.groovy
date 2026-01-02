@@ -10,14 +10,14 @@ pipeline
     {
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\Window"
-        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\Web"
+        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\WindowBuild"
+        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\WebBuild"
     }
 
     parameters {
         booleanParam(name: 'BUILD_WINDOWS', defaultValue: true, description: '윈도우 빌드 수행')
         booleanParam(name: 'DEPLOY_WINDOWS', defaultValue: false, description: '윈도우 배포 수행')
-        booleanParam(name: 'BUILD_WEBGL', defaultValue: false, description: 'WebGL 빌드 수행')
+        booleanParam(name: 'BUILD_WEBGL', defaultValue: true, description: 'WebGL 빌드 수행')
         booleanParam(name: 'DEPLOY_WEBGL', defaultValue: false, description: 'WebGL 배포 수행')
     }
 
