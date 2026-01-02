@@ -103,30 +103,22 @@ pipeline
         {
             script 
             {
-                // --- 1. 변수 계산 (여기서 먼저 계산합니다) ---
-                def commitMsg = "변경 사항 없음 (수동 빌드 또는 재시도)"
-                def commitAuthor = "Unknown"
+                // 1. Git 정보 가져오기 (아래 정의한 @NonCPS 함수 호출)
+                def gitData = getGitChanges() 
                 
-                // changeSets가 리스트라 복잡해서 안전하게 가져오는 로직
-                def changeLogSets = currentBuild.changeSets
-                if (changeLogSets.size() > 0) {
-                    def entries = changeLogSets[0].items
-                    if (entries.length > 0) {
-                        def lastEntry = entries[entries.length - 1]
-                        commitMsg = lastEntry.msg
-                        commitAuthor = lastEntry.author.fullName
-                    }
-                }
-
-                // --- 2. 디스코드 전송 (같은 블록 안이라 변수 사용 가능) ---
+                // 2. 현재 시간 구하기 (이게 없으면 에러 납니다)
+                def buildTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("Asia/Seoul"))
+                
+                // 3. 디스코드 전송
                 withCredentials([string(credentialsId: 'Discord-Webhook', variable: 'DISCORD')]) 
                 {
                     discordSend description: """
+                    **[빌드 성공]**
                     **결과** : ${currentBuild.result}
-                    📝 **커밋**: ${commitMsg}
-                    👤 **작성자**: ${commitAuthor}
+                    📝 **커밋**: ${gitData.msg}
+                    👤 **작성자**: ${gitData.author}
                     📅 **일시**: ${buildTime}
-                    ⏱ **실행 시간** : ${currentBuild.duration / 1000}s
+                    ⏱ **실행 시간** : ${currentBuild.durationString.replace(' and counting', '')}
                     """,
                     link: env.BUILD_URL, 
                     result: currentBuild.currentResult, 
@@ -149,4 +141,26 @@ pipeline
             }
         }
     }
+}
+
+@NonCPS
+def getGitChanges() {
+    def commitMsg = "변경 사항 없음 (수동 빌드 또는 재시도)"
+    def commitAuthor = "Unknown"
+    
+    try {
+        def changeLogSets = currentBuild.changeSets
+        if (changeLogSets.size() > 0) {
+            def entries = changeLogSets[0].items
+            if (entries.length > 0) {
+                def lastEntry = entries[entries.length - 1]
+                commitMsg = lastEntry.msg
+                commitAuthor = lastEntry.author.fullName
+            }
+        }
+    } catch (Exception e) {
+        commitMsg = "커밋 정보 불러오기 실패: ${e.message}"
+    }
+    
+    return [msg: commitMsg, author: commitAuthor]
 }
