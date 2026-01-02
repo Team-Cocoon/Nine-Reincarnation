@@ -121,11 +121,10 @@ pipeline
                 withCredentials([string(credentialsId: 'Discord-Webhook', variable: 'DISCORD')]) 
                 {
                     discordSend description: """
-                    **제목** : ${currentBuild.displayName}
                     **결과** : ${currentBuild.result}
                     📝 **커밋**: ${commitMsg}
                     👤 **작성자**: ${commitAuthor}
-                    ⏱ **시간**: ${currentBuild.durationString.replace(' and counting', '')}
+                    📅 **일시**: ${buildTime}
                     ⏱ **실행 시간** : ${currentBuild.duration / 1000}s
                     """,
                     link: env.BUILD_URL, 
@@ -139,9 +138,8 @@ pipeline
         failure {
             withCredentials([string(credentialsId: 'Discord-Webhook', variable: 'DISCORD')]) {
                         discordSend description: """
-                        **제목** : ${currentBuild.displayName}
                         **결과** : ${currentBuild.result}
-                        ⏱ **시간**: ${currentBuild.durationString.replace(' and counting', '')}
+                        📅 **일시**: ${buildTime}
                         ⏱ **실행 시간** : ${currentBuild.duration / 1000}s
                         """,
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
