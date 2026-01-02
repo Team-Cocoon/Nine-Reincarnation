@@ -8,7 +8,7 @@ pipeline
 
     environment
     {
-        PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
+        PROJECT_PATH = "${WORKSPACE}\\${PROJECT_NAME}"
 
         OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\Window\\NineReincarnation.exe"
         OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\Web"
