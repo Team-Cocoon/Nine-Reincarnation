@@ -30,7 +30,7 @@ public class BuildScript
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
         {
             scenes = GetEnableScenes(),
-            locationPathName = $"{path}",
+            locationPathName = $"{path}/NineReincarnation.exe",
             target = BuildTarget.StandaloneWindows64,
             options = BuildOptions.None
         };

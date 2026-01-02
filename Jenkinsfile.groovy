@@ -10,7 +10,7 @@ pipeline
     {
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\Window\\NineReincarnation.exe"
+        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\Window"
         OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\Web"
     }
 
