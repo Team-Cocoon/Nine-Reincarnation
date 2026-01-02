@@ -17,7 +17,7 @@ pipeline
     parameters {
         booleanParam(name: 'BUILD_WINDOWS', defaultValue: true, description: '윈도우 빌드 수행')
         booleanParam(name: 'DEPLOY_WINDOWS', defaultValue: false, description: '윈도우 배포 수행')
-        booleanParam(name: 'BUILD_WEBGL', defaultValue: true, description: 'WebGL 빌드 수행')
+        booleanParam(name: 'BUILD_WEBGL', defaultValue: false, description: 'WebGL 빌드 수행')
         booleanParam(name: 'DEPLOY_WEBGL', defaultValue: false, description: 'WebGL 배포 수행')
     }
 
