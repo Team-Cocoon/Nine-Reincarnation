@@ -1,4 +1,4 @@
-def PROJECT_NAME = "Nine-Reincarnation"
+def PROJECT_NAME = "NineReincarnation"
 def CUSTOM_WORKSPACE = "C:\\Git\\${PROJECT_NAME}"
 def UNITY_VERSION = "6000.1.17f1"
 def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION}\\Editor"
