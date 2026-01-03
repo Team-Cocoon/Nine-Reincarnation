@@ -72,7 +72,7 @@ pipeline
                         bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
                         
                         // 파이썬 라이브러리 설치 (필요시)
-                        bat "pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
+                        bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
                         
                         // 업로드 스크립트 실행 (유니티가 만든 Zip 파일 경로 전달)
                         bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WIN_ZIP%\""
@@ -116,7 +116,8 @@ pipeline
                 {
                     script {
                         bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
-                        bat "pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
+                        
+                        bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
                         
                         // WebGL Zip 파일 업로드
                         bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WEB_ZIP%\""
