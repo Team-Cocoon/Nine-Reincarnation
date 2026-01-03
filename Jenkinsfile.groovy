@@ -17,6 +17,8 @@ pipeline
 
         OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window.zip"
         OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\WebBuild\\Web.zip"
+
+        UPLOAD_SCRIPT = "upload_to_drive.py"
     }
 
     parameters {
@@ -75,7 +77,7 @@ pipeline
                         bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
                         
                         // 업로드 스크립트 실행 (유니티가 만든 Zip 파일 경로 전달)
-                        bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WIN_ZIP%\""
+                        bat "python ${UPLOAD_SCRIPT} \"%OUTPUT_WIN_ZIP%\""
                         
                         // 보안을 위해 키 파일 삭제
                         bat "del %GDRIVE_KEY_PATH%"
@@ -116,11 +118,11 @@ pipeline
                 {
                     script {
                         bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
-                        
+
                         bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
                         
                         // WebGL Zip 파일 업로드
-                        bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WEB_ZIP%\""
+                        bat "python ${UPLOAD_SCRIPT} \"%OUTPUT_WEB_ZIP%\""
                         
                         bat "del %GDRIVE_KEY_PATH%"
                     }
