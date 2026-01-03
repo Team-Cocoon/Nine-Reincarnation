@@ -8,10 +8,15 @@ pipeline
 
     environment
     {
+        KEY_FILE_PATH = 'jenkins-unity-upload-bd27d6a5ec4a.json'
+
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
         OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window"
         OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\WebBuild\\Web"
+
+        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window.zip"
+        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\WebBuild\\Web.zip"
     }
 
     parameters {
@@ -60,7 +65,22 @@ pipeline
             }
             steps
             {
-                echo 'Deploy Windows'
+                withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
+                {
+                    script {
+                        // 키 파일 복사
+                        bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
+                        
+                        // 파이썬 라이브러리 설치 (필요시)
+                        bat "pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
+                        
+                        // 업로드 스크립트 실행 (유니티가 만든 Zip 파일 경로 전달)
+                        bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WIN_ZIP%\""
+                        
+                        // 보안을 위해 키 파일 삭제
+                        bat "del %GDRIVE_KEY_PATH%"
+                    }
+                }
             }
         }
 
@@ -92,8 +112,20 @@ pipeline
             }
             steps
             {
-                echo 'Deploy Windows'
+                withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
+                {
+                    script {
+                        bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
+                        bat "pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
+                        
+                        // WebGL Zip 파일 업로드
+                        bat "python %UPLOAD_SCRIPT% \"%OUTPUT_WEB_ZIP%\""
+                        
+                        bat "del %GDRIVE_KEY_PATH%"
+                    }
+                }
             }
+        }
         }
     }
 
