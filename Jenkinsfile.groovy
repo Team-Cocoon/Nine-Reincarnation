@@ -160,15 +160,20 @@ pipeline
         }
 
         failure {
-            withCredentials([string(credentialsId: 'Discord-Webhook', variable: 'DISCORD')]) {
-                        discordSend description: """
-                        **결과** : ${currentBuild.result}
-                        📅 **일시**: ${buildTime}
-                        ⏱ **실행 시간** : ${currentBuild.duration / 1000}s
-                        """,
-                        link: env.BUILD_URL, result: currentBuild.currentResult, 
-                        title: "${env.JOB_NAME} : ${currentBuild.displayName} 실패", 
-                        webhookURL: "$DISCORD"
+            script {
+
+                def buildTime = new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("Asia/Seoul"))
+                
+                withCredentials([string(credentialsId: 'Discord-Webhook', variable: 'DISCORD')]) {
+                    discordSend description: """
+                    **결과** : ${currentBuild.result}
+                    📅 **일시**: ${buildTime}
+                    ⏱ **실행 시간** : ${currentBuild.durationString}
+                    """,
+                    link: env.BUILD_URL, result: currentBuild.currentResult, 
+                    title: "${env.JOB_NAME} : ${currentBuild.displayName} 실패", 
+                    webhookURL: "$DISCORD"
+                }
             }
         }
     }
