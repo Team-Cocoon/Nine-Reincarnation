@@ -71,7 +71,7 @@ pipeline
                 {
                     script {
                         // 키 파일 복사
-                        bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
+                        bat "copy /Y \"%SECRET_FILE%\" %KEY_FILE_PATH%"
                         
                         // 파이썬 라이브러리 설치 (필요시)
                         bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
@@ -80,7 +80,7 @@ pipeline
                         bat "python ${UPLOAD_SCRIPT} \"%OUTPUT_WIN_ZIP%\""
                         
                         // 보안을 위해 키 파일 삭제
-                        bat "del %GDRIVE_KEY_PATH%"
+                        bat "del %KEY_FILE_PATH%"
                     }
                 }
             }
@@ -117,14 +117,14 @@ pipeline
                 withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
                 {
                     script {
-                        bat "copy /Y \"%SECRET_FILE%\" %GDRIVE_KEY_PATH%"
+                        bat "copy /Y \"%SECRET_FILE%\" %KEY_FILE_PATH%"
 
                         bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
                         
                         // WebGL Zip 파일 업로드
                         bat "python ${UPLOAD_SCRIPT} \"%OUTPUT_WEB_ZIP%\""
                         
-                        bat "del %GDRIVE_KEY_PATH%"
+                        bat "del %KEY_FILE_PATH%"
                     }
                 }
             }
