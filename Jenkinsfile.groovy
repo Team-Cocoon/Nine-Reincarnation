@@ -12,12 +12,6 @@ pipeline
 
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WindowBuild\\Window"
-        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web"
-
-        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WindowBuild\\Window.zip"
-        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web.zip"
-
         UPLOAD_SCRIPT = "upload_to_drive.py"
     }
 
@@ -42,6 +36,8 @@ pipeline
             {
                 script
                 {
+                    def OUTPUT_WIN = "C:/Builds/NineReincarnation/${params.STATE}/WindowBuild/Window"
+
                     withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"])
                     {
                         bat '''
@@ -60,6 +56,9 @@ pipeline
             }
             steps
             {
+
+                def OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WindowBuild\\Window.zip"
+
                 withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
                 {
                     script {
@@ -89,6 +88,8 @@ pipeline
             {
                 script
                 {
+                    def OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web"
+
                     withEnv(["UNITY_PATH=${UNITY_INSTALLATION}"])
                     {
                         bat '''
@@ -107,6 +108,8 @@ pipeline
             }
             steps
             {
+                def OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web.zip"
+                
                 withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
                 {
                     script {
