@@ -74,8 +74,8 @@ pipeline
                 script 
                 {
                     // 배포 단계도 같은 워크스페이스를 써야 파일(업로드 스크립트 등)을 찾을 수 있습니다.
-                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${params.STATE}/NineReincarnation"
-                    def OUTPUT_WIN_ZIP = "C:/Builds/NineReincarnation/${params.STATE}/WindowBuild/Window.zip"
+                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${STATE}/NineReincarnation"
+                    def OUTPUT_WIN_ZIP = "C:/Builds/NineReincarnation/${STATE}/WindowBuild/Window.zip"
 
                     ws(WORKSPACE_PATH)
                     {
