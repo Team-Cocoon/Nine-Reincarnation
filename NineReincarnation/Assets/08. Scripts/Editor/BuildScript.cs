@@ -76,7 +76,12 @@ public class BuildScript
 
     private static void ZipBuild(string buildPath)
     {
-        string zipPath = buildPath + ".zip";
+        // Path.GetFullPath를 통해 절대 경로로 변환 후 구분자 통일
+        string normalizedBuildPath = Path.GetFullPath(buildPath).Replace('\\', '/');
+        // 끝에 슬래시가 있다면 제거 (계산 정확도를 위해)
+        normalizedBuildPath = normalizedBuildPath.TrimEnd('/');
+
+        string zipPath = normalizedBuildPath + ".zip";
         if (File.Exists(zipPath))
         {
             File.Delete(zipPath);
@@ -92,19 +97,27 @@ public class BuildScript
 
         using (ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Create))
         {
-            // buildPath 내부의 모든 파일을 가져옴 (하위 폴더 포함)
-            string[] allFiles = Directory.GetFiles(buildPath, "*.*", SearchOption.AllDirectories);
+            string[] allFiles = Directory.GetFiles(normalizedBuildPath, "*.*", SearchOption.AllDirectories);
 
             foreach (string filePath in allFiles)
             {
-                // 전체 경로에서 buildPath를 떼어내어 상대 경로를 만듦
-                string relativePath = filePath.Substring(buildPath.Length + 1).Replace('\\', '/');
+                // [수정 4] 파일 경로도 정규화
+                string normalizedFilePath = filePath.Replace('\\', '/');
 
-                // 제외할 폴더 이름으로 시작하는지 검사
+                // buildPath 길이 + 1(슬래시) 부터 자름
+                string relativePath = normalizedFilePath.Substring(normalizedBuildPath.Length);
+
+                // 만약 맨 앞에 슬래시가 남아있다면 제거 (예: "/Folder" -> "Folder")
+                if (relativePath.StartsWith("/"))
+                {
+                    relativePath = relativePath.Substring(1);
+                }
+
                 bool isExcluded = false;
                 foreach (string excluded in excludedFolders)
                 {
-                    // 폴더 이름으로 시작하면 제외 (폴더 자체이거나 그 하위 파일인 경우)
+                    // 그냥 StartsWith를 쓰면 "FolderA"가 "FolderA_Backup"까지 제외할 위험이 있음(물론 여기선 이름이 길어서 괜찮지만 안전하게)
+                    // 파일 자체가 제외 대상인지(폴더 내부 파일인지) 확인
                     if (relativePath.StartsWith(excluded, StringComparison.OrdinalIgnoreCase))
                     {
                         isExcluded = true;
@@ -112,9 +125,13 @@ public class BuildScript
                     }
                 }
 
-                // 제외 대상이 아니면 압축 파일에 추가
-                archive.CreateEntryFromFile(filePath, relativePath);
+                if (!isExcluded)
+                {
+                    archive.CreateEntryFromFile(filePath, relativePath);
+                }
             }
         }
+
+        Console.WriteLine($"Zip Created: {zipPath}");
     }
 }
