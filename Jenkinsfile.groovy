@@ -29,15 +29,15 @@ pipeline
         {
             when
             {
-                expression {params.BUILD_WINDOWS == 'true'}
+                expression {BUILD_WINDOWS == 'true'}
             }
             steps
             {
                 script
                 {
                     // 1. 여기서 동적 경로를 정의합니다. (이 시점에는 params.STATE가 100% 존재함)
-                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${params.STATE}/NineReincarnation"
-                    def OUTPUT_WIN = "C:/Builds/NineReincarnation/${params.STATE}/WindowBuild/Window"
+                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${STATE}/NineReincarnation"
+                    def OUTPUT_WIN = "C:/Builds/NineReincarnation/${STATE}/WindowBuild/Window"
                     
                     echo "Current Workspace: ${WORKSPACE_PATH}"
 
@@ -67,7 +67,7 @@ pipeline
         {
             when
             {
-                expression {params.DEPLOY_WINDOWS == 'true'}
+                expression {DEPLOY_WINDOWS == 'true'}
             }
             steps
             {
@@ -97,14 +97,14 @@ pipeline
         {
             when
             {
-                expression {params.BUILD_WEBGL == 'true'}
+                expression {BUILD_WEBGL == 'true'}
             }
             steps
             {
                 script
                 {
-                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${params.STATE}/NineReincarnation"
-                    def OUTPUT_WEB = "C:/Builds/NineReincarnation/${params.STATE}/WebBuild/Web"
+                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${STATE}/NineReincarnation"
+                    def OUTPUT_WEB = "C:/Builds/NineReincarnation/${STATE}/WebBuild/Web"
 
                     ws(WORKSPACE_PATH)
                     {
@@ -130,14 +130,14 @@ pipeline
         {
             when
             {
-                expression {params.DEPLOY_WEBGL == 'true'}
+                expression {DEPLOY_WEBGL == 'true'}
             }
             steps
             {
                 script 
                 {
-                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${params.STATE}/NineReincarnation"
-                    def OUTPUT_WEB_ZIP = "C:/Builds/NineReincarnation/${params.STATE}/WebBuild/Web.zip"
+                    def WORKSPACE_PATH = "C:/JenkinsWorkspace/${STATE}/NineReincarnation"
+                    def OUTPUT_WEB_ZIP = "C:/Builds/NineReincarnation/${STATE}/WebBuild/Web.zip"
                     
                     ws(WORKSPACE_PATH)
                     {
