@@ -12,20 +12,13 @@ pipeline
 
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window"
-        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\WebBuild\\Web"
+        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\${STATE}\\WindowBuild\\Window"
+        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\${STATE}\\WebBuild\\Web"
 
-        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\WindowBuild\\Window.zip"
-        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\WebBuild\\Web.zip"
+        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\${STATE}\\WindowBuild\\Window.zip"
+        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\${STATE}\\WebBuild\\Web.zip"
 
         UPLOAD_SCRIPT = "upload_to_drive.py"
-    }
-
-    parameters {
-        booleanParam(name: 'BUILD_WINDOWS', defaultValue: true, description: '윈도우 빌드 수행')
-        booleanParam(name: 'DEPLOY_WINDOWS', defaultValue: true, description: '윈도우 배포 수행')
-        booleanParam(name: 'BUILD_WEBGL', defaultValue: true, description: 'WebGL 빌드 수행')
-        booleanParam(name: 'DEPLOY_WEBGL', defaultValue: true, description: 'WebGL 배포 수행')
     }
 
     agent
@@ -33,7 +26,7 @@ pipeline
         label
         {
             label ""
-            customWorkspace "C:\\JenkinsWorkspace\\NineReincarnation"
+            customWorkspace "C:\\JenkinsWorkspace\\${STATE}\\NineReincarnation"
         }
     }
 
@@ -43,7 +36,7 @@ pipeline
         {
             when
             {
-                expression {params.BUILD_WINDOWS == true}
+                expression {BUILD_WINDOWS == 'true'}
             }
             steps
             {
@@ -63,7 +56,7 @@ pipeline
         {
             when
             {
-                expression {params.DEPLOY_WINDOWS == true}
+                expression {params.DEPLOY_WINDOWS == 'true'}
             }
             steps
             {
@@ -90,7 +83,7 @@ pipeline
         {
             when
             {
-                expression {params.BUILD_WEBGL == true}
+                expression {params.BUILD_WEBGL == 'true'}
             }
             steps
             {
@@ -110,7 +103,7 @@ pipeline
         {
             when
             {
-                expression {params.DEPLOY_WEBGL == true}
+                expression {params.DEPLOY_WEBGL == 'true'}
             }
             steps
             {

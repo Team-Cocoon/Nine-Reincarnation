@@ -5,15 +5,38 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 # --- 설정 정보 ---
-# 젠킨스 환경 변수에서 파일명을 가져오거나, 없으면 기본값 사용
 KEY_FILE_PATH = 'jenkins-unity-upload-bd27d6a5ec4a.json'
-FOLDER_ID = '1Jhi7R7-99fjV7AAYoUnbEVDb7zIg6nZT' 
 SCOPES = ['https://www.googleapis.com/auth/drive']
+
+# STATE 값에 따른 구글 드라이브 폴더 ID 매핑
+FOLDER_MAP = {
+    'Deploy': '1pjqoxWbmlhJqOlP3zPth-a4a6rIsKwUm',     
+    'Test': '1xgjhDKrMWTxPGePluaZe0b-umEIqZAm7'
+}
+
+def get_folder_id_by_state():
+    """젠킨스 환경변수 STATE를 읽어 해당되는 폴더 ID를 반환"""
+    # 1. 젠킨스에서 전달된 STATE 환경변수 읽기 (기본값: Dev)
+    state = os.environ.get('STATE', 'Deploy')
+    
+    # 2. 매핑된 ID 찾기
+    folder_id = FOLDER_MAP.get(state)
+    
+    if not folder_id:
+        print(f"[ERROR] No Folder ID mapped for STATE: '{state}'")
+        print(f"[CHECK] Please update FOLDER_MAP in the python script.")
+        sys.exit(1)
+        
+    print(f"[INFO] Current STATE: {state} -> Target Folder ID: {folder_id}")
+    return folder_id
 
 def upload_by_update(file_path):
     if not os.path.exists(KEY_FILE_PATH):
         print(f"[ERROR] Key file not found: {KEY_FILE_PATH}")
         sys.exit(1)
+
+    #동적으로 폴더 ID 가져오기
+    target_folder_id = get_folder_id_by_state()
 
     try:
         # 1. 인증
@@ -25,15 +48,16 @@ def upload_by_update(file_path):
         print(f"--------------------------------------------------")
         print(f"[INFO] Processing File: {file_name}")
 
-        # 2. 구글 드라이브에서 '같은 이름의 파일' 찾기
-        # (주의: 로봇이 '새로 만들기'를 하면 용량 부족 에러가 뜨므로, 있는 파일을 '수정'해야 함)
-        query = f"name = '{file_name}' and '{FOLDER_ID}' in parents and trashed=false"
+        # 2. 구글 드라이브에서 '해당 폴더(target_folder_id) 안의' 파일 찾기
+        # query 문자열 안에 target_folder_id를 넣습니다.
+        query = f"name = '{file_name}' and '{target_folder_id}' in parents and trashed=false"
+        
         results = service.files().list(q=query, fields="files(id, name)").execute()
         files = results.get('files', [])
 
         if not files:
-            print(f"[ERROR] File '{file_name}' not found in the Google Drive folder!")
-            print(f"[ACTION REQUIRED] Please upload a dummy file named '{file_name}' to the folder manually first.")
+            print(f"[ERROR] File '{file_name}' not found in the Google Drive folder ({target_folder_id})!")
+            print(f"[ACTION REQUIRED] Please upload a dummy file named '{file_name}' to the '{os.environ.get('STATE', 'Dev')}' folder manually first.")
             print("The robot (Service Account) has 0GB quota, so it can only UPDATE your existing files.")
             sys.exit(1)
 

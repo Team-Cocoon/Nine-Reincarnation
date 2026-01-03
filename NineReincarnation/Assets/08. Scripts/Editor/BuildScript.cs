@@ -81,6 +81,40 @@ public class BuildScript
         {
             File.Delete(zipPath);
         }
-        ZipFile.CreateFromDirectory(buildPath, zipPath);
+
+        string[] excludedFolders = new string[]
+        {
+            "NineReincarnation_BurstDebugInformation_DoNotShip",
+            "NineReincarnation_BackUpThisFolder_ButDontShipItWithYourGame"
+        };
+
+        Console.WriteLine($"Start Zipping: {zipPath}");
+
+        using (ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Create))
+        {
+            // buildPath 내부의 모든 파일을 가져옴 (하위 폴더 포함)
+            string[] allFiles = Directory.GetFiles(buildPath, "*.*", SearchOption.AllDirectories);
+
+            foreach (string filePath in allFiles)
+            {
+                // 전체 경로에서 buildPath를 떼어내어 상대 경로를 만듦
+                string relativePath = filePath.Substring(buildPath.Length + 1).Replace('\\', '/');
+
+                // 제외할 폴더 이름으로 시작하는지 검사
+                bool isExcluded = false;
+                foreach (string excluded in excludedFolders)
+                {
+                    // 폴더 이름으로 시작하면 제외 (폴더 자체이거나 그 하위 파일인 경우)
+                    if (relativePath.StartsWith(excluded, StringComparison.OrdinalIgnoreCase))
+                    {
+                        isExcluded = true;
+                        break;
+                    }
+                }
+
+                // 제외 대상이 아니면 압축 파일에 추가
+                archive.CreateEntryFromFile(filePath, relativePath);
+            }
+        }
     }
 }
