@@ -12,11 +12,11 @@ pipeline
 
         PROJECT_PATH = "C:\\Git\\Nine-Reincarnation\\${PROJECT_NAME}"
 
-        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\${STATE}\\WindowBuild\\Window"
-        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\${STATE}\\WebBuild\\Web"
+        OUTPUT_WIN = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WindowBuild\\Window"
+        OUTPUT_WEB = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web"
 
-        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\${STATE}\\WindowBuild\\Window.zip"
-        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\${STATE}\\WebBuild\\Web.zip"
+        OUTPUT_WIN_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WindowBuild\\Window.zip"
+        OUTPUT_WEB_ZIP = "C:\\Builds\\NineReincarnation\\${params.STATE}\\WebBuild\\Web.zip"
 
         UPLOAD_SCRIPT = "upload_to_drive.py"
     }
