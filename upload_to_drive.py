@@ -10,8 +10,8 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 
 # STATE 값에 따른 구글 드라이브 폴더 ID 매핑
 FOLDER_MAP = {
-    'Deploy': '1pjqoxWbmlhJqOlP3zPth-a4a6rIsKwUm',     
-    'Test': '1xgjhDKrMWTxPGePluaZe0b-umEIqZAm7'
+    'Deploy': os.getenv('ENV_FOLDER_ID_DEPLOY'),     
+    'Test': os.getenv('ENV_FOLDER_ID_TEST')
 }
 
 def get_folder_id_by_state():
