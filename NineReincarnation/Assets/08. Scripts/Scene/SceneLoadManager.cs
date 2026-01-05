@@ -16,6 +16,21 @@ public class SceneLoadManager : MonoBehaviour
         _saveManager = saveManager;
     }
 
+    public bool GetInitScenePath(ref string scenePath)
+    {
+        switch (_gameData.State)
+        {
+            case GameState.Stoty:
+                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
+                return true;
+            case GameState.Stage:
+                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
+                return true;
+        }
+
+        return false;
+    }
+
     public bool GetScenePath(ref string scenePath)
     {
         _saveManager.Save();

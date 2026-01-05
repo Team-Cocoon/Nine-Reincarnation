@@ -51,7 +51,7 @@ public class SceneDataManager : MonoBehaviour
 
         if (_sceneData.StageScene.SubSceneGroups[index].Size <= subIndex)
         {
-            subIndex = 0;
+            subIndex = 1;
             index++;
 
             return true;

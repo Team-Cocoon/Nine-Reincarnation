@@ -79,7 +79,11 @@ pipeline
 
                     ws(WORKSPACE_PATH)
                     {
-                        withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
+                        withCredentials([
+                            file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE'),
+                            string(credentialsId: 'GDRIVE_FOLDER_ID_DEPLOY', variable: 'ENV_FOLDER_ID_DEPLOY'),
+                            string(credentialsId: 'GDRIVE_FOLDER_ID_TEST', variable: 'ENV_FOLDER_ID_TEST')
+                        ])
                         {
                             bat "copy /Y \"%SECRET_FILE%\" %KEY_FILE_PATH%"
                             bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"
@@ -141,7 +145,11 @@ pipeline
                     
                     ws(WORKSPACE_PATH)
                     {
-                        withCredentials([file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE')]) 
+                        withCredentials([
+                            file(credentialsId: 'gdrive-secret-key', variable: 'SECRET_FILE'),
+                            string(credentialsId: 'GDRIVE_FOLDER_ID_DEPLOY', variable: 'ENV_FOLDER_ID_DEPLOY'),
+                            string(credentialsId: 'GDRIVE_FOLDER_ID_TEST', variable: 'ENV_FOLDER_ID_TEST')
+                        ])
                         {
                             bat "copy /Y \"%SECRET_FILE%\" %KEY_FILE_PATH%"
                             bat "python -m pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib"

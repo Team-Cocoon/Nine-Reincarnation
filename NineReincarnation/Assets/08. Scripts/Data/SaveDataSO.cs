@@ -21,7 +21,7 @@ public class SaveDataSO : ScriptableObject
     {
         State = GameState.Stoty;
         StageIndex = 0;
-        StageSubIndex = 0;
+        StageSubIndex = 1;
         StoryIndex = 0;
         StorySubIndex = 0;
         CheckPoint = null;

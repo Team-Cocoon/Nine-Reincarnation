@@ -4,7 +4,7 @@ using VContainer;
 
 public enum SceneLoadType
 {
-    None = 0,
+    Init = 0,
     Add = 1,
     Change = 2,
     Load = 3
@@ -24,11 +24,22 @@ public class SceneTrigger
 
     public async void LoadScene(SceneLoadType type)
     {
-        _sceneLoadManager.GetScenePath(ref _sceneLoader.SubScenePath);
+        if(type == SceneLoadType.Init)
+        {
+            _sceneLoadManager.GetInitScenePath(ref _sceneLoader.SubScenePath);
+        }
+        else
+        {
+            _sceneLoadManager.GetScenePath(ref _sceneLoader.SubScenePath);
+        }
 
         if (string.IsNullOrEmpty(_sceneLoader.SubScenePath)) return;
+
         switch (type)
         {
+            case SceneLoadType.Init:
+                await _sceneLoader.AddSubScene();
+                break;
             case SceneLoadType.Add:
                 await _sceneLoader.AddSubScene();
                 break;
