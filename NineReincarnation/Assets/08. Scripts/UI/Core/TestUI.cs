@@ -105,18 +105,28 @@ public class TestUI : ToggleUI
 
     private void StageChange(int x)
     {
-        _stageStateDropdown.options
+        string selectedText = _stageStateDropdown.options[x].text;
 
-        _stageIndex    = x / _sceneData.StageScene.Size;
-        _stageSubIndex = (x % _sceneData.StageScene.Size) + (_stageIndex + 1);
+        string[] parts = selectedText.Split('-');
+
+        if (parts.Length >= 2)
+        {
+            _stageIndex = int.Parse(parts[0]) - 1;
+            _stageSubIndex = int.Parse(parts[1]);
+        }
     }
 
     private void StoryChange(int x)
     {
-        _storyStateDropdown.options
+        string selectedText = _storyStateDropdown.options[x].text;
 
-        _storyIndex    = x / _sceneData.StoryScene.Size;
-        _storySubIndex = x % _sceneData.StoryScene.Size;
+        string[] parts = selectedText.Split('-');
+
+        if (parts.Length >= 2)
+        {
+            _storyIndex = int.Parse(parts[0]) - 1;
+            _storySubIndex = int.Parse(parts[1]) - 1;
+        }
     }
 
     private void Awake()
@@ -170,13 +180,15 @@ public class TestUI : ToggleUI
                 GameEventHandler.TitleExcuted_Invoke();
                 break;
             case SceneStateType.Story:
-                _gameData.StoryIndex = 0;
-                _gameData.StorySubIndex = 0;
+                _saveManager.SetSaveData(0);
+                _gameData.StoryIndex = _storyIndex;
+                _gameData.StorySubIndex = _storySubIndex;
                 GameEventHandler.StoryExcuted_Invoke();
                 break;
             case SceneStateType.Stage:
-                _gameData.StageIndex = 0;
-                _gameData.StageSubIndex = 0;
+                _saveManager.SetSaveData(0);
+                _gameData.StageIndex = _stageIndex;
+                _gameData.StageSubIndex = _stageSubIndex;
                 GameEventHandler.StageExcuted_Invoke();
                 break;
             case SceneStateType.Clear:
