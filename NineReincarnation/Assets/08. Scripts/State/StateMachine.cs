@@ -28,8 +28,6 @@ namespace StateMachine
         /// <param name="state"></param>
         public void TransitionTo(IState nextState)
         {
-            if (CurrentState == nextState) return;
-
             CurrentState.Exit();
             CurrentState = nextState;
             nextState.Enter();
