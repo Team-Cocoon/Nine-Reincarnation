@@ -19,24 +19,29 @@ public class TestUI : ToggleUI
     [SerializeField] private GameObject _uiToggleButton;
 
     [Header("--- SceneState ---")]
-    [SerializeField] private GameObject _statePanel;
-    [SerializeField] private TMP_Dropdown _stateDropdown;
+    [SerializeField] private GameObject           _statePanel;
+    [SerializeField] private TMP_Dropdown         _stateDropdown;
     [SerializeField] private List<SceneStateType> _stateList;
-    [SerializeField] private int resolutionNum;
-    [SerializeField] private Toggle _screenToggle;
-    [SerializeField] private FullScreenMode _screenMode;
+    [SerializeField] private SceneStateType       _curState = 0;
 
     [Header("--- StageState ---")]
-    [SerializeField] private GameObject _stageStatePanel;
+    [SerializeField] private GameObject   _stageStatePanel;
     [SerializeField] private TMP_Dropdown _stageStateDropdown;
 
     [Header("--- StoryState ---")]
-    [SerializeField] private GameObject _storyStatePanel;
+    [SerializeField] private GameObject   _storyStatePanel;
     [SerializeField] private TMP_Dropdown _storyStateDropdown;
 
     [Inject] private CoreSceneLoader _coreSceneLoader;
-    private SceneStateType curState = 0;
+    [Inject] private SaveManager     _saveManager;
 
+    private GameProgressData _gameData => _saveManager.GameData;
+
+    private int _storyIndex = 0;
+    private int _storySubIndex = 0;
+
+    private int _stageIndex = 0;
+    private int _stageSubIndex = 0;
 
     private void InitDropDownOption()
     {
@@ -54,30 +59,64 @@ public class TestUI : ToggleUI
         }
 
         _stageStateDropdown.ClearOptions();
-        for(int i = 0; i < _sceneData.StageScene.Size; ++i)
+        for (int i = 0; i < _sceneData.StageScene.Size; ++i)
         {
-            for (int j = 0; j <= _sceneData.StageScene.SubSceneGroups[i].Size; ++j)
+            for (int j = 1; j < _sceneData.StageScene.SubSceneGroups[i].Size; ++j)
             {
-
+                _stageStateDropdown.options.Add(new TMP_Dropdown.OptionData($"{i + 1}-{j}"));
             }
         }
+
 
         _storyStateDropdown.ClearOptions();
         for (int i = 0; i < _sceneData.StoryScene.Size; ++i)
         {
-            for (int j = 0; j <= _sceneData.StoryScene.SubSceneGroups[i].Size; ++j)
+            for (int j = 0; j < _sceneData.StoryScene.SubSceneGroups[i].Size; ++j)
             {
-
+                _storyStateDropdown.options.Add(new TMP_Dropdown.OptionData($"{i + 1}-{j + 1}"));
             }
         }
     }
 
-    public void ResolutionChange(int x)
+    private void SceneStateChange(int x)
     {
-        if (_stateList[x] != curState)
+        if (_stateList[x] != _curState)
         {
-            curState = _stateList[x];
+            _curState = _stateList[x];
+
+            switch (_curState)
+            {
+                case SceneStateType.Title:
+                case SceneStateType.Clear:
+                    _stageStatePanel.SetActive(false);
+                    _storyStatePanel.SetActive(false);
+                    break;
+                case SceneStateType.Story:
+                    _stageStatePanel.SetActive(false);
+                    _storyStatePanel.SetActive(true);
+                    break;
+                case SceneStateType.Stage:
+                    _stageStatePanel.SetActive(true);
+                    _storyStatePanel.SetActive(false);
+                    break;
+            }
         }
+    }
+
+    private void StageChange(int x)
+    {
+        _stageStateDropdown.options
+
+        _stageIndex    = x / _sceneData.StageScene.Size;
+        _stageSubIndex = (x % _sceneData.StageScene.Size) + (_stageIndex + 1);
+    }
+
+    private void StoryChange(int x)
+    {
+        _storyStateDropdown.options
+
+        _storyIndex    = x / _sceneData.StoryScene.Size;
+        _storySubIndex = x % _sceneData.StoryScene.Size;
     }
 
     private void Awake()
@@ -89,17 +128,25 @@ public class TestUI : ToggleUI
 
     private void Start()
     {
+        InitDropDownOption();
+
+        _stateDropdown.onValueChanged.AddListener(SceneStateChange);
+        _storyStateDropdown.onValueChanged.AddListener(StoryChange);
+        _stageStateDropdown.onValueChanged.AddListener(StageChange);
+
         _uiToggleButton.GetComponent<Button>().onClick.AddListener(ButtonEvent_SettingUI);
 
         _exitButton.onClick.AddListener(ButtonEvent_SettingUI);
-        _nextButton.onClick.RemoveListener(NextButtonEvent);
+        _nextButton.onClick.AddListener(NextButtonEvent);
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
 
-        _stateDropdown.onValueChanged.RemoveListener(ResolutionChange);
+        _stateDropdown.onValueChanged.RemoveListener(SceneStateChange);
+        _storyStateDropdown.onValueChanged.RemoveListener(StoryChange);
+        _stageStateDropdown.onValueChanged.RemoveListener(StageChange);
 
         _uiToggleButton.GetComponent<Button>().onClick.RemoveListener(ButtonEvent_SettingUI);
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
@@ -117,16 +164,20 @@ public class TestUI : ToggleUI
     {;
         UIEvent_ToggleUI();
 
-        switch (curState)
+        switch (_curState)
         {
             case SceneStateType.Title:
                 GameEventHandler.TitleExcuted_Invoke();
                 break;
             case SceneStateType.Story:
-
+                _gameData.StoryIndex = 0;
+                _gameData.StorySubIndex = 0;
+                GameEventHandler.StoryExcuted_Invoke();
                 break;
             case SceneStateType.Stage:
-
+                _gameData.StageIndex = 0;
+                _gameData.StageSubIndex = 0;
+                GameEventHandler.StageExcuted_Invoke();
                 break;
             case SceneStateType.Clear:
                 GameEventHandler.GameClearExcuted_Invoke();
