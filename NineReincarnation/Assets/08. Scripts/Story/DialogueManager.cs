@@ -17,6 +17,7 @@ namespace DialogueSpace
         [Inject]         private StoryAnimationManager _storyAnimationManager;
         [Inject]         private StoryEventManager     _storyEventManager;
         [Inject]         private BubbleManager         _bubbleManager;
+        [Inject]         private SelectManager         _selectManager;
         [Inject]         private PlayerController      _anna;
         [SerializeField] private GameObject            _npcAnna;
         [SerializeField] private int                   _id;
@@ -116,7 +117,7 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
                 {
-                    tasks.Add(_storyEventManager.ExcuteEvent(_cts));
+                    tasks.Add(_storyEventManager.ExcuteEvent(_cts, _id));
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Camera) == ExcelData.EventType.Camera)
                 {
@@ -129,6 +130,24 @@ namespace DialogueSpace
                 if ((dialogue.EventType & ExcelData.EventType.Bubble) == ExcelData.EventType.Bubble)
                 {
                     tasks.Add(_bubbleManager.ExcuteBubble(_dialogueDB.GetData<BubbleClass>(_id)));
+                }
+                if ((dialogue.EventType & ExcelData.EventType.Select) == ExcelData.EventType.Select)
+                {
+                    SelectClass data =_dialogueDB.GetData<SelectClass>(_id);
+
+                    int size = data.ChoiceCount;
+
+                    SelectDataStruct[] selectDataStructs = new SelectDataStruct[size];
+
+                    for (int i = 1; i <= size; ++i)
+                    {
+                        int id = _id * 10 + i;
+                        string script = _dialogueDB.GetData<ScriptClass>(id).Script;
+                        int nextId = _dialogueDB.GetData<DialogueClass>(id).NextID;
+                        selectDataStructs[i-1].SetSelectDataStruct(id, nextId, script);
+                    }
+
+                    tasks.Add(SelectWrapper(data, selectDataStructs));
                 }
 
                 await UniTask.WhenAll(tasks).AttachExternalCancellation(_cts.Token);
@@ -150,6 +169,10 @@ namespace DialogueSpace
             }
 
             return true;
+        }
+        private async UniTask SelectWrapper(SelectClass data, SelectDataStruct[] selectDataes)
+        {
+            _nextId = await _selectManager.ExcuteSelect(data, selectDataes);
         }
 
         private async UniTask FinishEvent()

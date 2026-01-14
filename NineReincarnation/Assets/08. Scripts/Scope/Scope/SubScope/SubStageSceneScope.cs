@@ -29,7 +29,6 @@ public class SubStageSceneScope : LifetimeScope
 
         builder.RegisterComponent<LoadNextScene>(_loadNextScene);
 
-
         player = Parent.Container.Resolve<PlayerController>();
         if(!player.gameObject.activeSelf)
         {
