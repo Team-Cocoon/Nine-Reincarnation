@@ -5,12 +5,12 @@ using VContainer;
 
 public class ChaseGhost : MonoBehaviour, ICollidable
 {
-    [SerializeField] private Transform          _player;
+    [SerializeField] private Transform _player;
     [SerializeField] private BehaviorGraphAgent _agent;
-    [SerializeField] private Animator           _animator;
-    [SerializeField] private Animator           _alertAnimator;
-    [SerializeField] private SpriteRenderer     _spriteRenderer;
-    [SerializeField] private Transform          _spawnPoint;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _alertAnimator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Transform _spawnPoint;
 
     public BlackboardVariable<bool> IsTargetDetected;
     public BlackboardVariable<bool> IsTargetCatched;

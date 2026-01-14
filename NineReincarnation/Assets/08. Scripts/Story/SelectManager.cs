@@ -1,14 +1,14 @@
-using Cysharp.Threading.Tasks;
-using ExcelData;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using System;
+using Cysharp.Threading.Tasks;
+using ExcelData;
 
 public class SelectManager : IDisposable
 {
-    private Dictionary<string, SelectUI> _selectDict     = new();
-    private CancellationTokenSource      _cts            = new();
-    private List<SelectUI>               _activeSelectUI = new List<SelectUI>(32);
+    private Dictionary<string, SelectUI> _selectDict = new();
+    private CancellationTokenSource _cts = new();
+    private List<SelectUI> _activeSelectUI = new List<SelectUI>(32);
 
     public SelectManager(SelectUI[] selectArray)
     {

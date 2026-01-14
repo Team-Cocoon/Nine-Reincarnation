@@ -49,7 +49,7 @@ public partial class NavigateAction : Action
         }
         else
         {
-            return new Vector2(UnityEngine.Random.Range(-y, -x),0);
+            return new Vector2(UnityEngine.Random.Range(-y, -x), 0);
         }
     }
 }

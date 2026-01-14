@@ -7,7 +7,7 @@ public class TriggerEnabler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag(_tag) && !_object.activeSelf)
+        if (collision.CompareTag(_tag) && !_object.activeSelf)
         {
             _object.SetActive(true);
         }

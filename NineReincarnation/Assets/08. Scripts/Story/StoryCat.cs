@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Player.Controller;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StoryCat : StoryNPC, IEventInterface
@@ -30,7 +30,7 @@ public class StoryCat : StoryNPC, IEventInterface
         if (sign >= float.Epsilon) Flip(PlayerDirection.Right);
         else Flip(PlayerDirection.Left);
 
-        if(_speed < 4.0f)
+        if (_speed < 4.0f)
         {
             NpcAnimator.SetTrigger("isMove");
         }
@@ -60,11 +60,11 @@ public class StoryCat : StoryNPC, IEventInterface
 
     public async UniTask ExecuteEvent(int index)
     {
-        if(index == 0)
+        if (index == 0)
         {
             await MoveToTarget();
         }
-        else if(index == 1)
+        else if (index == 1)
         {
             _speed = 6.0f;
             await MoveToTarget();

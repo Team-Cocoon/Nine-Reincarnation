@@ -12,7 +12,7 @@ enum CameraPriority
 public class VirtualCameraManager : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera _eventCam;
-    [SerializeField] private Transform         _storyObj;
+    [SerializeField] private Transform _storyObj;
 
     [SerializeField] private CinemachineCamera[] _cams;
     [SerializeField] private PolygonCollider2D[] _areas;
@@ -35,7 +35,7 @@ public class VirtualCameraManager : MonoBehaviour
         }
 
 
-        if(_eventCam != null)
+        if (_eventCam != null)
         {
             _eventCam.Follow = _storyObj;
         }

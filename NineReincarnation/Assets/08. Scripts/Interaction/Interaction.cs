@@ -16,13 +16,13 @@ public class Interaction : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         set
         {
             _isInteraction = value;
-            if(_isInteraction == false)
+            if (_isInteraction == false)
             {
                 OffHoverInteraction();
             }
             else
             {
-                if(_isHovered)
+                if (_isHovered)
                 {
                     OnHoverInteraction();
                 }

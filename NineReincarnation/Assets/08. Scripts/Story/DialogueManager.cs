@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -12,17 +10,17 @@ namespace DialogueSpace
 {
     public class DialogueManager : MonoBehaviour
     {
-        [Inject]         private DialogueUI            _dialogueUI;
-        [Inject]         private DialogueDB            _dialogueDB;
-        [Inject]         private StoryAnimationManager _storyAnimationManager;
-        [Inject]         private StoryEventManager     _storyEventManager;
-        [Inject]         private BubbleManager         _bubbleManager;
-        [Inject]         private SelectManager         _selectManager;
-        [Inject]         private PlayerController      _anna;
-        [SerializeField] private GameObject            _npcAnna;
-        [SerializeField] private int                   _id;
-        [SerializeField] private EventCamera           _camera;
-        [SerializeField] private VirtualCameraManager  _virtualCameraManager;
+        [Inject] private DialogueUI _dialogueUI;
+        [Inject] private DialogueDB _dialogueDB;
+        [Inject] private StoryAnimationManager _storyAnimationManager;
+        [Inject] private StoryEventManager _storyEventManager;
+        [Inject] private BubbleManager _bubbleManager;
+        [Inject] private SelectManager _selectManager;
+        [Inject] private PlayerController _anna;
+        [SerializeField] private GameObject _npcAnna;
+        [SerializeField] private int _id;
+        [SerializeField] private EventCamera _camera;
+        [SerializeField] private VirtualCameraManager _virtualCameraManager;
         [SerializeField] private bool _startScene = false;
 
 
@@ -37,7 +35,7 @@ namespace DialogueSpace
 
         private void OnEnable()
         {
-            if(_startScene)
+            if (_startScene)
             {
                 if (_anna.gameObject.activeSelf)
                 {
@@ -133,7 +131,7 @@ namespace DialogueSpace
                 }
                 if ((dialogue.EventType & ExcelData.EventType.Select) == ExcelData.EventType.Select)
                 {
-                    SelectClass data =_dialogueDB.GetData<SelectClass>(_id);
+                    SelectClass data = _dialogueDB.GetData<SelectClass>(_id);
 
                     int size = data.ChoiceCount;
 
@@ -144,7 +142,7 @@ namespace DialogueSpace
                         int id = _id * 10 + i;
                         string script = _dialogueDB.GetData<ScriptClass>(id).Script;
                         int nextId = _dialogueDB.GetData<DialogueClass>(id).NextID;
-                        selectDataStructs[i-1].SetSelectDataStruct(id, nextId, script);
+                        selectDataStructs[i - 1].SetSelectDataStruct(id, nextId, script);
                     }
 
                     tasks.Add(SelectWrapper(data, selectDataStructs));

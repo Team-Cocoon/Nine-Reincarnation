@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "RestartGhost", story: "RestartGhost", category: "Action", id: "f5df05c896c9ffbb65ee06c7213d8747")]

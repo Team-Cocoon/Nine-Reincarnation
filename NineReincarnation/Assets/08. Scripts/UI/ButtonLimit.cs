@@ -14,7 +14,7 @@ public class ButtonLimit : MonoBehaviour
             () =>
             {
                 count++;
-                if(count >= maxCount)
+                if (count >= maxCount)
                 {
                     button.gameObject.SetActive(false);
                 }

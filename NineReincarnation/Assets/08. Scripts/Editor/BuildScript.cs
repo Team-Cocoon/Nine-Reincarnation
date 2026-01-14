@@ -59,8 +59,8 @@ public class BuildScript
     public static void CreateDirectory(string path)
     {
         //디렉터리 존재 여부 확인
-        if(Directory.Exists(path))
-        {   
+        if (Directory.Exists(path))
+        {
             //디렉터리 생성
             Directory.Exists(path);
         }

@@ -7,7 +7,7 @@ public class SubStageSceneScope : LifetimeScope
 {
     [Header("----- StoryInstaller ------")]
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private StoryEventManager             _storyEventManager;
+    [SerializeField] private StoryEventManager _storyEventManager;
 
     [Header("----- SubSceneInstaller ------")]
     [SerializeField] private LoadNextScene _loadNextScene;
@@ -30,7 +30,7 @@ public class SubStageSceneScope : LifetimeScope
         builder.RegisterComponent<LoadNextScene>(_loadNextScene);
 
         player = Parent.Container.Resolve<PlayerController>();
-        if(!player.gameObject.activeSelf)
+        if (!player.gameObject.activeSelf)
         {
             player.gameObject.SetActive(true);
         }

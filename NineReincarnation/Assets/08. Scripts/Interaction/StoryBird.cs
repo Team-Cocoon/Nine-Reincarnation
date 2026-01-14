@@ -9,7 +9,7 @@ public class StoryBird : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && _detectedPlayer)
+        if (Input.GetKeyDown(KeyCode.E) && _detectedPlayer)
         {
             _detectedPlayer = false;
             _key.SetActive(false);
@@ -20,7 +20,7 @@ public class StoryBird : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             _detectedPlayer = true;
         }

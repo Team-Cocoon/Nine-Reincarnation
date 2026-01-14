@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class BigTree : DrawOutline, IClickInteractableToggle, IEventInterface
@@ -29,8 +28,8 @@ public class BigTree : DrawOutline, IClickInteractableToggle, IEventInterface
 
     public async UniTask ExecuteEvent(int index)
     {
-        switch(index)
-        { 
+        switch (index)
+        {
             case 0:
                 _Interaction.IsInteraction = true;
                 break;

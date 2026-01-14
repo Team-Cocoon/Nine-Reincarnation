@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class StoryAnna : StoryNPC, IEventInterface
 {
-    [SerializeField] private List<Transform>  _wayPoints;
-    [SerializeField] private Rigidbody2D      _rb2d;
-    [SerializeField] private float            _speed;
+    [SerializeField] private List<Transform> _wayPoints;
+    [SerializeField] private Rigidbody2D _rb2d;
+    [SerializeField] private float _speed;
 
     private Queue<Transform> _wayPointQueue;
 
     private void OnEnable()
     {
-        
+
     }
 
     private void Awake()
@@ -28,7 +28,7 @@ public class StoryAnna : StoryNPC, IEventInterface
 
     private async UniTask MoveToTarget()
     {
-        if(_wayPoints.Count == 0) return;
+        if (_wayPoints.Count == 0) return;
 
         Transform targetTransform = _wayPointQueue.Dequeue();
 
@@ -36,7 +36,7 @@ public class StoryAnna : StoryNPC, IEventInterface
 
         float sign = Mathf.Sign(targetTransform.position.x - transform.position.x);
 
-        if(sign >= float.Epsilon) Flip(PlayerDirection.Right);
+        if (sign >= float.Epsilon) Flip(PlayerDirection.Right);
         else Flip(PlayerDirection.Left);
 
         NpcAnimator.SetTrigger("isMove");
