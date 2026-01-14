@@ -190,6 +190,98 @@ MonoBehaviour:
     Duration: 0
     NextID: 0
   - ID: 107001
+    EventType: 4
+    Duration: 0
+    NextID: 107002
+  - ID: 107002
+    EventType: 4
+    Duration: 0
+    NextID: 107003
+  - ID: 107003
+    EventType: 2
+    Duration: 1
+    NextID: 107004
+  - ID: 107004
+    EventType: 5
+    Duration: 0
+    NextID: 107005
+  - ID: 107005
+    EventType: 34
+    Duration: 0
+    NextID: 107006
+  - ID: 107006
+    EventType: 16
+    Duration: 0
+    NextID: 107007
+  - ID: 107007
+    EventType: 1
+    Duration: 0
+    NextID: 107008
+  - ID: 107008
+    EventType: 4
+    Duration: 0
+    NextID: 107009
+  - ID: 107009
+    EventType: 1
+    Duration: 0
+    NextID: 107010
+  - ID: 107010
+    EventType: 1
+    Duration: 0
+    NextID: 107011
+  - ID: 107011
+    EventType: 1
+    Duration: 1
+    NextID: 107012
+  - ID: 107012
+    EventType: 64
+    Duration: 0
+    NextID: 0
+  - ID: 1070121
+    EventType: 16
+    Duration: 0
+    NextID: 107013
+  - ID: 1070122
+    EventType: 16
+    Duration: 0
+    NextID: 107016
+  - ID: 107013
+    EventType: 3
+    Duration: 0
+    NextID: 107014
+  - ID: 107014
+    EventType: 1
+    Duration: 0
+    NextID: 107015
+  - ID: 107015
+    EventType: 2
+    Duration: 0
+    NextID: 107012
+  - ID: 107016
+    EventType: 3
+    Duration: 2
+    NextID: 107017
+  - ID: 107017
+    EventType: 4
+    Duration: 0
+    NextID: 107018
+  - ID: 107018
+    EventType: 1
+    Duration: 0
+    NextID: 107019
+  - ID: 107019
+    EventType: 4
+    Duration: 0
+    NextID: 107020
+  - ID: 107020
+    EventType: 16
+    Duration: 0
+    NextID: 107021
+  - ID: 107021
+    EventType: 2
+    Duration: 0
+    NextID: 107022
+  - ID: 107022
     EventType: 0
     Duration: 0
     NextID: 0
@@ -226,6 +318,42 @@ MonoBehaviour:
     Name: Anna
     AnimationName: Anna_Surprised
     Direction: -1
+  - ID: 107004
+    Name: Cat
+    AnimationName: Cat_Jump
+    Direction: -1
+  - ID: 107007
+    Name: Cat
+    AnimationName: Cat_Stretch
+    Direction: -1
+  - ID: 107009
+    Name: Cat
+    AnimationName: Cat_Sit
+    Direction: -1
+  - ID: 107010
+    Name: Cat
+    AnimationName: Cat_Idle
+    Direction: -1
+  - ID: 107011
+    Name: Anna
+    AnimationName: Anna_Sit_Start
+    Direction: 1
+  - ID: 107013
+    Name: Anna
+    AnimationName: Anna_Stroking
+    Direction: 1
+  - ID: 107014
+    Name: Cat
+    AnimationName: Cat_Pet
+    Direction: -1
+  - ID: 107016
+    Name: Cat
+    AnimationName: Cat_Ready
+    Direction: -1
+  - ID: 107018
+    Name: Anna
+    AnimationName: Anna_Fall_Start
+    Direction: 0
   Script:
   - ID: 101003
     ShowName: "\uC548\uB098"
@@ -246,7 +374,7 @@ MonoBehaviour:
     ImageName: Anna_Smile
     Script: "{fade a=3.5} \uADF8\uB798\uB3C4 \uBB50, \uD638\uB791\uC774 \uAD74\uC5D0
       \uB4E4\uC5B4\uAC00\uB3C4 \uC815\uC2E0\uB9CC \uBC14\uC9DD \uCC28\uB9AC\uBA74
-      \uBE60\uC838\uB098\uC62C \uC218 \uC788\uB2E4 \uD588\uC796\uC544!"
+      <br>\uBE60\uC838\uB098\uC62C \uC218 \uC788\uB2E4 \uD588\uC796\uC544!"
   - ID: 101013
     ShowName: "\uC548\uB098"
     ImageName: Anna_Blank
@@ -270,44 +398,100 @@ MonoBehaviour:
     ShowName: "\uC548\uB098"
     ImageName: Anna_Confusion
     Script: "{fade a=3.5} \uC73C\uC545 \uC800\uAC74 \uBB50\uC57C?!!"
+  - ID: 107006
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Question
+    Script: "{fade a=3.5}\uACE0\uC591\uC774\uAC00 \uC65C \uC774\uACF3\uC5D0 \uC788\uC9C0?"
+  - ID: 1070121
+    ShowName: 
+    ImageName: 
+    Script: "\uC4F0\uB2E4\uB4EC\uAE30"
+  - ID: 1070122
+    ShowName: 
+    ImageName: 
+    Script: "\uAD00\uCC30\uD558\uAE30"
+  - ID: 107020
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Surprised
+    Script: "{fade a=3.5}\uACE0\uC591\uC544!!!! \uC5B4\uB514 \uAC00!!!"
   Camera:
   - ID: 101009
+    Name: 
     Type: 0
-    Size: 6.5
+    Size: 7
     Duration: 0.8
   - ID: 101010
+    Name: 
     Type: 0
     Size: 6
     Duration: 0.8
   - ID: 101011
+    Name: 
     Type: 2
     Size: 0.05
     Duration: -1
   - ID: 101012
+    Name: 
     Type: 1
     Size: 7
     Duration: 0.8
   - ID: 101017
+    Name: 
     Type: 1
     Size: 8
     Duration: 0.8
   - ID: 104002
+    Name: 
     Type: 0
     Size: 6
     Duration: 0.8
   - ID: 104005
+    Name: 
     Type: 1
     Size: 7
     Duration: 0.8
   - ID: 104015
+    Name: 
     Type: 0
     Size: 6
     Duration: 0.8
   - ID: 104023
+    Name: 
     Type: 2
     Size: 0.1
     Duration: -1
   - ID: 104024
+    Name: 
+    Type: 1
+    Size: 8
+    Duration: 0.8
+  - ID: 107003
+    Name: Cat
+    Type: 0
+    Size: 6
+    Duration: 3
+  - ID: 107005
+    Name: Anna
+    Type: 3
+    Size: 0
+    Duration: 0
+  - ID: 107013
+    Name: 
+    Type: 0
+    Size: 5.5
+    Duration: 3
+  - ID: 107015
+    Name: 
+    Type: 1
+    Size: 6
+    Duration: 0.8
+  - ID: 107016
+    Name: Cat
+    Type: 0
+    Size: 5.5
+    Duration: 2
+  - ID: 107021
+    Name: 
     Type: 1
     Size: 8
     Duration: 0.8
@@ -354,3 +538,12 @@ MonoBehaviour:
     Type: 2
     Script: "{fade a=3.5} <size=120%><shake>\uADF8\uB7EC\uB2C8 \uC0B0 \uC790\uC758
       \uC778\uC5F0\uC758 \uC2E4\uC744 \uB0B4\uAC00 \uAC00\uC838\uAC00\uC57C\uACA0\uC5B4!!!</>"
+  - ID: 107005
+    Name: Anna
+    Type: 2
+    Script: '!!!'
+  Select:
+  - ID: 107012
+    Script: "\uC5B4\uB5BB\uAC8C \uD560\uAE4C?"
+    Name: Anna
+    ChoiceCount: 2

@@ -14,14 +14,16 @@ namespace ExcelData
         Event     = 0b000000100,
         Wait      = 0b000001000,
         Script    = 0b000010000,
-        Bubble    = 0b000100000
+        Bubble    = 0b000100000,
+        Select    = 0b001000000,
     }
 
     public enum CameraEventType
     {
         ZoomIn,
         ZoomOut,
-        Shake
+        Shake,
+        CameraShift
     }
 
     [Serializable]
@@ -55,6 +57,7 @@ namespace ExcelData
     public class CameraClass
     {
         public int ID;
+        public string Name;
         public CameraEventType Type;
         public float Size;
         public float Duration;
@@ -69,6 +72,15 @@ namespace ExcelData
         public string Script;
     }
 
+    [Serializable]
+    public class SelectClass
+    {
+        public int ID;
+        public string Script;
+        public string Name;
+        public int ChoiceCount;
+    }
+
     [ExcelAsset(ExcelName = "DialogueData", HeaderRow = 0, DataStartRow = 1, DataStartColumn = 0, AssetPath = "07. ScriptableObjects", LogOnImport = true)]
     public class DialogueDataSO : ScriptableObject
     {
@@ -78,5 +90,6 @@ namespace ExcelData
         public List<ScriptClass> Script;
         public List<CameraClass> Camera;
         public List<BubbleClass> Bubble;
+        public List<SelectClass> Select;
     }
 }

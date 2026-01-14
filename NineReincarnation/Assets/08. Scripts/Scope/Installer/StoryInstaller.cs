@@ -20,12 +20,16 @@ public class StoryInstaller : IInstaller
     {
         StoryNPC[] allNpcs = Object.FindObjectsByType<StoryNPC>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         BubbleUI[] allBubbles = Object.FindObjectsByType<BubbleUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        SelectUI[] allSelect = Object.FindObjectsByType<SelectUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         builder.RegisterEntryPoint<StoryAnimationManager>(Lifetime.Scoped)
             .WithParameter(allNpcs)
             .AsSelf();
         builder.RegisterEntryPoint<BubbleManager>(Lifetime.Scoped)
             .WithParameter(allBubbles)
+            .AsSelf();
+        builder.RegisterEntryPoint<SelectManager>(Lifetime.Scoped)
+            .WithParameter(allSelect)
             .AsSelf();
 
         builder.RegisterComponent<StoryEventManager>(_storyEventManager);
