@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
@@ -8,19 +7,19 @@ using UnityEngine.UI;
 
 public struct SelectDataStruct
 {
-    private int    _id;
-    private int    _nextId;
+    private int _id;
+    private int _nextId;
     private string _script;
 
-    public int    Id     => _id;
-    public int    NextId => _nextId;
+    public int Id => _id;
+    public int NextId => _nextId;
     public string Script => _script;
-    
+
     public void SetSelectDataStruct(int id, int nextId, string script)
     {
-        _id     = id;
+        _id = id;
         _nextId = nextId;
-        _script = script; 
+        _script = script;
     }
 }
 
@@ -29,7 +28,7 @@ public struct SelectDataStruct
 public class SelectUI : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private TMP_Text   _questionText;
+    [SerializeField] private TMP_Text _questionText;
     [SerializeField] private GameObject _choiceButtonPrefab;
     [SerializeField] private List<GameObject> _choiceButtons;
 
@@ -49,7 +48,7 @@ public class SelectUI : MonoBehaviour
 
         _utcs = new UniTaskCompletionSource<int>();
 
-        if(_panel.transform.childCount < selectData.ChoiceCount)
+        if (_panel.transform.childCount < selectData.ChoiceCount)
         {
             for (int i = 0; i < selectData.ChoiceCount; i++)
             {

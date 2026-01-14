@@ -1,13 +1,11 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class ChaseGhostUI : MonoBehaviour, IEventInterface, IClickInteractableToggle
 {
-    [SerializeField] private GameObject  _panel;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private CanvasGroup _canvasGroup;
 
     public bool IsClickControlToSelf => false;
@@ -41,7 +39,7 @@ public class ChaseGhostUI : MonoBehaviour, IEventInterface, IClickInteractableTo
 
     public void EnableClickInteraction()
     {
-        if(_isActive == true) CloseUI().Forget();
+        if (_isActive == true) CloseUI().Forget();
     }
 
     public void DisableClickInteraction()

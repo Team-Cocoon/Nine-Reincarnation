@@ -4,7 +4,7 @@ using UnityEngine;
 public class StoryScroll : StoryNPC, IEventInterface, IClickInteractableToggle
 {
     [SerializeField] private ChaseGhostUI _storyUI;
-    [SerializeField] private Interaction  _Interaction;
+    [SerializeField] private Interaction _Interaction;
     [SerializeField] private AudioSource _audioSource;
     private bool isClick = false;
 

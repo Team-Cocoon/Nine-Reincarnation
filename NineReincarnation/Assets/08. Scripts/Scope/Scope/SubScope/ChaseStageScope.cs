@@ -7,7 +7,7 @@ public class ChaseStageScope : LifetimeScope
 {
     [Header("----- StoryInstaller ------")]
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private StoryEventManager             _storyEventManager;
+    [SerializeField] private StoryEventManager _storyEventManager;
 
     [Header("----- SubSceneInstaller ------")]
     [SerializeField] private LoadNextScene _loadNextScene;
@@ -20,8 +20,8 @@ public class ChaseStageScope : LifetimeScope
 
     [Header("----- Chase Scene -----")]
     [SerializeField] private ChaseGhost _chaseGhost;
-    [SerializeField] private float      _playerSpeed        = 6.0f;
-    [SerializeField] private float      _defaultPlayerSpeed = 4.0f;
+    [SerializeField] private float _playerSpeed = 6.0f;
+    [SerializeField] private float _defaultPlayerSpeed = 4.0f;
 
     private PlayerController player;
     protected override void Configure(IContainerBuilder builder)

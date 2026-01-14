@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 public class AsyncEvent : MonoBehaviour
@@ -22,7 +21,7 @@ public class AsyncEvent : MonoBehaviour
 
     private async UniTaskVoid RunTaskAsync(StoryEventManager storyEventManager)
     {
-        if(_eventQueue.Count == 0)
+        if (_eventQueue.Count == 0)
         {
             await _event.ExecuteEvent(0);
         }

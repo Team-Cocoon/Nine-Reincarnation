@@ -16,7 +16,7 @@ public class InteractionGrass : MonoBehaviour, IEventInterface
     public async UniTask ExecuteEvent(int index)
     {
         switch (index)
-        { 
+        {
             case 0:
                 _animator.SetBool("IsLoopWobble", true);
                 break;

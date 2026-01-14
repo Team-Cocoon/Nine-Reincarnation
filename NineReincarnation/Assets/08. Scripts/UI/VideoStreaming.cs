@@ -5,7 +5,7 @@ public class VideoStreaming : MonoBehaviour
 {
     [SerializeField] private VideoPlayer _vp;
     [SerializeField] private string _videoName;
- 
+
     void Awake()
     {
 
@@ -18,6 +18,6 @@ public class VideoStreaming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

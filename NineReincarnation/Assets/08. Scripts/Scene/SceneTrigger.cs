@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using VContainer;
 
@@ -24,7 +23,7 @@ public class SceneTrigger
 
     public async void LoadScene(SceneLoadType type)
     {
-        if(type == SceneLoadType.Init)
+        if (type == SceneLoadType.Init)
         {
             _sceneLoadManager.GetInitScenePath(ref _sceneLoader.SubScenePath);
         }

@@ -100,7 +100,7 @@ public class CoreSceneLoader : SceneLoader, IFadeEffect
         //페이드 인 순서
         _currentSceneState = sceneState.StateType;
 
-        if(loadSceneCount == 1)
+        if (loadSceneCount == 1)
         {
             await FadeIn();
 

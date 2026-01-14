@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 [Serializable]
@@ -23,7 +22,7 @@ public class StoryEventManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach(AsyncEventData data in _asyncEventArray)
+        foreach (AsyncEventData data in _asyncEventArray)
         {
             _asyncEventDict.Add(data.ID, data.StoryEvent);
         }

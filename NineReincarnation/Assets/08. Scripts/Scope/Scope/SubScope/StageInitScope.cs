@@ -8,9 +8,9 @@ public class StageInitScope : LifetimeScope
 {
     [Header("----- Stage Init -----")]
     [SerializeField] private PlayerController _player;
-    [SerializeField] private ThrowThread      _thread;
-    [SerializeField] private LoadNextScene    _loadNextScene;
-    [SerializeField] private CameraManager    _cameraManager;
+    [SerializeField] private ThrowThread _thread;
+    [SerializeField] private LoadNextScene _loadNextScene;
+    [SerializeField] private CameraManager _cameraManager;
 
     protected override void Configure(IContainerBuilder builder)
     {

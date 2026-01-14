@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EventTrigger : MonoBehaviour
 {
-    [SerializeField] private int             _id;
+    [SerializeField] private int _id;
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private string          _playerTag = "Player";
+    [SerializeField] private string _playerTag = "Player";
 
     private bool isTrigger = false;
 

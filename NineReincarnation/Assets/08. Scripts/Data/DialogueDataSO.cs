@@ -8,14 +8,14 @@ namespace ExcelData
     [Flags]
     public enum EventType
     {
-        End       = 0b000000000,
+        End = 0b000000000,
         Animation = 0b000000001,
-        Camera    = 0b000000010,
-        Event     = 0b000000100,
-        Wait      = 0b000001000,
-        Script    = 0b000010000,
-        Bubble    = 0b000100000,
-        Select    = 0b001000000,
+        Camera = 0b000000010,
+        Event = 0b000000100,
+        Wait = 0b000001000,
+        Script = 0b000010000,
+        Bubble = 0b000100000,
+        Select = 0b001000000,
     }
 
     public enum CameraEventType
