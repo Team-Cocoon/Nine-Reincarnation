@@ -2083,12 +2083,16 @@ PrefabInstance:
       value: AudioManger
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: LoopingChannels
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: BgmClips.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: SfxClips.Array.size
-      value: 21
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: 'BgmClips.Array.data[0]'
@@ -2118,6 +2122,30 @@ PrefabInstance:
       propertyPath: 'SfxClips.Array.data[20]'
       value: 
       objectReference: {fileID: 8300000, guid: 9422d89f43520304cad3a5ffaf2b9a17, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[21]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f2a860fc13cab54583a1015020d2510, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[22]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ec7cd85136a03f549b7b64053f8ca073, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[23]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 683a90068fbb84444a5552342e05f104, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[24]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1366c3edb7f3c8049995cc6784bb3076, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: LoopingSfxClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'LoopingSfxClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d76e738a0d5d64c4d8038c78d0e22892, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

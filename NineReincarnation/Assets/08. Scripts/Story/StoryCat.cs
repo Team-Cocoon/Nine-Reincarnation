@@ -40,6 +40,7 @@ public class StoryCat : StoryNPC, IEventInterface
         }
 
         Move(sign);
+        AudioManager.Instance?.PlayLoopingSfx(AudioManager.LoopSfx.CatWalk);
         while (dist > 0.1f)
         {
             dist = Vector2.Distance(transform.position, targetTransform.position);
@@ -47,6 +48,7 @@ public class StoryCat : StoryNPC, IEventInterface
             await UniTask.NextFrame(PlayerLoopTiming.FixedUpdate);
         }
         NpcAnimator.SetTrigger("isIdle");
+        AudioManager.Instance?.StopLoopingSfx(AudioManager.LoopSfx.CatWalk);
 
         _rb2d.linearVelocityX = 0.0f;
     }
@@ -58,6 +60,21 @@ public class StoryCat : StoryNPC, IEventInterface
         _rb2d.linearVelocityX = direction * _speed;
     }
 
+    public void PlayCatJumpSound()
+    {
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatJump);
+    }
+
+    public void PlayCatStrokedSound()
+    {
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatStroked);
+    }
+
+    public void PlayCatPositiveSound()
+    {
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatPositive);
+    }
+
     public async UniTask ExecuteEvent(int index)
     {
         if (index == 0)
@@ -67,6 +84,7 @@ public class StoryCat : StoryNPC, IEventInterface
         else if (index == 1)
         {
             _speed = 6.0f;
+            AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
             await MoveToTarget();
         }
     }
