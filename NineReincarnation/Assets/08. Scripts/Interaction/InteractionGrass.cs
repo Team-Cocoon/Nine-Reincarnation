@@ -31,7 +31,7 @@ public class InteractionGrass : MonoBehaviour, IEventInterface
         if (_isWobble) return;
         if (!collision.CompareTag(_playerTag)) return;
 
-        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.GrassHide);
+        PlayWobbleSound();
         _animator.SetTrigger("IsWobble");
         _isWobble = true;
     }
@@ -42,5 +42,10 @@ public class InteractionGrass : MonoBehaviour, IEventInterface
         if (!collision.CompareTag(_playerTag)) return;
 
         _isWobble = false;
+    }
+
+    public void PlayWobbleSound()
+    {
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.GrassHide);
     }
 }

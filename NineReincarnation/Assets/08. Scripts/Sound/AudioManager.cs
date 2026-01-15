@@ -58,11 +58,16 @@ public class AudioManager : MonoBehaviour
         GrassHide,
         CameraShake,
         Surprised,
-        GhoseDetected
+        GhoseDetected,
+        CatRun,
+        CatJump,
+        CatStroked,
+        CatPositive
     }
     public enum LoopSfx
     {
-        Walk
+        Walk,
+        CatWalk
     }
 
     private void Awake()
@@ -206,7 +211,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopLoopingSfx(LoopSfx sfx)
     {
-        AudioSource source = _loopingSfxPlayers[(int)sfx];
+        AudioSource source = _loopingSfxPlayers[0];
         if (source == null) return;
 
         AudioClip targetClip = source.clip;

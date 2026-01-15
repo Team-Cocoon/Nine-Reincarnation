@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using ExcelData;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public struct SelectDataStruct
@@ -94,6 +95,7 @@ public class SelectUI : MonoBehaviour
 
     public void CloseUI()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         _panel.SetActive(false);
     }
 }
