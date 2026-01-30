@@ -1,0 +1,549 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd21951de86c344ab1b08ffb3b01acf, type: 3}
+  m_Name: DialogueDataSO
+  m_EditorClassIdentifier: 
+  Dialogue:
+  - ID: 101001
+    EventType: 1
+    Duration: 0
+    NextID: 101002
+  - ID: 101002
+    EventType: 1
+    Duration: 0
+    NextID: 101003
+  - ID: 101003
+    EventType: 16
+    Duration: 0
+    NextID: 101004
+  - ID: 101004
+    EventType: 16
+    Duration: 0
+    NextID: 101005
+  - ID: 101005
+    EventType: 1
+    Duration: 0
+    NextID: 101006
+  - ID: 101006
+    EventType: 1
+    Duration: 0
+    NextID: 101007
+  - ID: 101007
+    EventType: 16
+    Duration: 0
+    NextID: 101008
+  - ID: 101008
+    EventType: 16
+    Duration: 0
+    NextID: 101009
+  - ID: 101009
+    EventType: 34
+    Duration: 0
+    NextID: 101010
+  - ID: 101010
+    EventType: 34
+    Duration: 0
+    NextID: 101011
+  - ID: 101011
+    EventType: 34
+    Duration: 2
+    NextID: 101012
+  - ID: 101012
+    EventType: 2
+    Duration: 2
+    NextID: 101013
+  - ID: 101013
+    EventType: 16
+    Duration: 0
+    NextID: 101014
+  - ID: 101014
+    EventType: 4
+    Duration: 0
+    NextID: 101015
+  - ID: 101015
+    EventType: 16
+    Duration: 0
+    NextID: 101016
+  - ID: 101016
+    EventType: 32
+    Duration: 0
+    NextID: 101017
+  - ID: 101017
+    EventType: 2
+    Duration: 0
+    NextID: 101018
+  - ID: 101018
+    EventType: 0
+    Duration: 0
+    NextID: 0
+  - ID: 104001
+    EventType: 4
+    Duration: 1
+    NextID: 104002
+  - ID: 104002
+    EventType: 2
+    Duration: 1
+    NextID: 104003
+  - ID: 104003
+    EventType: 16
+    Duration: 0
+    NextID: 104004
+  - ID: 104004
+    EventType: 16
+    Duration: 0
+    NextID: 104005
+  - ID: 104005
+    EventType: 2
+    Duration: 0
+    NextID: 104006
+  - ID: 104006
+    EventType: 4
+    Duration: 0
+    NextID: 104007
+  - ID: 104007
+    EventType: 4
+    Duration: 0
+    NextID: 104008
+  - ID: 104008
+    EventType: 1
+    Duration: 1
+    NextID: 104009
+  - ID: 104009
+    EventType: 1
+    Duration: 0
+    NextID: 104010
+  - ID: 104010
+    EventType: 4
+    Duration: 0
+    NextID: 104011
+  - ID: 104011
+    EventType: 4
+    Duration: 0
+    NextID: 104012
+  - ID: 104012
+    EventType: 4
+    Duration: 0
+    NextID: 104013
+  - ID: 104013
+    EventType: 4
+    Duration: 0
+    NextID: 104014
+  - ID: 104014
+    EventType: 4
+    Duration: 0
+    NextID: 104015
+  - ID: 104015
+    EventType: 2
+    Duration: 0
+    NextID: 104016
+  - ID: 104016
+    EventType: 1
+    Duration: 0
+    NextID: 104017
+  - ID: 104017
+    EventType: 1
+    Duration: 2
+    NextID: 104018
+  - ID: 104018
+    EventType: 16
+    Duration: 0
+    NextID: 104019
+  - ID: 104019
+    EventType: 32
+    Duration: 0
+    NextID: 104020
+  - ID: 104020
+    EventType: 32
+    Duration: 0
+    NextID: 104021
+  - ID: 104021
+    EventType: 32
+    Duration: 0
+    NextID: 104022
+  - ID: 104022
+    EventType: 32
+    Duration: 0
+    NextID: 104023
+  - ID: 104023
+    EventType: 34
+    Duration: 0
+    NextID: 104024
+  - ID: 104024
+    EventType: 2
+    Duration: 0
+    NextID: 104025
+  - ID: 104025
+    EventType: 4
+    Duration: 0
+    NextID: 104026
+  - ID: 104026
+    EventType: 0
+    Duration: 0
+    NextID: 0
+  - ID: 107001
+    EventType: 4
+    Duration: 0
+    NextID: 107002
+  - ID: 107002
+    EventType: 4
+    Duration: 0
+    NextID: 107003
+  - ID: 107003
+    EventType: 2
+    Duration: 1
+    NextID: 107004
+  - ID: 107004
+    EventType: 5
+    Duration: 0
+    NextID: 107005
+  - ID: 107005
+    EventType: 34
+    Duration: 0
+    NextID: 107006
+  - ID: 107006
+    EventType: 16
+    Duration: 0
+    NextID: 107007
+  - ID: 107007
+    EventType: 1
+    Duration: 0
+    NextID: 107008
+  - ID: 107008
+    EventType: 4
+    Duration: 0
+    NextID: 107009
+  - ID: 107009
+    EventType: 1
+    Duration: 0
+    NextID: 107010
+  - ID: 107010
+    EventType: 1
+    Duration: 0
+    NextID: 107011
+  - ID: 107011
+    EventType: 1
+    Duration: 1
+    NextID: 107012
+  - ID: 107012
+    EventType: 64
+    Duration: 0
+    NextID: 0
+  - ID: 1070121
+    EventType: 16
+    Duration: 0
+    NextID: 107013
+  - ID: 1070122
+    EventType: 16
+    Duration: 0
+    NextID: 107016
+  - ID: 107013
+    EventType: 3
+    Duration: 0
+    NextID: 107014
+  - ID: 107014
+    EventType: 1
+    Duration: 0
+    NextID: 107015
+  - ID: 107015
+    EventType: 2
+    Duration: 0
+    NextID: 107012
+  - ID: 107016
+    EventType: 3
+    Duration: 2
+    NextID: 107017
+  - ID: 107017
+    EventType: 4
+    Duration: 0
+    NextID: 107018
+  - ID: 107018
+    EventType: 1
+    Duration: 0
+    NextID: 107019
+  - ID: 107019
+    EventType: 4
+    Duration: 0
+    NextID: 107020
+  - ID: 107020
+    EventType: 16
+    Duration: 0
+    NextID: 107021
+  - ID: 107021
+    EventType: 2
+    Duration: 0
+    NextID: 107022
+  - ID: 107022
+    EventType: 0
+    Duration: 0
+    NextID: 0
+  Animation:
+  - ID: 101001
+    Name: Anna
+    AnimationName: Anna_Down
+    Direction: 1
+  - ID: 101002
+    Name: Anna
+    AnimationName: Anna_Wake
+    Direction: 1
+  - ID: 101005
+    Name: Anna
+    AnimationName: Anna_LookAround
+    Direction: -1
+  - ID: 101006
+    Name: Anna
+    AnimationName: Anna_LookAround
+    Direction: 1
+  - ID: 104008
+    Name: BigTree
+    AnimationName: BigTree_Shaked
+    Direction: 1
+  - ID: 104009
+    Name: Scroll
+    AnimationName: Scroll_Drop
+    Direction: 1
+  - ID: 104016
+    Name: ChaseGhost
+    AnimationName: ChaseGhost_Start
+    Direction: 1
+  - ID: 104017
+    Name: Anna
+    AnimationName: Anna_Surprised
+    Direction: -1
+  - ID: 107004
+    Name: Cat
+    AnimationName: Cat_Jump
+    Direction: -1
+  - ID: 107007
+    Name: Cat
+    AnimationName: Cat_Stretch
+    Direction: -1
+  - ID: 107009
+    Name: Cat
+    AnimationName: Cat_Sit
+    Direction: -1
+  - ID: 107010
+    Name: Cat
+    AnimationName: Cat_Idle
+    Direction: -1
+  - ID: 107011
+    Name: Anna
+    AnimationName: Anna_Sit_Start
+    Direction: 1
+  - ID: 107013
+    Name: Anna
+    AnimationName: Anna_Stroking
+    Direction: 1
+  - ID: 107014
+    Name: Cat
+    AnimationName: Cat_Pet
+    Direction: -1
+  - ID: 107016
+    Name: Cat
+    AnimationName: Cat_Ready
+    Direction: -1
+  - ID: 107018
+    Name: Anna
+    AnimationName: Anna_Fall_Start
+    Direction: 1
+  Script:
+  - ID: 101003
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Confusion
+    Script: "{fade a=3.5} \uC73C\uC73C... \uBA38\uB9AC\uC57C..."
+  - ID: 101004
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uB09C \uBD84\uBA85 \uAD50\uC2E4\uC5D0 \uC788\uC5C8\uB358
+      \uAC83 \uAC19\uC740\uB370 \uC5EC\uAE30\uB294 \uB3C4\uB300\uCCB4 \uC5B4\uB514\uC9C0?"
+  - ID: 101007
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Confusion
+    Script: "{fade a=3.5} \uC660\uC9C0 \uBAA8\uB974\uAC8C \uC73C\uC2A4\uC2A4\uD55C
+      \uAE30\uBD84\uC774 \uB4DC\uB124"
+  - ID: 101008
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Smile
+    Script: "{fade a=3.5} \uADF8\uB798\uB3C4 \uBB50, \uD638\uB791\uC774 \uAD74\uC5D0
+      \uB4E4\uC5B4\uAC00\uB3C4 \uC815\uC2E0\uB9CC \uBC14\uC9DD \uCC28\uB9AC\uBA74
+      <br>\uBE60\uC838\uB098\uC62C \uC218 \uC788\uB2E4 \uD588\uC796\uC544!"
+  - ID: 101013
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uADFC\uB370 \uC5B4\uB514\uB85C \uAC00\uC57C\uD558\uC9C0?"
+  - ID: 101015
+    ShowName: "\uC548\uB098"
+    ImageName: 
+    Script: "{fade a=3.5} \uC800\uAC74... \uC544\uAE4C \uB0B4\uAC00 \uAD50\uC2E4\uC5D0\uC11C
+      \uBD24\uB358 \uADF8 \uAC00\uC704\uC796\uC544!!"
+  - ID: 104003
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uD6C4 \uC544\uBB34\uB9AC \uCAD3\uC544\uC640\uB3C4 \uADF8
+      \uAC00\uC704\uB294 \uC548 \uBCF4\uC774\uB294 \uAC83 \uAC19\uB124"
+  - ID: 104004
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Blank
+    Script: "{fade a=3.5} \uADF8\uB098\uC800\uB098 \uC774 \uD070 \uB098\uBB34\uB294
+      \uBB50\uC9C0?"
+  - ID: 104018
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Confusion
+    Script: "{fade a=3.5} \uC73C\uC545 \uC800\uAC74 \uBB50\uC57C?!!"
+  - ID: 107006
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Question
+    Script: "{fade a=3.5}\uACE0\uC591\uC774\uAC00 \uC65C \uC774\uACF3\uC5D0 \uC788\uC9C0?"
+  - ID: 1070121
+    ShowName: 
+    ImageName: 
+    Script: "\uC4F0\uB2E4\uB4EC\uAE30"
+  - ID: 1070122
+    ShowName: 
+    ImageName: 
+    Script: "\uAD00\uCC30\uD558\uAE30"
+  - ID: 107020
+    ShowName: "\uC548\uB098"
+    ImageName: Anna_Surprised
+    Script: "{fade a=3.5}\uACE0\uC591\uC544!!!! \uC5B4\uB514 \uAC00!!!"
+  Camera:
+  - ID: 101009
+    Name: 
+    Type: 0
+    Size: 7
+    Duration: 0.8
+  - ID: 101010
+    Name: 
+    Type: 0
+    Size: 6
+    Duration: 0.8
+  - ID: 101011
+    Name: 
+    Type: 2
+    Size: 0.05
+    Duration: -1
+  - ID: 101012
+    Name: 
+    Type: 1
+    Size: 7
+    Duration: 0.8
+  - ID: 101017
+    Name: 
+    Type: 1
+    Size: 8
+    Duration: 0.8
+  - ID: 104002
+    Name: 
+    Type: 0
+    Size: 6
+    Duration: 0.8
+  - ID: 104005
+    Name: 
+    Type: 1
+    Size: 7
+    Duration: 0.8
+  - ID: 104015
+    Name: 
+    Type: 0
+    Size: 6
+    Duration: 0.8
+  - ID: 104023
+    Name: 
+    Type: 2
+    Size: 0.1
+    Duration: -1
+  - ID: 104024
+    Name: 
+    Type: 1
+    Size: 8
+    Duration: 0.8
+  - ID: 107003
+    Name: Cat
+    Type: 0
+    Size: 6
+    Duration: 3
+  - ID: 107005
+    Name: Anna
+    Type: 3
+    Size: 0
+    Duration: 0
+  - ID: 107013
+    Name: 
+    Type: 0
+    Size: 5.5
+    Duration: 3
+  - ID: 107015
+    Name: 
+    Type: 1
+    Size: 6
+    Duration: 0.8
+  - ID: 107016
+    Name: Cat
+    Type: 0
+    Size: 5.5
+    Duration: 2
+  - ID: 107021
+    Name: 
+    Type: 1
+    Size: 8
+    Duration: 0.8
+  Bubble:
+  - ID: 101009
+    Name: Anna
+    Type: 0
+    Script: "{fade a=3.5}<bounce a=0.2>\uC77C\uB2E8 \uAC00\uBCF4\uC790\uACE0!</>"
+  - ID: 101010
+    Name: Anna
+    Type: 1
+    Script: "{fade a=3.5}\uC5B4\uB5BB\uAC8C\uB4E0 \uB098\uAC08 \uBC29\uBC95\uC744
+      \uCC3E\uC544\uC11C..."
+  - ID: 101011
+    Name: Anna
+    Type: 2
+    Script: "{horiexp}<size=120%>\uB09C \uBC18\uB4DC\uC2DC \uC9D1\uC73C\uB85C \uB3CC\uC544\uAC08
+      \uAC70\uC57C!!!"
+  - ID: 101016
+    Name: Anna
+    Type: 0
+    Script: "{fade a=3.5} <wiggle a=0.1>\uAC70\uAE30 \uC11C!!!</>"
+  - ID: 104019
+    Name: ChaseGhost
+    Type: 0
+    Script: "{fade a=3.5}<size=80%> \uC544\uBB34\uB3C4 \uB3C4\uC640\uC8FC\uC9C0 \uC54A\uC558\uC5B4..."
+  - ID: 104020
+    Name: ChaseGhost
+    Type: 0
+    Script: "{fade a=3.5} <size=80%>\uC544\uBB34\uB3C4 \uC190 \uB0B4\uBC00\uC9C0
+      \uC54A\uC558\uC5B4..."
+  - ID: 104021
+    Name: ChaseGhost
+    Type: 2
+    Script: "{fade a=3.5} <shake>\uADF8\uB7F0 \uB108\uD76C\uB4E4 \uB54C\uBB38\uC5D0
+      \uB098\uB294 \uB9D8 \uD3B8\uD788 \uC8FD\uC9C0\uB3C4 \uBABB\uD558\uACE0 \uC788\uB294\uB370...!!!</>"
+  - ID: 104022
+    Name: ChaseGhost
+    Type: 2
+    Script: "{fade a=3.5} <shake>\uB108\uB294 \uC0B4\uC544\uC788\uB294 \uC790\uC758
+      \uB0C4\uC0C8\uB97C \uD48D\uAE30\uBA70 \uC798\uB3C4 \uC788\uAD6C\uB098!!</>"
+  - ID: 104023
+    Name: ChaseGhost
+    Type: 2
+    Script: "{fade a=3.5} <size=120%><shake>\uADF8\uB7EC\uB2C8 \uC0B0 \uC790\uC758
+      \uC778\uC5F0\uC758 \uC2E4\uC744 \uB0B4\uAC00 \uAC00\uC838\uAC00\uC57C\uACA0\uC5B4!!!</>"
+  - ID: 107005
+    Name: Anna
+    Type: 2
+    Script: '!!!'
+  Select:
+  - ID: 107012
+    Script: "\uC5B4\uB5BB\uAC8C \uD560\uAE4C?"
+    Name: Anna
+    ChoiceCount: 2
