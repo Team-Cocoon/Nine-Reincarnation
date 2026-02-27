@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 public class GoogleSheetDownloader : EditorWindow
 {
-    // [설정 변수 분리]
-    private string sheetId = "";            // 스프레드시트 ID
-    private string saveFolderPath = "Assets/08. Scripts/03. Data"; // 저장할 폴더 경로 (기본값: Assets)
+    private string sheetId = "";  // 스프레드시트 ID
+    private string saveFolderPath = "Assets/08. Scripts/03. Data"; // 저장할 폴더 경로
     private string saveFileName = "DialogueData.xlsx"; // 저장할 파일 이름
 
-// 레지스트리에 저장할 키값 (프로젝트마다 겹치지 않게 이름 포함)
+//저장할 키값 (프로젝트마다 겹치지 않게 이름 포함)
     private string PrefKeyId => Application.productName + "_SheetID";
     private string PrefKeyPath => Application.productName + "_SheetPath";
     private string PrefKeyFile => Application.productName + "_SheetFile";
@@ -51,11 +50,6 @@ public class GoogleSheetDownloader : EditorWindow
         // 1. Sheet ID 입력 (변경 시 즉시 저장하지 않고 창 닫을 때 저장)
         EditorGUI.BeginChangeCheck();
         sheetId = EditorGUILayout.TextField("Sheet ID", sheetId);
-        if (EditorGUI.EndChangeCheck())
-        {
-            // 입력할 때마다 저장하고 싶으면 여기서 SaveSettings() 호출
-            // 여기서는 성능을 위해 창 닫을 때 저장 (OnDisable)
-        }
         
         GUILayout.Space(5);
 

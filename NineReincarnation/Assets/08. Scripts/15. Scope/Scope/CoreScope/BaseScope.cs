@@ -16,8 +16,6 @@ public class BaseScope : LifetimeScope
 
     [Header("----- UI ------")]
     [SerializeField] private FadeUI _fadeUI;
-    [SerializeField] private UIManager _uiManager;
-    [SerializeField] private Camera _uiCamera;
     [SerializeField] private SettingUI _settingUI;
     [SerializeField] private DialogueUI _dialogueUI;
 
@@ -26,24 +24,12 @@ public class BaseScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
+        //UIManager 싱글톤 등록
+        builder.Register<UIManager>(Lifetime.Singleton);
+
         builder.RegisterEntryPoint<CoreSceneLoader>(Lifetime.Singleton).As<CoreSceneLoader>();
 
-        builder.RegisterInstance<DialogueDataSO>(_dialogueData);
-        builder.Register<DialogueDB>(Lifetime.Singleton);
-
-        builder.RegisterComponent<SceneDataManager>(_sceneDataManager);
-        builder.RegisterComponent<SaveManager>(_saveManager);
-        builder.RegisterComponent<FadeUI>(_fadeUI);
-        builder.RegisterComponent<UIManager>(_uiManager);
-        builder.RegisterComponent<Camera>(_uiCamera);
-        builder.RegisterComponent<SettingUI>(_settingUI);
-        builder.RegisterComponent<AudioManager>(_audioManager);
-        builder.RegisterComponent<DialogueUI>(_dialogueUI);
-
-        builder.RegisterBuildCallback(container =>
-        {
-            // VContainer 빌드가 끝나면, 이 코드를 즉시 실행해라.
-            container.Resolve<DialogueDB>();
-        });
+        builder.Register<CoreInitiator>(Lifetime.Scoped).AsSelf();   
+        builder.RegisterEntryPoint<EntryPoint>(Lifetime.Scoped).AsSelf();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using State.SceneState;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,13 +18,13 @@ struct Resolution
     }
 }
 
-public class SettingUI : ToggleUI
+public class SettingUI : GameUI
 {
-    [Header("--- 버튼 ---")]
+    [Header("--- Button ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
     [SerializeField] private Button _titleButton; //게임종료 버튼
 
-    [Header("--- 사운드 조절 ---")]
+    [Header("--- Sound ---")]
     [SerializeField] private SoundVolumeSO _volume;
     [SerializeField] private Slider _totalSlider;
     [SerializeField] private Slider _sfxSlider;
@@ -34,7 +33,7 @@ public class SettingUI : ToggleUI
     [Header("--- SettingButton ---")]
     [SerializeField] private GameObject _uiToggleButton;
 
-    [Header("--- 해상도 조절 ---")]
+    [Header("--- Resolution ---")]
     [SerializeField] private GameObject _resolutionPanel;
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private List<Resolution> _resolutionList;
@@ -46,6 +45,14 @@ public class SettingUI : ToggleUI
     private List<Resolution> _resolutions = new List<Resolution>();
     private int width = 1920;
     private int height = 1080;
+
+    protected override void ToggleUI()
+    {
+        base.ToggleUI();
+
+        //열때 시간 정지
+        Time.timeScale = _ui.activeSelf ? 1 : 0;
+    }
 
     private void InitResolution()
     {
@@ -78,8 +85,6 @@ public class SettingUI : ToggleUI
     private void Awake()
     {
         _uiToggleButton.SetActive(true);
-
-        UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
     }
 
     private void Start()
@@ -128,21 +133,19 @@ public class SettingUI : ToggleUI
         _totalSlider.onValueChanged.RemoveListener(OnTotalSliderChanged);
         _sfxSlider.onValueChanged.RemoveListener(OnSfxSliderChanged);
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
-
-        UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
     }
 
 
     private void ButtonEvent_SettingUI()
     {
         PlayClickSound();
-        UIEvent_ToggleUI();
+        ToggleUI();
     }
 
     private void TitleButtonEvent()
     {
         PlayClickSound();
-        UIEvent_ToggleUI();
+        ToggleUI();
         if (_coreSceneLoader.CurrentSceneState != SceneStateType.Title)
         {
             GameEventHandler.TitleExcuted_Invoke();

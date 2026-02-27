@@ -1,6 +1,12 @@
 using UnityEngine;
 using VContainer;
 
+public enum GameState
+{
+    Stoty,
+    Stage,
+}
+
 public class SceneLoadManager : MonoBehaviour
 {
     [Inject] private SceneDataManager _sceneDataManager;
@@ -18,15 +24,15 @@ public class SceneLoadManager : MonoBehaviour
 
     public bool GetInitScenePath(ref string scenePath)
     {
-        switch (_gameData.State)
-        {
-            case GameState.Stoty:
-                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
-                return true;
-            case GameState.Stage:
-                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
-                return true;
-        }
+        // switch (_gameData.State)
+        // {
+        //     case GameState.Stoty:
+        //         scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
+        //         return true;
+        //     case GameState.Stage:
+        //         scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
+        //         return true;
+        // }
 
         return false;
     }
@@ -35,13 +41,13 @@ public class SceneLoadManager : MonoBehaviour
     {
         _saveManager.Save();
 
-        switch (_gameData.State)
-        {
-            case GameState.Stoty:
-                return GetStoryScenePath(ref scenePath);
-            case GameState.Stage:
-                return GetStageScenePath(ref scenePath);
-        }
+        // switch (_gameData.State)
+        // {
+        //     case GameState.Stoty:
+        //         return GetStoryScenePath(ref scenePath);
+        //     case GameState.Stage:
+        //         return GetStageScenePath(ref scenePath);
+        // }
 
         return false;
     }

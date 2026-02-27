@@ -29,9 +29,9 @@ public class SaveManager : MonoBehaviour
         _curSaveData.Save(GameData);
     }
 
-    public void SetState(GameState state)
+    public void SetState()
     {
-        GameData.State = state;
+        //GameData.State = state;
     }
 
     private void DataClear(int index)

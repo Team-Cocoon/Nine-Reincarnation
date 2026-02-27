@@ -10,7 +10,7 @@ public class ChaseStageScope : LifetimeScope
     [SerializeField] private StoryEventManager _storyEventManager;
 
     [Header("----- SubSceneInstaller ------")]
-    [SerializeField] private LoadNextScene _loadNextScene;
+    //[SerializeField] private LoadNextScene _loadNextScene;
 
     [Header("----- VirtualCameraInstaller ------")]
     [SerializeField] private VirtualCameraManager _vCammanager;
@@ -32,7 +32,7 @@ public class ChaseStageScope : LifetimeScope
         }
         new VirtualCameraInstaller(_vCammanager).Install(builder);
 
-        builder.RegisterComponent<LoadNextScene>(_loadNextScene);
+        //builder.RegisterComponent<LoadNextScene>(_loadNextScene);
         builder.RegisterComponent<ChaseGhost>(_chaseGhost);
 
         player = Parent.Container.Resolve<PlayerController>();

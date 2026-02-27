@@ -31,20 +31,20 @@ public class TitleUI : MonoBehaviour
 
         _saveManager.SetSaveData(0);
 
-        if (_saveManager.GameData.State == GameState.Stoty)
-        {
-            GameEventHandler.StoryExcuted_Invoke();
-        }
-        else if (_saveManager.GameData.State == GameState.Stage)
-        {
-            GameEventHandler.StageExcuted_Invoke();
-        }
+        // if (_saveManager.GameData.State == GameState.Stoty)
+        // {
+        //     GameEventHandler.StoryExcuted_Invoke();
+        // }
+        // else if (_saveManager.GameData.State == GameState.Stage)
+        // {
+        //     GameEventHandler.StageExcuted_Invoke();
+        // }
     }
 
     private void GameEvent_Option()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        UIEventHandler.ToggleSettingUI_Invoke(true);
+        //UIEventHandler.ToggleSettingUI_Invoke(true);
     }
     private void GameEvent_Exit()
     {
