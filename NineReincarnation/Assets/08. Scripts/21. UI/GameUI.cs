@@ -23,8 +23,18 @@ public class GameUI : MonoBehaviour
         _uiManager.RemoveUIDictionary(_name);
     }
 
-    protected virtual void ToggleUI()
+    public virtual void ToggleUI()
     {
         _ui.SetActive(!_ui.activeSelf);
+    }
+
+    public virtual void OpenUI()
+    {
+        _ui.SetActive(true);
+    }
+
+    public virtual void CloseUI()
+    {
+        _ui.SetActive(false);
     }
 }

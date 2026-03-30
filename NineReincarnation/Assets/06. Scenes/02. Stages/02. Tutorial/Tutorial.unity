@@ -268,17 +268,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 077e9cdb61e6d364689d82eb9d14f6e4, type: 3}
---- !u!114 &245230509 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2389153853928143057, guid: 077e9cdb61e6d364689d82eb9d14f6e4, type: 3}
-  m_PrefabInstance: {fileID: 245230508}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8189bf16ea5d0e4982c2a6487980dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &390173388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -844,7 +833,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153831460}
-  - component: {fileID: 1153831459}
   m_Layer: 0
   m_Name: StageInitScope
   m_TagString: Untagged
@@ -852,26 +840,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1153831459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153831458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d70a8e45cf4e04294e9cc8be4833b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: StageCoreScope
-  autoRun: 1
-  autoInjectGameObjects: []
-  _player: {fileID: 1016182464}
-  _thread: {fileID: 433577309}
-  _loadNextScene: {fileID: 1257432093}
-  _cameraManager: {fileID: 245230509}
 --- !u!4 &1153831460
 Transform:
   m_ObjectHideFlags: 0
@@ -896,7 +864,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257432094}
-  - component: {fileID: 1257432093}
   m_Layer: 0
   m_Name: LoadNextScene
   m_TagString: Untagged
@@ -904,21 +871,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1257432093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257432092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348e6fdc6822e2247be77bf0abb25f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 1
-  _loadSceneOnStart: 1
-  _playerTag: Player
 --- !u!4 &1257432094
 Transform:
   m_ObjectHideFlags: 0

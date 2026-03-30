@@ -467,50 +467,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5dc08628fd3a1c644b5d280ef7ec92b2, type: 2}
   - {fileID: 11400000, guid: 459e84e18d6a3394b84eeda4a1e67628, type: 2}
   _isTest: 1
---- !u!1 &1239545582
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1239545583}
-  - component: {fileID: 1239545584}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1239545583
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239545582}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1239545584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239545582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abb87235b7e07c47966fe325eb24857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1255829264
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +507,8 @@ MonoBehaviour:
   _settingUI: {fileID: 1479231552}
   _dialogueUI: {fileID: 1834878332}
   _dialogueData: {fileID: 11400000, guid: 758764e09b95e69438bfd630722681a8, type: 2}
+  _loadingScreen: {fileID: 2048296103}
+  _scenePath: Assets/06. Scenes/01. CoreScene/TitleScene.unity
 --- !u!4 &1255829266
 Transform:
   m_ObjectHideFlags: 0
@@ -1517,6 +1475,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2048296103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 135068791215260567, guid: 9722a1d126f78444d89924ee94c5bbec, type: 3}
+  m_PrefabInstance: {fileID: 7288509559611009543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2126316902 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4748312249264494432, guid: b8d7b9f7fe0760249befd0ce3f87f38c, type: 3}
@@ -1752,7 +1715,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 994820552}
-  - {fileID: 1239545583}
   - {fileID: 1185052127}
   - {fileID: 953369639}
   - {fileID: 668648390}

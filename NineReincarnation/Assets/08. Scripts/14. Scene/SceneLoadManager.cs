@@ -7,7 +7,7 @@ public enum GameState
     Stage,
 }
 
-public class SceneLoadManager : MonoBehaviour
+public class SceneLoadManager
 {
     [Inject] private SceneDataManager _sceneDataManager;
     [Inject] private SaveManager _saveManager;
@@ -24,15 +24,12 @@ public class SceneLoadManager : MonoBehaviour
 
     public bool GetInitScenePath(ref string scenePath)
     {
-        // switch (_gameData.State)
-        // {
-        //     case GameState.Stoty:
-        //         scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
-        //         return true;
-        //     case GameState.Stage:
-        //         scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
-        //         return true;
-        // }
+        switch (_gameData.State)
+        {
+            case SceneStateType.Stage:
+                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
+                return true;
+        }
 
         return false;
     }
@@ -41,34 +38,13 @@ public class SceneLoadManager : MonoBehaviour
     {
         _saveManager.Save();
 
-        // switch (_gameData.State)
-        // {
-        //     case GameState.Stoty:
-        //         return GetStoryScenePath(ref scenePath);
-        //     case GameState.Stage:
-        //         return GetStageScenePath(ref scenePath);
-        // }
-
-        return false;
-    }
-
-    private bool GetStoryScenePath(ref string scenePath)
-    {
-        bool isReturn = _sceneDataManager.HasStory(_gameData.StoryIndex);
-
-        if (!isReturn)
+        switch (_gameData.State)
         {
-            _saveManager.Save();
-            scenePath = null;
-            GameEventHandler.GameClearExcuted_Invoke();
-            return false;
+            case SceneStateType.Stage:
+                return GetStageScenePath(ref scenePath);
         }
 
-        scenePath = _sceneDataManager.GetStorySubScene(_gameData.StoryIndex, _gameData.StorySubIndex);
-
-        _sceneDataManager.NextStory(ref _gameData.StoryIndex, ref _gameData.StorySubIndex);
-
-        return true;
+        return false;
     }
 
     private bool GetStageScenePath(ref string scenePath)

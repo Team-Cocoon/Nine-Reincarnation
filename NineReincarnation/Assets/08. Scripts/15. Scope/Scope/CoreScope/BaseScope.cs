@@ -22,14 +22,37 @@ public class BaseScope : LifetimeScope
     [Header("----- Data ------")]
     [SerializeField] private DialogueDataSO _dialogueData;
 
+
+    [Header("----- CoreInitiator ------")]
+    [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private string _scenePath;
+
     protected override void Configure(IContainerBuilder builder)
     {
+        builder.RegisterComponent(_sceneDataManager);
+        builder.RegisterComponent(_saveManager);
+        builder.RegisterComponent(_settingUI);
+        builder.RegisterComponent(_fadeUI);
+        builder.RegisterComponent(_dialogueUI);
+
+        builder.RegisterComponent(_loadingScreen);
+        builder.RegisterComponent(_scenePath);
+
         //UIManager 싱글톤 등록
         builder.Register<UIManager>(Lifetime.Singleton);
 
-        builder.RegisterEntryPoint<CoreSceneLoader>(Lifetime.Singleton).As<CoreSceneLoader>();
+        builder.Register<CoreSceneLoader>(Lifetime.Singleton).As<CoreSceneLoader>();
 
-        builder.Register<CoreInitiator>(Lifetime.Scoped).AsSelf();   
-        builder.RegisterEntryPoint<EntryPoint>(Lifetime.Scoped).AsSelf();
+#if UNITY_EDITOR
+        if(!CoreBootStrap.RequestedStartSceneName.Contains("BaseScene"))
+        {
+            _scenePath = CoreBootStrap.RequestedStartScenePath;
+        }
+#endif
+        builder.Register<CoreInitiator>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf()
+        .WithParameter("loadingScreen", _loadingScreen)
+        .WithParameter("scenePath", _scenePath);
+
+        builder.RegisterEntryPoint<EntryPoint>(Lifetime.Singleton).AsSelf();
     }
 }

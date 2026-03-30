@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -10,6 +11,8 @@ public class TitleUI : MonoBehaviour
     [SerializeField] private Button _exitButton;
 
     [Inject] private SaveManager _saveManager;
+    [Inject] private SettingUI _settingUI;
+    [Inject] private CoreSceneLoader _coreSceneLoader;
 
     private void Start()
     {
@@ -31,20 +34,13 @@ public class TitleUI : MonoBehaviour
 
         _saveManager.SetSaveData(0);
 
-        // if (_saveManager.GameData.State == GameState.Stoty)
-        // {
-        //     GameEventHandler.StoryExcuted_Invoke();
-        // }
-        // else if (_saveManager.GameData.State == GameState.Stage)
-        // {
-        //     GameEventHandler.StageExcuted_Invoke();
-        // }
+        GameEventHandler.StageExcuted_Invoke();
     }
 
     private void GameEvent_Option()
     {
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
-        //UIEventHandler.ToggleSettingUI_Invoke(true);
+        _settingUI.ToggleUI();
     }
     private void GameEvent_Exit()
     {

@@ -23,7 +23,7 @@ public class FadeUI : GameUI
         base.OnDestroy();
     }
 
-    private Tween UIEvent_WipeFadeIn(bool stopTime)
+    public  Tween UIEvent_WipeFadeIn(bool stopTime)
     {
         _image.material.SetFloat("_Progress", 0.0f);
 
@@ -34,7 +34,7 @@ public class FadeUI : GameUI
         });
     }
 
-    private Tween UIEvent_WipeFadeOut(bool stopTime)
+    public Tween UIEvent_WipeFadeOut(bool stopTime)
     {
         _image.material.SetFloat("_Progress", 1.0f);
 
@@ -43,22 +43,22 @@ public class FadeUI : GameUI
         return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
     }
 
-    private Tween UIEvent_FadeIn(bool stopTime)
+    public  Tween UIEvent_FadeIn()
     {
+        OpenUI();
         _image.material.SetFloat("_Progress", 0.0f);
         _image.material.SetFloat("_IsFadeIn", 1.0f);
         Color color = _image.color;
 
         color.a = 1.0f;
 
-
         return FadeEffect.FadeIn(_image, 2.0f, () =>
         {
-            ToggleUI();
+            CloseUI();
         });
     }
 
-    private Tween UIEvent_FadeOut(bool stopTime)
+    public Tween UIEvent_FadeOut()
     {
         _image.material.SetFloat("_Progress", 1.0f);
         _image.material.SetFloat("_IsFadeIn", 0.0f);
@@ -66,7 +66,7 @@ public class FadeUI : GameUI
         color.a = 0.0f;
         _image.color = color;
 
-        ToggleUI();
+        OpenUI();
 
         return FadeEffect.FadeOut(_image, 2.0f);
     }

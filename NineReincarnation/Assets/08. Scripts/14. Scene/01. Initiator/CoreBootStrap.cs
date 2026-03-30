@@ -5,7 +5,17 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class CoreBootStrap
 {
-    public static string RequestedStartSceneName { get; private set; }
+    public static string RequestedStartSceneName 
+    { 
+        get => SessionState.GetString("RequestedStartSceneName", ""); 
+        private set => SessionState.SetString("RequestedStartSceneName", value); 
+    }
+
+    public static string RequestedStartScenePath 
+    { 
+        get => SessionState.GetString("RequestedStartScenePath", ""); 
+        private set => SessionState.SetString("RequestedStartScenePath", value); 
+    }
 
     public const string playFromBaseKey = "CoreBootStrap.PlayFromBaseScene";
 
@@ -20,14 +30,17 @@ public static class CoreBootStrap
         if (state != PlayModeStateChange.ExitingEditMode)
             return;
         
+
+        RequestedStartSceneName = EditorSceneManager.GetActiveScene().name;
+        RequestedStartScenePath = EditorSceneManager.GetActiveScene().path;
+        Debug.Log(RequestedStartSceneName);
+
         if(!ToolbarPlayButtonsView.OnGetCoreMode)
         {
-            EditorSceneManager.playModeStartScene = null;
             return;
         }
 
-        // 체크박스 ON이면: 기존 로직(베이스 씬부터)
-        RequestedStartSceneName = EditorSceneManager.GetActiveScene().name;
+        // 체크박스 ON이면: 기존 로직
 
         var pathOfFirstScene = EditorBuildSettings.scenes[0].path;
         var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(pathOfFirstScene);

@@ -46,12 +46,12 @@ public class SettingUI : GameUI
     private int width = 1920;
     private int height = 1080;
 
-    protected override void ToggleUI()
+    public override void ToggleUI()
     {
         base.ToggleUI();
 
         //열때 시간 정지
-        Time.timeScale = _ui.activeSelf ? 1 : 0;
+        Time.timeScale = _ui.activeSelf ? 0 : 1;
     }
 
     private void InitResolution()

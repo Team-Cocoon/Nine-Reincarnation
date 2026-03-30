@@ -14,6 +14,7 @@ public class CoreSceneLoader : SceneLoader
 {
     [Inject] private SceneDataManager _sceneDataManager;
     [Inject] private SaveManager      _saveManager;
+
     private SceneStateType    _currentSceneState;
 
     private string _titleScenePath => _sceneDataManager.TitleScene;
@@ -29,16 +30,19 @@ public class CoreSceneLoader : SceneLoader
 
     public async UniTask SceneEvent_Title(CancellationToken token)
     {
+        _currentSceneState = SceneStateType.Title;
         await LoadSceneByPath(_titleScenePath, token);
     }
 
     public async UniTask SceneEvent_Stage(CancellationToken token)
     {
+        _currentSceneState = SceneStateType.Stage;
         await LoadSceneByPath(_stageScenePath, token);
     }
 
     public async UniTask SceneEvent_Clear(CancellationToken token)
     {
+        _currentSceneState = SceneStateType.Clear;
         await LoadSceneByPath(_clearScenePath, token);
     }
 }
