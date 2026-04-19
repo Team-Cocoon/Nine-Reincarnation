@@ -7,14 +7,8 @@ public class SceneDataManager : MonoBehaviour
 
     public string LoadingScene => _sceneData.LoadingScene;
     public string TitleScene => _sceneData.TitleScene;
-    public string StoryCoreScene => _sceneData.StoryScene.CoreScene;
     public string StageCoreScene => _sceneData.StageScene.CoreScene;
     public string ClearScene => _sceneData.ClearScene;
-
-    public List<string> GetStorySubScenes(int index)
-    {
-        return _sceneData.StoryScene.SubSceneGroups[index].SubScenePaths;
-    }
 
     public List<string> GetStageSubScenes(int index)
     {
@@ -26,21 +20,9 @@ public class SceneDataManager : MonoBehaviour
         return _sceneData.StageScene.SubSceneGroups[index].SubScenePaths[subIndex];
     }
 
-    public string GetStorySubScene(int index, int subIndex)
-    {
-        return _sceneData.StoryScene.SubSceneGroups[index].SubScenePaths[subIndex];
-    }
-
     public bool HasStage(int index)
     {
         if (_sceneData.StageScene.Size <= index) return false;
-
-        return true;
-    }
-
-    public bool HasStory(int index)
-    {
-        if (_sceneData.StoryScene.Size <= index) return false;
 
         return true;
     }
@@ -57,17 +39,5 @@ public class SceneDataManager : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    public void NextStory(ref int index, ref int subIndex)
-    {
-        subIndex++;
-
-        if (_sceneData.StoryScene.SubSceneGroups[index].Size <= subIndex)
-        {
-            subIndex = 0;
-            index++;
-            return;
-        }
     }
 }

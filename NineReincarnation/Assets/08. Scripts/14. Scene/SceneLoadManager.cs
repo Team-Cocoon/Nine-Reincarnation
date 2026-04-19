@@ -34,35 +34,30 @@ public class SceneLoadManager
         return false;
     }
 
-    public bool GetScenePath(ref string scenePath)
+    public string GetScenePath()
     {
         _saveManager.Save();
 
         switch (_gameData.State)
         {
             case SceneStateType.Stage:
-                return GetStageScenePath(ref scenePath);
+                return GetStageScenePath();
         }
 
-        return false;
+        return null;
     }
 
-    private bool GetStageScenePath(ref string scenePath)
+    private string GetStageScenePath()
     {
         bool isReturn = _sceneDataManager.HasStage(_gameData.StageIndex);
 
         if (!isReturn)
         {
             _saveManager.Save();
-            scenePath = null;
-            GameEventHandler.GameClearExcuted_Invoke();
-            return false;
+            return null;
         }
 
-        scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, _gameData.StageSubIndex);
-
         _isNextStage = _sceneDataManager.NextStage(ref _gameData.StageIndex, ref _gameData.StageSubIndex);
-
-        return true;
+        return  _sceneDataManager.GetStageSubScene(_gameData.StageIndex, _gameData.StageSubIndex);
     }
 }

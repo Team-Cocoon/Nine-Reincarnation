@@ -26,7 +26,5 @@ public class SceneDataSO : ScriptableObject
 
     public string ClearScene;
 
-    public StateScene StoryScene;
-
     public StateScene StageScene;
 }

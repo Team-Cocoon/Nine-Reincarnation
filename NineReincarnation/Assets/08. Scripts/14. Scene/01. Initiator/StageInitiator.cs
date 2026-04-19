@@ -8,7 +8,7 @@ public class StageInitiator : IInitiator
     private string _scenePath;
 
     [Inject]
-    public StageInitiator(CoreSceneLoader sceneLoader, string scenePath)
+    public StageInitiator(SceneLoader sceneLoader, string scenePath)
     {
         _sceneLoader = sceneLoader;
         _scenePath = scenePath;
