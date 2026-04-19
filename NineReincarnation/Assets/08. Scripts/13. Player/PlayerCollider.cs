@@ -8,7 +8,6 @@ public class PlayerCollider : MonoBehaviour
         public Vector2 bottomLeft, bottomRight;
     }
 
-
     private RaycastOrigins _raycastOrigins;
 
 	private float _horizontalRaySpacing;
