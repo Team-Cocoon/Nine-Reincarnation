@@ -15,6 +15,8 @@ public enum PlayerAnimationState
     Throw
 }
 
+
+
 public interface IObjectData
 {
     public float Speed
@@ -51,7 +53,7 @@ namespace Player.Controller
         [SerializeField] private PhysicsMaterial2D _defaultPhysicsMaterial; //기본 피직스 머티리얼
         [SerializeField] private PhysicsMaterial2D _idlePhysicsMaterial;    //가만히 서 있을때 피직스 머티리얼 
         [SerializeField] private SpriteRenderer _spriteRenderer;         //플레이어 이미지
-        [SerializeField] private ThrowThread _thread;                 //던질 실
+        [SerializeField] private ThrowThread[] _thread;                 //던질 실
 
         [Header("--- 플레이어 상태 관련 변수 ---")]
         [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
@@ -64,7 +66,13 @@ namespace Player.Controller
         [SerializeField] private bool _onGroundDetector = false;
         [SerializeField] private bool _onSlopeDetector = false;
 
-        private bool _isInteract = false;
+        [Header("--- 플레이어 실 관련 변수 ---")]
+        [SerializeField] private int _currentBlueThread = 3;
+        [SerializeField] private int _maxBlueThread = 3;
+        private bool _isRedInteract = false;
+        private bool _isBlueInteract = false;
+        private int _activePhasingCount = 0;
+
         private int _jumpCount = 0;             //더블 점프 제어
         private Vector2 _slopeDir = Vector2.right; //경사면 이동을 위한 벡터
         private PlayerDirection _direction;                 //플레이어 방향
@@ -74,6 +82,7 @@ namespace Player.Controller
         private OneWayPlatform _oneWayPlatform;
         private PlayerAnimationState _currentState;
         private bool _lockThrow = true;
+        private ThreadType _pendingThreadType;
 
         private float accelerationTimeAirborne = 0.05f;
         private float accelerationTimeGrounded = 0.05f;
@@ -143,13 +152,21 @@ namespace Player.Controller
             get => _currentState;
             set => _currentState = value;
         }
+        public int BlueThread
+        {
+            get => _currentBlueThread;
+            set {
+                _currentBlueThread = (_currentBlueThread - 1 < 0) ? 0 : _currentBlueThread - 1;
+            }
+        }
+        public int ActivePhasingCount => _activePhasingCount;
         #endregion
 
         [Inject]
         public void Construct(ThrowThread thread)
         {
-            _thread = thread;
-            _thread.SetStart(this.transform);
+            _thread[(int)ThreadType.Red] = thread;
+            _thread[(int)ThreadType.Red].SetStart(this.transform);
         }
         private void Init()
         {
@@ -159,6 +176,9 @@ namespace Player.Controller
             _isJump = false;
             _isFalling = false;
             _isThrow = false;
+
+            // 청연 소유 초기화
+            _currentBlueThread = _maxBlueThread;
 
             _onGroundDetector = false;
             _onSlopeDetector = false;
@@ -250,43 +270,74 @@ namespace Player.Controller
             }
         }
 
-        public void ExcuteThrowMotion(Vector2 mousePostion)
+
+        private void PrepareThrowMotion(Vector2 mousePosition, ThreadType threadType)
         {
             if (_lockThrow) return;
 
-            //상호작용 중이면
-            if (_isInteract)
+            _pendingThreadType = threadType;
+            switch (threadType)
             {
-                _thread?.ClickEvent();
-            }
-            else
-            {
-                if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
-                {
-                    Vector2 rightVector = transform.right;
-                    Vector2 playerPosition = transform.position;
-                    Vector2 playerToMouse = (mousePostion - playerPosition).normalized;
-
-                    float dot = Vector3.Dot(rightVector, playerToMouse);
-
-                    //플레이어 기준 왼쪽 클릭
-                    if (dot <= float.Epsilon)
+                case ThreadType.Red:
+                    if (_isRedInteract)
                     {
-                        _spriteRenderer.flipX = true;
+                        _thread[(int)threadType]?.ClickEvent();
                     }
-                    //플레이어 기준 오른쪽 클릭
                     else
                     {
-                        _spriteRenderer.flipX = false;
-                    }
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+                        {
+                            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+                            float dot = Vector3.Dot(transform.right, playerToMouse);
+                            _spriteRenderer.flipX = dot <= float.Epsilon;
 
-                    IsThrow = true;
-                }
+                            IsThrow = true;
+                        }
+                    }
+                    break;
+                case ThreadType.Blue:
+                    if (_currentBlueThread == 0 || _activePhasingCount > 0) return;
+
+                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f, LayerMask.GetMask("Interaction"));
+                    bool shouldClick = false;
+                    if (hit.collider != null)
+                    {
+                        var phasable = hit.collider.GetComponent<IPhasable>();
+                        if (phasable != null)
+                        {
+                            if (phasable.IsConnected)
+                            {
+                                return;
+                            }
+                        }
+
+                    }
+                    if (shouldClick)
+                    {
+                        _thread[(int)threadType]?.ClickEvent();
+                    }
+                    else
+                    {
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+                        {
+                            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+                            float dot = Vector3.Dot(transform.right, playerToMouse);
+                            _spriteRenderer.flipX = dot <= float.Epsilon;
+
+                            IsThrow = true;
+                        }
+                    }
+                    break;
             }
         }
+        public void AddActivePhasing() => _activePhasingCount++;
+        public void RemoveActivePhasing() => _activePhasingCount = Mathf.Max(0, _activePhasingCount - 1);
+        public void ExcuteRedThrowMotion(Vector2 mousePosition) => PrepareThrowMotion(mousePosition, ThreadType.Red);
+        public void ExcuteBlueThrowMotion(Vector2 mousePosition) => PrepareThrowMotion(mousePosition, ThreadType.Blue);
+
         public void ExcuteThrowThread()
         {
-            _thread?.ClickEvent();
+            _thread[(int)_pendingThreadType]?.ClickEvent();
         }
 
         #region 내부 변수 제어
@@ -302,7 +353,7 @@ namespace Player.Controller
 
         public void BecomeLighter()
         {
-            _isInteract = true;
+            _isRedInteract = true;
             _jumpGravity = _lighterGravity;
             _downGravity = _lighterGravity;
             _maxDownForce = _gliderDownForce;
@@ -310,7 +361,7 @@ namespace Player.Controller
 
         public void InitGravity()
         {
-            _isInteract = false;
+            _isRedInteract = false;
             _jumpGravity = _defaultGravity;
             _downGravity = _defaultGravity;
             _maxDownForce = _defaultDownForce;

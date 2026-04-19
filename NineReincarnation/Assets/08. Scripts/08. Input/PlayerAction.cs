@@ -28,14 +28,25 @@ namespace Player.Action
         /// 인풋 액션에서 실행시킬 실던지기 함수
         /// </summary>
         /// <param name="context"></param>
-        public void ActionThrowThread(InputAction.CallbackContext context)
+        public void ActionThrowRedThread(InputAction.CallbackContext context)
         {
             if (context.started)
             {
                 Vector2 screenPos = Mouse.current.position.ReadValue();
                 Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
-                _player.ExcuteThrowMotion(worldPos);
+                _player.ExcuteRedThrowMotion(worldPos);
+            }
+        }
+
+        public void ActionThrowBlueThread(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                Vector2 screenPos = Mouse.current.position.ReadValue();
+                Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+
+                _player.ExcuteBlueThrowMotion(worldPos);
             }
         }
 

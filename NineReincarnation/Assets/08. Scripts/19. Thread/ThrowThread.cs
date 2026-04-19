@@ -1,6 +1,18 @@
 using System.Collections;
 using Unity.Collections;
 using UnityEngine;
+using System;
+using Cysharp.Threading.Tasks;
+using Player.Controller;
+
+public interface IThreadThrower
+{
+    /// <summary>
+    /// 실이 Exist상태일 때, 사라질지 말지 확인하는 함수
+    /// </summary>
+    /// <returns></returns>
+    bool IsExpired();
+}
 
 public enum ThrowThreadState
 {
@@ -10,22 +22,35 @@ public enum ThrowThreadState
     Deleting
 }
 
-public class ThrowThread : Thread
+public enum ThreadType
 {
+    Red,
+    Blue
+}
+
+public abstract class ThrowThread : Thread, IThreadThrower
+{
+    [Header("실 종류")]
+    [SerializeField] private ThreadType _threadType;
     [Header("목표 지점")]
     public Transform targetTransform;
     public Vector3 targetPos;
     [Header("한계 거리")]
-    [SerializeField] private float limitDistance = 5f;
+    [SerializeField] protected float limitDistance = 5f;
     [Header("속도")]
-    [SerializeField] private float _throwSpeed = 1f;
+    [SerializeField] private float _throwSpeed = 20f;
+    [Header("빗맞았을 때 연출")]
+    [SerializeField] private float _fallSpeed = 10f;
 
-    private ThrowThreadState _state;
-
+    protected PlayerController _player;
+    protected ThrowThreadState _state;
+    protected IClickInteractableToggle clickable;
     private int maxSegmentCount;
     private Vector3 prevNodePos;
-    private IClickInteractableToggle clickable;
 
+    /* UI관련 */
+    public event Action OnConnected;
+    public event Action OnDisconnected;
 
     public void SetStart(Transform transform)
     {
@@ -35,6 +60,7 @@ public class ThrowThread : Thread
     protected override void Initialize()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _player = _startTransform.GetComponent<PlayerController>();
         InitThread();
     }
     /*  이것만 호출하면 됨 */
@@ -43,7 +69,10 @@ public class ThrowThread : Thread
         switch (_state)
         {
             case ThrowThreadState.Idle:
-                StartThrowing();
+                if (CanThrow())
+                {
+                    StartThrowing();
+                }
                 break;
             case ThrowThreadState.Exist:
                 StartDeleting();
@@ -53,25 +82,43 @@ public class ThrowThread : Thread
                 break;
         }
     }
+
+    protected virtual bool CanThrow() => true;
+
     protected override void UpdateThread()
     {
         if (_state == ThrowThreadState.Exist)
         {
             if (targetTransform != null)
             {
-                targetPos = targetTransform.position;
-                float currentDistance = Vector3.Distance(_startTransform.position, targetPos);
-
-                if (currentDistance > limitDistance)
+                if (IsExpired())
                 {
+                    OnDisconnected?.Invoke();
                     StartDeleting();
                     return;
                 }
             }
-            UpdateSegments();
+            UpdateThreadVisualization();
+        }
+        else if (_state == ThrowThreadState.Deleting)
+        {
+            if (targetTransform == null)
+            {
+                _endTransform.position += _gravity * Time.deltaTime * 0.5f;
+
+                // NormalizeSegments();
+            }
+
+            UpdateThreadVisualization();
         }
     }
-    void InitThread()
+
+    protected virtual void UpdateThreadVisualization()
+    {
+        UpdateSegments();
+    }
+
+    protected void InitThread()
     {
         if (segments.IsCreated)
         {
@@ -124,60 +171,96 @@ public class ThrowThread : Thread
         }
     }
 
-    private void StartThrowing()
+    protected void StartThrowing()
     {
         _lineRenderer.enabled = true;
         _state = ThrowThreadState.Throwing;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask("Interaction"));
 
-        targetTransform = null;
+        float dist = Vector3.Distance(_startTransform.position, mousePos);
 
-        if (hit.collider != null)
+        // 2. 타겟 설정 (거리가 한계치 이내일 때만 hit 인정)
+        if (hit != null && dist <= limitDistance)
         {
-            targetTransform = hit.collider.transform;
+            targetTransform = hit.transform;
             targetPos = targetTransform.position;
         }
         else
         {
-            targetPos = mousePos;
+            // 거리가 너무 멀면 hit이 있어도 허공으로 취급
+            targetTransform = null;
+
+            if (dist <= limitDistance)
+            {
+                // 1. 사거리 안쪽을 클릭했다면? 그 지점까지만 던짐
+                targetPos = mousePos;
+            }
+            else
+            {
+                // 2. 사거리 밖을 클릭했다면? 방향은 유지하되 거리는 제한
+                Vector3 dir = ((Vector3)mousePos - _startTransform.position).normalized;
+                targetPos = _startTransform.position + dir * limitDistance;
+            }
         }
 
         InitThread();
 
-        hit = Physics2D.Raycast(targetPos, Vector2.zero, 20, LayerMask.GetMask("Interaction"));
-        if (hit.collider != null)
+        // 3. 연결 가능 여부 최종 판별
+        if (targetTransform != null) // 위에서 거리 체크를 통과한 경우에만 들어옴
         {
-            //상호작용 시작
-            clickable = hit.collider.GetComponent<IClickInteractableToggle>();
-            clickable?.EnableClickInteraction();
+            var threadTarget = targetTransform.GetComponent<IThreadInteractable>();
+            bool isCompatible = false;
 
-            targetTransform = hit.collider.transform;
+            if (threadTarget != null)
+                isCompatible = threadTarget.AllowedThreads.HasFlag(ConvertToFlag(this._threadType));
 
-            _endTransform.SetParent(targetTransform);
-            _endTransform.localPosition = Vector2.zero;
-
-            targetPos = targetTransform.position;
-
-            StartCoroutine(Throwing(() =>
+            if (isCompatible)
             {
-                _state = ThrowThreadState.Exist;
-                AudioManager.Instance?.PlaySfx(AudioManager.Sfx.LinkThread);
-            }));
+                clickable = targetTransform.GetComponent<IClickInteractableToggle>();
+                threadTarget.OnThreadHit(this._threadType);
+
+                _endTransform.SetParent(targetTransform);
+                _endTransform.localPosition = Vector2.zero;
+                targetPos = targetTransform.position;
+
+                StartCoroutine(Throwing(() =>
+                {
+                    _state = ThrowThreadState.Exist;
+                    AudioManager.Instance?.PlaySfx(AudioManager.Sfx.LinkThread);
+                    OnConnected?.Invoke();
+                    /* 이 부분 상속처리함 */
+                    ThrowingEvent();
+                }));
+            }
+            else
+            {
+                // 호환되지 않는 실인 경우
+                StartCoroutine(Throwing(StartDeleting));
+            }
         }
         else
         {
+            // 거리가 멀거나 맞은 게 없는 경우 (이때 Deleting 상태에서 아래로 떨어짐)
             StartCoroutine(Throwing(StartDeleting));
         }
     }
-    private void StartDeleting()
+
+    private ThreadCompatibility ConvertToFlag(ThreadType state)
+    {
+        return state == ThreadType.Red ? ThreadCompatibility.Red : ThreadCompatibility.Blue;
+    }
+
+    protected virtual void ThrowingEvent() { }
+    
+    protected virtual void StartDeleting()
     {
         _state = ThrowThreadState.Deleting;
-
-        StartCoroutine(Disappearing(() => { _state = ThrowThreadState.Idle; }));
+        OnDisconnected?.Invoke();
     }
+
     private IEnumerator Throwing(System.Action onComplete)
     {
         while (true)
@@ -203,42 +286,19 @@ public class ThrowThread : Thread
             yield return null;
         }
     }
-
-    private IEnumerator Disappearing(System.Action onComplete)
+    
+    protected virtual void ResetAlpha()
     {
-        //상호작용 종료
-        clickable?.EnableClickInteraction();
-        clickable = null;
-
-        float elapsedTime = 0f;
-        Color startColor = _lineRenderer.startColor;
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
-
-        while (elapsedTime < 1f)
+        if (_lineRenderer != null)
         {
-            elapsedTime += Time.deltaTime;
-            Color currentColor = Color.Lerp(startColor, endColor, elapsedTime / 1f);
-
-            _lineRenderer.startColor = currentColor;
-            _lineRenderer.endColor = currentColor;
-
-            yield return null;
+            Color c = _lineRenderer.startColor;
+            c.a = 1f;
+            _lineRenderer.startColor = c;
+            _lineRenderer.endColor = c;
         }
-        _lineRenderer.startColor = endColor;
-        _lineRenderer.endColor = endColor;
+    }
 
-        InitThread();
-        _lineRenderer.enabled = false;
-        ResetAlpha();
-        onComplete?.Invoke();
-    }
-    private void ResetAlpha()
-    {
-        Color resetColor = _lineRenderer.startColor;
-        resetColor.a = 1f;
-        _lineRenderer.startColor = resetColor;
-        _lineRenderer.endColor = resetColor;
-    }
+    public abstract bool IsExpired();
 
     #region 포물선 운동
     //private Vector3 startPos;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Player.Controller;
 using UnityEngine;
 
-public class Feather : DrawOutline, IClickInteractableToggle
+public class Feather : DrawOutline, IThreadInteractable
 {
     public static bool IsTotalActive;
     public static List<Feather> ActiveFeather = new List<Feather>();
@@ -17,6 +17,7 @@ public class Feather : DrawOutline, IClickInteractableToggle
     [SerializeField] private bool _isClickControlToSelf;
     [SerializeField] private bool _isHoverControlToSelf;
     [SerializeField] private float _interactionDistance;
+    [SerializeField] private ThreadCompatibility _allowedThreads = ThreadCompatibility.Red;
 
     [Header("----- Sprite -----")]
     [SerializeField] private SpriteRenderer _sprite;
@@ -27,6 +28,8 @@ public class Feather : DrawOutline, IClickInteractableToggle
     public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
 
     PlayerController _player => InputManager.Instance.CurPlayer;
+
+    public ThreadCompatibility AllowedThreads => _allowedThreads;
 
     private LayerMask _playerMask;
     private Vector2 _lastPosition;
@@ -108,6 +111,17 @@ public class Feather : DrawOutline, IClickInteractableToggle
         IsTotalActive = false;
         _isActivated = false;
         _player.InitGravity();
+    }
+    public void OnThreadHit(ThreadType threadType)
+    {
+        switch (threadType)
+        {
+            case ThreadType.Red:
+                EnableClickInteraction();
+                break;
+            case ThreadType.Blue:
+                break;
+        }
     }
 
     public void EnableClickInteraction()

@@ -23,7 +23,6 @@ public abstract class Thread : MonoBehaviour
     protected JobHandle _currentJobHandle;
 
     protected Vector3 _gravity = new Vector3(0, -5f, 0);
-    protected bool _isInCamera = false; // 카메라 안에 들어오는지
 
     protected abstract void UpdateThread();
 
@@ -50,7 +49,6 @@ public abstract class Thread : MonoBehaviour
     protected virtual void LateUpdate()
     {
         _currentJobHandle.Complete();
-        //if (_isInCamera)
         RenderThread();
     }
     protected virtual void Initialize()
@@ -120,16 +118,6 @@ public abstract class Thread : MonoBehaviour
             segments[i] = new Segment(pos);
         }
     }
-    protected void OnBecameVisible()
-    {
-        _isInCamera = true;
-    }
-
-    protected void OnBecameInvisible()
-    {
-        _isInCamera = false;
-    }
-
 }
 
 [BurstCompile(FloatPrecision.Standard, FloatMode.Fast)]
