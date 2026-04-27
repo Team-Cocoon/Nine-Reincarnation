@@ -41,6 +41,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/06. Scenes/01. CoreScene/ClearScene.unity
     guid: 0c2d198af953cdb45a67a92b3b39b790
+  - enabled: 1
+    path: Assets/06. Scenes/02. Stages/01. Stage1/NewStage1-1.unity
+    guid: f02f6709974ad754db8d48d66e16e60c
+  - enabled: 1
+    path: Assets/06. Scenes/02. Stages/01. Stage1/NewStage1-2.unity
+    guid: 2522705a29b4098418e30d36c74b3068
+  - enabled: 1
+    path: Assets/06. Scenes/02. Stages/01. Stage1/Stage1.unity
+    guid: 078a37cf599032d4cb0a12920d63c80c
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e7fff3d3276832c48a941a6e5b60d5d8, type: 3}

@@ -15,7 +15,7 @@ public class StageInitScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponent<PlayerController>(_player);
-        builder.RegisterComponent<ThrowThread>(_thread);
+        //builder.RegisterComponent<ThrowThread>(_thread);
         builder.RegisterComponent<LoadNextScene>(_loadNextScene);
         builder.RegisterComponent<CameraManager>(_cameraManager);
     }
