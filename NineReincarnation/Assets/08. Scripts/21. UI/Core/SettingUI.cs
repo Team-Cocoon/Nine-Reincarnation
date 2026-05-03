@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq; // Contains를 사용하기 위해 추가
+using Cysharp.Threading.Tasks; // Forget()을 사용하기 위해 추가
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,7 +24,7 @@ public class SettingUI : GameUI
 {
     [Header("--- Button ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
-    [SerializeField] private Button _titleButton; //게임종료 버튼
+    [SerializeField] private Button _titleButton; //타이틀로 돌아가기 버튼 (주석 수정)
 
     [Header("--- Sound ---")]
     [SerializeField] private SoundVolumeSO _volume;
@@ -41,7 +43,11 @@ public class SettingUI : GameUI
     [SerializeField] private Toggle _screenToggle;
     [SerializeField] private FullScreenMode _screenMode;
 
-    [Inject] private CoreSceneLoader _coreSceneLoader;
+    // [수정된 의존성 주입] 기존 CoreSceneLoader를 제거하고 새 매니저들을 주입받습니다.
+    [Inject] private SceneLoader _sceneLoader;
+    [Inject] private SceneDataManager _sceneDataManager;
+    [Inject] private SceneTransitionManager _transitionManager;
+
     private List<Resolution> _resolutions = new List<Resolution>();
     private int width = 1920;
     private int height = 1080;
@@ -135,19 +141,26 @@ public class SettingUI : GameUI
         _bgmSlider.onValueChanged.RemoveListener(OnBgmSliderChanged);
     }
 
-
     private void ButtonEvent_SettingUI()
     {
         PlayClickSound();
         ToggleUI();
     }
 
+    // [핵심 수정 로직] 타이틀 버튼 클릭 시 동작
     private void TitleButtonEvent()
     {
         PlayClickSound();
         ToggleUI();
-        if (_coreSceneLoader.CurrentSceneState != SceneStateType.Title)
+
+        // 1. 현재 로드된 씬 목록 중에 타이틀 씬이 "없는" 경우에만 이동 진행
+        if (!_sceneLoader.LoadedScenes.Contains(_sceneDataManager.TitleScene))
         {
+            // 2. 타이틀 씬만 로드하도록 매니저에게 요청
+            List<string> scenesToLoad = new List<string> { _sceneDataManager.TitleScene };
+            _transitionManager.TransitionToScenes(scenesToLoad).Forget();
+
+            // 3. 기존 이벤트 호출 (이벤트 구독자들이 필요한 처리를 할 수 있도록 유지)
             GameEventHandler.TitleExcuted_Invoke();
         }
     }

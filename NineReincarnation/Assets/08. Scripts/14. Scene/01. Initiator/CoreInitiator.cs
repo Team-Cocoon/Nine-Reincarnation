@@ -1,39 +1,54 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 public class CoreInitiator : IInitiator
 {
-    private FadeUI _fadeScreen;
-    private GameObject _loadingScreen;
-    private CoreSceneLoader _sceneLoader;
-    private string _scenePath;
+    private readonly SceneTransitionManager _transitionManager;
+    private readonly SceneDataManager _sceneDataManager;
 
     [Inject]
-    public CoreInitiator(GameObject loadingScreen, CoreSceneLoader sceneLoader, string scenePath, FadeUI fadeUI)
+    public CoreInitiator(SceneTransitionManager transitionManager, SceneDataManager sceneDataManager)
     {
-        _loadingScreen = loadingScreen;
-        _sceneLoader = sceneLoader;
-        _scenePath = scenePath;
-        _fadeScreen = fadeUI;
+        _transitionManager = transitionManager;
+        _sceneDataManager = sceneDataManager;
     }
 
     public async UniTask GameInitialize(CancellationToken token)
     {
-        await ExcuteInit(token);
-    }
+        List<string> scenesToLoad = new List<string>();
 
-    private async UniTask ExcuteInit(CancellationToken token)
-    {
+#if UNITY_EDITOR
+        string reqPath = CoreBootStrap.RequestedStartScenePath;
+        string reqName = CoreBootStrap.RequestedStartSceneName;
 
-        Debug.Log($"<color=yellow>[SceneLoader]</color> 씬 로드 시도: '{_scenePath}'");
-
-        using (var Loding = new LoadingUIStarter(_loadingScreen))
+        if (!string.IsNullOrEmpty(reqPath) && !reqName.Contains("BaseScene") && ToolbarPlayButtonsView.OnGetCoreMode)
         {
-            await _sceneLoader.LoadSceneByPath(_scenePath, token);
+            if (reqPath == _sceneDataManager.TitleScene)
+            {
+                scenesToLoad.Add(_sceneDataManager.TitleScene);
+            }
+            else 
+            {
+                int stageIndex = _sceneDataManager.GetStageIndexByPath(reqPath);
+                if (stageIndex != -1)
+                {
+                    scenesToLoad.Add(_sceneDataManager.StageCoreScene);
+                    scenesToLoad.AddRange(_sceneDataManager.GetStageSubScenes(stageIndex));
+                }
+                else
+                {
+                    scenesToLoad.Add(reqPath);
+                }
+            }
+
+            await _transitionManager.TransitionToScenes(scenesToLoad, token);
+            return;
         }
-        await _fadeScreen.UIEvent_FadeIn();
+#endif
+
+        scenesToLoad.Add(_sceneDataManager.TitleScene);
+        await _transitionManager.TransitionToScenes(scenesToLoad, token);
     }
 }

@@ -10,7 +10,7 @@ using VContainer;
 public class SceneLoader : IDisposable
 {
     private List<string> _scenePathList;
-
+    public IReadOnlyList<string> LoadedScenes => _scenePathList;
 
     [Inject]
     public SceneLoader()
@@ -80,11 +80,20 @@ public class SceneLoader : IDisposable
             //해당 씬이 활성화 씬이면
             if (SceneManager.GetActiveScene() == scene)
             {
-                string lastScenePath = _scenePathList.Last();
+                // [수정 포인트] 리스트에 남은 씬이 있는지 먼저 확인합니다.
+                if (_scenePathList.Count > 0)
+                {
+                    string lastScenePath = _scenePathList.Last();
 
-                //활성화 씬 변경
-                scene = SceneManager.GetSceneByPath(lastScenePath);
-                SceneManager.SetActiveScene(scene);
+                    //활성화 씬 변경
+                    scene = SceneManager.GetSceneByPath(lastScenePath);
+                    SceneManager.SetActiveScene(scene);
+                }
+                else
+                {
+                    // 관리 리스트가 비어있다면, 가장 기본 씬(BaseScene)을 활성화 상태로 둡니다.
+                    SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+                }
             }
 
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(path);

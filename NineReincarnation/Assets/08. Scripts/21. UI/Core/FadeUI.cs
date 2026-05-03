@@ -43,9 +43,11 @@ public class FadeUI : GameUI
         return FadeEffect.WipeFadeOut(_image.material, _duration, false, 0.0f);
     }
 
-    public  Tween UIEvent_FadeIn()
+    public Tween UIEvent_FadeIn()
     {
         OpenUI();
+
+        Debug.Log("[Loading End] 로딩 완료, 페이드 시작");
         _image.material.SetFloat("_Progress", 0.0f);
         _image.material.SetFloat("_IsFadeIn", 1.0f);
         Color color = _image.color;

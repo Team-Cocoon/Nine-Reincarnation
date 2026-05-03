@@ -40,4 +40,18 @@ public class SceneDataManager : MonoBehaviour
         }
         return false;
     }
+
+    public int GetStageIndexByPath(string scenePath)
+    {
+        if (scenePath == StageCoreScene) return 0;
+
+        for (int i = 0; i < _sceneData.StageScene.Size; i++)
+        {
+            if (GetStageSubScenes(i).Contains(scenePath))
+            {
+                return i;
+            }
+        }
+        return -1; 
+    }
 }
