@@ -1454,6 +1454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 675781084}
   - component: {fileID: 675781083}
+  - component: {fileID: 675781085}
   m_Layer: 16
   m_Name: ThreadEffect
   m_TagString: Untagged
@@ -1485,7 +1486,7 @@ LineRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff431d8f6b542dc49b6b1a5673241a4a, type: 2}
+  - {fileID: 2100000, guid: 2274e66bcfc3acf4997b59558f8ca6ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1583,6 +1584,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1634316157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675781085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675781082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00b640411fb7764cb789c1f169b4bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &723391021
 GameObject:
   m_ObjectHideFlags: 0
