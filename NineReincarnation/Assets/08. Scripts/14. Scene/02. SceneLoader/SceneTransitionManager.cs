@@ -15,24 +15,30 @@ public class SceneTransitionManager
     private readonly FadeUI _fadeUI;
     private readonly GameObject _loadingScreen;
     private readonly SceneLoader _sceneLoader;
+    private readonly TransitionTaskRegistry _taskRegistry;
 
     [Inject]
-    public SceneTransitionManager(FadeUI fadeUI, GameObject loadingScreen, SceneLoader sceneLoader)
+    public SceneTransitionManager(FadeUI fadeUI, GameObject loadingScreen, SceneLoader sceneLoader, TransitionTaskRegistry taskRegistry)
     {
         _fadeUI = fadeUI;
         _loadingScreen = loadingScreen;
         _sceneLoader = sceneLoader;
+        _taskRegistry = taskRegistry;
     }
 
     public async UniTask TransitionToScenes(List<string> requestedScenes, CancellationToken token = default)
     {
         await _fadeUI.UIEvent_FadeOut();
 
+        _taskRegistry.ClearTasks();
+        
         using (var loading = new LoadingUIStarter(_loadingScreen))
         {
             try
             {
                 await ApplySceneChangesAsync(requestedScenes, token);
+
+                await _taskRegistry.WaitAllTasksAsync();
             }
             catch (OperationCanceledException)
             {
