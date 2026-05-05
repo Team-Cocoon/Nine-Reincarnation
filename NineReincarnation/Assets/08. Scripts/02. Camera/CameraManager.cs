@@ -7,14 +7,6 @@ namespace Manager
     public class CameraManager : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
-        private Camera _uiCamera;
-
-        [Inject]
-        public void Constrct(Camera uiCamera)
-        {
-            _uiCamera = uiCamera;
-            AddStackCamera(_uiCamera);
-        }
 
         /// <summary>
         /// 카메라가 따라다니는 타겟 변경

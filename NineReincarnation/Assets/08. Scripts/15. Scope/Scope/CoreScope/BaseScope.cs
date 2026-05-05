@@ -16,34 +16,36 @@ public class BaseScope : LifetimeScope
 
     [Header("----- UI ------")]
     [SerializeField] private FadeUI _fadeUI;
-    [SerializeField] private UIManager _uiManager;
-    [SerializeField] private Camera _uiCamera;
     [SerializeField] private SettingUI _settingUI;
     [SerializeField] private DialogueUI _dialogueUI;
 
     [Header("----- Data ------")]
     [SerializeField] private DialogueDataSO _dialogueData;
 
+    [Header("----- UI Starter ------")]
+    [SerializeField] private GameObject _loadingScreen;
+
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<CoreSceneLoader>(Lifetime.Singleton).As<CoreSceneLoader>();
+        // MonoBehaviour 컴포넌트 등록
+        builder.RegisterComponent(_sceneDataManager);
+        builder.RegisterComponent(_saveManager);
+        builder.RegisterComponent(_settingUI);
+        builder.RegisterComponent(_fadeUI);
+        builder.RegisterComponent(_dialogueUI);
+        builder.RegisterComponent(_loadingScreen);
 
-        builder.RegisterInstance<DialogueDataSO>(_dialogueData);
-        builder.Register<DialogueDB>(Lifetime.Singleton);
+        // 매니저(싱글톤) 등록
+        builder.Register<UIManager>(Lifetime.Singleton);
+        
+        // 씬 전환 관련 클래스 등록
+        builder.Register<SceneLoader>(Lifetime.Singleton);
+        builder.Register<SceneTransitionManager>(Lifetime.Singleton);
 
-        builder.RegisterComponent<SceneDataManager>(_sceneDataManager);
-        builder.RegisterComponent<SaveManager>(_saveManager);
-        builder.RegisterComponent<FadeUI>(_fadeUI);
-        builder.RegisterComponent<UIManager>(_uiManager);
-        builder.RegisterComponent<Camera>(_uiCamera);
-        builder.RegisterComponent<SettingUI>(_settingUI);
-        builder.RegisterComponent<AudioManager>(_audioManager);
-        builder.RegisterComponent<DialogueUI>(_dialogueUI);
-
-        builder.RegisterBuildCallback(container =>
-        {
-            // VContainer 빌드가 끝나면, 이 코드를 즉시 실행해라.
-            container.Resolve<DialogueDB>();
-        });
+        // 초기화 및 엔트리 포인트 등록
+        // VContainer가 알아서 SceneTransitionManager와 SceneDataManager를 주입
+        builder.Register<CoreInitiator>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+        
+        builder.RegisterEntryPoint<EntryPoint>(Lifetime.Singleton).AsSelf();
     }
 }

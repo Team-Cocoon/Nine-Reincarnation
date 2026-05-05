@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public struct SubScene
 {
+    public string SubBootScene;
     public List<string> SubScenePaths;
     public int Size => SubScenePaths.Count;
 }
@@ -25,8 +26,6 @@ public class SceneDataSO : ScriptableObject
     public string TitleScene;
 
     public string ClearScene;
-
-    public StateScene StoryScene;
 
     public StateScene StageScene;
 }

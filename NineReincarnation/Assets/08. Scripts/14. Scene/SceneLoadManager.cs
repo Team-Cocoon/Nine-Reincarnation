@@ -1,7 +1,13 @@
 using UnityEngine;
 using VContainer;
 
-public class SceneLoadManager : MonoBehaviour
+public enum GameState
+{
+    Stoty,
+    Stage,
+}
+
+public class SceneLoadManager
 {
     [Inject] private SceneDataManager _sceneDataManager;
     [Inject] private SaveManager _saveManager;
@@ -20,10 +26,7 @@ public class SceneLoadManager : MonoBehaviour
     {
         switch (_gameData.State)
         {
-            case GameState.Stoty:
-                scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
-                return true;
-            case GameState.Stage:
+            case SceneStateType.Stage:
                 scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, 0);
                 return true;
         }
@@ -31,56 +34,30 @@ public class SceneLoadManager : MonoBehaviour
         return false;
     }
 
-    public bool GetScenePath(ref string scenePath)
+    public string GetScenePath()
     {
         _saveManager.Save();
 
         switch (_gameData.State)
         {
-            case GameState.Stoty:
-                return GetStoryScenePath(ref scenePath);
-            case GameState.Stage:
-                return GetStageScenePath(ref scenePath);
+            case SceneStateType.Stage:
+                return GetStageScenePath();
         }
 
-        return false;
+        return null;
     }
 
-    private bool GetStoryScenePath(ref string scenePath)
-    {
-        bool isReturn = _sceneDataManager.HasStory(_gameData.StoryIndex);
-
-        if (!isReturn)
-        {
-            _saveManager.Save();
-            scenePath = null;
-            GameEventHandler.GameClearExcuted_Invoke();
-            return false;
-        }
-
-        scenePath = _sceneDataManager.GetStorySubScene(_gameData.StoryIndex, _gameData.StorySubIndex);
-
-        _sceneDataManager.NextStory(ref _gameData.StoryIndex, ref _gameData.StorySubIndex);
-
-        return true;
-    }
-
-    private bool GetStageScenePath(ref string scenePath)
+    private string GetStageScenePath()
     {
         bool isReturn = _sceneDataManager.HasStage(_gameData.StageIndex);
 
         if (!isReturn)
         {
             _saveManager.Save();
-            scenePath = null;
-            GameEventHandler.GameClearExcuted_Invoke();
-            return false;
+            return null;
         }
 
-        scenePath = _sceneDataManager.GetStageSubScene(_gameData.StageIndex, _gameData.StageSubIndex);
-
         _isNextStage = _sceneDataManager.NextStage(ref _gameData.StageIndex, ref _gameData.StageSubIndex);
-
-        return true;
+        return  _sceneDataManager.GetStageSubScene(_gameData.StageIndex, _gameData.StageSubIndex);
     }
 }

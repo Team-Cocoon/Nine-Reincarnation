@@ -1,42 +1,27 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-class UIInfo
+public class UIManager
 {
-    [Header("---- 초기 등록 UI ----")]
+    private Dictionary<string, GameObject> _uiDict = new();
 
-    public bool IsOpen;
-    public GameObject UI;
-
-    public UIInfo(bool _IsOpen, GameObject _UI)
-    {
-        IsOpen = _IsOpen;
-        UI = _UI;
-    }
-}
-
-public class UIManager : MonoBehaviour
-{
-    public static int OpenUICount = 0;
-
-    public static UIManager Instance { get; set; }
-
-    private Dictionary<string, UIInfo> _uiDict = new Dictionary<string, UIInfo>();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    public void AddUIDictionary(string name, GameObject go)
+    /// <summary>
+    /// UI추가
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="ui"></param>
+    public void AddUIDictionary(string name, GameObject ui)
     {
         //이미 있으면 리턴
         if (_uiDict.ContainsKey(name)) return;
 
-        _uiDict.Add(name, new UIInfo(go.activeSelf, go));
+        _uiDict.Add(name, ui);
     }
+
+    /// <summary>
+    /// UI제거
+    /// </summary>
+    /// <param name="name"></param>
     public void RemoveUIDictionary(string name)
     {
         //없으면 리턴
@@ -45,56 +30,15 @@ public class UIManager : MonoBehaviour
         _uiDict.Remove(name);
     }
 
-    private void UpdateInputActionMap()
-    {
-        if (OpenUICount > 0)
-        {
-            InputManager.Instance?.CurPlayer.SetStop();
-            InputEventHandler.OnChangedActionToUI_Invoke();
-        }
-        else
-        {
-            InputEventHandler.OnChangedActionToPlayer_Invoke();
-        }
-    }
-
-
     /// <summary>
-    /// UI 토글
+    /// 모든 UI 닫기
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="isStop">시간을 멈출지 말지 결정하는 변수</param>
-    public void ToggleUI(string name, bool isStop)
+    public void CloseAllUI()
     {
-        bool isOpen = _uiDict[name].IsOpen;
-        GameObject ui = _uiDict[name].UI;
-
-        //이미 열려있다면
-        if (isOpen)
+        foreach(KeyValuePair<string, GameObject> ui in _uiDict)
         {
-            //닫어
-            if (isStop)
-            {
-                Time.timeScale = 1.0f;
-            }
-
-            OpenUICount--;
-            _uiDict[name].IsOpen = false;
-            ui.SetActive(false);
+            ui.Value.SetActive(false);
         }
-        else
-        {
-            //열어
-            _uiDict[name].IsOpen = true;
-            ui.SetActive(true);
-
-            OpenUICount++;
-            if (isStop)
-            {
-                Time.timeScale = 0.0f;
-            }
-        }
-
-        UpdateInputActionMap();
     }
 }

@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueUI : ToggleUI
+public class DialogueUI : GameUI
 {
     [Header("----Image-----")]
     [SerializeField] private Sprite[] _sprites;
