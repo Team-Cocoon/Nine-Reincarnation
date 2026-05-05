@@ -37,6 +37,7 @@ public static class CoreBootStrap
 
         if(!ToolbarPlayButtonsView.OnGetCoreMode)
         {
+            EditorSceneManager.playModeStartScene = null;
             return;
         }
 

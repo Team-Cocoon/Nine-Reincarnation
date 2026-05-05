@@ -38,17 +38,14 @@ public class TitleUI : MonoBehaviour
         AudioManager.Instance.PlaySfx(AudioManager.Sfx.Click);
 
         // 세이브 데이터를 0(첫 스테이지)으로 초기화
+        // 이 함수 내부에서 서브맵 인덱스도 0으로 초기화된다고 가정
         _saveManager.SetSaveData(0);
 
-        // 1. 다음에 열어야 할 씬 리스트 구성 (스테이지 코어 + 1번 스테이지 서브씬들)
-        List<string> scenesToLoad = new List<string> { _sceneDataManager.StageCoreScene };
-        scenesToLoad.AddRange(_sceneDataManager.GetStageSubScenes(0));
+        // SceneDataManager가 판단해서 필요한 3개(또는 2개)의 씬 리스트를 묶어주도록 요청
+        List<string> scenesToLoad = _sceneDataManager.GetTargetScenes(0, 0);
 
-        // 2. 씬 전환 매니저에게 전환 요청 (Diff 로직에 의해 타이틀은 알아서 꺼짐)
+        // 씬 전환 매니저에게 전환 요청
         _transitionManager.TransitionToScenes(scenesToLoad).Forget();
-
-        // 3. 기존 이벤트 호출 (다른 UI 닫기, BGM 변경 등 이벤트를 듣고 있는 다른 객체들을 위해 유지)
-        GameEventHandler.StageExcuted_Invoke();
     }
 
     private void GameEvent_Option()
