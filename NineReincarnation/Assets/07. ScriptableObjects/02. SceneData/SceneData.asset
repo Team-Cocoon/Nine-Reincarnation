@@ -15,17 +15,13 @@ MonoBehaviour:
   LoadingScene: Assets/06. Scenes/01. CoreScene/LoadingScene.unity
   TitleScene: Assets/06. Scenes/01. CoreScene/TitleScene.unity
   ClearScene: Assets/06. Scenes/01. CoreScene/ClearScene.unity
-  StoryScene:
-    CoreScene: Assets/06. Scenes/01. CoreScene/StoryCoreScene.unity
-    SubSceneGroups:
-    - SubScenePaths:
-      - Assets/06. Scenes/02. Stages/Story0.unity
   StageScene:
     CoreScene: Assets/06. Scenes/01. CoreScene/StageCoreScene.unity
     SubSceneGroups:
-    - SubScenePaths:
-      - Assets/06. Scenes/02. Stages/02. Tutorial/Tutorial.unity
-      - Assets/06. Scenes/02. Stages/02. Tutorial/Tutorial-1.unity
-      - Assets/06. Scenes/02. Stages/02. Tutorial/Tutorial-2.unity
-      - Assets/06. Scenes/02. Stages/02. Tutorial/Tutorial-3.unity
-      - Assets/06. Scenes/02. Stages/02. Tutorial/Tutorial-4.unity
+    - SubBootScene: Assets/06. Scenes/02. Stages/00. Story0/Story0.unity
+      SubScenePaths: []
+    - SubBootScene: Assets/06. Scenes/02. Stages/02. Stage1/Stage1.unity
+      SubScenePaths:
+      - Assets/06. Scenes/02. Stages/02. Stage1/Stage1-1.unity
+      - Assets/06. Scenes/02. Stages/02. Stage1/Stage1-2.unity
+      - Assets/06. Scenes/02. Stages/02. Stage1/Stage1-3.unity
