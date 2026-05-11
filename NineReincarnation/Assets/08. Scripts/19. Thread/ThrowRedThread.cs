@@ -11,6 +11,8 @@ public class ThrowRedThread : ThrowThread
     public event Action<float> OnDistanceUpdate;
     private bool _isVisualSwitched = false;
 
+
+
     protected override void UpdateThreadVisualization()
     {
         if (!_isVisualSwitched)

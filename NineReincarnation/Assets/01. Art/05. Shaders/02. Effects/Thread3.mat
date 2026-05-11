@@ -74,6 +74,7 @@ Material:
     - _Frequency1: 10
     - _Frequency2: 15
     - _Frequency3: 7
+    - _LineLength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed1: 1
@@ -81,7 +82,7 @@ Material:
     - _Speed3: 1.5
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.5999999, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -71,17 +71,18 @@ Material:
     - _Amplitude2: 0.11
     - _Amplitude3: 0.05
     - _EnableExternalAlpha: 0
-    - _Frequency1: 10
-    - _Frequency2: 15
-    - _Frequency3: 7
+    - _Frequency1: 2.1
+    - _Frequency2: 3.4
+    - _Frequency3: 4.4
+    - _LineLength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed1: 1
+    - _Speed1: 1.7
     - _Speed2: 0.8
-    - _Speed3: 1.5
+    - _Speed3: 2.4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.5018867, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

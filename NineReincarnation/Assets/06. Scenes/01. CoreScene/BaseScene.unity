@@ -343,6 +343,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 0dcf06de6a4e044438d6259a51aaa762, type: 3}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f8c46682a7f26ff4b967aeaa92f2cfb5, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: 'SfxClips.Array.data[17]'
       value: 
       objectReference: {fileID: 8300000, guid: a2edd969311286b4b91417d5d87ba0da, type: 3}
@@ -508,7 +512,6 @@ MonoBehaviour:
   _dialogueUI: {fileID: 1834878332}
   _dialogueData: {fileID: 11400000, guid: 758764e09b95e69438bfd630722681a8, type: 2}
   _loadingScreen: {fileID: 2048296103}
-  _scenePath: Assets/06. Scenes/01. CoreScene/TitleScene.unity
 --- !u!4 &1255829266
 Transform:
   m_ObjectHideFlags: 0

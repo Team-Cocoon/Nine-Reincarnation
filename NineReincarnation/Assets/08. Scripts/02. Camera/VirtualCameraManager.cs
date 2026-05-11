@@ -19,7 +19,7 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private int _currentIndex = 0;
     [Inject] private PlayerController _player;
 
-    private void Start()
+    public void Initialize()
     {
         for (int i = 0; i < _areas.Length; ++i)
         {

@@ -162,12 +162,12 @@ namespace Player.Controller
         public int ActivePhasingCount => _activePhasingCount;
         #endregion
 
-        [Inject]
-        public void Construct(ThrowThread thread)
-        {
-            _thread[(int)ThreadType.Red] = thread;
-            _thread[(int)ThreadType.Red].SetStart(this.transform);
-        }
+        // [Inject]
+        // public void Construct(ThrowThread thread)
+        // {
+        //     _thread[(int)ThreadType.Red] = thread;
+        //     _thread[(int)ThreadType.Red].SetStart(this.transform);
+        // }
         private void Init()
         {
             _isDead = false;

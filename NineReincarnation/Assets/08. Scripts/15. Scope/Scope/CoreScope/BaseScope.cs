@@ -41,6 +41,7 @@ public class BaseScope : LifetimeScope
         // 씬 전환 관련 클래스 등록
         builder.Register<SceneLoader>(Lifetime.Singleton);
         builder.Register<SceneTransitionManager>(Lifetime.Singleton);
+        builder.Register<TransitionTaskRegistry>(Lifetime.Singleton);
 
         // 초기화 및 엔트리 포인트 등록
         // VContainer가 알아서 SceneTransitionManager와 SceneDataManager를 주입
