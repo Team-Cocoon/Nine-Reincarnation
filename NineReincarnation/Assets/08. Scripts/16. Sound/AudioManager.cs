@@ -62,7 +62,10 @@ public class AudioManager : MonoBehaviour
         CatRun,
         CatJump,
         CatStroked,
-        CatPositive
+        CatPositive,
+        MainTitleReveal,
+        MainGlint,
+        MainFlashFade
     }
     public enum LoopSfx
     {

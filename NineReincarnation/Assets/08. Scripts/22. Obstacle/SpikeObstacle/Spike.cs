@@ -17,15 +17,18 @@ public class Spike : MonoBehaviour, ICollidable
 
     private void OnEnable()
     {
+        transform.DOKill();
+
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
 
-        // 떨어지는 로직 실행
         StartFalling(_cts.Token).Forget();
     }
 
     private void OnDisable()
     {
+        transform.DOKill();
+
         _cts?.Cancel();
         _cts?.Dispose();
         _cts = null;
@@ -37,6 +40,7 @@ public class Spike : MonoBehaviour, ICollidable
         {
             await transform.DOMoveY(transform.position.y - fallDistance, fallDuration)
                 .SetEase(Ease.InQuad) // 살짝 가속도 붙는 느낌
+                .SetLink(gameObject)
                 .WithCancellation(token);
 
             ReturnToPool();
@@ -62,7 +66,10 @@ public class Spike : MonoBehaviour, ICollidable
 
     public void Enter(GameObject go = null)
     {
-        go.GetComponent<PlayerController>().Dead();
+        if (go != null && go.TryGetComponent<PlayerController>(out var player))
+        {
+            player.Dead();
+        }
     }
 
     public void Exit(GameObject go = null) { }

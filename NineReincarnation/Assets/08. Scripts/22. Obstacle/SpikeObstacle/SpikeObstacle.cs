@@ -5,8 +5,9 @@ using System;
 
 public class SpikeObstacle : MonoBehaviour
 {
-    [Header("Pool Asset")]
-    [SerializeField] private SpikePoolSO spikePool; // SO 에셋 할당
+    [SerializeField] private Animator animator; 
+
+    [SerializeField] private SpikePoolSO[] spikePools;
 
     [Header("Settings")]
     [SerializeField] private float spawnInterval = 1.0f;
@@ -14,7 +15,8 @@ public class SpikeObstacle : MonoBehaviour
     [SerializeField] private float spawnHeight = 5.0f;
 
     private CancellationTokenSource _cts;
-
+    private static readonly int TreeShakeHash = Animator.StringToHash("Tree_Shake");
+    private static readonly int TreeIdleHash = Animator.StringToHash("Tree_Idle");
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -39,17 +41,46 @@ public class SpikeObstacle : MonoBehaviour
         {
             while (!token.IsCancellationRequested)
             {
+                animator.Play(TreeShakeHash);
+                animator.Update(0f);
+                await UniTask.Yield(PlayerLoopTiming.Update, token);
+
+                var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                float shakeDuration = stateInfo.length;
+
                 SpawnSpike();
-                await UniTask.Delay(TimeSpan.FromSeconds(spawnInterval), cancellationToken: token);
+
+                await UniTask.Delay(TimeSpan.FromSeconds(shakeDuration), cancellationToken: token);
+
+                animator.Play(TreeIdleHash);
+
+                float remainingDelay = spawnInterval - shakeDuration;
+                if (remainingDelay > 0)
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(remainingDelay), cancellationToken: token);
+                }
             }
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException)
+        {
+            ResetToIdle();
+        }
     }
 
     private void SpawnSpike()
     {
-        // 싱글톤 없이 SO 에셋에서 직접 꺼내옴
-        GameObject spikeGo = spikePool.Get();
+        if (spikePools == null || spikePools.Length == 0)
+        {
+            Debug.LogWarning("SpikePools 배열이 비어 있습니다! 인스펙터에서 SO 에셋들을 넣어주세요.");
+            return;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, spikePools.Length);
+        SpikePoolSO selectedPool = spikePools[randomIndex];
+
+        if (selectedPool == null) return;
+
+        GameObject spikeGo = selectedPool.Get();
 
         float randomX = transform.position.x + UnityEngine.Random.Range(-xRange, xRange);
         Vector3 spawnPos = new Vector3(randomX, transform.position.y + spawnHeight, 0);
@@ -57,6 +88,13 @@ public class SpikeObstacle : MonoBehaviour
         spikeGo.transform.position = spawnPos;
     }
 
+    private void ResetToIdle()
+    {
+        if (animator != null)
+        {
+            animator.Play(TreeIdleHash);
+        }
+    }
     private void OnDestroy()
     {
         _cts?.Cancel();
