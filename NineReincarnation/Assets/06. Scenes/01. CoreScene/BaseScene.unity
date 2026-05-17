@@ -328,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: SfxClips.Array.size
-      value: 25
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: 'BgmClips.Array.data[0]'
@@ -378,6 +378,18 @@ PrefabInstance:
       propertyPath: 'SfxClips.Array.data[24]'
       value: 
       objectReference: {fileID: 8300000, guid: 1366c3edb7f3c8049995cc6784bb3076, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[25]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f168d60986971e545be54377ab3a3852, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[26]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 578dc9cb5547bc746b4868295cbdd7a2, type: 3}
+    - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
+      propertyPath: 'SfxClips.Array.data[27]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 742222ed598f4ed489b5002e87474c97, type: 3}
     - target: {fileID: 8199785517519974067, guid: d77dac6635f856a499a8fe2fb2277320, type: 3}
       propertyPath: LoopingSfxClips.Array.size
       value: 2
