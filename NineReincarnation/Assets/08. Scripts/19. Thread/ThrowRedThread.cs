@@ -5,13 +5,14 @@ using System.Collections;
 public class ThrowRedThread : ThrowThread
 {
     [Header("연결 후 실제 라인 설정")]
-    [SerializeField] private GameObject linkedLineObject; // 연결 후 보여줄 실제 줄 오브젝트
+    [SerializeField] private GameObject linkedLineObject; 
     [SerializeField] private LineRenderer linkedLineRenderer;
+    
+    // 추가: 실이 연결된 후 유지할 수 있는 최대 거리 (예: 10)
+    [SerializeField] private float _maintainDistance = 10f; 
 
     public event Action<float> OnDistanceUpdate;
     private bool _isVisualSwitched = false;
-
-
 
     protected override void UpdateThreadVisualization()
     {
@@ -31,7 +32,6 @@ public class ThrowRedThread : ThrowThread
         StartCoroutine(WaitAndTransfer());
     }
 
-    
     protected override void StartDeleting()
     {
         base.StartDeleting();
@@ -42,7 +42,6 @@ public class ThrowRedThread : ThrowThread
         }));
     }
 
-
     private IEnumerator WaitAndTransfer()
     {
         yield return new WaitForSeconds(0.1f); 
@@ -51,10 +50,13 @@ public class ThrowRedThread : ThrowThread
             _isVisualSwitched = true;
         }));
     }
+
     private IEnumerator DisappearingCustom(bool isSwitching, System.Action onComplete)
     {
         if (_lineRenderer == null) yield break;
 
+        // isSwitching이 false라는 것은 실이 완전히 끊어지며 삭제됨을 의미함
+        // 이때 Feather 측의 EnableClickInteraction()을 호출하여 상호작용 상태를 해제함
         if (!isSwitching)
         {
             clickable?.EnableClickInteraction();
@@ -68,7 +70,6 @@ public class ThrowRedThread : ThrowThread
         float elapsedTime = 0f;
         float duration = 1f;
 
-        // 초기 색상 안전하게 저장
         Color startColorOrig = _lineRenderer.startColor;
         Color endColorOrig = new Color(startColorOrig.r, startColorOrig.g, startColorOrig.b, 0f);
 
@@ -136,17 +137,22 @@ public class ThrowRedThread : ThrowThread
         }
     }
 
+    // 핵심 로직: 상태에 따라 유효 거리를 다르게 판단
     public override bool IsExpired()
     {
         targetPos = targetTransform.position;
         float currentDistance = Vector3.Distance(_startTransform.position, targetPos);
 
-        float ratio = Mathf.Clamp01(currentDistance / limitDistance);
+        // 연결되기 전(던지는 중)이면 기존 limitDistance, 연결 후면 _maintainDistance 사용
+        float currentLimitDistance = _isVisualSwitched ? _maintainDistance : limitDistance;
+
+        float ratio = Mathf.Clamp01(currentDistance / currentLimitDistance);
         OnDistanceUpdate?.Invoke(ratio);
 
-        if (currentDistance > limitDistance)
+        // 현재 한계 거리를 벗어나면 만료(끊어짐) 처리
+        if (currentDistance > currentLimitDistance)
         {
-            return true;
+            return true; 
         }
         return false;
     }

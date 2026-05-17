@@ -16,7 +16,8 @@ public class Feather : DrawOutline, IThreadInteractable
     [SerializeField] private bool _isActivated;
     [SerializeField] private bool _isClickControlToSelf;
     [SerializeField] private bool _isHoverControlToSelf;
-    [SerializeField] private float _interactionDistance;
+    
+    [SerializeField] private float _throwDistance = 5f; 
     [SerializeField] private ThreadCompatibility _allowedThreads = ThreadCompatibility.Red;
 
     [Header("----- Sprite -----")]
@@ -28,16 +29,17 @@ public class Feather : DrawOutline, IThreadInteractable
     public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
 
     PlayerController _player => InputManager.Instance.CurPlayer;
-
     public ThreadCompatibility AllowedThreads => _allowedThreads;
 
     private LayerMask _playerMask;
     private Vector2 _lastPosition;
+    
+    // 추가: 마우스 호버 상태를 추적하기 위한 변수
+    private bool _isHovered = false; 
 
     protected override void Awake()
     {
         base.Awake();
-
         _lastPosition = transform.position;
         _possibleActive = false;
         _isActivated = false;
@@ -48,33 +50,31 @@ public class Feather : DrawOutline, IThreadInteractable
     {
         SetSpriteDirection();
 
-        if (IsOutline == true)
+        // IsTotalActive 제거 (자기 자신이 켜졌을 때만 켜지도록)
+        if (_isActivated) 
         {
-            float dist = Vector2.Distance(_playerPosition, transform.position);
+            IsOutline = true; // 진행 중일 때는 마우스 위치와 상관없이 아웃라인 켜짐
+            OutlineColor = _activatedColor;
+            return;
+        }
 
-            //상호 작용 불가능한 거리면
-            if (dist > _interactionDistance)
-            {
-                if (!_possibleActive) return;
+        // 거리 계산 및 가능 여부 갱신
+        float dist = Vector2.Distance(_playerPosition, transform.position);
+        _possibleActive = (dist <= _throwDistance);
 
-                OutlineColor = _inactiveColor;
-                _possibleActive = false;
-
-                //이미 상호작용 중이라면
-                if (_isActivated)
-                {
-                    InactivateFeather();
-                    IsOutline = false;
-                }
-            }
-            //상호 작용 가능한 거리면
-            else
-            {
-                if (_isActivated || _possibleActive) return;
-
-                OutlineColor = _activeColor;
-                _possibleActive = true;
-            }
+        // 상태 1 & 2: 마우스 호버 상태에 따른 아웃라인 표시 처리
+        if (!_isHovered)
+        {
+            // 마우스가 올라가 있지 않으면 무조건 아웃라인 끔
+            IsOutline = false;
+        }
+        else
+        {
+            // 마우스가 올라가 있을 때만 아웃라인 켬
+            IsOutline = true;
+            
+            // 거리 내부에 있으면 상호작용 가능 색상, 외부에 있으면 불가능 색상
+            OutlineColor = _possibleActive ? _activeColor : _inactiveColor;
         }
     }
 
@@ -84,16 +84,8 @@ public class Feather : DrawOutline, IThreadInteractable
 
         if (Mathf.Abs(moveX) > float.Epsilon)
         {
-            if (moveX > 0)
-            {
-                _sprite.flipX = true;
-            }
-            else if (moveX < 0)
-            {
-                _sprite.flipX = false;
-            }
+            _sprite.flipX = moveX > 0;
         }
-
         _lastPosition = transform.position;
     }
 
@@ -105,13 +97,14 @@ public class Feather : DrawOutline, IThreadInteractable
         _player.BecomeLighter();
     }
 
-    private void InactivateFeather()
+    public void InactivateFeather()
     {
         OutlineColor = _activeColor;
         IsTotalActive = false;
         _isActivated = false;
         _player.InitGravity();
     }
+
     public void OnThreadHit(ThreadType threadType)
     {
         switch (threadType)
@@ -126,63 +119,36 @@ public class Feather : DrawOutline, IThreadInteractable
 
     public void EnableClickInteraction()
     {
-        //상호 작용 가능하면 상호작용 실행
-        if (_possibleActive)
+        if (_isActivated || IsTotalActive) 
         {
-            if (_isActivated || IsTotalActive) //이미 활성화 되어있다면
+            foreach (Feather feather in ActiveFeather)
             {
-                //활성화 해제
-                foreach (Feather feather in ActiveFeather)
-                {
-                    feather.InactivateFeather();
-                }
-                ActiveFeather.Clear();
-
-                InactivateFeather();
+                feather.InactivateFeather();
             }
-            else
-            {//활성화
-                ActiveFeather.Add(this);
-                ActivateFeather();
-            }
+            ActiveFeather.Clear();
+        }
+        else if (_possibleActive) 
+        {
+            ActiveFeather.Add(this);
+            ActivateFeather();
         }
     }
 
     public override void EnableHoverInteraction()
     {
-        //이미 상호작용 중이면 리턴
-        if (_isActivated)
-        {
-            return;
-        }
+        _isHovered = true; // 호버 진입 시 상태 저장
 
-        //상호 작용 가능하면 색 변경
-        if (_possibleActive)
-        {
-            OutlineColor = _activeColor;
-        }
-        else
-        {
-            OutlineColor = _inactiveColor;
-        }
-
+        if (_isActivated) return;
         base.EnableHoverInteraction();
     }
 
-    public void DisableClickInteraction()
-    {
-        return;
-    }
+    public void DisableClickInteraction() { return; }
 
     public override void DisableHoverInteraction()
     {
-        //이미 상호작용 중이라면 리턴
-        if (_isActivated)
-        {
-            return;
-        }
+        _isHovered = false; // 호버 이탈 시 상태 저장
 
+        if (_isActivated) return;
         base.DisableHoverInteraction();
-        return;
     }
 }

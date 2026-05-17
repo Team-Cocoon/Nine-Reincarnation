@@ -1578,6 +1578,7 @@ MonoBehaviour:
   _fallSpeed: 10
   linkedLineObject: {fileID: 2019152378}
   linkedLineRenderer: {fileID: 2019152379}
+  _maintainDistance: 10
 --- !u!1 &1731315052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1929,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -1958,7 +1959,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019152378}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f00b640411fb7764cb789c1f169b4bf5, type: 3}
   m_Name: 

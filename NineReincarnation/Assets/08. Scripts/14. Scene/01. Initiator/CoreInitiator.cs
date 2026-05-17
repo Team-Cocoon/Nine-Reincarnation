@@ -41,7 +41,7 @@ public class CoreInitiator : IInitiator
                     // 만약 맵 리스트에 없는 씬(예: 부트 씬 자체를 켜고 플레이 했을 때)이라면 mapIndex는 -1이 됩니다.
                     if (mapIndex != -1)
                     {
-                        // 🌟 이미 잘 짜놓은 GetTargetScenes를 호출하여 리스트를 통째로 가져옵니다.
+                        // 이미 잘 짜놓은 GetTargetScenes를 호출하여 리스트를 통째로 가져옵니다.
                         scenesToLoad = _sceneDataManager.GetTargetScenes(stageIndex, mapIndex);
                     }
                     else

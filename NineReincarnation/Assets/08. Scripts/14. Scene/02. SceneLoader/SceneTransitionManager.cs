@@ -32,6 +32,11 @@ public class SceneTransitionManager
 
         _taskRegistry.ClearTasks();
         
+        foreach (var scene in requestedScenes)
+        {
+            Debug.Log($"[SceneTransition] 현재 로드되어야 하는 씬: {scene}");
+        }
+
         using (var loading = new LoadingUIStarter(_loadingScreen))
         {
             try

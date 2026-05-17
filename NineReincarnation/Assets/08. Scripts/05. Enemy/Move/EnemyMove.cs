@@ -21,6 +21,10 @@ namespace Enemy.Move
         [SerializeField] private bool isVisible = false;
         [SerializeField] private bool isStopAnimator = false;
 
+        [Header("작동 방식 세팅")]
+        [SerializeField] private bool _startOnPlayerStep = false; // true: 플레이어가 밟으면 작동, false: 즉시 작동
+        private bool _hasStartedMoving = false; // 중복 실행 방지용 플래그
+
         [Header("운동 형태 세팅")]
         [SerializeField] private WaypointPathType _pathType = WaypointPathType.LineClosed; //닫힘 => 맨 마지막 웨이포인트와 처음이 이어짐
         [SerializeField] private LoopType _animationLoopType = LoopType.Restart;
@@ -86,6 +90,33 @@ namespace Enemy.Move
                 GetComponent<Animator>().speed = 0.0f;
             }
 
+            // 플레이어가 밟았을 때 작동하는 모드가 아닐 경우에만 즉시 실행
+            if (!_startOnPlayerStep)
+            {
+                StartMovement();
+            }
+        }
+
+        // 충돌 감지를 통해 플레이어가 밟았는지 판단
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (_startOnPlayerStep && !_hasStartedMoving)
+            {
+                // 플레이어 태그가 "Player"인지 확인 (프로젝트 설정에 맞게 변경 가능)
+                if (collision.gameObject.CompareTag("Player"))
+                {
+                    // 밟았을 때 작동 시작
+                    StartMovement();
+                }
+            }
+        }
+
+        // 실제 움직임 시작을 담당하는 메서드 (외부 호출도 가능하도록 public 선언)
+        public void StartMovement()
+        {
+            if (_hasStartedMoving) return; // 이미 작동 중이면 무시
+            _hasStartedMoving = true;
+
             switch (_pathType)
             {
                 case WaypointPathType.Circle:
@@ -142,7 +173,7 @@ namespace Enemy.Move
                    }).SetLoops(_loopCount, _animationLoopType);
         }
 
-        //닫힌 구간 움직임
+        //열린 구간 움직임
         private void MoveLineOpen()
         {
             if (isStopAnimator)
@@ -205,6 +236,7 @@ namespace Enemy.Move
             seq.SetLoops(_loopCount, _animationLoopType);
         }
 
+        //닫힌 구간 움직임
         private void MoveLineClosed()
         {
             if (_waypoints.Count < 1)
