@@ -862,7 +862,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 3.5333333
-    functionName: PlayMainFlashFade
+    functionName: PlayMainTitleReveal
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.65
+    functionName: ShowMenuButton
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
