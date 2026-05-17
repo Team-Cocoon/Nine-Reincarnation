@@ -34,6 +34,9 @@ public class BaseScope : LifetimeScope
         builder.RegisterComponent(_fadeUI);
         builder.RegisterComponent(_dialogueUI);
         builder.RegisterComponent(_loadingScreen);
+        builder.RegisterComponent(_dialogueData);
+
+        builder.Register<DialogueDB>(Lifetime.Singleton);
 
         // 매니저(싱글톤) 등록
         builder.Register<UIManager>(Lifetime.Singleton);
