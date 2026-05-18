@@ -27,6 +27,7 @@ public class ChaseCollider : MonoBehaviour
     {
         if (collision.CompareTag(_playerTag))
         {
+            Debug.Log("플레이어가 추적 범위를 벗어났습니다.");
             _chaseGhost.IsTargetDetected.Value = false;
         }
     }

@@ -603,6 +603,14 @@ PrefabInstance:
       value: -3.42
       objectReference: {fileID: 0}
     - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _maxBlueThread
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _currentBlueThread
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: _thread.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1578,7 +1586,7 @@ MonoBehaviour:
   _fallSpeed: 10
   linkedLineObject: {fileID: 2019152378}
   linkedLineRenderer: {fileID: 2019152379}
-  _maintainDistance: 10
+  _maintainDistance: 7.5
 --- !u!1 &1731315052
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,16 +13,19 @@ public class CrackedPlatform : MonoBehaviour, ICollidable
     [SerializeField] private float _shakeTime = 0.2f;
     [SerializeField] private float _fallDistance = 15f;
     [SerializeField] private float _fallDuration = 1.5f;
+    [SerializeField] private float _respawnTime = 3.0f;
 
     private PlatformState _currentState = PlatformState.Idle;
     private CancellationTokenSource _breakCts;
     private Vector3 _originPosition;
     private Collider2D _collider;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _originPosition = transform.position;
         _collider = GetComponent<Collider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>(); // ✨ 추가
     }
 
     public void Enter(GameObject go = null)
@@ -49,22 +52,32 @@ public class CrackedPlatform : MonoBehaviour, ICollidable
 
         try
         {
+            // 밟고 버티는 시간
             await UniTask.Delay(TimeSpan.FromSeconds(_waitTime), cancellationToken: ct);
 
+            // 흔들림 연출
             await transform.DOShakePosition(_shakeTime, strength: 0.15f, vibrato: 30)
                            .SetLink(gameObject)
                            .ToUniTask(cancellationToken: ct);
 
             _currentState = PlatformState.Falling;
 
+            // 추락 시작할 때 충돌체 끄기
             if (_collider != null) _collider.enabled = false;
 
+            // 추락 연출
             await transform.DOMoveY(_originPosition.y - _fallDistance, _fallDuration)
                            .SetEase(Ease.InQuad)
                            .SetLink(gameObject)
                            .ToUniTask(cancellationToken: ct);
 
-            gameObject.SetActive(false);
+            if (_spriteRenderer != null) _spriteRenderer.enabled = false;
+
+            // 정한 시간만큼 부활 대기
+            await UniTask.Delay(TimeSpan.FromSeconds(_respawnTime), cancellationToken: ct);
+
+            // 리셋
+            ResetPlatform();
         }
         catch (OperationCanceledException)
         {
@@ -83,6 +96,8 @@ public class CrackedPlatform : MonoBehaviour, ICollidable
         transform.position = _originPosition;
 
         if (_collider != null) _collider.enabled = true;
+        if (_spriteRenderer != null) _spriteRenderer.enabled = true; 
+        
         _currentState = PlatformState.Idle;
     }
 
