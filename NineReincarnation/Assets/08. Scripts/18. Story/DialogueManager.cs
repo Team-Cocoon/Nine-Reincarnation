@@ -42,18 +42,14 @@ namespace DialogueSpace
                     _anna.gameObject.SetActive(false);
                     _npcAnna.SetActive(true);
                 }
-                SceneEventHandler.SceneStarted += DialogueStart;
             }
         }
 
-        private void OnDisable()
+        private void Start()
         {
-            if (_startScene)
-            {
-                SceneEventHandler.SceneStarted -= DialogueStart;
-            }
+            DialogueStart();
         }
-
+        
         private void DialogueStart()
         {
             Debug.Log("다이얼로그 시작");
