@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -57,3 +58,4 @@ public static class CoreBootStrap
         Debug.Log($"[CoreBootStrap] ON -> start from base. requested: {RequestedStartSceneName}");
     }
 }
+#endif

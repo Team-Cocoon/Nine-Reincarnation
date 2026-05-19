@@ -522,7 +522,7 @@ MonoBehaviour:
   _fadeUI: {fileID: 2126316902}
   _settingUI: {fileID: 1479231552}
   _dialogueUI: {fileID: 1834878332}
-  _dialogueData: {fileID: 11400000, guid: 758764e09b95e69438bfd630722681a8, type: 2}
+  _dialogueData: {fileID: 11400000, guid: 3ac7d8b75b93fe54fa03263add585797, type: 2}
   _loadingScreen: {fileID: 2048296103}
 --- !u!4 &1255829266
 Transform:
@@ -1518,6 +1518,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: _sprites.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e4c9bde72673e044e974cd3ccad3f87b, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: d32ea5661d186744d9d05dfa49e2f708, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 308bbaf8bdd899e4ea92be0f650079b8, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 12bc54120f3e1954493808e4a00a1216, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[4]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 8845efe8e9e033148b4d322aaba6a698, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[5]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 7f45d6ad504a675428858063c7bdf07c, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[6]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ca1ac221a21b2942a8bea6682a0e7a4, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[7]'
+      value: 
+      objectReference: {fileID: 21300000, guid: ddaa42e9e5f0b0946ae677b521089660, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[8]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 38eeff82449048a46b2784dd03491750, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[9]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 81264ec1d0aac174386c111544eb862c, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[10]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 33dbecae8ddfeb64aaffec519c7b94b9, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[11]'
+      value: 
+      objectReference: {fileID: 21300000, guid: b66ef7ae2fc79494999e7977e7ceb6cf, type: 3}
     - target: {fileID: 8855520463782491647, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
       propertyPath: m_Camera
       value: 

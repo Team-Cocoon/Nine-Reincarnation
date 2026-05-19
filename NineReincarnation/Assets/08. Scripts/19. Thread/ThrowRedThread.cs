@@ -22,8 +22,12 @@ public class ThrowRedThread : ThrowThread
         }
         else
         {
-            linkedLineRenderer.SetPosition(0, _startTransform.position);
-            linkedLineRenderer.SetPosition(1, targetTransform.position);
+            // [안전장치] 타겟이나 시작점이 소멸했을 때의 널 예외 방지
+            if (_startTransform != null && targetTransform != null && linkedLineRenderer != null)
+            {
+                linkedLineRenderer.SetPosition(0, _startTransform.position);
+                linkedLineRenderer.SetPosition(1, targetTransform.position);
+            }
         }
     }
 
@@ -81,15 +85,16 @@ public class ThrowRedThread : ThrowThread
         {
             elapsedTime += Time.deltaTime;
             float normalizedTime = elapsedTime / duration;
-            Color currentColor = Color.Lerp(startColorOrig, endColorOrig, normalizedTime);
 
-            if (_lineRenderer.enabled)
+            if (_lineRenderer != null && _lineRenderer.enabled)
             {
+                Color currentColor = Color.Lerp(startColorOrig, endColorOrig, normalizedTime);
                 _lineRenderer.startColor = currentColor;
                 _lineRenderer.endColor = currentColor;
             }
 
-            if (targetTransform != null && linkedLineRenderer != null && linkedLineRenderer.enabled)
+            // 페이드아웃 루프가 도는 도중 실시간 널 체크를 적용하여 낙하 연출 지원 및 에러 방지
+            if (_startTransform != null && targetTransform != null && linkedLineRenderer != null && linkedLineRenderer.enabled)
             {
                 linkedLineRenderer.SetPosition(0, _startTransform.position);
                 linkedLineRenderer.SetPosition(1, targetTransform.position);
@@ -140,6 +145,12 @@ public class ThrowRedThread : ThrowThread
     // 핵심 로직: 상태에 따라 유효 거리를 다르게 판단
     public override bool IsExpired()
     {
+        // [안전장치] 타겟 오브젝트나 플레이어가 사라진 상태라면 만료(true) 처리하여 안전하게 연결 종료
+        if (targetTransform == null || _startTransform == null)
+        {
+            return true;
+        }
+
         targetPos = targetTransform.position;
         float currentDistance = Vector3.Distance(_startTransform.position, targetPos);
 

@@ -684,7 +684,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1719686015}
+    - targetCorrespondingSourceObject: {fileID: 5913995490316214992, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1416387454}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
 --- !u!4 &547015334 stripped
@@ -1098,7 +1104,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 547015334}
     m_Modifications:
     - target: {fileID: 1600220970370440793, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: _shadowPS
@@ -1153,12 +1159,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.047519684
+      value: 58.913483
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.520709
+      value: 1.4609932
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1235,6 +1249,11 @@ MonoBehaviour:
   limitDistance: 5
   _throwSpeed: 20
   _fallSpeed: 50
+--- !u!4 &1416387454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
+  m_PrefabInstance: {fileID: 1416387450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1509467253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,7 +1415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -265645551889139867, guid: 8cd32223b632af543b2a9bbb91aec661, type: 3}
+  m_Sprite: {fileID: -7857582145445264885, guid: e0fa8814d5308cf4386de79503bc0836, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1469,7 +1488,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 547015334}
     m_Modifications:
     - target: {fileID: 1600220970370440793, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: _shadowPS
@@ -1496,12 +1515,20 @@ PrefabInstance:
       value: ThrowRedThread
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.047519684
+      value: 58.913483
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.520709
+      value: 1.4609932
       objectReference: {fileID: 0}
     - target: {fileID: 6027012136381883748, guid: 6aabf178c676ba84a91873d07b125a6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2101,8 +2128,6 @@ SceneRoots:
   - {fileID: 245230508}
   - {fileID: 1029711126}
   - {fileID: 547015333}
-  - {fileID: 1719686014}
-  - {fileID: 1416387450}
   - {fileID: 1769268632}
   - {fileID: 1153831460}
   - {fileID: 1833075561}

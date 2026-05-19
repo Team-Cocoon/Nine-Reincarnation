@@ -1,4 +1,4 @@
-using System;
+#if UNITY_EDITOR
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -88,5 +88,4 @@ public static class ToolbarPlayButtonsView
     }
 }
 
-
-
+#endif
