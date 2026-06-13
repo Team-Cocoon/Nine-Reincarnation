@@ -64,15 +64,16 @@ public abstract class ThrowThread : Thread, IThreadThrower
         InitThread();
     }
     
-    /* 이것만 호출하면 됨 */
-    public void ClickEvent()
+    /* ✨ 수정됨: 캐싱된 마우스 위치(targetPosition)를 매개변수로 받습니다. */
+    public void ClickEvent(Vector2 targetPosition)
     {
         switch (_state)
         {
             case ThrowThreadState.Idle:
                 if (CanThrow())
                 {
-                    StartThrowing();
+                    // ✨ 매개변수로 받은 위치를 StartThrowing으로 넘겨줍니다.
+                    StartThrowing(targetPosition);
                 }
                 break;
             case ThrowThreadState.Exist:
@@ -191,12 +192,15 @@ public abstract class ThrowThread : Thread, IThreadThrower
         }
     }
 
-    protected void StartThrowing()
+    /* ✨ 수정됨: ClickEvent로부터 넘어온 마우스 위치를 매개변수(mousePos)로 받습니다. */
+    protected void StartThrowing(Vector2 mousePos)
     {
         _lineRenderer.enabled = true;
         _state = ThrowThreadState.Throwing;
 
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // ✨ 삭제됨: 실시간으로 마우스 위치를 구하던 기존 코드는 더 이상 사용하지 않습니다.
+        // Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask("Interaction"));
         float dist = Vector3.Distance(_startTransform.position, mousePos);
 

@@ -84,6 +84,9 @@ namespace Player.Controller
         private bool _lockThrow = true;
         private ThreadType _pendingThreadType;
 
+        // ✨ 추가: 클릭 순간의 마우스 위치를 저장할 변수
+        private Vector2 _cachedThrowPosition; 
+
         private float accelerationTimeAirborne = 0.05f;
         private float accelerationTimeGrounded = 0.05f;
         private float velocityXSmoothing;
@@ -270,12 +273,15 @@ namespace Player.Controller
             if (_lockThrow) return;
 
             _pendingThreadType = threadType;
+            _cachedThrowPosition = mousePosition; // ✨ 핵심 수정: 클릭한 시점의 마우스 위치를 캐싱!
+
             switch (threadType)
             {
                 case ThreadType.Red:
                     if (_isRedInteract)
                     {
-                        _thread[(int)threadType]?.ClickEvent();
+                        // 캐싱된 위치 전달
+                        _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
                     }
                     else
                     {
@@ -307,7 +313,8 @@ namespace Player.Controller
                     }
                     if (shouldClick)
                     {
-                        _thread[(int)threadType]?.ClickEvent();
+                        // 캐싱된 위치 전달
+                        _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
                     }
                     else
                     {
@@ -331,7 +338,8 @@ namespace Player.Controller
 
         public void ExcuteThrowThread()
         {
-            _thread[(int)_pendingThreadType]?.ClickEvent();
+            // ✨ 핵심 수정: 애니메이션에서 실을 발사할 때, 방금 기억해둔 마우스 위치로 발사하도록 변경
+            _thread[(int)_pendingThreadType]?.ClickEvent(_cachedThrowPosition);
         }
 
         #region 내부 변수 제어
