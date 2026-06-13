@@ -10,8 +10,13 @@ public class NextScene : MonoBehaviour
     {
         if(collision.CompareTag("Player") && !isExecuting)
         {
-            isExecuting = true;
-            _stageManager.GoToNextMap().Forget();
+            GoToNextScene();
         }
+    }
+
+    public void GoToNextScene()
+    {
+        isExecuting = true;
+        _stageManager.GoToNextMap().Forget();
     }
 }

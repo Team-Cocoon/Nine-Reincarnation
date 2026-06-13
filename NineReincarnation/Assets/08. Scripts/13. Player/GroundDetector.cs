@@ -22,7 +22,6 @@ public class GroundDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _detectedGround = ((1 << collision.gameObject.layer) & (_groundMask | _obstacleMask | _platformMask)) != 0;
-
         if (_detectedGround)
         {
             _player.IsGround = true;

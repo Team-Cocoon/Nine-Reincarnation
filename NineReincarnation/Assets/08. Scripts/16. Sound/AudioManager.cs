@@ -37,8 +37,9 @@ public class AudioManager : MonoBehaviour
     {
         None = -1,
         Title,
-        Stage,
-        Chase
+        Stage1,
+        Chase,
+        Stage2
     }
 
     public enum Sfx

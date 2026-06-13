@@ -59,6 +59,14 @@ namespace Enemy.Move
         [SerializeField] private Ease _animaionType = Ease.Linear;
         private Rigidbody2D _rb2d;
 
+        // --- 초기 상태 리셋을 위한 백업 및 제어 변수들 ---
+        private Vector3 _origPosition;
+        private Vector3 _origLocalPosition;
+        private float _origAngleRad;
+        private bool _origSpriteEnabled;
+        private bool _origColliderEnabled;
+        private Tween _activeTween; // 🌟 어떠한 형태의 트윈이든 확실하게 정지시키기 위한 변수
+
         [Header("---프로퍼티----")]
         public WaypointPathType PathType => _pathType;
         public List<Vector3> Waypoints => _waypoints;
@@ -84,6 +92,18 @@ namespace Enemy.Move
 
         private void Start()
         {
+            // 최초 시작 시점의 원본 데이터들을 안전하게 백업합니다.
+            _origPosition = transform.position;
+            _origLocalPosition = transform.localPosition;
+            _origAngleRad = _angleRad;
+
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null) _origSpriteEnabled = sr.enabled;
+
+            var col = GetComponent<Collider2D>();
+            if (col != null) _origColliderEnabled = col.enabled;
+
+
             if (isStopAnimator)
             {
                 GetComponent<Animator>().Play(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0f);
@@ -102,7 +122,7 @@ namespace Enemy.Move
         {
             if (_startOnPlayerStep && !_hasStartedMoving)
             {
-                // 플레이어 태그가 "Player"인지 확인 (프로젝트 설정에 맞게 변경 가능)
+                // 플레이어 태그가 "Player"인지 확인
                 if (collision.gameObject.CompareTag("Player"))
                 {
                     // 밟았을 때 작동 시작
@@ -111,7 +131,7 @@ namespace Enemy.Move
             }
         }
 
-        // 실제 움직임 시작을 담당하는 메서드 (외부 호출도 가능하도록 public 선언)
+        // 실제 움직임 시작을 담당하는 메서드
         public void StartMovement()
         {
             if (_hasStartedMoving) return; // 이미 작동 중이면 무시
@@ -139,7 +159,9 @@ namespace Enemy.Move
         {
             Vector3 center = transform.localPosition - new Vector3(0, _circleRadius, 0);
             _angleRad *= Mathf.Deg2Rad;
-            DOTween.To(() => _angleRad,
+            
+            // 🌟 생성된 트윈을 _activeTween에 할당하여 추적합니다.
+            _activeTween = DOTween.To(() => _angleRad,
                                  x => _angleRad = x,
                                  _angleRad - 2f * _circleDirection * Mathf.PI,
                                  _duration)
@@ -159,7 +181,9 @@ namespace Enemy.Move
         {
             Vector3 center = transform.localPosition - new Vector3(0, _elipseRadiusY, 0);
             _angleRad *= Mathf.Deg2Rad;
-            DOTween.To(() => _angleRad, x => _angleRad = x,
+            
+            // 🌟 생성된 트윈을 _activeTween에 할당하여 추적합니다.
+            _activeTween = DOTween.To(() => _angleRad, x => _angleRad = x,
                         _angleRad - 2f * _elipseDirection * Mathf.PI,
                         _duration)
                    .SetEase(Ease.Linear)
@@ -234,6 +258,9 @@ namespace Enemy.Move
                 }
             });
             seq.SetLoops(_loopCount, _animationLoopType);
+
+            // 🌟 시퀀스도 트윈이므로 _activeTween에 담아줍니다.
+            _activeTween = seq;
         }
 
         //닫힌 구간 움직임
@@ -258,6 +285,67 @@ namespace Enemy.Move
 
             seq.AppendInterval(_delay);
             seq.SetLoops(_loopCount, _animationLoopType);
+
+            // 🌟 시퀀스를 _activeTween에 담아줍니다.
+            _activeTween = seq;
+        }
+
+        // 🌟 플레이어 사망 시 호출되어 버그 없이 완벽히 초기화하는 메서드
+        public void ResetToInitialState()
+        {
+            // 1. 대기 중인 Invoke 및 실행 중이던 모든 형태의 트윈 강제 킬 (가장 중요)
+            CancelInvoke();
+            if (_activeTween != null)
+            {
+                _activeTween.Kill();
+                _activeTween = null;
+            }
+            
+            // 2. 리지드바디 트윈 정지 및 남아있던 물리 속도(관성)를 완벽히 제로로 초기화
+            if (_rb2d != null)
+            {
+                _rb2d.DOKill();
+                _rb2d.linearVelocity = Vector2.zero;
+            }
+            transform.DOKill();
+
+            // 3. 내부 데이터 변수 원상 복구
+            _hasStartedMoving = false;
+            _angleRad = _origAngleRad;
+
+            // 4. 물리 위치 캐싱 버그를 막기 위해 transform과 rb2d.position을 동시에 완전히 강제 동기화 리셋
+            if (_pathType == WaypointPathType.LineOpen || _pathType == WaypointPathType.LineClosed)
+            {
+                Vector3 targetPos = _waypoints.Count > 0 ? _waypoints[0] : _origPosition;
+                transform.position = targetPos;
+                if (_rb2d != null) _rb2d.position = targetPos;
+            }
+            else
+            {
+                transform.localPosition = _origLocalPosition;
+                if (_rb2d != null) _rb2d.position = transform.position;
+            }
+
+            // 5. 비활성화되었을 수 있는 컴포넌트 복구
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = _origSpriteEnabled;
+
+            var col = GetComponent<Collider2D>();
+            if (col != null) col.enabled = _origColliderEnabled;
+
+            // 6. 애니메이터 상태 복구
+            Animator animator = GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.speed = isStopAnimator ? 0.0f : 1.0f;
+                animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0f);
+            }
+
+            // 7. 즉시 작동 플랫폼이었다면 처음 상태에서 다시 움직이도록 재기동
+            if (!_startOnPlayerStep)
+            {
+                StartMovement();
+            }
         }
 
         private void OnDrawGizmos() //얘는 선택 안되어있을때를 그림

@@ -5,6 +5,7 @@ using VContainer.Unity;
 
 public class ChaseStageScope : LifetimeScope
 {
+    [SerializeField] private NextScene _nextScene;
     [Header("----- StoryInstaller ------")]
     [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
     [SerializeField] private StoryEventManager _storyEventManager;
@@ -31,7 +32,7 @@ public class ChaseStageScope : LifetimeScope
             new StoryInstaller(_dialogueManager, _storyEventManager).Install(builder);
         }
         new VirtualCameraInstaller(_vCammanager).Install(builder);
-
+        builder.RegisterComponent(_nextScene);
         //builder.RegisterComponent<LoadNextScene>(_loadNextScene);
         builder.RegisterComponent<ChaseGhost>(_chaseGhost);
 

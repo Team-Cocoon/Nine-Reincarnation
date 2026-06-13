@@ -6,12 +6,14 @@ public class StoryChaseGhost : StoryNPC, IEventInterface
     [SerializeField] private RuntimeAnimatorController _storyAnimator;
     [SerializeField] private RuntimeAnimatorController _defaultAnimator;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private GameObject _uiObject;
     private ChaseGhost _chaseGhost;
 
     public async UniTask ExecuteEvent(int index)
     {
         NpcAnimator.runtimeAnimatorController = _defaultAnimator;
         _chaseGhost.StartBehavior();
+        _uiObject.SetActive(true);
     }
 
     public void SoundPlay()

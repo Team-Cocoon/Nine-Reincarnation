@@ -15,8 +15,6 @@ public enum PlayerAnimationState
     Throw
 }
 
-
-
 public interface IObjectData
 {
     public float Speed
@@ -34,6 +32,7 @@ namespace Player.Controller
         Stop = 0,
         Left = -1
     }
+    
     public class PlayerController : MonoBehaviour, IObjectData
     {
         [Header("--- 플레이어 관련 변수 ---")]
@@ -46,6 +45,7 @@ namespace Player.Controller
         [SerializeField] private float _downGravity;            //떨어질때 중력
         [SerializeField] private float _speed;                  //플레이어 속도
         [SerializeField] private float _jumpForce;              //점프 힘
+        [SerializeField] private float _enhancedJumpForce;      // ✨ 추가: 고양이 상호작용 시 강화될 점프 힘
         [SerializeField] private string _playerName;             //플레이어 식별 변수
         [SerializeField] private Vector3 _checkPoint;             //플레이어 리스폰 위치
         [SerializeField] private GroundDetector _groundDetector;         //땅 감지 
@@ -87,6 +87,8 @@ namespace Player.Controller
         private float accelerationTimeAirborne = 0.05f;
         private float accelerationTimeGrounded = 0.05f;
         private float velocityXSmoothing;
+        
+        private float _baseJumpForce; // ✨ 추가: 원래 점프 힘을 저장해둘 내부 변수
 
         #region 프로퍼티 영역
         public int JumpCount => _jumpCount;
@@ -162,12 +164,6 @@ namespace Player.Controller
         public int ActivePhasingCount => _activePhasingCount;
         #endregion
 
-        // [Inject]
-        // public void Construct(ThrowThread thread)
-        // {
-        //     _thread[(int)ThreadType.Red] = thread;
-        //     _thread[(int)ThreadType.Red].SetStart(this.transform);
-        // }
         private void Init()
         {
             _isDead = false;
@@ -177,13 +173,13 @@ namespace Player.Controller
             _isFalling = false;
             _isThrow = false;
 
-            // 청연 소유 초기화
             _currentBlueThread = _maxBlueThread;
 
             _onGroundDetector = false;
             _onSlopeDetector = false;
 
             InitGravity();
+            InitJumpForce(); // ✨ 추가: 리스폰 시 점프력도 초기 상태로 복구
         }
 
         private void OnValidate()
@@ -203,13 +199,13 @@ namespace Player.Controller
             _animator = GetComponent<Animator>();
 
             _rb2d.gravityScale = _defaultGravity;
+            _baseJumpForce = _jumpForce; // ✨ 추가: 인스펙터에 세팅된 기본 점프 힘 백업
         }
 
         private void OnEnable()
         {
             SetLockThrow().Forget();
 
-            //모든 상태비헤비어 초기화
             foreach (PlayerStateMachineBehaviour behaviour in _animator.GetBehaviours<PlayerStateMachineBehaviour>())
             {
                 behaviour.Player = this;
@@ -252,7 +248,6 @@ namespace Player.Controller
 
         private void UpdateGravityAndFallSpeed()
         {
-            //떨어지고 있는 상태로 변경
             if (!_isFalling && _rb2d.linearVelocity.y <= 0.5f)
             {
                 _rb2d.gravityScale = _downGravity;
@@ -269,7 +264,6 @@ namespace Player.Controller
                 _rb2d.linearVelocity = new Vector2(_rb2d.linearVelocity.x, _maxDownForce);
             }
         }
-
 
         private void PrepareThrowMotion(Vector2 mousePosition, ThreadType threadType)
         {
@@ -310,7 +304,6 @@ namespace Player.Controller
                                 return;
                             }
                         }
-
                     }
                     if (shouldClick)
                     {
@@ -330,6 +323,7 @@ namespace Player.Controller
                     break;
             }
         }
+        
         public void AddActivePhasing() => _activePhasingCount++;
         public void RemoveActivePhasing() => _activePhasingCount = Mathf.Max(0, _activePhasingCount - 1);
         public void ExcuteRedThrowMotion(Vector2 mousePosition) => PrepareThrowMotion(mousePosition, ThreadType.Red);
@@ -367,14 +361,25 @@ namespace Player.Controller
             _maxDownForce = _defaultDownForce;
         }
 
+        // ✨ 추가: 점프력 강화 메서드 (고양이 상호작용용)
+        public void EnhanceJump()
+        {
+            _isBlueInteract = true; // 파란 실 상호작용 판정 플래그 ON (필요에 따라 수정 가능)
+            _jumpForce = _enhancedJumpForce;
+        }
+
+        // ✨ 추가: 점프력 초기화 메서드
+        public void InitJumpForce()
+        {
+            _isBlueInteract = false;
+            _jumpForce = _baseJumpForce;
+        }
+
         public void SetCheckPoint(Vector3 position)
         {
             _checkPoint = position;
         }
 
-        /// <summary>
-        /// 플레이어를 정지 상태로 만드는 함수
-        /// </summary>
         public void SetStop()
         {
             _direction = PlayerDirection.Stop;
@@ -384,9 +389,6 @@ namespace Player.Controller
             }
         }
 
-        /// <summary>
-        /// 현재 접촉한 OneWayPlatform 설정
-        /// </summary>
         public void SetContactPlatform(OneWayPlatform platform = null)
         {
             _oneWayPlatform = platform;
@@ -406,17 +408,11 @@ namespace Player.Controller
         {
             if (isActive)
             {
-                if (_onGroundDetector)
-                {
-                    return;
-                }
+                if (_onGroundDetector) return;
             }
             else
             {
-                if (!_onGroundDetector)
-                {
-                    return;
-                }
+                if (!_onGroundDetector) return;
             }
 
             _onGroundDetector = isActive;
@@ -427,26 +423,17 @@ namespace Player.Controller
         {
             if (isActive)
             {
-                if (_onSlopeDetector)
-                {
-                    return;
-                }
-
+                if (_onSlopeDetector) return;
             }
             else
             {
-                if (!_onSlopeDetector)
-                {
-                    return;
-                }
+                if (!_onSlopeDetector) return;
             }
 
             _onSlopeDetector = isActive;
             _slopeDetector.gameObject.SetActive(isActive);
         }
 
-
-        //RigidBody를 제어하여 물리적인 움직임을 주는 함수
         private void Move()
         {
             if (_currentState == PlayerAnimationState.Dead) return;
@@ -461,9 +448,6 @@ namespace Player.Controller
             }
         }
 
-        /// <summary>
-        /// RigidBody를 제어하여 Jump하는 함수
-        /// </summary>
         public void Jump()
         {
             if (_jumpCount >= 2 || _currentState == PlayerAnimationState.Dead) return;
@@ -482,9 +466,6 @@ namespace Player.Controller
             _jumpCount++;
         }
 
-        /// <summary>
-        /// Platform을 제어해서 DownJump하는 함수
-        /// </summary>
         public void DownJump()
         {
             if (_oneWayPlatform != null)
@@ -496,7 +477,6 @@ namespace Player.Controller
         #endregion
 
         #region 플레이어 상태 제어
-
         public void Dead()
         {
             if (_currentState == PlayerAnimationState.Dead) return;
@@ -527,9 +507,6 @@ namespace Player.Controller
             CameraEventHandler.OnLook_Invoke(_isLook);
         }
 
-        /// <summary>
-        /// 플레이어 방향에 따라 이미지 방향 변경
-        /// </summary>
         public void ChangePlayerDirection()
         {
             switch (_direction)
