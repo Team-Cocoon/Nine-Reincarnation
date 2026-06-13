@@ -5,8 +5,7 @@ using System;
 
 public class SpikeObstacle : MonoBehaviour
 {
-    [SerializeField] private Animator animator; 
-
+    [SerializeField] private Animator animator;
     [SerializeField] private SpikePoolSO[] spikePools;
 
     [Header("Settings")]
@@ -17,6 +16,7 @@ public class SpikeObstacle : MonoBehaviour
     private CancellationTokenSource _cts;
     private static readonly int TreeShakeHash = Animator.StringToHash("Tree_Shake");
     private static readonly int TreeIdleHash = Animator.StringToHash("Tree_Idle");
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -65,13 +65,19 @@ public class SpikeObstacle : MonoBehaviour
         {
             ResetToIdle();
         }
+        catch (Exception e)
+        {
+            // [수정됨] 풀링 에러 등 알 수 없는 에러로 루프가 멈추고 나무가 굳는 현상 방지
+            Debug.LogError($"SpawnLoop Error: {e.Message}");
+            ResetToIdle();
+        }
     }
 
     private void SpawnSpike()
     {
         if (spikePools == null || spikePools.Length == 0)
         {
-            Debug.LogWarning("SpikePools 배열이 비어 있습니다! 인스펙터에서 SO 에셋들을 넣어주세요.");
+            Debug.LogWarning("SpikePools 배열이 비어 있습니다!");
             return;
         }
 
@@ -85,7 +91,11 @@ public class SpikeObstacle : MonoBehaviour
         float randomX = transform.position.x + UnityEngine.Random.Range(-xRange, xRange);
         Vector3 spawnPos = new Vector3(randomX, transform.position.y + spawnHeight, 0);
 
+        // [수정됨] 1. 위치를 최상단으로 먼저 옮깁니다.
         spikeGo.transform.position = spawnPos;
+
+        // [수정됨] 2. 위치가 완전히 세팅된 후 활성화해야 이전 위치에서의 충돌 버그를 막을 수 있습니다.
+        spikeGo.SetActive(true);
     }
 
     private void ResetToIdle()
@@ -95,6 +105,7 @@ public class SpikeObstacle : MonoBehaviour
             animator.Play(TreeIdleHash);
         }
     }
+
     private void OnDestroy()
     {
         _cts?.Cancel();
