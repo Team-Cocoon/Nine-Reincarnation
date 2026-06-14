@@ -1983,6 +1983,9 @@ MonoBehaviour:
   step2Sprite: {fileID: -3366698030609452317, guid: 6eca6ef389845774486a29f8c1521bc8, type: 3}
   step3Sprite: {fileID: -4378365503672350835, guid: 93e93470327dc864fa345ada8a3690d3, type: 3}
   offset: {x: 0, y: 1.5, z: 0}
+  _interactionSprite: {fileID: 1667934067}
+  _catSprite: {fileID: -6378234553392478909, guid: 59d8171223afc5a4495f9c0bfb18a99d, type: 3}
+  _featherSprite: {fileID: -7857582145445264885, guid: e0fa8814d5308cf4386de79503bc0836, type: 3}
 --- !u!225 &1872744727
 CanvasGroup:
   m_ObjectHideFlags: 0
