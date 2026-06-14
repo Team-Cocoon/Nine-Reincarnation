@@ -45,7 +45,7 @@ namespace Player.Controller
         [SerializeField] private float _downGravity;            //떨어질때 중력
         [SerializeField] private float _speed;                  //플레이어 속도
         [SerializeField] private float _jumpForce;              //점프 힘
-        [SerializeField] private float _enhancedJumpForce;      // ✨ 추가: 고양이 상호작용 시 강화될 점프 힘
+        [SerializeField] private float _enhancedJumpForce;      // 고양이 상호작용 시 강화될 점프 힘
         [SerializeField] private string _playerName;             //플레이어 식별 변수
         [SerializeField] private Vector3 _checkPoint;             //플레이어 리스폰 위치
         [SerializeField] private GroundDetector _groundDetector;         //땅 감지 
@@ -84,14 +84,14 @@ namespace Player.Controller
         private bool _lockThrow = true;
         private ThreadType _pendingThreadType;
 
-        // ✨ 추가: 클릭 순간의 마우스 위치를 저장할 변수
+        // 클릭 순간의 마우스 위치를 저장할 변수
         private Vector2 _cachedThrowPosition; 
 
         private float accelerationTimeAirborne = 0.05f;
         private float accelerationTimeGrounded = 0.05f;
         private float velocityXSmoothing;
         
-        private float _baseJumpForce; // ✨ 추가: 원래 점프 힘을 저장해둘 내부 변수
+        private float _baseJumpForce; // 원래 점프 힘을 저장해둘 내부 변수
 
         #region 프로퍼티 영역
         public int JumpCount => _jumpCount;
@@ -182,7 +182,7 @@ namespace Player.Controller
             _onSlopeDetector = false;
 
             InitGravity();
-            InitJumpForce(); // ✨ 추가: 리스폰 시 점프력도 초기 상태로 복구
+            InitJumpForce(); 
         }
 
         private void OnValidate()
@@ -202,7 +202,7 @@ namespace Player.Controller
             _animator = GetComponent<Animator>();
 
             _rb2d.gravityScale = _defaultGravity;
-            _baseJumpForce = _jumpForce; // ✨ 추가: 인스펙터에 세팅된 기본 점프 힘 백업
+            _baseJumpForce = _jumpForce; 
         }
 
         private void OnEnable()
@@ -238,8 +238,6 @@ namespace Player.Controller
 
             if (this == null || !this.isActiveAndEnabled) return;
             _lockThrow = false;
-
-            Debug.Log("던지기 실행가능");
         }
 
         private void FixedUpdate()
@@ -272,15 +270,26 @@ namespace Player.Controller
         {
             if (_lockThrow) return;
 
+            // ✨ 수정됨: 막는 것이 아니라, 이미 다른 실이 사용 중이라면 강제로 취소(해제)시킵니다.
+            for (int i = 0; i < _thread.Length; i++)
+            {
+                if (i != (int)threadType && _thread[i] != null)
+                {
+                    if (_thread[i].CurrentState == ThrowThreadState.Exist || _thread[i].CurrentState == ThrowThreadState.Throwing)
+                    {
+                        _thread[i].ForceCancel(); // 강제로 끊어버리기
+                    }
+                }
+            }
+
             _pendingThreadType = threadType;
-            _cachedThrowPosition = mousePosition; // ✨ 핵심 수정: 클릭한 시점의 마우스 위치를 캐싱!
+            _cachedThrowPosition = mousePosition; 
 
             switch (threadType)
             {
                 case ThreadType.Red:
                     if (_isRedInteract)
                     {
-                        // 캐싱된 위치 전달
                         _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
                     }
                     else
@@ -313,7 +322,6 @@ namespace Player.Controller
                     }
                     if (shouldClick)
                     {
-                        // 캐싱된 위치 전달
                         _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
                     }
                     else
@@ -338,110 +346,39 @@ namespace Player.Controller
 
         public void ExcuteThrowThread()
         {
-            // ✨ 핵심 수정: 애니메이션에서 실을 발사할 때, 방금 기억해둔 마우스 위치로 발사하도록 변경
             _thread[(int)_pendingThreadType]?.ClickEvent(_cachedThrowPosition);
         }
 
         #region 내부 변수 제어
-        public void ResetJumpCount()
-        {
-            _jumpCount = 0;
-        }
-
-        public Transform GetTransform()
-        {
-            return transform;
-        }
-
-        public void BecomeLighter()
-        {
-            _isRedInteract = true;
-            _jumpGravity = _lighterGravity;
-            _downGravity = _lighterGravity;
-            _maxDownForce = _gliderDownForce;
-        }
-
-        public void InitGravity()
-        {
-            _isRedInteract = false;
-            _jumpGravity = _defaultGravity;
-            _downGravity = _defaultGravity;
-            _maxDownForce = _defaultDownForce;
-        }
-
-        // ✨ 추가: 점프력 강화 메서드 (고양이 상호작용용)
-        public void EnhanceJump()
-        {
-            _isBlueInteract = true; // 파란 실 상호작용 판정 플래그 ON (필요에 따라 수정 가능)
-            _jumpForce = _enhancedJumpForce;
-        }
-
-        // ✨ 추가: 점프력 초기화 메서드
-        public void InitJumpForce()
-        {
-            _isBlueInteract = false;
-            _jumpForce = _baseJumpForce;
-        }
-
-        public void SetCheckPoint(Vector3 position)
-        {
-            _checkPoint = position;
-        }
-
-        public void SetStop()
-        {
-            _direction = PlayerDirection.Stop;
-            if (_rb2d != null)
-            {
-                _rb2d.linearVelocityX = 0.0f;
-            }
-        }
-
-        public void SetContactPlatform(OneWayPlatform platform = null)
-        {
-            _oneWayPlatform = platform;
-        }
+        // (생략 없이 기존과 동일하게 유지)
+        public void ResetJumpCount() { _jumpCount = 0; }
+        public Transform GetTransform() { return transform; }
+        public void BecomeLighter() { _isRedInteract = true; _jumpGravity = _lighterGravity; _downGravity = _lighterGravity; _maxDownForce = _gliderDownForce; }
+        public void InitGravity() { _isRedInteract = false; _jumpGravity = _defaultGravity; _downGravity = _defaultGravity; _maxDownForce = _defaultDownForce; }
+        public void EnhanceJump() { _isBlueInteract = true; _jumpForce = _enhancedJumpForce; }
+        public void InitJumpForce() { _isBlueInteract = false; _jumpForce = _baseJumpForce; }
+        public void SetCheckPoint(Vector3 position) { _checkPoint = position; }
+        public void SetStop() { _direction = PlayerDirection.Stop; if (_rb2d != null) { _rb2d.linearVelocityX = 0.0f; } }
+        public void SetContactPlatform(OneWayPlatform platform = null) { _oneWayPlatform = platform; }
         #endregion
 
         #region 움직임 관련 부분
-        public void IdleEnter()
-        {
-            _rb2d.sharedMaterial = _idlePhysicsMaterial;
-        }
-        public void IdleExit()
-        {
-            _rb2d.sharedMaterial = _defaultPhysicsMaterial;
-        }
+        public void IdleEnter() { _rb2d.sharedMaterial = _idlePhysicsMaterial; }
+        public void IdleExit() { _rb2d.sharedMaterial = _defaultPhysicsMaterial; }
         public void UpdateGroundDetector(bool isActive)
         {
-            if (isActive)
-            {
-                if (_onGroundDetector) return;
-            }
-            else
-            {
-                if (!_onGroundDetector) return;
-            }
-
+            if (isActive) { if (_onGroundDetector) return; }
+            else { if (!_onGroundDetector) return; }
             _onGroundDetector = isActive;
             _groundDetector.gameObject.SetActive(isActive);
         }
-
         public void UpdateSlopeDetector(bool isActive)
         {
-            if (isActive)
-            {
-                if (_onSlopeDetector) return;
-            }
-            else
-            {
-                if (!_onSlopeDetector) return;
-            }
-
+            if (isActive) { if (_onSlopeDetector) return; }
+            else { if (!_onSlopeDetector) return; }
             _onSlopeDetector = isActive;
             _slopeDetector.gameObject.SetActive(isActive);
         }
-
         private void Move()
         {
             if (_currentState == PlayerAnimationState.Dead) return;
@@ -455,32 +392,19 @@ namespace Player.Controller
                 _rb2d.linearVelocityX = Mathf.SmoothDamp(_rb2d.linearVelocityX, targetVelocityX, ref velocityXSmoothing, (IsGround) ? accelerationTimeGrounded : accelerationTimeAirborne);
             }
         }
-
         public void Jump()
         {
             if (_jumpCount >= 2 || _currentState == PlayerAnimationState.Dead) return;
-
-            if (_jumpCount == 0)
-            {
-                _isGround = false;
-                _isSlope = false;
-            }
+            if (_jumpCount == 0) { _isGround = false; _isSlope = false; }
             _isJump = true;
-
             _rb2d.linearVelocityY = 0.0f;
-
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
             _rb2d.AddForceY(_jumpForce, ForceMode2D.Impulse);
             _jumpCount++;
         }
-
         public void DownJump()
         {
-            if (_oneWayPlatform != null)
-            {
-                _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic;
-                _oneWayPlatform.Ignore(_collider);
-            }
+            if (_oneWayPlatform != null) { _rb2d.bodyType = UnityEngine.RigidbodyType2D.Dynamic; _oneWayPlatform.Ignore(_collider); }
         }
         #endregion
 
@@ -488,43 +412,21 @@ namespace Player.Controller
         public void Dead()
         {
             if (_currentState == PlayerAnimationState.Dead) return;
-
             UpdateGroundDetector(false);
             UpdateSlopeDetector(false);
-
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
             SetStop();
             _isDead = true;
         }
-
-        public void GameEvent_PlayerDead()
-        {
-            GameEventHandler.OnPlayerDead_Invoke();
-        }
-
-        public void Respawn()
-        {
-            Init();
-            transform.position = _checkPoint;
-            UpdateGroundDetector(true);
-            UpdateSlopeDetector(true);
-        }
-
-        public void Look()
-        {
-            CameraEventHandler.OnLook_Invoke(_isLook);
-        }
-
+        public void GameEvent_PlayerDead() { GameEventHandler.OnPlayerDead_Invoke(); }
+        public void Respawn() { Init(); transform.position = _checkPoint; UpdateGroundDetector(true); UpdateSlopeDetector(true); }
+        public void Look() { CameraEventHandler.OnLook_Invoke(_isLook); }
         public void ChangePlayerDirection()
         {
             switch (_direction)
             {
-                case PlayerDirection.Right:
-                    _spriteRenderer.flipX = false;
-                    break;
-                case PlayerDirection.Left:
-                    _spriteRenderer.flipX = true;
-                    break;
+                case PlayerDirection.Right: _spriteRenderer.flipX = false; break;
+                case PlayerDirection.Left: _spriteRenderer.flipX = true; break;
             }
         }
         #endregion
@@ -535,7 +437,6 @@ namespace Player.Controller
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
             collidable?.Enter(gameObject);
         }
-
         private void OnTriggerExit2D(Collider2D collision)
         {
             ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
