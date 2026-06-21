@@ -270,7 +270,7 @@ namespace Player.Controller
         {
             if (_lockThrow) return;
 
-            // ✨ 수정됨: 막는 것이 아니라, 이미 다른 실이 사용 중이라면 강제로 취소(해제)시킵니다.
+            // 막는 것이 아니라, 이미 다른 실이 사용 중이라면 강제로 취소(해제)시킵니다.
             for (int i = 0; i < _thread.Length; i++)
             {
                 if (i != (int)threadType && _thread[i] != null)
@@ -294,7 +294,8 @@ namespace Player.Controller
                     }
                     else
                     {
-                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+                        // 점프 중에도 던지기가 가능하도록 조건 추가
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
                         {
                             Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
                             float dot = Vector3.Dot(transform.right, playerToMouse);
@@ -326,7 +327,8 @@ namespace Player.Controller
                     }
                     else
                     {
-                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move)
+                        // 점프 중에도 던지기가 가능하도록 조건 추가
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
                         {
                             Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
                             float dot = Vector3.Dot(transform.right, playerToMouse);
@@ -350,7 +352,6 @@ namespace Player.Controller
         }
 
         #region 내부 변수 제어
-        // (생략 없이 기존과 동일하게 유지)
         public void ResetJumpCount() { _jumpCount = 0; }
         public Transform GetTransform() { return transform; }
         public void BecomeLighter() { _isRedInteract = true; _jumpGravity = _lighterGravity; _downGravity = _lighterGravity; _maxDownForce = _gliderDownForce; }

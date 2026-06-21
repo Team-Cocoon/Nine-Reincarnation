@@ -16,6 +16,11 @@ public class AnnaJumpState : PlayerStateMachineBehaviour
             animator.SetTrigger("IsDead");
             Player.IsDead = false;
         }
+        else if (Player.IsThrow)
+        {
+            animator.SetTrigger("IsThrow");
+            Player.IsThrow = false;
+        }
         //땅에 닿으면 Idle 상태로 진입
         else if (Player.IsGround || Player.IsSlope)
         {

@@ -1033,7 +1033,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2687,6 +2687,9 @@ MonoBehaviour:
   step2Sprite: {fileID: -3366698030609452317, guid: 6eca6ef389845774486a29f8c1521bc8, type: 3}
   step3Sprite: {fileID: -4378365503672350835, guid: 93e93470327dc864fa345ada8a3690d3, type: 3}
   offset: {x: 0, y: 1.5, z: 0}
+  _interactionSprite: {fileID: 0}
+  _catSprite: {fileID: 0}
+  _featherSprite: {fileID: 0}
 --- !u!225 &1051839255
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3021,9 +3024,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabe61c40398e56408d78a5b46ead020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keyCode: 323
+  _leftClickKeyCode: 323
+  _rightClickKeyCode: 324
   _defaultSprite: {fileID: 21300000, guid: a48b569b8e7340e4babb3213b3dbeef2, type: 3}
-  _changeSprite: {fileID: 21300000, guid: 2e4ea2f59ef7c0d4cb89e476e21372c1, type: 3}
+  _leftClickSprite: {fileID: 21300000, guid: 2e4ea2f59ef7c0d4cb89e476e21372c1, type: 3}
+  _rightClickSprite: {fileID: 21300000, guid: b1f9a67ea3ec4f847befde95752361ce, type: 3}
   _renderer: {fileID: 1209093396}
 --- !u!212 &1209093396
 SpriteRenderer:
@@ -4312,6 +4317,7 @@ MonoBehaviour:
   _fallSpeed: 10
   linkedLineObject: {fileID: 675781082}
   linkedLineRenderer: {fileID: 675781083}
+  _maintainDistance: 10
 --- !u!1 &1658198624
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,7 +4547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114162071741136715, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.714
+      value: 17.96
       objectReference: {fileID: 0}
     - target: {fileID: 1114162071741136715, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
       propertyPath: m_LocalPosition.y

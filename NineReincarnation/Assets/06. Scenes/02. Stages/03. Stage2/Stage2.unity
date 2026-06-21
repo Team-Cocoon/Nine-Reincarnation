@@ -695,6 +695,10 @@ PrefabInstance:
       value: -3.42
       objectReference: {fileID: 0}
     - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _maxBlueThread
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285429716836269916, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
       propertyPath: _enhancedJumpForce
       value: 14
       objectReference: {fileID: 0}
