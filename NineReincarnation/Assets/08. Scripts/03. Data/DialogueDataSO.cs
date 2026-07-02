@@ -1,6 +1,7 @@
+using Player.Controller;
 using System;
 using System.Collections.Generic;
-using Player.Controller;
+using Unity.AppUI.UI;
 using UnityEngine;
 
 namespace ExcelData
@@ -8,14 +9,15 @@ namespace ExcelData
     [Flags]
     public enum EventType
     {
-        End = 0b000000000,
+        End =       0b000000000,
         Animation = 0b000000001,
-        Camera = 0b000000010,
-        Event = 0b000000100,
-        Wait = 0b000001000,
-        Script = 0b000010000,
-        Bubble = 0b000100000,
-        Select = 0b001000000,
+        Camera =    0b000000010,
+        Event =     0b000000100,
+        Wait =      0b000001000,
+        Script =    0b000010000,
+        Bubble =    0b000100000,
+        Select =    0b001000000,
+        Parallel =  0b010000000,
     }
 
     public enum CameraEventType
@@ -33,6 +35,8 @@ namespace ExcelData
         public EventType EventType; //이벤트 함수
         public float Duration;
         public int NextID;
+
+        public bool IsThisEvent(EventType type) => (EventType & type) == type;
     }
 
     [Serializable]
@@ -81,6 +85,13 @@ namespace ExcelData
         public int ChoiceCount;
     }
 
+    [Serializable]
+    public class ParallelClass
+    {
+        public int ID;
+        public float TimeOffset;
+    }
+
     [ExcelAsset(ExcelName = "DialogueData", HeaderRow = 0, DataStartRow = 1, DataStartColumn = 0, AssetPath = "07. ScriptableObjects", LogOnImport = true)]
     public class DialogueDataSO : ScriptableObject
     {
@@ -91,5 +102,6 @@ namespace ExcelData
         public List<CameraClass> Camera;
         public List<BubbleClass> Bubble;
         public List<SelectClass> Select;
+        public List<ParallelClass> Parallel;
     }
 }

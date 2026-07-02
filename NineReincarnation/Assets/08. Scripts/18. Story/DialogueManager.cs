@@ -1,8 +1,10 @@
-using System.Collections.Generic;
-using System.Threading;
+using AnyPortrait;
 using Cysharp.Threading.Tasks;
 using ExcelData;
 using Player.Controller;
+using System.Collections.Generic;
+using System.Threading;
+using Unity.AppUI.UI;
 using UnityEngine;
 using VContainer;
 
@@ -23,14 +25,27 @@ namespace DialogueSpace
         [SerializeField] private VirtualCameraManager _virtualCameraManager;
         [SerializeField] private bool _startScene = false;
 
-
         List<UniTask> tasks = new List<UniTask>(5);
+
+        List<UniTask>[] subTasks; // 병렬 처리용 테스크
+        private const int maxSubTaskCount = 2;
+
+        List<UniTask> totalTasks; // 전체 테스크
+        
         private CancellationTokenSource _cts;
         private int _nextId;
         private void Awake()
         {
             _cts = new CancellationTokenSource();
             _cts.Token.RegisterWithoutCaptureExecutionContext(ResetState);
+
+            subTasks = new List<UniTask>[maxSubTaskCount];
+            for (int i = 0; i < maxSubTaskCount; ++i)
+            {
+                subTasks[i] = new List<UniTask>(5);
+            }
+
+            totalTasks = new List<UniTask>(maxSubTaskCount + 1);
         }
 
         private void OnEnable()
@@ -105,47 +120,31 @@ namespace DialogueSpace
                     return false;
                 }
 
-                if ((dialogue.EventType & ExcelData.EventType.Script) == ExcelData.EventType.Script)
-                {
-                    tasks.Add(_dialogueUI.UpdateUI(_dialogueDB.GetData<ScriptClass>(_id), _cts.Token));
-                }
-                if ((dialogue.EventType & ExcelData.EventType.Event) == ExcelData.EventType.Event)
-                {
-                    tasks.Add(_storyEventManager.ExcuteEvent(_cts, _id));
-                }
-                if ((dialogue.EventType & ExcelData.EventType.Camera) == ExcelData.EventType.Camera)
-                {
-                    tasks.Add(_camera.ExcuteEvent(_dialogueDB.GetData<CameraClass>(_id)));
-                }
-                if ((dialogue.EventType & ExcelData.EventType.Animation) == ExcelData.EventType.Animation)
-                {
-                    tasks.Add(_storyAnimationManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(_id)));
-                }
-                if ((dialogue.EventType & ExcelData.EventType.Bubble) == ExcelData.EventType.Bubble)
-                {
-                    tasks.Add(_bubbleManager.ExcuteBubble(_dialogueDB.GetData<BubbleClass>(_id)));
-                }
-                if ((dialogue.EventType & ExcelData.EventType.Select) == ExcelData.EventType.Select)
-                {
-                    SelectClass data = _dialogueDB.GetData<SelectClass>(_id);
+                // 지금 차례 테스크 추가
+                TaskAdder(tasks, dialogue);
+                totalTasks.Add(StartMainTask(tasks, dialogue.Duration));
 
-                    int size = data.ChoiceCount;
-
-                    SelectDataStruct[] selectDataStructs = new SelectDataStruct[size];
-
-                    for (int i = 1; i <= size; ++i)
+                // 선택지, 스크립트 이벤트가 있다면 병렬 처리 안함(선택지는 id 꼬일 수 있음, 스크립트는 동시 출력 불가)
+                if (dialogue.IsThisEvent(ExcelData.EventType.Select) == false)
+                {
+                    // 병렬 처리 테스크 추가
+                    int curSubTaskIndex = 0;
+                    DialogueClass nextDialogue = _dialogueDB.GetData<DialogueClass>(_nextId);
+                    while (curSubTaskIndex < maxSubTaskCount && nextDialogue.IsThisEvent(ExcelData.EventType.Parallel))
                     {
-                        int id = _id * 10 + i;
-                        string script = _dialogueDB.GetData<ScriptClass>(id).Script;
-                        int nextId = _dialogueDB.GetData<DialogueClass>(id).NextID;
-                        selectDataStructs[i - 1].SetSelectDataStruct(id, nextId, script);
-                    }
+                        _id = _nextId; _nextId = nextDialogue.NextID;
 
-                    tasks.Add(SelectWrapper(data, selectDataStructs));
+                        ParallelClass data = _dialogueDB.GetData<ParallelClass>(_id);
+                        totalTasks.Add(StartSubTask(subTasks[curSubTaskIndex], nextDialogue, data.TimeOffset));
+
+                        // 다음 다이얼로그 처리
+                        nextDialogue = _dialogueDB.GetData<DialogueClass>(_nextId);
+                        ++curSubTaskIndex;
+                    }
                 }
 
-                await UniTask.WhenAll(tasks).AttachExternalCancellation(_cts.Token);
-                await UniTask.WaitForSeconds(dialogue.Duration, cancellationToken: _cts.Token);
+                // 테스크 총괄 실행
+                await UniTask.WhenAll(totalTasks).AttachExternalCancellation(_cts.Token);
 
                 if (_bubbleManager.HasSkipEvent || _camera.HasSkipEvent || _dialogueUI.HasSkipEvent)
                 {
@@ -158,8 +157,12 @@ namespace DialogueSpace
             }
             finally
             {
-
                 tasks.Clear();
+                for(int i = 0; i < maxSubTaskCount; ++i)
+                {
+                    subTasks[i].Clear();
+                }
+                totalTasks.Clear();
             }
 
             return true;
@@ -189,6 +192,22 @@ namespace DialogueSpace
             await UniTask.NextFrame();
         }
 
+        private async UniTask StartMainTask(List<UniTask> taskList, float duration)
+        {
+            await UniTask.WhenAll(taskList).AttachExternalCancellation(_cts.Token);
+            await UniTask.WaitForSeconds(duration, cancellationToken: _cts.Token);
+        }
+
+        private async UniTask StartSubTask(List<UniTask> taskList, DialogueClass dialogue, float timeOffset)
+        {
+            await UniTask.WaitForSeconds(timeOffset, cancellationToken: _cts.Token);
+
+            TaskAdder(taskList, dialogue, true);
+
+            await UniTask.WhenAll(taskList).AttachExternalCancellation(_cts.Token);
+            await UniTask.WaitForSeconds(dialogue.Duration, cancellationToken: _cts.Token);
+        }
+
         private void ResetState()
         {
             if (_camera != null && _camera.HasSkipEvent)
@@ -199,6 +218,50 @@ namespace DialogueSpace
 
             if (_dialogueUI != null && _dialogueUI.HasSkipEvent)
                 _dialogueUI.CloseUI();
+        }
+
+        private void TaskAdder(List<UniTask> taskList, DialogueClass dialogue, bool isSubTask = false)
+        {
+            if (isSubTask == false && dialogue.IsThisEvent(ExcelData.EventType.Script))
+            {
+                taskList.Add(_dialogueUI.UpdateUI(_dialogueDB.GetData<ScriptClass>(dialogue.ID), _cts.Token));
+            }
+            if (isSubTask == false && dialogue.IsThisEvent(ExcelData.EventType.Event))
+            {
+                taskList.Add(_storyEventManager.ExcuteEvent(_cts, dialogue.ID));
+            }
+            if (isSubTask == false && dialogue.IsThisEvent(ExcelData.EventType.Select))
+            {
+                SelectClass data = _dialogueDB.GetData<SelectClass>(dialogue.ID);
+
+                int size = data.ChoiceCount;
+
+                SelectDataStruct[] selectDataStructs = new SelectDataStruct[size];
+
+                for (int i = 1; i <= size; ++i)
+                {
+                    int sid = dialogue.ID * 10 + i;
+                    string script = _dialogueDB.GetData<ScriptClass>(sid).Script;
+                    int nextId = _dialogueDB.GetData<DialogueClass>(sid).NextID;
+                    selectDataStructs[i - 1].SetSelectDataStruct(sid, nextId, script);
+                }
+
+                taskList.Add(SelectWrapper(data, selectDataStructs));
+            }
+
+            // 병렬 처리가 가능한 테스크
+            if (dialogue.IsThisEvent(ExcelData.EventType.Camera))
+            {
+                taskList.Add(_camera.ExcuteEvent(_dialogueDB.GetData<CameraClass>(dialogue.ID)));
+            }
+            if (dialogue.IsThisEvent(ExcelData.EventType.Animation))
+            {
+                taskList.Add(_storyAnimationManager.ExcuteAnimation(_dialogueDB.GetData<AnimationClass>(dialogue.ID)));
+            }
+            if (dialogue.IsThisEvent(ExcelData.EventType.Bubble))
+            {
+                taskList.Add(_bubbleManager.ExcuteBubble(_dialogueDB.GetData<BubbleClass>(dialogue.ID)));
+            }
         }
     }
 }
