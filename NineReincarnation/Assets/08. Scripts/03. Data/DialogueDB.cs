@@ -16,6 +16,7 @@ public class DialogueDB
         RegisterDatabase<ScriptClass>(dialogueData.Script, item => item.ID);
         RegisterDatabase<BubbleClass>(dialogueData.Bubble, item => item.ID);
         RegisterDatabase<SelectClass>(dialogueData.Select, item => item.ID);
+        RegisterDatabase<ParallelClass>(dialogueData.Parallel, item => item.ID);
     }
 
     private void RegisterDatabase<T>(IEnumerable<T> sourceList, Func<T, int> keySelector)

@@ -125,16 +125,18 @@ namespace DialogueSpace
                 totalTasks.Add(StartMainTask(tasks, dialogue.Duration));
 
                 // 선택지, 스크립트 이벤트가 있다면 병렬 처리 안함(선택지는 id 꼬일 수 있음, 스크립트는 동시 출력 불가)
-                if (dialogue.IsThisEvent(ExcelData.EventType.Select) == false)
+                if (dialogue.IsThisEvent(ExcelData.EventType.Select) == false &&
+                    dialogue.IsThisEvent(ExcelData.EventType.Script) == false &&
+                    dialogue.IsThisEvent(ExcelData.EventType.Event) == false) 
                 {
                     // 병렬 처리 테스크 추가
-                    int curSubTaskIndex = 0;
-                    DialogueClass nextDialogue = _dialogueDB.GetData<DialogueClass>(_nextId);
+                    int curSubTaskIndex = 0; int subID = _nextId;
+                    DialogueClass nextDialogue = _dialogueDB.GetData<DialogueClass>(subID);
                     while (curSubTaskIndex < maxSubTaskCount && nextDialogue.IsThisEvent(ExcelData.EventType.Parallel))
                     {
-                        _id = _nextId; _nextId = nextDialogue.NextID;
+                        subID = _nextId; _nextId = nextDialogue.NextID;
 
-                        ParallelClass data = _dialogueDB.GetData<ParallelClass>(_id);
+                        ParallelClass data = _dialogueDB.GetData<ParallelClass>(subID);
                         totalTasks.Add(StartSubTask(subTasks[curSubTaskIndex], nextDialogue, data.TimeOffset));
 
                         // 다음 다이얼로그 처리

@@ -250,7 +250,7 @@ MonoBehaviour:
     Duration: 0
     NextID: 103017
   - ID: 103017
-    EventType: 1
+    EventType: 129
     Duration: 2
     NextID: 103018
   - ID: 103018
@@ -1119,3 +1119,6 @@ MonoBehaviour:
     Script: "\uBB34\uC5C7\uC744 \uBB3C\uC744\uAE4C?"
     Name: 
     ChoiceCount: 0
+  Parallel:
+  - ID: 103017
+    TimeOffset: 0.5
