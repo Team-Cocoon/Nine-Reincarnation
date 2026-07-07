@@ -9,7 +9,9 @@ public class EventCamera : MonoBehaviour
     [SerializeField] private float _defaultOthoSize;
     [SerializeField] private CinemachineZoom _zoom;
     [SerializeField] private CinemachineShake _shake;
+    [SerializeField] private VirtualCameraManager _cameraManager;
     [SerializeField] private bool _playSound = false;
+    [SerializeField] private float _defaultCameraShiftDampingTime = 0.5f;
     private bool _hasSkipEvent = false;
     public bool HasSkipEvent => _hasSkipEvent;
 
@@ -22,6 +24,7 @@ public class EventCamera : MonoBehaviour
     {
         _hasSkipEvent = false;
 
+        string name = data.Name;
         CameraEventType type = data.Type;
         float duration = data.Duration;
         float size = data.Size;
@@ -45,6 +48,9 @@ public class EventCamera : MonoBehaviour
             case CameraEventType.ZoomOut:
                 await Zoom(duration, size);
                 break;
+            case CameraEventType.CameraShift:
+                await CameraShift(name);
+                break;
         }
     }
 
@@ -56,6 +62,12 @@ public class EventCamera : MonoBehaviour
     private async UniTask Shake(float duration, float strength)
     {
         await _shake.Shake(duration, strength);
+    }
+
+    private async UniTask CameraShift(string name)
+    {
+        _cameraManager.SetFollowObj(name);
+        await UniTask.WaitForSeconds(_defaultCameraShiftDampingTime);
     }
 
     public void StopShakeImmediate()

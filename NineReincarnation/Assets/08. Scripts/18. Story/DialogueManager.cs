@@ -265,5 +265,10 @@ namespace DialogueSpace
                 taskList.Add(_bubbleManager.ExcuteBubble(_dialogueDB.GetData<BubbleClass>(dialogue.ID)));
             }
         }
+
+        public void SynchronizePlayerPos()
+        {
+            _npcAnna.transform.position = _anna.transform.position;
+        }
     }
 }

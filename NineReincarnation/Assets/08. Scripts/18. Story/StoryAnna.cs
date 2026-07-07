@@ -7,12 +7,14 @@ public class StoryAnna : StoryNPC, IEventInterface
 {
     [SerializeField] private List<Transform> _wayPoints;
     [SerializeField] private Rigidbody2D _rb2d;
+    [SerializeField] private string _defaultAnimationName = "Anna_Idle";
     [SerializeField] private float _speed;
 
     private Queue<Transform> _wayPointQueue;
 
     private void OnEnable()
     {
+        NpcAnimator.Play(_defaultAnimationName);
     }
 
     private void Awake()

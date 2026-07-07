@@ -19,6 +19,8 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private int _currentIndex = 0;
     [Inject] private PlayerController _player;
 
+    [SerializeField] private DialogueCameraShiftHelper _cameraShiftHelper;
+
     public void Initialize()
     {
         for (int i = 0; i < _areas.Length; ++i)
@@ -56,5 +58,15 @@ public class VirtualCameraManager : MonoBehaviour
     public void SetPlayer()
     {
         _eventCam.Follow = _player.transform;
+    }
+
+    public void SetFollowObj(Transform objTransfrom)
+    {
+        _eventCam.Follow = objTransfrom;
+    }
+
+    public void SetFollowObj(string name)
+    {
+        SetFollowObj(_cameraShiftHelper.GetShiftObjTransform(name));
     }
 }
