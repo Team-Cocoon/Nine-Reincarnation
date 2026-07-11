@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.AppUI.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using VContainer;
 
 namespace DialogueSpace
@@ -34,6 +35,9 @@ namespace DialogueSpace
         
         private CancellationTokenSource _cts;
         private int _nextId;
+
+        private UnityEvent OnDialogueEnd = new UnityEvent();
+
         private void Awake()
         {
             _cts = new CancellationTokenSource();
@@ -116,6 +120,9 @@ namespace DialogueSpace
                     _npcAnna.SetActive(false);
                     _anna.gameObject.SetActive(true);
                     _virtualCameraManager.SetPlayer();
+
+                    OnDialogueEnd?.Invoke();
+                    OnDialogueEnd.RemoveAllListeners();
 
                     return false;
                 }
@@ -269,6 +276,12 @@ namespace DialogueSpace
         public void SynchronizePlayerPos()
         {
             _npcAnna.transform.position = _anna.transform.position;
+        }
+
+        public void DialogueEndAddListener(UnityAction action)
+        {
+            OnDialogueEnd.RemoveListener(action);
+            OnDialogueEnd.AddListener(action);
         }
     }
 }

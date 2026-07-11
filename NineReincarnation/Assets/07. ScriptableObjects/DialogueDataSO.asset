@@ -75,30 +75,30 @@ MonoBehaviour:
     NextID: 101016
   - ID: 101016
     EventType: 2
-    Duration: 1
+    Duration: 0
     NextID: 101017
   - ID: 101017
-    EventType: 2
-    Duration: 2
+    EventType: 130
+    Duration: 1
     NextID: 101018
   - ID: 101018
-    EventType: 5
-    Duration: 0
+    EventType: 2
+    Duration: 2
     NextID: 101019
   - ID: 101019
-    EventType: 34
+    EventType: 5
     Duration: 0
     NextID: 101020
   - ID: 101020
-    EventType: 1
+    EventType: 34
     Duration: 0
     NextID: 101021
   - ID: 101021
-    EventType: 4
+    EventType: 1
     Duration: 0
     NextID: 101022
   - ID: 101022
-    EventType: 1
+    EventType: 4
     Duration: 0
     NextID: 101023
   - ID: 101023
@@ -107,57 +107,61 @@ MonoBehaviour:
     NextID: 101024
   - ID: 101024
     EventType: 1
-    Duration: 1
+    Duration: 0
     NextID: 101025
   - ID: 101025
+    EventType: 1
+    Duration: 1
+    NextID: 101026
+  - ID: 101026
     EventType: 64
     Duration: 0
     NextID: 0
-  - ID: 1010251
+  - ID: 1010261
     EventType: 16
     Duration: 0
-    NextID: 101026
-  - ID: 1010252
+    NextID: 101027
+  - ID: 1010262
     EventType: 16
     Duration: 0
-    NextID: 101029
-  - ID: 101026
-    EventType: 3
-    Duration: 0
-    NextID: 1010267
+    NextID: 101030
   - ID: 101027
-    EventType: 1
+    EventType: 3
     Duration: 0
     NextID: 101028
   - ID: 101028
+    EventType: 129
+    Duration: 0
+    NextID: 101029
+  - ID: 101029
     EventType: 2
     Duration: 0
-    NextID: 101025
-  - ID: 101029
+    NextID: 101026
+  - ID: 101030
     EventType: 3
     Duration: 2
-    NextID: 101030
-  - ID: 101030
-    EventType: 4
-    Duration: 0
     NextID: 101031
   - ID: 101031
     EventType: 1
     Duration: 0
     NextID: 101032
   - ID: 101032
-    EventType: 4
+    EventType: 129
     Duration: 0
     NextID: 101033
   - ID: 101033
-    EventType: 16
+    EventType: 4
     Duration: 0
     NextID: 101034
   - ID: 101034
-    EventType: 2
+    EventType: 16
     Duration: 0
     NextID: 101035
   - ID: 101035
+    EventType: 2
+    Duration: 0
+    NextID: 101036
+  - ID: 101036
     EventType: 0
     Duration: 0
     NextID: 0
@@ -166,7 +170,7 @@ MonoBehaviour:
     Duration: 0
     NextID: 0
   - ID: 102002
-    EventType: 2
+    EventType: 130
     Duration: 0
     NextID: 0
   - ID: 102003
@@ -538,39 +542,43 @@ MonoBehaviour:
     Name: Anna
     AnimationName: Anna_LookAround
     Direction: 1
-  - ID: 101018
+  - ID: 101019
     Name: Cat
     AnimationName: Cat_Jump
     Direction: -1
-  - ID: 101020
+  - ID: 101021
     Name: Cat
     AnimationName: Cat_Stretch
     Direction: -1
-  - ID: 101022
+  - ID: 101023
     Name: Cat
     AnimationName: Cat_Sit
     Direction: -1
-  - ID: 101023
+  - ID: 101024
     Name: Cat
     AnimationName: Cat_Idle
     Direction: -1
-  - ID: 101024
+  - ID: 101025
     Name: Anna
     AnimationName: Anna_Sit_Start
     Direction: 1
-  - ID: 101026
+  - ID: 101027
     Name: Anna
     AnimationName: Anna_Stroking
     Direction: 1
-  - ID: 101027
+  - ID: 101028
     Name: Cat
     AnimationName: Cat_Pet
     Direction: -1
-  - ID: 101029
+  - ID: 101030
     Name: Cat
     AnimationName: Cat_Ready
     Direction: -1
   - ID: 101031
+    Name: Cat
+    AnimationName: Cat_Knockback
+    Direction: -1
+  - ID: 101032
     Name: Anna
     AnimationName: Anna_Fall_Start
     Direction: 1
@@ -611,23 +619,22 @@ MonoBehaviour:
     Script: "{fade a=3.5} \uADF8\uB798\uB3C4 \uBB50, \uD638\uB791\uC774 \uAD74\uC5D0
       \uB4E4\uC5B4\uAC00\uB3C4 \uC815\uC2E0\uB9CC \uBC14\uC9DD \uCC28\uB9AC\uBA74
       <br>\uBE60\uC838\uB098\uC62C \uC218 \uC788\uB2E4 \uD588\uC796\uC544!"
-  - ID: 1010251
+  - ID: 1010261
     ShowName: 
     ImageName: 
     Script: "\uC4F0\uB2E4\uB4EC\uAE30"
-  - ID: 1010252
+  - ID: 1010262
     ShowName: 
     ImageName: 
     Script: "\uAD00\uCC30\uD558\uAE30"
-  - ID: 101033
+  - ID: 101034
     ShowName: "\uC548\uB098"
     ImageName: Anna_Surprised
     Script: "{fade a=3.5}\uACE0\uC591\uC544!!!! \uC5B4\uB514 \uAC00!!!"
   - ID: 103003
     ShowName: "\uC548\uB098"
     ImageName: Anna_Sigh
-    Script: "{fade a=3.5} \uD6C4 \uC544\uBB34\uB9AC \uCAD3\uC544\uC640\uB3C4 \uADF8
-      \uAC00\uC704\uB294 \uC548 \uBCF4\uC774\uB294 \uAC83 \uAC19\uB124"
+    Script: "{fade a=3.5} \uD6C4 \uADF8 \uACE0\uC591\uC774\uB294 \uBABB \uCC3E\uACA0\uB124..."
   - ID: 103004
     ShowName: "\uC548\uB098"
     ImageName: Anna_Question
@@ -866,36 +873,41 @@ MonoBehaviour:
     Size: 0
     Duration: 0
   - ID: 101016
+    Name: Cat
+    Type: 3
+    Size: 0
+    Duration: 0
+  - ID: 101017
     Name: 
     Type: 0
     Size: 5.5
     Duration: 0.3
-  - ID: 101017
+  - ID: 101018
     Name: 
     Type: 0
     Size: 5
     Duration: 0.3
-  - ID: 101019
+  - ID: 101020
     Name: Anna
     Type: 3
     Size: 0
     Duration: 0
-  - ID: 101026
+  - ID: 101027
     Name: 
     Type: 0
     Size: 5.5
     Duration: 3
-  - ID: 101028
+  - ID: 101029
     Name: 
     Type: 1
     Size: 6
     Duration: 0.8
-  - ID: 101029
+  - ID: 101030
     Name: Cat
     Type: 0
     Size: 5.5
     Duration: 2
-  - ID: 101034
+  - ID: 101035
     Name: 
     Type: 1
     Size: 8
@@ -1038,7 +1050,7 @@ MonoBehaviour:
     Name: Anna
     Type: 2
     Script: "{fade a=3.5}\uB204...\uB204\uAD6C\uC57C...!!!"
-  - ID: 101019
+  - ID: 101020
     Name: Anna
     Type: 2
     Script: "{fade a=3.5}\uACE0...\uC591...\uC774...?"
@@ -1107,7 +1119,7 @@ MonoBehaviour:
     Type: 0
     Script: "{fade a=3.5}\uADF8\uB807\uC9C0 \uC6C5\uB2E8\uC544?"
   Select:
-  - ID: 101025
+  - ID: 101026
     Script: "\uC5B4\uB5BB\uAC8C \uD560\uAE4C?"
     Name: Anna
     ChoiceCount: 2
@@ -1120,5 +1132,13 @@ MonoBehaviour:
     Name: 
     ChoiceCount: 0
   Parallel:
+  - ID: 101017
+    TimeOffset: 0
+  - ID: 101028
+    TimeOffset: 0
+  - ID: 101032
+    TimeOffset: 0.2
+  - ID: 102002
+    TimeOffset: 0
   - ID: 103017
     TimeOffset: 0.5

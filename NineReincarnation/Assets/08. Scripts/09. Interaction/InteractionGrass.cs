@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractionGrass : MonoBehaviour, IEventInterface
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private string _playerTag = "Player";
+    [SerializeField] private float _wobbleTime = 1f;
     private bool _isWobble = false;
     private SpriteRenderer _spriteRenderer;
 
@@ -15,17 +17,34 @@ public class InteractionGrass : MonoBehaviour, IEventInterface
 
     public async UniTask ExecuteEvent(int index)
     {
-        switch (index)
+        switch(index)
         {
-            case 0:
-                _animator.SetBool("IsLoopWobble", true);
-                break;
-            case 1:
-                _animator.SetBool("IsLoopWobble", false);
-                _spriteRenderer.sortingOrder = 0;
-                break;
+            case 0: await StartWobble(); break;
+            case 1: await StopWobble(); break;
         }
+
     }
+
+    private async UniTask StartWobble()
+    {
+        _isWobble = true;
+
+        _animator.SetTrigger("IsWobble");
+        PlayWobbleSound();
+        await UniTask.WaitForSeconds(_wobbleTime);
+
+        _animator.SetTrigger("IsWobble");
+        PlayWobbleSound();
+        await UniTask.WaitForSeconds(_wobbleTime);
+
+        _animator.SetBool("IsLoopWobble", true);
+    }
+
+    private async UniTask StopWobble()
+    {
+        _animator.SetBool("IsLoopWobble", false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_isWobble) return;
