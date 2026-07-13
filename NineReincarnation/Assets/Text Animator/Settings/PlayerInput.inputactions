@@ -58,6 +58,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleSettingUI",
+                    "type": "Button",
+                    "id": "5dbfc645-9abc-4d2d-bbae-c0f041c540b2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowRedThread",
+                    "type": "Button",
+                    "id": "b8db8d37-125f-4d17-8601-cd1387cd4c25",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowBlueThread",
+                    "type": "Button",
+                    "id": "85ae65f6-2986-4bc4-9b44-1b7621373fd0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -181,6 +208,39 @@
                     "action": "ToggleMainUI",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a435a267-81d1-4393-9d14-5f53991d6cba",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleSettingUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac821343-4511-45fc-8dd0-5c80184dc299",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowRedThread",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e17d53c-ae8c-477e-ab36-cfed4ed57311",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowBlueThread",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -189,9 +249,18 @@
             "id": "77b82e24-9ace-45b2-bceb-8ff082382021",
             "actions": [
                 {
-                    "name": "Cancel",
+                    "name": "ToggleSettingUI",
                     "type": "Button",
-                    "id": "413d8a29-4797-48e1-9963-69b7b159a772",
+                    "id": "6bb32106-14a4-4c59-949e-8d62db9914b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleMainUI",
+                    "type": "Button",
+                    "id": "c4066fb5-8d80-4750-8b23-ddfe74e4a732",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -201,12 +270,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "82627dcc-3b13-4ba9-841d-e4b746d6553e",
+                    "id": "2fdb3248-6824-49d1-be67-ba43f1233707",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleSettingUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88eddd70-7f25-496c-ade1-1cd661f4937c",
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
-                    "action": "Cancel",
+                    "groups": "",
+                    "action": "ToggleMainUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

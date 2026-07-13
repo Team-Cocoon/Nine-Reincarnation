@@ -1,0 +1,22 @@
+﻿ID,캐릭터 이름,이벤트 함수,표정,애니메이션,Script
+S1L1_PRE_01,안나,AnimStory,,Anna_Wake,
+S1L1_PRE_02,안나,DialogueStory,Anna_Blank,,{fade a=3.5} 으으... 여기가 어디지?
+S1L1_PRE_03,안나,DialogueStory,Anna_Confusion,,{fade a=3.5} 어둡고... 캄캄하고... 뭔가 음침한 기분이 들어...\n음… 뭔가 <b>사람사는 곳 같지 않다는 느낌?</b>
+S1L1_PRE_04,안나,DialogueStory,Anna_Blank,,{fade a=3.5} 근데 내가 어쩌다 왜 이곳에 오게 됐더라?
+S1L1_PRE_05,안나,Event3-2,,,<waitfor=1>.<waitfor=1>.<waitfor=1>.
+S1L1_PRE_06,안나,DialogueStory,Anna_Blank,,{fade a=3.5} 마지막 기억에서의 난 학교에서 친구들과 같이 놀고있었지.
+S1L1_PRE_07,안나,DialogueStory,Anna_Determination,,{fade a=3.5} 근데 갑자기 커다란 가위가 내 앞에 다가오더니 싹둑거리면서 나를 연결하고 있는 것들을 끊어갔어.
+S1L1_PRE_08,안나,DialogueStory,Anna_Blank,,{fade a=3.5} 그게 뭐였지? 뭔가 <b>실</b>이었던 것 같은데…\n아무튼 그 가위가 원인이라는 건 확실해. \n아마 그때부터 내가 이 이상한 곳에 떨어진 거겠지.
+S1L1_PRE_09,안나,Event3-3,,,<waitfor=1>.<waitfor=1>.<waitfor=1>.
+S1L1_PRE_10,안나,DialogueStory,Anna_Confusion,,{fade a=3.5} 아무리 생각해봐도 진짜 아무것도 모르겠다.
+S1L1_PRE_11,안나,DialogueStory,Anna_Confusion,,{fade a=3.5} 그 커다란 가위도# <waitfor=0.5>갑자기 잘려나간 실들도# <waitfor=0.5>\n그리고 내가 지금 서 있는 이 공간도…!!
+S1L1_PRE_12,안나,Event3-4,,,<b> 하지만 지금부터 알아가보면 되지!!!!!! </b>
+S1L1_PRE_13,안나,Event3-5,,,<b> 다 해결하고 나서 난 반드시 집으로 돌아갈거다!!!!! </b>
+S1L1_PRE_14,,Event3-6,,,
+S1L1_PRE_15,안나,DialogueStory,Anna_Smile,,{fade a=3.5} 호랑이 굴에 들어가더라도 정신만 차리면\n빠져나올 수 있다 했어! \n 그럼 일단 여기를 한 번 탐색이나 해볼까?
+S1L1_PRE_16,,Event3-7,,,
+S1L1_PRE_17,안나,Event3-8,,,{fade a=2 d=2} <b><color=red> 붉은색 실...?</color></b>
+S1L1_PRE_18,안나,DialogueStory,Anna_Blank,,{fade a=3.5} 뭔가 되게 너덜너덜하고 끊겨진 붉은 실들이 나무에 걸려있네. \n 왠지 모르게 이 실들을 보는 것만으로도\n 으스스한 기분이 드는 것 같기도 하고…
+S1L1_PRE_19,,Event3-10,,,
+S1L1_PRE_20,안나,DialogueStory,Anna_Determination,,{fade a=3.5} 어??? 너는 아까 내가 교실에서 봤던 그 가위!!!!\n거기 서!!!!
+S1L1_PRE_21,,Event3-12,,,

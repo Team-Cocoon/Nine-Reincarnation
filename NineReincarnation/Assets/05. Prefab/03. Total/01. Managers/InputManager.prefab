@@ -1,0 +1,265 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7923950608937231103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7993293557911134431}
+  - component: {fileID: 5848109479736679958}
+  - component: {fileID: 5922702560739776728}
+  - component: {fileID: 8595296017942002913}
+  - component: {fileID: 4330408941620496009}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7993293557911134431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5848109479736679958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3dbd71d70b0f304b9ecffabd0be2113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5922702560739776728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: e7fff3d3276832c48a941a6e5b60d5d8, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 839df36c-fc11-4c6d-9fb6-0ce3743db339
+    m_ActionName: 'Player/Move[/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b9dd94c8-bf70-49b2-8acb-14bd08cd7e11
+    m_ActionName: 'Player/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c11a470-d673-40e3-b78b-53fd0eede062
+    m_ActionName: 'Player/Switch[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionDownJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a154eeba-cf14-4554-96e7-290111d4a1df
+    m_ActionName: 'Player/DownJump[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionLook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 77b8764f-edbf-4e32-8abb-26d4c2049f47
+    m_ActionName: 'Player/Look[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionToggleMainUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 08b24fb8-ff7e-47c4-9619-7f000fcde6d1
+    m_ActionName: 'Player/ToggleMainUI[/Keyboard/m]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleSettingUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5dbfc645-9abc-4d2d-bbae-c0f041c540b2
+    m_ActionName: 'Player/ToggleSettingUI[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848109479736679958}
+        m_TargetAssemblyTypeName: Player.Action.PlayerAction, Assembly-CSharp
+        m_MethodName: ActionThrowThread
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b8db8d37-125f-4d17-8601-cd1387cd4c25
+    m_ActionName: 'Player/ThrowThread[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleSettingUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6bb32106-14a4-4c59-949e-8d62db9914b8
+    m_ActionName: 'UI/ToggleSettingUI[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4330408941620496009}
+        m_TargetAssemblyTypeName: UIAction, Assembly-CSharp
+        m_MethodName: ActionToggleMainUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c4066fb5-8d80-4750-8b23-ddfe74e4a732
+    m_ActionName: 'UI/ToggleMainUI[/Keyboard/m]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &8595296017942002913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52dafbe18d7e5b479f9638551e6c32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _players:
+  - {fileID: 0}
+--- !u!114 &4330408941620496009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923950608937231103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8904a42049dfe4c901eac172f0df82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
