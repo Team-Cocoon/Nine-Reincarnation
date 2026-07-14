@@ -29,7 +29,14 @@ public abstract class Thread : MonoBehaviour
     protected virtual void Start()
     {
         Initialize();
-        CreateRope();
+        if (HasValidAnchors())
+        {
+            CreateRope();
+        }
+        else if (_lineRenderer != null)
+        {
+            _lineRenderer.enabled = false;
+        }
     }
     protected void OnDestroy()
     {
@@ -41,6 +48,7 @@ public abstract class Thread : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
+        if (!HasValidAnchors() || !segments.IsCreated) return;
         if (_currentJobHandle.IsCompleted)
         {
             UpdateThread();
@@ -48,6 +56,11 @@ public abstract class Thread : MonoBehaviour
     }
     protected virtual void LateUpdate()
     {
+        if (!HasValidAnchors() || _lineRenderer == null || !segments.IsCreated)
+        {
+            if (_lineRenderer != null) _lineRenderer.enabled = false;
+            return;
+        }
         _currentJobHandle.Complete();
         RenderThread();
     }
@@ -63,6 +76,21 @@ public abstract class Thread : MonoBehaviour
     /// </summary>
     protected virtual void RenderThread()
     {
+        if (!HasValidAnchors() || _lineRenderer == null || !segments.IsCreated) return;
+        _currentJobHandle.Complete();
+        if (segments.IsCreated && segmentCount > 0)
+        {
+            Segment start = segments[0];
+            start.position = start.prevPosition = _startTransform.position;
+            segments[0] = start;
+
+            if (_endTransform != null && segmentCount > 1)
+            {
+                Segment end = segments[segmentCount - 1];
+                end.position = end.prevPosition = _endTransform.position;
+                segments[segmentCount - 1] = end;
+            }
+        }
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
         for (int i = 0; i < segmentCount; i++)
         {
@@ -73,6 +101,7 @@ public abstract class Thread : MonoBehaviour
     }
     protected void UpdateSegments()
     {
+        if (!HasValidAnchors() || !segments.IsCreated) return;
         UpdateSegmentJob updateJob = new UpdateSegmentJob
         {
             gravity = _gravity,
@@ -95,6 +124,7 @@ public abstract class Thread : MonoBehaviour
 
     private void CreateRope()
     {
+        if (!HasValidAnchors() || !segments.IsCreated) return;
         Vector2 start = _startTransform.position;
         Vector2 end = _endTransform.position;
         int segmentCount = this.segmentCount;
@@ -117,6 +147,11 @@ public abstract class Thread : MonoBehaviour
             //segments.Add(new Segment(pos));
             segments[i] = new Segment(pos);
         }
+    }
+
+    protected bool HasValidAnchors()
+    {
+        return _startTransform != null && _endTransform != null;
     }
 }
 

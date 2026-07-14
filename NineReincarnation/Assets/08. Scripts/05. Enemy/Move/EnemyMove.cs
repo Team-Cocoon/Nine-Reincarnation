@@ -120,15 +120,15 @@ namespace Enemy.Move
         // 충돌 감지를 통해 플레이어가 밟았는지 판단
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (_startOnPlayerStep && !_hasStartedMoving)
-            {
-                // 플레이어 태그가 "Player"인지 확인
-                if (collision.gameObject.CompareTag("Player"))
-                {
-                    // 밟았을 때 작동 시작
-                    StartMovement();
-                }
-            }
+            if (collision.gameObject.CompareTag("Player")) TryStartFromPlayerStep();
+        }
+
+        // The custom player motor does not depend on kinematic collision callbacks.
+        // PlayerController calls this when its downward rays confirm this platform.
+        public void TryStartFromPlayerStep()
+        {
+            if (!_startOnPlayerStep || _hasStartedMoving) return;
+            StartMovement();
         }
 
         // 실제 움직임 시작을 담당하는 메서드

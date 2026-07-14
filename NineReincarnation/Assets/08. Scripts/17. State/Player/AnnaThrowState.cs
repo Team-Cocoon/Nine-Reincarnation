@@ -24,6 +24,8 @@ public class AnnaThrowState : PlayerStateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Player.EndThrowMovementLock();
+
         // [수정됨] Enter에서 권한을 뺏지 않았으므로, Exit에서 돌려주는 코드도 주석 처리합니다.
         // InputEventHandler.OnChangedForceActionToPlayer_Invoke();
     }
