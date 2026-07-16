@@ -3,32 +3,25 @@ using Cysharp.Threading.Tasks;
 using Player.Controller;
 using UnityEngine;
 
-public class StoryCat : StoryNPC, IEventInterface
+public abstract class StoryCat : StoryNPC, IEventInterface
 {
-    [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
+    [SerializeField] protected DialogueSpace.DialogueManager _dialogueManager;
 
     [SerializeField] private List<Transform> _wayPoints;
-    [SerializeField] private Rigidbody2D _rb2d;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _runSpeed = 6f;
+    [SerializeField] protected Rigidbody2D _rb2d;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected float _runSpeed = 6f;
 
-    [Header("----Thread----")]
-    [SerializeField] private StoryThread _storyThread;
-    [SerializeField] private Transform _threadCatPoint;
-    [SerializeField] private Transform _threadAnnaPoint;
-    [SerializeField] private GameObject _threadBall;
+    protected Queue<Transform> _wayPointQueue;
 
-    private Queue<Transform> _wayPointQueue;
+    protected bool _isAnimationEnd = false;
 
-    private bool _isAnimationEnd = false;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         _wayPointQueue = new Queue<Transform>(_wayPoints);
-        _dialogueManager.DialogueEndAddListener(DisconnectThread);
     }
 
-    private async UniTask MoveToTarget(bool isRunning, bool isPlayIdleAfter = true)
+    protected virtual async UniTask MoveToTarget(bool isRunning, bool isPlayIdleAfter = true)
     {
         if (_wayPoints.Count == 0) return;
 
@@ -66,7 +59,8 @@ public class StoryCat : StoryNPC, IEventInterface
         _rb2d.linearVelocityX = 0.0f;
     }
 
-    private void Move(float direction)
+
+    protected void Move(float direction)
     {
         _rb2d.linearVelocityX = direction * _speed;
     }
@@ -95,31 +89,22 @@ public class StoryCat : StoryNPC, IEventInterface
         transform.localPosition = Vector3.zero;
     }
 
-    public async UniTask ExecuteEvent(int index)
+    protected virtual async UniTask RunAndPlayAnimation(string _animationName)
     {
-        if (index == 0)
-        {
-            await MoveToTarget(false);
-        }
-        else if (index == 1)
-        {
-            await RunAndDisappear(true);
-        }
-        else if (index == 2)
-        {
-            _dialogueManager.DialogueEndAddListener(DisableSelf);
-            await RunAndPlayAnimation("isFallOff");
-        }
+        _speed = _runSpeed;
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
+        await MoveToTarget(true, false);
+        _isAnimationEnd = false;
+        NpcAnimator.SetTrigger(_animationName);
+        await UniTask.WaitUntil(() => _isAnimationEnd == true);
     }
 
-    private async UniTask RunAndDisappear(bool teleportToNextWayPoint = false)
+    protected virtual async UniTask RunAndDisappear(bool teleportToNextWayPoint = false)
     {
-        _storyThread.Connect(_threadAnnaPoint, _threadCatPoint);
-
         _speed = _runSpeed;
         AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
         await MoveToTarget(true);
-        if(teleportToNextWayPoint)
+        if (teleportToNextWayPoint)
         {
             Transform tp = _wayPointQueue.Dequeue();
             Debug.Log(tp.name);
@@ -128,29 +113,15 @@ public class StoryCat : StoryNPC, IEventInterface
         }
     }
 
-    private async UniTask RunAndPlayAnimation(string _animationName)
-    {
-        _speed = _runSpeed;
-        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
-        await MoveToTarget(true, false);
-        _threadBall.SetActive(true);
-        _isAnimationEnd = false;
-        NpcAnimator.SetTrigger(_animationName);
-        await UniTask.WaitUntil(() => _isAnimationEnd == true);
-    }
-
-    private void SetAnimationEnd()
+    protected void SetAnimationEnd()
     {
         _isAnimationEnd = true;
     }
 
-    private void DisconnectThread()
-    {
-        _storyThread.Disconnect();
-    }
-
-    private void DisableSelf()
+    protected void DisableSelf()
     {
         gameObject.SetActive(false);
     }
+
+    public abstract UniTask ExecuteEvent(int index);
 }
