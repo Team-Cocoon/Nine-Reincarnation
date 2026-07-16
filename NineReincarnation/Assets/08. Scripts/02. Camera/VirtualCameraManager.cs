@@ -17,6 +17,7 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera[] _cams;
     [SerializeField] private PolygonCollider2D[] _areas;
     [SerializeField] private int _currentIndex = 0;
+    private int _prevIndex = 0;
     [Inject] private PlayerController _player;
 
     [SerializeField] private DialogueCameraShiftHelper _cameraShiftHelper;
@@ -68,5 +69,16 @@ public class VirtualCameraManager : MonoBehaviour
     public void SetFollowObj(string name)
     {
         SetFollowObj(_cameraShiftHelper.GetShiftObjTransform(name));
+    }
+
+    public void SetToEventCam()
+    {
+        _prevIndex = _currentIndex;
+        SetPrioriy(0);
+    }
+
+    public void ResetToNormalCam()
+    {
+        SetPrioriy(_prevIndex);
     }
 }

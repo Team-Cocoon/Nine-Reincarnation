@@ -5,25 +5,30 @@ using UnityEngine;
 
 public class StoryCat : StoryNPC, IEventInterface
 {
+    [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
+
     [SerializeField] private List<Transform> _wayPoints;
     [SerializeField] private Rigidbody2D _rb2d;
     [SerializeField] private float _speed;
+    [SerializeField] private float _runSpeed = 6f;
 
+    [Header("----Thread----")]
     [SerializeField] private StoryThread _storyThread;
     [SerializeField] private Transform _threadCatPoint;
     [SerializeField] private Transform _threadAnnaPoint;
-
-    [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
+    [SerializeField] private GameObject _threadBall;
 
     private Queue<Transform> _wayPointQueue;
+
+    private bool _isAnimationEnd = false;
 
     private void Awake()
     {
         _wayPointQueue = new Queue<Transform>(_wayPoints);
-        _dialogueManager.DialogueEndAddListener(OnDialogueEnd);
+        _dialogueManager.DialogueEndAddListener(DisconnectThread);
     }
 
-    private async UniTask MoveToTarget(bool isRunning)
+    private async UniTask MoveToTarget(bool isRunning, bool isPlayIdleAfter = true)
     {
         if (_wayPoints.Count == 0) return;
 
@@ -53,7 +58,9 @@ public class StoryCat : StoryNPC, IEventInterface
 
             await UniTask.NextFrame(PlayerLoopTiming.FixedUpdate);
         }
-        NpcAnimator.SetTrigger("isIdle");
+        
+        if(isPlayIdleAfter)
+            NpcAnimator.SetTrigger("isIdle");
         AudioManager.Instance?.StopLoopingSfx(AudioManager.LoopSfx.CatWalk);
 
         _rb2d.linearVelocityX = 0.0f;
@@ -84,8 +91,7 @@ public class StoryCat : StoryNPC, IEventInterface
         if (transform.localPosition == Vector3.zero)
             return;
 
-        Vector2 offset = transform.localPosition;
-        _rb2d.MovePosition(_rb2d.position + offset);
+        _rb2d.MovePosition(_rb2d.position + (Vector2)transform.localPosition);
         transform.localPosition = Vector3.zero;
     }
 
@@ -97,22 +103,54 @@ public class StoryCat : StoryNPC, IEventInterface
         }
         else if (index == 1)
         {
-            await RunAndDisappear();
+            await RunAndDisappear(true);
+        }
+        else if (index == 2)
+        {
+            _dialogueManager.DialogueEndAddListener(DisableSelf);
+            await RunAndPlayAnimation("isFallOff");
         }
     }
 
-    private async UniTask RunAndDisappear()
+    private async UniTask RunAndDisappear(bool teleportToNextWayPoint = false)
     {
         _storyThread.Connect(_threadAnnaPoint, _threadCatPoint);
 
-        _speed = 6.0f;
+        _speed = _runSpeed;
         AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
         await MoveToTarget(true);
+        if(teleportToNextWayPoint)
+        {
+            Transform tp = _wayPointQueue.Dequeue();
+            Debug.Log(tp.name);
+            _rb2d.position = tp.position;
+            NpcAnimator.SetTrigger("isIdle");
+        }
     }
 
-    private void OnDialogueEnd()
+    private async UniTask RunAndPlayAnimation(string _animationName)
+    {
+        _speed = _runSpeed;
+        AudioManager.Instance?.PlaySfx(AudioManager.Sfx.CatRun);
+        await MoveToTarget(true, false);
+        _threadBall.SetActive(true);
+        _isAnimationEnd = false;
+        NpcAnimator.SetTrigger(_animationName);
+        await UniTask.WaitUntil(() => _isAnimationEnd == true);
+    }
+
+    private void SetAnimationEnd()
+    {
+        _isAnimationEnd = true;
+    }
+
+    private void DisconnectThread()
+    {
+        _storyThread.Disconnect();
+    }
+
+    private void DisableSelf()
     {
         gameObject.SetActive(false);
-        _storyThread.Disconnect();
     }
 }

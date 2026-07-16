@@ -97,6 +97,8 @@ namespace DialogueSpace
                 _npcAnna.SetActive(true);
             }
 
+            _virtualCameraManager.SetToEventCam();
+
             while (isNext)
             {
                 isNext = await NextDialogue();
@@ -119,6 +121,8 @@ namespace DialogueSpace
                     _anna.transform.position = _npcAnna.transform.position;
                     _npcAnna.SetActive(false);
                     _anna.gameObject.SetActive(true);
+
+                    _virtualCameraManager.ResetToNormalCam();
                     _virtualCameraManager.SetPlayer();
 
                     OnDialogueEnd?.Invoke();

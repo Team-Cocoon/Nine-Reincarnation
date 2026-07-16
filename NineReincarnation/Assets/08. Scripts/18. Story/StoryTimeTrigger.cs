@@ -4,16 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class StoryTimeTrigger : MonoBehaviour
+public class StoryTimeTrigger : EventTrigger
 {
-    [SerializeField] private int _id;
-    [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
-    [SerializeField] private string _playerTag = "Player";
     [SerializeField] private float _stayWaitTime = 3f;
     [SerializeField] private bool _synchronizePlayerPos = false;
 
     private bool isWaitStarted = false;
-    private bool isTriggered = false;
     private CancellationTokenSource _cts;
 
     private void Start()
@@ -21,9 +17,9 @@ public class StoryTimeTrigger : MonoBehaviour
         _cts = new CancellationTokenSource();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isTriggered) return;
+        if (isTrigger) return;
         if (isWaitStarted) return;
         if (!collision.CompareTag(_playerTag)) return;
 
@@ -33,7 +29,7 @@ public class StoryTimeTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (isTriggered) return;
+        if (isTrigger) return;
         if (!collision.CompareTag(_playerTag)) return;
         if (isWaitStarted == false) return;
 
@@ -55,16 +51,16 @@ public class StoryTimeTrigger : MonoBehaviour
 
             await UniTask.WaitForSeconds(_stayWaitTime, cancellationToken: token);
 
-            isTriggered = true;
+            isTrigger = true;
 
             //Debug.Log("트리거 발동 완료");
 
-            if(_synchronizePlayerPos)
+            if (_synchronizePlayerPos)
             {
                 _dialogueManager.SynchronizePlayerPos();
             }
 
-            _dialogueManager.DialogueExctute(_id).Forget();
+            StartDialogue();
         }
         catch (OperationCanceledException)
         {

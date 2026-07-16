@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class StoryThread : Thread
 {
+    const float DefaultFadeTime = 1f;
+
     [Header("DialogueThread")]
     [SerializeField] private float _fadeTime = 1f;
 
@@ -26,12 +28,14 @@ public class StoryThread : Thread
         UpdateSegments();
     }
 
-    public void Connect(Transform start, Transform end)
+    public void Connect(Transform start, Transform end, float fadeTime = DefaultFadeTime)
     {
         _currentJobHandle.Complete();
 
         _startTransform = start;
         _endTransform = end;
+
+        _fadeTime = fadeTime;
 
         ResetSegments();
 

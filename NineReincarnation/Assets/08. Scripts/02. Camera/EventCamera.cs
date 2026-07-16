@@ -66,6 +66,7 @@ public class EventCamera : MonoBehaviour
 
     private async UniTask CameraShift(string name)
     {
+        Debug.Log($"Shift to {name}");
         _cameraManager.SetFollowObj(name);
         await UniTask.WaitForSeconds(_defaultCameraShiftDampingTime);
     }

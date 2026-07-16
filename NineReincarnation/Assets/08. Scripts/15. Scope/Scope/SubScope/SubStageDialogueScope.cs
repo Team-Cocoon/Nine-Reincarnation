@@ -1,5 +1,6 @@
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 public class SubStageDialogueScope : SubStageScope
 {
@@ -16,5 +17,7 @@ public class SubStageDialogueScope : SubStageScope
         {
             new StoryInstaller(_dialogueManager, _storyEventManager).Install(builder);
         }
+
+        builder.RegisterComponentInHierarchy<ThreadBallUI>();
     }
 }

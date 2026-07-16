@@ -412,6 +412,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dbd71d70b0f304b9ecffabd0be2113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &333099434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8595296017942002913, guid: 717410625a607934c99b689c9672bd07, type: 3}
+  m_PrefabInstance: {fileID: 333099431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52dafbe18d7e5b479f9638551e6c32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &390173388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1014,6 +1025,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _playerController: {fileID: 547015335}
   _cameraManager: {fileID: 245230509}
+  InputManager: {fileID: 333099434}
 --- !u!1 &1268897804
 GameObject:
   m_ObjectHideFlags: 0
