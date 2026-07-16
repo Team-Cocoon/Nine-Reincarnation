@@ -18,6 +18,6 @@ public class SubStageDialogueScope : SubStageScope
             new StoryInstaller(_dialogueManager, _storyEventManager).Install(builder);
         }
 
-        builder.RegisterComponentInHierarchy<ThreadBallUI>();
+        builder.RegisterComponentInHierarchy<InputConnector>();
     }
 }

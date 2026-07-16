@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ExcelData;
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +25,28 @@ public struct SelectDataStruct
     }
 }
 
+public class SelectButtonInfo
+{
+    public int ID { get; private set; }
+    public Button Button { get; private set; }
+
+    public SelectButtonInfo(int id, Button button)
+    {
+        ID = id;
+        Button = button;
+    }
+
+    public void SetInfo(int id, Button button)
+    {
+        ID = id;
+        Button = button;
+    }
+
+    public void SetID(int id)
+    {
+        ID = id;
+    }
+}
 
 
 public class SelectUI : MonoBehaviour
@@ -31,11 +54,25 @@ public class SelectUI : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private TMP_Text _questionText;
     [SerializeField] private GameObject _choiceButtonPrefab;
-    [SerializeField] private List<GameObject> _choiceButtons;
+    [SerializeField] private List<SelectButtonInfo> _choiceButtons = new List<SelectButtonInfo>();
+    [SerializeField] private SelectUIButtonListener _buttonListner;
 
     private UniTaskCompletionSource<int> _utcs;
 
-    public void UpdateUI(SelectClass selectData, SelectDataStruct[] selectDataes)
+    private SelectClass _currentSelectClass;
+
+    private void Awake()
+    {
+        _buttonListner?.ConnectSelectUI(this);
+    }
+
+    public void ConnectSelecctButtonListener(SelectUIButtonListener buttonListner)
+    {
+        _buttonListner = buttonListner;
+        _buttonListner?.ConnectSelectUI(this);
+    }
+
+    public void UpdateUI(SelectClass selectData, SelectDataStruct[] selectDatas)
     {
         if (!string.IsNullOrEmpty(selectData.Script))
         {
@@ -49,29 +86,94 @@ public class SelectUI : MonoBehaviour
 
         _utcs = new UniTaskCompletionSource<int>();
 
-        if (_panel.transform.childCount < selectData.ChoiceCount)
-        {
-            for (int i = 0; i < selectData.ChoiceCount; i++)
-            {
-                int index = i;
+        UpdateQuestion(selectData.Script);
 
-                if (!string.IsNullOrEmpty(selectData.Script))
-                {
-                    GameObject button = Instantiate(_choiceButtonPrefab, _panel.transform);
-                    _choiceButtons.Add(button);
+        UpdateChoiceButtons(selectData, selectDatas);
 
-                    button.GetComponentInChildren<Button>().onClick.AddListener(() =>
-                    {
-                        Debug.Log(selectDataes[index].NextId);
-                        _utcs.TrySetResult(selectDataes[index].NextId); // "나 i번째 버튼 눌렸어!" 하고 신호 보냄
-                    });
-
-                    ChangeScript(button.GetComponentInChildren<TMP_Text>(), selectDataes[i].Script);
-                }
-            }
-        }
+        _currentSelectClass = selectData;
 
         OpenUI();
+    }
+
+    private void UpdateQuestion(string question)
+    {
+        bool hasQuestion = !string.IsNullOrEmpty(question);
+
+        _questionText.gameObject.SetActive(hasQuestion);
+
+        if (hasQuestion)
+        {
+            ChangeScript(_questionText, question);
+        }
+    }
+
+    private void UpdateChoiceButtons(
+        SelectClass selectData,
+        SelectDataStruct[] selectDatas)
+    {
+        while (_choiceButtons.Count < selectData.ChoiceCount)
+        {
+            Button button = Instantiate(
+                _choiceButtonPrefab,
+                _panel.transform
+            ).GetComponent<Button>();
+
+            if (button == null)
+            {
+                Debug.LogError(
+                    "[SelectUI] ChoiceButtonPrefab에 Button 컴포넌트가 없습니다."
+                );
+                return;
+            }
+
+            _choiceButtons.Add(
+                new SelectButtonInfo(-1, button)
+            );
+        }
+
+        for (int i = 0; i < _choiceButtons.Count; i++)
+        {
+            SelectButtonInfo info = _choiceButtons[i];
+            Button button = info.Button;
+
+            if (button == null)
+            {
+                continue;
+            }
+
+            if (i >= selectData.ChoiceCount)
+            {
+                button.onClick.RemoveAllListeners();
+                button.gameObject.SetActive(false);
+                continue;
+            }
+
+            button.gameObject.SetActive(true);
+
+            int buttonId = selectDatas[i].Id;
+            int nextId = selectDatas[i].NextId;
+            string script = selectDatas[i].Script;
+
+            info.SetID(nextId);
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() =>
+            {
+                Debug.Log(
+                    $"[SelectUI] Button ID: {buttonId}, Next ID: {nextId}"
+                );
+
+                _utcs?.TrySetResult(nextId);
+            });
+
+            TMP_Text buttonText =
+                button.GetComponentInChildren<TMP_Text>();
+
+            if (buttonText != null)
+            {
+                ChangeScript(buttonText, script);
+            }
+        }
     }
 
     public async UniTask<int> WaitSelect()
@@ -79,6 +181,11 @@ public class SelectUI : MonoBehaviour
         int id = await _utcs.Task;
 
         CloseUI();
+
+        if(_buttonListner != null)
+        {
+            id = _buttonListner.OnButtonClicked(id);
+        }
 
         return id;
     }
@@ -97,5 +204,16 @@ public class SelectUI : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         _panel.SetActive(false);
+    }
+
+    public Button GetButton(int buttonId)
+    {
+        foreach (var button in _choiceButtons)
+        {
+            if (button.ID == buttonId)
+                return button.Button;
+        }
+
+        return null;
     }
 }

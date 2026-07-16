@@ -519,7 +519,7 @@ MonoBehaviour:
     NextID: 201041
   - ID: 201041
     EventType: 32
-    Duration: 0
+    Duration: 1.5
     NextID: 201042
   - ID: 201042
     EventType: 0
@@ -601,11 +601,11 @@ MonoBehaviour:
   - ID: 201022
     Name: Yeonong
     AnimationName: Yeon_wheel
-    Direction: 1
+    Direction: -1
   - ID: 201023
     Name: Yeonong
     AnimationName: Yeon_wheel
-    Direction: 1
+    Direction: -1
   - ID: 201036
     Name: C5
     AnimationName: C5_hand
@@ -1040,7 +1040,7 @@ MonoBehaviour:
     Size: 0
     Duration: 0
   - ID: 201040
-    Name: Yeonong
+    Name: 
     Type: 0
     Size: 6
     Duration: 2
@@ -1146,8 +1146,8 @@ MonoBehaviour:
     ChoiceCount: 2
   - ID: 201016
     Script: "\uBB34\uC5C7\uC744 \uBB3C\uC744\uAE4C?"
-    Name: 
-    ChoiceCount: 0
+    Name: Anna
+    ChoiceCount: 2
   Parallel:
   - ID: 101017
     TimeOffset: 0

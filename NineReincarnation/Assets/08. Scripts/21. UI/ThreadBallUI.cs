@@ -8,7 +8,7 @@ using VContainer;
 
 public class ThreadBallUI : MonoBehaviour, IClickInteractableToggle
 {
-    [Inject] private InputManager _inputManager;
+    [SerializeField] private InputConnector _inputConnector;
 
     [SerializeField] private GameObject _panel;
     [SerializeField] private GraphicRaycaster _raycaster;
@@ -23,6 +23,12 @@ public class ThreadBallUI : MonoBehaviour, IClickInteractableToggle
     private bool _isClick = false;
     private bool _isActive = false;
 
+    private void Awake()
+    {
+        if(_inputConnector == null)
+            _inputConnector = GetComponent<InputConnector>();
+    }
+
     private void OnEnable()
     {
         _raycaster.enabled = false;
@@ -30,7 +36,7 @@ public class ThreadBallUI : MonoBehaviour, IClickInteractableToggle
 
     public async UniTask OpenUI(CancellationToken token)
     {
-        _inputManager?.ChangeActionToUI();
+        _inputConnector?.InputManager?.ChangeActionToUI();
         _panel.SetActive(true);
         var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
         token,
@@ -49,7 +55,7 @@ public class ThreadBallUI : MonoBehaviour, IClickInteractableToggle
         _raycaster.enabled = false;
         _isActive = false;
         _onUIClosed?.Invoke();
-        _inputManager?.ChangeActionToPlayer();
+        _inputConnector?.InputManager?.ChangeActionToPlayer();
     }
 
     public async UniTask ExecuteEvent(int index)

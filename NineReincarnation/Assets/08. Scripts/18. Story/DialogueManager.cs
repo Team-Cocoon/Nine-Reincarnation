@@ -72,6 +72,7 @@ namespace DialogueSpace
         private void DialogueStart()
         {
             Debug.Log("다이얼로그 시작");
+            _virtualCameraManager.SetToEventCam();
             DialogueExctute(_id).Forget();
         }
 
