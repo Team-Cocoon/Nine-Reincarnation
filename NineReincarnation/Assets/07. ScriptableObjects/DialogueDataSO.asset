@@ -519,9 +519,13 @@ MonoBehaviour:
     NextID: 201041
   - ID: 201041
     EventType: 32
-    Duration: 1.5
+    Duration: 0
     NextID: 201042
   - ID: 201042
+    EventType: 2
+    Duration: 0
+    NextID: 201043
+  - ID: 201043
     EventType: 0
     Duration: 0
     NextID: 0
@@ -739,21 +743,21 @@ MonoBehaviour:
     ShowName: "\uC5F0\uC639"
     ImageName: Yeonong_Idle
     Script: "{fade a=3.5}\uB108\uC5D0\uAC8C\uB294 \uB04A\uACA8\uC838\uBC84\uB9B0
-      <color=#D80101>\uD64D\uC5F0</>\uACFC \uC5B4\uB514\uB85C \uC774\uC5B4\uC9C4\uC9C0
-      \uBAA8\uB978 \uCC44 \uAE38\uAC8C \uB298\uC5B4\uC9C4 <color=#001AFF>\uCCAD\uC5F0</>\uC774
+      <color=#D80101>\uD64D\uC5F0</color>\uACFC \uC5B4\uB514\uB85C \uC774\uC5B4\uC9C4\uC9C0
+      \uBAA8\uB978 \uCC44 \uAE38\uAC8C \uB298\uC5B4\uC9C4 <color=#001AFF>\uCCAD\uC5F0</color>\uC774
       \uBCF4\uC774\uB294\uAD6C\uB098."
   - ID: 2010161
     ShowName: 
     ImageName: 
-    Script: "<color=#D80101>\uD64D\uC5F0\uC774\uC694?</>"
+    Script: "<color=#D80101>\uD64D\uC5F0</color>\uC774\uC694?"
   - ID: 2010162
     ShowName: 
     ImageName: 
-    Script: "<color=#001AFF>\uCCAD\uC5F0\uC774\uC694?</>"
+    Script: "<color=#001AFF>\uCCAD\uC5F0</color>\uC774\uC694?"
   - ID: 201017
     ShowName: "\uC5F0\uC639"
     ImageName: Yeonong_Idle
-    Script: "{fade a=3.5}<color=#D80101>\uBD89\uC740\uC0C9 \uC778\uC5F0\uC758 \uC2E4</>\uB85C,
+    Script: "{fade a=3.5}<color=#D80101>\uBD89\uC740\uC0C9 \uC778\uC5F0\uC758 \uC2E4</color>\uB85C,
       <b>\uC5F0\uACB0\uB41C \uC790\uC640 \uBB34\uC870\uAC74 \uC774\uC5B4\uC9C4\uB2E4\uB294
       \uC758\uBBF8</b>\uB97C \uAC00\uC9C0\uACE0 \uC788\uC9C0."
   - ID: 201018
@@ -765,7 +769,7 @@ MonoBehaviour:
   - ID: 201019
     ShowName: "\uC5F0\uC639"
     ImageName: Yeonong_Idle
-    Script: "{fade a=3.5}<color=#001AFF>\uD478\uB978\uC0C9 \uC778\uC5F0\uC758 \uC2E4</>\uB85C,
+    Script: "{fade a=3.5}<color=#001AFF>\uD478\uB978\uC0C9 \uC778\uC5F0\uC758 \uC2E4</color>\uB85C,
       <b>\uC5F0\uACB0\uB41C \uC790\uC640\uB294 \uB05D\uB0B4 \uC774\uC5B4\uC9C0\uC9C0
       \uC54A\uB294\uB2E4\uB294 \uC758\uBBF8</b>\uB97C \uAC00\uC9C0\uACE0 \uC788\uC9C0."
   - ID: 201020
@@ -822,9 +826,9 @@ MonoBehaviour:
   - ID: 201029
     ShowName: "\uC5F0\uC639"
     ImageName: Yeonong_Idle
-    Script: "{fade a=3.5}<b>\uB108\uC758 \uC778\uC5F0\uC758 \uC2E4\uB4E4.</b> <color=#D80101>\uD64D\uC5F0</>\uACFC
-      <color=#001AFF>\uCCAD\uC5F0.</> \uADF8\uAC83\uB4E4\uC774 \uB108\uB97C \uB3C4\uC640\uC904
-      \uAC83\uC774\uC57C."
+    Script: "{fade a=3.5}<b>\uB108\uC758 \uC778\uC5F0\uC758 \uC2E4\uB4E4.</b> <color=#D80101>\uD64D\uC5F0</color>\uACFC
+      <color=#001AFF>\uCCAD\uC5F0.</color> \uADF8\uAC83\uB4E4\uC774 \uB108\uB97C
+      \uB3C4\uC640\uC904 \uAC83\uC774\uC57C."
   - ID: 201030
     ShowName: "\uC548\uB098"
     ImageName: Anna_Surprised
@@ -1044,6 +1048,11 @@ MonoBehaviour:
     Type: 0
     Size: 6
     Duration: 2
+  - ID: 201042
+    Name: 
+    Type: 5
+    Size: 0
+    Duration: 0.5
   Bubble:
   - ID: 101009
     Name: Anna

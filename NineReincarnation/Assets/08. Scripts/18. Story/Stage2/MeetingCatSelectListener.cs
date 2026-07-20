@@ -29,7 +29,7 @@ public class MeetingCatSelectListener : SelectUIButtonListener
             {
                 Button button = GetSelectButton(id);
                 if (button == null) return id;
-                button.enabled = false;
+                button.interactable = false;
             }
         }
 

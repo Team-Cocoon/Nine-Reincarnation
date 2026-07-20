@@ -25,7 +25,9 @@ namespace ExcelData
         ZoomIn,
         ZoomOut,
         Shake,
-        CameraShift
+        CameraShift,
+        FadeIn,
+        FadeOut,
     }
 
     [Serializable]

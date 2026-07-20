@@ -8,8 +8,18 @@ public class StoryEventConnecter : MonoBehaviour
     [SerializeField] private UnityEvent _onDialogueStart;
     [SerializeField] private UnityEvent _onDialogueEnd;
 
+    [SerializeField] private bool _isStaringDialogue;
+
     private void Awake()
     {
+        if(_isStaringDialogue)
+        {
+            _onDialogueStart?.Invoke();
+            _dialogueManager.DialogueEndAddListener(
+                () => _onDialogueEnd?.Invoke());
+            return;
+        }
+
         _trigger.OnDialogueStart.AddListener(ConnectEvents);
     }
 

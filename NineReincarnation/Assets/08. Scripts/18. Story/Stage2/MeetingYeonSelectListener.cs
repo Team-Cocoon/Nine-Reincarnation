@@ -29,7 +29,7 @@ public class MeetingYeonSelectListener : SelectUIButtonListener
 
         _buttonTemp = GetSelectButton(id);
         if (_buttonTemp != null)
-            _buttonTemp.enabled = false;
+            _buttonTemp.interactable = false;
 
 
         if (_redThreadId == id)

@@ -10,6 +10,7 @@ public class EventCamera : MonoBehaviour
     [SerializeField] private CinemachineZoom _zoom;
     [SerializeField] private CinemachineShake _shake;
     [SerializeField] private VirtualCameraManager _cameraManager;
+    [SerializeField] private StoryFadeUI _fadeUI;
     [SerializeField] private bool _playSound = false;
     [SerializeField] private float _defaultCameraShiftDampingTime = 0.5f;
     private bool _hasSkipEvent = false;
@@ -50,6 +51,12 @@ public class EventCamera : MonoBehaviour
                 break;
             case CameraEventType.CameraShift:
                 await CameraShift(name);
+                break;
+            case CameraEventType.FadeIn:
+                await _fadeUI.FadeIn(duration);
+                break;
+            case CameraEventType.FadeOut:
+                await _fadeUI.FadeOut(duration);
                 break;
         }
     }

@@ -11,22 +11,9 @@ public class StoryFadeUI : MonoBehaviour
     [SerializeField] private Material _material;
 
     [Header("Setting")]
-    [SerializeField] private float _fadeDuration = 0.5f;
-    [SerializeField] private float _fadeStayTime = 1f;
-    [SerializeField] private bool _fadeInOutAfterDialogue = false;
     [SerializeField] private bool _stopInputWhenFadeOut = false;
 
-    private void Awake()
-    {
-        if (_fadeInOutAfterDialogue)
-        {
-            _dialogueManager.DialogueEndAddListener(
-                () => FadeInOut(_fadeDuration, _fadeStayTime).Forget()
-            );
-        }
-    }
-
-    private async UniTask FadeInOut(float duration, float stayTime)
+    public async UniTask FadeInOut(float duration, float stayTime)
     {
         if (_stopInputWhenFadeOut && _inputConnector != null)
         {
