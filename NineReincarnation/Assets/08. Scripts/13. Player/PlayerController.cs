@@ -47,7 +47,6 @@ namespace Player.Controller
         [SerializeField] private float _downGravity;            //떨어질때 중력
         [SerializeField] private float _speed;                  //플레이어 속도
         [SerializeField] private float _jumpForce;              //점프 힘
-        [SerializeField] private float _enhancedJumpForce;      // 고양이 상호작용 시 강화될 점프 힘
         [SerializeField] private string _playerName;             //플레이어 식별 변수
         [SerializeField] private Vector3 _checkPoint;             //플레이어 리스폰 위치
         [SerializeField] private SpriteRenderer _spriteRenderer;         //플레이어 이미지
@@ -69,7 +68,7 @@ namespace Player.Controller
         [SerializeField] private int _currentBlueThread = 3;
         [SerializeField] private int _maxBlueThread = 3;
         private bool _isRedInteract = false;
-        private bool _isBlueInteract = false;
+        private bool _isFeatherFastFall;
         private int _activePhasingCount = 0;
 
         private int _jumpCount = 0;             //더블 점프 제어
@@ -92,7 +91,6 @@ namespace Player.Controller
         private float accelerationTimeGrounded = 0.05f;
         private float velocityXSmoothing;
         
-        private float _baseJumpForce; // 원래 점프 힘을 저장해둘 내부 변수
         private Vector2 _velocity;
         private PlatformerRaycastMotor2D _motor;
         private Collider2D _groundCollider;
@@ -105,7 +103,7 @@ namespace Player.Controller
 
         // Wall movement values are intentionally constants: they match the design
         // sheet and do not add more per-prefab tuning variables.
-        private const float WallHangDelay = 1f;
+        private const float WallHangDelay = 0.5f;
         private const float WallSlideAccelerationTime = 0.3f;
         private const float WallSlideHoldEnd = 2.5f;
         private const float WallSlideStopEnd = 3f;
@@ -181,6 +179,7 @@ namespace Player.Controller
             get => _isThrow;
             set => _isThrow = value;
         }
+        public bool IsFeatherConnected => _isRedInteract;
         public Vector2 SlopeDir
         {
             get => _slopeDir;
@@ -237,7 +236,6 @@ namespace Player.Controller
             ClearGround();
 
             InitGravity();
-            InitJumpForce(); 
         }
 
         private void OnValidate()
@@ -263,8 +261,6 @@ namespace Player.Controller
             _rb2d.linearVelocity = Vector2.zero;
             _rb2d.sharedMaterial = null;
             _rb2d.freezeRotation = true;
-            _baseJumpForce = _jumpForce; 
-
         }
 
         private void OnEnable()
@@ -431,10 +427,9 @@ namespace Player.Controller
         #region 내부 변수 제어
         public void ResetJumpCount() { _jumpCount = 0; }
         public Transform GetTransform() { return transform; }
-        public void BecomeLighter() { _isRedInteract = true; _jumpGravity = _lighterGravity; _downGravity = _lighterGravity; _maxDownForce = _gliderDownForce; }
-        public void InitGravity() { _isRedInteract = false; _jumpGravity = _defaultGravity; _downGravity = _defaultGravity; _maxDownForce = _defaultDownForce; }
-        public void EnhanceJump() { _isBlueInteract = true; _jumpForce = _enhancedJumpForce; }
-        public void InitJumpForce() { _isBlueInteract = false; _jumpForce = _baseJumpForce; }
+        public void BecomeLighter() { _isRedInteract = true; _isFeatherFastFall = false; _jumpGravity = _lighterGravity; _downGravity = _lighterGravity; _maxDownForce = _gliderDownForce; }
+        public void InitGravity() { _isRedInteract = false; _isFeatherFastFall = false; _jumpGravity = _defaultGravity; _downGravity = _defaultGravity; _maxDownForce = _defaultDownForce; }
+        public void SetFeatherFastFall(bool isPressed) { _isFeatherFastFall = isPressed && _isRedInteract; }
         public void SetCheckPoint(Vector3 position) { _checkPoint = position; }
         public void SetStop() { _direction = PlayerDirection.Stop; _velocity.x = 0.0f; }
         public void SetContactPlatform(OneWayPlatform platform = null) { _oneWayPlatform = platform; }
@@ -493,8 +488,10 @@ namespace Player.Controller
                 _isFalling = _velocity.y <= 0f;
                 float gravity = (_isFalling ? _downGravity : _jumpGravity) *
                                 (_defaultGravity > 0f ? _environmentGravityScale / _defaultGravity : 1f);
+                bool fastFalling = _isFalling && _isFeatherFastFall;
+                if (fastFalling) gravity *= 4f;
                 _velocity.y += Physics2D.gravity.y * gravity * deltaTime;
-                _velocity.y = Mathf.Max(_velocity.y, _maxDownForce);
+                _velocity.y = Mathf.Max(_velocity.y, _maxDownForce * (fastFalling ? 4f : 1f));
             }
 
             if (_environmentDamping > 0f)
@@ -570,6 +567,12 @@ namespace Player.Controller
 
         private void RefreshWallHang()
         {
+            if (!HasActiveCatThread())
+            {
+                CancelWallAbility();
+                return;
+            }
+
             bool canHang = !_isGround && !_isDead && _velocity.y <= 0f;
             int inputDirection = (int)_direction;
             Collider2D detectedWall = null;
@@ -655,6 +658,12 @@ namespace Player.Controller
 
         private bool TryExecuteWallJump()
         {
+            if (!HasActiveCatThread())
+            {
+                CancelWallAbility();
+                return false;
+            }
+
             bool canUseCurrentWall = _isWallHanging && _wallCollider != null;
             bool canUseCoyoteWall = !canUseCurrentWall && Time.time <= _wallCoyoteUntil && _wallCollider != null;
             if (!canUseCurrentWall && !canUseCoyoteWall) return false;
@@ -702,6 +711,32 @@ namespace Player.Controller
             _animator.SetTrigger("IsJump");
             return true;
         }
+
+        private bool HasActiveCatThread()
+        {
+            int redThreadIndex = (int)ThreadType.Red;
+            if (_thread == null || redThreadIndex >= _thread.Length) return false;
+
+            ThrowThread redThread = _thread[redThreadIndex];
+            return redThread != null &&
+                   redThread.CurrentState == ThrowThreadState.Exist &&
+                   redThread.targetTransform != null &&
+                   redThread.targetTransform.TryGetComponent<Cat>(out _);
+        }
+
+        private void CancelWallAbility()
+        {
+            ClearWallHang(false);
+            _wallCollider = null;
+            _wallDirection = 0;
+            _wallCoyoteUntil = 0f;
+            _wallJumpBufferedUntil = 0f;
+            _wallInputIgnoreUntil = 0f;
+            _ignoredWallDirection = 0;
+            _sameWallVerticalJumpCount = 0;
+            _verticalJumpWallCollider = null;
+        }
+
         public void Jump()
         {
             if (_currentState == PlayerAnimationState.Dead) return;
