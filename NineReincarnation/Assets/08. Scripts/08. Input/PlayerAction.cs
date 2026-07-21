@@ -95,7 +95,18 @@ namespace Player.Action
         {
             if (context.started)
             {
-                _player.DownJump();
+                if (_player.IsFeatherConnected)
+                {
+                    InputManager.Instance.SetDownInput(true);
+                }
+                else
+                {
+                    _player.DownJump();
+                }
+            }
+            else if (context.canceled)
+            {
+                InputManager.Instance.SetDownInput(false);
             }
         }
 
