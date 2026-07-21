@@ -87,7 +87,7 @@ public class CinemachineShake : CinemachineExtension
         else
         {
             float shakeTime = duration;
-            float fadeTime = 2.0f;
+            float fadeTime = 0.5f;
 
             while (timer < shakeTime)
             {
