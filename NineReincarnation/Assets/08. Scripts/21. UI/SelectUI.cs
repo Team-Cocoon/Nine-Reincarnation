@@ -29,14 +29,16 @@ public class SelectButtonInfo
 {
     public int ID { get; private set; }
     public Button Button { get; private set; }
+    public TMP_Text BtnText { get; private set; }
 
-    public SelectButtonInfo(int id, Button button)
+    public SelectButtonInfo(int id, Button button, TMP_Text btnText)
     {
         ID = id;
         Button = button;
+        BtnText = btnText;
     }
 
-    public void SetInfo(int id, Button button)
+    public void SetInfo(int id, Button button, TMP_Text btnText)
     {
         ID = id;
         Button = button;
@@ -45,6 +47,11 @@ public class SelectButtonInfo
     public void SetID(int id)
     {
         ID = id;
+    }
+
+    public void ChangeScript(string script)
+    {
+        BtnText.text = script;
     }
 }
 
@@ -74,21 +81,13 @@ public class SelectUI : MonoBehaviour
 
     public void UpdateUI(SelectClass selectData, SelectDataStruct[] selectDatas)
     {
-        if (!string.IsNullOrEmpty(selectData.Script))
-        {
-            _questionText.gameObject.SetActive(true);
-            ChangeScript(_questionText, selectData.Script);
-        }
-        else
-        {
-            _questionText.gameObject.SetActive(false);
-        }
-
         _utcs = new UniTaskCompletionSource<int>();
 
         UpdateQuestion(selectData.Script);
 
         UpdateChoiceButtons(selectData, selectDatas);
+
+        SetTextSize();
 
         _currentSelectClass = selectData;
 
@@ -103,7 +102,7 @@ public class SelectUI : MonoBehaviour
 
         if (hasQuestion)
         {
-            ChangeScript(_questionText, question);
+            _questionText.text = question;
         }
     }
 
@@ -121,13 +120,13 @@ public class SelectUI : MonoBehaviour
             if (button == null)
             {
                 Debug.LogError(
-                    "[SelectUI] ChoiceButtonPrefab에 Button 컴포넌트가 없습니다."
+                    "[SelectUI] No Button Conponent"
                 );
                 return;
             }
 
             _choiceButtons.Add(
-                new SelectButtonInfo(-1, button)
+                new SelectButtonInfo(-1, button, button.GetComponentInChildren<TMP_Text>())
             );
         }
 
@@ -166,13 +165,7 @@ public class SelectUI : MonoBehaviour
                 _utcs?.TrySetResult(nextId);
             });
 
-            TMP_Text buttonText =
-                button.GetComponentInChildren<TMP_Text>();
-
-            if (buttonText != null)
-            {
-                ChangeScript(buttonText, script);
-            }
+            info.ChangeScript(script);
         }
     }
 
@@ -190,9 +183,20 @@ public class SelectUI : MonoBehaviour
         return id;
     }
 
-    private void ChangeScript(TMP_Text tmpText, string script)
+    private void SetTextSize()
     {
-        tmpText.text = script;
+        float longestSize = _questionText.preferredWidth;
+
+        foreach (var btn in _choiceButtons)
+        {
+            longestSize = Mathf.Max(longestSize, btn.BtnText.preferredWidth);
+        }
+
+        _questionText.GetComponent<LayoutElement>().preferredWidth = longestSize;
+        foreach (var btn in _choiceButtons)
+        {
+            btn.BtnText.GetComponent<LayoutElement>().preferredWidth = longestSize;
+        }
     }
 
     private void OpenUI()
