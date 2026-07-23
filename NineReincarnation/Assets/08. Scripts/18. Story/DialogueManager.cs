@@ -24,6 +24,8 @@ namespace DialogueSpace
         [SerializeField] private int _id;
         [SerializeField] private EventCamera _camera;
         [SerializeField] private VirtualCameraManager _virtualCameraManager;
+        [SerializeField] private StoryCanvas _storyCanvas;
+        [SerializeField] private bool _enableLetterboxd = false;
         [SerializeField] private bool _startScene = false;
 
         List<UniTask> tasks = new List<UniTask>(5);
@@ -99,6 +101,7 @@ namespace DialogueSpace
             }
 
             _virtualCameraManager.SetToEventCam();
+            if(_enableLetterboxd) await _storyCanvas.ShowAsync(_cts.Token);
 
             while (isNext)
             {
@@ -118,6 +121,7 @@ namespace DialogueSpace
                 if (dialogue.EventType == ExcelData.EventType.End)
                 {
                     await _camera.ZoomDefault();
+                    if(_enableLetterboxd) await _storyCanvas.HideAsync(_cts.Token);
 
                     _anna.transform.position = _npcAnna.transform.position;
                     _npcAnna.SetActive(false);

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class StoryFadeUI : MonoBehaviour
 {
     [SerializeField] private InputConnector _inputConnector;
-    [SerializeField] private DialogueSpace.DialogueManager _dialogueManager;
     [SerializeField] private Material _material;
 
     [Header("Setting")]
