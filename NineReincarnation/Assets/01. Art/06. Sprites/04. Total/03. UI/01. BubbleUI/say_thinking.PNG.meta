@@ -119,13 +119,13 @@ TextureImporter:
       name: say_thinking_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 252
-        height: 63
+        width: 256
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 12, z: 7, w: 12}
+      pivot: {x: 0, y: 0}
+      border: {x: 13, y: 18, z: 12, w: 15}
       customData: 
       outline: []
       physicsShape: []
@@ -133,28 +133,6 @@ TextureImporter:
       bones: []
       spriteID: 835134e294f3faa50800000000000000
       internalID: 6534511167879189816
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: say_thinking_1
-      rect:
-        serializedVersion: 2
-        x: 124
-        y: 0
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9360666f6e09f5c50800000000000000
-      internalID: 6656198095927641657
       vertices: []
       indices: 
       edges: []
@@ -171,10 +149,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       say_thinking_0: 6534511167879189816
-      say_thinking_1: 6656198095927641657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
