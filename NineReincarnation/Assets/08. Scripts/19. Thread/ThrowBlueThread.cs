@@ -14,6 +14,7 @@ public class ThrowBlueThread : ThrowThread
     protected override void ThrowingEvent()
     {
         _player.BlueThread--;
+        UIEventHandler.OnBlueThreadConnectionChanged_Invoke(true);
         //_connectionStartTime = Time.time;
         Debug.Log(_player.BlueThread);
     }
@@ -50,6 +51,7 @@ public class ThrowBlueThread : ThrowThread
         InitThread();
         _lineRenderer.enabled = false;
         ResetAlpha();
+        UIEventHandler.OnBlueThreadConnectionChanged_Invoke(false);
         onComplete?.Invoke();
     }
 

@@ -161,7 +161,8 @@ namespace Player.Controller
         {
             get => _currentBlueThread;
             set {
-                _currentBlueThread = (_currentBlueThread - 1 < 0) ? 0 : _currentBlueThread - 1;
+                _currentBlueThread = Mathf.Clamp(value, 0, _maxBlueThread);
+                UIEventHandler.OnBlueThreadCountChanged_Invoke(_currentBlueThread);
             }
         }
         public int ActivePhasingCount => _activePhasingCount;
@@ -175,8 +176,8 @@ namespace Player.Controller
             _isJump = false;
             _isFalling = false;
             _isThrow = false;
-
-            _currentBlueThread = _maxBlueThread;
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            BlueThread = _maxBlueThread;
 
             _onGroundDetector = false;
             _onSlopeDetector = false;
@@ -349,6 +350,12 @@ namespace Player.Controller
         public void ExcuteThrowThread()
         {
             _thread[(int)_pendingThreadType]?.ClickEvent(_cachedThrowPosition);
+        }
+
+        public void IncreaseMaxBlueThread(int amount)
+        {
+            _maxBlueThread += amount;
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
         }
 
         #region 내부 변수 제어
