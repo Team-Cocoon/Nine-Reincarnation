@@ -194,7 +194,8 @@ namespace Player.Controller
         {
             get => _currentBlueThread;
             set {
-                _currentBlueThread = (_currentBlueThread - 1 < 0) ? 0 : _currentBlueThread - 1;
+                _currentBlueThread = Mathf.Clamp(value, 0, _maxBlueThread);
+                UIEventHandler.OnBlueThreadCountChanged_Invoke(_currentBlueThread);
             }
         }
         public int ActivePhasingCount => _activePhasingCount;
@@ -229,6 +230,8 @@ namespace Player.Controller
             _verticalJumpWallCollider = null;
 
             _currentBlueThread = _maxBlueThread;
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            BlueThread = _maxBlueThread;
 
             _velocity = Vector2.zero;
             _environmentGravityScale = _defaultGravity;
@@ -419,6 +422,12 @@ namespace Player.Controller
         {
             _groundThrowMoveLockUntil = 0f;
             ChangePlayerDirection();
+        }
+
+        public void IncreaseMaxBlueThread(int amount)
+        {
+            _maxBlueThread += amount;
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
         }
 
         #region 내부 변수 제어
