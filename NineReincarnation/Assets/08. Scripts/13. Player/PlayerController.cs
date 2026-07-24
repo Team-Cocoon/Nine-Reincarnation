@@ -284,10 +284,7 @@ namespace Player.Controller
             _groundThrowMoveLockUntil = 0f;
             ClearWallHang(false);
 
-            if (_thread != null)
-            {
-                foreach (ThrowThread thread in _thread) thread?.ResetThread();
-            }
+            ReleaseThreads();
 
             AudioManager.Instance.StopLoopingSfx(AudioManager.LoopSfx.Walk);
         }
@@ -769,6 +766,7 @@ namespace Player.Controller
         #region 플레이어 상태 제어
         public void Dead()
         {
+            ReleaseThreads();
             if (_currentState == PlayerAnimationState.Dead) return;
             UpdateGroundDetector(false);
             UpdateSlopeDetector(false);
@@ -779,6 +777,17 @@ namespace Player.Controller
             _wallJumpBufferedUntil = 0f;
             _isDead = true;
         }
+
+        private void ReleaseThreads()
+        {
+            if (_thread == null) return;
+
+            foreach (ThrowThread thread in _thread)
+            {
+                thread?.ResetThread();
+            }
+        }
+
         public void GameEvent_PlayerDead() { GameEventHandler.OnPlayerDead_Invoke(); }
         public void Respawn() { Init(); transform.position = _checkPoint; UpdateGroundDetector(true); UpdateSlopeDetector(true); }
         public void Look() { CameraEventHandler.OnLook_Invoke(_isLook); }

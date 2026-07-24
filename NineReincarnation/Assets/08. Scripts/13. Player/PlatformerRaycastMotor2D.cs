@@ -75,7 +75,11 @@ namespace Player.Controller
             if (!Mathf.Approximately(displacement.x, 0f)) SolidHorizontalSweep(ref displacement);
             if (!Mathf.Approximately(displacement.y, 0f)) VerticalCollisions(ref displacement, dropThroughOneWay);
 
-            _body.position += displacement;
+            // Move through the Rigidbody API so its interpolation has a previous
+            // and a target physics pose to blend between render frames. Assigning
+            // Rigidbody2D.position directly makes the camera-follow target step at
+            // the fixed timestep, which appears as player jitter.
+            _body.MovePosition(_body.position + displacement);
         }
 
         // Wall hang deliberately uses two points instead of the last horizontal
