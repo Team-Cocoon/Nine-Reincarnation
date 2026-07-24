@@ -93,6 +93,14 @@ public class InputManager : MonoBehaviour
         _playerInput.SwitchCurrentActionMap("Player");
     }
 
+    // PlayerInput's DownJump action is shared by one-way-platform drop-through
+    // and Feather fast-fall. Keep the input routing here so PlayerAction does
+    // not need to know which player is currently controlled.
+    public void SetDownInput(bool isPressed)
+    {
+        _curPlayer?.SetFeatherFastFall(isPressed);
+    }
+
     /// <summary>
     /// 플레이어 변경
     /// </summary>

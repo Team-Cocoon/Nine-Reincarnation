@@ -2281,6 +2281,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5922702560739776728, guid: 717410625a607934c99b689c9672bd07, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922702560739776728, guid: 717410625a607934c99b689c9672bd07, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922702560739776728, guid: 717410625a607934c99b689c9672bd07, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922702560739776728, guid: 717410625a607934c99b689c9672bd07, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 148895445}
@@ -2356,7 +2368,8 @@ PrefabInstance:
       propertyPath: '_players.Array.data[0]'
       value: 
       objectReference: {fileID: 49251477}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4330408941620496009, guid: 717410625a607934c99b689c9672bd07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

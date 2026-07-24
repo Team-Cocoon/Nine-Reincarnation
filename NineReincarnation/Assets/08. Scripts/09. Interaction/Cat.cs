@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Player.Controller;
 using UnityEngine;
 
 public class Cat : DrawOutline, IThreadInteractable
@@ -28,7 +27,6 @@ public class Cat : DrawOutline, IThreadInteractable
     public bool IsClickControlToSelf { get => _isClickControlToSelf; }
     public override bool IsHoverControlToSelf { get => _isHoverControlToSelf; }
 
-    PlayerController _player => InputManager.Instance.CurPlayer;
     public ThreadCompatibility AllowedThreads => _allowedThreads;
 
     private LayerMask _playerMask;
@@ -94,7 +92,6 @@ public class Cat : DrawOutline, IThreadInteractable
         OutlineColor = _activatedColor;
         IsTotalActive = true;
         _isActivated = true;
-        _player.EnhanceJump();
     }
 
     public void InactivateFeather()
@@ -102,7 +99,6 @@ public class Cat : DrawOutline, IThreadInteractable
         OutlineColor = _activeColor;
         IsTotalActive = false;
         _isActivated = false;
-        _player.InitJumpForce();
     }
 
     public void OnThreadHit(ThreadType threadType)

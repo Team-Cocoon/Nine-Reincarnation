@@ -1,4 +1,5 @@
 using Player.Controller;
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
@@ -17,7 +18,11 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera[] _cams;
     [SerializeField] private PolygonCollider2D[] _areas;
     [SerializeField] private int _currentIndex = 0;
+    private int _prevIndex = 0;
+    private bool _isEventCamFocused = false;
     [Inject] private PlayerController _player;
+
+    [SerializeField] private DialogueCameraShiftHelper _cameraShiftHelper;
 
     public void Initialize()
     {
@@ -56,5 +61,38 @@ public class VirtualCameraManager : MonoBehaviour
     public void SetPlayer()
     {
         _eventCam.Follow = _player.transform;
+    }
+
+    public void SetFollowObj(Transform objTransfrom)
+    {
+        _eventCam.Follow = objTransfrom;
+    }
+
+    public void SetFollowObj(string name)
+    {
+        SetFollowObj(_cameraShiftHelper.GetShiftObjTransform(name));
+    }
+
+    public void SetToEventCam()
+    {
+        if (_isEventCamFocused == true)
+            return;
+
+        _isEventCamFocused = true;
+        _prevIndex = _currentIndex;
+
+        _cams[_currentIndex].Priority = (int)CameraPriority.None;
+        _eventCam.Priority = (int)CameraPriority.Priority;
+    }
+
+    public void ResetToNormalCam()
+    {
+        if (_isEventCamFocused == false)
+            return;
+
+        _isEventCamFocused = false;
+
+        _cams[_currentIndex].Priority = (int)CameraPriority.Priority;
+        _eventCam.Priority = (int)CameraPriority.None;
     }
 }

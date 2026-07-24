@@ -828,7 +828,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 2, z: 0}
-  - {x: 5, y: 2, z: 1}
+  - {x: 5, y: 2, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -836,7 +836,7 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.07481384
         value: 1
         inSlope: 0
         outSlope: 0

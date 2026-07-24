@@ -32,7 +32,7 @@ public class BubbleUI : MonoBehaviour
 
     private async UniTask ChangeScript(string script)
     {
-        _sizer.ResizeBubble(script);
+        _sizer.ResizeBubble(script, (int)_currentType);
 
         _scriptText.ShowText(script);
 

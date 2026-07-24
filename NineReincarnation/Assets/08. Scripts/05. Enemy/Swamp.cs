@@ -1,4 +1,5 @@
 using UnityEngine;
+using Player.Controller;
 
 public class Swamp : MonoBehaviour, ICollidable
 {
@@ -25,10 +26,20 @@ public class Swamp : MonoBehaviour, ICollidable
         {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             IObjectData objectData = go.GetComponent<IObjectData>();
-            RestoreInitData(rb.gravityScale, rb.linearDamping, objectData.Speed);
+            PlayerController player = go.GetComponent<PlayerController>();
+            RestoreInitData(player != null ? player.EnvironmentGravityScale : rb.gravityScale,
+                player != null ? player.EnvironmentDamping : rb.linearDamping, objectData.Speed);
 
-            rb.gravityScale = _gravity;
-            rb.linearDamping = _damping;
+            if (player != null)
+            {
+                player.EnvironmentGravityScale = _gravity;
+                player.EnvironmentDamping = _damping;
+            }
+            else
+            {
+                rb.gravityScale = _gravity;
+                rb.linearDamping = _damping;
+            }
             objectData.Speed = _speed;
 
             isSave = true;
@@ -41,9 +52,18 @@ public class Swamp : MonoBehaviour, ICollidable
         {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             IObjectData objectData = go.GetComponent<IObjectData>();
+            PlayerController player = go.GetComponent<PlayerController>();
 
-            rb.gravityScale = _initGravity;
-            rb.linearDamping = _initDamping;
+            if (player != null)
+            {
+                player.EnvironmentGravityScale = _initGravity;
+                player.EnvironmentDamping = _initDamping;
+            }
+            else
+            {
+                rb.gravityScale = _initGravity;
+                rb.linearDamping = _initDamping;
+            }
             objectData.Speed = _initSpeed;
 
             isSave = false;

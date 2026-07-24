@@ -14,6 +14,13 @@ public class ThrowRedThread : ThrowThread
     public event Action<float> OnDistanceUpdate;
     private bool _isVisualSwitched = false;
 
+    public override void ResetThread()
+    {
+        base.ResetThread();
+        _isVisualSwitched = false;
+        if (linkedLineRenderer != null) linkedLineRenderer.enabled = false;
+    }
+
     protected override void UpdateThreadVisualization()
     {
         if (!_isVisualSwitched)

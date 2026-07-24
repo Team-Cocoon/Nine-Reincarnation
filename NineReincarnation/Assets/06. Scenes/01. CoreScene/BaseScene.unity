@@ -1524,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
       propertyPath: _sprites.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
       propertyPath: '_sprites.Array.data[0]'
@@ -1574,6 +1574,10 @@ PrefabInstance:
       propertyPath: '_sprites.Array.data[11]'
       value: 
       objectReference: {fileID: 21300000, guid: b66ef7ae2fc79494999e7977e7ceb6cf, type: 3}
+    - target: {fileID: 6711488988914129225, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
+      propertyPath: '_sprites.Array.data[12]'
+      value: 
+      objectReference: {fileID: 21300000, guid: aeac15837ce00b24890d07110104a7e9, type: 3}
     - target: {fileID: 8855520463782491647, guid: c9b86c64ec065d644865f15b493ce5be, type: 3}
       propertyPath: m_Camera
       value: 

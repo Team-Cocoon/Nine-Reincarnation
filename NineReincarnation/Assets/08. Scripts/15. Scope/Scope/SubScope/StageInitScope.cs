@@ -8,10 +8,12 @@ public class StageInitScope : LifetimeScope
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private CameraManager _cameraManager;
+    [SerializeField] private InputManager InputManager;
 
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponent(_playerController);
         builder.RegisterComponent(_cameraManager);
+        builder.RegisterComponent(InputManager);
     }
 }
