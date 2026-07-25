@@ -26,23 +26,31 @@ public class ThreadStateUI : MonoBehaviour
 
     private void OnEnable()
     {
-        throwThread.OnConnected += ShowUI;
-        throwThread.OnDistanceUpdate += UpdateUI;
-        throwThread.OnDisconnected += HideUI;
+        // 참조가 파괴/미할당 상태면 접근하지 않는다(플레이 종료 시 파괴 순서 문제 방지).
+        if (throwThread != null)
+        {
+            throwThread.OnConnected += ShowUI;
+            throwThread.OnDistanceUpdate += UpdateUI;
+            throwThread.OnDisconnected += HideUI;
+        }
 
-        canvasGroup.alpha = 0f; // 초기 상태는 투명하게
+        if (canvasGroup != null) canvasGroup.alpha = 0f; // 초기 상태는 투명하게
     }
 
     private void OnDisable()
     {
-        throwThread.OnConnected -= ShowUI;
-        throwThread.OnDistanceUpdate -= UpdateUI;
-        throwThread.OnDisconnected -= HideUI;
+        // ThrowRedThread가 이 UI보다 먼저 파괴되면 MissingReferenceException이 나므로 null 체크.
+        if (throwThread != null)
+        {
+            throwThread.OnConnected -= ShowUI;
+            throwThread.OnDistanceUpdate -= UpdateUI;
+            throwThread.OnDisconnected -= HideUI;
+        }
     }
 
     private void ShowUI()
     {
-        if (throwThread.targetTransform != null)
+        if (throwThread != null && throwThread.targetTransform != null && _interactionSprite != null)
         {
             if (throwThread.targetTransform.GetComponent<Feather>() != null)
             {
@@ -60,12 +68,13 @@ public class ThreadStateUI : MonoBehaviour
     private void UpdateUI(float ratio)
     {
         // 위치 업데이트 (타겟 머리 위)
-        if (throwThread.targetTransform != null)
+        if (throwThread != null && throwThread.targetTransform != null)
         {
             transform.position = throwThread.targetTransform.position + offset;
         }
 
         // 비율에 따른 스프라이트 교체
+        if (progressImage == null) return;
         if (ratio < 0.3f) progressImage.sprite = step1Sprite;
         else if (ratio < 0.6f) progressImage.sprite = step2Sprite;
         else progressImage.sprite = step3Sprite;
@@ -79,6 +88,8 @@ public class ThreadStateUI : MonoBehaviour
 
     private IEnumerator FadeRoutine(float targetAlpha, float duration)
     {
+        if (canvasGroup == null) yield break;
+
         float startAlpha = canvasGroup.alpha;
         float elapsed = 0f;
 

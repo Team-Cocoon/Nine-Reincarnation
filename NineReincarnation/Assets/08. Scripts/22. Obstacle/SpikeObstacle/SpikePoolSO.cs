@@ -48,11 +48,20 @@ public class SpikePoolSO : ScriptableObject
             // [수정됨] 여기서 SetActive(true)를 하지 않습니다. 위치를 먼저 잡고 켜야 합니다.
             actionOnGet: (go) => { },
             actionOnRelease: (go) => go.SetActive(false),
-            actionOnDestroy: (go) => Destroy(go),
+            actionOnDestroy: (go) => DestroySafe(go),
             collectionCheck: true,
             defaultCapacity: 10,
             maxSize: 20
         );
+    }
+
+    // 도메인 리로드/에디트 모드에서는 Destroy() 대신 DestroyImmediate()를 써야 한다.
+    private void DestroySafe(GameObject go)
+    {
+        if (go == null) return;
+
+        if (Application.isPlaying) Destroy(go);
+        else DestroyImmediate(go);
     }
 
     public GameObject Get() => Pool.Get();

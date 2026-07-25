@@ -59,7 +59,17 @@ public abstract class ThrowThread : Thread, IThreadThrower
         if (_lineRenderer != null && segments.IsCreated)
         {
             InitThread();
+            _lineRenderer.enabled = false;   //던지기 전(Idle)에는 실을 숨긴다
         }
+    }
+
+    // 던지는 실은 시작 시 보이면 안 된다. 장식용 로프를 만드는 base.Start(CreateRope)를 호출하지 않고
+    // 렌더러를 꺼둔 Idle 상태로 대기한다. 실제 세그먼트는 던질 때 StartThrowing→InitThread에서 구성된다.
+    protected override void Start()
+    {
+        Initialize();
+        _state = ThrowThreadState.Idle;
+        if (_lineRenderer != null) _lineRenderer.enabled = false;
     }
 
     protected override void Initialize()
@@ -70,10 +80,9 @@ public abstract class ThrowThread : Thread, IThreadThrower
             _player = _startTransform.GetComponent<PlayerController>();
             InitThread();
         }
-        else
-        {
-            _lineRenderer.enabled = false;
-        }
+
+        // Idle 상태이므로 어떤 경우에도 시작 시에는 실을 숨긴다.
+        if (_lineRenderer != null) _lineRenderer.enabled = false;
     }
     
     public void ClickEvent(Vector2 targetPosition)
@@ -87,13 +96,86 @@ public abstract class ThrowThread : Thread, IThreadThrower
                 }
                 break;
             case ThrowThreadState.Exist:
-                StartDeleting();
+                // 이미 연결된 상태에서 '다른' 연결 가능한 오브젝트를 클릭하면
+                // 이전 실을 즉시 해제함과 동시에 새 오브젝트로 다시 연결한다(전환).
+                if (TryGetConnectableTarget(targetPosition, out Transform newTarget) && newTarget != targetTransform)
+                {
+                    CancelConnection();
+                    StartThrowing(targetPosition);
+                }
+                else
+                {
+                    // 빈 공간이나 현재 연결된 대상을 클릭하면 연결을 해제한다(수동 취소).
+                    OnManualCancel();
+                    StartDeleting();
+                }
                 break;
             case ThrowThreadState.Throwing:
             case ThrowThreadState.Deleting:
                 break;
         }
     }
+
+    // 클릭 지점에 이 실로 연결 가능한 오브젝트가 있는지 검사한다.
+    private bool TryGetConnectableTarget(Vector2 position, out Transform target)
+    {
+        target = null;
+        if (_startTransform == null) return false;
+
+        float dist = Vector3.Distance(_startTransform.position, position);
+        if (dist > limitDistance) return false;
+
+        Collider2D hit = Physics2D.OverlapPoint(position, LayerMask.GetMask("Interaction"));
+        if (hit == null) return false;
+
+        var threadTarget = hit.GetComponent<IThreadInteractable>();
+        if (threadTarget == null) return false;
+        if (!threadTarget.AllowedThreads.HasFlag(ConvertToFlag(_threadType))) return false;
+
+        target = hit.transform;
+        return true;
+    }
+
+    // 페이드 없이 현재 연결을 즉시 끊는다(다른 오브젝트로 즉시 전환할 때 사용).
+    // 대상 해제 방식은 실 종류마다 다르므로 ReleaseTarget()으로 분리한다.
+    protected virtual void CancelConnection()
+    {
+        StopAllCoroutines();
+        _currentJobHandle.Complete();
+
+        ReleaseTarget();
+
+        targetTransform = null;
+        clickable = null;
+
+        if (_endTransform != null)
+        {
+            _endTransform.SetParent(null);
+            if (_startTransform != null) _endTransform.position = _startTransform.position;
+        }
+
+        OnDisconnected?.Invoke();
+
+        if (_startTransform != null) InitThread();
+        if (_lineRenderer != null)
+        {
+            _lineRenderer.enabled = false;
+            ResetAlpha();
+        }
+
+        _state = ThrowThreadState.Idle;
+    }
+
+    // 전환 시 이전 대상의 활성 상태를 해제한다.
+    // 기본(홍연/Feather)은 EnableClickInteraction() 토글로 비활성화된다.
+    protected virtual void ReleaseTarget()
+    {
+        clickable?.EnableClickInteraction();
+    }
+
+    // 사용자가 직접 연결을 취소할 때 호출되는 훅.
+    // 자연 만료(코루틴/시간 경과)와 구분하기 위해 클릭 취소 경로에서만 실행된다.
+    protected virtual void OnManualCancel() { }
 
     // ✨ 추가됨: 외부에서 기존 실을 강제로 끊을 때 호출하는 메서드
     public void ForceCancel()
@@ -109,7 +191,9 @@ public abstract class ThrowThread : Thread, IThreadThrower
         StopAllCoroutines();
         _currentJobHandle.Complete();
         bool wasActive = _state != ThrowThreadState.Idle;
-        clickable?.EnableClickInteraction();
+        // 대상 해제는 실 종류마다 다르다(홍연=Feather 토글 해제, 청연=페이즈/충돌 강제 종료).
+        // 청연 대상에게 EnableClickInteraction()은 재활성화(PhaseIn)이므로 여기서 직접 부르면 안 된다.
+        ReleaseTarget();
         targetTransform = null;
         clickable = null;
         _state = ThrowThreadState.Idle;

@@ -67,6 +67,8 @@ namespace Player.Controller
         [Header("--- 플레이어 실 관련 변수 ---")]
         [SerializeField] private int _currentBlueThread = 3;
         [SerializeField] private int _maxBlueThread = 3;
+        [SerializeField] private float _blueThreadRecoverInterval = 5f;   //청연 회복 주기(초)
+        private float _blueThreadRecoverTimer = 0f;
         private bool _isRedInteract = false;
         private bool _isFeatherFastFall;
         private int _activePhasingCount = 0;
@@ -294,7 +296,26 @@ namespace Player.Controller
 
         private void Update()
         {
+            RecoverBlueThreadOverTime();
+        }
 
+        // 청연을 일정 시간(_blueThreadRecoverInterval)마다 1개씩 최대치까지 회복한다.
+        private void RecoverBlueThreadOverTime()
+        {
+            if (_isDead) return;
+
+            if (_currentBlueThread >= _maxBlueThread)
+            {
+                _blueThreadRecoverTimer = 0f;
+                return;
+            }
+
+            _blueThreadRecoverTimer += Time.deltaTime;
+            if (_blueThreadRecoverTimer >= _blueThreadRecoverInterval)
+            {
+                _blueThreadRecoverTimer -= _blueThreadRecoverInterval;
+                BlueThread = _currentBlueThread + 1;   //프로퍼티에서 최대치 클램프 + UI 갱신
+            }
         }
 
         private async UniTaskVoid SetLockThrow()
@@ -314,17 +335,8 @@ namespace Player.Controller
         {
             if (_lockThrow) return;
 
-            // 막는 것이 아니라, 이미 다른 실이 사용 중이라면 강제로 취소(해제)시킵니다.
-            for (int i = 0; i < _thread.Length; i++)
-            {
-                if (i != (int)threadType && _thread[i] != null)
-                {
-                    if (_thread[i].CurrentState == ThrowThreadState.Exist || _thread[i].CurrentState == ThrowThreadState.Throwing)
-                    {
-                        _thread[i].ForceCancel(); // 강제로 끊어버리기
-                    }
-                }
-            }
+            // 홍연과 청연은 서로 다른 종류이므로 동시에 연결(공존)될 수 있다.
+            // 따라서 다른 색 실을 강제로 끊지 않는다. 같은 종류의 전환은 ThrowThread.ClickEvent에서 처리한다.
 
             _pendingThreadType = threadType;
             _cachedThrowPosition = mousePosition; 
@@ -351,37 +363,37 @@ namespace Player.Controller
                     }
                     break;
                 case ThreadType.Blue:
-                    if (_currentBlueThread == 0 || _activePhasingCount > 0) return;
+                    // 잔여 청연이 없으면 던질 수 없다.
+                    if (_currentBlueThread == 0) return;
+
+                    ThrowThread blueThread = _thread[(int)threadType];
+                    bool blueConnected = blueThread != null &&
+                        (blueThread.CurrentState == ThrowThreadState.Exist || blueThread.CurrentState == ThrowThreadState.Throwing);
+
+                    // 청연이 연결되어 있지 않은 상태에서 이미 다른 페이즈가 진행 중이면 새로 던질 수 없다.
+                    // (연결 중이라면 '다른 오브젝트로 전환'이 가능해야 하므로 이 제한을 건너뛴다.)
+                    if (!blueConnected && _activePhasingCount > 0) return;
 
                     RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f, LayerMask.GetMask("Interaction"));
-                    bool shouldClick = false;
                     if (hit.collider != null)
                     {
                         var phasable = hit.collider.GetComponent<IPhasable>();
-                        if (phasable != null)
+                        // 이미 연결(활성화)된 오브젝트를 다시 클릭한 경우는 무시한다.
+                        if (phasable != null && phasable.IsConnected)
                         {
-                            if (phasable.IsConnected)
-                            {
-                                return;
-                            }
+                            return;
                         }
                     }
-                    if (shouldClick)
-                    {
-                        _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
-                    }
-                    else
-                    {
-                        // 점프 중에도 던지기가 가능하도록 조건 추가
-                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
-                        {
-                            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
-                            float dot = Vector3.Dot(transform.right, playerToMouse);
-                            _spriteRenderer.flipX = dot <= float.Epsilon;
 
-                            IsThrow = true;
-                            QueueAndExecuteThrow();
-                        }
+                    // 점프 중에도 던지기가 가능하도록 조건 추가
+                    if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
+                    {
+                        Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+                        float dot = Vector3.Dot(transform.right, playerToMouse);
+                        _spriteRenderer.flipX = dot <= float.Epsilon;
+
+                        IsThrow = true;
+                        QueueAndExecuteThrow();
                     }
                     break;
             }
@@ -793,7 +805,9 @@ namespace Player.Controller
 
             foreach (ThrowThread thread in _thread)
             {
-                thread?.ResetThread();
+                // Unity의 '파괴된 객체'는 C# null이 아니므로 ?. 로는 걸러지지 않는다.
+                // 플레이 종료 시 실이 먼저 파괴된 경우 ResetThread 접근이 예외를 내므로 Unity null 체크로 방어한다.
+                if (thread != null) thread.ResetThread();
             }
         }
 

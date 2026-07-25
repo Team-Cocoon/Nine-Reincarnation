@@ -53,6 +53,14 @@ public class ThrowRedThread : ThrowThread
         }));
     }
 
+    // 전환(즉시 해제 후 재연결) 시에는 페이드 없이 연결선 비주얼을 즉시 정리한다.
+    protected override void CancelConnection()
+    {
+        base.CancelConnection();
+        _isVisualSwitched = false;
+        if (linkedLineRenderer != null) linkedLineRenderer.enabled = false;
+    }
+
     private IEnumerator WaitAndTransfer()
     {
         yield return new WaitForSeconds(0.1f); 

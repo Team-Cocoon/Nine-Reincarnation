@@ -72,6 +72,9 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
 
     public void SetOutline()
     {
+        // 플레이 종료/파괴 순서로 렌더러가 이미 파괴된 경우 접근하지 않는다.
+        if (_render == null || _propBlock == null) return;
+
         _render.GetPropertyBlock(_propBlock);
         _propBlock.SetInt("_IsOutline", _isOutline == true ? 1 : 0);
         _propBlock.SetColor("_OutlineColor", _outlineColor);

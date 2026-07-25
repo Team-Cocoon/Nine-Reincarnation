@@ -25,6 +25,31 @@ public class ThrowBlueThread : ThrowThread
         StartCoroutine(Disappearing(() => { _state = ThrowThreadState.Idle; }));
     }
 
+    // 전환 시 이전에 연결됐던 오브젝트를 즉시 연결 전 상태로 되돌린다.
+    protected override void ReleaseTarget()
+    {
+        ForceDisconnectTarget();
+        clickable = null;
+        UIEventHandler.OnBlueThreadConnectionChanged_Invoke(false);
+    }
+
+    // 사용자가 직접 연결을 취소한 경우에도 대상 오브젝트를 즉시 연결 전 상태로 되돌린다.
+    // (자연 만료 시에는 오브젝트가 스스로 부드럽게 복귀하므로 이 훅이 호출되지 않는다.)
+    protected override void OnManualCancel()
+    {
+        ForceDisconnectTarget();
+    }
+
+    // 현재 연결된 청연 대상을 즉시 연결 전 상태(불투명/충돌 복구)로 되돌린다.
+    private void ForceDisconnectTarget()
+    {
+        if (targetTransform != null)
+        {
+            var phasable = targetTransform.GetComponent<IPhasable>();
+            phasable?.ForceDisconnect();
+        }
+    }
+
     private IEnumerator Disappearing(System.Action onComplete)
     {
         // 상호작용 종료
