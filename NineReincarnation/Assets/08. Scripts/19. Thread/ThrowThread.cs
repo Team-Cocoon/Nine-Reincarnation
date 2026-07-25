@@ -311,7 +311,8 @@ public abstract class ThrowThread : Thread, IThreadThrower
 
         float dist = Vector3.Distance(prevNodePos, _endTransform.position);
 
-        if (dist >= segmentDist)
+        // 용량(maxSegmentCount)을 넘어서는 인덱스 접근으로 인한 OutOfRange 방지
+        if (dist >= segmentDist && segmentCount < segments.Length)
         {
             segments[segmentCount] = new Segment(_endTransform.position);
             segmentCount++;
