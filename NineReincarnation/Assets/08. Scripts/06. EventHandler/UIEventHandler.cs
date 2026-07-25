@@ -11,4 +11,20 @@ public static class UIEventHandler
     public static event System.Action<bool> OnBlueThreadConnectionChanged;
     public static void OnBlueThreadConnectionChanged_Invoke(bool isConnected)
         => OnBlueThreadConnectionChanged?.Invoke(isConnected);
+
+    // ===== 홍연(빨간 실) =====
+    // 연결됨
+    public static event System.Action OnRedThreadConnected;
+    public static void OnRedThreadConnected_Invoke()
+        => OnRedThreadConnected?.Invoke();
+
+    // 연결 대상과의 거리 비율(0 = 가까움/여유 많음, 1 = 끊기 직전)
+    public static event System.Action<float> OnRedThreadDistanceChanged;
+    public static void OnRedThreadDistanceChanged_Invoke(float ratio)
+        => OnRedThreadDistanceChanged?.Invoke(ratio);
+
+    // 연결 해제됨
+    public static event System.Action OnRedThreadDisconnected;
+    public static void OnRedThreadDisconnected_Invoke()
+        => OnRedThreadDisconnected?.Invoke();
 }

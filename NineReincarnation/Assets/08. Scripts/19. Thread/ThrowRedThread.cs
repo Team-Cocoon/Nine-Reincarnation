@@ -19,6 +19,8 @@ public class ThrowRedThread : ThrowThread
         base.ResetThread();
         _isVisualSwitched = false;
         if (linkedLineRenderer != null) linkedLineRenderer.enabled = false;
+
+        UIEventHandler.OnRedThreadDisconnected_Invoke();
     }
 
     protected override void UpdateThreadVisualization()
@@ -40,12 +42,15 @@ public class ThrowRedThread : ThrowThread
 
     protected override void ThrowingEvent()
     {
+        UIEventHandler.OnRedThreadConnected_Invoke();
         StartCoroutine(WaitAndTransfer());
     }
 
     protected override void StartDeleting()
     {
         base.StartDeleting();
+
+        UIEventHandler.OnRedThreadDisconnected_Invoke();
 
         StartCoroutine(DisappearingCustom(false, () => {
             _state = ThrowThreadState.Idle;
@@ -174,6 +179,7 @@ public class ThrowRedThread : ThrowThread
 
         float ratio = Mathf.Clamp01(currentDistance / currentLimitDistance);
         OnDistanceUpdate?.Invoke(ratio);
+        UIEventHandler.OnRedThreadDistanceChanged_Invoke(ratio);
 
         // 현재 한계 거리를 벗어나면 만료(끊어짐) 처리
         if (currentDistance > currentLimitDistance)
