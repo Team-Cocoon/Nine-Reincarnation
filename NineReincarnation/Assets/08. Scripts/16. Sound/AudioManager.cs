@@ -234,6 +234,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops every non-BGM sound currently owned by this manager.
+    /// Used before scene transitions so scene-specific sounds do not carry over.
+    /// </summary>
+    public void StopAllSfx()
+    {
+        if (_sfxPlayers != null)
+        {
+            foreach (AudioSource player in _sfxPlayers)
+            {
+                player?.Stop();
+            }
+        }
+
+        if (_loopingSfxPlayers != null)
+        {
+            foreach (AudioSource player in _loopingSfxPlayers)
+            {
+                player?.Stop();
+            }
+        }
+    }
+
 
     public void PlaySfx(Sfx sfx)
     {
