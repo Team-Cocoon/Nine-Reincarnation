@@ -351,11 +351,11 @@ namespace Player.Controller
                     else
                     {
                         // 점프 중에도 던지기가 가능하도록 조건 추가
-                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
+                    if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move ||
+                        _currentState == PlayerAnimationState.Jump || _currentState == PlayerAnimationState.WallHang ||
+                        _currentState == PlayerAnimationState.WallSlide)
                         {
-                            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
-                            float dot = Vector3.Dot(transform.right, playerToMouse);
-                            _spriteRenderer.flipX = dot <= float.Epsilon;
+                            UpdateThrowFacing(mousePosition);
 
                             IsThrow = true;
                             QueueAndExecuteThrow();
@@ -386,17 +386,30 @@ namespace Player.Controller
                     }
 
                     // 점프 중에도 던지기가 가능하도록 조건 추가
-                    if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move || _currentState == PlayerAnimationState.Jump)
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move ||
+                            _currentState == PlayerAnimationState.Jump || _currentState == PlayerAnimationState.WallHang ||
+                            _currentState == PlayerAnimationState.WallSlide)
                     {
-                        Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
-                        float dot = Vector3.Dot(transform.right, playerToMouse);
-                        _spriteRenderer.flipX = dot <= float.Epsilon;
+                        UpdateThrowFacing(mousePosition);
 
                         IsThrow = true;
                         QueueAndExecuteThrow();
                     }
                     break;
             }
+        }
+
+        private void UpdateThrowFacing(Vector2 mousePosition)
+        {
+            if (_currentState == PlayerAnimationState.WallHang ||
+                _currentState == PlayerAnimationState.WallSlide)
+            {
+                return;
+            }
+
+            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+            float dot = Vector3.Dot(transform.right, playerToMouse);
+            _spriteRenderer.flipX = dot <= float.Epsilon;
         }
         
         public void AddActivePhasing() => _activePhasingCount++;
