@@ -218,7 +218,7 @@ public class AudioManager : MonoBehaviour
         AudioSource source = _loopingSfxPlayers[0];
         if (source == null) return;
 
-        AudioClip targetClip = source.clip;
+        AudioClip targetClip = LoopingSfxClips[(int)sfx];
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {
