@@ -13,15 +13,18 @@ public class ThrowBlueThread : ThrowThread
 
     protected override void ThrowingEvent()
     {
-        _player.BlueThread--;
+        // 가득 찬 칸 하나를 사용(Draining 시작). 회복 중인 칸은 건드리지 않는다.
+        _player.TryUseBlueCharge();
         UIEventHandler.OnBlueThreadConnectionChanged_Invoke(true);
-        //_connectionStartTime = Time.time;
-        Debug.Log(_player.BlueThread);
     }
 
     protected override void StartDeleting()
     {
         base.StartDeleting();
+
+        // 연결 종료 → 사용 중이던 칸을 회복(Recovering) 상태로 전환
+        _player?.OnBlueConnectionEnded();
+
         StartCoroutine(Disappearing(() => { _state = ThrowThreadState.Idle; }));
     }
 
@@ -31,6 +34,9 @@ public class ThrowBlueThread : ThrowThread
         ForceDisconnectTarget();
         clickable = null;
         UIEventHandler.OnBlueThreadConnectionChanged_Invoke(false);
+
+        // 전환/리셋으로 연결이 끝날 때도 사용 중이던 칸을 회복 상태로 전환
+        _player?.OnBlueConnectionEnded();
     }
 
     // 사용자가 직접 연결을 취소한 경우에도 대상 오브젝트를 즉시 연결 전 상태로 되돌린다.

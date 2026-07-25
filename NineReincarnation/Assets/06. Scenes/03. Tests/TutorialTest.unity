@@ -876,6 +876,8 @@ MonoBehaviour:
   limitDistance: 5
   _throwSpeed: 20
   _fallSpeed: 50
+  _interactionLayerNames:
+  - Interaction
 --- !u!212 &525221171 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2722889856789072161, guid: 77f1c5179a7262e449b0c82671c87183, type: 3}
@@ -4032,6 +4034,8 @@ MonoBehaviour:
   limitDistance: 5
   _throwSpeed: 20
   _fallSpeed: 10
+  _interactionLayerNames:
+  - Interaction
   linkedLineObject: {fileID: 675781082}
   linkedLineRenderer: {fileID: 675781083}
   _maintainDistance: 10

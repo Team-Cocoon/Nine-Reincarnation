@@ -65,10 +65,17 @@ namespace Player.Controller
         [SerializeField] private bool _isFalling = false;
 
         [Header("--- 플레이어 실 관련 변수 ---")]
-        [SerializeField] private int _currentBlueThread = 3;
         [SerializeField] private int _maxBlueThread = 3;
-        [SerializeField] private float _blueThreadRecoverInterval = 5f;   //청연 회복 주기(초)
-        private float _blueThreadRecoverTimer = 0f;
+        [SerializeField] private float _blueActiveDuration = 5f;    //청연 연결 중 게이지가 줄어드는 시간(초). PhasableObject 페이즈(5s)와 맞출 것
+        [SerializeField] private float _blueRecoverDuration = 5f;   //청연 연결 종료 후 게이지가 다시 차오르는 시간(초)
+
+        // 청연 충전 슬롯: 각 칸이 Full / Draining(연결 중) / Recovering(회복 중) 상태를 가진다.
+        private enum BlueChargeState { Full, Draining, Recovering }
+        private BlueChargeState[] _blueStates;
+        private float[] _blueFill;    //칸별 표시값(0~1)
+        private float[] _blueTimer;   //칸별 상태 경과 시간
+        private int _activeBlueSlot = -1;  //현재 연결 중(Draining)인 칸
+
         private bool _isRedInteract = false;
         private bool _isFeatherFastFall;
         private int _activePhasingCount = 0;
@@ -192,22 +199,68 @@ namespace Player.Controller
             get => _currentState;
             set => _currentState = value;
         }
+        // 사용 가능한(가득 찬) 청연 개수
         public int BlueThread
         {
-            get => _currentBlueThread;
-            set {
-                _currentBlueThread = Mathf.Clamp(value, 0, _maxBlueThread);
-                UIEventHandler.OnBlueThreadCountChanged_Invoke(_currentBlueThread);
+            get
+            {
+                if (_blueStates == null) return 0;
+                int c = 0;
+                for (int i = 0; i < _blueStates.Length; i++)
+                    if (_blueStates[i] == BlueChargeState.Full) c++;
+                return c;
             }
         }
 
-        // 청연 UI 게이지용: 최대치 및 '다음 1개 회복'까지의 진행도(0~1).
-        // 최대치이거나 회복이 필요 없으면 0을 반환한다.
+        // 청연 UI 게이지용
         public int MaxBlueThread => _maxBlueThread;
-        public float BlueRecoverProgress01 =>
-            (_currentBlueThread >= _maxBlueThread)
-                ? 0f
-                : Mathf.Clamp01(_blueThreadRecoverTimer / _blueThreadRecoverInterval);
+        public int BlueSlotCount => (_blueStates != null) ? _blueStates.Length : 0;
+        public float GetBlueSlotFill(int index) =>
+            (_blueFill != null && index >= 0 && index < _blueFill.Length) ? _blueFill[index] : 0f;
+
+        // 칸이 '활성 색(파랑)'으로 보여야 하는지 여부. 회복 중(Recovering)만 회색이고, Full/Draining은 활성 색.
+        public bool IsBlueSlotActive(int index)
+        {
+            if (_blueStates == null || index < 0 || index >= _blueStates.Length) return true;
+            return _blueStates[index] != BlueChargeState.Recovering;
+        }
+
+        // 청연 사용(연결) 시 호출: 가득 찬 칸 하나를 Draining으로 전환한다.
+        // 회복 중인 칸은 건드리지 않는다. 오른쪽(높은 인덱스) 칸부터 사용한다. 성공하면 true.
+        public bool TryUseBlueCharge()
+        {
+            if (_blueStates == null) return false;
+            for (int i = _blueStates.Length - 1; i >= 0; i--)
+            {
+                if (_blueStates[i] == BlueChargeState.Full)
+                {
+                    _blueStates[i] = BlueChargeState.Draining;
+                    _blueTimer[i] = 0f;
+                    _blueFill[i] = 1f;
+                    _activeBlueSlot = i;
+                    UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // 청연 연결이 끝났을 때 호출: 연결 중이던 칸을 완전히 비운 뒤 Recovering으로 전환한다.
+        public void OnBlueConnectionEnded()
+        {
+            if (_blueStates == null) return;
+            if (_activeBlueSlot < 0 || _activeBlueSlot >= _blueStates.Length) return;
+
+            int i = _activeBlueSlot;
+            if (_blueStates[i] == BlueChargeState.Draining)
+            {
+                _blueStates[i] = BlueChargeState.Recovering;
+                _blueTimer[i] = 0f;
+                _blueFill[i] = 0f;   //취소/종료 시 완전히 비운 뒤 회복 시작
+            }
+            _activeBlueSlot = -1;
+        }
+
         public int ActivePhasingCount => _activePhasingCount;
         public float EnvironmentGravityScale
         {
@@ -239,9 +292,7 @@ namespace Player.Controller
             _sameWallVerticalJumpCount = 0;
             _verticalJumpWallCollider = null;
 
-            _currentBlueThread = _maxBlueThread;
-            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
-            BlueThread = _maxBlueThread;
+            InitBlueCharges();
 
             _velocity = Vector2.zero;
             _environmentGravityScale = _defaultGravity;
@@ -304,26 +355,85 @@ namespace Player.Controller
 
         private void Update()
         {
-            RecoverBlueThreadOverTime();
+            UpdateBlueCharges();
         }
 
-        // 청연을 일정 시간(_blueThreadRecoverInterval)마다 1개씩 최대치까지 회복한다.
-        private void RecoverBlueThreadOverTime()
+        // 청연 충전 슬롯 갱신:
+        //  - Draining: 연결 시간(_blueActiveDuration) 동안 게이지가 1→0으로 줄어든다.
+        //  - Recovering: 회복 시간(_blueRecoverDuration) 동안 0→1로 차오른 뒤 Full로 복귀(개수 +1).
+        private void UpdateBlueCharges()
         {
-            if (_isDead) return;
+            if (_isDead || _blueStates == null) return;
 
-            if (_currentBlueThread >= _maxBlueThread)
+            bool countChanged = false;
+            for (int i = 0; i < _blueStates.Length; i++)
             {
-                _blueThreadRecoverTimer = 0f;
-                return;
+                switch (_blueStates[i])
+                {
+                    case BlueChargeState.Draining:
+                        _blueTimer[i] += Time.deltaTime;
+                        _blueFill[i] = 1f - Mathf.Clamp01(_blueTimer[i] / Mathf.Max(0.01f, _blueActiveDuration));
+                        break;
+
+                    case BlueChargeState.Recovering:
+                        _blueTimer[i] += Time.deltaTime;
+                        _blueFill[i] = Mathf.Clamp01(_blueTimer[i] / Mathf.Max(0.01f, _blueRecoverDuration));
+                        if (_blueTimer[i] >= _blueRecoverDuration)
+                        {
+                            _blueStates[i] = BlueChargeState.Full;
+                            _blueFill[i] = 1f;
+                            countChanged = true;
+                        }
+                        break;
+
+                    case BlueChargeState.Full:
+                        _blueFill[i] = 1f;
+                        break;
+                }
             }
 
-            _blueThreadRecoverTimer += Time.deltaTime;
-            if (_blueThreadRecoverTimer >= _blueThreadRecoverInterval)
+            if (countChanged) UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+        }
+
+        // 최대치 기준으로 슬롯 배열을 초기화(모두 Full).
+        private void InitBlueCharges()
+        {
+            int n = Mathf.Max(0, _maxBlueThread);
+            _blueStates = new BlueChargeState[n];
+            _blueFill = new float[n];
+            _blueTimer = new float[n];
+            for (int i = 0; i < n; i++)
             {
-                _blueThreadRecoverTimer -= _blueThreadRecoverInterval;
-                BlueThread = _currentBlueThread + 1;   //프로퍼티에서 최대치 클램프 + UI 갱신
+                _blueStates[i] = BlueChargeState.Full;
+                _blueFill[i] = 1f;
+                _blueTimer[i] = 0f;
             }
+            _activeBlueSlot = -1;
+
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+        }
+
+        // 최대치 변경 시 기존 슬롯 상태를 유지하며 크기만 조정(새 칸은 Full).
+        private void ResizeBlueCharges()
+        {
+            int n = Mathf.Max(0, _maxBlueThread);
+            var st = new BlueChargeState[n];
+            var fl = new float[n];
+            var tm = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                if (_blueStates != null && i < _blueStates.Length)
+                {
+                    st[i] = _blueStates[i]; fl[i] = _blueFill[i]; tm[i] = _blueTimer[i];
+                }
+                else
+                {
+                    st[i] = BlueChargeState.Full; fl[i] = 1f; tm[i] = 0f;
+                }
+            }
+            _blueStates = st; _blueFill = fl; _blueTimer = tm;
+            if (_activeBlueSlot >= n) _activeBlueSlot = -1;
         }
 
         private async UniTaskVoid SetLockThrow()
@@ -372,7 +482,7 @@ namespace Player.Controller
                     break;
                 case ThreadType.Blue:
                     // 잔여 청연이 없으면 던질 수 없다.
-                    if (_currentBlueThread == 0) return;
+                    if (BlueThread == 0) return;
 
                     ThrowThread blueThread = _thread[(int)threadType];
                     bool blueConnected = blueThread != null &&
@@ -460,7 +570,9 @@ namespace Player.Controller
         public void IncreaseMaxBlueThread(int amount)
         {
             _maxBlueThread += amount;
+            ResizeBlueCharges();
             UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
         }
 
         #region 내부 변수 제어

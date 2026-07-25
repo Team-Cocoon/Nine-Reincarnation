@@ -164,9 +164,13 @@ MonoBehaviour:
   _segmentParent: {fileID: 8460445842119921416}
   _refillSpeed: 8
   _drainSpeed: 8
+  _activeColor: {r: 0.054901965, g: 0.08235294, b: 0.54509807, a: 1}
+  _inactiveColor: {r: 0.3529412, g: 0.3647059, b: 0.3529412, a: 1}
+  _colorLerpSpeed: 10
   _iconImage: {fileID: 533848042922234441}
   _activeIcon: {fileID: 7161804087239879833, guid: d531f926fdce2e14bb80ed4b336afc34, type: 3}
   _inactiveIcon: {fileID: 5090756241718273886, guid: 98b2e52e10cb8bd42b032741dc160584, type: 3}
+  _keepIconOnTop: 1
 --- !u!114 &7667193777307564846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +284,8 @@ GameObject:
   - component: {fileID: 7014569838155753918}
   - component: {fileID: 6350008606425641919}
   - component: {fileID: 3261495508315379821}
+  - component: {fileID: 8811717643759408297}
+  - component: {fileID: 1721350435239020940}
   m_Layer: 5
   m_Name: ThreadUIParent
   m_TagString: Untagged
@@ -370,6 +376,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &8811717643759408297
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191264164914546751}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1721350435239020940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191264164914546751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c03d4d5e63be124393ffad4fe831692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hudCanvasGroup: {fileID: 8811717643759408297}
 --- !u!1 &6848614717067594521
 GameObject:
   m_ObjectHideFlags: 0

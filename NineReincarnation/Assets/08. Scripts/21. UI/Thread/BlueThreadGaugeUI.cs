@@ -27,10 +27,19 @@ public class BlueThreadGaugeUI : MonoBehaviour
     [Tooltip("사용 시 줄어드는 속도. 낮추면 천천히 줄어듦")]
     [SerializeField] private float _drainSpeed = 8f;
 
+    [Header("--- 칸 색상 (홍연처럼 active/inactive) ---")]
+    [Tooltip("Full / Draining(줄어들 때) 칸 색 — 파랑")]
+    [SerializeField] private Color _activeColor = new Color(0.2f, 0.45f, 1f, 1f);
+    [Tooltip("Recovering(채워지는 중) 칸 색 — 회색. 다 채워지면 다시 activeColor로")]
+    [SerializeField] private Color _inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+    [SerializeField] private float _colorLerpSpeed = 10f;
+
     [Header("--- 좌측 매듭 아이콘 (셰이더 아님) ---")]
     [SerializeField] private Image _iconImage;
     [SerializeField] private Sprite _activeIcon;    // 개수가 남아있을 때(원래 이미지)
     [SerializeField] private Sprite _inactiveIcon;  // 모두 소진(0개) 시 회색 실 이미지
+    [Tooltip("동적 생성된 칸이 아이콘을 덮지 않도록, 칸 생성/제거 시 아이콘을 맨 위(마지막 형제)로 보냄")]
+    [SerializeField] private bool _keepIconOnTop = true;
 
     private readonly List<Image> _segments = new List<Image>();
     private readonly List<float> _displayed = new List<float>();
@@ -50,8 +59,8 @@ public class BlueThreadGaugeUI : MonoBehaviour
         PlayerController player = Player;
         if (player == null) return;
 
-        EnsureSegmentCount(Mathf.Max(0, player.MaxBlueThread));
-        UpdateSegments(player.BlueThread, player.BlueRecoverProgress01);
+        EnsureSegmentCount(player.BlueSlotCount);
+        UpdateSegments(player);
         UpdateIcon(player.BlueThread);
     }
 
@@ -70,6 +79,8 @@ public class BlueThreadGaugeUI : MonoBehaviour
 
         if (_segmentPrefab == null || _segmentParent == null) return;
 
+        bool changed = false;
+
         // 부족하면 복제 생성
         while (_segments.Count < max)
         {
@@ -78,6 +89,7 @@ public class BlueThreadGaugeUI : MonoBehaviour
             seg.fillAmount = 0f;
             _segments.Add(seg);
             _displayed.Add(0f);
+            changed = true;
         }
 
         // 남으면 제거
@@ -87,23 +99,36 @@ public class BlueThreadGaugeUI : MonoBehaviour
             if (_segments[last] != null) Destroy(_segments[last].gameObject);
             _segments.RemoveAt(last);
             _displayed.RemoveAt(last);
+            changed = true;
         }
+
+        // 칸이 새로 생기면 아이콘을 맨 위(마지막 형제)로 다시 올려 덮이지 않게 한다.
+        if (changed) BringIconToFront();
     }
 
-    private void UpdateSegments(int count, float recover)
+    private void BringIconToFront()
+    {
+        if (_keepIconOnTop && _iconImage != null)
+            _iconImage.transform.SetAsLastSibling();
+    }
+
+    private void UpdateSegments(PlayerController player)
     {
         for (int i = 0; i < _segments.Count; i++)
         {
             if (_segments[i] == null) continue;
 
-            float target;
-            if (i < count) target = 1f;            // 채워진 칸
-            else if (i == count) target = recover; // 회복 중인 칸(부분 채움)
-            else target = 0f;                      // 빈 칸
+            // 칸별 채움값은 게임 로직(PlayerController 슬롯 상태)에서 계산된 값을 그대로 사용
+            float target = player.GetBlueSlotFill(i);
 
             float speed = (target >= _displayed[i]) ? _refillSpeed : _drainSpeed;
             _displayed[i] = Mathf.MoveTowards(_displayed[i], target, speed * Time.deltaTime);
             _segments[i].fillAmount = _displayed[i];
+
+            // 색상: Recovering(채워지는 중)만 회색, Full/Draining은 파랑. 다 채워지면 다시 파랑.
+            Color targetColor = player.IsBlueSlotActive(i) ? _activeColor : _inactiveColor;
+            _segments[i].color = Color.Lerp(_segments[i].color, targetColor,
+                Mathf.Clamp01(_colorLerpSpeed * Time.deltaTime));
         }
     }
 

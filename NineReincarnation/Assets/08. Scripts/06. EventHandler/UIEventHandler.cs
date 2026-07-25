@@ -27,4 +27,14 @@ public static class UIEventHandler
     public static event System.Action OnRedThreadDisconnected;
     public static void OnRedThreadDisconnected_Invoke()
         => OnRedThreadDisconnected?.Invoke();
+
+    // ===== 스토리 진행 =====
+    // true = 스토리(다이얼로그) 진행 중 → HUD 숨김, false = 종료 → HUD 표시
+    public static bool IsStoryPlaying { get; private set; }
+    public static event System.Action<bool> OnStoryPlayingChanged;
+    public static void OnStoryPlayingChanged_Invoke(bool playing)
+    {
+        IsStoryPlaying = playing;
+        OnStoryPlayingChanged?.Invoke(playing);
+    }
 }

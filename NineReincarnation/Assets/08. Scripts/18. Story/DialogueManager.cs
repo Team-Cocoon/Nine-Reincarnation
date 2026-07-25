@@ -92,6 +92,9 @@ namespace DialogueSpace
         {
             _id = id;
 
+            // 스토리 시작 → HUD(실 UI) 숨김
+            UIEventHandler.OnStoryPlayingChanged_Invoke(true);
+
             bool isNext = true;
 
             if (_anna.gameObject.activeSelf)
@@ -132,6 +135,9 @@ namespace DialogueSpace
 
                     OnDialogueEnd?.Invoke();
                     OnDialogueEnd.RemoveAllListeners();
+
+                    // 스토리 종료 → HUD(실 UI) 다시 표시
+                    UIEventHandler.OnStoryPlayingChanged_Invoke(false);
 
                     return false;
                 }
