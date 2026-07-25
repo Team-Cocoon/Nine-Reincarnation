@@ -38,6 +38,8 @@ public abstract class ThrowThread : Thread, IThreadThrower
     [Header("빗맞았을 때 연출")]
     [SerializeField] private float _fallSpeed = 10f;
 
+    [SerializeField] private string[] _interactionLayerNames = { "Interaction" };
+
     protected PlayerController _player;
     protected ThrowThreadState _state;
     
@@ -125,7 +127,7 @@ public abstract class ThrowThread : Thread, IThreadThrower
         float dist = Vector3.Distance(_startTransform.position, position);
         if (dist > limitDistance) return false;
 
-        Collider2D hit = Physics2D.OverlapPoint(position, LayerMask.GetMask("Interaction"));
+        Collider2D hit = Physics2D.OverlapPoint(position, LayerMask.GetMask(_interactionLayerNames));
         if (hit == null) return false;
 
         var threadTarget = hit.GetComponent<IThreadInteractable>();
@@ -337,7 +339,7 @@ public abstract class ThrowThread : Thread, IThreadThrower
         _lineRenderer.enabled = true;
         _state = ThrowThreadState.Throwing;
         
-        Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask("Interaction"));
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask(_interactionLayerNames));
         float dist = Vector3.Distance(_startTransform.position, mousePos);
 
         if (hit != null && dist <= limitDistance)

@@ -200,6 +200,14 @@ namespace Player.Controller
                 UIEventHandler.OnBlueThreadCountChanged_Invoke(_currentBlueThread);
             }
         }
+
+        // 청연 UI 게이지용: 최대치 및 '다음 1개 회복'까지의 진행도(0~1).
+        // 최대치이거나 회복이 필요 없으면 0을 반환한다.
+        public int MaxBlueThread => _maxBlueThread;
+        public float BlueRecoverProgress01 =>
+            (_currentBlueThread >= _maxBlueThread)
+                ? 0f
+                : Mathf.Clamp01(_blueThreadRecoverTimer / _blueThreadRecoverInterval);
         public int ActivePhasingCount => _activePhasingCount;
         public float EnvironmentGravityScale
         {

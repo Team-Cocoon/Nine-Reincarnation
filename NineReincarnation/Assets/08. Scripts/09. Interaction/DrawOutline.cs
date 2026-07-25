@@ -56,7 +56,7 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
     protected virtual void Awake()
     {
         _render = GetComponent<Renderer>();
-        _tex = GetComponent<SpriteRenderer>().sprite.texture;
+        //_tex = GetComponent<SpriteRenderer>()?.sprite?.texture;
         _propBlock = new MaterialPropertyBlock();
 
         //SetTexelSize();
