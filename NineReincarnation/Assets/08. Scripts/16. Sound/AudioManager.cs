@@ -218,7 +218,7 @@ public class AudioManager : MonoBehaviour
         AudioSource source = _loopingSfxPlayers[0];
         if (source == null) return;
 
-        AudioClip targetClip = source.clip;
+        AudioClip targetClip = LoopingSfxClips[(int)sfx];
 
         for (int index = 0; index < _loopingSfxPlayers.Length; index++)
         {
@@ -230,6 +230,29 @@ public class AudioManager : MonoBehaviour
             {
                 player.Stop();
                 break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Stops every non-BGM sound currently owned by this manager.
+    /// Used before scene transitions so scene-specific sounds do not carry over.
+    /// </summary>
+    public void StopAllSfx()
+    {
+        if (_sfxPlayers != null)
+        {
+            foreach (AudioSource player in _sfxPlayers)
+            {
+                player?.Stop();
+            }
+        }
+
+        if (_loopingSfxPlayers != null)
+        {
+            foreach (AudioSource player in _loopingSfxPlayers)
+            {
+                player?.Stop();
             }
         }
     }

@@ -80,7 +80,7 @@ public class PhasableObject : DrawOutline, IThreadInteractable, IPhasable
     }
 
     // true면 플레이어가 막히고, false면 통과한다(페이즈 중).
-    private void SetSolid(bool solid)
+    protected virtual void SetSolid(bool solid)
     {
         if (_solidBlocker != null) _solidBlocker.enabled = solid;
     }

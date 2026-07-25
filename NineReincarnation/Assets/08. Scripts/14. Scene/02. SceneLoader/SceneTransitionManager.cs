@@ -28,6 +28,7 @@ public class SceneTransitionManager
 
     public async UniTask TransitionToScenes(List<string> requestedScenes, CancellationToken token = default)
     {
+        AudioManager.Instance?.StopAllSfx();
         await _fadeUI.UIEvent_FadeOut();
 
         _taskRegistry.ClearTasks();

@@ -364,16 +364,10 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 7
   _playerName: Anna
-  _checkPoint: {x: 0, y: -1, z: 0}
-  _groundDetector: {fileID: 196964441453532725}
-  _slopeDetector: {fileID: 8227496466836733011}
+  _checkPoint: {x: 0, y: -0.21, z: 0}
   _spriteRenderer: {fileID: 5546431793339523123}
-  _thread: {fileID: 0}
-  _horizontalRayCount: 4
-  _verticalRayCount: 4
-  _skinWidth: 0.02
-  _maxSlopeAngle: 55
-  _groundSnapDistance: 0.08
+  _thread:
+  - {fileID: 0}
   _oneWayDropDuration: 0.25
   _platformVelocityInheritance: 1
   _isGround: 0
@@ -383,8 +377,8 @@ MonoBehaviour:
   _isJump: 0
   _isThrow: 0
   _isFalling: 0
-  _onGroundDetector: 1
-  _onSlopeDetector: 1
+  _currentBlueThread: 3
+  _maxBlueThread: 3
 --- !u!70 &2153693473223386151
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -438,6 +432,9 @@ MonoBehaviour:
   _verticalRayCount: 4
   _skinWidth: 0.02
   _maxSlopeAngle: 55
+  _collisionLayer:
+    serializedVersion: 2
+    m_Bits: 917889
 --- !u!1 &8884321024790366604
 GameObject:
   m_ObjectHideFlags: 0

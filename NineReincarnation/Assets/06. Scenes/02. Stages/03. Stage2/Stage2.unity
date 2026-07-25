@@ -777,6 +777,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7348291056382149071, guid: 56fe5926af91b0d47bad2fcb8af63b8a, type: 3}
+      propertyPath: _collisionLayer.m_Bits
+      value: 393601
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1331,6 +1335,8 @@ MonoBehaviour:
   limitDistance: 5
   _throwSpeed: 20
   _fallSpeed: 50
+  _interactionLayerNames:
+  - Interaction
 --- !u!1 &1509467253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1694,8 @@ MonoBehaviour:
   limitDistance: 5
   _throwSpeed: 20
   _fallSpeed: 10
+  _interactionLayerNames:
+  - Interaction
   linkedLineObject: {fileID: 2019152378}
   linkedLineRenderer: {fileID: 2019152379}
   _maintainDistance: 7.5

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class AnnaWallHangState : PlayerStateMachineBehaviour
+public class AnnaJumpThrowState : PlayerStateMachineBehaviour
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player.CurrentState = PlayerAnimationState.WallHang;
+        Player.CurrentState = PlayerAnimationState.Jump;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,14 +14,17 @@ public class AnnaWallHangState : PlayerStateMachineBehaviour
             animator.SetTrigger("IsDead");
             Player.IsDead = false;
         }
-        else if (Player.IsThrow)
+        else if (Player.IsGround || Player.IsSlope)
         {
-            animator.SetTrigger("IsThrow");
-            Player.IsThrow = false;
+            animator.SetTrigger("IsIdle");
         }
-        else if (!Player.IsWallHanging)
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (!Player.IsWallHanging)
         {
-            animator.SetTrigger(Player.IsGround ? "IsIdle" : "IsJump");
+            Player.ChangePlayerDirection();
         }
     }
 }
