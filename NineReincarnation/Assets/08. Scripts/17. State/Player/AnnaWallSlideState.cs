@@ -14,6 +14,11 @@ public class AnnaWallSlideState : PlayerStateMachineBehaviour
             animator.SetTrigger("IsDead");
             Player.IsDead = false;
         }
+        else if (Player.IsThrow)
+        {
+            animator.SetTrigger("IsThrow");
+            Player.IsThrow = false;
+        }
         else if (!Player.IsWallHanging)
         {
             animator.SetTrigger(Player.IsGround ? "IsIdle" : "IsJump");
