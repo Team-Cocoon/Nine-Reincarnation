@@ -30,6 +30,7 @@ namespace Player.Controller
         [SerializeField, Min(3)] private int _verticalRayCount = 4;
         [SerializeField, Min(0.001f)] private float _skinWidth = 0.02f;
         [SerializeField, Range(0f, 89f)] private float _maxSlopeAngle = 55f;
+        [SerializeField] private LayerMask _collisionLayer;
 
         private Collider2D _collider;
         private Rigidbody2D _body;
@@ -60,7 +61,7 @@ namespace Player.Controller
             _slopeLayer = LayerMask.NameToLayer("Slope");
             // Several stage boundary walls (including Stage1-1 LeftWall/RightWall)
             // are still on Default, so Default must be part of the solid mask.
-            _collisionMask = LayerMask.GetMask("Default", "Ground", "Obstacle", "Platform", "Slope");
+            _collisionMask = _collisionLayer;
         }
 
         public void Move(Vector2 displacement, bool dropThroughOneWay, bool allowSlopeMovement)
