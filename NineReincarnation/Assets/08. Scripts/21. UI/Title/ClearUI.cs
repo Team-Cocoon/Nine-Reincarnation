@@ -7,11 +7,17 @@ using VContainer;
 
 public class ClearUI : MonoBehaviour
 {
+    [Inject] private FadeUI _fadeUI;
     [Inject] private SceneDataManager _sceneDataManager;
     [Inject] private SceneLoader _sceneLoader;
     [Inject] private SceneTransitionManager _transitionManager;
     [Header("---- Button ----")]
     [SerializeField] private Button _titleButton;
+
+    private void Awake()
+    {
+        _fadeUI.CloseUI();
+    }
 
     private void Start()
     {
