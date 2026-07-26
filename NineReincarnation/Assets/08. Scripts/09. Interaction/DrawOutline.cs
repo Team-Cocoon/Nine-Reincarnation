@@ -9,7 +9,7 @@ public class DrawOutline : MonoBehaviour, IHoverInteractableToggle
     [SerializeField] private float _thickness;
 
     private Texture _tex;
-    private Renderer _render;
+    protected Renderer _render;
     private MaterialPropertyBlock _propBlock;
 
     public bool IsOutline

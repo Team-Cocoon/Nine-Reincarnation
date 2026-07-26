@@ -42,6 +42,7 @@ public class Cat : DrawOutline, IThreadInteractable
         _possibleActive = false;
         _isActivated = false;
         _playerMask = LayerMask.GetMask("Player");
+        _render = _sprite;
     }
 
     private void Update()
