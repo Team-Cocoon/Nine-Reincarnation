@@ -53,7 +53,12 @@ public sealed class StageParallaxManager : MonoBehaviour
     [Tooltip("배경 레이어를 뒤에서 앞으로 등록합니다.")]
     [SerializeField] private List<Layer> layers = new();
 
+    [Header("Extensible Child Layers")]
+    [Tooltip("StageParallaxLayer 컴포넌트가 있는 자식을 자동으로 관리합니다.")]
+    [SerializeField] private bool includeConfiguredChildren = true;
+
     private MaterialPropertyBlock propertyBlock;
+    private StageParallaxLayer[] configuredChildLayers = Array.Empty<StageParallaxLayer>();
     private Vector3 initialCameraPosition;
     private bool initialized;
 
@@ -76,6 +81,14 @@ public sealed class StageParallaxManager : MonoBehaviour
         foreach (Layer layer in layers)
         {
             UpdateLayer(layer, cameraDelta);
+        }
+
+        foreach (StageParallaxLayer layer in configuredChildLayers)
+        {
+            if (layer != null)
+            {
+                layer.UpdateLayer(cameraTarget, initialCameraPosition);
+            }
         }
     }
 
@@ -110,6 +123,16 @@ public sealed class StageParallaxManager : MonoBehaviour
                 layer.initialWorldPosition = layer.renderer.transform.position;
                 layer.initialLocalPosition = layer.renderer.transform.localPosition;
                 layer.isCameraChild = layer.renderer.transform.IsChildOf(cameraTarget);
+            }
+        }
+
+        RefreshConfiguredChildLayers();
+
+        foreach (StageParallaxLayer layer in configuredChildLayers)
+        {
+            if (layer != null)
+            {
+                layer.Initialize(cameraTarget);
             }
         }
 
@@ -199,6 +222,16 @@ public sealed class StageParallaxManager : MonoBehaviour
             propertyBlock.SetFloat(HorizontalOffsetId, layer.horizontalOffset);
             layer.renderer.SetPropertyBlock(propertyBlock);
         }
+
+        RefreshConfiguredChildLayers();
+
+        foreach (StageParallaxLayer layer in configuredChildLayers)
+        {
+            if (layer != null)
+            {
+                layer.ApplyRenderingSettings();
+            }
+        }
     }
 
     private static float GetRepeatWorldWidth(Layer layer)
@@ -236,5 +269,12 @@ public sealed class StageParallaxManager : MonoBehaviour
     private void EnsurePropertyBlock()
     {
         propertyBlock ??= new MaterialPropertyBlock();
+    }
+
+    private void RefreshConfiguredChildLayers()
+    {
+        configuredChildLayers = includeConfiguredChildren
+            ? GetComponentsInChildren<StageParallaxLayer>(true)
+            : Array.Empty<StageParallaxLayer>();
     }
 }

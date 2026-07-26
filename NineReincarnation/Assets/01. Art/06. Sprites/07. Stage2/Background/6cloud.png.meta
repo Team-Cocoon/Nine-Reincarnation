@@ -1,28 +1,43 @@
 fileFormatVersion: 2
-guid: a43dd9f276b2fc14286874988dbdfd62
+guid: 8fb7ee9ca1ae4894dbf9ca82b0a5e977
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5858479730459764560
-    second: 2-2_0
+      213: 7565340869821685042
+    second: 6cloud_0
   - first:
-      213: -4987140279588554387
-    second: 2-2_1
+      213: -6372036278442560629
+    second: 6cloud_1
   - first:
-      213: 6559459344829588956
-    second: 2-2_2
+      213: 8434972987699316675
+    second: 6cloud_2
   - first:
-      213: 6280569992417932232
-    second: 2-2_3
+      213: -1656147717200489125
+    second: 6cloud_3
   - first:
-      213: -6801573035050896166
-    second: 2-2_4
+      213: -1688214675676865868
+    second: 6cloud_4
   - first:
-      213: 1267721990658590182
-    second: 2-2_5
+      213: -9029731014955444810
+    second: 6cloud_5
   - first:
-      213: 2596425531191613149
-    second: 2-2_6
+      213: 1339616245125168763
+    second: 6cloud_6
+  - first:
+      213: 8485131530751340313
+    second: 6cloud_7
+  - first:
+      213: 1760877598699704861
+    second: 6cloud_8
+  - first:
+      213: -240722637876518542
+    second: 6cloud_9
+  - first:
+      213: -3571710725850794630
+    second: 6cloud_10
+  - first:
+      213: 3250472603595795108
+    second: 6cloud_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -59,17 +74,17 @@ TextureImporter:
     aniso: 1
     mipBias: 0
     wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -131,13 +146,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2-2_0
+      name: 6cloud_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 168
-        width: 551
-        height: 232
+        x: 14
+        y: 370
+        width: 375
+        height: 133
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05761e976408d4150800000000000000
-      internalID: 5858479730459764560
+      spriteID: 23d577e207d7df860800000000000000
+      internalID: 7565340869821685042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_1
+      name: 6cloud_1
       rect:
         serializedVersion: 2
-        x: 519
-        y: 210
-        width: 577
-        height: 190
+        x: 492
+        y: 465
+        width: 194
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d69f416b65e1acab0800000000000000
-      internalID: -4987140279588554387
+      spriteID: b837787e3caf197a0800000000000000
+      internalID: -6372036278442560629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_2
+      name: 6cloud_2
       rect:
         serializedVersion: 2
-        x: 598
-        y: 195
-        width: 81
-        height: 30
+        x: 729
+        y: 464
+        width: 10
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd52f274581e70b50800000000000000
-      internalID: 6559459344829588956
+      spriteID: 3c745dded3b0f0570800000000000000
+      internalID: 8434972987699316675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_3
+      name: 6cloud_3
       rect:
         serializedVersion: 2
-        x: 693
-        y: 203
-        width: 7
-        height: 7
+        x: 739
+        y: 461
+        width: 144
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c37c09d121192750800000000000000
-      internalID: 6280569992417932232
+      spriteID: b55d0b40d6e2409e0800000000000000
+      internalID: -1656147717200489125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_4
+      name: 6cloud_4
       rect:
         serializedVersion: 2
-        x: 684
-        y: 200
-        width: 9
-        height: 8
+        x: 467
+        y: 347
+        width: 248
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,20 +249,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad47ae36c55fb91a0800000000000000
-      internalID: -6801573035050896166
+      spriteID: 4baddaf62b14298e0800000000000000
+      internalID: -1688214675676865868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_5
+      name: 6cloud_5
       rect:
         serializedVersion: 2
-        x: 564
-        y: 188
-        width: 11
-        height: 6
+        x: 601
+        y: 422
+        width: 16
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e5082f0f6ad79110800000000000000
-      internalID: 1267721990658590182
+      spriteID: 6b5d044cb73ffa280800000000000000
+      internalID: -9029731014955444810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2-2_6
+      name: 6cloud_6
       rect:
         serializedVersion: 2
-        x: 598
-        y: 182
-        width: 29
-        height: 12
+        x: 421
+        y: 381
+        width: 19
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,8 +293,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd65e60a34b580420800000000000000
-      internalID: 2596425531191613149
+      spriteID: b7e370a90e5479210800000000000000
+      internalID: 1339616245125168763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6cloud_7
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 382
+        width: 23
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f66eacb2e31c570800000000000000
+      internalID: 8485131530751340313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6cloud_8
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 344
+        width: 134
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d125073b8d4ef6810800000000000000
+      internalID: 1760877598699704861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6cloud_9
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 358
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271a9f74908c8acf0800000000000000
+      internalID: -240722637876518542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6cloud_10
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 329
+        width: 168
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a75f531c40cbe6ec0800000000000000
+      internalID: -3571710725850794630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6cloud_11
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 264
+        width: 184
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa67797c9ffb1d20800000000000000
+      internalID: 3250472603595795108
       vertices: []
       indices: 
       edges: []
@@ -298,13 +423,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      2-2_0: 5858479730459764560
-      2-2_1: -4987140279588554387
-      2-2_2: 6559459344829588956
-      2-2_3: 6280569992417932232
-      2-2_4: -6801573035050896166
-      2-2_5: 1267721990658590182
-      2-2_6: 2596425531191613149
+      6cloud_0: 7565340869821685042
+      6cloud_1: -6372036278442560629
+      6cloud_10: -3571710725850794630
+      6cloud_11: 3250472603595795108
+      6cloud_2: 8434972987699316675
+      6cloud_3: -1656147717200489125
+      6cloud_4: -1688214675676865868
+      6cloud_5: -9029731014955444810
+      6cloud_6: 1339616245125168763
+      6cloud_7: 8485131530751340313
+      6cloud_8: 1760877598699704861
+      6cloud_9: -240722637876518542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
