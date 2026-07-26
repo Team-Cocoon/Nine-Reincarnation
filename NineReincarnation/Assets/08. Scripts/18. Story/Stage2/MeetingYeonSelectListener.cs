@@ -1,12 +1,18 @@
+using ExcelData;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class MeetingYeonSelectListener : SelectUIButtonListener
 {
+    [Inject] private DialogueDB _dialogueDB;
+
     [SerializeField] private int _redThreadId = 201017;
+    [SerializeField] private int _redThreadEndID = 201018;
     private bool _isRedThreadClicked = false;
     
     [SerializeField] private int _blueThreadId = 201018;
+    [SerializeField] private int _blueThreadEndID = 201020;
     private bool _isBlueThreadClicked = false;
 
     [SerializeField] private int _nextDialogueID = 201021;
@@ -35,15 +41,15 @@ public class MeetingYeonSelectListener : SelectUIButtonListener
         if (_redThreadId == id)
         {
             _isRedThreadClicked = true;
+            _dialogueDB.GetData<DialogueClass>(_blueThreadEndID).NextID = _nextDialogueID;
         }
 
         else if (_blueThreadId == id)
         {
             _isBlueThreadClicked = true;
+            _dialogueDB.GetData<DialogueClass>(_redThreadEndID).NextID = _nextDialogueID;
         }
 
-        return _isRedThreadClicked == true &&
-            _isBlueThreadClicked == true ?
-            _nextDialogueID : id;
+        return id;
     }
 }
