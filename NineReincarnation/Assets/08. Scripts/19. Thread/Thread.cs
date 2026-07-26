@@ -67,6 +67,7 @@ public abstract class Thread : MonoBehaviour
     protected virtual void Initialize()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        segmentCount = Mathf.Max(segmentCount, 2);
         _segmentPositions = new Vector3[segmentCount];
         segments = new NativeArray<Segment>(segmentCount, Allocator.Persistent);
     }
@@ -78,30 +79,45 @@ public abstract class Thread : MonoBehaviour
     {
         if (!HasValidAnchors() || _lineRenderer == null || !segments.IsCreated) return;
         _currentJobHandle.Complete();
-        if (segments.IsCreated && segmentCount > 0)
-        {
-            Segment start = segments[0];
-            start.position = start.prevPosition = _startTransform.position;
-            segments[0] = start;
 
-            if (_endTransform != null && segmentCount > 1)
-            {
-                Segment end = segments[segmentCount - 1];
-                end.position = end.prevPosition = _endTransform.position;
-                segments[segmentCount - 1] = end;
-            }
+        int activeCount = GetActiveSegmentCount();
+        if (activeCount <= 0)
+        {
+            _lineRenderer.positionCount = 0;
+            return;
         }
+
+        segmentCount = activeCount;
+
+        Segment start = segments[0];
+        start.position = start.prevPosition = _startTransform.position;
+        segments[0] = start;
+
+        if (_endTransform != null && activeCount > 1)
+        {
+            int endIndex = activeCount - 1;
+            Segment end = segments[endIndex];
+            end.position = end.prevPosition = _endTransform.position;
+            segments[endIndex] = end;
+        }
+
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
-        for (int i = 0; i < segmentCount; i++)
+        _lineRenderer.positionCount = activeCount;
+        for (int i = 0; i < activeCount; i++)
         {
             _segmentPositions[i] = segments[i].position;
+            _lineRenderer.SetPosition(i, _segmentPositions[i]);
         }
-        _lineRenderer.positionCount = segmentCount;
-        _lineRenderer.SetPositions(_segmentPositions);
     }
+
     protected void UpdateSegments()
     {
         if (!HasValidAnchors() || !segments.IsCreated) return;
+
+        int activeCount = GetActiveSegmentCount();
+        if (activeCount < 2) return;
+
+        segmentCount = activeCount;
         UpdateSegmentJob updateJob = new UpdateSegmentJob
         {
             gravity = _gravity,
@@ -111,15 +127,23 @@ public abstract class Thread : MonoBehaviour
         ApplyConstraintJob applyJob = new ApplyConstraintJob
         {
             segments = segments,
-            segmentCount = segmentCount,
+            segmentCount = activeCount,
             segmentDist = segmentDist,
             startPosition = _startTransform.position,
             endPosition = _endTransform.position
         };
 
-        JobHandle UpdateSegmentHandle = updateJob.Schedule(segmentCount, 64, _currentJobHandle);
+        JobHandle UpdateSegmentHandle = updateJob.Schedule(activeCount, 64, _currentJobHandle);
         JobHandle ApplyConstraintHandle = applyJob.Schedule(UpdateSegmentHandle);
         _currentJobHandle = ApplyConstraintHandle;
+    }
+
+    protected int GetActiveSegmentCount()
+    {
+        if (!segments.IsCreated || _segmentPositions == null) return 0;
+
+        int capacity = Mathf.Min(segments.Length, _segmentPositions.Length);
+        return Mathf.Clamp(segmentCount, 0, capacity);
     }
 
     private void CreateRope()
@@ -127,7 +151,9 @@ public abstract class Thread : MonoBehaviour
         if (!HasValidAnchors() || !segments.IsCreated) return;
         Vector2 start = _startTransform.position;
         Vector2 end = _endTransform.position;
-        int segmentCount = this.segmentCount;
+        int segmentCount = GetActiveSegmentCount();
+        if (segmentCount < 2) return;
+        this.segmentCount = segmentCount;
 
         float totalLength = segmentDist * (segmentCount - 1);
         Vector2 dir = (end - start).normalized;
@@ -183,15 +209,24 @@ public struct ApplyConstraintJob : IJob
 
     public void Execute()
     {
+        int activeCount = segmentCount;
+        if (activeCount > segments.Length)
+        {
+            activeCount = segments.Length;
+        }
+        if (activeCount <= 0) return;
+
         Segment startSeg = segments[0];
         startSeg.position = startPosition;
         segments[0] = startSeg;
 
-        Segment endSeg = segments[segmentCount - 1];
-        endSeg.position = endPosition;
-        segments[segmentCount - 1] = endSeg;
+        if (activeCount == 1) return;
 
-        for (int i = 0; i < segmentCount - 1; i++)
+        Segment endSeg = segments[activeCount - 1];
+        endSeg.position = endPosition;
+        segments[activeCount - 1] = endSeg;
+
+        for (int i = 0; i < activeCount - 1; i++)
         {
             Segment segA = segments[i];
             Segment segB = segments[i + 1];
@@ -205,7 +240,7 @@ public struct ApplyConstraintJob : IJob
             {
                 segB.position += movement;
             }
-            else if (i == segmentCount - 2)
+            else if (i == activeCount - 2)
             {
                 segA.position -= movement;
             }

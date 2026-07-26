@@ -20,6 +20,8 @@ public class ThrowBlueThread : ThrowThread
 
     protected override void StartDeleting()
     {
+        if (_state == ThrowThreadState.Deleting || _state == ThrowThreadState.Idle) return;
+
         base.StartDeleting();
 
         // 연결 종료 → 사용 중이던 칸을 회복(Recovering) 상태로 전환

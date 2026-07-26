@@ -48,6 +48,8 @@ public class ThrowRedThread : ThrowThread
 
     protected override void StartDeleting()
     {
+        if (_state == ThrowThreadState.Deleting || _state == ThrowThreadState.Idle) return;
+
         base.StartDeleting();
 
         UIEventHandler.OnRedThreadDisconnected_Invoke();

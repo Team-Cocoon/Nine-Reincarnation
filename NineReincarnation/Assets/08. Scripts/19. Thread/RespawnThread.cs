@@ -46,14 +46,24 @@ public class RespawnThread : Thread, ICollidable
     }
     protected override void RenderThread()
     {
+        int activeCount = GetActiveSegmentCount();
+        if (activeCount <= 0 || _lineRenderer == null || _edgeCollider == null) return;
+
+        segmentCount = activeCount;
+        if (_colliderPositions == null || _colliderPositions.Length != activeCount)
+        {
+            _colliderPositions = new Vector2[activeCount];
+        }
+
         _lineRenderer.startWidth = _lineRenderer.endWidth = threadWidth;
-        for (int i = 0; i < segmentCount; i++)
+        _lineRenderer.positionCount = activeCount;
+        for (int i = 0; i < activeCount; i++)
         {
             _segmentPositions[i] = segments[i].position;
             _colliderPositions[i] = transform.InverseTransformPoint(segments[i].position);
+            _lineRenderer.SetPosition(i, _segmentPositions[i]);
         }
-        _lineRenderer.positionCount = _segmentPositions.Length;
-        _lineRenderer.SetPositions(_segmentPositions);
+
         _edgeCollider.edgeRadius = threadWidth * _margin;
         _edgeCollider.points = _colliderPositions;
     }

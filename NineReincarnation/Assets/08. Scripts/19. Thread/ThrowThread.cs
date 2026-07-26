@@ -225,14 +225,12 @@ public abstract class ThrowThread : Thread, IThreadThrower
         {
             if (targetTransform == null)
             {
-                OnDisconnected?.Invoke();
                 StartDeleting();
                 return;
             }
 
             if (IsExpired())
             {
-                OnDisconnected?.Invoke();
                 StartDeleting();
                 return;
             }
@@ -289,17 +287,28 @@ public abstract class ThrowThread : Thread, IThreadThrower
             segments[i] = new Segment(pos);
             _segmentPositions[i] = pos;
         }
-        _lineRenderer.positionCount = segmentCount;
-        _lineRenderer.SetPositions(_segmentPositions);
+        if (_lineRenderer != null)
+        {
+            _lineRenderer.positionCount = segmentCount;
+            for (int i = 0; i < segmentCount; i++)
+            {
+                _lineRenderer.SetPosition(i, _segmentPositions[i]);
+            }
+        }
     }
 
     void NormalizeSegments()
     {
-        if (!segments.IsCreated) return;
+        if (_startTransform == null || !segments.IsCreated) return;
 
-        for (int i = 0; i < maxSegmentCount; i++)
+        int capacity = Mathf.Min(segments.Length, _segmentPositions?.Length ?? 0);
+        if (capacity < 2) return;
+
+        maxSegmentCount = capacity;
+        segmentCount = capacity;
+        for (int i = 0; i < capacity; i++)
         {
-            float t = (float)i / (maxSegmentCount - 1);
+            float t = i / (float)(capacity - 1);
             Vector3 pos = Vector3.Lerp(_startTransform.position, targetPos, t);
             segments[i] = new Segment(pos);
         }
@@ -312,7 +321,8 @@ public abstract class ThrowThread : Thread, IThreadThrower
         float dist = Vector3.Distance(prevNodePos, _endTransform.position);
 
         // 용량(maxSegmentCount)을 넘어서는 인덱스 접근으로 인한 OutOfRange 방지
-        if (dist >= segmentDist && segmentCount < segments.Length)
+        int capacity = Mathf.Min(segments.Length, _segmentPositions?.Length ?? 0);
+        if (dist >= segmentDist && segmentCount >= 0 && segmentCount < capacity)
         {
             segments[segmentCount] = new Segment(_endTransform.position);
             segmentCount++;
@@ -325,10 +335,14 @@ public abstract class ThrowThread : Thread, IThreadThrower
     {
         if (_startTransform == null || _endTransform == null || !segments.IsCreated || segmentCount < 2) return;
 
+        int activeCount = GetActiveSegmentCount();
+        if (activeCount < 2) return;
+
+        segmentCount = activeCount;
         Vector3 start = _startTransform.position;
         Vector3 end = _endTransform.position;
-        int lastIndex = segmentCount - 1;
-        for (int i = 0; i < segmentCount; i++)
+        int lastIndex = activeCount - 1;
+        for (int i = 0; i < activeCount; i++)
         {
             float t = i / (float)lastIndex;
             segments[i] = new Segment(Vector3.Lerp(start, end, t));
@@ -413,6 +427,8 @@ public abstract class ThrowThread : Thread, IThreadThrower
     
     protected virtual void StartDeleting()
     {
+        if (_state == ThrowThreadState.Deleting || _state == ThrowThreadState.Idle) return;
+
         _state = ThrowThreadState.Deleting;
         if (_endTransform != null)
         {
@@ -436,13 +452,18 @@ public abstract class ThrowThread : Thread, IThreadThrower
             float step = Mathf.Min(_throwSpeed * Time.deltaTime, distToTarget);
             _endTransform.position += dir * step;
 
-            if (segmentCount >= maxSegmentCount || distToTarget <= 0.01f)
+            int capacity = Mathf.Min(segments.Length, _segmentPositions?.Length ?? 0);
+            if (capacity < 2) yield break;
+
+            if (segmentCount >= capacity || distToTarget <= 0.01f)
             {
                 if (_endTransform == null || !segments.IsCreated) yield break;
 
                 _endTransform.position = targetPos;
-                segments[maxSegmentCount - 1] = new Segment(_endTransform.position);
-                segmentCount = maxSegmentCount;
+                int endIndex = capacity - 1;
+                segments[endIndex] = new Segment(_endTransform.position);
+                maxSegmentCount = capacity;
+                segmentCount = capacity;
                 NormalizeSegments();
                 onComplete?.Invoke();
                 yield break;
