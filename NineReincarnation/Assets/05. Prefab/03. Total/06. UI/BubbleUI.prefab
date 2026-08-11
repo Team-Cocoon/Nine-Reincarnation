@@ -120,7 +120,7 @@ MonoBehaviour:
   _image: {fileID: 4724945219370633835}
   _scriptText: {fileID: 6943153238927845358}
   _sizer: {fileID: 5572839081630767541}
-  _currentType: 0
+  _currentType: 1
 --- !u!1 &629390387876860831
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150.005, y: -72.634995}
-  m_SizeDelta: {x: 300.01, y: 125.27}
+  m_AnchoredPosition: {x: 150, y: -57.335}
+  m_SizeDelta: {x: 300, y: 94.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2202705324856676980
 CanvasRenderer:
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC548\uB155\uD558\uC138\uC694"
+  m_text: '!!!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
   m_sharedMaterial: {fileID: -691115318593132985, guid: 5b462b245da51284aac28d9c9199e216, type: 2}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 80, y: 40.8, z: 80, w: 51.8}
+  m_margin: {x: 60, y: 30, z: 60, w: 32}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -374,7 +374,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0.000040605664, y: 467.365}
-  m_SizeDelta: {x: 300.01, y: 145.26999}
+  m_SizeDelta: {x: 300, y: 114.67}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5247913581025941350
 CanvasRenderer:
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6754139358389565671, guid: dd970d4d7b3e19141b426ad3eee3b2ac, type: 3}
+  m_Sprite: {fileID: 1288818111651292976, guid: d081bd3480dc7c243be8fc9481cee966, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.2982
+  m_PixelsPerUnitMultiplier: 1.3
 --- !u!114 &5572839081630767541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,8 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minWidthByType:
   - 300
-  - 580
-  - 580
+  - 300
+  - 300
   _maxWidth: 1200
   _minHeight: 125
   _maxHeight: 200
@@ -438,7 +438,7 @@ MonoBehaviour:
   _image: {fileID: 4724945219370633835}
   _minMultiplier: 1.3
   _maxMultiplier: 0.8
-  _type: 0
+  _type: 1
 --- !u!114 &8422251608663109551
 MonoBehaviour:
   m_ObjectHideFlags: 0

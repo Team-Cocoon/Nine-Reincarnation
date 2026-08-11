@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,20 @@ public class BubbleSizer : MonoBehaviour
     [Header("--- Debug Type ---")]
     [SerializeField] private BubbleImageType _type = BubbleImageType.Normal;
 
+    // 태그 빼기
+    private string GetSizeCalculationText(string text)
+    {
+        text = Regex.Replace(text, @"\{[^}]+\}", "");
+
+        text = Regex.Replace(text, @"<bounce[^>]*>", "");
+        text = Regex.Replace(text, @"<shake[^>]*>", "");
+
+        if (Regex.IsMatch(text, @"<size=[^>]+>"))
+            text = text.Replace("</>", "</size>");
+
+        return text;
+    }
+
     private void OnValidate()
     {
         ResizeBubble(tmp.text, (int) _type);
@@ -33,7 +48,7 @@ public class BubbleSizer : MonoBehaviour
     {
         if (_type < 0) _type = 0;
 
-        Vector2 expectedSize = tmp.GetPreferredValues(text); //예상 사이즈 계산
+        Vector2 expectedSize = tmp.GetPreferredValues(GetSizeCalculationText(text)); //예상 사이즈 계산
 
         float finalWidth = Mathf.Max(Mathf.Min(expectedSize.x, _maxWidth), _minWidthByType[type]);
         rt.sizeDelta = new Vector2(finalWidth, rt.sizeDelta.y);
