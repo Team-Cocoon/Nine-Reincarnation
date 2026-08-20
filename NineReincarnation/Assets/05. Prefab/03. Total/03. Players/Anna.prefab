@@ -377,8 +377,9 @@ MonoBehaviour:
   _isJump: 0
   _isThrow: 0
   _isFalling: 0
-  _currentBlueThread: 3
   _maxBlueThread: 3
+  _blueActiveDuration: 5
+  _blueRecoverDuration: 5
 --- !u!70 &2153693473223386151
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -434,7 +435,7 @@ MonoBehaviour:
   _maxSlopeAngle: 55
   _collisionLayer:
     serializedVersion: 2
-    m_Bits: 917889
+    m_Bits: 393601
 --- !u!1 &8884321024790366604
 GameObject:
   m_ObjectHideFlags: 0
