@@ -69,9 +69,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ThrowThread",
+                    "name": "ThrowRedThread",
                     "type": "Button",
                     "id": "b8db8d37-125f-4d17-8601-cd1387cd4c25",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowBlueThread",
+                    "type": "Button",
+                    "id": "85ae65f6-2986-4bc4-9b44-1b7621373fd0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -218,7 +227,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ThrowThread",
+                    "action": "ThrowRedThread",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e17d53c-ae8c-477e-ab36-cfed4ed57311",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowBlueThread",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

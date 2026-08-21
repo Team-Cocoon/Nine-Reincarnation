@@ -1,0 +1,978 @@
+using System;
+using Cysharp.Threading.Tasks;
+using EventHandler;
+using Map.Platform;
+using UnityEngine;
+using VContainer;
+
+public enum PlayerAnimationState
+{
+    Move,
+    Idle,
+    Jump,
+    WallHang,
+    WallSlide,
+    Look,
+    Dead,
+    Throw
+}
+
+public interface IObjectData
+{
+    public float Speed
+    {
+        get;
+        set;
+    }
+}
+
+namespace Player.Controller
+{
+    public enum PlayerDirection
+    {
+        Right = 1,
+        Stop = 0,
+        Left = -1
+    }
+    
+    public class PlayerController : MonoBehaviour, IObjectData
+    {
+        [Header("--- 플레이어 관련 변수 ---")]
+        [SerializeField] private float _defaultGravity;         //상승 중력
+        [SerializeField] private float _defaultDownForce;       //기본 하강시 최대 보정
+        [SerializeField] private float _gliderDownForce;        //글라이딩 하강시 최대 보정
+        [SerializeField] private float _maxDownForce;           //하강시 최대 보정
+        [SerializeField] private float _jumpGravity;            //상승 중력
+        [SerializeField] private float _lighterGravity;         //가벼워 질때 중력
+        [SerializeField] private float _downGravity;            //떨어질때 중력
+        [SerializeField] private float _speed;                  //플레이어 속도
+        [SerializeField] private float _jumpForce;              //점프 힘
+        [SerializeField] private string _playerName;             //플레이어 식별 변수
+        [SerializeField] private Vector3 _checkPoint;             //플레이어 리스폰 위치
+        [SerializeField] private SpriteRenderer _spriteRenderer;         //플레이어 이미지
+        [SerializeField] private ThrowThread[] _thread;                 //던질 실
+
+        [SerializeField, Min(0f)] private float _oneWayDropDuration = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float _platformVelocityInheritance = 1f;
+
+        [Header("--- 플레이어 상태 관련 변수 ---")]
+        [SerializeField] private bool _isGround = false; //플레이어가 땅을 밟고 있는가 판별
+        [SerializeField] private bool _isLook = false; //플레이어가 줌을 실행하고 있는가 판별
+        [SerializeField] private bool _isDead = false; //플레이어가 죽었는가 판별
+        [SerializeField] private bool _isSlope = false;
+        [SerializeField] private bool _isJump = false; //트리거 용
+        [SerializeField] private bool _isThrow = false; //트리거 용
+        [SerializeField] private bool _isFalling = false;
+
+        [Header("--- 플레이어 실 관련 변수 ---")]
+        [SerializeField] private int _maxBlueThread = 3;
+        [SerializeField] private float _blueActiveDuration = 5f;    //청연 연결 중 게이지가 줄어드는 시간(초). PhasableObject 페이즈(5s)와 맞출 것
+        [SerializeField] private float _blueRecoverDuration = 5f;   //청연 연결 종료 후 게이지가 다시 차오르는 시간(초)
+
+        // 청연 충전 슬롯: 각 칸이 Full / Draining(연결 중) / Recovering(회복 중) 상태를 가진다.
+        private enum BlueChargeState { Full, Draining, Recovering }
+        private BlueChargeState[] _blueStates;
+        private float[] _blueFill;    //칸별 표시값(0~1)
+        private float[] _blueTimer;   //칸별 상태 경과 시간
+        private int _activeBlueSlot = -1;  //현재 연결 중(Draining)인 칸
+
+        private bool _isRedInteract = false;
+        private bool _isFeatherFastFall;
+        private int _activePhasingCount = 0;
+
+        private int _jumpCount = 0;             //더블 점프 제어
+        private Vector2 _slopeDir = Vector2.right; //경사면 이동을 위한 벡터
+        private PlayerDirection _direction;                 //플레이어 방향
+        private Animator _animator;
+        private Rigidbody2D _rb2d;
+        private Collider2D _collider;
+        private OneWayPlatform _oneWayPlatform;
+        private PlayerAnimationState _currentState;
+        private bool _lockThrow = true;
+        private ThreadType _pendingThreadType;
+        private bool _hasPendingThrow;
+        private float _groundThrowMoveLockUntil;
+
+        // 클릭 순간의 마우스 위치를 저장할 변수
+        private Vector2 _cachedThrowPosition; 
+
+        private float accelerationTimeAirborne = 0.05f;
+        private float accelerationTimeGrounded = 0.05f;
+        private float velocityXSmoothing;
+        
+        private Vector2 _velocity;
+        private PlatformerRaycastMotor2D _motor;
+        private Collider2D _groundCollider;
+        private Transform _groundPlatform;
+        private Vector2 _groundPlatformPosition;
+        private Vector2 _groundPlatformVelocity;
+        private float _ignoreOneWayUntil;
+        private float _environmentGravityScale;
+        private float _environmentDamping;
+
+        // Wall movement values are intentionally constants: they match the design
+        // sheet and do not add more per-prefab tuning variables.
+        private const float WallHangDelay = 0.5f;
+        private const float WallSlideAccelerationTime = 0.3f;
+        private const float WallSlideHoldEnd = 2.5f;
+        private const float WallSlideStopEnd = 3f;
+        private const float WallSlideSpeed = 2f;
+        private const float WallJumpCoyoteTime = 0.1f;
+        private const float WallJumpBufferTime = 0.1f;
+        private const float WallJumpInputLockTime = 0.2f;
+        private const float VerticalWallJumpAwaySpeed = 0.1f;
+
+        private bool _isWallHanging;
+        private bool _isWallSliding;
+        private int _wallDirection;
+        private Collider2D _wallCollider;
+        private Collider2D _verticalJumpWallCollider;
+        private int _sameWallVerticalJumpCount;
+        private float _wallHangStartedAt;
+        private float _wallCoyoteUntil;
+        private float _wallJumpBufferedUntil;
+        private float _wallInputIgnoreUntil;
+        private int _ignoredWallDirection;
+
+        #region 프로퍼티 영역
+        public int JumpCount => _jumpCount;
+        public Rigidbody2D Rb2d => _rb2d;
+        public bool IsLook
+        {
+            get => _isLook;
+            set => _isLook = value;
+        }
+        public PlayerDirection Direction
+        {
+            get => _direction;
+            set => _direction = value;
+        }
+        public bool IsGround
+        {
+            get => _isGround;
+            set => _isGround = value;
+        }
+        public string PlayerName
+        {
+            get => _playerName;
+            set => _playerName = value;
+        }
+        public float Speed
+        {
+            get => _speed;
+            set => _speed = value;
+        }
+
+        public Vector3 CheckPoint
+        {
+            get => _checkPoint;
+            set => _checkPoint = value;
+        }
+        public bool IsSlope
+        {
+            get => _isSlope;
+            set => _isSlope = value;
+        }
+        public bool IsJump
+        {
+            get => _isJump;
+            set => _isJump = value;
+        }
+        public bool IsDead
+        {
+            get => _isDead;
+            set => _isDead = value;
+        }
+        public bool IsThrow
+        {
+            get => _isThrow;
+            set => _isThrow = value;
+        }
+        public bool IsFeatherConnected => _isRedInteract;
+        public Vector2 SlopeDir
+        {
+            get => _slopeDir;
+            set => _slopeDir = value;
+        }
+        public PlayerAnimationState CurrentState
+        {
+            get => _currentState;
+            set => _currentState = value;
+        }
+        // 사용 가능한(가득 찬) 청연 개수
+        public int BlueThread
+        {
+            get
+            {
+                if (_blueStates == null) return 0;
+                int c = 0;
+                for (int i = 0; i < _blueStates.Length; i++)
+                    if (_blueStates[i] == BlueChargeState.Full) c++;
+                return c;
+            }
+        }
+
+        // 청연 UI 게이지용
+        public int MaxBlueThread => _maxBlueThread;
+        public int BlueSlotCount => (_blueStates != null) ? _blueStates.Length : 0;
+        public float GetBlueSlotFill(int index) =>
+            (_blueFill != null && index >= 0 && index < _blueFill.Length) ? _blueFill[index] : 0f;
+
+        // 칸이 '활성 색(파랑)'으로 보여야 하는지 여부. 회복 중(Recovering)만 회색이고, Full/Draining은 활성 색.
+        public bool IsBlueSlotActive(int index)
+        {
+            if (_blueStates == null || index < 0 || index >= _blueStates.Length) return true;
+            return _blueStates[index] != BlueChargeState.Recovering;
+        }
+
+        // 청연 사용(연결) 시 호출: 가득 찬 칸 하나를 Draining으로 전환한다.
+        // 회복 중인 칸은 건드리지 않는다. 오른쪽(높은 인덱스) 칸부터 사용한다. 성공하면 true.
+        public bool TryUseBlueCharge()
+        {
+            if (_blueStates == null) return false;
+            for (int i = _blueStates.Length - 1; i >= 0; i--)
+            {
+                if (_blueStates[i] == BlueChargeState.Full)
+                {
+                    _blueStates[i] = BlueChargeState.Draining;
+                    _blueTimer[i] = 0f;
+                    _blueFill[i] = 1f;
+                    _activeBlueSlot = i;
+                    UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // 청연 연결이 끝났을 때 호출: 연결 중이던 칸을 완전히 비운 뒤 Recovering으로 전환한다.
+        public void OnBlueConnectionEnded()
+        {
+            if (_blueStates == null) return;
+            if (_activeBlueSlot < 0 || _activeBlueSlot >= _blueStates.Length) return;
+
+            int i = _activeBlueSlot;
+            if (_blueStates[i] == BlueChargeState.Draining)
+            {
+                _blueStates[i] = BlueChargeState.Recovering;
+                _blueTimer[i] = 0f;
+                _blueFill[i] = 0f;   //취소/종료 시 완전히 비운 뒤 회복 시작
+            }
+            _activeBlueSlot = -1;
+        }
+
+        public int ActivePhasingCount => _activePhasingCount;
+        public float EnvironmentGravityScale
+        {
+            get => _environmentGravityScale;
+            set => _environmentGravityScale = Mathf.Max(0f, value);
+        }
+        public bool IsWallHanging => _isWallHanging;
+        public bool IsWallSliding => _isWallSliding;
+        public float EnvironmentDamping
+        {
+            get => _environmentDamping;
+            set => _environmentDamping = Mathf.Max(0f, value);
+        }
+        #endregion
+
+        private void Init()
+        {
+            _isDead = false;
+            _isGround = false;
+            _isSlope = false;
+            _isJump = false;
+            _isFalling = false;
+            _isThrow = false;
+            _groundThrowMoveLockUntil = 0f;
+            ClearWallHang(false);
+            _wallCoyoteUntil = 0f;
+            _wallJumpBufferedUntil = 0f;
+            _wallInputIgnoreUntil = 0f;
+            _sameWallVerticalJumpCount = 0;
+            _verticalJumpWallCollider = null;
+
+            InitBlueCharges();
+
+            _velocity = Vector2.zero;
+            _environmentGravityScale = _defaultGravity;
+            _environmentDamping = 0f;
+            ClearGround();
+
+            InitGravity();
+        }
+
+        private void OnValidate()
+        {
+            _checkPoint = transform.position;
+        }
+
+        public void ResetVelocityY()
+        {
+            _velocity.y = 0.0f;
+        }
+
+        private void Awake()
+        {
+            _rb2d = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
+            _animator = GetComponent<Animator>();
+
+            _motor = GetComponent<PlatformerRaycastMotor2D>();
+            if (_motor == null) _motor = gameObject.AddComponent<PlatformerRaycastMotor2D>();
+            _rb2d.bodyType = RigidbodyType2D.Kinematic;
+            _rb2d.gravityScale = 0f;
+            _rb2d.linearVelocity = Vector2.zero;
+            _rb2d.sharedMaterial = null;
+            _rb2d.freezeRotation = true;
+        }
+
+        private void OnEnable()
+        {
+            SetLockThrow().Forget();
+
+            foreach (PlayerStateMachineBehaviour behaviour in _animator.GetBehaviours<PlayerStateMachineBehaviour>())
+            {
+                behaviour.Player = this;
+            }
+        }
+
+        private void Start()
+        {
+            Respawn();
+        }
+
+        private void OnDisable()
+        {
+            if (!_lockThrow) _lockThrow = true;
+            _groundThrowMoveLockUntil = 0f;
+            ClearWallHang(false);
+
+            ReleaseThreads();
+
+            AudioManager.Instance.StopLoopingSfx(AudioManager.LoopSfx.Walk);
+        }
+
+        private void Update()
+        {
+            UpdateBlueCharges();
+        }
+
+        // 청연 충전 슬롯 갱신:
+        //  - Draining: 연결 시간(_blueActiveDuration) 동안 게이지가 1→0으로 줄어든다.
+        //  - Recovering: 회복 시간(_blueRecoverDuration) 동안 0→1로 차오른 뒤 Full로 복귀(개수 +1).
+        private void UpdateBlueCharges()
+        {
+            if (_isDead || _blueStates == null) return;
+
+            bool countChanged = false;
+            for (int i = 0; i < _blueStates.Length; i++)
+            {
+                switch (_blueStates[i])
+                {
+                    case BlueChargeState.Draining:
+                        _blueTimer[i] += Time.deltaTime;
+                        _blueFill[i] = 1f - Mathf.Clamp01(_blueTimer[i] / Mathf.Max(0.01f, _blueActiveDuration));
+                        break;
+
+                    case BlueChargeState.Recovering:
+                        _blueTimer[i] += Time.deltaTime;
+                        _blueFill[i] = Mathf.Clamp01(_blueTimer[i] / Mathf.Max(0.01f, _blueRecoverDuration));
+                        if (_blueTimer[i] >= _blueRecoverDuration)
+                        {
+                            _blueStates[i] = BlueChargeState.Full;
+                            _blueFill[i] = 1f;
+                            countChanged = true;
+                        }
+                        break;
+
+                    case BlueChargeState.Full:
+                        _blueFill[i] = 1f;
+                        break;
+                }
+            }
+
+            if (countChanged) UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+        }
+
+        // 최대치 기준으로 슬롯 배열을 초기화(모두 Full).
+        private void InitBlueCharges()
+        {
+            int n = Mathf.Max(0, _maxBlueThread);
+            _blueStates = new BlueChargeState[n];
+            _blueFill = new float[n];
+            _blueTimer = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                _blueStates[i] = BlueChargeState.Full;
+                _blueFill[i] = 1f;
+                _blueTimer[i] = 0f;
+            }
+            _activeBlueSlot = -1;
+
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+        }
+
+        // 최대치 변경 시 기존 슬롯 상태를 유지하며 크기만 조정(새 칸은 Full).
+        private void ResizeBlueCharges()
+        {
+            int n = Mathf.Max(0, _maxBlueThread);
+            var st = new BlueChargeState[n];
+            var fl = new float[n];
+            var tm = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                if (_blueStates != null && i < _blueStates.Length)
+                {
+                    st[i] = _blueStates[i]; fl[i] = _blueFill[i]; tm[i] = _blueTimer[i];
+                }
+                else
+                {
+                    st[i] = BlueChargeState.Full; fl[i] = 1f; tm[i] = 0f;
+                }
+            }
+            _blueStates = st; _blueFill = fl; _blueTimer = tm;
+            if (_activeBlueSlot >= n) _activeBlueSlot = -1;
+        }
+
+        private async UniTaskVoid SetLockThrow()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: this.GetCancellationTokenOnDestroy());
+
+            if (this == null || !this.isActiveAndEnabled) return;
+            _lockThrow = false;
+        }
+
+        private void FixedUpdate()
+        {
+            SimulateMotor(Time.fixedDeltaTime);
+        }
+
+        private void PrepareThrowMotion(Vector2 mousePosition, ThreadType threadType)
+        {
+            if (_lockThrow) return;
+
+            // 홍연과 청연은 서로 다른 종류이므로 동시에 연결(공존)될 수 있다.
+            // 따라서 다른 색 실을 강제로 끊지 않는다. 같은 종류의 전환은 ThrowThread.ClickEvent에서 처리한다.
+
+            _pendingThreadType = threadType;
+            _cachedThrowPosition = mousePosition; 
+
+            switch (threadType)
+            {
+                case ThreadType.Red:
+                    if (_isRedInteract)
+                    {
+                        _thread[(int)threadType]?.ClickEvent(_cachedThrowPosition);
+                    }
+                    else
+                    {
+                        // 점프 중에도 던지기가 가능하도록 조건 추가
+                    if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move ||
+                        _currentState == PlayerAnimationState.Jump || _currentState == PlayerAnimationState.WallHang ||
+                        _currentState == PlayerAnimationState.WallSlide)
+                        {
+                            UpdateThrowFacing(mousePosition);
+
+                            IsThrow = true;
+                            QueueAndExecuteThrow();
+                        }
+                    }
+                    break;
+                case ThreadType.Blue:
+                    // 잔여 청연이 없으면 던질 수 없다.
+                    if (BlueThread == 0) return;
+
+                    ThrowThread blueThread = _thread[(int)threadType];
+                    bool blueConnected = blueThread != null &&
+                        (blueThread.CurrentState == ThrowThreadState.Exist || blueThread.CurrentState == ThrowThreadState.Throwing);
+
+                    // 청연이 연결되어 있지 않은 상태에서 이미 다른 페이즈가 진행 중이면 새로 던질 수 없다.
+                    // (연결 중이라면 '다른 오브젝트로 전환'이 가능해야 하므로 이 제한을 건너뛴다.)
+                    if (!blueConnected && _activePhasingCount > 0) return;
+
+                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f, LayerMask.GetMask("Interaction"));
+                    if (hit.collider != null)
+                    {
+                        var phasable = hit.collider.GetComponent<IPhasable>();
+                        // 이미 연결(활성화)된 오브젝트를 다시 클릭한 경우는 무시한다.
+                        if (phasable != null && phasable.IsConnected)
+                        {
+                            return;
+                        }
+                    }
+
+                    // 점프 중에도 던지기가 가능하도록 조건 추가
+                        if (_currentState == PlayerAnimationState.Idle || _currentState == PlayerAnimationState.Move ||
+                            _currentState == PlayerAnimationState.Jump || _currentState == PlayerAnimationState.WallHang ||
+                            _currentState == PlayerAnimationState.WallSlide)
+                    {
+                        UpdateThrowFacing(mousePosition);
+
+                        IsThrow = true;
+                        QueueAndExecuteThrow();
+                    }
+                    break;
+            }
+        }
+
+        private void UpdateThrowFacing(Vector2 mousePosition)
+        {
+            if (_currentState == PlayerAnimationState.WallHang ||
+                _currentState == PlayerAnimationState.WallSlide)
+            {
+                return;
+            }
+
+            Vector2 playerToMouse = (mousePosition - (Vector2)transform.position).normalized;
+            float dot = Vector3.Dot(transform.right, playerToMouse);
+            _spriteRenderer.flipX = dot <= float.Epsilon;
+        }
+        
+        public void AddActivePhasing() => _activePhasingCount++;
+        public void RemoveActivePhasing() => _activePhasingCount = Mathf.Max(0, _activePhasingCount - 1);
+        public void ExcuteRedThrowMotion(Vector2 mousePosition) => PrepareThrowMotion(mousePosition, ThreadType.Red);
+        public void ExcuteBlueThrowMotion(Vector2 mousePosition) => PrepareThrowMotion(mousePosition, ThreadType.Blue);
+
+        public void ExcuteThrowThread()
+        {
+            if (!_hasPendingThrow) return;
+            _hasPendingThrow = false;
+            _thread[(int)_pendingThreadType]?.ClickEvent(_cachedThrowPosition);
+        }
+
+        private void QueueAndExecuteThrow()
+        {
+            // Throwing must not depend on an animation event: a double-jump can
+            // re-enter the Jump state and consume the transition before that event.
+            _animator.ResetTrigger("IsJump");
+            _animator.SetTrigger("IsThrow");
+            _isThrow = false;
+
+            if (_currentState != PlayerAnimationState.Jump && _isGround)
+            {
+                _groundThrowMoveLockUntil = Time.time + 0.8f;
+                _velocity.x = 0f;
+                velocityXSmoothing = 0f;
+            }
+
+            _hasPendingThrow = true;
+            ExcuteThrowThread();
+        }
+
+        public void EndThrowMovementLock()
+        {
+            _groundThrowMoveLockUntil = 0f;
+            ChangePlayerDirection();
+        }
+
+        public void IncreaseMaxBlueThread(int amount)
+        {
+            _maxBlueThread += amount;
+            ResizeBlueCharges();
+            UIEventHandler.OnMaxBlueThreadChanged_Invoke(_maxBlueThread);
+            UIEventHandler.OnBlueThreadCountChanged_Invoke(BlueThread);
+        }
+
+        #region 내부 변수 제어
+        public void ResetJumpCount() { _jumpCount = 0; }
+        public Transform GetTransform() { return transform; }
+        public void BecomeLighter() { _isRedInteract = true; _isFeatherFastFall = false; _jumpGravity = _lighterGravity; _downGravity = _lighterGravity; _maxDownForce = _gliderDownForce; }
+        public void InitGravity() { _isRedInteract = false; _isFeatherFastFall = false; _jumpGravity = _defaultGravity; _downGravity = _defaultGravity; _maxDownForce = _defaultDownForce; }
+        public void SetFeatherFastFall(bool isPressed) { _isFeatherFastFall = isPressed && _isRedInteract; }
+        public void SetCheckPoint(Vector3 position) { _checkPoint = position; }
+        public void SetStop() { _direction = PlayerDirection.Stop; _velocity.x = 0.0f; }
+        public void SetContactPlatform(OneWayPlatform platform = null) { _oneWayPlatform = platform; }
+        #endregion
+
+        #region 움직임 관련 부분
+        public void IdleEnter() { }
+        public void IdleExit() { }
+        public void UpdateGroundDetector(bool isActive)
+        {
+        }
+        public void UpdateSlopeDetector(bool isActive)
+        {
+        }
+        private void Move()
+        {
+            if (_currentState == PlayerAnimationState.Dead) return;
+            if (Time.time < _groundThrowMoveLockUntil)
+            {
+                _velocity.x = 0f;
+                velocityXSmoothing = 0f;
+                return;
+            }
+
+            if (_isWallHanging)
+            {
+                _velocity.x = 0f;
+                velocityXSmoothing = 0f;
+                return;
+            }
+
+            int moveDirection = (int)_direction;
+            if (Time.time < _wallInputIgnoreUntil && moveDirection == _ignoredWallDirection)
+                moveDirection = 0;
+            float targetVelocityX = moveDirection * _speed;
+            _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref velocityXSmoothing,
+                IsGround ? accelerationTimeGrounded : accelerationTimeAirborne);
+        }
+
+        private void SimulateMotor(float deltaTime)
+        {
+            ApplyPlatformMotion(deltaTime);
+            RefreshWallHang();
+            Move();
+
+            if (_isWallHanging)
+            {
+                ApplyWallHangVelocity();
+            }
+            else if (_motor.Collisions.Below && _velocity.y <= 0f)
+            {
+                _velocity.y = -2f;
+            }
+            else
+            {
+                _isFalling = _velocity.y <= 0f;
+                float gravity = (_isFalling ? _downGravity : _jumpGravity) *
+                                (_defaultGravity > 0f ? _environmentGravityScale / _defaultGravity : 1f);
+                bool fastFalling = _isFalling && _isFeatherFastFall;
+                if (fastFalling) gravity *= 4f;
+                _velocity.y += Physics2D.gravity.y * gravity * deltaTime;
+                _velocity.y = Mathf.Max(_velocity.y, _maxDownForce * (fastFalling ? 4f : 1f));
+            }
+
+            if (_environmentDamping > 0f)
+                _velocity /= 1f + _environmentDamping * deltaTime;
+
+            bool allowSlopeMovement = _isGround && _direction != PlayerDirection.Stop && _velocity.y <= 0f;
+            _motor.Move(_velocity * deltaTime, Time.time < _ignoreOneWayUntil, allowSlopeMovement);
+            if (_motor.Collisions.Above || _motor.Collisions.Below) _velocity.y = 0f;
+            if ((_motor.Collisions.Left && _velocity.x < 0f) ||
+                (_motor.Collisions.Right && _velocity.x > 0f))
+            {
+                _velocity.x = 0f;
+                velocityXSmoothing = 0f;
+            }
+
+            _isGround = _motor.Collisions.Below;
+            _isSlope = _motor.Collisions.ClimbingSlope || _motor.Collisions.DescendingSlope;
+            if (_isGround)
+            {
+                ClearWallHang(false);
+                _wallCoyoteUntil = 0f;
+                _isJump = false;
+                _jumpCount = 0;
+                SetGround(_motor.Collisions.GroundCollider);
+            }
+            else
+            {
+                ClearGround();
+            }
+            RefreshWallHang();
+            TryExecuteBufferedWallJump();
+            // PlatformerRaycastMotor2D already applies the complete displacement.
+            // A velocity on a kinematic Rigidbody would move it once more outside
+            // the raycast collision pass and can push the collider into a wall.
+            _rb2d.linearVelocity = Vector2.zero;
+        }
+
+        private void ApplyPlatformMotion(float deltaTime)
+        {
+            _groundPlatformVelocity = Vector2.zero;
+            if (_groundPlatform == null || !IsGround) return;
+
+            Vector2 current = _groundPlatform.position;
+            Vector2 delta = current - _groundPlatformPosition;
+            if (deltaTime > 0f) _groundPlatformVelocity = delta / deltaTime;
+            _rb2d.position += delta;
+            _groundPlatformPosition = current;
+        }
+
+        private static bool IsOneWay(Collider2D collider)
+        {
+            return collider.GetComponentInParent<OneWayPlatform>() != null ||
+                   (collider.usedByEffector && collider.GetComponent<PlatformEffector2D>() != null);
+        }
+
+        private void SetGround(Collider2D collider)
+        {
+            _groundCollider = collider;
+            Transform platform = collider.attachedRigidbody != null ? collider.attachedRigidbody.transform : collider.transform;
+            if (_groundPlatform == platform) return;
+            _groundPlatform = platform;
+            _groundPlatformPosition = platform.position;
+            _oneWayPlatform = collider.GetComponentInParent<OneWayPlatform>();
+            collider.GetComponentInParent<Enemy.Move.EnemyMove>()?.TryStartFromPlayerStep();
+        }
+
+        private void ClearGround()
+        {
+            _groundCollider = null;
+            _groundPlatform = null;
+            _oneWayPlatform = null;
+        }
+
+        private void RefreshWallHang()
+        {
+            if (!HasActiveCatThread())
+            {
+                CancelWallAbility();
+                return;
+            }
+
+            bool canHang = !_isGround && !_isDead && _velocity.y <= 0f;
+            int inputDirection = (int)_direction;
+            Collider2D detectedWall = null;
+            int detectedDirection = 0;
+
+            // Only the direction currently held by the player may start or keep
+            // a hang. The motor verifies both chest and foot rays on that side.
+            if (canHang && inputDirection != 0 && _motor.TryGetVerticalWall(inputDirection, out detectedWall))
+            {
+                detectedDirection = inputDirection;
+            }
+
+            if (detectedDirection != 0)
+            {
+                bool beganHang = !_isWallHanging;
+                _isWallHanging = true;
+                _wallDirection = detectedDirection;
+                _wallCollider = detectedWall;
+                if (beganHang)
+                {
+                    _wallHangStartedAt = Time.time;
+                    _isWallSliding = false;
+                    _jumpCount = 0;
+                    _animator.SetTrigger("IsWallHang");
+                }
+                return;
+            }
+
+            ClearWallHang(true);
+        }
+
+        private void ClearWallHang(bool grantCoyoteTime)
+        {
+            if (!_isWallHanging) return;
+            if (grantCoyoteTime)
+                _wallCoyoteUntil = Time.time + WallJumpCoyoteTime;
+            _isWallHanging = false;
+            _isWallSliding = false;
+        }
+
+        private void ApplyWallHangVelocity()
+        {
+            _velocity.x = 0f;
+            float hangTime = Time.time - _wallHangStartedAt;
+            if (hangTime < WallHangDelay)
+            {
+                _velocity.y = 0f;
+                return;
+            }
+
+            if (!_isWallSliding)
+            {
+                _isWallSliding = true;
+                _animator.SetTrigger("IsWallSlide");
+            }
+
+            float slideTime = hangTime - WallHangDelay;
+            if (slideTime < WallSlideAccelerationTime)
+            {
+                _velocity.y = -Mathf.Lerp(0f, WallSlideSpeed, slideTime / WallSlideAccelerationTime);
+            }
+            else if (slideTime < WallSlideHoldEnd)
+            {
+                _velocity.y = -WallSlideSpeed;
+            }
+            else if (slideTime < WallSlideStopEnd)
+            {
+                float stopT = (slideTime - WallSlideHoldEnd) / (WallSlideStopEnd - WallSlideHoldEnd);
+                _velocity.y = -Mathf.Lerp(WallSlideSpeed, 0f, stopT);
+            }
+            else
+            {
+                _velocity.y = 0f;
+            }
+        }
+
+        private void TryExecuteBufferedWallJump()
+        {
+            if (Time.time > _wallJumpBufferedUntil) return;
+            if (!TryExecuteWallJump()) return;
+            _wallJumpBufferedUntil = 0f;
+        }
+
+        private bool TryExecuteWallJump()
+        {
+            if (!HasActiveCatThread())
+            {
+                CancelWallAbility();
+                return false;
+            }
+
+            bool canUseCurrentWall = _isWallHanging && _wallCollider != null;
+            bool canUseCoyoteWall = !canUseCurrentWall && Time.time <= _wallCoyoteUntil && _wallCollider != null;
+            if (!canUseCurrentWall && !canUseCoyoteWall) return false;
+
+            int jumpWallDirection = _wallDirection;
+            bool verticalJump = (int)_direction == jumpWallDirection;
+            _velocity = Vector2.zero;
+            _isJump = true;
+            _isGround = false;
+            _isSlope = false;
+            ClearGround();
+            ClearWallHang(false);
+            _wallCoyoteUntil = 0f;
+            _wallJumpBufferedUntil = 0f;
+            // A wall jump is the first jump after a wall hold, leaving one
+            // regular aerial jump available instead of consuming both counts.
+            _jumpCount = 1;
+
+            if (verticalJump)
+            {
+                if (_verticalJumpWallCollider != _wallCollider)
+                {
+                    _verticalJumpWallCollider = _wallCollider;
+                    _sameWallVerticalJumpCount = 0;
+                }
+
+                int decaySteps = Mathf.Min(_sameWallVerticalJumpCount, 3);
+                _velocity.x = -jumpWallDirection * VerticalWallJumpAwaySpeed;
+                _velocity.y = _jumpForce * 1.2f * Mathf.Pow(0.9f, decaySteps);
+                _sameWallVerticalJumpCount++;
+                SetFacing(jumpWallDirection);
+            }
+            else
+            {
+                _velocity.x = -jumpWallDirection * _jumpForce;
+                _velocity.y = _jumpForce * 0.8f;
+                _sameWallVerticalJumpCount = 0;
+                _verticalJumpWallCollider = null;
+                _ignoredWallDirection = jumpWallDirection;
+                _wallInputIgnoreUntil = Time.time + WallJumpInputLockTime;
+                SetFacing(-jumpWallDirection);
+            }
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
+            _animator.SetTrigger("IsJump");
+            return true;
+        }
+
+        private bool HasActiveCatThread()
+        {
+            int redThreadIndex = (int)ThreadType.Red;
+            if (_thread == null || redThreadIndex >= _thread.Length) return false;
+
+            ThrowThread redThread = _thread[redThreadIndex];
+            return redThread != null &&
+                   redThread.CurrentState == ThrowThreadState.Exist &&
+                   redThread.targetTransform != null &&
+                   redThread.targetTransform.TryGetComponent<Cat>(out _);
+        }
+
+        private void CancelWallAbility()
+        {
+            ClearWallHang(false);
+            _wallCollider = null;
+            _wallDirection = 0;
+            _wallCoyoteUntil = 0f;
+            _wallJumpBufferedUntil = 0f;
+            _wallInputIgnoreUntil = 0f;
+            _ignoredWallDirection = 0;
+            _sameWallVerticalJumpCount = 0;
+            _verticalJumpWallCollider = null;
+        }
+
+        public void Jump()
+        {
+            if (_currentState == PlayerAnimationState.Dead) return;
+            if (TryExecuteWallJump()) return;
+            if (_jumpCount >= 2)
+            {
+                _wallJumpBufferedUntil = Time.time + WallJumpBufferTime;
+                return;
+            }
+            if (_jumpCount == 0) { _isGround = false; _isSlope = false; }
+            _isJump = true;
+            Vector2 inheritedVelocity = _jumpCount == 0 ? _groundPlatformVelocity * _platformVelocityInheritance : Vector2.zero;
+            _velocity.y = 0.0f;
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Jump);
+            _velocity += inheritedVelocity;
+            _velocity.y += _jumpForce;
+            ClearGround();
+            _jumpCount++;
+        }
+        public void DownJump()
+        {
+            if (_oneWayPlatform == null && (_groundCollider == null || !IsOneWay(_groundCollider))) return;
+            _ignoreOneWayUntil = Time.time + _oneWayDropDuration;
+            _isGround = false;
+            _velocity.y = Mathf.Min(_velocity.y, -1f);
+            ClearGround();
+        }
+        #endregion
+
+        #region 플레이어 상태 제어
+        public void Dead()
+        {
+            ReleaseThreads();
+            if (_currentState == PlayerAnimationState.Dead) return;
+            UpdateGroundDetector(false);
+            UpdateSlopeDetector(false);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.DIe);
+            SetStop();
+            ClearWallHang(false);
+            _wallCoyoteUntil = 0f;
+            _wallJumpBufferedUntil = 0f;
+            _isDead = true;
+        }
+
+        private void ReleaseThreads()
+        {
+            if (_thread == null) return;
+
+            foreach (ThrowThread thread in _thread)
+            {
+                // Unity의 '파괴된 객체'는 C# null이 아니므로 ?. 로는 걸러지지 않는다.
+                // 플레이 종료 시 실이 먼저 파괴된 경우 ResetThread 접근이 예외를 내므로 Unity null 체크로 방어한다.
+                if (thread != null) thread.ResetThread();
+            }
+        }
+
+        public void GameEvent_PlayerDead() { GameEventHandler.OnPlayerDead_Invoke(); }
+        public void Respawn() { Init(); transform.position = _checkPoint; UpdateGroundDetector(true); UpdateSlopeDetector(true); }
+        public void Look() { CameraEventHandler.OnLook_Invoke(_isLook); }
+        public void ChangePlayerDirection()
+        {
+            SetFacing((int)_direction);
+        }
+
+        private void SetFacing(int direction)
+        {
+            switch (direction)
+            {
+                case 1: _spriteRenderer.flipX = false; break;
+                case -1: _spriteRenderer.flipX = true; break;
+            }
+        }
+        #endregion
+
+        #region 충돌 제어
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
+            collidable?.Enter(gameObject);
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
+            collidable?.Exit(gameObject);
+        }
+        #endregion
+    }
+}

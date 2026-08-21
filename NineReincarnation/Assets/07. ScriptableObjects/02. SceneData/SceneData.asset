@@ -12,20 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d2d4110f4076049b41e38c00bd67bf, type: 3}
   m_Name: SceneData
   m_EditorClassIdentifier: 
-  LoadingScene: Assets/06. Scenes/CoreScene/LoadingScene.unity
-  TitleScene: Assets/06. Scenes/CoreScene/TitleScene.unity
-  ClearScene: Assets/06. Scenes/CoreScene/ClearScene.unity
-  StoryScene:
-    CoreScene: Assets/06. Scenes/CoreScene/StoryCoreScene.unity
-    SubSceneGroups:
-    - SubScenePaths:
-      - Assets/06. Scenes/Stories/Story0.unity
+  LoadingScene: Assets/06. Scenes/01. CoreScene/LoadingScene.unity
+  TitleScene: Assets/06. Scenes/01. CoreScene/TitleScene.unity
+  ClearScene: Assets/06. Scenes/01. CoreScene/ClearScene.unity
   StageScene:
-    CoreScene: Assets/06. Scenes/CoreScene/StageCoreScene.unity
+    CoreScene: Assets/06. Scenes/01. CoreScene/StageCoreScene.unity
     SubSceneGroups:
-    - SubScenePaths:
-      - Assets/06. Scenes/Stages/Tutorial/Tutorial.unity
-      - Assets/06. Scenes/Stages/Tutorial/Tutorial-1.unity
-      - Assets/06. Scenes/Stages/Tutorial/Tutorial-2.unity
-      - Assets/06. Scenes/Stages/Tutorial/Tutorial-3.unity
-      - Assets/06. Scenes/Stages/Tutorial/Tutorial-4.unity
+    - SubBootScene: Assets/06. Scenes/02. Stages/00. Story0/Story0.unity
+      SubScenePaths: []
+    - SubBootScene: Assets/06. Scenes/02. Stages/02. Stage1/Stage1.unity
+      SubScenePaths:
+      - Assets/06. Scenes/02. Stages/02. Stage1/Stage1-1.unity
+      - Assets/06. Scenes/02. Stages/02. Stage1/Stage1-2.unity
+    - SubBootScene: Assets/06. Scenes/02. Stages/03. Stage2/Stage2.unity
+      SubScenePaths:
+      - Assets/06. Scenes/02. Stages/03. Stage2/Stage2-1.unity
