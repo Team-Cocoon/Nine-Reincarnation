@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity.Play.Publisher.Editor;
 using UnityEngine;
 using VContainer;
 
@@ -102,6 +103,34 @@ public class StageManager : IDisposable
 
         // 일반 매핑 중에는 예상치 못한 파괴 시 작업이 취소되는 것이 맞으므로 기존 토큰을 유지해도 좋습니다.
         await _sceneTransitionManager.TransitionToScenes(targetScenes, _cts.Token);
+    }
+
+    public async UniTask<bool> GoToMap(int stage, int map)
+    {
+        if(stage < 0 || map < 0 || !_sceneDataManager.HasStage(_currentStageIndex))
+        {
+            Debug.LogError("[StageManager] 맵 이동 불가");
+            return false;
+        }
+
+        if(_currentStageIndex == stage && _currentMapIndex == map)
+        {
+            Debug.Log("[StageManager] 이미 해당 맵임");
+            return true;
+        }
+
+        // 맵 이동
+
+        SetCurrentStageIndex(stage, map);
+
+        List<string> targetScenes = _sceneDataManager.GetTargetScenes(_currentStageIndex, _currentMapIndex);
+
+        Debug.Log($"[StageManager] 다음 스테이지/맵으로 이동 준비 중... 스테이지: {_currentStageIndex}, 맵: {_currentMapIndex}");
+        _saveManager.Save();
+
+        await _sceneTransitionManager.TransitionToScenes(targetScenes, _cts.Token, false);
+
+        return true;
     }
 
     public void Dispose()

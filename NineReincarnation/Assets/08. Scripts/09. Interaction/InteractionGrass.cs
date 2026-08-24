@@ -67,4 +67,9 @@ public class InteractionGrass : MonoBehaviour, IEventInterface
     {
         AudioManager.Instance?.PlaySfx(AudioManager.Sfx.GrassHide);
     }
+
+    public void FinishEvent(int index)
+    {
+        return;
+    }
 }

@@ -26,10 +26,13 @@ public class SceneTransitionManager
         _taskRegistry = taskRegistry;
     }
 
-    public async UniTask TransitionToScenes(List<string> requestedScenes, CancellationToken token = default)
+    public async UniTask TransitionToScenes(List<string> requestedScenes, CancellationToken token = default, bool enableFadeInOut = true)
     {
         AudioManager.Instance?.StopAllSfx();
-        await _fadeUI.UIEvent_FadeOut();
+        if (enableFadeInOut)
+        {
+            await _fadeUI.UIEvent_FadeOut();
+        }
 
         _taskRegistry.ClearTasks();
         
@@ -58,7 +61,10 @@ public class SceneTransitionManager
             }
         }
 
-        await _fadeUI.UIEvent_FadeIn();
+        if(enableFadeInOut)
+        {
+            await _fadeUI.UIEvent_FadeIn();
+        }
     }
 
     private async UniTask ApplySceneChangesAsync(List<string> requestedScenes, CancellationToken token)

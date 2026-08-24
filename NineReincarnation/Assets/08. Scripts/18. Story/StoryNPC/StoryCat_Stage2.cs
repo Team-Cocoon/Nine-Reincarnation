@@ -28,4 +28,18 @@ public class StoryCat_Stage2 : StoryCat
             //await _fadeUI.UIEvent_FadeOut();
         }
     }
+
+    public override void FinishEvent(int index)
+    {
+        if (index == 0)
+        {
+            FinishMoveToTarget();
+        }
+        if (index == 1)
+        {
+            _speed = _runSpeed;
+            _anna.FinishEvent(index);
+            FinishMoveToTarget();
+        }
+    }
 }

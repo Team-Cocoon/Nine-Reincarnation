@@ -46,4 +46,9 @@ public class ChaseGhostUI : MonoBehaviour, IEventInterface, IClickInteractableTo
     {
 
     }
+
+    public void FinishEvent(int index)
+    {
+        return;
+    }
 }

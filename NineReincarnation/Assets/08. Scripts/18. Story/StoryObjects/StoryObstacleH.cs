@@ -21,6 +21,11 @@ public class StoryObstacleH : MonoBehaviour, IEventInterface
         await ExecutePhaseSequence();
     }
 
+    public void FinishEvent(int index)
+    {
+        FinishPhaseSequence();
+    }
+
     private async UniTask ExecutePhaseSequence()
     {
         foreach (var spriteRenderer in _spriteRenderers)
@@ -33,6 +38,23 @@ public class StoryObstacleH : MonoBehaviour, IEventInterface
         }
 
         await UniTask.WhenAll(_spriteRenderFade);
+
+        if (_collider2D != null)
+        {
+            _collider2D.enabled = false;
+        }
+    }
+
+    private void FinishPhaseSequence()
+    {
+        foreach (var spriteRenderer in _spriteRenderers)
+        {
+            if (spriteRenderer == null) continue;
+
+            Color color = spriteRenderer.color;
+            color.a = _targetAlpha;
+            spriteRenderer.color = color;
+        }
 
         if (_collider2D != null)
         {

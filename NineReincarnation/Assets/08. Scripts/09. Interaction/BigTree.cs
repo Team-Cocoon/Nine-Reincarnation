@@ -43,4 +43,21 @@ public class BigTree : DrawOutline, IClickInteractableToggle, IEventInterface
                 return;
         }
     }
+
+    public void FinishEvent(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                _Interaction.IsInteraction = true;
+                break;
+            case 1:
+                break;
+            case 2:
+                _Interaction.IsInteraction = false;
+                break;
+            default:
+                return;
+        }
+    }
 }

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49d16055fe58be47a09d42623096286, type: 3}
+  m_Name: CheatDataSO
+  m_EditorClassIdentifier: 
+  CheatInfoList:
+  - StageNumber: 1
+    MovePointNumber: 1
+    PointIndex: 0
+    SubSceneNumber: 0
+  - StageNumber: 1
+    MovePointNumber: 2
+    PointIndex: 1
+    SubSceneNumber: 0
+  - StageNumber: 1
+    MovePointNumber: 3
+    PointIndex: 2
+    SubSceneNumber: 0
+  - StageNumber: 1
+    MovePointNumber: 4
+    PointIndex: 0
+    SubSceneNumber: 1
+  - StageNumber: 2
+    MovePointNumber: 1
+    PointIndex: 0
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 2
+    PointIndex: 1
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 3
+    PointIndex: 2
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 4
+    PointIndex: 3
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 5
+    PointIndex: 4
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 6
+    PointIndex: 5
+    SubSceneNumber: 0
+  - StageNumber: 2
+    MovePointNumber: 7
+    PointIndex: 6
+    SubSceneNumber: 0

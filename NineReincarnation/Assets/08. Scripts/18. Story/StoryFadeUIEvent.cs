@@ -35,6 +35,20 @@ public class StoryFadeUIEvent : MonoBehaviour, IEventInterface
         return CanvasEvent(_eventList[index]);
     }
 
+    public void FinishEvent(int index)
+    {
+        switch (_eventList[index].EventType)
+        {
+            case EventType.FadeIn:
+                _storyUI.FadeIn();
+                break;
+            case EventType.FadeOut:
+            case EventType.FadeInOut:
+                _storyUI.FadeOut();
+                break;
+        }
+    }
+
     private async UniTask CanvasEvent(FadeCanvasEvent _eventInfo)
     {
         switch (_eventInfo.EventType)
@@ -52,4 +66,5 @@ public class StoryFadeUIEvent : MonoBehaviour, IEventInterface
                 break;
         }
     }
+
 }

@@ -20,6 +20,7 @@ namespace DialogueSpace
         [Inject] private BubbleManager _bubbleManager;
         [Inject] private SelectManager _selectManager;
         [Inject] private PlayerController _anna;
+        [Inject] private CheatManager _cheatManager;
         [SerializeField] private GameObject _npcAnna;
         [SerializeField] private int _id;
         [SerializeField] private EventCamera _camera;
@@ -52,6 +53,9 @@ namespace DialogueSpace
             }
 
             totalTasks = new List<UniTask>(maxSubTaskCount + 1);
+
+            _cheatManager.OnCheat.RemoveAllListeners();
+            _cheatManager.OnCheat.AddListener(StopDialogueOnCheat);
         }
 
         private void OnEnable()
@@ -68,6 +72,17 @@ namespace DialogueSpace
 
         private void Start()
         {
+            if (_cheatManager.IsMapMovedByCheat())
+            {
+                OnDialogueEnd?.Invoke();
+                _anna.gameObject.SetActive(true);
+                _npcAnna.SetActive(false);
+
+                _virtualCameraManager.ResetToNormalCam();
+                _virtualCameraManager.SetPlayer();
+                return;
+            }
+
             DialogueStart();
         }
         
@@ -297,6 +312,139 @@ namespace DialogueSpace
         {
             OnDialogueEnd.RemoveListener(action);
             OnDialogueEnd.AddListener(action);
+        }
+
+        private void StopDialogueOnCheat(CheatInfo info)
+        {
+            StopDialogue();
+        }
+
+        private void FinishAllEvent()
+        {
+            while (true)
+            {
+                DialogueClass dialogue =
+                    _dialogueDB.GetData<DialogueClass>(_id);
+
+                if (dialogue.EventType == ExcelData.EventType.End)
+                    break;
+
+                if (dialogue.IsThisEvent(ExcelData.EventType.Select))
+                {
+                    _nextId = FinishSelectEvent(_id);
+                }
+                else
+                {
+                    _nextId = FinishEvent(_id);
+                }
+
+                _id = _nextId;
+            }
+
+
+            tasks.Clear();
+            for (int i = 0; i < maxSubTaskCount; ++i)
+            {
+                subTasks[i].Clear();
+            }
+            totalTasks.Clear();
+        }
+
+        private int FinishEvent(int id)
+        {
+            DialogueClass dialogue = _dialogueDB.GetData<DialogueClass>(id);
+
+            int nextID = dialogue.NextID;
+
+            if (dialogue.IsThisEvent(ExcelData.EventType.Event))
+            {
+                _storyEventManager.FinishEvent(id);
+            }
+
+            // 선택지, 스크립트 이벤트가 있다면 병렬 처리 안함(선택지는 id 꼬일 수 있음, 스크립트는 동시 출력 불가)
+            if (dialogue.IsThisEvent(ExcelData.EventType.Select) == false &&
+                dialogue.IsThisEvent(ExcelData.EventType.Script) == false &&
+                dialogue.IsThisEvent(ExcelData.EventType.Event) == false)
+            {
+                // 병렬 다이얼로그 스킵
+                int curSubTaskIndex = 0; int subID = nextID;
+                DialogueClass nextDialogue = _dialogueDB.GetData<DialogueClass>(subID);
+                while (curSubTaskIndex < maxSubTaskCount && nextDialogue.IsThisEvent(ExcelData.EventType.Parallel))
+                {
+                    subID = nextID; nextID = nextDialogue.NextID;
+                    // 다음 다이얼로그 처리
+                    nextDialogue = _dialogueDB.GetData<DialogueClass>(nextID);
+                    ++curSubTaskIndex;
+                }
+            }
+
+            return nextID;
+        }
+
+        private int FinishSelectEvent(int id)
+        {
+            SelectClass data = _dialogueDB.GetData<SelectClass>(id);
+
+            int size = data.ChoiceCount;
+
+            SelectDataStruct[] selectDataStructs = new SelectDataStruct[size];
+
+            for (int i = 1; i <= size; ++i)
+            {
+                int sid = id * 10 + i;
+                string script = _dialogueDB.GetData<ScriptClass>(sid).Script;
+                int nextId = _dialogueDB.GetData<DialogueClass>(sid).NextID;
+                selectDataStructs[i - 1].SetSelectDataStruct(sid, nextId, script);
+            }
+
+            int nextID = 0, preID = 0;
+            // 임시: 일단 원래 select id로 돌아오면 끝났다고 판별 (문제 생기면 그때 수정..)
+            foreach (var s in selectDataStructs)
+            {
+                nextID = s.NextId; preID = nextID - 1;
+                while (nextID == preID + 1 && nextID != id)
+                {
+                    preID = nextID;
+                    nextID = FinishEvent(nextID);
+                }
+            }
+
+            if(nextID == id)
+            {
+                nextID = preID + 1;
+            }
+
+            return nextID;
+        }
+
+        public void StopDialogue()
+        {
+            _camera.CancelShake().Forget();
+            _bubbleManager.CloseBubble();
+            _dialogueUI.CloseUI();
+
+            FinishAllEvent();
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+
+            _cts = new CancellationTokenSource();
+
+            _camera.ZoomDefault().Forget();
+            if (_enableLetterboxd)
+                _storyCanvas.Hide();
+
+            _npcAnna.SetActive(false);
+            _anna.gameObject.SetActive(true);
+
+            _virtualCameraManager.ResetToNormalCam();
+            _virtualCameraManager.SetPlayer();
+
+            OnDialogueEnd?.Invoke();
+            OnDialogueEnd.RemoveAllListeners();
+
+            // 스토리 종료 → HUD(실 UI) 다시 표시
+            UIEventHandler.OnStoryPlayingChanged_Invoke(false);
         }
     }
 }

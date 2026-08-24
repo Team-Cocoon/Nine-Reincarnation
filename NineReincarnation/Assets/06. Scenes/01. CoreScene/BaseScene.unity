@@ -1679,6 +1679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 135068791215260567, guid: 9722a1d126f78444d89924ee94c5bbec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1484949159976619063, guid: 9722a1d126f78444d89924ee94c5bbec, type: 3}
       propertyPath: m_Pivot.x
       value: 0

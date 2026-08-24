@@ -59,7 +59,23 @@ public abstract class StoryCat : StoryNPC, IEventInterface
         _rb2d.linearVelocityX = 0.0f;
     }
 
+    protected virtual void FinishMoveToTarget(bool isPlayIdleAfter = true)
+    {
+        if (_wayPoints.Count == 0) return;
 
+        Transform targetTransform = _wayPointQueue.Dequeue();
+
+        float sign = Mathf.Sign(targetTransform.position.x - transform.position.x);
+
+        if (sign >= float.Epsilon) Flip(PlayerDirection.Right);
+        else Flip(PlayerDirection.Left);
+
+        if (isPlayIdleAfter)
+            NpcAnimator.SetTrigger("isIdle");
+
+        _rb2d.linearVelocityX = 0.0f;
+        _rb2d.position = targetTransform.position;
+    }
     protected void Move(float direction)
     {
         _rb2d.linearVelocityX = direction * _speed;
@@ -113,6 +129,18 @@ public abstract class StoryCat : StoryNPC, IEventInterface
         }
     }
 
+    protected virtual void FinishRunAndDisapper(bool teleportToNextWayPoint = false)
+    {
+        FinishMoveToTarget();
+        if (teleportToNextWayPoint)
+        {
+            Transform tp = _wayPointQueue.Dequeue();
+            Debug.Log(tp.name);
+            _rb2d.position = tp.position;
+            NpcAnimator.SetTrigger("isIdle");
+        }
+    }
+
     protected void SetAnimationEnd()
     {
         _isAnimationEnd = true;
@@ -124,4 +152,5 @@ public abstract class StoryCat : StoryNPC, IEventInterface
     }
 
     public abstract UniTask ExecuteEvent(int index);
+    public abstract void FinishEvent(int index);
 }

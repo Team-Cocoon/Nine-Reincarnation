@@ -75,6 +75,11 @@ public class NPCScissors : NPC, IEventInterface
         await Move();
     }
 
+    public void FinishEvent(int index)
+    {
+        return;
+    }
+
     public async UniTask Move()
     {
         Vector3 position = transform.position;

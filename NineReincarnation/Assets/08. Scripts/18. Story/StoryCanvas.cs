@@ -69,6 +69,12 @@ public class StoryCanvas : MonoBehaviour
         SetHeight(0f);
     }
 
+    public void Hide()
+    {
+        KillSequence();
+        SetHeight(0f);
+    }
+
     private Tween CreateHeightTween(
         float startHeight,
         float targetHeight)

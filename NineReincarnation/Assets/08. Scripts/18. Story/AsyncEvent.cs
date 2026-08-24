@@ -19,6 +19,18 @@ public class AsyncEvent : MonoBehaviour
         RunTaskAsync(storyEventManager).Forget();
     }
 
+    public void FinishExecute()
+    {
+        if (_eventQueue.Count == 0)
+        {
+            _event.FinishEvent(0);
+        }
+        else
+        {
+            _event.FinishEvent(_eventQueue.Dequeue());
+        }
+    }
+
     private async UniTaskVoid RunTaskAsync(StoryEventManager storyEventManager)
     {
         if (_eventQueue.Count == 0)

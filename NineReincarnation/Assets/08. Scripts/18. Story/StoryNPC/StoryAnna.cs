@@ -85,4 +85,21 @@ public class StoryAnna : StoryNPC, IEventInterface
     {
         await MoveToTarget();
     }
+
+    public void FinishEvent(int index)
+    {
+        FinishMoveToTarget();
+    }
+
+    private void FinishMoveToTarget()
+    {
+        // 수정: 원본 리스트가 아닌 큐에 남은 데이터가 있는지 확인해야 에러가 나지 않습니다.
+        if (_wayPointQueue.Count == 0) return;
+
+        Transform targetTransform = _wayPointQueue.Dequeue();
+        NpcAnimator.SetTrigger("isIdle");
+
+        _rb2d.linearVelocityX = 0.0f; // 목표 도달 시 정확히 정지
+        _rb2d.position = targetTransform.position;
+    }
 }

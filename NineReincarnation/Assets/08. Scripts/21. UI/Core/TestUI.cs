@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using State.SceneState;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-public class TestUI : ToggleUI
+public class TestUI
 {
     [Header("--- 버튼 ---")]
     [SerializeField] private Button _exitButton; //옵션 닫기 버튼
@@ -69,13 +68,6 @@ public class TestUI : ToggleUI
 
 
         _storyStateDropdown.ClearOptions();
-        for (int i = 0; i < _sceneData.StoryScene.Size; ++i)
-        {
-            for (int j = 0; j < _sceneData.StoryScene.SubSceneGroups[i].Size; ++j)
-            {
-                _storyStateDropdown.options.Add(new TMP_Dropdown.OptionData($"{i + 1}-{j + 1}"));
-            }
-        }
     }
 
     private void SceneStateChange(int x)
@@ -90,10 +82,6 @@ public class TestUI : ToggleUI
                 case SceneStateType.Clear:
                     _stageStatePanel.SetActive(false);
                     _storyStatePanel.SetActive(false);
-                    break;
-                case SceneStateType.Story:
-                    _stageStatePanel.SetActive(false);
-                    _storyStatePanel.SetActive(true);
                     break;
                 case SceneStateType.Stage:
                     _stageStatePanel.SetActive(true);
@@ -133,7 +121,7 @@ public class TestUI : ToggleUI
     {
         _uiToggleButton.SetActive(true);
 
-        UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
+        //UIEventHandler.ToggleSettingUI += UIEvent_ToggleUI;
     }
 
     private void Start()
@@ -150,10 +138,8 @@ public class TestUI : ToggleUI
         _nextButton.onClick.AddListener(NextButtonEvent);
     }
 
-    protected override void OnDestroy()
+    protected void OnDestroy()
     {
-        base.OnDestroy();
-
         _stateDropdown.onValueChanged.RemoveListener(SceneStateChange);
         _storyStateDropdown.onValueChanged.RemoveListener(StoryChange);
         _stageStateDropdown.onValueChanged.RemoveListener(StageChange);
@@ -162,28 +148,22 @@ public class TestUI : ToggleUI
         _exitButton.onClick.RemoveListener(ButtonEvent_SettingUI);
         _nextButton.onClick.RemoveListener(NextButtonEvent);
 
-        UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
+        //UIEventHandler.ToggleSettingUI -= UIEvent_ToggleUI;
     }
 
     private void ButtonEvent_SettingUI()
     {
-        UIEvent_ToggleUI();
+        //UIEvent_ToggleUI();
     }
 
     private void NextButtonEvent()
-    {;
-        UIEvent_ToggleUI();
+    {
+        //UIEvent_ToggleUI();
 
         switch (_curState)
         {
             case SceneStateType.Title:
                 GameEventHandler.TitleExcuted_Invoke();
-                break;
-            case SceneStateType.Story:
-                _saveManager.SetSaveData(0);
-                _gameData.StoryIndex = _storyIndex;
-                _gameData.StorySubIndex = _storySubIndex;
-                GameEventHandler.StoryExcuted_Invoke();
                 break;
             case SceneStateType.Stage:
                 _saveManager.SetSaveData(0);

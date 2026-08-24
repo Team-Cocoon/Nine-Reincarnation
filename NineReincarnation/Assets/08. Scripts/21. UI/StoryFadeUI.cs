@@ -34,10 +34,23 @@ public class StoryFadeUI : MonoBehaviour
         var tween = Effect.WipeFade.FadeEffect.WipeFadeOut(_material, duration, true);
         await tween.AsyncWaitForCompletion();
     }
+    public void FadeOut()
+    {
+        _material.SetFloat("_isRight", 1f);
+        _material.SetFloat("_IsFadeIn", 0f);
+        _material.SetFloat("_Progress", 1f);
+    }
 
     public async UniTask FadeIn(float duration)
     {
         var tween = Effect.WipeFade.FadeEffect.WipeFadeIn(_material, duration, true);
         await tween.AsyncWaitForCompletion();
+    }
+
+    public void FadeIn()
+    {
+        _material.SetFloat("_isRight", 1f);
+        _material.SetFloat("_IsFadeIn", 1f);
+        _material.SetFloat("_Progress", 1f);
     }
 }

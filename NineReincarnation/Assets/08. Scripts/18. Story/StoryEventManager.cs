@@ -47,6 +47,12 @@ public class StoryEventManager : MonoBehaviour
         await _eventCompletionSource.Task;
     }
 
+    public void FinishEvent(int id)
+    {
+        if (curIndex >= _asyncEventArray.Length) return;
+        _asyncEventDict[id].FinishExecute();
+    }
+
     public void SignalEventComplete()
     {
         // 대기 중인 ExcuteEvent의 await를 해제

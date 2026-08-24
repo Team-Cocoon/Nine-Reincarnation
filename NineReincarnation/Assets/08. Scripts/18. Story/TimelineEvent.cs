@@ -11,6 +11,11 @@ public class TimelineEvent : MonoBehaviour, IEventInterface
         await PlayTimelineTask();
     }
 
+    public void FinishEvent(int index)
+    {
+        return;
+    }
+
     private async UniTask PlayTimelineTask()
     {
         _director.Play();

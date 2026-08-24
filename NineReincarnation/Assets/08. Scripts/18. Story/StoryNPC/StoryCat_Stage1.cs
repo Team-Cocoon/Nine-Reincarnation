@@ -35,6 +35,23 @@ public class StoryCat_Stage1 : StoryCat
         }
     }
 
+    public override void FinishEvent(int index)
+    {
+        if (index == 0)
+        {
+            FinishMoveToTarget();
+        }
+        else if (index == 1)
+        {
+            FinishRunAndDisapper(true);
+        }
+        else if (index == 2)
+        {
+            _dialogueManager.DialogueEndAddListener(DisableSelf);
+            FinishRunAndShowBall();
+        }
+    }
+
     protected override async UniTask RunAndPlayAnimation(string _animationName)
     {
         _speed = _runSpeed;
@@ -46,8 +63,15 @@ public class StoryCat_Stage1 : StoryCat
         await UniTask.WaitUntil(() => _isAnimationEnd == true);
     }
 
+    private void FinishRunAndShowBall()
+    {
+        FinishMoveToTarget(false);
+        _threadBall.SetActive(true);
+    }
+
     private void DisconnectThread()
     {
         _storyThread.Disconnect();
     }
+
 }
