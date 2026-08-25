@@ -8,6 +8,8 @@ public class BubbleSizer : MonoBehaviour
 {
     [Header("--- 말풍선 최소, 최대 너비 ---")]
     [SerializeField] private float[] _minWidthByType;
+    [SerializeField] private float[] _marginTopByType;
+    [SerializeField] private Vector4 originMargin = new Vector4();
     [SerializeField] float _maxWidth;
 
     [SerializeField] private float _minHeight;
@@ -24,6 +26,7 @@ public class BubbleSizer : MonoBehaviour
 
     [Header("--- Debug Type ---")]
     [SerializeField] private BubbleImageType _type = BubbleImageType.Normal;
+
 
     // 태그 빼기
     private string GetSizeCalculationText(string text)
@@ -55,5 +58,8 @@ public class BubbleSizer : MonoBehaviour
 
         _image.pixelsPerUnitMultiplier = Mathf.Lerp(_minMultiplier, _maxMultiplier, 
             (expectedSize.y - _minHeight) / (_maxHeight - _minHeight));
+
+        originMargin.y = _marginTopByType[type];
+        tmp.margin = originMargin;
     }
 }
