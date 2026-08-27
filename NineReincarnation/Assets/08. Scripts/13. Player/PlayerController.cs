@@ -890,6 +890,7 @@ namespace Player.Controller
 
         public void Jump()
         {
+            if (gameObject.activeSelf == false) return;
             if (_currentState == PlayerAnimationState.Dead) return;
             if (TryExecuteWallJump()) return;
             if (_jumpCount >= 2)
