@@ -17,6 +17,10 @@ PrefabInstance:
       value: 3.98
       objectReference: {fileID: 0}
     - target: {fileID: 661829313522870564, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 661829313522870564, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 3.90625
       objectReference: {fileID: 0}
@@ -34,23 +38,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 269.57
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 22.65
       objectReference: {fileID: 0}
     - target: {fileID: 7758494654718747378, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
       propertyPath: m_LocalPosition.z
@@ -88,8 +92,70 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1792224007335079768, guid: 78fa3314e8fda1b4abd9364f2ca04a1b, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 8759075602085756319, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3597574328139097930, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6373701470633818878, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8184064085728166837}
+    - targetCorrespondingSourceObject: {fileID: 6373701470633818878, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6941526896875153835}
   m_SourcePrefab: {fileID: 100100000, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+--- !u!61 &1401928192168738356 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 661829313522870564, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+  m_PrefabInstance: {fileID: 1899371162688427792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4767064283729718766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6373701470633818878, guid: 327f9e96a10d3e446bf6e93ac5ab1171, type: 3}
+  m_PrefabInstance: {fileID: 1899371162688427792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8184064085728166837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767064283729718766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdafdd350948a949b4c284cdd2d8445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOutline: 1
+  _outlineColor: {r: 0, g: 0, b: 0, a: 0}
+  _thickness: 1
+  _targetAlpha: 0.15
+  _solidLayerName: Obstacle
+  _activeColor: {r: 0, g: 1, b: 0, a: 1}
+  _inactiveColor: {r: 1, g: 0, b: 0, a: 1}
+  _activatedColor: {r: 0, g: 0, b: 1, a: 1}
+  _possibleActive: 0
+  _isActivated: 1
+  _isClickControlToSelf: 1
+  _isHoverControlToSelf: 0
+  _interactionDistance: 5
+  _allowedThreads: 2
+  _chicken: {fileID: 0}
+  _interactCollider: {fileID: 1401928192168738356}
+  _dZone: {fileID: 6941526896875153835}
+--- !u!114 &6941526896875153835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767064283729718766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8729cfccb3479b74b8290af52b5910eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
