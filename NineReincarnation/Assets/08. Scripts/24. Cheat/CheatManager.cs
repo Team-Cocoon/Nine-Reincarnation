@@ -13,7 +13,8 @@ public class CheatManager : MonoBehaviour
     [Inject]
     private StageManager _stageManager;
 
-    public UnityEvent<CheatInfo> OnCheat { get; private set; } = new UnityEvent<CheatInfo>();
+    public UnityEvent<CheatInfo> OnCheatMoveEnd { get; private set; } = new UnityEvent<CheatInfo>();
+    public UnityEvent<CheatInfo> OnCheatMoveStart { get; private set; } = new UnityEvent<CheatInfo>();
 
     public bool IsCheatOn => _isCheatOn;
     [SerializeField] private bool _isCheatOn = false;
@@ -79,7 +80,7 @@ public class CheatManager : MonoBehaviour
         if (isChanged)
         {
             OpenCheatUI(false);
-            OnCheat?.Invoke(_cheatInfo);
+            OnCheatMoveEnd?.Invoke(_cheatInfo);
         }
         else
         {

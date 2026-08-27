@@ -66,7 +66,7 @@ public class StoryCat_Stage1 : StoryCat
     private void FinishRunAndShowBall()
     {
         FinishMoveToTarget(false);
-        _threadBall.SetActive(true);
+        _threadBall?.SetActive(true);
     }
 
     private void DisconnectThread()

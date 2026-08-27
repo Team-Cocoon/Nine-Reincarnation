@@ -13,7 +13,7 @@ public class StageCheatSetter : MonoBehaviour
 
     private void Awake()
     {
-        _cheatManager.OnCheat.RemoveAllListeners();
+        _cheatManager.OnCheatMoveEnd.RemoveAllListeners();
 
         CheckFirstCheat().Forget();
     }
@@ -24,7 +24,7 @@ public class StageCheatSetter : MonoBehaviour
 
         if (_cheatManager.IsMapMovedByCheat() == false)
         {
-            _cheatManager.OnCheat.AddListener(MoveToPoint);
+            _cheatManager.OnCheatMoveEnd.AddListener(MoveToPoint);
             return;
         }
 
@@ -34,7 +34,7 @@ public class StageCheatSetter : MonoBehaviour
 
         MoveToPoint(info);
 
-        _cheatManager.OnCheat.AddListener(MoveToPoint);
+        _cheatManager.OnCheatMoveEnd.AddListener(MoveToPoint);
     }
 
     private void MoveToPoint(CheatInfo info)

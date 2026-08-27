@@ -1,10 +1,8 @@
-using AnyPortrait;
 using Cysharp.Threading.Tasks;
 using ExcelData;
 using Player.Controller;
 using System.Collections.Generic;
 using System.Threading;
-using Unity.AppUI.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using VContainer;
@@ -54,8 +52,8 @@ namespace DialogueSpace
 
             totalTasks = new List<UniTask>(maxSubTaskCount + 1);
 
-            _cheatManager.OnCheat.RemoveAllListeners();
-            _cheatManager.OnCheat.AddListener(StopDialogueOnCheat);
+            _cheatManager.OnCheatMoveEnd.RemoveAllListeners();
+            _cheatManager.OnCheatMoveEnd.AddListener(StopDialogueOnCheat);
         }
 
         private void OnEnable()
@@ -97,6 +95,8 @@ namespace DialogueSpace
         {
             if (_cts != null)
             {
+                StopDialogue();
+
                 _cts.Cancel();
                 _cts.Dispose();
                 _cts = null;
