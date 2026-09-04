@@ -128,9 +128,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1418728397
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a4eae5901b7b5ad44905cd41291d6f1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -246,12 +246,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c072cb5a15479c4439f689e4fb260132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   _agent: {fileID: 4043311588529449023}
   _animator: {fileID: 7343679264508730025}
-  _player: {fileID: 0}
   _alertAnimator: {fileID: 2564868318224254632}
   _spriteRenderer: {fileID: 766300410659521480}
+  _spawnPoint: {fileID: 0}
   IsTargetDetected:
+    GUID:
+      m_Value0: 0
+      m_Value1: 0
+    Name: 
+    m_Value: 0
+  IsTargetCatched:
+    GUID:
+      m_Value0: 0
+      m_Value1: 0
+    Name: 
+    m_Value: 0
+  IsClear:
     GUID:
       m_Value0: 0
       m_Value1: 0
