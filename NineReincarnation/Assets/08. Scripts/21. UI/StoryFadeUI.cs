@@ -12,6 +12,23 @@ public class StoryFadeUI : MonoBehaviour
     [Header("Setting")]
     [SerializeField] private bool _stopInputWhenFadeOut = false;
 
+    private Material _runtimeMaterial;
+    private Tween _fadeTween;
+
+    private void Awake()
+    {
+        // Each story owns its fade state; never animate the shared material asset.
+        _runtimeMaterial = Instantiate(_material);
+        foreach (Image image in GetComponentsInChildren<Image>(true))
+        {
+            if (image.material == _material)
+                image.material = _runtimeMaterial;
+        }
+
+        // The serialized material starts opaque. Keep the view clear until a fade event.
+        FadeIn();
+    }
+
     public async UniTask FadeInOut(float duration, float stayTime)
     {
         if (_stopInputWhenFadeOut && _inputConnector != null)
@@ -31,26 +48,37 @@ public class StoryFadeUI : MonoBehaviour
 
     public async UniTask FadeOut(float duration)
     {
-        var tween = Effect.WipeFade.FadeEffect.WipeFadeOut(_material, duration, true);
-        await tween.AsyncWaitForCompletion();
+        _fadeTween?.Kill();
+        _fadeTween = Effect.WipeFade.FadeEffect.WipeFadeOut(_runtimeMaterial, duration, true);
+        await _fadeTween.AsyncWaitForCompletion();
     }
     public void FadeOut()
     {
-        _material.SetFloat("_isRight", 1f);
-        _material.SetFloat("_IsFadeIn", 0f);
-        _material.SetFloat("_Progress", 1f);
+        _fadeTween?.Kill();
+        _runtimeMaterial.SetFloat("_isRight", 1f);
+        _runtimeMaterial.SetFloat("_IsFadeIn", 0f);
+        _runtimeMaterial.SetFloat("_Progress", 1f);
     }
 
     public async UniTask FadeIn(float duration)
     {
-        var tween = Effect.WipeFade.FadeEffect.WipeFadeIn(_material, duration, true);
-        await tween.AsyncWaitForCompletion();
+        _fadeTween?.Kill();
+        _fadeTween = Effect.WipeFade.FadeEffect.WipeFadeIn(_runtimeMaterial, duration, true);
+        await _fadeTween.AsyncWaitForCompletion();
     }
 
     public void FadeIn()
     {
-        _material.SetFloat("_isRight", 1f);
-        _material.SetFloat("_IsFadeIn", 1f);
-        _material.SetFloat("_Progress", 1f);
+        _fadeTween?.Kill();
+        _runtimeMaterial.SetFloat("_isRight", 1f);
+        _runtimeMaterial.SetFloat("_IsFadeIn", 1f);
+        _runtimeMaterial.SetFloat("_Progress", 1f);
+    }
+
+    private void OnDestroy()
+    {
+        _fadeTween?.Kill();
+        if (_runtimeMaterial != null)
+            Destroy(_runtimeMaterial);
     }
 }
