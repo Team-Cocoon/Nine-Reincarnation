@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Player.Action;
 using Player.Controller;
@@ -8,6 +9,26 @@ using VContainer;
 
 public class InputManager : MonoBehaviour
 {
+    public enum InputMap
+    {
+        Player,
+        UI,
+    }
+
+    public enum InputActions
+    {
+        Move,
+        Jump,
+        Switch,
+        DownJump,
+        Look,
+        ToggleMainUI,
+        ToggleSettingUI,
+        ThrowRedThread,
+        ThrowBlueThread,
+        StartDialogue,
+    }
+
     public static InputManager Instance { get; private set; }
 
     [Header("---플레이어 정보들---")]
@@ -91,6 +112,27 @@ public class InputManager : MonoBehaviour
     public void ChangeActionToPlayer()
     {
         _playerInput.SwitchCurrentActionMap("Player");
+    }
+
+    public void AddListenerToInput(InputMap map, InputActions action, Action<InputAction.CallbackContext> callback)
+    {
+        var m = _playerInput?.actions?.FindActionMap(map.ToString());
+        var act = m?.FindAction(action.ToString());
+
+        if (act == null) return;
+
+        act.performed -= callback;
+        act.performed += callback;
+    }
+
+    public void RemoveListenerInInput(InputMap map, InputActions action, Action<InputAction.CallbackContext> callback)
+    {
+        var m = _playerInput?.actions?.FindActionMap(map.ToString());
+        var act = m?.FindAction(action.ToString());
+
+        if (act == null) return;
+
+        act.performed -= callback;
     }
 
     // PlayerInput's DownJump action is shared by one-way-platform drop-through

@@ -26,6 +26,7 @@ namespace DialogueSpace
         [SerializeField] private StoryCanvas _storyCanvas;
         [SerializeField] private bool _enableLetterboxd = false;
         [SerializeField] private bool _startScene = false;
+        [SerializeField] private bool _startDialogueWhenStart = true;
 
         List<UniTask> tasks = new List<UniTask>(5);
 
@@ -39,10 +40,14 @@ namespace DialogueSpace
 
         private UnityEvent OnDialogueEnd = new UnityEvent();
 
+        private bool _isPlayingDialogue = false;
+
         private void Awake()
         {
             _cts = new CancellationTokenSource();
             _cts.Token.RegisterWithoutCaptureExecutionContext(ResetState);
+
+            _isPlayingDialogue = false;
 
             subTasks = new List<UniTask>[maxSubTaskCount];
             for (int i = 0; i < maxSubTaskCount; ++i)
@@ -58,7 +63,7 @@ namespace DialogueSpace
 
         private void OnEnable()
         {
-            if (_startScene)
+            if (_startScene && _startDialogueWhenStart)
             {
                 if (_anna.gameObject.activeSelf)
                 {
@@ -70,11 +75,17 @@ namespace DialogueSpace
 
         private void Start()
         {
+            if(_startDialogueWhenStart == false)
+            {
+                _anna.gameObject.SetActive(true);
+                _npcAnna.SetActive(false);
+                return;
+            }
+
             if (_cheatManager.IsMapMovedByCheat())
             {
                 OnDialogueEnd?.Invoke();
-                _anna.gameObject.SetActive(true);
-                _npcAnna.SetActive(false);
+                OnDialogueEnd.RemoveAllListeners();
 
                 _virtualCameraManager.ResetToNormalCam();
                 _virtualCameraManager.SetPlayer();
@@ -105,6 +116,8 @@ namespace DialogueSpace
 
         public async UniTaskVoid DialogueExctute(int id)
         {
+            _isPlayingDialogue = true;
+
             _id = id;
 
             // 스토리 시작 → HUD(실 UI) 숨김
@@ -138,6 +151,8 @@ namespace DialogueSpace
                 //End면 종료
                 if (dialogue.EventType == ExcelData.EventType.End)
                 {
+                    _isPlayingDialogue = false;
+
                     await _camera.ZoomDefault();
                     if(_enableLetterboxd) await _storyCanvas.HideAsync(_cts.Token);
 
@@ -419,6 +434,11 @@ namespace DialogueSpace
 
         public void StopDialogue()
         {
+            if (_isPlayingDialogue == false)
+                return;
+
+            _isPlayingDialogue = false;
+
             _camera.CancelShake().Forget();
             _bubbleManager.CloseBubble();
             _dialogueUI.CloseUI();

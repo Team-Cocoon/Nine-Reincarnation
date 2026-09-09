@@ -27,13 +27,8 @@ public class StoryAnna : StoryNPC, IEventInterface
         AudioManager.Instance?.StopLoopingSfx(AudioManager.LoopSfx.Walk);
     }
 
-    private async UniTask MoveToTarget()
+    public override async UniTask MoveToTarget(Transform targetTransform)
     {
-        // 수정: 원본 리스트가 아닌 큐에 남은 데이터가 있는지 확인해야 에러가 나지 않습니다.
-        if (_wayPointQueue.Count == 0) return;
-
-        Transform targetTransform = _wayPointQueue.Dequeue();
-
         NpcAnimator.SetTrigger("isMove");
         AudioManager.Instance?.PlayLoopingSfx(AudioManager.LoopSfx.Walk);
 
@@ -62,8 +57,18 @@ public class StoryAnna : StoryNPC, IEventInterface
 
         NpcAnimator.SetTrigger("isIdle");
         AudioManager.Instance?.StopLoopingSfx(AudioManager.LoopSfx.Walk);
-        
+
         _rb2d.linearVelocityX = 0.0f; // 목표 도달 시 정확히 정지
+    }
+
+    private async UniTask MoveToTarget()
+    {
+        // 수정: 원본 리스트가 아닌 큐에 남은 데이터가 있는지 확인해야 에러가 나지 않습니다.
+        if (_wayPointQueue.Count == 0) return;
+
+        Transform targetTransform = _wayPointQueue.Dequeue();
+
+        await MoveToTarget(targetTransform);
     }
 
     public void LoockAroundSoundPlay()

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Player.Controller;
 using UnityEngine;
 
@@ -12,5 +13,10 @@ public class StoryNPC : MonoBehaviour
     public void Flip(PlayerDirection playerDirection)
     {
         _npcSpriteRenderer.flipX = playerDirection == PlayerDirection.Left ? true : false;
+    }
+
+    public virtual async UniTask MoveToTarget(Transform targetPos)
+    {
+        return;
     }
 }
