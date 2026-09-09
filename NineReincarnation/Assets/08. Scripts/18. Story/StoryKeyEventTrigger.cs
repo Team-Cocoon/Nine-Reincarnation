@@ -57,13 +57,6 @@ public class StoryKeyEventTrigger : EventTrigger
         _npcTasks = new List<UniTask>(_extraCount + 1);
     }
 
-    // 임시
-    //private void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.F))
-    //        PrepareDialogue();
-    //}
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (isTrigger) return; 
@@ -88,8 +81,6 @@ public class StoryKeyEventTrigger : EventTrigger
 
     public void PrepareDialogue(InputAction.CallbackContext context)
     {
-        Debug.Log("F 키 눌림");
-
         if (_isShowingDialogue || _isInTheZone == false || isTrigger == true)
             return;
 
